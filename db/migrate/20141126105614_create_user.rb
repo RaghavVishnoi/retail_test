@@ -3,6 +3,7 @@ class CreateUser < ActiveRecord::Migration
     create_table :users do |t|
       t.string :email
       t.string :password
+      t.string :auth_token
     end
     add_index :users, :email, :unique => true
   end

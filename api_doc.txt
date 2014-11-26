@@ -1,0 +1,39 @@
+=====================================================================================
+* Signin
+Params:
+-- email
+-- password
+
+Success Response:
+{
+  result: true,
+  auth_token: '681e7e29b921628926d243097728727f',
+  role: 'rep'  // 'rep' or 'manager',
+  email: 'mail@example.com'
+}
+
+Error Response:
+{
+  result: false,
+  errors: {
+    messages: ["Invalid Password"]
+  }
+}
+
+=================================================================================
+* Signout
+Params:
+-- auth_token
+
+Success Response:
+{
+  result: true
+}
+
+Error Response:
+{
+  result: false,
+  errors: {
+    messages: ["User not found"]
+  }
+}

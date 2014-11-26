@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  namespace :api, :defaults => { :format => :json }, :constraints => {:format => :json} do
+    namespace :v1 do
+      post '/users/sign_in' => 'sessions#create'
+      delete '/users/sign_out' => 'sessions#destroy'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
