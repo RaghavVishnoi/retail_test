@@ -1,5 +1,8 @@
 =====================================================================================
 * Signin
+
+POST /api/v1/users/sign_in
+
 Params:
 -- email
 -- password
@@ -22,6 +25,9 @@ Error Response:
 
 =================================================================================
 * Signout
+
+DELETE /api/v1/users/sign_out
+
 Params:
 -- auth_token
 
@@ -36,4 +42,141 @@ Error Response:
   errors: {
     messages: ["User not found"]
   }
+}
+
+
+=================================================================================
+* Customers Index
+
+GET /api/v1/customers
+
+Params:
+-- auth_token
+-- page
+
+Success Response:
+{
+    "result": true,
+    "per_page": 20,
+    "length": 1,
+    "current_page": 1,
+    "total_pages": 1,
+    "customers": [
+        {
+            "id": 1,
+            "name": "customer_name1",
+            "address": "lajdfl",
+            "state": "aldljsdkf",
+            "phone_number": "1234567890",
+            "store_manager": "manager name",
+            "avatar": null
+        }
+    ]
+}
+================================================================================
+* Create Customer
+
+POST /api/v1/customers
+
+Params:
+-- auth_token
+-- customer[name]
+-- customer[address]
+-- customer[state]
+-- customer[phone_number]
+-- customer[store_manager]
+-- customer[avatar]
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+  "result": false,
+  "errors": {
+    "messages": ["State is not included in the list"]
+  }
+}
+
+================================================================================
+* Customer
+
+GET /api/v1/customers/id
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "id": 1,
+    "name": "customer_name1",
+    "address": "lajdfl",
+    "state": "aldljsdkf",
+    "phone_number": "1234567890",
+    "store_manager": "manager name",
+    "avatar": null
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Customer not found"
+        ]
+    }
+}
+
+
+===============================================================================
+* Edit Customer
+
+PUT /api/v1/customers/id
+
+Params:
+-- auth_token
+-- customer[name]
+-- customer[address]
+-- customer[state]
+-- customer[phone_number]
+-- customer[store_manager]
+-- customer[avatar]
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+  "result": false,
+  "errors": {
+    "messages": ["State is not included in the list"]
+  }
+}
+
+
+============================================================================
+* Delete Customer
+
+DELETE /api/v1/customers/id
+
+Params:
+-- auth_token
+
+Success Response:
+{
+  "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Customer not found"
+        ]
+    }
 }

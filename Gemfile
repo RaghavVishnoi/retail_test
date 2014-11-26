@@ -39,3 +39,4 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 gem 'mysql2'
 gem 'pry', :group => :development
+gem 'will_paginate'
