@@ -17,7 +17,7 @@ module Api
       end
 
       def edit
-        render :json => { result: true, customer: @customer.as_json }
+        render :json => { result: true, customer: @customer.as_json, states: ADDRESS_STATES }
       end
 
       def create

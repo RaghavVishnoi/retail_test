@@ -42,3 +42,4 @@ gem 'pry', :group => :development
 gem 'will_paginate'
 gem 'geocoder'
 gem 'countries'
+gem 'carrierwave'

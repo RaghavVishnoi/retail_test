@@ -69,7 +69,7 @@ Success Response:
             "state": "aldljsdkf",
             "phone_number": "1234567890",
             "store_manager": "manager name",
-            "avatar": null
+            "avatar_url": "/uploads/customer/avatar/1/9TH_ENVIRON_2098382f.jpg"
         }
     ]
 }
@@ -109,14 +109,17 @@ Params:
 -- auth_token
 
 Success Response:
-{
-    "id": 1,
-    "name": "customer_name1",
-    "address": "lajdfl",
-    "state": "aldljsdkf",
-    "phone_number": "1234567890",
-    "store_manager": "manager name",
-    "avatar": null
+{   
+    "result": true,
+    "customer": {
+      "id": 1,
+      "name": "customer_name1",
+      "address": "lajdfl",
+      "state": "aldljsdkf",
+      "phone_number": "1234567890",
+      "store_manager": "manager name",
+      "avatar_url": "/uploads/customer/avatar/1/9TH_ENVIRON_2098382f.jpg"
+    }
 }
 
 Error Response:
@@ -131,7 +134,7 @@ Error Response:
 
 
 ===============================================================================
-* Edit Customer
+* Update Customer
 
 PUT /api/v1/customers/id
 
@@ -179,4 +182,53 @@ Error Response:
             "Customer not found"
         ]
     }
+}
+
+===========================================================================
+* New Customer
+
+GET /api/v1/customers/new
+
+Params:
+-- auth_token
+-- latitude
+-- longitude
+
+Success Response:
+{   
+    "result": true,
+    "customer": {
+      "id": null,
+      "name": null,
+      "address": null,
+      "state": null,
+      "phone_number": null,
+      "store_manager": null,
+      "avatar_url": null
+    },
+    "states": ["Haryana", "Chandigarh", ...],
+    "default_state": "Haryana"
+}
+
+==========================================================================
+* Edit Customer
+
+GET /api/v1/customers/id/edit
+
+Params:
+-- auth_token
+
+Success Response:
+{
+  "result": true,
+  "customer": {
+    "id": 1,
+    "name": "customer_name1",
+    "address": "lajdfl",
+    "state": "aldljsdkf",
+    "phone_number": "1234567890",
+    "store_manager": "manager name",
+    "avatar_url": "/uploads/customer/avatar/1/9TH_ENVIRON_2098382f.jpg"
+  },
+  "states": ["Haryana", "Chandigarh", ...]
 }
