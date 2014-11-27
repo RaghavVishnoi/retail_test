@@ -4,12 +4,21 @@ module Api
 
       PER_PAGE = 20
 
-      before_action :set_customer, :only => [:show, :update, :destroy]
+      before_action :set_customer, :only => [:show, :update, :destroy, :edit]
       
       def index
         @customers = Customer.paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
         render :json => { result: true, :per_page => @customers.per_page, :length => @customers.length, :current_page => @customers.current_page, :total_pages => @customers.total_pages, :customers => @customers.as_json }
       end  
+
+      def new
+        @customer = Customer.new
+        render :json => { result: true, customer: @customer.as_json, states: ADDRESS_STATES, default_state: current_address_state }
+      end
+
+      def edit
+        render :json => { result: true, customer: @customer.as_json }
+      end
 
       def create
         @customer = Customer.new customer_params
@@ -21,7 +30,7 @@ module Api
       end 
 
       def show
-        render :json => @customer.to_json
+        render :json => { result: true, customer: @customer.as_json }
       end
 
       def update

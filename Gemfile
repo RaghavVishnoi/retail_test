@@ -40,3 +40,5 @@ gem 'spring',        group: :development
 gem 'mysql2'
 gem 'pry', :group => :development
 gem 'will_paginate'
+gem 'geocoder'
+gem 'countries'
