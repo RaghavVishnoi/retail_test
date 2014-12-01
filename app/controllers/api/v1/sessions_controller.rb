@@ -6,7 +6,7 @@ module Api
 
       def create
         if @user.valid_password?(params[:password])
-          render :json => { :result => true, :auth_token => @user.auth_token, :role => @user.role, :email => @user.email }
+          render :json => { :result => true, :auth_token => @user.auth_token, :role => @user.role, :email => @user.email, :quotation => Quotation.any }
         else
           render :json => { :result => false, :errors => { :messages => ['Invalid Password'] } }
         end
