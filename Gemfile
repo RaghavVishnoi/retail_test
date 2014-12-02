@@ -46,3 +46,4 @@ gem 'carrierwave'
 gem 'faker'
 gem 'capistrano'
 gem 'rvm1-capistrano3', require: false
+gem 'capistrano-bundler'

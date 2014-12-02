@@ -162,6 +162,7 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
+  capistrano-bundler
   capistrano-rails
   carrierwave
   coffee-rails (~> 4.0.0)
