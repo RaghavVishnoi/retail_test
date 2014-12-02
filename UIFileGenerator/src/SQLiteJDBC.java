@@ -10,14 +10,20 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 public class SQLiteJDBC {
+	public static String folderName = "Screen_Json";
 	public static void main(String args[]) {
+		File dirFile = new File(folderName);
+		if (!dirFile.isDirectory()) {
+			dirFile.mkdir();
+		}
+		
 		String fileName = "temp";
 		Connection c = null;
 		Statement stmt = null;
 		JsonObject mainJsonObject = new JsonObject();
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:test.db");
+			c = DriverManager.getConnection("jdbc:sqlite:database/test.db");
 			c.setAutoCommit(false);
 
 			stmt = c.createStatement();
@@ -81,21 +87,22 @@ public class SQLiteJDBC {
 				
 				mainJsonObject.add("Tables", jsonArrayTable);
 				
+				createFile(dirFile, fileName, mainJsonObject.toString());
+				System.out.println("Operation done successfully \nOutput Json::\n"+mainJsonObject);
 			}
 			screenRS.close();
 			stmt.close();
 			c.close();
+
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
-		System.out.println("Operation done successfully \nOutput Json::\n"+mainJsonObject);
-		
-		createFile(fileName, mainJsonObject.toString());
 	}
 
-	public static void createFile(String fileName, String content) {
-		File file = new File(fileName+".json");
+	public static void createFile(File dirFile, String fileName, String content) {
+		File file = new File(dirFile, fileName+".json");
+		
 		try (FileOutputStream fop = new FileOutputStream(file)) {
 			if (!file.exists()) {
 				file.createNewFile();
