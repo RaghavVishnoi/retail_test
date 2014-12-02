@@ -233,3 +233,15 @@ Success Response:
   },
   "states": ["Haryana", "Chandigarh", ...]
 }
+
+
+
+==========================================================================
+* Screens
+GET /api/v1/screens
+
+Response:
+{
+  "Login":{},
+  "View_New_C": {}
+}
