@@ -42,8 +42,9 @@ gem 'pry', :group => :development
 gem 'will_paginate'
 gem 'geocoder'
 gem 'countries'
-gem 'carrierwave'
+gem 'carrierwave', '0.10.0'
 gem 'faker'
 gem 'capistrano'
 gem 'rvm1-capistrano3', require: false
 gem 'capistrano-bundler'
+gem 'fog'
