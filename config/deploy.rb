@@ -112,7 +112,34 @@ namespace :passenger_nginx do
       execute "sudo mv /tmp/nginx.conf /etc/nginx/nginx.conf"
     end
   end
+
+  task :start do
+    on roles(:web) do
+      execute "sudo service nginx start"
+    end
+  end
+
+  task :stop do
+    on roles(:web) do
+      execute "sudo service nginx stop"
+    end
+  end
+
+  task :restart do
+    on roles(:web) do
+      execute "sudo service nginx restart"
+    end
+  end
 end
 
 before 'passenger_nginx:install', 'passenger_nginx:setup_apt_sources'
 after 'deploy:install', 'passenger_nginx:install'
+
+before "passenger_nginx:restart", "passenger_nginx:configure"
+before "passenger_nginx:start", "passenger_nginx:configure"
+
+after "deploy:publishing", "deploy:restart"
+
+# after "deploy:start", "passenger_nginx:start"
+# after "deploy:stop", "passenger_nginx:stop"
+after "deploy:restart", "passenger_nginx:restart"
