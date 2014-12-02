@@ -51,7 +51,6 @@ public class SQLiteJDBC {
 					object.addProperty("css", uiTableRS.getString("css"));
 					object.addProperty("pt_id", uiTableRS.getString("pt_id"));
 					object.addProperty("type", uiTableRS.getString("type"));
-					object.addProperty("name", uiTableRS.getString("name"));
 					object.addProperty("scrollable", uiTableRS.getString("scrollable"));
 					object.addProperty("component_ids", uiTableRS.getString("component_ids"));
 
@@ -74,6 +73,8 @@ public class SQLiteJDBC {
 						objectChild.addProperty("action_id", uiCompRS.getString("action_id"));
 						objectChild.addProperty("target_id", uiCompRS.getString("target_id"));
 						objectChild.addProperty("request_id", uiCompRS.getString("request_id"));
+						objectChild.addProperty("value", uiCompRS.getString("Value"));
+
 						
 						jsonChildArray.add(objectChild);
 					}
