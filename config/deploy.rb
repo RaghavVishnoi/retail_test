@@ -106,10 +106,7 @@ namespace :passenger_nginx do
 
   task :configure do
     on roles(:web) do
-      template = File.read(File.join(File.dirname(__FILE__), "deploy/nginx/nginx.conf.erb"))
-      result = ERB.new(template).result(binding)
-      upload! StringIO.new(result), "/tmp/nginx.conf"
-      execute "sudo mv /tmp/nginx.conf /etc/nginx/nginx.conf"
+      write_template("deploy/nginx/nginx.conf.erb", "/etc/nginx/nginx.conf", "nginx.conf")
     end
   end
 
@@ -132,6 +129,14 @@ namespace :passenger_nginx do
   end
 end
 
+namespace :logrotate do
+  task :configure do
+    on roles(:web) do
+      write_template("deploy/logrotate/log.conf", "/etc/logrotate.d/fosem", 'logrotate')
+    end
+  end
+end
+
 before 'passenger_nginx:install', 'passenger_nginx:setup_apt_sources'
 after 'deploy:install', 'passenger_nginx:install'
 
@@ -139,7 +144,16 @@ before "passenger_nginx:restart", "passenger_nginx:configure"
 before "passenger_nginx:start", "passenger_nginx:configure"
 
 after "deploy:publishing", "deploy:restart"
+after "deploy:published", "logrotate:configure"
 
 # after "deploy:start", "passenger_nginx:start"
 # after "deploy:stop", "passenger_nginx:stop"
 after "deploy:restart", "passenger_nginx:restart"
+
+def write_template(erb_template, target, tmp)
+  template = File.read(File.join(File.dirname(__FILE__), erb_template))
+  result = ERB.new(template).result(binding)
+  tmp_path = "/tmp/#{tmp}"
+  upload! StringIO.new(result), tmp_path
+  execute "sudo mv #{tmp_path} #{target}"
+end
