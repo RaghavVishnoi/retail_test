@@ -40,9 +40,7 @@ staging:
 
 analytics:
   host: test-dw-instance.cwnigds5y4hm.ap-southeast-1.redshift.amazonaws.com
-  database: dev
-  adapter: postgresql
-  pool: 5
-  username: awsuser
+  dbname: dev
+  user: awsuser
   password: Root1234
   port: 5439
