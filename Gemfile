@@ -48,3 +48,5 @@ gem 'capistrano'
 gem 'rvm1-capistrano3', require: false
 gem 'capistrano-bundler'
 gem 'fog'
+gem 'pg'
+gem 'aws-sdk'
