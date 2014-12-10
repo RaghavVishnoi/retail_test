@@ -2,6 +2,7 @@ development:
   access_key: AKIAI25NMQARPZDAQHYA
   secret_access_key: 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
   bucket_name: fosem-staging
+  redshift-bucket: fosem-redshift-test
   region: ap-southeast-1
   storage: :file
 
@@ -9,5 +10,6 @@ staging:
   access_key: AKIAI25NMQARPZDAQHYA
   secret_access_key: 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
   bucket_name: fosem-staging
+  redshift-bucket: fosem-redshift-test
   region: ap-southeast-1
   storage: :fog
