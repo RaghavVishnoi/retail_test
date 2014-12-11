@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
     password == pass
   end
 
+  def personalized_message
+    "Hi #{name}"
+  end
+
   private
 
     def ensure_auth_token
