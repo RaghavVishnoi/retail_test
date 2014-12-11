@@ -16,3 +16,4 @@
 /tmp
 db/schema.rb
 public/uploads
+analytics/analytics*
