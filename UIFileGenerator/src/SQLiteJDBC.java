@@ -32,10 +32,12 @@ public class SQLiteJDBC {
 				fileName = screenRS.getString("screen_name");
 				String tableIds = screenRS.getString("screen_table_ids");
 				String urls = screenRS.getString("screen_url");
+				String post_url	=	screenRS.getString("screen_url_post");
 
 				mainJsonObject.addProperty("screen_name", fileName);
 				mainJsonObject.addProperty("screen_table_ids", tableIds);
 				mainJsonObject.addProperty("screen_url", urls);
+				mainJsonObject.addProperty("screen_url_post", post_url);
 
 				JsonArray jsonArrayTable = new JsonArray();
 				stmt = c.createStatement();
@@ -44,10 +46,6 @@ public class SQLiteJDBC {
 				while (uiTableRS.next()) {
 					JsonObject object = new JsonObject();
 					object.addProperty("table_id", uiTableRS.getInt("table_id"));
-					object.addProperty("gx", uiTableRS.getString("gx"));
-					object.addProperty("gy", uiTableRS.getString("gy"));
-					object.addProperty("gw", uiTableRS.getString("gw"));
-					object.addProperty("gh", uiTableRS.getString("gh"));
 					object.addProperty("css", uiTableRS.getString("css"));
 					object.addProperty("pt_id", uiTableRS.getString("pt_id"));
 					object.addProperty("type", uiTableRS.getString("type"));
@@ -64,10 +62,6 @@ public class SQLiteJDBC {
 						objectChild.addProperty("name", uiCompRS.getString("name"));
 						objectChild.addProperty("css", uiCompRS.getString("css"));
 						objectChild.addProperty("type", uiCompRS.getString("type"));
-						objectChild.addProperty("gx", uiCompRS.getString("gx"));
-						objectChild.addProperty("gy", uiCompRS.getString("gy"));
-						objectChild.addProperty("gw", uiCompRS.getString("gw"));
-						objectChild.addProperty("gh", uiCompRS.getString("gh"));
 						objectChild.addProperty("id", uiCompRS.getString("id"));
 						objectChild.addProperty("behaviour", uiCompRS.getString("behaviour"));
 						objectChild.addProperty("action_id", uiCompRS.getString("action_id"));
