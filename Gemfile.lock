@@ -72,6 +72,7 @@ GEM
     countries (0.9.3)
       currencies (~> 0.4.2)
     currencies (0.4.2)
+    daemons (1.1.9)
     delayed_job (4.0.4)
       activesupport (>= 3.0, < 4.2)
     delayed_job_active_record (4.0.2)
@@ -261,6 +262,7 @@ DEPENDENCIES
   carrierwave (= 0.10.0)
   coffee-rails (~> 4.0.0)
   countries
+  daemons
   delayed_job_active_record
   faker
   fog
