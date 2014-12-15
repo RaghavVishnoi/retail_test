@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/aamine/activerecord4-redshift-adapter.git
+  revision: fbca59d81a35453317b4a2307a984997621b04cd
+  specs:
+    activerecord4-redshift-adapter (0.1.1)
+      activerecord (>= 4.0.0)
+      pg
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -245,6 +253,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord4-redshift-adapter!
   aws-sdk
   capistrano
   capistrano-bundler

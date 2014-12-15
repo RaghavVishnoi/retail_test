@@ -12,10 +12,10 @@ class LogHandler
   end
 
   class Handler
-    MAX_FILE_SIZE = 3.megabytes
+    MAX_FILE_SIZE = 512.bytes
 
     def file_name
-      @file_name ||= "analytics_log_#{Time.current}"
+      @file_name ||= "analytics_log_#{Time.current}" #set_file_name
     end
 
     def dir
@@ -34,15 +34,43 @@ class LogHandler
       file.puts str
       if file.size > MAX_FILE_SIZE
         file.close
-        Uploader.new(file_path).process
-        LogHandler.handler = nil
+        reset_handler
       end
     end
+
+    def reset_handler
+      # File.write(current_file, nil)
+      LogHandler.handler = nil
+      Uploader.new(file_path).process
+    end
+
+    private
+      # def current_file
+      #   File.join(dir, "current_file_name")
+      # end
+
+      # def existing_file_name
+      #   @existing_file_name ||= File.read(current_file)
+      # end
+
+      # def set_new_file_name
+      #   File.write(current_file, new_file_name)
+      #   new_file_name
+      # end
+
+      # def set_file_name
+      #   existing_file_name.present? ? existing_file_name : set_new_file_name
+      # end
+
+      # def new_file_name
+      #   @new_file_name ||= "analytics_log_#{Time.current}"
+      # end
   end
 
   class RequestFormatter
     def self.format(request)
       { 
+        created_at: Time.current.strftime("%Y-%m-%d %H:%M:%S"),
         format: request.format.to_s,
         remote_ip: request.remote_ip,
         protocol: request.protocol,
@@ -62,7 +90,12 @@ class LogHandler
     def process
       upload_to_s3
     end
-    # handle_asynchronously :process
+
+    def delete_from_s3
+      puts file_path
+      bucket.objects.delete(obj_key)
+    end
+    handle_asynchronously :delete_from_s3
 
     private
 
@@ -77,11 +110,6 @@ class LogHandler
         File.delete(file_path)
       end
 
-      def delete_from_s3
-        bucket.objects.delete(obj_key)
-      end
-      handle_asynchronously :delete_from_s3
-
       def s3_obj
         bucket.objects[obj_key]
       end
@@ -91,7 +119,7 @@ class LogHandler
       end
 
       def bucket
-        bucket ||= s3.buckets[AWS_CONFIG['redshift-bucket']]
+        @bucket ||= s3.buckets[AWS_CONFIG['redshift-bucket']]
       end
 
       def s3
@@ -103,33 +131,23 @@ class LogHandler
       end
 
       def copy_to_redshift
-        Redshift.copy(s3_file_name)
-        delete_from_s3
+        Redshift.new(s3_file_name, file_path).copy
       end
-      handle_asynchronously :copy_to_redshift
   end
 
   class Redshift
-    class << self
-      def table_name
-        "analytics"
-      end
+    attr_accessor :s3_file_name, :file_path
 
-      def db_configuration
-        ActiveRecord::Base.configurations['analytics']
-      end
-
-      def conn
-        PGconn.new db_configuration
-      end
-
-      def create_table
-        conn.exec_params("create table #{table_name} (format varchar, remote_ip varchar, protocol varchar, controller varchar, action varchar)")
-      end
-
-      def copy(s3_file_name)
-        conn.exec_params("copy analytics from '#{s3_file_name}' credentials 'aws_access_key_id=#{AWS_CONFIG[:access_key]};aws_secret_access_key=#{AWS_CONFIG[:secret_access_key]}' json 'auto';")
-      end
+    def initialize(s3_file_name, file_path)
+      @s3_file_name = s3_file_name
+      @file_path = file_path
     end
+
+    def copy
+      Analytics.connection.execute("copy analytics from '#{s3_file_name}' credentials 'aws_access_key_id=#{AWS_CONFIG[:access_key]};aws_secret_access_key=#{AWS_CONFIG[:secret_access_key]}' json 'auto';")
+      Uploader.new(file_path).delete_from_s3
+    end
+    handle_asynchronously :copy
+
   end
 end

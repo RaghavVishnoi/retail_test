@@ -17,3 +17,4 @@
 db/schema.rb
 public/uploads
 analytics/analytics*
+db_analytics/schema.rb

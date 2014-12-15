@@ -1,0 +1,19 @@
+development:
+  encoding: utf8
+  adapter: redshift
+  pool: 5
+  host: test-dw-instance.cwnigds5y4hm.ap-southeast-1.redshift.amazonaws.com
+  username: awsuser
+  password: Root1234
+  database: dev
+  port: 5439
+
+staging:
+  encoding: utf8
+  adapter: redshift
+  pool: 5
+  host: test-dw-instance.cwnigds5y4hm.ap-southeast-1.redshift.amazonaws.com
+  username: awsuser
+  password: Root1234
+  database: analytics_staging
+  port: 5439

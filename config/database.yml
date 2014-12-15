@@ -37,10 +37,3 @@ development:
 staging:
   <<: *default
   database: staging_fosem
-
-analytics:
-  host: test-dw-instance.cwnigds5y4hm.ap-southeast-1.redshift.amazonaws.com
-  dbname: dev
-  user: awsuser
-  password: Root1234
-  port: 5439
