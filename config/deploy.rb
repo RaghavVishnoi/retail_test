@@ -149,6 +149,7 @@ after "deploy:published", "logrotate:configure"
 # after "deploy:start", "passenger_nginx:start"
 # after "deploy:stop", "passenger_nginx:stop"
 after "deploy:restart", "passenger_nginx:restart"
+after "deploy:restart", "delayed_job:restart"
 
 def write_template(erb_template, target, tmp)
   template = File.read(File.join(File.dirname(__FILE__), erb_template))
