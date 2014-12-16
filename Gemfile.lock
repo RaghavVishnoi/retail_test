@@ -42,6 +42,7 @@ GEM
     aws-sdk-v1 (1.59.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
+    bcrypt (3.1.7)
     builder (3.2.2)
     capistrano (3.3.3)
       capistrano-stats (~> 1.0.3)
@@ -256,6 +257,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord4-redshift-adapter!
   aws-sdk
+  bcrypt (~> 3.1.7)
   capistrano
   capistrano-bundler
   capistrano-rails

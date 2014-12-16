@@ -1,12 +1,9 @@
 class User < ActiveRecord::Base
   enum role: ['manager', 'rep']
+  has_secure_password
   validates :email, :presence => true
-  validates :password, :length => { :minimum => 6 }
+  # validates :password, :length => { :minimum => 6 }
   before_save :ensure_auth_token
-
-  def valid_password?(pass)
-    password == pass
-  end
 
   def personalized_message
     "Hi #{name}"
