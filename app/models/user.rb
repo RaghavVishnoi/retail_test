@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  enum role: ['manager', 'rep']
+  include RoleModel
+  roles :superadmin, :admin, :manager, :user
   has_secure_password
   validates :email, :presence => true
   # validates :password, :length => { :minimum => 6 }
