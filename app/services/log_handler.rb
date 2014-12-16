@@ -92,7 +92,6 @@ class LogHandler
     end
 
     def delete_from_s3
-      puts file_path
       bucket.objects.delete(obj_key)
     end
     handle_asynchronously :delete_from_s3
