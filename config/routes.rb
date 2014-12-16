@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
    
   resources :users, :except => [:show]
+  get '/passwords/edit' => "passwords#edit"
+  put '/passwords' => "passwords#update"
 
   namespace :api, :defaults => { :format => :json }, :constraints => {:format => :json} do
     namespace :v1 do
