@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+   
+  resources :users, :except => [:show]
 
   namespace :api, :defaults => { :format => :json }, :constraints => {:format => :json} do
     namespace :v1 do

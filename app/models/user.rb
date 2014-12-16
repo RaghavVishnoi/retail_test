@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include RoleModel
   roles :superadmin, :admin, :manager, :user
   has_secure_password
-  validates :email, :presence => true
+  validates :email, :presence => true, :uniqueness => true
   # validates :password, :length => { :minimum => 6 }
   before_save :ensure_auth_token
 
