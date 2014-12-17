@@ -4,9 +4,28 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   before_action :log_requests
+  before_action :authenticate_user
 
   private
     def log_requests
       LogHandler.process(request)
+    end
+
+    def authenticate_user
+      unless current_user
+        redirect_to users_sign_in_url, alert: 'You need to login'
+      end
+    end
+
+    def current_user
+      @current_user ||= User.where(:id => session[:user_id]).first
+    end
+
+    def sign_in user
+      session[:user_id] = user.id
+    end
+
+    def sign_out
+      session[:user_id] = nil
     end
 end

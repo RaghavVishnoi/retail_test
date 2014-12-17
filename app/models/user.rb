@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   before_create :set_reset_password_token
   after_create :send_invite_mail
 
+  scope :with_password, -> { where('password_digest is not null') }
+  scope :with_email, ->(email) { where(:email => email) }
+
   def personalized_message
     "Hi #{name}"
   end
