@@ -55,3 +55,4 @@ gem 'activerecord4-redshift-adapter', github: 'aamine/activerecord4-redshift-ada
 gem 'daemons'
 gem 'role_model'
 gem "letter_opener", :group => :development
+gem 'cancan'

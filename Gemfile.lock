@@ -45,6 +45,7 @@ GEM
       nokogiri (>= 1.4.4)
     bcrypt (3.1.7)
     builder (3.2.2)
+    cancan (1.6.10)
     capistrano (3.3.3)
       capistrano-stats (~> 1.0.3)
       i18n
@@ -264,6 +265,7 @@ DEPENDENCIES
   activerecord4-redshift-adapter!
   aws-sdk
   bcrypt (~> 3.1.7)
+  cancan
   capistrano
   capistrano-bundler
   capistrano-rails
