@@ -56,3 +56,5 @@ gem 'daemons'
 gem 'role_model'
 gem "letter_opener", :group => :development
 gem 'cancan'
+gem 'less-rails'
+gem 'semantic-ui-rails'
