@@ -1,0 +1,101 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+#nav-bar-wrapper {
+  margin: 0 auto;
+  width: 750px;
+}
+
+#nav-bar {
+  padding: 0px;
+  float: right;
+  margin: 0px;
+}
+
+#nav-bar li {
+  display: inline;
+  margin: 0px 5px;
+}
+
+#nav-bar-container {
+  background-color: black;
+  padding: 2px 0px 2px 0px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+}
+
+#nav-bar a {
+  color: white;
+  text-decoration: none;
+}
+
+#page-container {
+  position: relative;
+  top: 25px;
+  width: 750px;
+  margin: 0 auto;
+}
+
+#new-button {
+  padding: 5px 8px;
+  text-decoration: none;
+  background-color: rgb(116, 116, 235);
+  color: white;
+  display:block;
+  width: 70px;
+  margin: 2px 0px 10px 0px;
+}
+
+.user-form {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.user-form .form-field {
+  margin: 4px 0px 8px 0px;
+}
+
+.user-form .form-field input {
+  width: 250px;
+  height: 25px;
+}
+
+.user-form .form-field label {
+  width: 150px;
+  text-align: left;
+  display: inline-block;
+}
+
+#form-title {
+  text-align: center;
+}
+
+.field_with_errors {
+  display: inline;
+}
+
+input[type="submit"] {
+  background-color: rgb(65, 187, 65);
+  color: white;
+  font-size: 15px;
+  border: none;
+  padding: 8px 5px;
+  cursor: pointer;
+}
+
+.error-messages-container {
+  padding: 1px 0px 1px 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgb(235, 140, 140);
+}
+
+.error-messages-container h4 {
+  margin: 2px 0px 2px 0px;
+}
+
+.error-messages-container ul {
+  margin: 0px;
+}

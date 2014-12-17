@@ -1,24 +1,29 @@
-<table>
-  <tr>
-    <td>Email</td>
-    <td>Name</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <% @users.each do |user| %>
+<%= link_to "New User", new_user_path, :id => 'new-button' %>
+<table class="ui table">
+  <thead>
     <tr>
-      <td>
-        <%= user.email %>
-      </td>
-      <td>
-        <%= user.name %>
-      </td>
-      <td>
-        <%= link_to "Edit", [:edit, user] %>
-      </td>
-      <td>
-        <%= link_to "Delete", [user], method: :delete, data: { confirm: "Are you sure?" } %>
-      </td>
+      <th>Email</th>
+      <th>Name</th>
+      <th></th>
+      <th></th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.email %>
+        </td>
+        <td>
+          <%= user.name %>
+        </td>
+        <td>
+          <%= link_to "Edit", [:edit, user] %>
+        </td>
+        <td>
+          <%= link_to "Delete", [user], method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

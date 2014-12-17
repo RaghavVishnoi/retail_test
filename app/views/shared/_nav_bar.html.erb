@@ -1,0 +1,18 @@
+<div id="nav-bar-container">
+  <div id="nav-bar-wrapper">
+    <ul id="nav-bar">
+      <% if can? :read, User %>
+      <li>
+        <%= link_to "Users", users_path %>
+      </li>
+      <% end %>
+      <li>
+        <%= link_to "Profile", edit_user_path(current_user) %>
+      </li>
+      <li>
+        <%= link_to "Log out", users_sign_out_path, :method => :delete %>
+      </li>
+    </ul>
+    <div class="clear"></div>
+  </div>
+</div>

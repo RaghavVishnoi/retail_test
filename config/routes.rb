@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-   
-  resources :users, :except => [:show]
-  get '/passwords/edit' => "passwords#edit"
-  put '/passwords' => "passwords#update"
+  
   get '/users/sign_in' => "sessions#new"
   post '/users/sign_in' => "sessions#create"
   delete '/users/sign_out' => "sessions#destroy"
+  resources :users, :except => [:show]
+  get '/passwords/edit' => "passwords#edit"
+  put '/passwords' => "passwords#update"
 
   namespace :api, :defaults => { :format => :json }, :constraints => {:format => :json} do
     namespace :v1 do

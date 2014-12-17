@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_secure_password :validations => false
   validates_confirmation_of :password, :if => ->{ password.present? }
   validates :email, :presence => true, :uniqueness => true
+  validates :name, :presence => true
   validates :reset_password_token, :uniqueness => true, :allow_nil => true
   # validates :password, :length => { :minimum => 6 }
   before_save :ensure_auth_token

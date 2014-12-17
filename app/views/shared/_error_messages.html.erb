@@ -1,0 +1,10 @@
+<% if errors.any? %>
+  <div class="error-messages-container">
+    <h4>Please fix following errors</h4>
+    <ul>
+      <% errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
