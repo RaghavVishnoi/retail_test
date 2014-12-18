@@ -58,12 +58,12 @@ body {
   margin: 4px 0px 8px 0px;
 }
 
-.user-form .form-field input {
+.user-form .form-field input, .user-form .form-field .field-value {
   width: 250px;
   height: 25px;
 }
 
-.user-form .form-field label {
+.user-form .form-field label, .user-form .form-field .field-name {
   width: 150px;
   text-align: left;
   display: inline-block;

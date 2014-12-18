@@ -23,11 +23,18 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
   </div>
-
-  <div class="form-field">
-    <%= f.label :roles %>
-    <%= f.select :roles, User.valid_roles, {}, { :multiple => true } %>
-  </div>
+  
+  <% if can? :update, :roles %>
+    <div class="form-field">
+      <%= f.label :roles %>
+      <%= f.select :roles, User.valid_roles, {}, { :multiple => true } %>
+    </div>
+  <% else %>
+    <div class="form-field">
+      <span class="field-name">Role</span>
+      <span class="field-value"><%= current_user.role_symbols.join(',') %></span>
+    </div>
+  <% end %>
 
   <%= f.submit %>
 <% end %>
