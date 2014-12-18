@@ -9,12 +9,7 @@
 <body>
   <%= render :partial => 'shared/nav_bar' %>
   <div id="page-container">
-    <% if alert %>
-      <%= alert %>
-    <% end %>
-    <% if notice %>
-      <%= notice %>
-    <% end %>
+    <%= render :partial => "shared/flash_messages" %>
     <%= yield %>
   </div>
 </body>
