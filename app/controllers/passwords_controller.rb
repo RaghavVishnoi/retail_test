@@ -20,7 +20,7 @@ class PasswordsController < ApplicationController
     def set_user
       @user = User.where(:reset_password_token => params[:token]).first if params[:token]
       unless @user
-        redirect_to :back, alert: ["Password token is invalid"]
+        redirect_to :back, alert: "Password token is invalid"
       end
     end
 end
