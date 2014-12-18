@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  helper_method :current_user
+  helper_method :current_user, :logged_in?
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to users_sign_in_url, alert: "Access denied!"
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate_user
-      unless current_user
+      unless logged_in?
         redirect_to users_sign_in_url, alert: 'You need to login'
       end
     end
@@ -37,5 +37,9 @@ class ApplicationController < ActionController::Base
 
     def home_page_url
       [:edit, current_user]
+    end
+
+    def logged_in?
+      !!current_user
     end
 end

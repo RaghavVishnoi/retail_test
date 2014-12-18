@@ -99,3 +99,7 @@ input[type="submit"] {
 .error-messages-container ul {
   margin: 0px;
 }
+
+.password-form {
+  width: 255px;
+}

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates :email, :presence => true, :uniqueness => true
   validates :name, :presence => true
   validates :reset_password_token, :uniqueness => true, :allow_nil => true
-  # validates :password, :length => { :minimum => 6 }
+  validates :password, :length => { :minimum => 6 }, :on => :update, :unless => :password_digest?
   before_save :ensure_auth_token
   before_create :set_reset_password_token
   after_create :send_invite_mail
