@@ -44,8 +44,8 @@ body {
   text-decoration: none;
   background-color: rgb(116, 116, 235);
   color: white;
-  display:block;
-  width: 70px;
+  display: inline-block;
+  /*width: 70px;*/
   margin: 2px 0px 10px 0px;
 }
 

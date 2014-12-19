@@ -1,0 +1,12 @@
+<%= link_to "New Job Title", new_job_title_path, :id => 'new-button' %>
+<table class="ui table">
+  <tbody>
+    <% @job_titles.each do |job_title| %>
+      <tr>
+        <td><%= job_title.title %></td>
+        <td><%= link_to "Edit", [:edit, job_title] %></td>
+        <td><%= link_to "Delete", [job_title], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</ul>
