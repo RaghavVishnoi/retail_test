@@ -30,6 +30,7 @@ class Ability
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
     if user.has_role? :superadmin
       can :manage, :all
+      can :manage, Organization
     else
       can [:edit, :update], User do |user_obj|
         user_obj == user

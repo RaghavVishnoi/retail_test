@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   get '/users/sign_in' => "sessions#new"
   post '/users/sign_in' => "sessions#create"
   delete '/users/sign_out' => "sessions#destroy"
+
+  get '/organization/edit' => "organizations#edit"
+  put '/organization' => "organizations#update"
+
   resources :users, :except => [:show]
+
   get '/passwords/edit' => "passwords#edit"
   put '/passwords' => "passwords#update"
 

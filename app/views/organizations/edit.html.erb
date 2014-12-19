@@ -1,0 +1,16 @@
+<%= form_for @organization, :url => organization_url, :method => :put, :html => { :class => 'user-form' } do |f| %>
+  <h4 id="form-title">Edit Organization</h4>
+  <% if @organization.logo? %>
+    <%= image_tag @organization.logo_url, :class => 'organization-logo' %>
+  <% end %>
+  <%= render :partial => 'shared/error_messages', :locals => { :errors => @organization.errors } %>
+  <div class="form-field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="form-field">
+    <%= f.label :logo %>
+    <%= f.file_field :logo %>
+  </div>
+  <%= f.submit %>
+<% end %>
