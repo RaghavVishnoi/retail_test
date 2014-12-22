@@ -1,4 +1,4 @@
 class Organization < ActiveRecord::Base
-  validates :name, :logo, :presence => true
   mount_uploader :logo, LogoUploader
+  validates :name, :logo, :presence => true
 end

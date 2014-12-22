@@ -7,7 +7,13 @@ Rails.application.routes.draw do
   get '/organization/edit' => "organizations#edit"
   put '/organization' => "organizations#update"
 
-  resources :job_titles
+  resources :job_titles, :except => [:show]
+
+  resources :addresses, :except => [:show] do
+    collection do
+      get :edit_hq
+    end
+  end
 
   resources :users, :except => [:show]
 

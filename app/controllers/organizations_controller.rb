@@ -1,6 +1,5 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization
-  authorize_resource
 
   def edit
   end

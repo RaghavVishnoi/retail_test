@@ -12,6 +12,9 @@ class ApplicationController < ActionController::Base
   before_action :log_requests
   before_action :authenticate_user
 
+  authorize_resource
+
+
   private
     def log_requests
       LogHandler.process(request)
