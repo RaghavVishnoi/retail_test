@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :job_titles, :except => [:show]
   
   resources :departments, :except => [:show]
+
+  resources :regions, :except => [:show]
   
   resources :addresses, :except => [:show] do
     collection do
