@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   put '/organization' => "organizations#update"
 
   resources :job_titles, :except => [:show]
-
+  
+  resources :departments, :except => [:show]
+  
   resources :addresses, :except => [:show] do
     collection do
       get :edit_hq
