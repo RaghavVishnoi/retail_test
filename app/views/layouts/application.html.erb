@@ -10,11 +10,8 @@
   <%= render :partial => 'shared/nav_bar' %>
 
   <div id="page-container">
-
-    <% if can? :manage, Organization %>
-      <%= render 'shared/organization_nav' %>
-    <% end %>
-
+    <%= render 'shared/organization_nav' %>
+    
     <%= render :partial => "shared/flash_messages" %>
 
     <%= yield %>

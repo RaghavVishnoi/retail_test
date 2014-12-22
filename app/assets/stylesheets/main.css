@@ -122,3 +122,5 @@ input[type="submit"] {
   padding: 5px;
   display: block;
 }
+
+#welcome-msg { text-align: center; }

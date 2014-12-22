@@ -3,11 +3,18 @@ class User < ActiveRecord::Base
   include RoleModel
   roles :superadmin, :admin, :manager, :user
   has_secure_password :validations => false
+
+  has_and_belongs_to_many :departments
+  has_and_belongs_to_many :regions
+  has_and_belongs_to_many :business_units
+  has_and_belongs_to_many :job_titles
+
   validates_confirmation_of :password, :if => ->{ password.present? }
   validates :email, :presence => true, :uniqueness => true
   validates :name, :presence => true
   validates :reset_password_token, :uniqueness => true, :allow_nil => true
   validates :password, :presence => true, :unless => :password_not_required?
+
   before_save :ensure_auth_token
   before_create :set_reset_password_token
   after_create :send_invite_mail

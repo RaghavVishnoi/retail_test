@@ -36,5 +36,53 @@
     </div>
   <% end %>
 
+  <% if can? :update, :departments %>
+    <div class="form-field">
+      <%= f.label :department_ids, "Department" %>
+      <%= f.select :department_ids, Department.pluck(:name, :id), :include_blank => true %>
+    </div>
+  <% else %>
+    <div class="form-field">
+      <span class="field-name">Department</span>
+      <span class="field-value"><%= current_user.departments.map(&:name).join(', ') %></span>
+    </div>
+  <% end %>
+
+  <% if can? :update, :regions %>
+    <div class="form-field">
+      <%= f.label :region_ids, "Regions" %>
+      <%= f.select :region_ids, Region.pluck(:name, :id), { :include_blank => true }, { :multiple => true } %>
+    </div>
+  <% else %>
+    <div class="form-field">
+      <span class="field-name">Regions</span>
+      <span class="field-value"><%= current_user.regions.map(&:name).join(', ') %></span>
+    </div>
+  <% end %>
+
+  <% if can? :update, :business_units %>
+    <div class="form-field">
+      <%= f.label :business_unit_ids, "Business Units" %>
+      <%= f.select :business_unit_ids, BusinessUnit.pluck(:name, :id), { :include_blank => true }, { :multiple => true } %>
+    </div>
+  <% else %>
+    <div class="form-field">
+      <span class="field-name">Business Units</span>
+      <span class="field-value"><%= current_user.business_units.map(&:name).join(', ') %></span>
+    </div>
+  <% end %>
+  
+  <% if can? :update, :job_titles %>
+    <div class="form-field">
+      <%= f.label :job_title_ids, "Job Titles" %>
+      <%= f.select :job_title_ids, JobTitle.pluck(:title, :id), { :include_blank => true }, { :multiple => true } %>
+    </div>
+  <% else %>
+    <div class="form-field">
+      <span class="field-name">Job Titles</span>
+      <span class="field-value"><%= current_user.job_titles.map(&:title).join(', ') %></span>
+    </div>
+  <% end %>
+
   <%= f.submit %>
 <% end %>

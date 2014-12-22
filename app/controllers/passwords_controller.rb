@@ -1,6 +1,7 @@
 class PasswordsController < ApplicationController
+  skip_authorize_resource
   skip_before_action :authenticate_user
-  before_action :set_user, :only => [:update]
+  before_action :set_user#, :only => [:update]
 
   def edit
   end
@@ -20,7 +21,7 @@ class PasswordsController < ApplicationController
     def set_user
       @user = User.where(:reset_password_token => params[:token]).first if params[:token]
       unless @user
-        redirect_to :back, alert: "Password token is invalid"
+        redirect_to users_sign_in_url, alert: "Password token is invalid"
       end
     end
 end

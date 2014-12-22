@@ -1,7 +1,10 @@
-<div class="organization-nav-container">
-  <div class="nav-link"><%= link_to "HeadQuarter Address", edit_hq_addresses_path %></div>
-  <div class="nav-link"><%= link_to "Job Titles", job_titles_path %></div>
-  <div class="nav-link"><%= link_to "Branch Offices", addresses_path %></div>
-  <div class="nav-link"><%= link_to "Departments", departments_path %></div>
-  <div class="nav-link"><%= link_to "Regions", regions_path %></div>
-</div>
+<% if logged_in? && can?(:manage, Organization) %>
+  <div class="organization-nav-container">
+    <div class="nav-link"><%= link_to "HeadQuarter Address", edit_hq_addresses_path %></div>
+    <div class="nav-link"><%= link_to "Job Titles", job_titles_path %></div>
+    <div class="nav-link"><%= link_to "Branch Offices", addresses_path %></div>
+    <div class="nav-link"><%= link_to "Departments", departments_path %></div>
+    <div class="nav-link"><%= link_to "Regions", regions_path %></div>
+    <div class="nav-link"><%= link_to "Business Units", business_units_path %></div>
+  </div>
+<% end %>

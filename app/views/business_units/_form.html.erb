@@ -1,0 +1,9 @@
+<%= form_for @business_unit, :html => { :class => 'user-form' } do |f| %>
+  <h4 id="form-title"><%= form_title %></h4>
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @business_unit.errors } %>
+  <div class="form-field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <%= f.submit %>
+<% end %>
