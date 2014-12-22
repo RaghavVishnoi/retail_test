@@ -51,7 +51,7 @@
   <% if can? :update, :regions %>
     <div class="form-field">
       <%= f.label :region_ids, "Regions" %>
-      <%= f.select :region_ids, Region.pluck(:name, :id), { :include_blank => true }, { :multiple => true } %>
+      <%= f.select :region_ids, Region.pluck(:name, :id), {}, { :multiple => true } %>
     </div>
   <% else %>
     <div class="form-field">
@@ -63,7 +63,7 @@
   <% if can? :update, :business_units %>
     <div class="form-field">
       <%= f.label :business_unit_ids, "Business Units" %>
-      <%= f.select :business_unit_ids, BusinessUnit.pluck(:name, :id), { :include_blank => true }, { :multiple => true } %>
+      <%= f.select :business_unit_ids, BusinessUnit.pluck(:name, :id), {}, { :multiple => true } %>
     </div>
   <% else %>
     <div class="form-field">
@@ -75,12 +75,24 @@
   <% if can? :update, :job_titles %>
     <div class="form-field">
       <%= f.label :job_title_ids, "Job Titles" %>
-      <%= f.select :job_title_ids, JobTitle.pluck(:title, :id), { :include_blank => true }, { :multiple => true } %>
+      <%= f.select :job_title_ids, JobTitle.pluck(:title, :id), {}, { :multiple => true } %>
     </div>
   <% else %>
     <div class="form-field">
       <span class="field-name">Job Titles</span>
       <span class="field-value"><%= current_user.job_titles.map(&:title).join(', ') %></span>
+    </div>
+  <% end %>
+  
+  <% if can? :update, :weekly_offs %>
+    <div class="form-field">
+      <%= f.label :weekly_off_ids, "Weekly Offs" %>
+      <%= f.select :weekly_off_ids, WeeklyOff.all.map { |w| [w.day, w.id] }, {}, { :multiple => true } %>
+    </div>
+  <% else %>
+    <div class="form-field">
+      <span class="field-name">Weekly Offs</span>
+      <span class="field-value"><%= current_user.weekly_offs.map(&:day).join(', ') %></span>
     </div>
   <% end %>
 

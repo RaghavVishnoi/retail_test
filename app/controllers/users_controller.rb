@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   private
     def user_params
       if current_user.superadmin?
-        params.require(:user).permit(:name, :email, :password, :password_confirmation, :department_ids, :roles => [], :region_ids => [], :business_unit_ids => [], :job_title_ids => []).merge(:skip_password_validation => true)
+        params.require(:user).permit(:name, :email, :password, :password_confirmation, :department_ids, :roles => [], :region_ids => [], :business_unit_ids => [], :job_title_ids => [], :weekly_off_ids => []).merge(:skip_password_validation => true)
       else
         params.require(:user).permit(:name, :email, :password, :password_confirmation)
       end

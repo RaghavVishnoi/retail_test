@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :regions
   has_and_belongs_to_many :business_units
   has_and_belongs_to_many :job_titles
+  has_and_belongs_to_many :weekly_offs
 
   validates_confirmation_of :password, :if => ->{ password.present? }
   validates :email, :presence => true, :uniqueness => true

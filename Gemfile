@@ -58,3 +58,4 @@ gem "letter_opener", :group => :development
 gem 'cancan'
 gem 'less-rails'
 gem 'semantic-ui-rails'
+gem 'select2-rails'
