@@ -1,5 +1,4 @@
 class Address < ActiveRecord::Base
-  belongs_to :organization
 
   def self.hq
     find_or_create_by(:addressable_type => "hq")
