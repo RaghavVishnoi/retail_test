@@ -59,3 +59,8 @@ gem 'cancan'
 gem 'less-rails'
 gem 'semantic-ui-rails'
 gem 'select2-rails'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-activemodel-mocks'
+end

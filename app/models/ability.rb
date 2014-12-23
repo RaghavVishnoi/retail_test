@@ -28,7 +28,7 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
-    if user.has_role? :superadmin
+    if user.superadmin?
       can :manage, :all
       can :manage, Organization
     else

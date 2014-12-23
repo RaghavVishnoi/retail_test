@@ -1,6 +1,6 @@
+<h2 id="welcome-msg">Welcome <%= @user.name %></h2>
 <%= render :partial => "shared/error_messages", :locals => { :errors => @user.errors } if @user %>
 <%= form_tag passwords_path, method: :put, :class => 'user-form password-form' do %>
-  <h2 id="welcome-msg">Welcome <%= @user.name %></h2>
   <h4 id="form-title">Update Password</h4>
 
   <%= hidden_field_tag :token, params[:token] %>

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     redirect_to users_sign_in_url, alert: "Access denied!"
   end
 
-  before_action :log_requests
+  before_action :log_requests, :if => 'Rails.env.staging?'
   before_action :authenticate_user
 
   authorize_resource
