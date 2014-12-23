@@ -1,61 +1,61 @@
 require 'rails_helper'
 
-describe JobTitlesController do
+describe RegionsController do
   before do
     @user = mock_model(User, :superadmin? => true)
     expect(controller).to receive(:authenticate_user).and_return(nil)
     expect(controller).to receive(:current_user).and_return(@user)
 
-    @job_title = mock_model(JobTitle, :update_attributes => true)
-    JobTitle.stub(:where).and_return([@job_title])
+    @region = mock_model(Region, :update_attributes => true)
+    Region.stub(:where).and_return([@region])
   end
 
-  shared_examples_for "request which sets job title" do
-    it "finds job title" do
-      expect(JobTitle).to receive(:where).with(:id => 'id')
+  shared_examples_for "request which sets region" do
+    it "finds region" do
+      expect(Region).to receive(:where).with(:id => 'id')
       send_request
     end
 
-    it "sets @job_title" do
+    it "sets @region" do
       send_request
-      expect(assigns(:job_title)).to eq(@job_title)
+      expect(assigns(:region)).to eq(@region)
     end
 
-    context "when job_title not found" do
+    context "when region not found" do
       before do
-        JobTitle.stub(:where).and_return([])
+        Region.stub(:where).and_return([])
       end
 
       it "redirects to index page" do
         send_request
-        expect(response).to redirect_to(job_titles_url)
+        expect(response).to redirect_to(regions_url)
       end
 
       it "sets alert" do
         send_request
-        expect(flash[:alert]).to eq("Job Title not found")
+        expect(flash[:alert]).to eq("Region not found")
       end
     end
   end
 
   describe "GET index" do
     before do
-      @job_titles = double("job titles")
-      JobTitle.stub(:all).and_return(@job_titles)
+      @regions = double("regions")
+      Region.stub(:all).and_return(@regions)
     end
 
     def send_request
       get :index
     end
 
-    it "finds all job titles" do
-      expect(JobTitle).to receive(:all)
+    it "finds all regions" do
+      expect(Region).to receive(:all)
       send_request
     end
 
-    it "sets @job_titles" do
+    it "sets @regions" do
       send_request
-      expect(assigns(:job_titles)).to eq(@job_titles)
+      expect(assigns(:regions)).to eq(@regions)
     end
 
     it "renders index template" do
@@ -66,22 +66,22 @@ describe JobTitlesController do
 
   describe "GET new" do
     before do
-      @job_title = mock_model(JobTitle)
-      JobTitle.stub(:new).and_return(@job_title)
+      @region = mock_model(Region)
+      Region.stub(:new).and_return(@region)
     end
 
     def send_request
       get :new
     end
 
-    it "initializes new job title" do
-      expect(JobTitle).to receive(:new)
+    it "initializes new region" do
+      expect(Region).to receive(:new)
       send_request
     end
 
-    it "sets @job_title" do
+    it "sets @region" do
       send_request
-      expect(assigns(:job_title)).to eq(@job_title)
+      expect(assigns(:region)).to eq(@region)
     end
 
     it "renders new template" do
@@ -92,43 +92,43 @@ describe JobTitlesController do
 
   describe "POST create" do
     before do
-      @job_title = mock_model(JobTitle, :save => true)
-      JobTitle.stub(:new).and_return(@job_title)
+      @region = mock_model(Region, :save => true)
+      Region.stub(:new).and_return(@region)
     end
 
     def send_request
-      post :create, :job_title => job_title_params
+      post :create, :region => region_params
     end
 
-    def job_title_params
-      { 'title' => 'job title' }
+    def region_params
+      { 'name' => 'region_name' }
     end
 
-    it "initializes new job_title" do
-      expect(JobTitle).to receive(:new).with(job_title_params)
+    it "initializes new region" do
+      expect(Region).to receive(:new).with(region_params)
       send_request
     end
 
-    it "sets @job_title" do
+    it "sets @region" do
       send_request
-      expect(assigns(:job_title)).to eq(@job_title)
+      expect(assigns(:region)).to eq(@region)
     end
 
     it "saves" do
-      expect(@job_title).to receive(:save)
+      expect(@region).to receive(:save)
       send_request
     end
 
     context "when saved successfully" do
       it "redirects to index page" do
         send_request
-        expect(response).to redirect_to(job_titles_url)
+        expect(response).to redirect_to(regions_url)
       end
     end
 
     context "when not saved successfully" do
       before do
-        @job_title.stub(:save).and_return(false)
+        @region.stub(:save).and_return(false)
       end
 
       it "renders new template" do
@@ -144,7 +144,7 @@ describe JobTitlesController do
       get :edit, :id => 'id'
     end
 
-    it_behaves_like "request which sets job title"
+    it_behaves_like "request which sets region"
 
     it "renders edit template" do
       send_request
@@ -156,30 +156,30 @@ describe JobTitlesController do
   describe "PUT update" do
 
     def send_request
-      put :update, :id => 'id', :job_title => job_title_params
+      put :update, :id => 'id', :region => region_params
     end
 
-    def job_title_params
-      { 'title' => 'job title' }
+    def region_params
+      { 'name' => 'region name' }
     end
 
-    it_behaves_like "request which sets job title"
+    it_behaves_like "request which sets region"
 
-    it "updates job title" do
-      expect(@job_title).to receive(:update_attributes).with(job_title_params)
+    it "updates region" do
+      expect(@region).to receive(:update_attributes).with(region_params)
       send_request
     end
 
     context "when updated successfully" do
       it "redirects to index page" do
         send_request
-        expect(response).to redirect_to(job_titles_url)
+        expect(response).to redirect_to(regions_url)
       end
     end
 
     context "when not updated successfully" do
       before do
-        @job_title.stub(:update_attributes).and_return(false)
+        @region.stub(:update_attributes).and_return(false)
       end
 
       it "renders edit page" do
@@ -195,16 +195,16 @@ describe JobTitlesController do
       delete :destroy, :id => 'id'
     end
 
-    it_behaves_like "request which sets job title"
+    it_behaves_like "request which sets region"
 
-    it "destroys job_title" do
-      expect(@job_title).to receive(:destroy)
+    it "destroys region" do
+      expect(@region).to receive(:destroy)
       send_request
     end
 
-    it "redirects to job_titles_url" do
+    it "redirects to regions_url" do
       send_request
-      expect(response).to redirect_to(job_titles_url)
+      expect(response).to redirect_to(regions_url)
     end
   end
 end
