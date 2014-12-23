@@ -37,3 +37,7 @@ development:
 staging:
   <<: *default
   database: staging_fosem
+
+test:
+  <<: *default
+  database: test_fosem

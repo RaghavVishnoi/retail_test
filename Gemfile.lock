@@ -257,6 +257,8 @@ GEM
     semantic-ui-rails (0.18.0)
       autoprefixer-rails
       less-rails
+    shoulda-matchers (2.7.0)
+      activesupport (>= 3.0.0)
     slop (3.6.0)
     spring (1.2.0)
     sprockets (2.12.3)
@@ -327,6 +329,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   select2-rails
   semantic-ui-rails
+  shoulda-matchers
   spring
   sqlite3
   therubyracer

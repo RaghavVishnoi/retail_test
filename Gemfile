@@ -63,4 +63,5 @@ gem 'select2-rails'
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec-activemodel-mocks'
+  gem 'shoulda-matchers', require: false
 end
