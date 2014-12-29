@@ -64,4 +64,5 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec-activemodel-mocks'
   gem 'shoulda-matchers', require: false
+  gem 'factory_girl_rails'
 end
