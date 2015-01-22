@@ -1,0 +1,92 @@
+<%= form_for @item, :html => { :class => 'user-form' } do |f| %>
+
+  <h4 id="form-title"><%= form_title %></h4>
+
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @item.errors } %>
+
+  <div class="form-field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :city %>
+    <%= f.select :city_id, City.pluck(:name, :id), :include_blank => true %>
+    <%= link_to "Add City", new_city_path, :remote => true %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :item_region, "Region" %>
+    <%= f.select :item_region_id, ItemRegion.pluck(:name, :id), :include_blank => true %>
+    <%= link_to "Add Region", new_item_region_path, :remote => true %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :category %>
+    <%= f.select :category_id, Category.pluck(:name, :id), :include_blank => true %>
+    <%= link_to "Add Category", new_category_path, :remote => true %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :subcategory %>
+    <%= f.select :subcategory_id, Category.pluck(:name, :id), :include_blank => true %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :short_description %>
+    <%= f.text_field :short_description %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :collection %>
+    <%= f.select :collection_id, Collection.pluck(:name, :id), :include_blank => true %>
+    <%= link_to "Add Collection", new_collection_path, :remote => true %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :size %>
+    <%= f.select :size_id, Size.pluck(:name, :id), :include_blank => true %>
+    <%= link_to "Add Size", new_size_path, :remote => true %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :alcohol_percent %>
+    <%= f.select :alcohol_percent_id, AlcoholPercent.pluck(:value, :id), :include_blank => true %>
+    <%= link_to "Add Alcohol percent", new_alcohol_percent_path, :remote => true %>
+  </div>
+  
+  <%= field_set_tag "Details" do %>
+    <div class="details-container dynamic-fields-container">
+
+      <%= link_to "Add Details", "javascript:void(0);", :class => "add-field" %>
+
+      <% @item.details.each do |detail| %>
+        <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[details][][name]" => detail["name"], "item[details][][value]" => detail["value"] }, :container_class => "", :disabled => false } %>
+      <% end %>
+
+      <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[details][][name]" => nil, "item[details][][value]" => nil }, :container_class => "hidden", :disabled => true } %>
+    </div>
+  <% end %>
+
+  <%= field_set_tag "Prices" do %>
+    <div class="details-container dynamic-fields-container">
+
+      <%= link_to "Add Prices", "javascript:void(0);", :class => "add-field" %>
+
+      <% @item.prices.each do |price| %>
+        <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[prices][][name]" => price["name"], "item[prices][][value]" => price["value"] }, :container_class => "", :disabled => false } %>
+      <% end %>
+
+      <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[prices][][name]" => nil, "item[prices][][value]" => nil }, :container_class => "hidden", :disabled => true } %>
+    </div>
+  <% end %>
+
+  <%= field_set_tag "Images" do %>
+    <div class="images-container">
+      <%= link_to "Add Image", new_image_path, :remote => true %>
+    </div>
+  <% end %>
+
+  <%= f.submit %>
+
+<% end %>

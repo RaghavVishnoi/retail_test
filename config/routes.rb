@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       get :edit_hq
     end
   end
+  
+  resources :items, :cities, :item_regions, :categories, :collections, :sizes, :alcohol_percents, :images, :except => [:show]
 
   resources :users, :except => [:show]
 

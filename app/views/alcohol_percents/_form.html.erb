@@ -1,0 +1,13 @@
+<%= form_for @alcohol_percent, :remote => request.format.js?, :html => { :class => 'user-form' } do |f| %>
+  
+  <h4 id="form-title"><%= form_title %></h4>
+  
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @alcohol_percent.errors } %>
+
+  <div class="form-field">
+    <%= f.label :value %>
+    <%= f.text_field :value %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
