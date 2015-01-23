@@ -131,3 +131,14 @@ input[type="submit"] {
 #welcome-msg { text-align: center; }
 
 .weekly-off-field { width: 500px !important; }
+
+.hidden { display: none; }
+
+.image-container img { 
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.image-container a {
+  float: right;
+}

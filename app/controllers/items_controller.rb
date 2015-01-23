@@ -17,7 +17,6 @@ class ItemsController < ApplicationController
     else
       render :new
     end
-    binding.pry
   end
 
   def edit
@@ -38,7 +37,7 @@ class ItemsController < ApplicationController
 
   private
     def item_params
-      params.require(:item).permit(:name, :city_id, :item_region_id, :category_id, :subcategory_id, :short_description, :collection_id, :size_id, :alcohol_percent_id, :prices => [:name, :value], :details => [:name, :value])
+      params.require(:item).permit(:name, :city_id, :item_region_id, :category_id, :subcategory_id, :short_description, :collection_id, :size_id, :alcohol_percent_id, :quantity, :unit_of_measurement, :image_ids => [], :prices => [:name, :value], :details => [:name, :value])
     end
 
     def set_item

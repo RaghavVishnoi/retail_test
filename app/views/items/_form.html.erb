@@ -54,6 +54,18 @@
     <%= f.select :alcohol_percent_id, AlcoholPercent.pluck(:value, :id), :include_blank => true %>
     <%= link_to "Add Alcohol percent", new_alcohol_percent_path, :remote => true %>
   </div>
+
+  <%= field_set_tag "Unit Of Measurement" do %>
+    <div class="form-field">
+      <%= f.label :unit_of_measurement %>
+      <%= f.text_field :unit_of_measurement %>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :quantity %>
+      <%= f.text_field :quantity %>
+    </div>
+  <% end %>
   
   <%= field_set_tag "Details" do %>
     <div class="details-container dynamic-fields-container">
@@ -61,10 +73,10 @@
       <%= link_to "Add Details", "javascript:void(0);", :class => "add-field" %>
 
       <% @item.details.each do |detail| %>
-        <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[details][][name]" => detail["name"], "item[details][][value]" => detail["value"] }, :container_class => "", :disabled => false } %>
+        <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[details][][name]" => detail["name"], "item[details][][value]" => detail["value"] }, :container_class => "" } %>
       <% end %>
 
-      <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[details][][name]" => nil, "item[details][][value]" => nil }, :container_class => "hidden", :disabled => true } %>
+      <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[details][][name]" => nil, "item[details][][value]" => nil }, :container_class => "hidden" } %>
     </div>
   <% end %>
 
@@ -74,16 +86,20 @@
       <%= link_to "Add Prices", "javascript:void(0);", :class => "add-field" %>
 
       <% @item.prices.each do |price| %>
-        <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[prices][][name]" => price["name"], "item[prices][][value]" => price["value"] }, :container_class => "", :disabled => false } %>
+        <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[prices][][name]" => price["name"], "item[prices][][value]" => price["value"] }, :container_class => "" } %>
       <% end %>
 
-      <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[prices][][name]" => nil, "item[prices][][value]" => nil }, :container_class => "hidden", :disabled => true } %>
+      <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[prices][][name]" => nil, "item[prices][][value]" => nil }, :container_class => "hidden" } %>
     </div>
   <% end %>
 
   <%= field_set_tag "Images" do %>
-    <div class="images-container">
-      <%= link_to "Add Image", new_image_path, :remote => true %>
+    <%= link_to "Add Image", new_image_path, :remote => true %>
+    <%= hidden_field_tag "item[image_ids][]", nil %>
+    <div class="images">
+      <% @item.images.each do |image| %>
+        <%= render :partial => 'images/image', :locals => { :image => image } %>
+      <% end %>
     </div>
   <% end %>
 
