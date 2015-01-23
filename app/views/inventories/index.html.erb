@@ -1,0 +1,13 @@
+<%= link_to "New Inventory", new_item_inventory_path(@item), :id => 'new-button' %>
+<table class="ui table">
+  <tbody>
+    <% @inventories.each do |inventory| %>
+      <tr>
+        <td><%= inventory.warehouse.try(:name) %></td>
+        <td><%= inventory.quantity %></td>
+        <td><%= link_to "Edit", [:edit, @item, inventory] %></td>
+        <td><%= link_to "Delete", [@item, inventory], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</ul>

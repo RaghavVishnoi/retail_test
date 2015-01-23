@@ -6,6 +6,7 @@ class Item < ActiveRecord::Base
   belongs_to :collection
   belongs_to :alcohol_percent
   has_many :images, :dependent => :destroy
+  has_many :inventories, :dependent => :destroy
 
   validates :name, :presence => true
 

@@ -4,6 +4,7 @@
     <% @items.each do |item| %>
       <tr>
         <td><%= item.name %></td>
+	<td><%= link_to "Inventories", item_inventories_path(item) %></td>
         <td><%= link_to "Edit", [:edit, item] %></td>
         <td><%= link_to "Delete", [item], method: :delete, data: { confirm: "Are you sure?" } %></td>
       </tr>
