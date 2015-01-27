@@ -5,49 +5,110 @@ class InventoriesController < ApplicationController
 
   def index
     @inventories = @item.inventories
+    respond_to do |format|
+      format.html
+      format.json {
+        render :json => { :result => true, :inventories => @inventories.as_json }
+      }
+    end
   end
 
   def new
     @inventory = @item.inventories.new
+    respond_to do |format|
+      format.html
+      format.json {
+        render :json => { result: true, :inventory => @inventory.as_json }
+      }
+    end
   end
 
   def create
     @inventory = @item.inventories.new inventory_params
     if @inventory.save
-      redirect_to item_inventories_path(@item)
+      respond_to do |format|
+        format.html { redirect_to item_inventories_path(@item) }
+        format.json { 
+          render :json => { :result => true, :inventory => @inventory.as_json }
+        }
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.json {
+          render :json => { :result => false, :errors => { :messages => @inventory.errors.full_messages } }
+        }
+      end
     end
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.json {
+        render :json => { :result => true, :inventory => @inventory.as_json }
+      }
+    end
   end
 
   def update
     if @inventory.update_attributes inventory_params
-      redirect_to item_inventories_path(@item)
+      respond_to do |format|
+        format.html { redirect_to item_inventories_path(@item) }
+        format.json { 
+          render :json => { :result => true, :inventory => @inventory.as_json }
+        }
+      end
     else
-      render :edit
+      respond_to do |format|
+        format.html { render :edit }
+        format.json {
+          render :json => { :result => false, :errors => { :messages => @inventory.errors.full_messages } }
+        }
+      end
     end
   end
 
   def destroy
-    @inventory.destroy
-    redirect_to item_inventories_path(@item)
+    if @inventory.destroy
+      respond_to do |format|
+        format.html { redirect_to item_inventories_path(@item) }
+        format.json {
+          render :json => { :result => true }
+        }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to item_inventories_path(@item), :alert => @inventory.errors.full_messages }
+        format.json {
+          render :json => { :result => false, :errors => { :messages => @inventory.errors.full_messages } }
+        }
+      end
+    end
   end
 
   private
     def set_item
       @item = Item.where(:id => params[:item_id]).first
       unless @item
-        redirect_to items_path, alert: "Item not found"
+        respond_to do |format|
+          format.html { redirect_to items_path, alert: "Item not found" }
+          format.json {
+            render :json => { :result => false, :errors => { :messages => ["Item not found"] } }
+          }
+        end
       end
     end
 
     def set_inventory
       @inventory = @item.inventories.where(:id => params[:id]).first
       unless @inventory
-        redirect_to item_inventories_path(@item), alert: "Inventory not found"
+        respond_to do |format|
+          format.html { redirect_to item_inventories_path(@item), alert: "Inventory not found" }
+          format.json {
+            render :json => { :result => false, :errors => { :messages => ["Inventory not found"] } }
+          }
+        end
       end
     end
 

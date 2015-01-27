@@ -10,9 +10,18 @@ class ImagesController < ApplicationController
       respond_to do |format|
         format.html { redirect_to images_path }
         format.js
+        format.json {
+          render :json => { :result => true, :image => { :id => @image.id, :image_url => @image.image_url } }
+        }
       end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.js { render :new }
+        format.json {
+          render :json => { :result => false, :errors => { :messages => @image.errors.full_messages } }
+        }
+      end
     end
   end
   

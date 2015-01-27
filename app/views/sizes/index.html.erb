@@ -1,0 +1,13 @@
+<%= link_to "New Size", new_size_path, :id => 'new-button' %>
+
+<table class="ui table">
+  <tbody>
+    <% @sizes.each do |size| %>
+      <tr>
+        <td><%= size.name %></td>
+        <td><%= link_to "Edit", [:edit, size] %></td>
+        <td><%= link_to "Delete", [size], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</ul>

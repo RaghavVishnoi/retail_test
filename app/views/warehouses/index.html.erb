@@ -1,0 +1,13 @@
+<%= link_to "New Warehouse", new_warehouse_path, :id => 'new-button' %>
+
+<table class="ui table">
+  <tbody>
+    <% @warehouses.each do |warehouse| %>
+      <tr>
+        <td><%= warehouse.name %></td>
+        <td><%= link_to "Edit", [:edit, warehouse] %></td>
+        <td><%= link_to "Delete", [warehouse], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</ul>

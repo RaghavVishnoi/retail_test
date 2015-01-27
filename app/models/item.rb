@@ -5,6 +5,7 @@ class Item < ActiveRecord::Base
   belongs_to :subcategory, :class_name => "Category"
   belongs_to :collection
   belongs_to :alcohol_percent
+  belongs_to :size
   has_many :images, :dependent => :destroy
   has_many :inventories, :dependent => :destroy
 
