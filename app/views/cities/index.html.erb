@@ -1,0 +1,15 @@
+<%= link_to "New City", new_city_path, :id => 'new-button' %>
+
+<%= will_paginate @cities %>
+
+<table class="ui table">
+  <tbody>
+    <% @cities.each do |city| %>
+      <tr>
+        <td><%= city.name %></td>
+        <td><%= link_to "Edit", [:edit, city] %></td>
+        <td><%= link_to "Delete", [city], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</ul>

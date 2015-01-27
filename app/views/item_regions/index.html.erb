@@ -1,0 +1,15 @@
+<%= link_to "New Item Region", new_item_region_path, :id => 'new-button' %>
+
+<%= will_paginate @item_regions %>
+
+<table class="ui table">
+  <tbody>
+    <% @item_regions.each do |item_region| %>
+      <tr>
+        <td><%= item_region.name %></td>
+        <td><%= link_to "Edit", [:edit, item_region] %></td>
+        <td><%= link_to "Delete", [item_region], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</ul>

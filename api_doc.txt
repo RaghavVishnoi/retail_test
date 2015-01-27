@@ -247,3 +247,545 @@ Response:
   "Login":{},
   "View_New_C": {}
 }
+
+========================================================================
+* Items Index
+GET /api/v1/items
+
+Params:
+-- auth_token
+-- page
+
+Response:
+{
+    "result": true,
+    "per_page": 20,
+    "length": 5,
+    "current_page": 1,
+    "total_pages": 1,
+    "items": [
+                {
+                    "id": 4,
+                    "name": "item1",
+                    "city_id": 1,
+                    "item_region_id": 1,
+                    "category_id": 1,
+                    "subcategory_id": 2,
+                    "short_description": "description",
+                    "details": [
+                        {
+                            "name": "detail1",
+                            "value": "detail1 value"
+                        },
+                        {
+                            "name": "detail2",
+                            "value": "detail2 value"
+                        }
+                    ],
+                    "collection_id": 2,
+                    "size_id": 4,
+                    "alcohol_percent_id": 6,
+                    "prices": [
+                        {
+                            "name": "price1",
+                            "value": "100"
+                        },
+                        {
+                            "name": "price2",
+                            "value": "150"
+                        },
+                        {
+                            "name": "price3",
+                            "value": "200"
+                        }
+                    ],
+                    "created_at": "2015-01-23T07:11:59.000Z",
+                    "updated_at": "2015-01-23T08:11:15.000Z",
+                    "quantity": 10,
+                    "unit_of_measurement": "pack"
+              }
+    ]
+}
+
+=========================================================================
+* Create Items
+POST /api/v1/items
+
+Params:
+-- auth_token
+-- item[name]
+-- item[city_id]
+-- item[item_region_id]
+-- item[category_id]
+-- item[subcategory_id]
+-- item[short_description]
+-- item[details][][name]
+-- item[details][][value]
+-- item[details][][name]
+-- item[details][][value]
+-- item[collection_id]
+-- item[size_id]
+-- item[alcohol_percent_id]
+-- item[prices][][name]
+-- item[prices][][value]
+-- item[prices][][name]
+-- item[prices][][value]
+-- item[quantity]
+-- item[unit_of_measurement]
+
+
+Success Response:
+{
+    "result": true,
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+
+========================================================================
+* New Item
+GET /api/v1/items/new
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "item": {
+        "id": null,
+        "name": null,
+        "city_id": null,
+        "item_region_id": null,
+        "category_id": null,
+        "subcategory_id": null,
+        "short_description": null,
+        "details": [],
+        "collection_id": null,
+        "size_id": null,
+        "alcohol_percent_id": null,
+        "prices": [],
+        "created_at": null,
+        "updated_at": null,
+        "quantity": null,
+        "unit_of_measurement": null
+    }
+}
+
+
+====================================================================
+* Edit Item
+GET /api/v1/items/{id}/edit
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "item": {
+        "id": 4,
+        "name": "item1",
+        "city_id": 1,
+        "item_region_id": 1,
+        "category_id": 1,
+        "subcategory_id": 2,
+        "short_description": "description",
+        "details": [
+            {
+                "name": "detail1",
+                "value": "detail1 value"
+            },
+            {
+                "name": "detail2",
+                "value": "detail2 value"
+            }
+        ],
+        "collection_id": 2,
+        "size_id": 4,
+        "alcohol_percent_id": 6,
+        "prices": [
+            {
+                "name": "price1",
+                "value": "100"
+            },
+            {
+                "name": "price2",
+                "value": "150"
+            },
+            {
+                "name": "price3",
+                "value": "200"
+            }
+        ],
+        "created_at": "2015-01-23T07:11:59.000Z",
+        "updated_at": "2015-01-23T08:11:15.000Z",
+        "quantity": 10,
+        "unit_of_measurement": "pack"
+  }
+}
+
+==================================================================
+* Update Item
+PUT /api/v1/items/{id}
+
+Params:
+-- auth_token
+-- item[name]
+-- item[city_id]
+-- item[item_region_id]
+-- item[category_id]
+-- item[subcategory_id]
+-- item[short_description]
+-- item[details][][name]
+-- item[details][][value]
+-- item[details][][name]
+-- item[details][][value]
+-- item[collection_id]
+-- item[size_id]
+-- item[alcohol_percent_id]
+-- item[prices][][name]
+-- item[prices][][value]
+-- item[prices][][name]
+-- item[prices][][value]
+-- item[quantity]
+-- item[unit_of_measurement]
+
+Success Response:
+{
+    "result": true,
+    "item": {
+        "id": 4,
+        "name": "item1",
+        "city_id": 1,
+        "item_region_id": 1,
+        "category_id": 1,
+        "subcategory_id": 2,
+        "short_description": "description",
+        "details": [
+            {
+                "name": "detail1",
+                "value": "detail1 value"
+            },
+            {
+                "name": "detail2",
+                "value": "detail2 value"
+            }
+        ],
+        "collection_id": 2,
+        "size_id": 4,
+        "alcohol_percent_id": 6,
+        "prices": [
+            {
+                "name": "price1",
+                "value": "100"
+            },
+            {
+                "name": "price2",
+                "value": "150"
+            },
+            {
+                "name": "price3",
+                "value": "200"
+            }
+        ],
+        "created_at": "2015-01-23T07:11:59.000Z",
+        "updated_at": "2015-01-23T08:11:15.000Z",
+        "quantity": 10,
+        "unit_of_measurement": "pack"
+  }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+
+=================================================================
+* Delete item
+DELETE /api/v1/items/{id}
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true
+}
+
+================================================================
+* Item Regions Index
+GET /api/v1/item_regions
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "per_page": 20,
+    "length": 9,
+    "current_page": 1,
+    "total_pages": 1,
+    "item_regions": [
+        {
+            "id": 1,
+            "name": "region1",
+            "created_at": "2015-01-22T09:05:08.000Z",
+            "updated_at": "2015-01-22T09:05:08.000Z"
+        }
+    ]
+
+
+=================================================================
+* Create Item Regions
+POST /api/v1/item_regions
+
+Params:
+-- auth_token
+-- item_region[name]
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+================================================================
+* Edit Item Region
+GET /api/v1/item_regions/{id}/edit
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "item_region": {
+        "id": 1,
+        "name": "region1",
+        "created_at": "2015-01-22T09:05:08.000Z",
+        "updated_at": "2015-01-22T09:05:08.000Z"
+    }
+}
+
+=============================================================
+* New Item Region
+GET /api/v1/item_regions/new
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "item_region": {
+        "id": null,
+        "name": null,
+        "created_at": null,
+        "updated_at": null
+    }
+}
+
+===========================================================
+* Update Item Region
+PUT /api/v1/item_regions/{id}
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name has already been taken"
+        ]
+    }
+}
+
+=========================================================
+* DELETE Item Region
+DELETE /api/v1/item_regions/{id}
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Cannot delete record because dependent items exist"
+        ]
+    }
+}
+
+========================================================
+* Cities Index
+GET /api/v1/cities
+
+Params:
+-- auth_token
+-- page
+
+Success Response:
+{
+    "result": true,
+    "per_page": 20,
+    "length": 11,
+    "current_page": 1,
+    "total_pages": 1,
+    "cities": [
+        {
+            "id": 1,
+            "name": "city1",
+            "created_at": "2015-01-22T09:04:37.000Z",
+            "updated_at": "2015-01-22T09:04:37.000Z"
+        }
+    ]
+}
+
+========================================================
+* New City
+GET /api/v1/cities/new
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "city": {
+        "id": null,
+        "name": null,
+        "created_at": null,
+        "updated_at": null
+    }
+}
+
+=======================================================
+* Edit City
+GET /api/v1/cities/{id}/edit
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "city": {
+        "id": 1,
+        "name": "city1",
+        "created_at": "2015-01-22T09:04:37.000Z",
+        "updated_at": "2015-01-22T09:04:37.000Z"
+    }
+}
+
+====================================================
+* Create City
+POST /api/v1/cities
+
+Params:
+-- auth_token
+-- city[name]
+
+Success Response:
+{
+    "result": true,
+    "city": {
+        "id": 1,
+        "name": "city1",
+        "created_at": "2015-01-27T08:50:13.616Z",
+        "updated_at": "2015-01-27T08:50:13.616Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name has already been taken"
+        ]
+    }
+}
+
+=====================================================
+* Update City
+PUT /api/v1/cities/{id}
+
+Params:
+-- auth_token
+-- city[name]
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+
+=======================================================
+* Delete City
+DELETE /api/v1/cities/{id}
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Cannot delete record because dependent items exist"
+        ]
+    }
+}

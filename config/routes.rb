@@ -42,6 +42,10 @@ Rails.application.routes.draw do
       resources :customers
     end
   end
+
+  scope '/api/v1/', :as => 'api_v1', :defaults => { :format => :json }, :constraints => { :format => :json } do
+    resources :items, :item_regions, :cities, :except => [:show]
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

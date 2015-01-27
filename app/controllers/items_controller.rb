@@ -1,38 +1,82 @@
+
 class ItemsController < ApplicationController
+
+  PER_PAGE = 20
 
   before_action :set_item, :only => [:edit, :update, :destroy]
 
   def index
-    @items = Item.all
+    @items = Item.paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
+    respond_to do |format|
+      format.html
+      format.json {
+        render :json => { result: true, :per_page => @items.per_page, :length => @items.length, :current_page => @items.current_page, :total_pages => @items.total_pages, :items => @items.as_json }
+      }
+    end
   end
 
   def new
     @item = Item.new
+    respond_to do |format|
+      format.html
+      format.json {
+        render :json => { result: true, :item => @item.as_json }
+      }
+    end
   end
 
   def create
     @item = Item.new item_params
     if @item.save
-      redirect_to items_path
+      respond_to do |format|
+        format.html { redirect_to items_path }
+        format.json {
+          render :json => { result: true, :item => @item.as_json }
+        }
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.json {
+          render :json => { result: false, :errors => { :messages => @item.errors.full_messages } }
+        }
+      end
     end
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.json { render :json => { result: true, :item => @item.as_json } }
+    end
   end
 
   def update
     if @item.update_attributes item_params
-      redirect_to items_path
+      respond_to do |format|
+        format.html { redirect_to items_path }
+        format.json {
+          render :json => { result: true, :item => @item.as_json }
+        }
+      end
     else
-      render :edit
+      respond_to do |format|
+        format.html { render :edit }
+        format.json {
+          render :json => { result: false, :errors => { :messages => @item.errors.full_messages } }
+        }
+      end
     end
   end
 
   def destroy
     @item.destroy
-    redirect_to items_path
+    respond_to do |format|
+      format.html { redirect_to items_path }
+      format.json {
+        render :json => { result: true }
+      }
+    end
   end
 
   private
@@ -43,7 +87,10 @@ class ItemsController < ApplicationController
     def set_item
       @item = Item.where(:id => params[:id]).first
       unless @item
-        redirect_to items_path, :alert => "Item not found"
+        respond_to do |format|
+          format.html { redirect_to items_path, :alert => "Item not found" }
+          format.json { render :json => { :result => false, :errors => { :messages => ["Item not found"] } } }
+        end
       end
     end
   

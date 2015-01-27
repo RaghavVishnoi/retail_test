@@ -2,11 +2,15 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  skip_before_action :verify_authenticity_token, :if => "request.format.json?"
   
   helper_method :current_user, :logged_in?
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to users_sign_in_url, alert: "Access denied!"
+    respond_to do |format|
+      format.html { redirect_to users_sign_in_url, alert: "Access denied!" }
+      format.json { render :json => { :result => true, :errors => { :messages => ["Access denied!"] } } }
+    end
   end
 
   before_action :log_requests, :if => 'Rails.env.staging?'
@@ -22,12 +26,23 @@ class ApplicationController < ActionController::Base
 
     def authenticate_user
       unless logged_in?
-        redirect_to users_sign_in_url, alert: 'You need to login'
+        respond_to do |format|
+          format.html { redirect_to users_sign_in_url, alert: 'You need to login' }
+          format.json { render :json => { :result => false, :errors => { :messages => ["User not found"] } } }
+        end
       end
     end
 
+    def find_user
+      if params[:auth_token]
+        User.where(:auth_token => params[:auth_token]).first
+      elsif session[:user_id]
+        User.where(:id => session[:user_id]).first
+      end
+    end
+    
     def current_user
-      @current_user ||= User.where(:id => session[:user_id]).first
+      @current_user ||= find_user
     end
 
     def sign_in user
@@ -36,10 +51,6 @@ class ApplicationController < ActionController::Base
 
     def sign_out
       session[:user_id] = nil
-    end
-
-    def home_page_url
-      [:edit, current_user]
     end
 
     def logged_in?
