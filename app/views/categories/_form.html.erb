@@ -1,5 +1,7 @@
 <%= form_for @category, :remote => request.format.js?, :html => { :class => 'user-form' } do |f| %>
-  
+
+  <%= hidden_field_tag "insert_option_at", params[:insert_option_at] %>
+    
   <h4 id="form-title"><%= form_title %></h4>
   
   <%= render :partial => "shared/error_messages", :locals => { :errors => @category.errors } %>

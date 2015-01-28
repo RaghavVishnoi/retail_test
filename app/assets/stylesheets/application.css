@@ -14,4 +14,5 @@
  *= require_self
  *= require select2
  *= require jquery.fileupload-ui
+ *= require jquery-ui/dialog
  */

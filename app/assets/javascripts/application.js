@@ -16,3 +16,4 @@
 //= require_tree .
 //= require select2
 //= require jquery-fileupload/basic
+//= require jquery-ui/dialog

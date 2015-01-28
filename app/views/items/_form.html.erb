@@ -24,12 +24,13 @@
   <div class="form-field">
     <%= f.label :category %>
     <%= f.select :category_id, Category.pluck(:name, :id), :include_blank => true %>
-    <%= link_to "Add Category", new_category_path, :remote => true %>
+    <%= link_to "Add Category", new_category_path(:insert_option_at => '#item_category_id'), :remote => true %>
   </div>
 
   <div class="form-field">
     <%= f.label :subcategory %>
     <%= f.select :subcategory_id, Category.pluck(:name, :id), :include_blank => true %>
+    <%= link_to "Add Subcategory", new_category_path(:insert_option_at => '#item_subcategory_id'), :remote => true %>
   </div>
 
   <div class="form-field">

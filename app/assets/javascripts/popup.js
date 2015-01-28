@@ -1,5 +1,5 @@
 function show_popup() {
-  $('#popup').show();
+  $('#popup').dialog({ modal: true, height: 300, width: 700 });
 }
 
 function create_popup(html) {
@@ -8,7 +8,7 @@ function create_popup(html) {
 }
 
 function close_popup() {
-  $('#popup').hide();
+  $('#popup').dialog('close')
 }
 
 function remove_popup() {

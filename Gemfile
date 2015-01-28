@@ -68,3 +68,4 @@ group :development, :test do
 end
 
 gem 'jquery-fileupload-rails'
+gem 'jquery-ui-rails'
