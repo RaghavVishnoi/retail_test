@@ -299,8 +299,12 @@ Response:
                             "value": "200"
                         }
                     ],
-                    "created_at": "2015-01-23T07:11:59.000Z",
-                    "updated_at": "2015-01-23T08:11:15.000Z",
+                    "images": [
+                        {
+                            "id": 1,
+                            "image_url": "image_url"
+                        }
+                    ],
                     "quantity": 10,
                     "unit_of_measurement": "pack"
               }
@@ -332,11 +336,56 @@ Params:
 -- item[prices][][value]
 -- item[quantity]
 -- item[unit_of_measurement]
+-- item[image_ids][]
 
 
 Success Response:
 {
     "result": true,
+    "item": {
+        "id": 4,
+        "name": "item1",
+        "city_id": 1,
+        "item_region_id": 1,
+        "category_id": 1,
+        "subcategory_id": 2,
+        "short_description": "description",
+        "details": [
+            {
+                "name": "detail1",
+                "value": "detail1 value"
+            },
+            {
+                "name": "detail2",
+                "value": "detail2 value"
+            }
+        ],
+        "collection_id": 2,
+        "size_id": 4,
+        "alcohol_percent_id": 6,
+        "prices": [
+            {
+                "name": "price1",
+                "value": "100"
+            },
+            {
+                "name": "price2",
+                "value": "150"
+            },
+            {
+                "name": "price3",
+                "value": "200"
+            }
+        ],
+        "images": [
+            {
+                "id": 1,
+                "image_url": "image_url"
+            }
+        ],
+        "quantity": 10,
+        "unit_of_measurement": "pack"
+  }
 }
 
 Error Response:
@@ -426,8 +475,12 @@ Response:
                 "value": "200"
             }
         ],
-        "created_at": "2015-01-23T07:11:59.000Z",
-        "updated_at": "2015-01-23T08:11:15.000Z",
+        "images": [
+            {
+                "id": 1,
+                "image_url": "image_url"
+            }
+        ],
         "quantity": 10,
         "unit_of_measurement": "pack"
   }
@@ -458,6 +511,7 @@ Params:
 -- item[prices][][value]
 -- item[quantity]
 -- item[unit_of_measurement]
+-- item[image_ids][]
 
 Success Response:
 {
@@ -497,8 +551,12 @@ Success Response:
                 "value": "200"
             }
         ],
-        "created_at": "2015-01-23T07:11:59.000Z",
-        "updated_at": "2015-01-23T08:11:15.000Z",
+        "images": [
+            {
+                "id": 1,
+                "image_url": "image_url"
+            }
+        ],
         "quantity": 10,
         "unit_of_measurement": "pack"
   }

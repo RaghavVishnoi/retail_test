@@ -1,4 +1,3 @@
-
 class ItemsController < ApplicationController
 
   PER_PAGE = 20
@@ -10,7 +9,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        render :json => { result: true, :per_page => @items.per_page, :length => @items.length, :current_page => @items.current_page, :total_pages => @items.total_pages, :items => @items.as_json }
+        render :json => { result: true, :per_page => @items.per_page, :length => @items.length, :current_page => @items.current_page, :total_pages => @items.total_pages, :items => ActiveModel::ArraySerializer.new(@items, :each_serializer => ItemSerializer) }
       }
     end
   end
@@ -31,7 +30,7 @@ class ItemsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to items_path }
         format.json {
-          render :json => { result: true, :item => @item.as_json }
+          render :json => { result: true, :item => ItemSerializer.new(@item, :root => false) }
         }
       end
     else
@@ -47,7 +46,7 @@ class ItemsController < ApplicationController
   def edit
     respond_to do |format|
       format.html
-      format.json { render :json => { result: true, :item => @item.as_json } }
+      format.json { render :json => { result: true, :item => ItemSerializer.new(@item, :root => false) } }
     end
   end
 
@@ -56,7 +55,7 @@ class ItemsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to items_path }
         format.json {
-          render :json => { result: true, :item => @item.as_json }
+          render :json => { result: true, :item => ItemSerializer.new(@item, :root => false) }
         }
       end
     else

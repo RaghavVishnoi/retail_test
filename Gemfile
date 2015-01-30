@@ -69,3 +69,4 @@ end
 
 gem 'jquery-fileupload-rails'
 gem 'jquery-ui-rails'
+gem 'active_model_serializers'

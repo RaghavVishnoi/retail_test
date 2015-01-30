@@ -79,7 +79,7 @@ class InventoriesController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to item_inventories_path(@item), :alert => @inventory.errors.full_messages }
+        format.html { redirect_to item_inventories_path(@item), :alert => @inventory.errors.full_messages.to_sentence }
         format.json {
           render :json => { :result => false, :errors => { :messages => @inventory.errors.full_messages } }
         }

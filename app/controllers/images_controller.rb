@@ -11,7 +11,7 @@ class ImagesController < ApplicationController
         format.html { redirect_to images_path }
         format.js
         format.json {
-          render :json => { :result => true, :image => { :id => @image.id, :image_url => @image.image_url } }
+          render :json => { :result => true, :image => ImageSerializer.new(@image, :root => false) }
         }
       end
     else
