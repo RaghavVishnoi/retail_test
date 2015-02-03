@@ -1,6 +1,7 @@
 module Api
   module V1
     class ScreensController < BaseController
+      skip_authorize_resource
       skip_before_action :authenticate_user
 
       def index

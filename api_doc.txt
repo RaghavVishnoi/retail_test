@@ -12,7 +12,7 @@ Success Response:
 {
   "result": true,
   "auth_token": '681e7e29b921628926d243097728727f',
-  "role": 'rep'  // 'rep' or 'manager',
+  "roles": [ "admin", "user"], // superadmin, admin, manager, user
   "email": 'mail@example.com',
   "quotation": "Illo architecto necessitatibus sint tempore et sit est voluptatum.",
   "personalized_message": "Hi {username}"
