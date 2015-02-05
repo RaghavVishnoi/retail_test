@@ -1,0 +1,14 @@
+<%= form_for @screen, :html => { :id => 'screen-form' } do |screen_form| %>
+
+  <%= screen_form.fields_for :layout, OpenStruct.new(screen_form.object.layout || {}) do |f| %>
+    <div class="screen-name">
+      <%= f.text_field :screen_name, :placeholder => "Screen Name" %>
+      <%= f.text_field :screen_heading, :placeholder => "Screen Heading" %>
+    </div>
+    <div class="container" data-name="screen[layout]">
+      <%= render :partial => 'components', :locals => { :form => f, :template => false } %>
+    </div>
+  <% end %>
+
+  <%= screen_form.submit %>
+<% end %>

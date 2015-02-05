@@ -142,3 +142,9 @@ input[type="submit"] {
 .image-container a {
   float: right;
 }
+
+.screen-name, .components-container, .component, .layout-element-container, .ui-elements-container, .ui-element { border: 1px solid black; margin: 2px;}
+
+.component, .ui-element {
+  margin: 10px;
+}

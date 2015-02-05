@@ -1,0 +1,13 @@
+<%= link_to "New Screen", new_screen_path, :id => 'new-button' %>
+
+<table class="ui table">
+  <tbody>
+    <% @screens.each do |screen| %>
+      <tr>
+        <td><%= screen.layout[:screen_name] %></td>
+        <td><%= link_to "Edit", [:edit, screen] %></td>
+        <td><%= link_to "Delete", [screen], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

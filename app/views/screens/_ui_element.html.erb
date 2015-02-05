@@ -1,0 +1,22 @@
+<% ui_element = OpenStruct.new(ui_element || {}) %>
+<div class="ui-element container <%= container_class %>" data-name="[ui_elements[<%= key %>]]">
+  <h5>UI Element</h5>
+  <p>Id: <span class="element-id"><%= ui_element.id %></span></p>
+  <%= link_to "Generate Element Id", "javascript:void(0);", :class => 'generate-element-id' %>
+  <%= link_to "Remove", "javascript:void(0);", :class => 'remove-field' %>
+  <%= form.fields_for "ui_elements[#{key}]", ui_element do |f| %>
+    <%= f.text_field :width, :placeholder => "Width", :data => { :name => "[width]" } %>
+    <%= f.text_field :height, :placeholder => "Height", :data => { :name => "[height]" } %>
+    <%= f.hidden_field :id, :placeholder => "Id", :data => { :name => "[id]" }, :class => 'element-id-field' %>
+    <%= f.text_field :type, :placeholder => "Type", :data => { :name => "[type]" } %>
+    <%= f.text_field :name, :placeholder => "Name", :data => { :name => "[name]" } %>
+    <%= f.text_field :weight, :placeholder => "Weight", :data => { :name => "[weight]" } %>
+    <%= f.text_field :behaviour, :placeholder => "Behaviour", :data => { :name => "[behaviour]" } %>
+    <%= f.text_field :display_value, :placeholder => "Display Value", :data => { :name => "[display_value]" } %>
+    <%= f.text_field :token1, :placeholder => "token1", :data => { :name => "[token1]"} %>
+    <%= f.text_field :token2, :placeholder => "token2", :data => { :name => "[token2]"} %>
+    <%= f.text_field :token3, :placeholder => "token3", :data => { :name => "[token3]"} %>
+    <%= f.text_field :token4, :placeholder => "token4", :data => { :name => "[token4]"} %>
+    <%= f.text_field :token5, :placeholder => "token5", :data => { :name => "[token5]"} %>
+  <% end %>
+</div>

@@ -1,0 +1,8 @@
+<div class="ui-elements-container container">
+  <h5>UI Elements</h5>
+  <% (form.object.ui_elements || {}).each_pair do |key, ui_element| %>
+    <%= render :partial => 'ui_element', :locals => { :key => key, :ui_element => ui_element, :form => form, :container_class => "" } %>
+  <% end %>
+  <%= render :partial => 'ui_element', :locals => { :key => "key", :ui_element => {}, :form => form, :container_class => "hidden ui-element-template" } %>
+  <%= link_to "Add UI Element", "javascript:void(0);", :class => "add-field", :data => { :template_class => 'ui-element-template'} %>
+</div>
