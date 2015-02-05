@@ -36,7 +36,6 @@ Rails.application.routes.draw do
 
   namespace :api, :defaults => { :format => :json }, :constraints => {:format => :json} do
     namespace :v1 do
-      get '/screens' => "screens#index"
       post '/users/sign_in' => 'sessions#create'
       delete '/users/sign_out' => 'sessions#destroy'
       resources :customers
@@ -45,6 +44,7 @@ Rails.application.routes.draw do
 
   scope '/api/v1/', :as => 'api_v1', :defaults => { :format => :json }, :constraints => { :format => :json } do
     resources :categories, :item_regions, :cities, :collections, :sizes, :alcohol_percents, :images, :warehouses, :except => [:show]
+    resources :screens, :only => [:index, :show]
     resources :items, :except => [:show] do
       resources :inventories, :except => [:show]
     end

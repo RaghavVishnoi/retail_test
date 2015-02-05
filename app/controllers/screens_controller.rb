@@ -1,12 +1,24 @@
 class ScreensController < ApplicationController
-  before_action :set_screen, :only => [:edit, :update, :destroy]
+  skip_before_action :authenticate_user, :only => [:index, :show]
+  skip_authorize_resource :only => [:index, :show]
+  before_action :set_screen, :only => [:edit, :show, :update, :destroy]
 
   def index
     @screens = Screen.all
+    respond_to do |format|
+      format.html 
+      format.json { render :json => { :result => true, :screens => @screens.as_json } }
+    end
   end
 
   def new
     @screen = Screen.new
+  end
+
+  def show
+    respond_to do |format|
+      format.json { render :json => { :result => true, :screen => @screen.layout } }
+    end
   end
 
   def edit
@@ -42,7 +54,10 @@ class ScreensController < ApplicationController
     def set_screen
       @screen = Screen.where(:id => params[:id]).first
       unless @screen
-        redirect_to screens_path
+        respond_to do |format|
+          format.html { redirect_to screens_path }
+          format.json { render :json => { :result => false, :errors => { :messages => ["Screen not found"] } } }
+        end
       end
     end
 end

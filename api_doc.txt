@@ -237,17 +237,6 @@ Success Response:
 }
 
 
-
-==========================================================================
-* Screens
-GET /api/v1/screens
-
-Response:
-{
-  "Login":{},
-  "View_New_C": {}
-}
-
 ========================================================================
 * Items Index
 GET /api/v1/items
@@ -1706,5 +1695,36 @@ Error Response:
         "messages": [
             "Image can't be blank"
         ]
+    }
+}
+
+
+===================================================
+* Screens Index
+GET /api/v1/screens
+
+Response:
+{
+    "result": true,
+    "screens": [
+        {
+            "id": 1,
+            "layout": {
+
+            }
+        }
+    ]
+}
+
+
+==================================================
+* Screen
+GET /api/v1/screens/{id}
+
+Response:
+{
+    "result": true,
+    "screen": {
+    
     }
 }
