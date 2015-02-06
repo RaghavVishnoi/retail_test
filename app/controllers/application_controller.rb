@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  before_action :log_requests, :if => 'Rails.env.staging?'
+  # before_action :log_requests, :if => 'Rails.env.staging?'
   before_action :authenticate_user
 
   authorize_resource
