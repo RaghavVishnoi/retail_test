@@ -1,5 +1,7 @@
 <%= link_to "New Screen", new_screen_path, :id => 'new-button' %>
 
+<%= will_paginate @screens %>
+
 <table class="ui table">
   <tbody>
     <% @screens.each do |screen| %>
