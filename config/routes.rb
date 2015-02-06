@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   namespace :api, :defaults => { :format => :json }, :constraints => {:format => :json} do
     namespace :v1 do
+      get '/test' => 'test#index'
       post '/users/sign_in' => 'sessions#create'
       delete '/users/sign_out' => 'sessions#destroy'
       resources :customers
