@@ -143,8 +143,8 @@ input[type="submit"] {
   float: right;
 }
 
-.screen-name, .components-container, .component, .layout-element-container, .ui-elements-container, .ui-element { border: 1px solid black; margin: 2px;}
+.screen-name, .components-container, .component, .layout-element-container, .ui-elements-container, .ui-element, .elements-container, .layout-elements-container { border: 1px solid black; margin: 2px;}
 
-.component, .ui-element {
+.component, .ui-element, .layout-elements-container {
   margin: 10px;
 }

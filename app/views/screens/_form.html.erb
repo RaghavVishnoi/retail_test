@@ -5,9 +5,19 @@
       <%= f.text_field :screen_name, :placeholder => "Screen Name" %>
       <%= f.text_field :screen_heading, :placeholder => "Screen Heading" %>
     </div>
+
+    <%= render :partial => 'layout_elements', :locals => { :form => f, :layout_elements => {}, :container_class => 'hidden layout-elements-template', :data_name => "" } %>
+
+    <%= render :partial => 'layout_elements', :locals => { :form => f, :layout_elements => {}, :container_class => 'hidden elements-layout-elements-template', :data_name => "[elements[key]]" } %>
+
+    <%= render :partial => 'layout_element', :locals => { :form => f, :layout_element => OpenStruct.new({}), :container_class => 'hidden layout-element-template', :data_name => "key", :key => 'key' } %>
+
+    <%= render :partial => 'ui_element', :locals => { :form => f, :ui_element => OpenStruct.new({}), :container_class => "hidden ui-element-template", :data_name => "key" } %>
+
     <div class="container" data-name="screen[layout]">
-      <%= render :partial => 'components', :locals => { :form => f, :template => false } %>
+      <%= render :partial => 'layout_elements', :locals => { :form => f, :layout_elements => (f.object.layout_elements || {}), :data_name => "", :container_class => "" } %>
     </div>
+
   <% end %>
 
   <%= screen_form.submit %>

@@ -1,7 +1,0 @@
-<div class="component container <%= container_class %>" data-name="[components[<%= key %>]]">
-  <h5>Component</h5>
-  <%= link_to "Remove", "javascript:void(0);", :class => 'remove-field' %>
-  <%= form.fields_for "components[#{key}]", OpenStruct.new(component) do |f| %>
-    <%= render :partial => 'layout_element', :locals => { :form => f, :template => template } %>
-  <% end %>
-</div>
