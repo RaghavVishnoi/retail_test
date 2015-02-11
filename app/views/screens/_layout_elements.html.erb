@@ -1,4 +1,4 @@
-<div class="layout-elements-container container <%= container_class %>" data-name="<%= data_name %>">
+<div class="layout-elements-container container <%= container_class %>" data-name="[layout_elements]">
   <h5>Layout Elements</h5>
 
   <% layout_elements.each_pair do |key, object| %>
@@ -10,7 +10,4 @@
   <% end %>
 
   <%= link_to "Add Layout Element", "javascript:void(0);", :class => "add-field", :data => { :template_class => 'layout-element-template'} %>
-  
-  <%= link_to "Remove", "javascript:void(0);", :class => 'remove-field' %>
-
 </div>
