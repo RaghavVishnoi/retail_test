@@ -4,6 +4,7 @@
     <div class="screen-name">
       <%= f.text_field :screen_name, :placeholder => "Screen Name" %>
       <%= f.text_field :screen_heading, :placeholder => "Screen Heading" %>
+      <%= f.text_field :has_menu, :placeholder => "Has Menu" %>
     </div>
 
     <%= render :partial => 'layout_elements', :locals => { :form => f, :layout_elements => {}, :container_class => 'hidden layout-elements-template', :data_name => "" } %>
