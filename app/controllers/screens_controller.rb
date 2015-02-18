@@ -3,7 +3,7 @@ class ScreensController < ApplicationController
   skip_authorize_resource :only => [:index, :show]
   before_action :set_screen, :only => [:edit, :show, :update, :destroy]
   
-  PER_PAGE = 10
+  PER_PAGE = 20
 
   def index
     @screens = Screen.paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
