@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :cities, :item_regions, :categories, :collections, :sizes, :alcohol_percents, :images, :warehouses, :screens, :except => [:show]
+  resources :cities, :item_regions, :categories, :collections, :sizes, :alcohol_percents, :images, :warehouses, :screens, :fields, :except => [:show]
   
   resources :items, :except => [:show] do
     resources :inventories, :except => [:show]

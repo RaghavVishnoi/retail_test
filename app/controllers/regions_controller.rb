@@ -37,7 +37,7 @@ class RegionsController < ApplicationController
 
   private
     def region_params
-      params.require(:region).permit(:name)
+      params.require(:region).permit(:name, :properties => [:field_id, :value])
     end
 
     def set_region

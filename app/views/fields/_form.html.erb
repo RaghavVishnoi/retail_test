@@ -1,0 +1,19 @@
+<%= form_for @field, :html => { :class => 'user-form' } do |f| %>
+
+  <h4 id="form-title"><%= form_title %></h4>
+
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @field.errors } %>
+
+  <div class="form-field">
+    <%= f.label :entity %>
+    <%= f.select :entity, Field.entities.keys %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :display_name %>
+    <%= f.text_field :display_name %>
+  </div>
+
+  <%= f.submit %>
+
+<% end %>

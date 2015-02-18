@@ -17,6 +17,8 @@
     <%= f.label :logo %>
     <%= f.file_field :logo %>
   </div>
+  
+  <%= render :partial => "shared/fields", :locals => { :form => f, :resource => @organization } %>
 
   <%= f.submit %>
 <% end %>

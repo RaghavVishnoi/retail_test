@@ -1,0 +1,15 @@
+<% resource.properties.each do |property| %>
+
+  <% property = OpenStruct.new(property) %>
+
+  <%= form.fields_for "properties[#{property.field_id}]", property do |f| %>
+
+    <div class="form-field">
+      <%= f.label :value, property.display_name %>
+      <%= f.text_field :value %>
+      <%= f.hidden_field :field_id %>
+    </div>
+
+  <% end %>
+
+<% end %>
