@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :business_units
   has_and_belongs_to_many :job_titles
   has_and_belongs_to_many :weekly_offs
+  has_many :data_files_users
+  has_many :data_files, :through => :data_files_users
+  has_many :owned_files, :class_name => "DataFile", :foreign_key => :user_id
 
   validates_confirmation_of :password, :if => ->{ password.present? }
   validates :email, :presence => true, :uniqueness => true
@@ -22,6 +25,14 @@ class User < ActiveRecord::Base
 
   scope :with_password, -> { where('password_digest is not null') }
   scope :with_email, ->(email) { where(:email => email) }
+
+  def self.with_name(name)
+    if name.present?
+      where("name like ?", "%#{name}%")
+    else
+      []
+    end
+  end
 
   def personalized_message
     "Hi #{name}"

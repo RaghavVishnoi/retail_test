@@ -32,9 +32,22 @@ class Ability
       can :manage, :all
       can :manage, Organization
     else
+      can [:autocomplete], Item
+
+      can [:autocomplete], User
+
       can [:edit, :update], User do |user_obj|
         user_obj == user
       end
+
+      can [:read, :share], DataFile do |obj|
+        obj.accessible_by?(user)
+      end
+
+      can :manage, DataFile do |obj|
+        obj.user_id == user.id
+      end
+      
     end
   end
 end

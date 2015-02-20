@@ -16,6 +16,12 @@ Rails.application.routes.draw do
   resources :regions, :except => [:show]
 
   resources :business_units, :except => [:show]
+
+  resources :data_files
+  resources :folders
+  resources :documents do
+    put :share, :on => :member
+  end
   
   resources :addresses, :except => [:show] do
     collection do
@@ -26,10 +32,13 @@ Rails.application.routes.draw do
   resources :cities, :item_regions, :categories, :collections, :sizes, :alcohol_percents, :images, :warehouses, :screens, :fields, :except => [:show]
   
   resources :items, :except => [:show] do
+    get :autocomplete, :on => :collection
     resources :inventories, :except => [:show]
   end
 
-  resources :users, :except => [:show]
+  resources :users, :except => [:show] do
+    get :autocomplete, :on => :collection
+  end
 
   get '/passwords/edit' => "passwords#edit"
   put '/passwords' => "passwords#update"

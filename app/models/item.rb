@@ -8,6 +8,7 @@ class Item < ActiveRecord::Base
   belongs_to :size
   has_many :images, :dependent => :destroy
   has_many :inventories, :dependent => :destroy
+  has_many :documents, :dependent => :nullify
 
   validates :name, :presence => true
 
@@ -15,6 +16,14 @@ class Item < ActiveRecord::Base
   serialize :prices, Array
 
   before_validation :reject_empty_serialized_attributes
+
+  def self.with_name(name)
+    if name.present?
+      where("name like ?", "%#{name}%")
+    else
+      []
+    end
+  end
 
   private
 

@@ -1,0 +1,11 @@
+<% if @data_files.present? %>
+  <% @data_file = @data_files.first %>
+<% end %>
+
+<% if @data_file && @data_file.parent %>  
+  <div>
+    <% @data_file.parent.self_and_ancestors.each do |folder| %>
+      <%= link_to folder.name, data_files_path(:parent_id => folder.id) %>&nbsp /&nbsp
+    <% end %>
+  </div>
+<% end %>

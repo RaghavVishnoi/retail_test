@@ -14,6 +14,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def autocomplete
+    @items = Item.with_name(params[:q]).pluck(:name, :id)
+    render :json => @items, root: false
+  end
+
   def new
     @item = Item.new
     respond_to do |format|

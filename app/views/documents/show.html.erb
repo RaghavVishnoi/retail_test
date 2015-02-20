@@ -1,0 +1,9 @@
+<%= render :partial => 'data_files/absolute_path' %>
+
+<%= link_to @data_file.name, @data_file.data_file_url %>
+
+<br>
+
+<h5>Description</h5>
+
+<p><%= @data_file.description %></p>

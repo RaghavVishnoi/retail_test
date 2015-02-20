@@ -4,6 +4,11 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
+  
+  def autocomplete
+    @users = User.with_name(params[:q]).pluck(:name, :id)
+    render :json => @users, root: false
+  end
 
   def new
     @user = User.new

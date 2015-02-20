@@ -1,0 +1,14 @@
+<div class="form-field">
+  <%= f.label :roles %>
+  <%= f.select :roles, DataFile.valid_roles, {}, { :multiple => true } %>
+</div>
+
+<div class="form-field">
+  <%= f.label :user_ids, "Users" %>
+  <%= f.text_field :user_ids_string, :id => 'user-select', 'data-ajax-url' => "/users/autocomplete", :placeholder => "Select Users", 'data-multiple' => true, 'data-initvalue' => @data_file.users.map { |user| { text: user.name, id: user.id} }.to_json  %>
+</div>
+
+<div class="form-field">
+  <%= f.label :region_ids, "Regions" %>
+  <%= f.select :region_ids, Region.pluck(:name, :id), {}, { :multiple => true } %>
+</div>

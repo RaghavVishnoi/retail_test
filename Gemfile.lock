@@ -42,6 +42,8 @@ GEM
     arel (5.0.1.20140414130214)
     autoprefixer-rails (4.0.2.1)
       execjs
+    awesome_nested_set (3.0.2)
+      activerecord (>= 4.0.0, < 5)
     aws-sdk (1.59.0)
       aws-sdk-v1 (= 1.59.0)
     aws-sdk-v1 (1.59.0)
@@ -313,6 +315,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   activerecord4-redshift-adapter!
+  awesome_nested_set
   aws-sdk
   bcrypt (~> 3.1.7)
   cancan
