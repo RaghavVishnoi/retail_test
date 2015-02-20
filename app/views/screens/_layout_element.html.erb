@@ -10,6 +10,12 @@
 
   <%= form.fields_for data_name, layout_element do |f| %>
 
+    <%= f.text_field :title_1, :placeholder => "Title 1", :data => { :name => "[title_1]" } %>
+
+    <%= f.text_field :title_2, :placeholder => "Title 2", :data => { :name => "[title_2]" } %>
+
+    <%= f.text_field :view_count, :placeholder => "View Count", :data => { :name => "[view_count]" } %>
+    
     <%= f.text_field :get_url, :placeholder => "Get Url", :data => { :name => "[get_url]" } %>
 
     <%= f.hidden_field :id, :placeholder => "Id", :data => { :name => "[id]" }, :class => 'element-id-field' %>

@@ -9,7 +9,10 @@
   <%= link_to "Remove", "javascript:void(0);", :class => 'remove-field' %>
 
   <%= form.fields_for data_name, ui_element do |f| %>
+    <%= f.text_field :post_url, :placeholder => "Post Url", :data => { :name => "[post_url]" } %>
 
+    <%= f.text_field :style, :placeholder => "Style", :data => { :name => "[style]" } %>
+    
     <%= f.text_field :width, :placeholder => "Width", :data => { :name => "[width]" } %>
 
     <%= f.text_field :height, :placeholder => "Height", :data => { :name => "[height]" } %>
