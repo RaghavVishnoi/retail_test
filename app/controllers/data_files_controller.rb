@@ -5,32 +5,62 @@ class DataFilesController < ApplicationController
   authorize_resource :instance_name => :data_file
 
   def index
-    @data_files = DataFile.with_parent_id(params[:parent_id]).accessible_by(current_ability)
+    @data_files = DataFile.includes(:owner, :users, :regions).with_parent_id(params[:parent_id]).accessible_by(current_ability)
+    respond_to do |format|
+      format.html 
+      format.json { render :json => { :result => true, :data_files => ActiveModel::ArraySerializer.new(@data_files, :each_serializer => DataFileSerializer) } }
+    end
+  end
+
+  def new
+    respond_to do |format|
+      format.html
+      format.json { render :json => { :result => true, :data_file => DataFileSerializer.new(@data_file, :root => false) } }
+    end
   end
 
   def create
     @data_file.attributes = data_file_params
     if @data_file.save
-      redirect_to data_files_path(:parent_id => @data_file.parent_id)
+      respond_to do |format|
+        format.html { redirect_to data_files_path(:parent_id => @data_file.parent_id) }
+        format.json { render :json => { :result => true, :data_file => DataFileSerializer.new(@data_file, :root => false) } }
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render :json => { :result => false, :errors => { :messages => @data_file.errors.full_messages } } }
+      end
     end
   end
   
   def edit
+    respond_to do |format|
+      format.html
+      format.json { render :json => { :result => true, :data_file => DataFileSerializer.new(@data_file, :root => false) } }
+    end
   end
 
   def update
     if @data_file.update_attributes(data_file_params)
-      redirect_to data_files_path(:parent_id => @data_file.parent_id)
+      respond_to do |format|
+        format.html { redirect_to data_files_path(:parent_id => @data_file.parent_id) }
+        format.json { render :json => { :result => true, :data_file => DataFileSerializer.new(@data_file, :root => false) } }
+      end
     else
-      render :edit
+      respond_to do |format|
+        format.html { render :edit }
+        format.json { render :json => { :result => false, :errors => { :messages => @data_file.errors.full_messages } } }
+      end
     end
   end
 
   def destroy
     @data_file.destroy
-    redirect_to data_files_path(:parent_id => @data_file.parent_id)
+    respond_to do |format|
+      format.html { redirect_to data_files_path(:parent_id => @data_file.parent_id) }
+      format.json { render :json => { :result => true } }
+    end
   end
 
   def share
@@ -46,7 +76,10 @@ class DataFilesController < ApplicationController
     def find_data_file
       @data_file = DataFile.where(:id => params[:id]).first
       unless @data_file
-        redirect_to data_files_path, :alert => "File not found"
+        respond_to do |format|
+          format.html { redirect_to data_files_path, :alert => "File not found" }
+          format.json { render :json => { :result => false, :errors => { :messages => ["File not found"] } } }
+        end
       end
     end
   

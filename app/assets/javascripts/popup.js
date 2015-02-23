@@ -15,3 +15,7 @@ function remove_popup() {
   $('#popup').html('')
   close_popup();
 }
+
+$(document).on('click', '.show-details', function() {
+  create_popup($(this).closest('tr').find('.details').clone().show());
+});

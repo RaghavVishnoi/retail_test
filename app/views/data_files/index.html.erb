@@ -17,6 +17,11 @@
           <% end %>
         </td>
 
+        <td>
+          <%= link_to "Show Details", "javascript:void(0);", :class => 'show-details' %>
+          <%= render :partial => 'details', :locals => { :file => file } %>
+        </td>
+
         <% if can? :manage, file %>
           <td>
             <%= link_to "Edit", [:edit, file] %>
@@ -26,6 +31,7 @@
             <%= link_to "Delete", [file], method: :delete, data: { confirm: "Are you sure?" } %>
           </td>
         <% end %>
+
       </tr>
     <% end %>
   </tbody>

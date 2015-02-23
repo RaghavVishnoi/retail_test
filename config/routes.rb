@@ -17,9 +17,9 @@ Rails.application.routes.draw do
 
   resources :business_units, :except => [:show]
 
-  resources :data_files
-  resources :folders
-  resources :documents do
+  resources :data_files, :only => [:index]
+  resources :folders, :except => [:index]
+  resources :documents, :except => [:index] do
     put :share, :on => :member
   end
   
@@ -57,6 +57,11 @@ Rails.application.routes.draw do
     resources :screens, :only => [:index, :show]
     resources :items, :except => [:show] do
       resources :inventories, :except => [:show]
+    end
+    resources :data_files, :only => [:index]
+    resources :folders, :except => [:index]
+    resources :documents, :except => [:index] do
+      put :share, :on => :member
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

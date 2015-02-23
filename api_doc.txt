@@ -1728,3 +1728,325 @@ Response:
     
     }
 }
+
+
+========================================================
+* Files Index
+
+GET /api/v1/data_files
+
+Params:
+-- auth_token
+-- parent_id // optional
+
+Response:
+{
+    "result": true,
+    "data_files": [
+        {
+            "id": 1,
+            "name": "filename1",
+            "description": "description",
+            "type": "Folder",
+            "data_file_url": null
+        },
+        {
+            "id": 2,
+            "name": "filename2",
+            "description": "description",
+            "type": "Document",
+            "data_file_url": "file_url"
+        }
+    ]
+}
+
+==================================================================
+* New Document
+
+GET /api/v1/documents/new
+
+Params:
+-- auth_token
+-- parent_id // optional
+
+Response:
+{
+    "result": true,
+    "data_file": {
+        "id": null,
+        "name": null,
+        "description": null,
+        "type": "Document",
+        "data_file_url": null
+    }
+}
+
+===================================================================
+* New Folder
+
+GET /api/v1/folders/new
+
+Params:
+-- auth_token
+-- parent_id // optional
+
+Response:
+{
+    "result": true,
+    "data_file": {
+        "id": null,
+        "name": null,
+        "description": null,
+        "type": "Folder",
+        "data_file_url": null
+    }
+}
+
+===============================================================
+* Create Document
+
+POST /api/v1/documents
+
+Params:
+-- auth_token
+-- document[parent_id] // optional
+-- document[item_id] // optional
+-- document[name]
+-- document[description]
+-- document[data_file]
+-- document[sharable] // true or false
+-- document[user_ids][]
+-- document[roles][] // superadmin, admin, manager, user
+-- document[region_ids][]
+
+Success Response:
+{
+    "result": true,
+    "data_file": {
+        "id": 1,
+        "name": "filename",
+        "description": "description",
+        "type": "Document",
+        "data_file_url": "file_url"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+=================================================================
+* Create Folder
+
+POST /api/v1/folders
+
+Params:
+-- auth_token
+-- folder[parent_id]
+-- folder[name]  // optional
+-- folder[user_ids][]
+-- folder[roles][]  // superadmin, admin, manager, user
+-- folder[region_ids][]
+
+Success Response:
+{
+    "result": true,
+    "data_file": {
+        "id": 1,
+        "name": "filename",
+        "description": null,
+        "type": "Folder",
+        "data_file_url": null
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+=====================================================================
+* Edit Document
+
+GET /api/v1/documents/{id}/edit
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true,
+    "data_file": {
+        "id": 1,
+        "name": "filename",
+        "description": "description",
+        "type": "Document",
+        "data_file_url": "file_url",
+        "user_ids": [1, 2],
+        "region_ids": [1, 2],
+        "roles": ["admin","user"],
+        "sharable": true
+    }
+}
+
+==================================================================
+* Edit Folder
+
+GET /api/v1/folders/{id}/edit
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true,
+    "data_file": {
+        "id": 1,
+        "name": "filename",
+        "description": null,
+        "type": "Folder",
+        "data_file_url": null,
+        "user_ids": [1, 2],
+        "region_ids": [],
+        "roles": ["admin"],
+        "sharable": null
+    }
+}
+
+===============================================================
+* Update Folder
+
+PUT /api/v1/folders/{id}
+
+Params:
+-- auth_token
+-- folder[parent_id]
+-- folder[name]  // optional
+-- folder[user_ids][]
+-- folder[roles][]  // superadmin, admin, manager, user
+-- folder[region_ids][]
+
+Success Response:
+{
+    "result": true,
+    "data_file": {
+        "id": 1,
+        "name": "filename",
+        "description": "description",
+        "type": "Document",
+        "data_file_url": "file_url",
+        "user_ids": [1, 2],
+        "region_ids": [1, 2],
+        "roles": ["admin","user"],
+        "sharable": true
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+==============================================================
+* Update Document
+
+PUT /api/v1/documents/{id}
+
+Params:
+-- auth_token
+-- document[parent_id] // optional
+-- document[item_id] // optional
+-- document[name]
+-- document[description]
+-- document[data_file]
+-- document[sharable] // true or false
+-- document[user_ids][]
+-- document[roles][] // superadmin, admin, manager, user
+-- document[region_ids][]
+
+Success Response:
+{
+    "result": true,
+    "data_file": {
+        "id": 1,
+        "name": "filename",
+        "description": "description",
+        "type": "Document",
+        "data_file_url": "file_url",
+        "user_ids": [1, 2],
+        "region_ids": [1, 2],
+        "roles": ["admin","user"],
+        "sharable": true
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+===========================================================
+* Destroy Document
+
+DELETE /api/v1/documents/{id}
+
+Response:
+{
+    "result": true
+}
+
+
+=========================================================
+* Destroy Folder
+
+DELETE /api/v1/folders/{id}
+
+Response:
+{
+    "result": true
+}
+
+======================================================
+* Share Document
+
+PUT /api/v1/documents/{id}/share
+
+Params:
+-- auth_token
+-- email    
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "This file is not sharable"
+        ]
+    }
+}
