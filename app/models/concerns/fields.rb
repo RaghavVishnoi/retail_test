@@ -18,7 +18,7 @@ module Fields
     unless @properties.present?
       Field.with_entity(self.class.name).each do |f|
         field_value = find_field_value(f.id)
-        @properties << { :field_id => f.id, :display_name => f.display_name, :value => field_value.try(:value) }
+        @properties << { :field => { :id => f.id, :display_name => f.display_name, :field_type => f.field_type, :configuration => f.configuration }, :value => field_value.try(:value) }
       end
     end
     @properties

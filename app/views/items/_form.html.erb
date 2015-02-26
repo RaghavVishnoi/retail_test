@@ -77,7 +77,7 @@
         <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[details][][name]" => detail["name"], "item[details][][value]" => detail["value"] }, :container_class => "" } %>
       <% end %>
 
-      <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[details][][name]" => nil, "item[details][][value]" => nil }, :container_class => "hidden details_template" } %>
+      <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[details][][name]" => nil, "item[details][][value]" => nil }, :container_class => "hidden details_template template" } %>
     </div>
   <% end %>
 
@@ -90,7 +90,7 @@
         <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[prices][][name]" => price["name"], "item[prices][][value]" => price["value"] }, :container_class => "" } %>
       <% end %>
 
-      <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[prices][][name]" => nil, "item[prices][][value]" => nil }, :container_class => "hidden prices_template" } %>
+      <%= render :partial => 'shared/dynamic_field', :locals => { :fields => { "item[prices][][name]" => nil, "item[prices][][value]" => nil }, :container_class => "hidden prices_template template" } %>
     </div>
   <% end %>
 
@@ -103,6 +103,8 @@
       <% end %>
     </div>
   <% end %>
+
+  <%= render :partial => "shared/fields", :locals => { :form => f, :resource => @item } %>
 
   <%= f.submit %>
 

@@ -1,4 +1,6 @@
 class Item < ActiveRecord::Base
+  include Fields
+  
   belongs_to :city
   belongs_to :item_region
   belongs_to :category

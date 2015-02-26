@@ -32,6 +32,10 @@ $(document).on('click', '.remove-field', function() {
   $(this).closest('.container').remove();
 });
 
+$(document).on('submit', 'form', function() {
+  $(this).find('.hidden.template').remove();
+});
+
 
 function generate_unique_key() {
   var date = new Date();

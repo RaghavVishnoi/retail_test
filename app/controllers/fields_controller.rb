@@ -38,7 +38,7 @@ class FieldsController < ApplicationController
   private
 
     def field_params
-      params.require(:field).permit(:name, :display_name, :entity)
+      params.require(:field).permit(:name, :display_name, :entity, :field_type, :value_type, :configuration => { :values => [] })
     end
 
     def set_field

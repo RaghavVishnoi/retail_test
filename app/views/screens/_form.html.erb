@@ -7,9 +7,9 @@
       <%= f.text_field :has_menu, :placeholder => "Has Menu" %>
     </div>
 
-    <%= render :partial => 'layout_element', :locals => { :form => f, :layout_element => OpenStruct.new({}), :container_class => 'hidden layout-element-template', :data_name => "key", :key => 'key' } %>
+    <%= render :partial => 'layout_element', :locals => { :form => f, :layout_element => OpenStruct.new({}), :container_class => 'hidden layout-element-template template', :data_name => "key", :key => 'key' } %>
 
-    <%= render :partial => 'ui_element', :locals => { :form => f, :ui_element => OpenStruct.new({}), :container_class => "hidden ui-element-template", :data_name => "key" } %>
+    <%= render :partial => 'ui_element', :locals => { :form => f, :ui_element => OpenStruct.new({}), :container_class => "hidden ui-element-template template", :data_name => "key" } %>
 
     <div class="container" data-name="screen[layout]">
       <%= render :partial => 'layout_elements', :locals => { :form => f, :layout_elements => (f.object.layout_elements || {}), :data_name => "", :container_class => "" } %>

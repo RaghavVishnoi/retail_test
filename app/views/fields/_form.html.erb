@@ -8,6 +8,27 @@
     <%= f.label :entity %>
     <%= f.select :entity, Field.entities.keys %>
   </div>
+  
+  <div class="form-field">
+    <%= f.label :value_type %>
+    <%= f.select :value_type, Field.value_types.keys %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :field_type %>
+    <%= f.select :field_type, Field.field_types.keys %>
+  </div>
+
+  <div class='container'>
+    <%= link_to "Add Value", "javascript:void(0);", :class => 'add-field', :data => { :template_class => 'values-template' } %>
+
+
+    <%= render :partial => 'values', :locals => { :value => nil, :container_class => "hidden values-template template"} %>
+
+    <% (@field.configuration[:values] || []).each do |value| %>
+      <%= render :partial => 'values', :locals => { :value => value, :container_class => "" } %>
+    <% end %>
+  </div>
 
   <div class="form-field">
     <%= f.label :display_name %>
