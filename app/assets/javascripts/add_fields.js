@@ -21,7 +21,9 @@ $(document).on('click', '.add-field', function() {
     input_name = input_name.reverse().join('');
     $(this).attr('name', input_name);
   });
-
+  
+  generate_element_id($template);
+  
   $template.removeClass('hidden');
   $template.removeClass(template_class);
 });
@@ -34,4 +36,13 @@ $(document).on('click', '.remove-field', function() {
 function generate_unique_key() {
   var date = new Date();
   return date.getTime();
+}
+
+function generate_element_id(element) {
+  var unique_key = generate_unique_key();
+  var $container = element.closest('.container');
+  var $element_id = $container.find('.element-id').first();
+  var $element_id_field = $container.find('.element-id-field').first();
+  $element_id.text(unique_key);
+  $element_id_field.val(unique_key);
 }

@@ -4,8 +4,6 @@
 
   <p>Id: <span class="element-id"><%= layout_element.id %></span></p>
 
-  <%= link_to "Generate Element Id", "javascript:void(0);", :class => 'generate-element-id' %>
-
   <%= link_to "Remove", "javascript:void(0);", :class => 'remove-field' %>
 
   <%= form.fields_for data_name, layout_element do |f| %>
