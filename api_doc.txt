@@ -295,7 +295,24 @@ Response:
                         }
                     ],
                     "quantity": 10,
-                    "unit_of_measurement": "pack"
+                    "unit_of_measurement": "pack",
+                    "properties": [
+                        {
+                            "field": {
+                                "id": 1,
+                                "display_name": "Field1",
+                                "field_type": "dropdown",
+                                "value_type": "decimal",
+                                "configuration": {
+                                    "values": [
+                                        "10",
+                                        "20"
+                                    ]
+                                }
+                            },
+                            "value": "20"
+                        }
+                    ]
               }
     ]
 }
@@ -326,6 +343,8 @@ Params:
 -- item[quantity]
 -- item[unit_of_measurement]
 -- item[image_ids][]
+-- item[properties][0][field_id]
+-- item[properties][0][value]
 
 
 Success Response:

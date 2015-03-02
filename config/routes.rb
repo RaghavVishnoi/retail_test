@@ -18,11 +18,17 @@ Rails.application.routes.draw do
   resources :business_units, :except => [:show]
 
   resources :data_files, :only => [:index]
+
   resources :folders, :except => [:index]
+
   resources :documents, :except => [:index] do
     put :share, :on => :member
   end
   
+  resources :module_groups, :only => [:index] do
+    put :toggle_activation, :on => :member
+  end
+
   resources :addresses, :except => [:show] do
     collection do
       get :edit_hq

@@ -5,3 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+organization = Organization.new
+organization.save! :validate => false
+
+user = User.new :email => 'superadmin@fosem.com', :password => '123456', :name => "superadmin"
+user.roles << :superadmin
+user.save!
+
+ModuleGroup.create :name => :login
+ModuleGroup.create :name => :items

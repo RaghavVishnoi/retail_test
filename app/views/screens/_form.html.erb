@@ -1,4 +1,14 @@
 <%= form_for @screen, :html => { :id => 'screen-form' } do |screen_form| %>
+  
+  <div class="form-field">
+    <%= screen_form.label :is_start_screen %>
+    <%= screen_form.check_box :is_start_screen %>
+  </div>
+
+  <div class="form-field">
+    <%= screen_form.label :module_group_id %>
+    <%= screen_form.select :module_group_id, ModuleGroup.all.map { |g| [g.name, g.id] } %>
+  </div>
 
   <%= screen_form.fields_for :layout, OpenStruct.new(screen_form.object.layout || {}) do |f| %>
     <div class="screen-name">
