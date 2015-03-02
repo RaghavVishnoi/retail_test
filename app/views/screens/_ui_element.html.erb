@@ -36,6 +36,9 @@
     <%= f.text_field :token4, :placeholder => "token4", :data => { :name => "[token4]"} %>
 
     <%= f.text_field :token5, :placeholder => "token5", :data => { :name => "[token5]"} %>
-
+   
+    <% if @screen.is_menu? %>
+        <%= f.select :module_group, ModuleGroup.all.map { |g| [g.name, g.id] }, { :prompt => "Select Module" }, { :data => { :name => "[module_group]" } } %>
+    <% end %>
   <% end %>
-</div>
+</div> 

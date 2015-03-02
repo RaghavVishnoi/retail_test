@@ -10,7 +10,7 @@ class ScreensController < ApplicationController
     @screens = @screens.paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
     respond_to do |format|
       format.html 
-      format.json { render :json => { :result => true, :per_page => @screens.per_page, :length => @screens.length, :current_page => @screens.current_page, :total_pages => @screens.total_pages, :screens => @screens.as_json, :menu_element_ids => Screen.menu_element_ids } }
+      format.json { render :json => { :result => true, :per_page => @screens.per_page, :length => @screens.length, :current_page => @screens.current_page, :total_pages => @screens.total_pages, :screens => ActiveModel::ArraySerializer.new(@screens, :each_serializer => ScreenSerializer) } } 
     end
   end
 

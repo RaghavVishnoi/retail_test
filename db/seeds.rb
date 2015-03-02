@@ -14,5 +14,6 @@ user = User.new :email => 'superadmin@fosem.com', :password => '123456', :name =
 user.roles << :superadmin
 user.save!
 
+ModuleGroup.create :name => :default, :active => true
 ModuleGroup.create :name => :login
 ModuleGroup.create :name => :items
