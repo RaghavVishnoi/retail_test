@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessor :skip_password_validation
+  attr_accessor :skip_password_validation, :password_required
   include RoleModel
   roles :superadmin, :admin, :manager, :user
   has_secure_password :validations => false
@@ -38,10 +38,15 @@ class User < ActiveRecord::Base
     "Hi #{name}"
   end
 
+  def set_reset_password_token
+    self.reset_password_sent_at = Time.current
+    self.reset_password_token = generate_token(:reset_password_token)
+  end
+
   private
     
     def password_not_required?
-      skip_password_validation || password_digest?
+      !password_required && (skip_password_validation || password_digest?)
     end
 
     def ensure_auth_token
@@ -55,11 +60,6 @@ class User < ActiveRecord::Base
         token = SecureRandom.hex(16)
         break token unless User.where(col => token).first
       end
-    end
-
-    def set_reset_password_token
-      self.reset_password_sent_at = Time.current
-      self.reset_password_token = generate_token(:reset_password_token)
     end
 
     def send_invite_mail

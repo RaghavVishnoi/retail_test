@@ -5,4 +5,9 @@ class UserMailer < ActionMailer::Base
     @token = token
     mail(to: email, subject: 'SignUp Invitation')
   end
+
+  def reset_password_token(email, token)
+    @token = token
+    mail(to: email, subject: 'Reset Password')
+  end
 end

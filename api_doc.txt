@@ -2069,3 +2069,51 @@ Error Response:
         ]
     }
 }
+
+========================================================
+* Forgot Password
+
+POST /api/v1/passwords
+
+Params:
+-- email
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Email can't be blank"
+        ]
+    }
+}
+
+======================================================
+* Reset Password
+
+PUT /api/v1/passwords
+
+Params:
+-- token
+-- password
+-- password_confirmation
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Password token is invalid"
+        ]
+    }
+}

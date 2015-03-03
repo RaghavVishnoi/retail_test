@@ -48,6 +48,8 @@ Rails.application.routes.draw do
 
   get '/passwords/edit' => "passwords#edit"
   put '/passwords' => "passwords#update"
+  get '/passwords/new' => "passwords#new"
+  post '/passwords' => "passwords#create"
 
   namespace :api, :defaults => { :format => :json }, :constraints => {:format => :json} do
     namespace :v1 do
@@ -69,6 +71,8 @@ Rails.application.routes.draw do
     resources :documents, :except => [:index] do
       put :share, :on => :member
     end
+    post '/passwords' => "passwords#create"
+    put '/passwords' => "passwords#update"
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
