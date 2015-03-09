@@ -5,11 +5,12 @@ class ItemsController < ApplicationController
   before_action :set_item, :only => [:edit, :update, :destroy]
 
   def index
-    @items = Item.paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
+    @items = updated_at.present? ? Item.where("updated_at > ?", updated_at) : Item
+    @items = @items.paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
     respond_to do |format|
       format.html
       format.json {
-        render :json => { result: true, :per_page => @items.per_page, :length => @items.length, :current_page => @items.current_page, :total_pages => @items.total_pages, :items => ActiveModel::ArraySerializer.new(@items, :each_serializer => ItemSerializer) }
+        render :json => { result: true, :per_page => @items.per_page, :length => @items.length, :current_page => @items.current_page, :total_pages => @items.total_pages, :updated_at => Time.current, :items => ActiveModel::ArraySerializer.new(@items, :each_serializer => ItemSerializer) }
       }
     end
   end

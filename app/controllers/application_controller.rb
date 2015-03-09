@@ -56,4 +56,8 @@ class ApplicationController < ActionController::Base
     def logged_in?
       !!current_user
     end
+
+    def updated_at
+      @updated_at ||= Time.parse(params[:updated_at]) rescue nil
+    end
 end
