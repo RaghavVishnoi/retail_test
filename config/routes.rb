@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get '/organization/edit' => "organizations#edit"
   put '/organization' => "organizations#update"
 
+  get '/schema' => "schema#index"
+
   resources :weekly_offs, :only => [:index, :create]
 
   resources :job_titles, :except => [:show]

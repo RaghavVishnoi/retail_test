@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "table_name": "items",
+      "columns": [
+        { "name": "id", "type": "INTEGER PRIMARY KEY  NOT NULL" },
+        { "name": "jsondump", "type": "text" } 
+      ],
+      "url": "/api/v1/items",
+      "pagination": true,
+      "login_required": true
+    }
+  ],
+
+  "default": [
+    {
+      "table_name": "screens",
+      "columns": [
+        { "name": "id", "type": "INTEGER PRIMARY KEY  NOT NULL" },
+        { "name": "jsondump", "type": "text"}
+      ],
+      "url": "/api/v1/screens",
+      "pagination": true,
+      "login_required": false
+    }
+  ]
+}
