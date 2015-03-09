@@ -3,9 +3,9 @@ class ItemsController < ApplicationController
   PER_PAGE = 20
 
   before_action :set_item, :only => [:edit, :update, :destroy]
+  before_action :initialize_resources, :only => [:index]
 
   def index
-    @items = updated_at.present? ? Item.where("updated_at > ?", updated_at) : Item
     @items = @items.paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
     respond_to do |format|
       format.html

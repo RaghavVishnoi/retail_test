@@ -60,4 +60,20 @@ class ApplicationController < ActionController::Base
     def updated_at
       @updated_at ||= Time.parse(params[:updated_at]) rescue nil
     end
+
+    def initialize_resources
+      instance_variable_set(resources_instance, resources)
+    end
+
+    def resources
+      updated_at.present? ? resource_class.where("updated_at > ?", updated_at) : resource_class
+    end
+
+    def resource_class
+      controller_name.camelize.singularize.constantize
+    end
+
+    def resources_instance
+      "@#{controller_name}"
+    end
 end

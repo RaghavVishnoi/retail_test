@@ -2,15 +2,16 @@ class ScreensController < ApplicationController
   skip_before_action :authenticate_user, :only => [:index, :show]
   skip_authorize_resource :only => [:index, :show]
   before_action :set_screen, :only => [:edit, :show, :update, :destroy]
+  before_action :initialize_resources, :only => [:index]
   
   PER_PAGE = 20
 
   def index
-    @screens = request.format.json? ? Screen.active : Screen
+    @screens = @screens.active if request.format.json?
     @screens = @screens.paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
     respond_to do |format|
       format.html 
-      format.json { render :json => { :result => true, :per_page => @screens.per_page, :length => @screens.length, :current_page => @screens.current_page, :total_pages => @screens.total_pages, :screens => ActiveModel::ArraySerializer.new(@screens, :each_serializer => ScreenSerializer) } } 
+      format.json { render :json => { :result => true, :per_page => @screens.per_page, :length => @screens.length, :current_page => @screens.current_page, :total_pages => @screens.total_pages, :updated_at => Time.current, :screens => ActiveModel::ArraySerializer.new(@screens, :each_serializer => ScreenSerializer) } } 
     end
   end
 
