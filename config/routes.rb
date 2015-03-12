@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   resources :folders, :except => [:index]
 
+  resources :attendances, :only => [:index]
+
   resources :documents, :except => [:index] do
     put :share, :on => :member
   end
@@ -59,6 +61,7 @@ Rails.application.routes.draw do
       post '/users/sign_in' => 'sessions#create'
       delete '/users/sign_out' => 'sessions#destroy'
       resources :customers
+      resources :attendances, :only => [:create]
     end
   end
 

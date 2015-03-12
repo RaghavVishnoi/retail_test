@@ -1,0 +1,28 @@
+<%= form_tag attendances_path, :method => :get do %>
+  <%= date_field_tag 'start_time', params[:start_time] || Time.current.to_date %>
+  <%= date_field_tag 'end_time', params[:end_time] || Time.current.to_date %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
+<%= will_paginate @attendances %>
+
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Punch In Image</th>
+      <th>Punch In Time</th>
+      <th>Punch Out Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @attendances.each do |attendance| %>
+      <tr>
+        <td><%= attendance.user.name %></td>
+        <td class="image-container"><%= image_tag attendance.punch_in_image_url %></td>
+        <td><%= attendance.punch_in_time %></td>
+        <td><%= attendance.punch_out_time %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

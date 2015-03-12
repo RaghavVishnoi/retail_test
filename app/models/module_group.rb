@@ -1,5 +1,5 @@
 class ModuleGroup < ActiveRecord::Base
-  enum name: [:login, :items, :default]
+  enum name: [:login, :items, :default, :attendance]
   has_many :screens, :dependent => :nullify
 
   def self.active

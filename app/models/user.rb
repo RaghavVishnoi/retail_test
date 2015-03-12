@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :data_files_users
   has_many :data_files, :through => :data_files_users
   has_many :owned_files, :class_name => "DataFile", :foreign_key => :user_id
+  has_many :attendances, :dependent => :destroy
 
   validates_confirmation_of :password, :if => ->{ password.present? }
   validates :email, :presence => true, :uniqueness => true

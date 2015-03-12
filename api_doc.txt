@@ -2117,3 +2117,34 @@ Error Response:
         ]
     }
 }
+
+
+===============================================
+* Create Attendance
+
+POST /api/v1/attendances
+
+Params:
+-- auth_token
+-- punch_in // true or false
+-- attendance[punch_in_image]
+-- attendance[punch_in_lat]
+-- attendance[punch_in_long]
+-- attendance[punch_out_image]
+-- attendance[punch_out_lat]
+-- attendance[punch_out_long]
+
+Success Response:
+{
+    "result": true    
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Punch in image can't be blank"
+        ]
+    }
+}
