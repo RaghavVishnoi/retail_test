@@ -8,4 +8,16 @@ class Attendance < ActiveRecord::Base
   def self.between_time(start_time, end_time)
     where("punch_in_time between ? and ?", start_time, end_time)
   end
+
+  def self.with_user_id(user_id)
+    if user_id == 'all'
+      self
+    else
+      where(:user_id => user_id)
+    end
+  end
+
+  def status
+    punch_in_time? ? 'Present' : 'Absent'
+  end
 end
