@@ -22,6 +22,16 @@
       "url": "/api/v1/screens",
       "pagination": true,
       "login_required": false
+    },
+
+    {
+      "table_name": "home",
+      "columns": [
+        { "name": "jsondump", "type": "text" }
+      ],
+      "url": "/api/v1/home",
+      "pagination": false,
+      "login_required": true
     }
   ],
 

@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
     self.reset_password_token = generate_token(:reset_password_token)
   end
 
+  def attendance
+    attendances.between_time(Time.current.beginning_of_day, Time.current.end_of_day).first || attendances.new
+  end
+
   private
     
     def password_not_required?

@@ -2148,3 +2148,19 @@ Error Response:
         ]
     }
 }
+
+==================================================
+* Home Screen
+
+GET /api/v1/home
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "email": "",
+    "personalized_message": "",
+    "attendance_status": "Present"  // "Present" or "Absent"
+}

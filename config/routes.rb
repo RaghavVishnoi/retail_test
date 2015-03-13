@@ -60,6 +60,7 @@ Rails.application.routes.draw do
       get '/test' => 'test#index'
       post '/users/sign_in' => 'sessions#create'
       delete '/users/sign_out' => 'sessions#destroy'
+      get '/home' => 'home#index'
       resources :customers
       resources :attendances, :only => [:create]
     end
