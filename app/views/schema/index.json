@@ -23,5 +23,18 @@
       "pagination": true,
       "login_required": false
     }
+  ],
+
+  "crm": [
+    {
+      "table_name": "customers",
+      "columns": [
+        { "name": "id", "type": "INTEGER PRIMARY KEY NOT NULL" },
+        { "name": "jsondump", "type": "text" }
+      ],
+      "url": "/api/v1/customers",
+      "pagination": true,
+      "login_required": true
+    }
   ]
 }
