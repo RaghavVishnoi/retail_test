@@ -2,6 +2,8 @@ class CategoriesController < ApplicationController
 
   before_action :set_category, :only => [:edit, :update, :destroy]
 
+  authorize_resource
+
   def index
     @categories = Category.all
     respond_to do |format|

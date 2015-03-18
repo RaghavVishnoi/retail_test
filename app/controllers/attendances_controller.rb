@@ -5,7 +5,7 @@ class AttendancesController < ApplicationController
   before_action :initialize_user
 
   def index
-    @attendances = Attendance.with_user_id(user_id).between_time(start_time, end_time).includes(:user).paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
+    @attendances = current_user.reporting_users_attendances.with_user_id(user_id).between_time(start_time, end_time).includes(:user).paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
   end
 
   private

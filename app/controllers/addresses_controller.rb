@@ -1,5 +1,8 @@
 class AddressesController < ApplicationController
   before_action :set_address, :only => [:edit, :update, :destroy]
+  
+  authorize_resource
+
 
   def index
     @addresses = Address.branch_offices

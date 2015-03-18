@@ -1,6 +1,8 @@
 class CollectionsController < ApplicationController
 
   before_action :set_collection, :only => [:edit, :update, :destroy]
+  
+  authorize_resource
 
   def index
     @collections = Collection.all

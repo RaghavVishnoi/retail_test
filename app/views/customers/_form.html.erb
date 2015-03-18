@@ -1,0 +1,73 @@
+<%= form_for @customer, :html => { :class => 'user-form' } do |f| %>
+  
+  <h4 id="form-title"><%= form_title %></h4>
+  
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @customer.errors } %>
+
+  <div class="form-field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :customer_type %>
+    <%= f.text_field :customer_type %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :website %>
+    <%= f.text_field :website %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :account_owner %>
+    <%= f.text_field :account_owner %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :phone %>
+    <%= f.text_field :phone %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :industry %>
+    <%= f.text_field :industry %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :customer_group %>
+    <%= f.text_field :customer_group %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :phone1 %>
+    <%= f.text_field :phone1 %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :phone2 %>
+    <%= f.text_field :phone2 %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :email1 %>
+    <%= f.text_field :email1 %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :email2 %>
+    <%= f.text_field :email2 %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :licence_details %>
+    <%= f.text_area :licence_details %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

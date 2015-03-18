@@ -2,6 +2,8 @@ class InventoriesController < ApplicationController
 
   before_action :set_item
   before_action :set_inventory, :only => [:edit, :update, :destroy]
+  
+  authorize_resource
 
   def index
     @inventories = @item.inventories

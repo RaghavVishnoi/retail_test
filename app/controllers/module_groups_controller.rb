@@ -2,6 +2,8 @@ class ModuleGroupsController < ApplicationController
   
   before_action :set_module_group, :only => [:toggle_activation]
 
+  authorize_resource
+
   def index
     @module_groups = ModuleGroup.all
   end

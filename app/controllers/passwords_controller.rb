@@ -1,5 +1,4 @@
 class PasswordsController < ApplicationController
-  skip_authorize_resource
   skip_before_action :authenticate_user
   before_action :find_user_by_reset_password_token, :only => [:edit, :update]
   before_action :find_user_by_email, :only => [:create]

@@ -1,7 +1,6 @@
 module Api
   module V1
     class AttendancesController < BaseController
-      skip_authorize_resource
 
       before_action :initialize_attendance
 

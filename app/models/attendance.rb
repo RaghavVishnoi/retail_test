@@ -11,12 +11,12 @@ class Attendance < ActiveRecord::Base
 
   def self.with_user_id(user_id)
     if user_id == 'all'
-      self
+      all
     else
       where(:user_id => user_id)
     end
   end
-
+  
   def status
     punch_in_time? ? 'Present' : 'Absent'
   end

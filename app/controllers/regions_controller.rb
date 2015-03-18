@@ -1,6 +1,7 @@
 class RegionsController < ApplicationController
   
   before_action :set_region, :only => [:edit, :update, :destroy]
+  authorize_resource
 
   def index
     @regions = Region.all

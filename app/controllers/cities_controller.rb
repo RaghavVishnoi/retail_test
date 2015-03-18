@@ -4,6 +4,8 @@ class CitiesController < ApplicationController
 
   before_action :set_city, :only => [:edit, :update, :destroy]
 
+  authorize_resource
+
   def index
     @cities = City.paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
     respond_to do |format|

@@ -4,7 +4,7 @@ $(document).on('ready page:load', function() {
     width: 'resolve'
   });
 
-  $('#item-select, #user-select').each(function() {
+  $('#item-select, #user-select, .ajax-select').each(function() {
     var $this = $(this);
     $this.select2({
       ajax: {

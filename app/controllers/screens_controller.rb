@@ -1,9 +1,9 @@
 class ScreensController < ApplicationController
   skip_before_action :authenticate_user, :only => [:index, :show]
-  skip_authorize_resource :only => [:index, :show]
   before_action :set_screen, :only => [:edit, :show, :update, :destroy]
   before_action :initialize_resources, :only => [:index]
-  
+  authorize_resource :except => [:index, :show]
+
   PER_PAGE = 20
 
   def index

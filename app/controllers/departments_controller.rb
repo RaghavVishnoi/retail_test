@@ -2,6 +2,8 @@ class DepartmentsController < ApplicationController
   
   before_action :set_department, :only => [:edit, :update, :destroy]
 
+  authorize_resource
+
   def index
     @departments = Department.all
   end

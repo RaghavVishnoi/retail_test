@@ -2,6 +2,8 @@ class AlcoholPercentsController < ApplicationController
 
   before_action :set_alcohol_percent, :only => [:edit, :update, :destroy]
 
+  authorize_resource
+
   def index
     @alcohol_percents = AlcoholPercent.all
     respond_to do |format|

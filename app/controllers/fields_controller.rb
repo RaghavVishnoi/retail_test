@@ -2,6 +2,8 @@ class FieldsController < ApplicationController
   
   before_action :set_field, :only => [:edit, :update, :destroy]
 
+  authorize_resource
+
   def index
     @fields = Field.all
   end

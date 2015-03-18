@@ -1,6 +1,8 @@
 class JobTitlesController < ApplicationController
   
   before_action :set_job_title, :only => [:edit, :update, :destroy]
+  
+  authorize_resource
 
   def index
     @job_titles = JobTitle.all

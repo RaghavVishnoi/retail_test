@@ -3,7 +3,10 @@ class ItemsController < ApplicationController
   PER_PAGE = 20
 
   before_action :set_item, :only => [:edit, :update, :destroy]
+  
   before_action :initialize_resources, :only => [:index]
+
+  authorize_resource
 
   def index
     @items = @items.paginate(:per_page => PER_PAGE, :page => params[:page] || '1')

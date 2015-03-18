@@ -13,6 +13,13 @@ class User < ActiveRecord::Base
   has_many :data_files, :through => :data_files_users
   has_many :owned_files, :class_name => "DataFile", :foreign_key => :user_id
   has_many :attendances, :dependent => :destroy
+  has_many :users_reportings, :foreign_key => :report_to_user_id, :dependent => :destroy
+  has_many :users_to_report, :foreign_key => :reporting_user_id, :class_name => "UsersReporting", :dependent => :destroy
+  has_many :reporting_users, :through => :users_reportings
+  has_many :report_to_users, :through => :users_to_report
+  has_many :reporting_users_attendances, :through => :users_reportings, :source => :attendances
+  has_many :customers_users, :dependent => :destroy
+  has_many :customers, :through => :customers_users
 
   validates_confirmation_of :password, :if => ->{ password.present? }
   validates :email, :presence => true, :uniqueness => true

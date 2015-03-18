@@ -1,6 +1,5 @@
 class SchemaController < ApplicationController
   skip_before_action :authenticate_user
-  skip_authorize_resource
 
   def index
     schema = JSON.parse(File.read("#{Rails.root}/app/views/schema/index.json"))

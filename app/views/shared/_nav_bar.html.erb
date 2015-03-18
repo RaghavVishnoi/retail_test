@@ -12,6 +12,19 @@
             <%= link_to "Users", users_path %>
           </li>
         <% end %>
+        <% if current_user.manager? %>
+          <li>
+            <%= link_to "My Customers", customers_path %>
+          </li>
+
+          <li>
+            <%= link_to "My Team", users_reportings_path %>
+          </li>
+          
+          <li>
+            <%= link_to "Attendance", attendances_path %>
+          </li>
+        <% end %>
         <li>
           <%= link_to "Profile", edit_user_path(current_user) %>
         </li>

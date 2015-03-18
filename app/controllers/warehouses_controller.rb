@@ -1,6 +1,7 @@
 class WarehousesController < ApplicationController
 
   before_action :set_warehouse, :only => [:edit, :update, :destroy]
+  authorize_resource
 
   def index
     @warehouses = Warehouse.all

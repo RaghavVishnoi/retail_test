@@ -3,6 +3,8 @@ class ItemRegionsController < ApplicationController
   PER_PAGE = 20
 
   before_action :set_item_region, :only => [:edit, :update, :destroy]
+  
+  authorize_resource
 
   def index
     @item_regions = ItemRegion.paginate(:per_page => PER_PAGE, :page => params[:page] || '1')

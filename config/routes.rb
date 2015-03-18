@@ -38,6 +38,17 @@ Rails.application.routes.draw do
       get :edit_hq
     end
   end
+
+  resources :users_reportings, :only => [:index] do
+    get :autocomplete, :on => :collection
+  end
+
+  resources :customers, :only => [:index, :show, :edit, :update] do
+    get :autocomplete, :on => :collection
+    resources :contacts
+  end
+
+  resources :customers_users, :only => [:new, :create, :destroy]
   
   resources :cities, :item_regions, :categories, :collections, :sizes, :alcohol_percents, :images, :warehouses, :screens, :fields, :except => [:show]
   
@@ -61,7 +72,6 @@ Rails.application.routes.draw do
       post '/users/sign_in' => 'sessions#create'
       delete '/users/sign_out' => 'sessions#destroy'
       get '/home' => 'home#index'
-      resources :customers
       resources :attendances, :only => [:create]
     end
   end
@@ -79,6 +89,9 @@ Rails.application.routes.draw do
     end
     post '/passwords' => "passwords#create"
     put '/passwords' => "passwords#update"
+    resources :customers, :only => [:index, :update, :create] do
+      resources :contacts, :only => [:create, :update, :destroy]
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

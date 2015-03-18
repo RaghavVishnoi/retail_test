@@ -47,7 +47,10 @@ class Ability
       can :manage, DataFile do |obj|
         obj.user_id == user.id
       end
-      
+
+      can [:destroy, :create], CustomersUser do |obj|
+        obj.accessible_by?(user)
+      end
     end
   end
 end

@@ -1,6 +1,8 @@
 class BusinessUnitsController < ApplicationController
   
   before_action :set_business_unit, :only => [:edit, :update, :destroy]
+  
+  authorize_resource
 
   def index
     @business_units = BusinessUnit.all

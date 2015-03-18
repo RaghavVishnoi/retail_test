@@ -1,0 +1,22 @@
+<%= form_for @customers_user, :html => { :class => 'user-form' } do |f| %>
+
+  <h4 id="form-title"><%= form_title %></h4>
+
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @customers_user.errors } %>
+  
+  <div class="form-field">
+    <% customer = @customers_user.customer %>
+    <%= f.label :customer %>
+    <%= f.text_field :customer_id, :class => 'ajax-select', 'data-ajax-url' => "/customers/autocomplete", :placeholder => "Select Customer", 'data-multiple' => false, 'data-initvalue' => (customer ? { text: customer.name, id: customer.id } : []).to_json %>
+  </div>
+
+  
+  <div class="form-field">
+    <% user = @customers_user.user %>
+    <%= f.label :user %>
+    <%= f.text_field :user_id, :class => 'ajax-select', 'data-ajax-url' => "/users_reportings/autocomplete", :placeholder => 'Select User', 'data-multiple' => false, 'data-initvalue' => (user ? { text: user.name, id: user.id } : []).to_json  %>
+  </div>
+
+  <%= f.submit %>
+
+<% end %>
