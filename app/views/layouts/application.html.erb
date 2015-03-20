@@ -7,17 +7,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render :partial => 'shared/nav_bar' %>
 
-  <div id="page-container">
-    <%= render 'shared/organization_nav' %>
+  <!-- <div id="page-container"> -->
+    <%#= render 'shared/organization_nav' %>
     
-    <%= render :partial => "shared/flash_messages" %>
+    <%#= render :partial => "shared/flash_messages" %>
 
-    <%= yield %>
+    <%#= yield %>
     
+  <!-- </div> -->
+    <%= render :partial => 'shared/nav_bar' %>
+
+    <div style="height:70px;"></div>
+
+    <div class="center_wrapper">
+      <%= yield %>
+    </div>
+
     <div id="popup" class="hidden"></div>
-  </div>
+
+    <div class="footer">
+      &copy; Copyright 2015, Feet on street all right reserved.
+    </div>
 
 </body>
 </html>

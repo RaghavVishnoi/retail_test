@@ -1,41 +1,19 @@
-<% if logged_in? %>
-  <div id="nav-bar-container">
-    <div id="nav-bar-wrapper">
-      <ul id="nav-bar">
-        <% if can? :manage, Organization %>
-          <li>
-            <%= link_to "Organization", organization_edit_url %>
-          </li>
-        <% end %>
-        <% if can? :read, User %>
-          <li>
-            <%= link_to "Users", users_path %>
-          </li>
-        <% end %>
-        <% if current_user.manager? %>
-          <li>
-            <%= link_to "My Customers", customers_path %>
-          </li>
+<div class="header">
+  <div class="center_wrapper">
 
-          <li>
-            <%= link_to "My Team", users_reportings_path %>
-          </li>
-          
-          <li>
-            <%= link_to "Attendance", attendances_path %>
-          </li>
-        <% end %>
-        <li>
-          <%= link_to "Profile", edit_user_path(current_user) %>
-        </li>
-        <li>
-          <%= link_to "Files", data_files_path %>
-        </li>
-        <li>
-          <%= link_to "Log out", users_sign_out_path, :method => :delete %>
-        </li>
-      </ul>
-      <div class="clear"></div>
+    <div class="fleft">
+      <%= link_to dashboard_path do %>
+        <%= image_tag 'logo.png' %>
+      <% end %>
     </div>
+
+    <div class="fright">
+      <% if logged_in? %>
+        <%= link_to "Log out", users_sign_out_path, :method => :delete %>
+      <% end %>
+    </div>
+
+    <div class="clear"></div>
+    
   </div>
-<% end %>
+</div>

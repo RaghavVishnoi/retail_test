@@ -148,3 +148,113 @@ input[type="submit"] {
 .component, .ui-element, .layout-elements-container {
   margin: 10px;
 }
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+body{ margin: 0px; font-family: 'Lato', Calibri, Arial, sans-serif; background: #F4F4F4;}
+
+/*===============================COMMON================================*/
+.center_wrapper{ width:1100px; margin: auto;}
+.fleft{ float: left;}
+.fright{ float: right;}
+.clear{ clear: both;}
+
+.gray_background{ background: #F4F4F4;}
+input, selct, textarea{ outline: none;}
+/*===END===*/
+
+
+/*===============================LOGIN PAGE================================*/
+.login_wrapper
+{ 
+  width:300px; 
+  margin:13% auto 0px auto; 
+  background: #FFF;  
+  box-shadow: 0px 0px 3px #CCC; 
+  padding: 15px; 
+  border-radius:5px;
+}
+.logobox
+{
+  padding-bottom: 15px; 
+  text-align: center; 
+  border-bottom: solid 1px #CCC; 
+  margin-bottom: 15px;
+}
+.logobox img
+{ 
+  width: 100%;
+}
+.login_form input[type=text], .login_form input[type=password] 
+{ 
+  width: 100%; 
+  padding: 10px; 
+  border-radius:3px; 
+  border:solid 1px #DDD; 
+  margin-bottom: 10px; 
+  background: #f7f7f7;
+  box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -os-box-sizing: border-box;
+    -ms-box-sizing: border-box; 
+}
+.login_form input[type=password]
+{ 
+  margin-bottom: 20px;
+}
+
+.button_box .fleft, .button_box .fright{ width: 48%;}
+.button_box .fleft{ font-size: 13px; color: #666; margin-top: 10px;}
+.button_box .fleft input{ float: left; margin: 2px 5px 0px 0px;}
+.button_box .fright input{ background: #009cd4; width: 100%; border:0px; padding: 10px; border-radius:3px; 
+  color: #FFF; text-transform: uppercase; cursor: pointer;}
+/*===END===*/
+
+
+
+/*===============================DASHBOARD PAGE================================*/
+.box_menu{padding: 10px 0px;}
+.box_menu .box{ 
+  padding: 10px;
+  width:20%; 
+  max-width: 150px;
+  margin: 10px 10px 20px 10px;  
+  float: left;
+  text-align: center;
+}
+.box_menu .box span
+{
+  border:solid 1px #CCC; 
+  width:100%; max-width: 200px;
+  min-height: 150px;
+  display: block;
+  margin-bottom: 15px;
+  transition: 1s;
+  cursor: pointer;
+  background: #FFF;
+}
+.box_menu .box i
+{
+  font-size: 70px;
+  color: #CCC;
+  margin: 20px 0px;
+  transition: 1s;
+}
+.box_menu .box span:hover{border:solid 1px #08af91; }
+.box_menu .box span:hover i{ color: #04d8b3;
+-webkit-transform: rotateY(180deg);
+-webkit-transform-style: preserve-3d;
+transform: rotateY(180deg);
+transform-style: preserve-3d;}
+/*===END===*/
+
+
+
+.header{ height: 50px; background: #FFF; border-bottom: solid 1px #CCC; 
+padding: 10px 0px; position: fixed; width: 100%; left: 0px; top: 0px;}
+.header .fleft img{ height: 50px;}
+.header .fright{ margin-top: 10px;}
+.header .fright a{ color: #027fce; text-decoration: none;}
+
+.footer{ background: #333; padding: 10px 0px; width: 100%; color: #999; text-align: center; font-size: 13px;}

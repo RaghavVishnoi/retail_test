@@ -1,0 +1,178 @@
+<div class="box_menu">
+
+  <% if can? :manage, Organization %>
+    <%= link_to organization_edit_path do %>
+      <div class="box">
+        <span></span>
+        Organization
+      </div>
+    <% end %>
+
+    <%= link_to edit_hq_addresses_path do %>
+      <div class="box">
+        <span></span>
+        HeadQuarter Address
+      </div>
+    <% end %>
+
+    <%= link_to addresses_path do %>
+      <div class="box">
+        <span></span>
+        Branch Offices
+      </div>
+    <% end %>
+
+    <%= link_to departments_path do %>
+      <div class="box">
+        <span></span>
+        Departments
+      </div>
+    <% end %>
+
+    <%= link_to regions_path do %>
+      <div class="box">
+        <span></span>
+        Regions
+      </div>
+    <% end %>
+
+    <%= link_to business_units_path do %>
+      <div class="box">
+        <span></span>
+        Business Units
+      </div>
+    <% end %>
+
+    <%= link_to weekly_offs_path do %>
+      <div class="box">
+        <span></span>
+        Weekly Offs
+      </div>
+    <% end %>
+
+    <%= link_to items_path do %>
+      <div class="box">
+        <span></span>
+        Items
+      </div>
+    <% end %>
+
+    <%= link_to cities_path do %>
+      <div class="box">
+        <span></span>
+        Cities
+      </div>
+    <% end %>
+
+    <%= link_to item_regions_path do %>
+      <div class="box">
+        <span></span>
+        Item Regions
+      </div>
+    <% end %>
+
+    <%= link_to categories_path do %>
+      <div class="box">
+        <span></span>
+        Categories
+      </div>
+    <% end %>
+
+    <%= link_to collections_path do %>
+      <div class="box">
+        <span></span>
+        Collections
+      </div>
+    <% end %>
+
+    <%= link_to sizes_path do %>
+      <div class="box">
+        <span></span>
+        Sizes
+      </div>
+    <% end %>
+
+    <%= link_to alcohol_percents_path do %>
+      <div class="box">
+        <span></span>
+        Alcohol Percents
+      </div>
+    <% end %>
+
+    <%= link_to warehouses_path do %>
+      <div class="box">
+        <span></span>
+        Warehouses
+      </div>
+    <% end %>
+
+    <%= link_to screens_path do %>
+      <div class="box">
+        <span></span>
+        Screens
+      </div>
+    <% end %>
+
+    <%= link_to fields_path do %>
+      <div class="box">
+        <span></span>
+        Fields
+      </div>
+    <% end %>
+
+    <%= link_to module_groups_path do %>
+      <div class="box">
+        <span></span>
+        Modules
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :read, User %>
+    <%= link_to users_path do %>
+      <div class="box">
+        <span></span>
+        Users
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if current_user.manager? %>
+    <%= link_to customers_path do %>
+      <div class="box">
+        <span></span>
+        My Customers
+      </div>
+    <% end %>
+
+    <%= link_to users_reportings_path do %>
+      <div class="box">
+        <span></span>
+        My Team
+      </div>
+    <% end %>
+
+    <%= link_to attendances_path do %>
+      <div class="box">
+        <span></span>
+        Attendance
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= link_to [:edit, current_user] do %>
+    <div class="box">
+      <span></span>
+      Profile
+    </div>
+  <% end %>
+
+  <%= link_to data_files_path do %>
+    <div class="box">
+      <span></span>
+      Files
+    </div>
+  <% end %>
+
+  <div class="clear"></div>
+</div>

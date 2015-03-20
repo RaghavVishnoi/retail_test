@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  get '/dashboard' => 'dashboard#index'
   get '/users/sign_in' => "sessions#new"
   post '/users/sign_in' => "sessions#create"
   delete '/users/sign_out' => "sessions#destroy"
