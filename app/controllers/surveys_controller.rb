@@ -44,7 +44,7 @@ class SurveysController < ApplicationController
 
   private
     def survey_params
-      params.require(:survey).permit(:heading, :questions_attributes => [:question_type, :id, :content, :question_options_attributes => [:id, :content]])
+      params.require(:survey).permit(:heading, :questions_attributes => [:question_type, :id, :content, :_destroy, :question_options_attributes => [:id, :content, :_destroy]])
     end
 
     def set_survey

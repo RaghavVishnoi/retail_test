@@ -6,6 +6,8 @@
 
     <%= f.hidden_field :id, :data => { :name => "[id]" } %>
 
+    <%= f.hidden_field :_destroy, :class => 'destroy', :data => { :name => "[_destroy]" } %>
+
     <%= f.text_area :content, :placeholder => "Question", :data => { :name => "[content]" }  %>
 
     <ul>
@@ -21,6 +23,8 @@
         <%= f.radio_button :question_type, 'multiple_select', :data => { :name => "[question_type]" } %>&nbsp Multiple Select
       </li>
     </ul>
+
+    <%= link_to "Remove", "javascript:void(0);", :class => 'destroy-field' %>
 
     <div class="container">
       <% question.question_options.each_with_index do |option, index| %>

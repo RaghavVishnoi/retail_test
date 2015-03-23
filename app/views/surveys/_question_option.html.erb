@@ -6,7 +6,11 @@
 
     <%= f.hidden_field :id, :data => { :name => '[id]' } %>
 
+    <%= f.hidden_field :_destroy, :class => 'destroy', :data => { :name => "[_destroy]" } %>
+
     <%= f.text_field :content, :placeholder => "Option", :data => { :name => '[content]' } %>
+
+    <%= link_to "Remove", "javascript:void(0);", :class => 'destroy-field' %>
     
   <% end %>
 </div>

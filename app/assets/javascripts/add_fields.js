@@ -32,6 +32,12 @@ $(document).on('click', '.remove-field', function() {
   $(this).closest('.container').remove();
 });
 
+$(document).on('click', '.destroy-field', function() {
+  var $container = $(this).closest('.container');
+  $container.find('.destroy').first().val(true);
+  $container.hide();
+})
+
 $(document).on('submit', 'form', function() {
   $(this).find('.hidden.template').remove();
 });
