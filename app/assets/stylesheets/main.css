@@ -222,11 +222,12 @@ input, selct, textarea{ outline: none;}
   margin: 10px 10px 20px 10px;  
   float: left;
   text-align: center;
+  min-height: 220px;
 }
 .box_menu .box span
 {
   border:solid 1px #CCC; 
-  width:100%; max-width: 200px;
+  width:100%; max-width: 150px;
   min-height: 150px;
   display: block;
   margin-bottom: 15px;
@@ -238,9 +239,12 @@ input, selct, textarea{ outline: none;}
 {
   font-size: 70px;
   color: #CCC;
-  margin: 20px 0px;
+  margin: 40px 0px;
   transition: 1s;
+  display: inline-block;
 }
+.box_menu .box i img
+{ width:60%;}
 .box_menu .box span:hover{border:solid 1px #08af91; }
 .box_menu .box span:hover i{ color: #04d8b3;
 -webkit-transform: rotateY(180deg);
@@ -258,3 +262,7 @@ padding: 10px 0px; position: fixed; width: 100%; left: 0px; top: 0px;}
 .header .fright a{ color: #027fce; text-decoration: none;}
 
 .footer{ background: #333; padding: 10px 0px; width: 100%; color: #999; text-align: center; font-size: 13px;}
+
+
+/*==================COMMON===============================*/
+a{ color:#0472bf}
