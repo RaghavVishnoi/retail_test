@@ -1,0 +1,26 @@
+<%= link_to "New Survey", new_survey_path, :id => 'new-button' %>
+
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Heading</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @surveys.each do |survey| %>
+      <tr>
+        <td>
+          <%= survey.heading %>
+        </td>
+        <td>
+          <%= link_to "Edit", [:edit, survey] %>
+        </td>
+        <td>
+          <%= link_to "Delete", [survey], method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

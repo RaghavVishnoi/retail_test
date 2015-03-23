@@ -19,3 +19,4 @@ ModuleGroup.create :name => :login
 ModuleGroup.create :name => :items
 ModuleGroup.create :name => :attendance
 ModuleGroup.create :name => :crm
+ModuleGroup.create :name => :survey

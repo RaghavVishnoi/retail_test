@@ -1,0 +1,38 @@
+<% data_name = "[questions_attributes][#{key}]" %>
+
+<div class='<%= template_class %> container' data-name='<%= data_name %>'>
+
+  <%= form.fields_for data_name, question do |f| %>
+
+    <%= f.hidden_field :id, :data => { :name => "[id]" } %>
+
+    <%= f.text_area :content, :placeholder => "Question", :data => { :name => "[content]" }  %>
+
+    <ul>
+      <li>
+        <%= f.radio_button :question_type, 'text' %>&nbsp Text
+      </li>
+
+      <li>
+        <%= f.radio_button :question_type, 'single_select' %>&nbsp Single Select
+      </li>
+
+      <li>
+        <%= f.radio_button :question_type, 'multiple_select' %>&nbsp Multiple Select
+      </li>
+    </ul>
+
+    <div class="container">
+      <% question.question_options.each_with_index do |option, index| %>
+
+        <%= render :partial => 'question_option', :locals => { :form => f, :question_option => option, :template_class => '', :key => index } %>
+        
+      <% end %>
+    
+    <%= link_to "Add Option", "javascript:void(0);", :class => 'add-field', :data => { :template_class => 'option-template'} %>
+
+    </div>
+
+  <% end %>
+
+</div>

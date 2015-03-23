@@ -1,0 +1,25 @@
+<%= form_for @survey, :html => { :class => 'user-form' } do |f| %>
+
+  <h4 id="form-title"><%= form_title %></h4>
+
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @survey.errors } %>
+
+  <div class="form-field">
+    <%= f.label :heading %>
+    <%= f.text_field :heading %>
+  </div>
+
+  <%= render :partial => 'question', :locals => { :form => f, :question => Question.new, :template_class => 'question-template hidden template', :key => 'key' } %>
+
+  <%= render :partial => 'question_option', :locals => { :form => f, :question_option => QuestionOption.new, :template_class => "option-template hidden template", :key => 'key' } %>
+
+  <div class="container" data-name="survey">
+    <% @survey.questions.each_with_index do |question, index| %>
+      <%= render :partial => "question", :locals => { :form => f, :question => question, :template_class => '', :key => index } %>
+    <% end %>
+    
+    <%= link_to "Add Question", "javascript:void(0);", :class => 'add-field', :data => { :template_class => 'question-template'} %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,12 @@
+<% data_name = "[question_options_attributes][#{key}]" %>
+
+<div class='<%= template_class %> container' data-name='<%= data_name %>'>
+
+  <%= form.fields_for data_name, question_option do |f| %>
+
+    <%= f.hidden_field :id, :data => { :name => '[id]' } %>
+
+    <%= f.text_field :content, :placeholder => "Option", :data => { :name => '[content]' } %>
+    
+  <% end %>
+</div>
