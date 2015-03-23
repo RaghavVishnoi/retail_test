@@ -2164,3 +2164,53 @@ Response:
     "personalized_message": "",
     "attendance_status": "Present"  // "Present" or "Absent"
 }
+
+=================================================
+* Surveys
+
+GET /api/v1/surveys
+
+Params:
+-- auth_token
+-- page
+
+Response:
+{
+    "result": true,
+    "per_page": 20,
+    "length": 0,
+    "current_page": 1,
+    "total_pages": 1,
+    "updated_at": "2015-03-23T10:13:00.191Z",
+    "surveys": [
+        {
+            "id": 4,
+            "heading": "survey1",
+            "updated_at": "2015-03-23T09:52:21.000Z",
+            "created_at": "2015-03-23T09:52:21.000Z",
+            "questions": [
+                {
+                    "id": 17,
+                    "content": "question1",
+                    "question_type": "text",
+                    "question_options": []
+                },
+                {
+                    "id": 18,
+                    "content": "question2",
+                    "question_type": "single_select",
+                    "question_options": [
+                        {
+                            "id": 20,
+                            "content": "option1"
+                        },
+                        {
+                            "id": 21,
+                            "content": "option2"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

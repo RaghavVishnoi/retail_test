@@ -10,15 +10,15 @@
 
     <ul>
       <li>
-        <%= f.radio_button :question_type, 'text' %>&nbsp Text
+        <%= f.radio_button :question_type, 'text', :data => { :name => "[question_type]" } %>&nbsp Text
       </li>
 
       <li>
-        <%= f.radio_button :question_type, 'single_select' %>&nbsp Single Select
+        <%= f.radio_button :question_type, 'single_select', :data => { :name => "[question_type]" } %>&nbsp Single Select
       </li>
 
       <li>
-        <%= f.radio_button :question_type, 'multiple_select' %>&nbsp Multiple Select
+        <%= f.radio_button :question_type, 'multiple_select', :data => { :name => "[question_type]" } %>&nbsp Multiple Select
       </li>
     </ul>
 

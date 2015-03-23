@@ -8,6 +8,12 @@ class SurveysController < ApplicationController
 
   def index
     @surveys = Survey.paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
+    respond_to do |format|
+      format.html
+      format.json do
+        render :json => { result: true, :per_page => @surveys.per_page, :length => @surveys.length, :current_page => @surveys.current_page, :total_pages => @surveys.total_pages, :updated_at => Time.current, :surveys => ActiveModel::ArraySerializer.new(@surveys, :each_serializer => SurveySerializer) }
+      end
+    end
   end
 
   def new

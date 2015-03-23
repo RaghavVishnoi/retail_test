@@ -93,6 +93,7 @@ Rails.application.routes.draw do
     resources :customers, :only => [:index, :update, :create] do
       resources :contacts, :only => [:create, :update, :destroy]
     end
+    resources :surveys, :only => [:index]
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

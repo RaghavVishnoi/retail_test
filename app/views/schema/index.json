@@ -46,5 +46,18 @@
       "pagination": true,
       "login_required": true
     }
+  ],
+
+  "survey": [
+    {
+      "table_name": "surveys",
+      "columns": [
+        { "name": "id", "type": "INTEGER PRIMARY KEY NOT NULL" },
+        { "name": "jsondump", "type": "text" }
+      ],
+      "url": "/api/v1/surveys",
+      "pagination": true,
+      "login_required": true
+    }
   ]
 }
