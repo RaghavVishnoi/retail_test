@@ -147,21 +147,21 @@
   <% if current_user.manager? %>
     <%= link_to customers_path do %>
       <div class="box">
-        <span></span>
+        <span><i><%= image_tag 'customer-icon.png' %></i></span>
         My Customers
       </div>
     <% end %>
 
     <%= link_to users_reportings_path do %>
       <div class="box">
-        <span></span>
+        <span><i><%= image_tag 'our-team.png' %></i></span>
         My Team
       </div>
     <% end %>
 
     <%= link_to attendances_path do %>
       <div class="box">
-        <span></span>
+        <span><i><%= image_tag 'attendance.png' %></i></span>
         Attendance
       </div>
     <% end %>
@@ -169,14 +169,14 @@
 
   <%= link_to [:edit, current_user] do %>
     <div class="box">
-      <span></span>
+      <span><i><%= image_tag 'profile-icon.png' %></i></span>
       Profile
     </div>
   <% end %>
 
   <%= link_to data_files_path do %>
     <div class="box">
-      <span></span>
+      <span><i><%= image_tag 'file-icon.png' %></i></span>
       Files
     </div>
   <% end %>
