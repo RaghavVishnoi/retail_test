@@ -1,42 +1,45 @@
 <% data_name = "[questions_attributes][#{key}]" %>
 
-<div class='<%= template_class %> container' data-name='<%= data_name %>'>
-
+<div class='form-field table_row <%= template_class %> container' data-name='<%= data_name %>'>
   <%= form.fields_for data_name, question do |f| %>
 
     <%= f.hidden_field :id, :data => { :name => "[id]" } %>
 
-    <%= f.hidden_field :_destroy, :class => 'destroy', :data => { :name => "[_destroy]" } %>
+    <%= f.hidden_field :_destroy, :class => "destroy", :data => { :name => "[_destroy]" } %>
 
-    <%= f.text_area :content, :placeholder => "Question", :data => { :name => "[content]" }  %>
+    <div class="field_with_errors table_cell"><label>&nbsp;</label></div>
 
-    <ul>
-      <li>
-        <%= f.radio_button :question_type, 'text', :data => { :name => "[question_type]" } %>&nbsp Text
-      </li>
+    <div class="field_with_errors table_cell">
+      <%= f.text_area :content, :placeholder => "Question", :data => { :name => "[content]" }  %>
+      <br>
+      <ul class="list">
+        <li>
+          <%= f.radio_button :question_type, 'text', :data => { :name => "[question_type]" } %>Text
+        </li>
 
-      <li>
-        <%= f.radio_button :question_type, 'single_select', :data => { :name => "[question_type]" } %>&nbsp Single Select
-      </li>
+        <li>
+          <%= f.radio_button :question_type, 'single_select', :data => { :name => "[question_type]" } %>Single Select
+        </li>
 
-      <li>
-        <%= f.radio_button :question_type, 'multiple_select', :data => { :name => "[question_type]" } %>&nbsp Multiple Select
-      </li>
-    </ul>
+        <li>
+          <%= f.radio_button :question_type, 'multiple_select', :data => { :name => "[question_type]" } %>&nbsp Multiple Select
+        </li>
+      </ul>
 
-    <%= link_to "Remove", "javascript:void(0);", :class => 'destroy-field' %>
+      <div class="clear"></div>
 
-    <div class="container">
-      <% question.question_options.each_with_index do |option, index| %>
+      <br><%= link_to "Remove", "javascript:void(0);", :class => 'destroy-field' %>
 
-        <%= render :partial => 'question_option', :locals => { :form => f, :question_option => option, :template_class => '', :key => index } %>
-        
-      <% end %>
-    
-    <%= link_to "Add Option", "javascript:void(0);", :class => 'add-field', :data => { :template_class => 'option-template'} %>
+      <div class="add_option container">
+        <%= link_to "Add Option", "javascript:void(0);", :class => 'add-field', :data => { :template_class => 'option-template'} %>          
+        <br>
+        <% question.question_options.each_with_index do |option, index| %>
+
+          <%= render :partial => 'question_option', :locals => { :form => f, :question_option => option, :template_class => '', :key => index } %>
+          
+        <% end %>
+      </div>
 
     </div>
-
   <% end %>
-
 </div>

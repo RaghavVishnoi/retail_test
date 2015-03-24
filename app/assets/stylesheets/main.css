@@ -132,7 +132,7 @@ input[type="submit"] {
 
 .weekly-off-field { width: 500px !important; }
 
-.hidden { display: none; }
+.hidden { display: none !important; }
 
 .image-container img { 
   max-width: 100px;
