@@ -214,6 +214,18 @@ input, selct, textarea{ outline: none;}
 
 
 /*===============================DASHBOARD PAGE================================*/
+html,
+body {
+  margin:0;
+  padding:0;
+  height:100%;
+}
+.main_container{ padding:10px;
+  padding-bottom:40px;}
+  #wrapper {
+  min-height:100%;
+  position:relative;
+}
 .box_menu{padding: 10px 0px;}
 .box_menu .box{ 
   padding: 10px;
@@ -261,8 +273,26 @@ padding: 10px 0px; position: fixed; width: 100%; left: 0px; top: 0px;}
 .header .fright{ margin-top: 10px;}
 .header .fright a{ color: #027fce; text-decoration: none;}
 
-.footer{ background: #333; padding: 10px 0px; width: 100%; color: #999; text-align: center; font-size: 13px;}
+.footer{ background: #333; padding: 10px 0px; width: 100%; color: #999; text-align: center; font-size: 13px; height:20px;
+  position:absolute;
+  bottom:0;
+  left:0;}
 
 
 /*==================COMMON===============================*/
 a{ color:#0472bf}
+.fleft{ float: left;}
+.fright{ float: right;}
+.clear{ clear: both;}
+
+/*================== TABLE ==================*/
+.table_row{ display: table-row;}
+.table_cell{ display: table-cell;}
+.table_cell textarea{ width: 254px; height: 60px; resize:none; border:solid 1px #ccc; margin: 5px 0px;}
+.table_cell ul{ list-style: none; margin: 0px; padding: 0px;}
+.table_cell ul li{ float: left; margin-right: 15px;}
+.table_cell input[type=radio]{ width:auto; float: left; margin: -3px 5px 0px 0px;}
+
+.add_option{ margin: 10px 0px 5px 0px; }
+.add_option input{ margin-bottom: 5px;}
+

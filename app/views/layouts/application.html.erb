@@ -16,12 +16,15 @@
     <%#= yield %>
     
   <!-- </div> -->
+  <div id="wrapper">
     <%= render :partial => 'shared/nav_bar' %>
 
     <div style="height:70px;"></div>
 
-    <div class="center_wrapper">
-      <%= yield %>
+    <div class="main_container">
+      <div class="center_wrapper">
+        <%= yield %>
+      </div>
     </div>
 
     <div id="popup" class="hidden"></div>
@@ -29,6 +32,6 @@
     <div class="footer">
       &copy; Copyright 2015, Feet on street all right reserved.
     </div>
-
+</div>
 </body>
 </html>
