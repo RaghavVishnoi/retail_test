@@ -2214,3 +2214,27 @@ Response:
         }
     ]
 }
+
+=========================================================
+* Answers
+
+POST /api/v1/answers
+
+Params:
+-- auth_token
+-- answer[question_id]
+-- answer[content]
+-- answer[question_option_ids][]
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": []
+    }
+}
