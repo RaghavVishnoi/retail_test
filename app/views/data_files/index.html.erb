@@ -5,34 +5,17 @@
 <%= link_to "New Folder", new_folder_path(:parent_id => params[:parent_id]), :id => 'new-button' %>
 
 <table class="ui table">
-  <tbody>
+  <tbody class="files-container">
     <% @data_files.each do |file| %>
-      <tr>
-
-        <td>
-          <% if file.is_a? Folder %>
-            <%= link_to file.name, data_files_path(:parent_id => file.id) %>
-          <% else %>
-            <%= link_to file.name, file %>
-          <% end %>
-        </td>
-
-        <td>
-          <%= link_to "Show Details", "javascript:void(0);", :class => 'show-details' %>
-          <%= render :partial => 'details', :locals => { :file => file } %>
-        </td>
-
-        <% if can? :manage, file %>
-          <td>
-            <%= link_to "Edit", [:edit, file] %>
-          </td>
-
-          <td>
-            <%= link_to "Delete", [file], method: :delete, data: { confirm: "Are you sure?" } %>
-          </td>
-        <% end %>
-
-      </tr>
+      <%= render :partial => 'file', :locals => { :file => file } %>
     <% end %>
   </tbody>
 </table>
+
+<%= form_for Document.new do |f| %>
+  <%= hidden_field_tag 'document[parent_id]', params[:parent_id] %>
+  <%= f.file_field :data_file, :id => 'dropfile', :class => 'hidden' %>
+  <div id="dropzone">
+    <h5>Drop Files Here</h5>
+  </div>
+<% end %>

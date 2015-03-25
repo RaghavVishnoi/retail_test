@@ -1,0 +1,26 @@
+<tr>
+
+  <td>
+    <% if file.is_a? Folder %>
+      <%= link_to file.name, data_files_path(:parent_id => file.id) %>
+    <% else %>
+      <%= link_to file.name, file %>
+    <% end %>
+  </td>
+
+  <td>
+    <%= link_to "Show Details", "javascript:void(0);", :class => 'show-details' %>
+    <%= render :partial => 'details', :locals => { :file => file } %>
+  </td>
+
+  <% if can? :manage, file %>
+    <td>
+      <%= link_to "Edit", [:edit, file] %>
+    </td>
+
+    <td>
+      <%= link_to "Delete", [file], method: :delete, data: { confirm: "Are you sure?" } %>
+    </td>
+  <% end %>
+
+</tr>

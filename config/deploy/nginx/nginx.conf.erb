@@ -118,6 +118,8 @@ http {
       add_header  ETag "";
       break;
     }
+
+    client_max_body_size 5M;
   }
 }
 

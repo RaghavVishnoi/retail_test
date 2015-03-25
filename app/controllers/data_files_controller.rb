@@ -25,11 +25,13 @@ class DataFilesController < ApplicationController
       respond_to do |format|
         format.html { redirect_to data_files_path(:parent_id => @data_file.parent_id) }
         format.json { render :json => { :result => true, :data_file => DataFileSerializer.new(@data_file, :root => false) } }
+        format.js
       end
     else
       respond_to do |format|
         format.html { render :new }
         format.json { render :json => { :result => false, :errors => { :messages => @data_file.errors.full_messages } } }
+        format.js
       end
     end
   end
