@@ -40,6 +40,7 @@
       "table_name": "customers",
       "columns": [
         { "name": "id", "type": "INTEGER PRIMARY KEY NOT NULL" },
+        { "name": "name", "type": "text" },
         { "name": "jsondump", "type": "text" }
       ],
       "url": "/api/v1/customers",
