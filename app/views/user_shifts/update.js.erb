@@ -1,0 +1,9 @@
+<% if @user %>
+  <% if @user.errors.any? %>
+    alert('<%= j(@user.errors.full_messages.to_sentence) %>');
+  <% else %>
+    $('#edit_user_<%= @user.id %>').replaceWith('<%= j(render :partial => "shift_time", :locals => { :user => @user} ) %>');
+  <% end %>
+<% else %>
+    alert('User not found');
+<% end %>

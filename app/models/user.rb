@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessor :skip_password_validation, :password_required
+  attr_writer :shift_start_time, :shift_end_time
+
   include RoleModel
   roles :superadmin, :admin, :manager, :user
   has_secure_password :validations => false
@@ -27,6 +29,7 @@ class User < ActiveRecord::Base
   validates :reset_password_token, :uniqueness => true, :allow_nil => true
   validates :password, :presence => true, :unless => :password_not_required?
 
+  before_validation :set_shift_time_in_seconds
   before_save :ensure_auth_token
   before_create :set_reset_password_token
   after_create :send_invite_mail
@@ -55,6 +58,14 @@ class User < ActiveRecord::Base
     attendances.between_time(Time.current.beginning_of_day, Time.current.end_of_day).first || attendances.new
   end
 
+  def shift_start_time
+    TimeHandler.day_time(timezone, shift_start_time_in_seconds)
+  end
+
+  def shift_end_time
+    TimeHandler.day_time(timezone, shift_end_time_in_seconds)
+  end
+
   private
     
     def password_not_required?
@@ -76,5 +87,14 @@ class User < ActiveRecord::Base
 
     def send_invite_mail
       UserMailer.delay.invite_mail(email, reset_password_token)
+    end
+
+    def set_shift_time_in_seconds
+      if @shift_start_time
+        self.shift_start_time_in_seconds = TimeHandler.seconds(timezone, @shift_start_time)
+      end
+      if @shift_end_time
+        self.shift_end_time_in_seconds = TimeHandler.seconds(timezone, @shift_end_time)
+      end
     end
 end

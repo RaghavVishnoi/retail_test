@@ -1,0 +1,11 @@
+<%= link_to "New Holiday", new_holiday_path, :id => 'new-button' %>
+
+<table class="ui table">
+  <% @holidays.each do |holiday| %>
+    <tr>
+      <td><%= holiday.description %></td>
+      <td><%= link_to "Edit", [:edit, holiday] %></td>
+      <td><%= link_to "Delete", [holiday], :method => :delete, :confirm => "Are you sure you want to delete it?" %></td>
+    </tr>
+  <% end %>
+</table>

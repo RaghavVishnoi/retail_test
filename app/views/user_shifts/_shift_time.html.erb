@@ -1,0 +1,16 @@
+<%= form_for user, :url => user_shift_path(:id => user.id), :method => :put, :remote => true do |f| %>
+  <%= check_box_tag 'user_ids[]', user.id, false, :class => 'user_ids_checkbox' %>
+
+  <span>
+    <%= user.name %>
+  </span>
+
+  <%= f.text_field :shift_start_time, :placeholder => 'Start Time(e.g. 10:00)' %>
+
+  <%= f.text_field :shift_end_time, :placeholder => 'End Time(e.g. 17:30)' %>
+
+  <%= f.time_zone_select :timezone, nil, :prompt => "Select TimeZone" %>
+
+  <%= f.submit %>
+
+<% end %>

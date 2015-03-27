@@ -142,6 +142,22 @@
         Users
       </div>
     <% end %>
+
+    <%= link_to user_shifts_path do %>
+      <div class="box">
+        <span></span>
+        Shift Timings
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :manage, Holiday %>
+    <%= link_to holidays_path do %>
+      <div class="box">
+        <span></span>
+        Holidays
+      </div>
+    <% end %>
   <% end %>
 
   <% if current_user.manager? %>
