@@ -1,0 +1,15 @@
+<%= link_to "New Permission", new_permission_path, :id => 'new-button' %>
+
+<table class="ui table">
+  <tbody>
+    <% @permissions.each do |permission| %>
+      <tr>
+        <td><%= permission.role.name %></td>
+        <td><%= permission.action %></td>
+        <td><%= permission.subject_class %></td>
+        <td><%= link_to "Edit", [:edit, permission] %></td>
+        <td><%= link_to "Delete", [permission], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,13 @@
+<%= link_to "New Role", new_role_path, :id => 'new-button' %>
+
+<table class="ui table">
+  <tbody>
+    <% @roles.each do |role| %>
+      <tr>
+        <td><%= role.name %></td>
+        <td><%= link_to "Edit", [:edit, role] %></td>
+        <td><%= link_to "Delete", [role], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

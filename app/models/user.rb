@@ -2,10 +2,11 @@ class User < ActiveRecord::Base
   attr_accessor :skip_password_validation, :password_required
   attr_writer :shift_start_time, :shift_end_time
 
-  include RoleModel
-  roles :superadmin, :admin, :manager, :user
   has_secure_password :validations => false
 
+  has_many :associated_roles, :as => :object, :dependent => :destroy
+  has_many :roles, :through => :associated_roles
+  has_many :permissions, :through => :roles
   has_and_belongs_to_many :departments
   has_and_belongs_to_many :regions
   has_and_belongs_to_many :business_units

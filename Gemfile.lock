@@ -239,7 +239,6 @@ GEM
     rdoc (4.1.2)
       json (~> 1.4)
     ref (1.0.5)
-    role_model (0.8.1)
     rspec-activemodel-mocks (1.0.1)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -348,7 +347,6 @@ DEPENDENCIES
   pg
   pry
   rails (= 4.1.4)
-  role_model
   rspec-activemodel-mocks
   rspec-rails (~> 3.0)
   rvm1-capistrano3

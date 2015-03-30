@@ -3,13 +3,11 @@ class DataFile < ActiveRecord::Base
 
   mount_uploader :data_file, DataFileUploader
 
-  include RoleModel
-
-  roles :superadmin, :admin, :manager, :user
-
   validates :name, :presence => true
   
   belongs_to :owner, :class_name => "User", :foreign_key => :user_id
+  has_many :associated_roles, :as => :object, :dependent => :destroy
+  has_many :roles, :through => :associated_roles
   has_many :data_files_users
   has_many :users, :through => :data_files_users
   has_many :data_files_regions
@@ -19,12 +17,28 @@ class DataFile < ActiveRecord::Base
     where(:parent_id => parent_id)
   end
 
-  def self.accessible_by(ability)
-    select { |file| ability.can?(:read, file) }
+  def self.accessible_by(user)
+    (with_user_id(user.id) + with_roles(user.role_ids) + with_user_ids(user.id) + with_regions(user.region_ids)).uniq
   end
 
-  def accessible_by?(user, search_in_hierarchy=true)
-    user_id == user.id || has_any_role?(user.roles.to_a) || (data_files_users.exists?(:user_id => user.id)) || (data_files_regions.exists?(:region_id => user.region_ids)) || (search_in_hierarchy && ((descendants + ancestors).any? { |file| file.accessible_by?(user, false) }))
+  def self.with_user_id(user_id) 
+    where(:user_id => user_id)
+  end
+
+  def self.with_roles(role_ids)
+    joins(:associated_roles).where(:associated_roles => { :role_id => role_ids })
+  end
+
+  def self.with_regions(region_ids) 
+    joins(:data_files_regions).where(:data_files_regions => { :region_id => region_ids })
+  end
+
+  def self.with_user_ids(user_id)
+    joins(:data_files_users).where(:data_files_users => { :user_id => user_id })
+  end
+
+  def accessible_by?(user)
+    user_id == user.id || associated_roles.exists?(:role_id => user.role_ids) || (data_files_users.exists?(:user_id => user.id)) || (data_files_regions.exists?(:region_id => user.region_ids))
   end
 
   def user_ids_string=(str)
@@ -34,5 +48,4 @@ class DataFile < ActiveRecord::Base
   def user_ids_string
     user_ids
   end
-
 end

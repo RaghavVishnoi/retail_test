@@ -1,0 +1,23 @@
+<%= form_for @permission, :html => { :class => 'user-form' } do |f| %>
+
+  <h4 id="form-title"><%= form_title %></h4>
+
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @permission.errors } %>
+
+  <div class="form-field">
+    <%= f.label :role_id %>
+    <%= f.select :role_id, Role.pluck(:name, :id) %>
+  </div>
+
+  <div class="form-field"> 
+    <%= f.label :action %>
+    <%= f.select :action, Permission::ACTIONS %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :subject_class %>
+    <%= f.select :subject_class, Permission::SUBJECT_CLASS %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

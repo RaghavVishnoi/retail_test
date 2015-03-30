@@ -51,7 +51,7 @@ Rails.application.routes.draw do
 
   resources :customers_users, :only => [:new, :create, :destroy]
   
-  resources :cities, :item_regions, :categories, :collections, :sizes, :alcohol_percents, :images, :warehouses, :screens, :fields, :surveys, :holidays, :except => [:show]
+  resources :cities, :item_regions, :categories, :collections, :sizes, :alcohol_percents, :images, :warehouses, :screens, :fields, :surveys, :holidays, :roles, :permissions, :except => [:show]
   
   resources :items, :except => [:show] do
     get :autocomplete, :on => :collection

@@ -133,6 +133,20 @@
         Modules
       </div>
     <% end %>
+
+    <%= link_to permissions_path do %>
+      <div class="box">
+        <span></span>
+        Permissions
+      </div>
+    <% end %>
+
+    <%= link_to roles_path do %>
+      <div class="box">
+        <span></span>
+        Roles
+      </div>
+    <% end %>
   <% end %>
 
   <% if can? :read, User %>
@@ -160,21 +174,25 @@
     <% end %>
   <% end %>
 
-  <% if current_user.manager? %>
+  <% if can? :read, Customer %>
     <%= link_to customers_path do %>
       <div class="box">
         <span><i><%= image_tag 'customer-icon.png' %></i></span>
         My Customers
       </div>
     <% end %>
+  <% end %>
 
+  <% if can? :read, UsersReporting %>
     <%= link_to users_reportings_path do %>
       <div class="box">
         <span><i><%= image_tag 'our-team.png' %></i></span>
         My Team
       </div>
     <% end %>
+  <% end %>
 
+  <% if can? :read, Attendance %>
     <%= link_to attendances_path do %>
       <div class="box">
         <span><i><%= image_tag 'attendance.png' %></i></span>

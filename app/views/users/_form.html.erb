@@ -26,13 +26,13 @@
   
   <% if can? :update, :roles %>
     <div class="form-field">
-      <%= f.label :roles %>
-      <%= f.select :roles, User.valid_roles, {}, { :multiple => true } %>
+      <%= f.label :role_ids %>
+      <%= f.select :role_ids, Role.pluck(:name, :id), {}, { :multiple => true } %>
     </div>
   <% else %>
     <div class="form-field">
       <span class="field-name">Role</span>
-      <span class="field-value"><%= current_user.role_symbols.join(',') %></span>
+      <span class="field-value"><%= current_user.roles.pluck(:name).join(', ') %></span>
     </div>
   <% end %>
 

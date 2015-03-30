@@ -53,7 +53,6 @@ gem 'aws-sdk'
 gem 'delayed_job_active_record'
 gem 'activerecord4-redshift-adapter', github: 'aamine/activerecord4-redshift-adapter'
 gem 'daemons'
-gem 'role_model'
 gem "letter_opener", :group => :development
 gem 'cancan'
 gem 'less-rails'

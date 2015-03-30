@@ -5,7 +5,7 @@ class DataFilesController < ApplicationController
   authorize_resource :instance_name => :data_file
 
   def index
-    @data_files = DataFile.includes(:owner, :users, :regions).with_parent_id(params[:parent_id]).accessible_by(current_ability)
+    @data_files = DataFile.includes(:owner, :users, :regions, :roles).with_parent_id(params[:parent_id]).accessible_by(current_user)
     respond_to do |format|
       format.html 
       format.json { render :json => { :result => true, :data_files => ActiveModel::ArraySerializer.new(@data_files, :each_serializer => DataFileSerializer) } }

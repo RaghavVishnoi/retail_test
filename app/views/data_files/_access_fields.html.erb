@@ -1,6 +1,6 @@
 <div class="form-field">
-  <%= f.label :roles %>
-  <%= f.select :roles, DataFile.valid_roles, {}, { :multiple => true } %>
+  <%= f.label :role_ids %>
+  <%= f.select :role_ids, Role.pluck(:name, :id), {}, { :multiple => true } %>
 </div>
 
 <div class="form-field">

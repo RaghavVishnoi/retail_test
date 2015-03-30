@@ -28,29 +28,51 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
-    if user.superadmin?
-      can :manage, :all
-      can :manage, Organization
-    else
-      can [:autocomplete], Item
+    # if user.superadmin?
+    #   can :manage, :all
+    #   can :manage, Organization
+    # else
+    #   can [:autocomplete], Item
 
-      can [:autocomplete], User
+    #   can [:autocomplete], User
 
-      can [:edit, :update], User do |user_obj|
-        user_obj == user
-      end
+    #   can [:edit, :update], User do |user_obj|
+    #     user_obj == user
+    #   end
 
-      can [:read, :share], DataFile do |obj|
-        obj.accessible_by?(user)
-      end
+    #   can [:read, :share], DataFile do |obj|
+    #     obj.accessible_by?(user)
+    #   end
 
-      can :manage, DataFile do |obj|
-        obj.user_id == user.id
-      end
+    #   can :manage, DataFile do |obj|
+    #     obj.user_id == user.id
+    #   end
 
-      can [:destroy, :create], CustomersUser do |obj|
-        obj.accessible_by?(user)
-      end
+    #   can [:destroy, :create], CustomersUser do |obj|
+    #     obj.accessible_by?(user)
+    #   end
+    # end
+
+    user.permissions.each do |permission|
+      subject_class = (permission.subject_class == "all" ? :all : permission.subject_class.constantize)
+      can permission.action.to_sym, subject_class
+    end
+
+    can [:edit, :update], User do |obj|
+      obj == user
+    end
+
+    can :manage, DataFile do |obj|
+      obj.user_id == user.id
+    end
+
+    can [:read, :share], DataFile do |obj|
+      obj.accessible_by?(user)
+    end
+
+    can [:destroy, :create], CustomersUser do |obj|
+      obj.accessible_by?(user)
     end
   end
+
 end
