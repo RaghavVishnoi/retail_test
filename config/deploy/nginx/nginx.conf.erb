@@ -1,4 +1,4 @@
-user ubuntu;
+user fosem;
 worker_processes 4;
 pid /run/nginx.pid;
 
@@ -23,7 +23,7 @@ http {
   # server_names_hash_bucket_size 64;
   # server_name_in_redirect off;
 
-  include /etc/nginx/mime.types;
+  include mime.types;
   default_type application/octet-stream;
 
   ##
@@ -60,9 +60,11 @@ http {
   ##
   # Uncomment it if you installed passenger or passenger-enterprise
   ##
-  
-  passenger_root /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini;
-  passenger_ruby /home/ubuntu/.rvm/wrappers/ruby-2.1.2/ruby;
+
+  passenger_root /home/fosem/.rvm/gems/ruby-2.1.2/gems/passenger-5.0.5;
+  passenger_ruby /home/fosem/.rvm/gems/ruby-2.1.2/wrappers/ruby;  
+  #passenger_root /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini;
+  #passenger_ruby /home/ubuntu/.rvm/wrappers/ruby-2.1.2/ruby;
   passenger_max_pool_size 5;
   passenger_min_instances 5;
   passenger_max_instances_per_app 0;
@@ -71,14 +73,14 @@ http {
   passenger_app_env staging;
   passenger_friendly_error_pages on;
   
-  passenger_user ubuntu;
-  passenger_group ubuntu;
+  passenger_user fosem;
+  passenger_group fosem ;
 
   ##
   # Virtual Host Configs
   ##
 
-  include /etc/nginx/conf.d/*.conf;
+  include /opt/nginx/conf/*.conf;
   
   server {
     listen 80 default_server;

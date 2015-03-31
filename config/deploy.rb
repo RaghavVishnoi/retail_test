@@ -2,7 +2,9 @@
 lock '3.3.3'
 
 set :application, 'fosem-staging'
-set :repo_url, 'git@github.com:LetsgomoLabs/feet-on-street-enterprise-mobility-solutions-backend.git'
+set :repo_url, 'git@github.com:LetsgomoLabs/gionee_be.git'
+
+set :tmp_dir, "/home/fosem/tmp"
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -106,25 +108,26 @@ namespace :passenger_nginx do
 
   task :configure do
     on roles(:web) do
-      write_template("deploy/nginx/nginx.conf.erb", "/etc/nginx/nginx.conf", "nginx.conf")
+      write_template("deploy/nginx/nginx.conf.erb", "/opt/nginx/conf/nginx.conf", "nginx.conf")
     end
   end
 
   task :start do
     on roles(:web) do
-      execute "sudo service nginx start"
+      execute "sudo /etc/init.d/nginx start"
     end
   end
 
   task :stop do
     on roles(:web) do
-      execute "sudo service nginx stop"
+      execute "sudo /etc/init.d/nginx stop"
     end
   end
 
   task :restart do
     on roles(:web) do
-      execute "sudo service nginx restart"
+      execute "sudo /etc/init.d/nginx stop"
+      execute "sudo /etc/init.d/nginx start"
     end
   end
 end
