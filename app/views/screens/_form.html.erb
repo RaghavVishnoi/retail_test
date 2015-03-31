@@ -15,6 +15,7 @@
       <%= f.text_field :screen_name, :placeholder => "Screen Name" %>
       <%= f.text_field :screen_heading, :placeholder => "Screen Heading" %>
       <%= f.text_field :has_menu, :placeholder => "Has Menu" %>
+      <%= f.text_field :has_action_bar, :placeholder => "Has Action Bar" %>
     </div>
 
     <%= render :partial => 'layout_element', :locals => { :form => f, :layout_element => OpenStruct.new({}), :container_class => 'hidden layout-element-template template', :data_name => "key", :key => 'key' } %>
