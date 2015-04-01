@@ -1,5 +1,5 @@
 class Field < ActiveRecord::Base
-  enum entity: ["Organization", "Region", "Item"]
+  enum entity: ["Organization", "Region", "Item", "Request"]
   enum field_type: ["text", "dropdown"]
   enum value_type: ['string', 'decimal']
   

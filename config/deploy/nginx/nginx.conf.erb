@@ -80,12 +80,12 @@ http {
   # Virtual Host Configs
   ##
 
-  include /opt/nginx/conf/*.conf;
+  #include /opt/nginx/conf/*.conf;
   
   server {
     listen 80 default_server;
     passenger_enabled on;
-    passenger_set_cgi_param HTTP_X_QUEUE_START "t=${msec}000";
+    #passenger_set_cgi_param HTTP_X_QUEUE_START "t=${msec}000";
 
     root <%= release_path %>/public;
 

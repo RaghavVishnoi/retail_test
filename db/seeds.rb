@@ -14,7 +14,7 @@ user = User.new :email => 'superadmin@fosem.com', :password => '123456', :name =
 user.save!
 
 superadmin_role = Role.create :name => 'superadmin'
-superadmin_role.permissions.create :action => :manage, :subject_class => "all"
+superadmin_role.permissions.create :action => "manage", :subject_class => "all"
 
 user.roles << superadmin_role
 
@@ -24,3 +24,11 @@ ModuleGroup.create :name => :items
 ModuleGroup.create :name => :attendance
 ModuleGroup.create :name => :crm
 ModuleGroup.create :name => :survey
+ModuleGroup.create :name => :requester
+
+brands = %w{SAMSUNG HTC SONY NOKIA MICROMAX XOLO OPPO VIVO}
+
+brands.each do |brand_name|
+  field_name = "Branding available for #{brand_name} in this outlet"
+  Field.create :entity => "Request", :display_name => field_name, :field_type => 'dropdown', :value_type => 'string', :configuration => { :values => ["Glow sign board", "SIS", "RSP"]}
+end

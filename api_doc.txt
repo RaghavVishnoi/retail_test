@@ -2238,3 +2238,43 @@ Error Response:
         "messages": []
     }
 }
+
+
+=======================================================
+* Requests
+
+POST /api/v1/requests
+
+Params:
+-- request[retailer_code]
+-- request[rsp_name]
+-- request[rsp_mobile_number]
+-- request[rsp_app_user_id]
+-- request[state]
+-- request[city]
+-- request[shop_name]
+-- request[shop_address]
+-- request[shop_owner_name]
+-- request[shop_owner_phone]
+-- request[is_main_signage]  // true or false
+-- request[is_sis_installed] // true or false
+-- request[avg_store_monthly_sales]
+-- request[avg_gionee_monthly_sales]
+-- request[width]
+-- request[height]
+-- request[cmo_name]
+-- request[request_type]
+-- request[remarks]
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": []
+    }
+}
