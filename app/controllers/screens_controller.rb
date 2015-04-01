@@ -7,11 +7,11 @@ class ScreensController < ApplicationController
   PER_PAGE = 20
 
   def index
-    @screens = @screens.active if request.format.json?
+    @screens = @screens.active(params[:app_id]) if request.format.json?
     @screens = @screens.includes(:module_group).paginate(:per_page => PER_PAGE, :page => params[:page] || '1')
     respond_to do |format|
       format.html 
-      format.json { render :json => { :result => true, :per_page => @screens.per_page, :length => @screens.length, :current_page => @screens.current_page, :total_pages => @screens.total_pages, :updated_at => Time.current, :screens => ActiveModel::ArraySerializer.new(@screens, :each_serializer => ScreenSerializer) } } 
+      format.json { render :json => { :result => true, :per_page => @screens.per_page, :length => @screens.length, :current_page => @screens.current_page, :total_pages => @screens.total_pages, :updated_at => Time.current, :screens => ActiveModel::ArraySerializer.new(@screens, :each_serializer => ScreenSerializer, :scope => { :app_id => params[:app_id] }) } } 
     end
   end
 

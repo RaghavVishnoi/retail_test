@@ -1,0 +1,22 @@
+<%= link_to "New App", new_app_path, :id => 'new-button' %>
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @apps.each do |app| %>
+      <tr>
+        <td><%= app.id %></td>
+        <td><%= app.name %></td>
+        <td><%= link_to "Edit", [:edit, app] %></td>
+        <td><%= link_to "Delete", [app], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

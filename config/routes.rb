@@ -30,9 +30,7 @@ Rails.application.routes.draw do
     put :share, :on => :member
   end
   
-  resources :module_groups, :only => [:index] do
-    put :toggle_activation, :on => :member
-  end
+  resources :module_groups, :only => [:index, :edit, :update]
 
   resources :addresses, :except => [:show] do
     collection do
@@ -51,7 +49,7 @@ Rails.application.routes.draw do
 
   resources :customers_users, :only => [:new, :create, :destroy]
   
-  resources :cities, :item_regions, :categories, :collections, :sizes, :alcohol_percents, :images, :warehouses, :screens, :fields, :surveys, :holidays, :roles, :permissions, :except => [:show]
+  resources :cities, :item_regions, :categories, :collections, :sizes, :alcohol_percents, :images, :warehouses, :screens, :fields, :surveys, :holidays, :roles, :permissions, :apps, :except => [:show]
   
   resources :items, :except => [:show] do
     get :autocomplete, :on => :collection
