@@ -3,7 +3,7 @@
     <% @module_groups.each do |group| %>
       <tr>
         <td><%= group.name %></td>
-        <td><%= render :partial => 'activation_link', :locals => { :group => group } %></td>
+        <td><%= link_to "activate", [:edit, group] %></td>
       </tr>
     <% end %>
   </tbody>

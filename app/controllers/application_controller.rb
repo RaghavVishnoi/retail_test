@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
     end
 
     def resources
-      updated_at.present? ? resource_class.where("updated_at > ?", updated_at) : resource_class
+      updated_at.present? ? resource_class.where("#{resource_class.table_name}.updated_at > ?", updated_at) : resource_class
     end
 
     def resource_class

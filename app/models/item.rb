@@ -8,7 +8,7 @@ class Item < ActiveRecord::Base
   belongs_to :collection
   belongs_to :alcohol_percent
   belongs_to :size
-  has_many :images, :dependent => :destroy
+  has_many :images, :as => :imageable, :dependent => :destroy
   has_many :inventories, :dependent => :destroy
   has_many :documents, :dependent => :nullify
 
