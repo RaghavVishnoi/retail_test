@@ -1,0 +1,17 @@
+<%= link_to "Pending", requests_path(:q => { :status => 'pending' }) %>
+<%= link_to "Declined", requests_path(:q => { :status => 'declined' }) %>
+<%= link_to "Approved", requests_path(:q => { :status => 'approved' }) %>
+
+<table class="ui table">
+  <tbody>
+    <% @requests.each do |request| %>
+      <tr>
+        <td><%= request.rsp_name %></td>
+        <td><%= request.shop_name %></td>
+        <td><%= request.shop_address %></td>
+        <td><%= request.retailer_code %></td>
+        <td><%= link_to "Edit", [:edit, request] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -208,18 +208,27 @@
     <% end %>
   <% end %>
 
-  <%= link_to [:edit, current_user] do %>
-    <div class="box">
-      <span><i><%= image_tag 'profile-icon.png' %></i></span>
+  <%#= link_to [:edit, current_user] do %>
+<!--     <div class="box">
+      <span><i><%#= image_tag 'profile-icon.png' %></i></span>
       Profile
-    </div>
-  <% end %>
+    </div> -->
+  <%# end %>
 
-  <%= link_to data_files_path do %>
-    <div class="box">
-      <span><i><%= image_tag 'file-icon.png' %></i></span>
+  <%#= link_to data_files_path do %>
+<!--     <div class="box">
+      <span><i><%#= image_tag 'file-icon.png' %></i></span>
       Files
-    </div>
+    </div> -->
+  <%# end %>
+
+  <% if can? :manage, Request %>
+    <%= link_to requests_path do %>
+      <div class="box">
+        <span></span>
+        Requests
+      </div>
+    <% end %>
   <% end %>
 
   <div class="clear"></div>

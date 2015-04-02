@@ -1,6 +1,6 @@
 class Permission < ActiveRecord::Base
   ACTIONS = ["manage", "create", "update", "read", "destroy"]
-  SUBJECT_CLASS = ["all", "Customer", "UsersReporting", "Attendance"]
+  SUBJECT_CLASS = ["all", "Customer", "UsersReporting", "Attendance", "Request"]
 
   belongs_to :role
 

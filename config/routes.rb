@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+  root 'dashboard#index'
   get '/dashboard' => 'dashboard#index'
   get '/users/sign_in' => "sessions#new"
   post '/users/sign_in' => "sessions#create"
@@ -46,6 +46,8 @@ Rails.application.routes.draw do
     get :autocomplete, :on => :collection
     resources :contacts
   end
+
+  resources :requests, :only => [:index, :edit, :update]
 
   resources :customers_users, :only => [:new, :create, :destroy]
   
