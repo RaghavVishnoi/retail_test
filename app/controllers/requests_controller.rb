@@ -1,8 +1,8 @@
 class RequestsController < ApplicationController
   
   before_action :find_request, :only => [:edit, :update]
-  authorize_resource :except => [:create]
-  skip_before_action :authenticate_user, :only => [:create]
+  authorize_resource :except => [:create, :new]
+  skip_before_action :authenticate_user, :only => [:create, :new]
 
   PER_PAGE = 20
 
