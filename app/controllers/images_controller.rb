@@ -1,5 +1,7 @@
 class ImagesController < ApplicationController
-
+  
+  skip_before_action :authenticate_user
+  
   def new
     @image = Image.new
   end

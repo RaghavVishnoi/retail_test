@@ -25,23 +25,14 @@
     },
 
     {
-      "table_name": "home",
-      "columns": [
-        { "name": "jsondump", "type": "text" }
-      ],
-      "url": "/api/v1/home",
-      "pagination": false,
-      "login_required": true
-    },
-
-    {
       "table_name": "dropdown_values",
       "columns": [
         { "name": "jsondump", "type": "text" }
       ],
       "url": "/api/v1/dropdown_values",
       "pagination": false,
-      "login_required": false
+      "login_required": false,
+      "single_record": true
     }
   ],
 
@@ -76,13 +67,12 @@
     {
       "table_name": "requests",
       "columns": [
-        { "name": "shop_requirements", "type": "text" },
-        { "name": "branding_details", "type": "text" },
         { "name": "jsondump", "type": "text" }
       ],
       "url": "/api/v1/requests/new",
       "pagination": false,
-      "login_required": false
+      "login_required": false,
+      "single_record": true
     }
   ]
 }
