@@ -100,6 +100,7 @@ Rails.application.routes.draw do
     resources :surveys, :only => [:index]
     resources :answers, :only => [:create]
     resources :requests, :only => [:new, :create]
+    resources :dropdown_values, :only => [:index]
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
