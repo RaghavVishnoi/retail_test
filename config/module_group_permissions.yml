@@ -18,3 +18,7 @@ UsersReporting:
   permissions:
     "read, UsersReporting": "View Assigned Users"
 
+Request:
+  group_name: "Requests"
+  permissions:
+    "manage, Request": "Approve/Decline Request"

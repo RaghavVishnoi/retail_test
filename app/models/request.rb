@@ -20,7 +20,6 @@ class Request < ActiveRecord::Base
   validates :cmo_name, :retailer_code, :rsp_name, :rsp_mobile_number, :state, :city, :shop_name, :shop_address, :shop_owner_name, :avg_store_monthly_sales, :avg_gionee_monthly_sales, :presence => true
   validates :is_main_signage, :is_sis_installed, :inclusion => { :in => [true, false] }, :if => "gsb? || in_shop?"
   validates :width, :height, :presence => true, :if => :gsb?
-  validates :space_available, :is_gionee_gsb_present, :inclusion => { :in => [true, false] }, :if => :sis?
   validate :validate_shop_requirements, :if => :in_shop?
 
   def self.with_query(q)
@@ -39,6 +38,12 @@ class Request < ActiveRecord::Base
   def branding_details
     properties.select { |property| property[:field][:configuration][:type] == "branding_details" }
   end
+
+  def image_ids_string=(str)
+    self.image_ids = str.split(',')
+  end
+
+  private
 
   def validate_shop_requirements
     if !(shop_requirements && shop_requirements[:values].present?)
