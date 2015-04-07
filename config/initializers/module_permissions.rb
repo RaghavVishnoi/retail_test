@@ -1,0 +1,1 @@
+Permission::Actions = YAML.load_file("#{Rails.root}/config/module_group_permissions.yml").with_indifferent_access

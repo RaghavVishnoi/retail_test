@@ -1,0 +1,20 @@
+all:
+  group_name: All
+  permissions:
+    "manage, all": "manage all"
+
+Customer:
+  group_name: Customers
+  permissions:
+    "read, Customer": "View Customers"
+
+Attendance:
+  group_name: Attendances
+  permissions:
+    "read, Attendance": "View Attendances"
+
+UsersReporting:
+  group_name: "Users"
+  permissions:
+    "read, UsersReporting": "View Assigned Users"
+

@@ -35,7 +35,7 @@ class PermissionsController < ApplicationController
 
   private
     def permission_params
-      params.require(:permission).permit(:role_id, :action, :subject_class)
+      params.require(:permission).permit(:role_id, :action_permission)
     end
 
     def find_permission

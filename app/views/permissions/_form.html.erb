@@ -9,14 +9,9 @@
     <%= f.select :role_id, Role.pluck(:name, :id) %>
   </div>
 
-  <div class="form-field"> 
-    <%= f.label :action %>
-    <%= f.select :action, Permission::ACTIONS %>
-  </div>
-
   <div class="form-field">
-    <%= f.label :subject_class %>
-    <%= f.select :subject_class, Permission::SUBJECT_CLASS %>
+    <%= f.label :action_permission, "Action" %>
+    <%= f.select :action_permission, permission_options(@permission.action_permission) %>
   </div>
 
   <%= f.submit %>

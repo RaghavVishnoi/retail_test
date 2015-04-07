@@ -18,7 +18,7 @@ superadmin_role.permissions.create :action => "manage", :subject_class => "all"
 
 user.roles << superadmin_role
 
-ModuleGroup.create :name => :default, :active => true
+ModuleGroup.create :name => :default
 ModuleGroup.create :name => :login
 ModuleGroup.create :name => :items
 ModuleGroup.create :name => :attendance

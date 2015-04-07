@@ -1,9 +1,15 @@
 class Permission < ActiveRecord::Base
-  ACTIONS = ["manage", "create", "update", "read", "destroy"]
-  SUBJECT_CLASS = ["all", "Customer", "UsersReporting", "Attendance", "Request"]
 
   belongs_to :role
 
-  validates :action, :inclusion => { :in => ACTIONS }
-  validates :subject_class, :inclusion => { :in => SUBJECT_CLASS }
+  validates :action, :subject_class, :presence => true
+
+  def action_permission=(val)
+    self.action, self.subject_class = val.split(',').map(&:strip)
+    @action_permission = val
+  end
+
+  def action_permission
+    @action_permission ||= [action, subject_class].join(', ')
+  end
 end

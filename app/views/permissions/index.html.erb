@@ -5,8 +5,7 @@
     <% @permissions.each do |permission| %>
       <tr>
         <td><%= permission.role.name %></td>
-        <td><%= permission.action %></td>
-        <td><%= permission.subject_class %></td>
+        <td><%= permission_name(permission.subject_class, permission.action_permission) %></td>
         <td><%= link_to "Edit", [:edit, permission] %></td>
         <td><%= link_to "Delete", [permission], method: :delete, data: { confirm: "Are you sure?" } %></td>
       </tr>
