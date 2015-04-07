@@ -1,6 +1,115 @@
 <div class="box_menu">
 
+  <% if can? :manage, Role %>
+    <%= link_to roles_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Roles
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :manage, Permission %>
+    <%= link_to permissions_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Permissions
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :read, User %>
+    <%= link_to users_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Users
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :read, UsersReporting %>
+    <%= link_to users_reportings_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'our-team.png' %></i></span>
+        My Team
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :manage, ModuleGroup %>
+    <%= link_to module_groups_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Modules
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :manage, App %>
+    <%= link_to apps_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Apps
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :manage, Screen %>
+    <%= link_to screens_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Screens
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :manage, Field %>
+    <%= link_to fields_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Fields
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :manage, Survey %>
+    <%= link_to surveys_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Surveys
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :manage, Request %>
+    <%= link_to requests_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Requests
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :read, User %>
+    <%= link_to user_shifts_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Shift Timings
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :read, Attendance %>
+    <%= link_to attendances_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'attendance.png' %></i></span>
+        Attendance
+      </div>
+    <% end %>
+  <% end %>
+
   <% if can? :manage, Organization %>
+
     <%= link_to organization_edit_path do %>
       <div class="box">
         <span><i><%= image_tag 'logo.png' %></i></span>
@@ -84,72 +193,9 @@
         Warehouses
       </div>
     <% end %>
-
-    <%= link_to screens_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Screens
-      </div>
-    <% end %>
-
-    <%= link_to apps_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Apps
-      </div>
-    <% end %>
-
-    <%= link_to fields_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Fields
-      </div>
-    <% end %>
-
-    <%= link_to surveys_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Surveys
-      </div>
-    <% end %>
-
-    <%= link_to module_groups_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Modules
-      </div>
-    <% end %>
-
-    <%= link_to permissions_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Permissions
-      </div>
-    <% end %>
-
-    <%= link_to roles_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Roles
-      </div>
-    <% end %>
+    
   <% end %>
 
-  <% if can? :read, User %>
-    <%= link_to users_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Users
-      </div>
-    <% end %>
-
-    <%= link_to user_shifts_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Shift Timings
-      </div>
-    <% end %>
-  <% end %>
 
   <% if can? :manage, Holiday %>
     <%= link_to holidays_path do %>
@@ -169,23 +215,6 @@
     <% end %>
   <% end %>
 
-  <% if can? :read, UsersReporting %>
-    <%= link_to users_reportings_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'our-team.png' %></i></span>
-        My Team
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :read, Attendance %>
-    <%= link_to attendances_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'attendance.png' %></i></span>
-        Attendance
-      </div>
-    <% end %>
-  <% end %>
 
   <%#= link_to [:edit, current_user] do %>
 <!--     <div class="box">
@@ -200,15 +229,6 @@
       Files
     </div> -->
   <%# end %>
-
-  <% if can? :manage, Request %>
-    <%= link_to requests_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Requests
-      </div>
-    <% end %>
-  <% end %>
 
   <div class="clear"></div>
 </div>
