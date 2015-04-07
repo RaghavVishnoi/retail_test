@@ -14,11 +14,11 @@ user = User.new :email => 'superadmin@fosem.com', :password => '123456', :name =
 user.save!
 
 superadmin_role = Role.create :name => 'superadmin'
-superadmin_role.permissions.create :action => :manage, :subject_class => "all"
+superadmin_role.permissions.create :action => "manage", :subject_class => "all"
 
 user.roles << superadmin_role
 
-ModuleGroup.create :name => :default, :active => true
+ModuleGroup.create :name => :default
 ModuleGroup.create :name => :login
 ModuleGroup.create :name => :items
 ModuleGroup.create :name => :attendance
