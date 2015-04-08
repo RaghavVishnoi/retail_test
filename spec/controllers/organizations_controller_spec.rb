@@ -2,12 +2,9 @@ require 'rails_helper'
 
 describe OrganizationsController do
   before do
+    initialize_current_user
     @organization = mock_model(Organization, :update_attributes => true)
     expect(Organization).to receive(:first).and_return(@organization)
-
-    @user = mock_model(User, :superadmin? => true)
-    expect(controller).to receive(:authenticate_user).and_return(nil)
-    expect(controller).to receive(:current_user).and_return(@user)
   end
 
   shared_examples_for "request which sets organization" do

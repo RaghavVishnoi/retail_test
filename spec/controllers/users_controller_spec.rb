@@ -2,10 +2,7 @@ require 'rails_helper'
 
 describe UsersController do
   before do
-    @current_user = mock_model(User, :superadmin? => true)
-    expect(controller).to receive(:authenticate_user).and_return(nil)
-    expect(controller).to receive(:current_user).at_least(:once).and_return(@current_user)
-
+    initialize_current_user
     @user = mock_model(User)
     User.stub(:where).with(:id => 'id').and_return([@user])
   end
@@ -114,7 +111,7 @@ describe UsersController do
     end
 
     def user_params
-      { 'name' => 'name', 'email' => 'email', 'password' => 'password', 'password_confirmation' => 'password', 'department_ids' =>'1, 2', 'roles' => ['superadmin', 'admin'], 'region_ids' => ['1', '2'], 'business_unit_ids' => ['1', '2'], 'job_title_ids' => ['1', '2'], 'weekly_off_ids' => ['1', '2'], 'skip_password_validation' => true }
+      { 'name' => 'name', 'email' => 'email', 'password' => 'password', 'password_confirmation' => 'password', 'department_ids' =>'1, 2', 'region_ids' => ['1', '2'], 'business_unit_ids' => ['1', '2'], 'job_title_ids' => ['1', '2'], 'weekly_off_ids' => ['1', '2'], 'skip_password_validation' => true }
     end
     
     it_behaves_like "request which sets user" 
@@ -160,7 +157,7 @@ describe UsersController do
     end
 
     def user_params
-      { 'name' => 'name', 'email' => 'email', 'password' => 'password', 'password_confirmation' => 'password', 'department_ids' =>'1, 2', 'roles' => ['superadmin', 'admin'], 'region_ids' => ['1', '2'], 'business_unit_ids' => ['1', '2'], 'job_title_ids' => ['1', '2'], 'weekly_off_ids' => ['1', '2'], 'skip_password_validation' => true }
+      { 'name' => 'name', 'email' => 'email', 'password' => 'password', 'password_confirmation' => 'password', 'department_ids' =>'1, 2', 'region_ids' => ['1', '2'], 'business_unit_ids' => ['1', '2'], 'job_title_ids' => ['1', '2'], 'weekly_off_ids' => ['1', '2'], 'skip_password_validation' => true }
     end
 
     it "initializes new user" do

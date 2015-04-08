@@ -2,10 +2,7 @@ require 'rails_helper'
 
 describe RegionsController do
   before do
-    @user = mock_model(User, :superadmin? => true)
-    expect(controller).to receive(:authenticate_user).and_return(nil)
-    expect(controller).to receive(:current_user).and_return(@user)
-
+    initialize_current_user
     @region = mock_model(Region, :update_attributes => true)
     Region.stub(:where).and_return([@region])
   end

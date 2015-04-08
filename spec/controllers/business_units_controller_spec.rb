@@ -2,10 +2,7 @@ require 'rails_helper'
 
 describe BusinessUnitsController do
   before do
-    @user = mock_model(User, :superadmin? => true)
-    expect(controller).to receive(:authenticate_user).and_return(nil)
-    expect(controller).to receive(:current_user).and_return(@user)
-
+    initialize_current_user
     @business_unit = mock_model(BusinessUnit, :update_attributes => true)
     BusinessUnit.stub(:where).and_return([@business_unit])
   end

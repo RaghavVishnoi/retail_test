@@ -2,10 +2,7 @@ require 'rails_helper'
 
 describe JobTitlesController do
   before do
-    @user = mock_model(User, :superadmin? => true)
-    expect(controller).to receive(:authenticate_user).and_return(nil)
-    expect(controller).to receive(:current_user).and_return(@user)
-
+    initialize_current_user
     @job_title = mock_model(JobTitle, :update_attributes => true)
     JobTitle.stub(:where).and_return([@job_title])
   end

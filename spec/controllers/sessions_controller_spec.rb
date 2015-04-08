@@ -64,7 +64,7 @@ describe SessionsController do
 
           it "redirects to profile_path" do
             send_request
-            expect(response).to redirect_to([:edit, @user])
+            expect(response).to redirect_to(dashboard_path)
           end
         end
 

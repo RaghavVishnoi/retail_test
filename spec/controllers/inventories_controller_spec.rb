@@ -2,10 +2,7 @@ require 'rails_helper'
 
 describe InventoriesController do
   before do
-    @user = mock_model(User, :superadmin? => true)
-    expect(controller).to receive(:authenticate_user).and_return(nil)
-    expect(controller).to receive(:current_user).and_return(@user)
-    
+    initialize_current_user
     @inventory = mock_model(Inventory, :update_attributes => true, :destroy => true)
     @inventories = double("inventories")
     @inventories.stub(:where).and_return([@inventory])

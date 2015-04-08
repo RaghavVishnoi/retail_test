@@ -2,10 +2,7 @@ require 'rails_helper'
 
 describe ItemRegionsController do
   before do
-    @user = mock_model(User, :superadmin? => true)
-    expect(controller).to receive(:authenticate_user).and_return(nil)
-    expect(controller).to receive(:current_user).and_return(@user)
-
+    initialize_current_user
     @item_region = mock_model(ItemRegion, :update_attributes => true, :destroy => true)
     ItemRegion.stub(:where).and_return([@item_region])
   end
