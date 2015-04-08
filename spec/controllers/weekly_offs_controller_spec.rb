@@ -2,9 +2,7 @@ require 'rails_helper'
 
 describe WeeklyOffsController do
   before do
-    @current_user = mock_model(User, :superadmin? => true)
-    controller.stub(:authenticate_user).and_return(nil)
-    controller.stub(:current_user).and_return(@current_user)
+    initialize_current_user
   end
 
   describe "GET index" do

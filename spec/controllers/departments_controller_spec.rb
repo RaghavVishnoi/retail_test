@@ -2,10 +2,7 @@ require 'rails_helper'
 
 describe DepartmentsController do
   before do
-    @user = mock_model(User, :superadmin? => true)
-    expect(controller).to receive(:authenticate_user).and_return(nil)
-    expect(controller).to receive(:current_user).and_return(@user)
-
+    initialize_current_user
     @department = mock_model(Department, :update_attributes => true)
     Department.stub(:where).and_return([@department])
   end

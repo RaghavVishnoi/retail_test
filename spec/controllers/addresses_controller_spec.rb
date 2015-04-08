@@ -2,10 +2,7 @@ require 'rails_helper'
 
 describe AddressesController do
   before do
-    @user = mock_model(User, :superadmin? => true)
-    expect(controller).to receive(:authenticate_user).and_return(nil)
-    expect(controller).to receive(:current_user).and_return(@user)
-
+    initialize_current_user
     @address = mock_model(Address, :update_attributes => true)
     Address.stub(:where).and_return([@address])
   end

@@ -2,10 +2,7 @@ require 'rails_helper'
 
 describe CategoriesController do
   before do
-    @user = mock_model(User, :superadmin? => true)
-    expect(controller).to receive(:authenticate_user).and_return(nil)
-    expect(controller).to receive(:current_user).and_return(@user)
-
+    initialize_current_user
     @category = mock_model(Category, :update_attributes => true, :destroy => true)
     Category.stub(:where).and_return([@category])
   end

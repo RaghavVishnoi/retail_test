@@ -2,10 +2,7 @@ require 'rails_helper'
 
 describe CitiesController do
   before do
-    @user = mock_model(User, :superadmin? => true)
-    expect(controller).to receive(:authenticate_user).and_return(nil)
-    expect(controller).to receive(:current_user).and_return(@user)
-
+    initialize_current_user
     @city = mock_model(City, :update_attributes => true, :destroy => true)
     City.stub(:where).and_return([@city])
   end
