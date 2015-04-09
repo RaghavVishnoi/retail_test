@@ -19,7 +19,7 @@ module Fields
       @properties = []
       Field.with_entity(self.class.name).each do |f|
         values = find_field_values(f.id).map(&:value)
-        @properties << { :field => { :id => f.id, :display_name => f.display_name, :field_type => f.field_type, :value_type => f.value_type, :configuration => f.configuration }, :values => values }
+        @properties << { :field => { :id => f.id, :display_name => f.display_name, :field_type => f.field_type, :value_type => f.value_type, :mandatory => f.mandatory, :configuration => f.configuration }, :values => values }
       end
     end
     @properties
