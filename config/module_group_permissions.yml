@@ -18,6 +18,10 @@ UsersReporting:
   permissions:
     "read, UsersReporting": "View Assigned Users"
 
+User:
+  group_name: "Users"
+  permissions:
+    "manage, User": "Create Users"
 Request:
   group_name: "Requests"
   permissions:

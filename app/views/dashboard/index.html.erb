@@ -90,14 +90,14 @@
     <% end %>
   <% end %>
 
-  <% if can? :read, User %>
-    <%= link_to user_shifts_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Shift Timings
-      </div>
-    <% end %>
-  <% end %>
+  <%# if can? :read, User %>
+    <%#= link_to user_shifts_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Shift Timings -->
+      <!-- </div> -->
+    <%# end %>
+  <%# end %>
 
   <% if can? :read, Attendance %>
     <%= link_to attendances_path do %>
