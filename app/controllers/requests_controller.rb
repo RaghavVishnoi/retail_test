@@ -1,8 +1,8 @@
 class RequestsController < ApplicationController
   
   before_action :find_request, :only => [:edit, :update]
-  authorize_resource :except => [:create, :new]
-  skip_before_action :authenticate_user, :only => [:create, :new]
+  authorize_resource :except => [:create, :new, :autocomplete_retailer_code]
+  skip_before_action :authenticate_user, :only => [:create, :new, :autocomplete_retailer_code]
 
   PER_PAGE = 20
 
@@ -29,7 +29,6 @@ class RequestsController < ApplicationController
 
 
   def update
-    @request.attributes = request_params
     if params[:commit] == "Approve"
       @request.approved_by_user_id = current_user.id
       @request.approve
@@ -42,6 +41,12 @@ class RequestsController < ApplicationController
     else
       redirect_to requests_path
     end
+  end
+
+  def autocomplete_retailer_code
+    @requests = Request.pluck(:retailer_code).paginate(:per_page => 100, :page => (params[:page] || '1'))
+    @retailer_codes = @requests.map { |r| { :display_name => r } }
+    render :json => { :result => true, :per_page => @requests.per_page, :length => @requests.length, :current_page => @requests.current_page, :total_pages => @requests.total_pages, :retailer_codes => @retailer_codes }
   end
 
   private

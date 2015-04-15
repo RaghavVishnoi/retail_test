@@ -99,7 +99,9 @@ Rails.application.routes.draw do
     end
     resources :surveys, :only => [:index]
     resources :answers, :only => [:create]
-    resources :requests, :only => [:new, :create]
+    resources :requests, :only => [:new, :create] do
+      get :autocomplete_retailer_code, :on => :collection
+    end
     resources :dropdown_values, :only => [:index]
   end
   # The priority is based upon order of creation: first created -> highest priority.
