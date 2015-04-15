@@ -18,7 +18,12 @@ $(document).on('ready page:load', function() {
         },
         results: function(data) {
           return {
-            results: $.map(data, function(item) { return { id: item[1], text: item[0] }; })
+            results: $.map(data, function(item) {
+              var id, text;
+              text = item['display_name'] || item [0];
+              id = item[1] || text; 
+              return { id: id, text: text }; 
+            })
           }
         },
         cache: true

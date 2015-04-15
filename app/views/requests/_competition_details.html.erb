@@ -1,0 +1,7 @@
+<div class="request-details hidden">
+  <% @request.branding_details.each do |property| %>
+    <%= render :partial => "shared/field", :locals => { :form => f, :property => property } %>
+  <% end %>
+
+  <%= f.text_area :remarks, :placeholder => "Remarks" %>
+</div>

@@ -1,0 +1,11 @@
+<% property = OpenStruct.new(property) %>
+
+<%= form.fields_for "properties[#{property.field[:id]}]", property do |f| %>
+
+  <div class="form-field">
+    <%= f.label :value, property.field[:display_name] %>
+    <%= f.hidden_field :field_id, :value => property.field[:id] %>
+    <%= render :partial => "shared/field_types/#{property.field[:field_type]}", :locals => { :f => f, :property => property } %>
+  </div>
+
+<% end %>

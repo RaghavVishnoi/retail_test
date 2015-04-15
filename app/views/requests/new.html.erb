@@ -9,31 +9,39 @@
     </div>
 
     <div class="req_type">
-      <div class="select">SIS </div>
-      <div>ln-shop </div>
-      <div>GSB requirement</div>
+      <%= link_to "javascript:void(0);", :data => { :request_type => "sis" } do %>
+        <div class="sis select">SIS </div>
+      <% end %>
+
+      <%= link_to "javascript:void(0);", :data => { :request_type => "in_shop" } do %>
+        <div class="in_shop">In-shop </div>
+      <% end %>
+
+      <%= link_to "javascript:void(0);", :data => { :request_type => "gsb" } do %>
+        <div class="gsb">GSB requirement</div>
+      <% end %>
     </div>
   </div>
 
   <div class="req_cont clearfix">
     <div class="reqstr_detail">
-      <div class="selected">Requestor Details <span>1</span></div>
-      <div>shop Details <span>2</span></div>
-      <div>Competition Details <span>3</span></div>
+      <div class="selected requestor_details" >Requestor Details <span>1</span></div>
+      <div class="shop_details">shop Details <span>2</span></div>
+      <div class="competition_details">Competition Details <span>3</span></div>
     </div>
 
     <div class="form_cont clearfix">
-      <form>
-        <%= form_for @request do |f| %>
-          <%= render :partial => 'requestor_details', :locals => { :f => f } %>
-          <%= render :partial => 'shop_details', :locals => { :f => f } %>
-          <%= render :partial => 'competition_details', :locals => { :f => f } %>
-        <% end %>
-      </form>
+      <%= form_for @request, :html => { :class => "request-form", :data => { :pages => ['requestor_details', 'shop_details', 'competition_details'], :current_page => 0 } } do |f| %>
+        <%= f.hidden_field :request_type %>
+        <%= render :partial => 'requestor_details', :locals => { :f => f } %>
+        <%= render :partial => 'shop_details', :locals => { :f => f } %>
+        <%= render :partial => 'competition_details', :locals => { :f => f } %>
+      <% end %>
     </div>
 
-    <div class="submt"><input type="submit" value="Next" name="submit button"></div>
-
+    <div class="submt">
+      <input type="submit" value="Next" name="submit button" id="next">
+    </div>
   </div>
 
 </div>

@@ -47,7 +47,9 @@ Rails.application.routes.draw do
     resources :contacts
   end
 
-  resources :requests, :only => [:index, :edit, :update, :new]
+  resources :requests, :only => [:index, :edit, :update, :new, :create] do
+    get :autocomplete_retailer_code, :on => :collection
+  end
 
   resources :customers_users, :only => [:new, :create, :destroy]
   

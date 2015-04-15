@@ -1,17 +1,21 @@
-<div class="pd-detail">
-  <%= f.select :cmo_name, CMO_NAMES %>
-</div>
+<div class="request-details">
+  <div class="pd-detail">
+    <%= f.select :cmo_name, CMO_NAMES, { :prompt => "CMO Name" } %>
+  </div>
 
-<div class="input_txt">
-  <%= f.text_field :retailer_code %>
-</div>
+  <div class="input_txt">
+    <%= f.text_field :retailer_code, :placeholder => "Retailer Code" %>
+  </div>
 
-<div class="input_tx">
-  <%= f.text_field :rsp_name %>
-</div>
-<div class="pd-detail">
-<%= f.phone_field :rsp_mobile_number %>
-</div>
-<div class="input_txt">
-<%= f.text_field :rsp_app_user_id %>
+  <div class="input_tx">
+    <%= f.text_field :rsp_name, :placeholder => "RSP name" %>
+  </div>
+
+  <div class="pd-detail">
+    <%= f.phone_field :rsp_mobile_number, :placeholder => "RSP Mobile Number" %>
+  </div>
+
+  <div class="input_txt">
+    <%= f.text_field :rsp_app_user_id, :placeholder => "RSP sales tag app user ID" %>
+  </div>
 </div>
