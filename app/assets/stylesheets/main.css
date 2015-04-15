@@ -338,6 +338,7 @@ height: 21px;
 margin-top: 21px;
 margin-left: 10px;
 background: url('burger_btn.png');
+display: none;
 }
 .header h1{
   display: inline-block;
@@ -355,6 +356,7 @@ background: url('filter_btn.png') center center;
  margin-top: 25px;
  background-size: 20px;
   margin-right: 20px;
+  display: none;
 }
 .header .sort{
   float: right;
@@ -364,6 +366,7 @@ background: url('sort_icon.png') center center;
 background-size: 22px;
 margin-right:23px;
  margin-top: 25px;
+ display: none;
 }
 .header .request_dashboard{
   float: right;
@@ -373,6 +376,7 @@ margin-right:23px;
   background-size: 23px;
   margin-right: 30px;
   margin-top: 25px;
+  display: none;
 }
 .footer{ background: #333; padding: 10px 0px; width: 100%; color: #999; text-align: center; font-size: 13px; height:20px;
   position:absolute;
@@ -473,15 +477,28 @@ color: #e5380e !important;
   font-weight: bold;
   color:#bbbbbb;
 }
-
+.apprvr_wrap{
+  margin: 15px;
+  display: block;
+  background: #fff;
+}
+.approv_cont{
+  border-bottom: 1px solid #dedede;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  margin: 0 10px;
+}
 .appr_info{
   display: block;
   float: left;
   width: 33%;
-  padding: 10px 15px;
+  text-align: center;
+  padding: 15px 15px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
-    border-bottom: 1px solid #dedede;
+    
 }
 .appr_info div:nth-of-type(1){
   font-size: 12px;
@@ -496,11 +513,12 @@ color: #e5380e !important;
 }
 .appr_retail{
   display: inline-block;
+  text-align: center;
   width: 33%;
-  padding: 10px 15px;
+  padding: 15px 15px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
-    border-bottom: 1px solid #dedede;
+
 }
 .appr_retail div:nth-of-type(1){
   font-size: 12px;
@@ -517,12 +535,12 @@ color: #e5380e !important;
 .appr_desc{
   display: block;
   float: right;
-  text-align: right;
+  text-align: center;
   width: 33%;
-  padding: 10px 15px;
+  padding: 15px 15px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
-    border-bottom: 1px solid #dedede;
+   
 }
 .appr_desc div:nth-of-type(1){
   font-size: 12px;
@@ -543,14 +561,30 @@ color: #e5380e !important;
   color: #fff;
   font-size: 17px;
   background-color: #ff9900;
-
+  width: 15%;
+  margin: 15px;
+  display: inline-block;
+}
+.apprv_btn input{
+  width: 100%;
+  padding: 15px 10px;
+  background-color: #ff9900;
+  margin-top: 0px;
 }
 .decline_btn{
   color: #fff;
   font-size: 17px;
+  width: 15%;
   background-color: #bcbcbc;
+  margin: 15px;
+  display: inline-block;
 }
-
+.decline_btn input{
+  width: 100%;
+  padding: 15px 10px;
+ background-color: #bcbcbc;
+ margin-top: 0px;
+}
 
 /*****************approver-flow********************/
 

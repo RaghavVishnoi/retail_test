@@ -2,8 +2,8 @@
 
 <div class="request_wrap clearfix">
   <div><%= request_type_name(@request) %> approve</div>
-
-  <div class="req_cont clearfix">
+<div class="apprvr_wrap">
+  <div class="approv_cont clearfix">
        
     <div class="appr_info">
       <div>CMO Name</div>
@@ -23,7 +23,7 @@
   </div>
 
 
-  <div class="req_cont clearfix">
+  <div class="approv_cont clearfix">
        
     <div class="appr_info">
       <div>City</div>
@@ -35,9 +35,14 @@
       <div><%= @request.state %></div>
     </div>
 
+    <div class="appr_desc">
+      <div></div>
+      <div></div>
+    </div>
+
   </div>
 
-  <div class="req_cont clearfix">
+  <div class="approv_cont clearfix">
        
     <div class="appr_info">
       <div>Avg. Monthly sales</div>
@@ -49,13 +54,18 @@
       <div><%= @request.avg_gionee_monthly_sales %></div>
     </div>
 
+    <div class="appr_desc">
+      <div></div>
+      <div></div>
+    </div>
+
   </div>
 
   <% if @request.pending? %>
     <div class="btn_blc">
-      <div clss="apprv_btn"><%= submit_tag "Approve" %></div>
-      <div classs="decline_btn"><%= submit_tag "Decline" %></div>
+      <div class="apprv_btn"><%= submit_tag "Approve" %></div>
+      <div class="decline_btn"><%= submit_tag "Decline" %></div>
     </div>
   <% end %>
-
+</div>
 </div>
