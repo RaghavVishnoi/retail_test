@@ -31,6 +31,14 @@ class Request < ActiveRecord::Base
     requests
   end
 
+  def self.with_retailer_code(q)
+    if q.present?
+      where("retailer_code like ?", "%#{q}%")
+    else
+      self
+    end
+  end
+
   def shop_requirements
     properties.select { |property| property[:field][:configuration][:name] == "shop_requirements" }.first
   end
