@@ -605,19 +605,20 @@ box-sizing: border-box;
 .requstr_main div:nth-of-type(1){
 width: 32%;
 padding: 5px 0px;
-display: inline-block;
+float: left;
 color: #bbbbbb;
 }
 .requstr_main div:nth-of-type(2){
 width: 32%;
 padding: 5px 0px;
+margin: 0 1%;
 display: inline-block;
 color: #bbbbbb;
 }
 .requstr_main div:nth-of-type(3){
 width: 32%;
 padding: 5px 0px;
-display: inline-block;
+float: right;
 color: #bbbbbb;
 }
 .req_type {
@@ -626,7 +627,21 @@ display: block;
   box-sizing: border-box;
 -webkit-box-sizing: border-box;
 }
-.req_type div{
+.req_type div:nth-of-type(1){
+width: 32%;
+  float: left;
+  color: #e5380e;
+  background-color: #fff;
+  border: 1px solid #e5380e;
+  text-align: center;
+  font-size: 24px;
+    padding: 21px 0px;
+  height: 75px;
+  box-sizing: border-box;
+-webkit-box-sizing: border-box;
+}
+.req_type div:nth-of-type(2){
+margin: 0 1%;
 width: 32%;
   display: inline-block;
   color: #e5380e;
@@ -636,16 +651,25 @@ width: 32%;
   font-size: 24px;
     padding: 21px 0px;
   height: 75px;
-
   box-sizing: border-box;
 -webkit-box-sizing: border-box;
 }
-.req_type div:nth-of-type(2){
-margin: 0 1%;
+.req_type div:nth-of-type(3){
+width: 32%;
+  float: right;
+  color: #e5380e;
+  background-color: #fff;
+  border: 1px solid #e5380e;
+  text-align: center;
+  font-size: 24px;
+    padding: 21px 0px;
+  height: 75px;
+  box-sizing: border-box;
+-webkit-box-sizing: border-box;
 }
 .req_type .select{
-  background-color: #e5380e;
-  color: #fff;
+  background-color: #e5380e!important;
+  color: #fff!important;
   text-transform: uppercase;
 }
 .reqstr_detail{
@@ -657,14 +681,32 @@ box-sizing: border-box;
   padding: 10px 0px;
   text-transform: capitalize;
 }
-.reqstr_detail div{
-  width: 33%;
+.reqstr_detail div:nth-of-type(1){
+  width: 32%;
   padding: 5px 10px;
-  display: inline-block;
+  float: left;
   color: #bbbbbb;
   box-sizing: border-box;
 -webkit-box-sizing: border-box;
 }
+.reqstr_detail div:nth-of-type(2){
+  width: 32%;
+  padding: 5px 10px;
+  display: inline-block;
+  color: #bbbbbb;
+  margin: 0 1%;
+  box-sizing: border-box;
+-webkit-box-sizing: border-box;
+}
+.reqstr_detail div:nth-of-type(3){
+  width: 32%;
+  padding: 5px 10px;
+  float: right;
+  color: #bbbbbb;
+  box-sizing: border-box;
+-webkit-box-sizing: border-box;
+}
+
 .reqstr_detail div span{
 font-size: 18px;
   border: 1px solid #dedede;
@@ -673,7 +715,7 @@ font-size: 18px;
   display: inline-block;
   border-radius: 19px;
   text-align: center;
-  margin-left: 65%
+  float: right;
 }
 .form_cont{
   padding: 15px 10px;
