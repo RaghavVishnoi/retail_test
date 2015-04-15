@@ -45,8 +45,8 @@ class RequestsController < ApplicationController
   end
 
   def autocomplete_retailer_code
-    @requests = Request.pluck(:retailer_code).paginate(:per_page => 100, :page => (params[:page] || '1'))
-    @retailer_codes = @requests.map { |r| { :display_name => r } }
+    @requests = Request.select(:retailer_code).paginate(:per_page => 100, :page => (params[:page] || '1')).uniq
+    @retailer_codes = @requests.map { |r| { :display_name => r.retailer_code } }
     render :json => { :result => true, :per_page => @requests.per_page, :length => @requests.length, :current_page => @requests.current_page, :total_pages => @requests.total_pages, :retailer_codes => @retailer_codes }
   end
 

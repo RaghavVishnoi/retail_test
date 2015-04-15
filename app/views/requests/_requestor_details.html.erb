@@ -1,15 +1,15 @@
 <div class="pd-detail">
-  <select>
-    <option value="-1">CMO Name</option>
-    <option value=""></option>
-  </select>
+  <%= f.select :cmo_name, CMO_NAMES %>
 </div>
 
-<div class="input_txt"><input type="text" value="Retailer code" name="retailer"></div>
+<div class="input_txt">
+  <%= f.text_field :retailer_code %>
+</div>
 
-<div class="input_tx"><input type="text" value="RSP name" name="rsp"></div>
+<div class="input_tx">
+  <%= f.text_field :rsp_name %>
+</div>
 
-<input type="tel" value="RSP Mobile Number" name="mobile">
+<%= f.phone_field :rsp_mobile_number %>
 
-<input type="e-mail" value="RSP sales tag app user ID" name="e-mail">
-
+<%= f.text_field :rsp_app_user_id %>

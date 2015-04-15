@@ -26,6 +26,8 @@
       <form>
         <%= form_for @request do |f| %>
           <%= render :partial => 'requestor_details', :locals => { :f => f } %>
+          <%= render :partial => 'shop_details', :locals => { :f => f } %>
+          <%= render :partial => 'competition_details', :locals => { :f => f } %>
         <% end %>
       </form>
     </div>
