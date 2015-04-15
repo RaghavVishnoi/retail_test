@@ -82,7 +82,7 @@
   <%# end %>
 
   <% if can? :manage, Request %>
-    <%= link_to requests_path do %>
+    <%= link_to requests_path(:q => { :status => 'pending' }) do %>
       <div class="box">
         <span><i><%= image_tag 'logo.png' %></i></span>
         Requests

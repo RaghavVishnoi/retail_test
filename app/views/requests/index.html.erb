@@ -1,28 +1,39 @@
 
 
 <div class="request_wrap clearfix">
-<div>Request dashboard</div>
-<div class="req_cont clearfix">
 
-<div class="links_blc">
-<div class="active"><%= link_to "Pending", requests_path(:q => { :status => 'pending' }) %></div>
-<div><%= link_to "Declined", requests_path(:q => { :status => 'declined' }) %></div>
-<div><%= link_to "Approved", requests_path(:q => { :status => 'approved' }) %></div>
-</div>
- <!--  -->
- <div class="req_info">
-<div>Deepak Sharma</div>
-<div>Dilshad garden</div>
- </div>
+  <div>Request dashboard</div>
 
-<div class="req_desc">
-<div>Pashi ywulf</div>
-<div>jygtwd</div>
-</div>
+  <div class="req_cont clearfix">
+
+    <div class="links_blc">
+      <div class="<%= request_status_class('pending') %>">
+        <%= link_to "Pending", requests_path(:q => { :status => 'pending' }) %>
+      </div>
+
+      <div class="<%= request_status_class('declined') %>">
+        <%= link_to "Declined", requests_path(:q => { :status => 'declined' }) %>
+      </div>
+
+      <div class="<%= request_status_class('approved') %>">
+        <%= link_to "Approved", requests_path(:q => { :status => 'approved' }) %>
+      </div>
+    </div>
+
+    <% @requests.each do |request| %>
+      <%= link_to [:edit, request] do %>
+        <div class="req_info">
+          <div><%= request.rsp_name %></div>
+          <div><%= request.shop_address %></div>
+        </div>
+
+        <div class="req_desc">
+          <div><%= request.shop_name %></div>
+          <div><%= request.retailer_code %></div>
+        </div>
+      <% end %>
+    <% end %>
 
   </div>
-  <!-- req_cont-end -->
-</div>
-<!-- req-wrap-end -->
 
 </div>

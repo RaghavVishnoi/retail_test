@@ -1,39 +1,61 @@
 
 
 <div class="request_wrap clearfix">
-<div>SIS approve</div>
-<div class="req_cont clearfix">
+  <div><%= request_type_name(@request) %> approve</div>
 
-<div class="links_blc">
-<div class="active"><%= link_to "SIS", requests_path(:q => { :status => 'pending' }) %></div>
-<div><%= link_to "In-shop", requests_path(:q => { :status => 'declined' }) %></div>
-<div><%= link_to "GSB", requests_path(:q => { :status => 'approved' }) %></div>
-</div>
-   
-<div class="appr_info">
-<div>Deepak Sharma</div>
-<div>Dilshad garden</div>
-</div>
+  <div class="req_cont clearfix">
+       
+    <div class="appr_info">
+      <div>CMO Name</div>
+      <div><%= @request.cmo_name %></div>
+    </div>
 
-<div class="appr_retail">
-<div>Deepak Sharma</div>
-<div>Dilshad garden</div>
-</div>
+    <div class="appr_retail">
+      <div>Retailer Code</div>
+      <div><%= @request.retailer_code %></div>
+    </div>
 
-<div class="appr_desc">
-<div>Pashi ywulf</div>
-<div>jygtwd</div>
-</div>
+    <div class="appr_desc">
+      <div>Rsp Name</div>
+      <div><%= @request.rsp_name %></div>
+    </div>
 
-</div>
-<!-- req_cont-end -->
+  </div>
 
-<div class="btn_blc">
-<div clss="apprv_btn"><%= f.submit "Approve" %></div>
-<div classs="decline_btn"><%= f.submit "Decline" %></div>
-</div>
-<!-- btn-blc-end -->
-</div>
-<!-- req-wrap-end -->
+
+  <div class="req_cont clearfix">
+       
+    <div class="appr_info">
+      <div>City</div>
+      <div><%= @request.city %></div>
+    </div>
+
+    <div class="appr_retail">
+      <div>State</div>
+      <div><%= @request.state %></div>
+    </div>
+
+  </div>
+
+  <div class="req_cont clearfix">
+       
+    <div class="appr_info">
+      <div>Avg. Monthly sales</div>
+      <div><%= @request.avg_store_monthly_sales %></div>
+    </div>
+
+    <div class="appr_retail">
+      <div>State</div>
+      <div><%= @request.avg_gionee_monthly_sales %></div>
+    </div>
+
+  </div>
+
+  <% if @request.pending? %>
+    <div class="btn_blc">
+      <div clss="apprv_btn"><%= submit_tag "Approve" %></div>
+      <div classs="decline_btn"><%= submit_tag "Decline" %></div>
+    </div>
+  <% end %>
 
 </div>
