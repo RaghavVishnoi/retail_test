@@ -1,19 +1,19 @@
 AVG_GIONEE_MONTHLY_SALES = [
-  ["0", "0-20 Thousand"],
-  ["21000", "21-50 Thousand"],
-  ["50000", "50 Thousand - 1 Lac"],
-  ["100000", "Above 1 Lac"]
-]
+  ["0-20 Thousand", "0"], 
+  ["21-50 Thousand", "21000"], 
+  ["50 Thousand - 1 Lac", "50000"], 
+  ["Above 1 Lac", "100000"]
+] 
 
 AVG_STORE_MONTHLY_SALES = [
-  ["0", "0-5 Lac"],
-  ["500000", "5-10 Lac"],
-  ["1000000", "10-15 Lac"],
-  ["1500000", "15-20 Lac"],
-  ["2000000", "20-25 Lac"],
-  ["2500000", "25-50 Lac"],
-  ["5000000", "50Lac-1 Cr"],
-  ["10000000", "1 Cr and above"]
+  ["0-5 Lac", "0"], 
+  ["5-10 Lac", "500000"], 
+  ["10-15 Lac", "1000000"], 
+  ["15-20 Lac", "1500000"], 
+  ["20-25 Lac", "2000000"], 
+  ["25-50 Lac", "2500000"], 
+  ["50Lac-1 Cr", "5000000"], 
+  ["1 Cr and above", "10000000"]
 ]
 
 CMO_NAMES = [
@@ -65,4 +65,9 @@ STATES = [
   ["Uttaranchal", "Uttaranchal"], 
   ["Uttar Pradesh", "Uttar Pradesh"], 
   ["West Bengal", "West Bengal"]
+]
+
+BOOLEAN_VALUES = [
+  ["yes", "true"],
+  ["no", "false"]
 ]

@@ -5,24 +5,12 @@
 
   "cmo_name": <%= CMO_NAMES.to_json.html_safe %>,
 
-  "is_main_signage": [
-    ["true", "yes"],
-    ["false", "no"]
-  ],
+  "is_main_signage": <%= BOOLEAN_VALUES.to_json.html_safe %>,
 
-  "is_sis_installed": [
-    ["true", "yes"],
-    ["false", "no"]
-  ],
+  "is_sis_installed": <%= BOOLEAN_VALUES.to_json.html_safe %>,
 
-  "space_available": [
-    ["true", "yes"],
-    ["false", "no"]
-  ],
+  "space_available": <%= BOOLEAN_VALUES.to_json.html_safe %>,
 
-  "is_gionee_gsb_present": [
-    ["true", "yes"],
-    ["false", "no"]
-  ],
+  "is_gionee_gsb_present": <%= BOOLEAN_VALUES.to_json.html_safe %>,
   "state":  <%= STATES.to_json.html_safe %>
 }
