@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     resources :contacts
   end
 
-  resources :requests, :only => [:index, :edit, :update]
+  resources :requests, :only => [:index, :edit, :update, :new]
 
   resources :customers_users, :only => [:new, :create, :destroy]
   

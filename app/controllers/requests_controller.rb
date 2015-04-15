@@ -13,6 +13,7 @@ class RequestsController < ApplicationController
   def new
     @request = Request.new
     respond_to do |format|
+      format.html
       format.json { render :json => @request.as_json(:methods => [:shop_requirements, :branding_details]) }
     end
   end
