@@ -36,50 +36,50 @@
     <% end %>
   <% end %>
 
-  <% if can? :manage, ModuleGroup %>
-    <%= link_to module_groups_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Modules
-      </div>
-    <% end %>
-  <% end %>
+  <%# if can? :manage, ModuleGroup %>
+    <%#= link_to module_groups_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Modules -->
+      <!-- </div> -->
+    <%# end %>
+  <%# end %>
 
-  <% if can? :manage, App %>
-    <%= link_to apps_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Apps
-      </div>
-    <% end %>
-  <% end %>
+  <%# if can? :manage, App %>
+    <%#= link_to apps_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Apps -->
+      <!-- </div> -->
+    <%# end %>
+  <%# end %>
 
-  <% if can? :manage, Screen %>
-    <%= link_to screens_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Screens
-      </div>
-    <% end %>
-  <% end %>
+  <%# if can? :manage, Screen %>
+    <%#= link_to screens_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Screens -->
+      <!-- </div> -->
+    <%# end %>
+  <%# end %>
 
-  <% if can? :manage, Field %>
-    <%= link_to fields_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Fields
-      </div>
-    <% end %>
-  <% end %>
+  <%# if can? :manage, Field %>
+    <%#= link_to fields_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Fields -->
+      <!-- </div> -->
+    <%# end %>
+  <%# end %>
 
-  <% if can? :manage, Survey %>
-    <%= link_to surveys_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Surveys
-      </div>
-    <% end %>
-  <% end %>
+  <%# if can? :manage, Survey %>
+    <%#= link_to surveys_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Surveys -->
+      <!-- </div> -->
+    <%# end %>
+  <%# end %>
 
   <% if can? :manage, Request %>
     <%= link_to requests_path do %>
@@ -90,130 +90,130 @@
     <% end %>
   <% end %>
 
-  <% if can? :read, User %>
-    <%= link_to user_shifts_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Shift Timings
-      </div>
-    <% end %>
-  <% end %>
+  <%# if can? :read, User %>
+    <%#= link_to user_shifts_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Shift Timings -->
+      <!-- </div> -->
+    <%# end %>
+  <%# end %>
 
-  <% if can? :read, Attendance %>
-    <%= link_to attendances_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'attendance.png' %></i></span>
-        Attendance
-      </div>
-    <% end %>
-  <% end %>
+  <%# if can? :read, Attendance %>
+    <%#= link_to attendances_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'attendance.png' %></i></span> -->
+        <!-- Attendance -->
+      <!-- </div> -->
+    <%# end %>
+  <%# end %>
 
-  <% if can? :manage, Organization %>
+  <%# if can? :manage, Organization %>
 
-    <%= link_to organization_edit_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Organization
-      </div>
-    <% end %>
+    <%#= link_to organization_edit_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Organization -->
+      <!-- </div> -->
+    <%# end %>
 
-    <%= link_to edit_hq_addresses_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        HeadQuarter Address
-      </div>
-    <% end %>
+    <%#= link_to edit_hq_addresses_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- HeadQuarter Address -->
+      <!-- </div> -->
+    <%# end %>
 
-    <%= link_to addresses_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Branch Offices
-      </div>
-    <% end %>
+    <%#= link_to addresses_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Branch Offices -->
+      <!-- </div> -->
+    <%# end %>
 
-    <%= link_to departments_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Departments
-      </div>
-    <% end %>
+    <%#= link_to departments_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Departments -->
+      <!-- </div> -->
+    <%# end %>
 
-    <%= link_to regions_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Regions
-      </div>
-    <% end %>
+    <%#= link_to regions_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Regions -->
+      <!-- </div> -->
+    <%# end %>
 
-    <%= link_to business_units_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Business Units
-      </div>
-    <% end %>
+    <%#= link_to business_units_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Business Units -->
+      <!-- </div> -->
+    <%# end %>
 
-    <%= link_to weekly_offs_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Weekly Offs
-      </div>
-    <% end %>
+    <%#= link_to weekly_offs_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Weekly Offs -->
+      <!-- </div> -->
+    <%# end %>
 
-    <%= link_to items_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Items
-      </div>
-    <% end %>
+    <%#= link_to items_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Items -->
+      <!-- </div> -->
+    <%# end %>
 
-    <%= link_to cities_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Cities
-      </div>
-    <% end %>
+    <%#= link_to cities_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Cities -->
+      <!-- </div> -->
+    <%# end %>
 
-    <%= link_to item_regions_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Item Regions
-      </div>
-    <% end %>
+    <%#= link_to item_regions_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Item Regions -->
+      <!-- </div> -->
+    <%# end %>
 
-    <%= link_to categories_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Categories
-      </div>
-    <% end %>
+    <%#= link_to categories_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Categories -->
+      <!-- </div> -->
+    <%# end %>
 
-    <%= link_to warehouses_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Warehouses
-      </div>
-    <% end %>
+    <%#= link_to warehouses_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Warehouses -->
+      <!-- </div> -->
+    <%# end %>
     
-  <% end %>
+  <%# end %>
 
 
-  <% if can? :manage, Holiday %>
-    <%= link_to holidays_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Holidays
-      </div>
-    <% end %>
-  <% end %>
+  <%# if can? :manage, Holiday %>
+    <%#= link_to holidays_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
+        <!-- Holidays -->
+      <!-- </div> -->
+    <%# end %>
+  <%# end %>
 
-  <% if can? :read, Customer %>
-    <%= link_to customers_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'customer-icon.png' %></i></span>
-        My Customers
-      </div>
-    <% end %>
-  <% end %>
+  <%# if can? :read, Customer %>
+    <%#= link_to customers_path do %>
+      <!-- <div class="box"> -->
+        <!-- <span><i><%#= image_tag 'customer-icon.png' %></i></span> -->
+        <!-- My Customers -->
+      <!-- </div> -->
+    <%# end %>
+  <%# end %>
 
 
   <%#= link_to [:edit, current_user] do %>

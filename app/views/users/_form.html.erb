@@ -24,7 +24,7 @@
     <%= f.password_field :password_confirmation %>
   </div>
   
-  <% if can? :update, :roles %>
+  <% if can? :manage, User %>
     <div class="form-field">
       <%= f.label :role_ids %>
       <%= f.select :role_ids, Role.pluck(:name, :id), {}, { :multiple => true } %>
@@ -36,7 +36,7 @@
     </div>
   <% end %>
 
-  <% if can? :update, :departments %>
+  <% if can? :manage, User %>
     <div class="form-field">
       <%= f.label :department_ids, "Department" %>
       <%= f.select :department_ids, Department.pluck(:name, :id), :include_blank => true %>
@@ -48,7 +48,7 @@
     </div>
   <% end %>
 
-  <% if can? :update, :regions %>
+  <% if can? :manage, User %>
     <div class="form-field">
       <%= f.label :region_ids, "Regions" %>
       <%= f.select :region_ids, Region.pluck(:name, :id), {}, { :multiple => true } %>
@@ -60,7 +60,7 @@
     </div>
   <% end %>
 
-  <% if can? :update, :business_units %>
+  <% if can? :manage, User %>
     <div class="form-field">
       <%= f.label :business_unit_ids, "Business Units" %>
       <%= f.select :business_unit_ids, BusinessUnit.pluck(:name, :id), {}, { :multiple => true } %>
@@ -72,7 +72,7 @@
     </div>
   <% end %>
   
-  <% if can? :update, :job_titles %>
+  <% if can? :manage, User %>
     <div class="form-field">
       <%= f.label :job_title_ids, "Job Titles" %>
       <%= f.select :job_title_ids, JobTitle.pluck(:title, :id), {}, { :multiple => true } %>
@@ -84,7 +84,7 @@
     </div>
   <% end %>
   
-  <% if can? :update, :weekly_offs %>
+  <% if can? :manage, User %>
     <div class="form-field">
       <%= f.label :weekly_off_ids, "Weekly Offs" %>
       <%= f.select :weekly_off_ids, WeeklyOff.all.map { |w| [w.day, w.id] }, {}, { :multiple => true } %>
