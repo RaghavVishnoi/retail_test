@@ -1,17 +1,28 @@
-<%= link_to "Pending", requests_path(:q => { :status => 'pending' }) %>
-<%= link_to "Declined", requests_path(:q => { :status => 'declined' }) %>
-<%= link_to "Approved", requests_path(:q => { :status => 'approved' }) %>
 
-<table class="ui table">
-  <tbody>
-    <% @requests.each do |request| %>
-      <tr>
-        <td><%= request.rsp_name %></td>
-        <td><%= request.shop_name %></td>
-        <td><%= request.shop_address %></td>
-        <td><%= request.retailer_code %></td>
-        <td><%= link_to "Edit", [:edit, request] %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<div class="request_wrap clearfix">
+<div>Request dashboard</div>
+<div class="req_cont clearfix">
+
+<div class="links_blc">
+<div class="active"><%= link_to "Pending", requests_path(:q => { :status => 'pending' }) %></div>
+<div><%= link_to "Declined", requests_path(:q => { :status => 'declined' }) %></div>
+<div><%= link_to "Approved", requests_path(:q => { :status => 'approved' }) %></div>
+</div>
+ <!--  -->
+ <div class="req_info">
+<div>Deepak Sharma</div>
+<div>Dilshad garden</div>
+ </div>
+
+<div class="req_desc">
+<div>Pashi ywulf</div>
+<div>jygtwd</div>
+</div>
+
+  </div>
+  <!-- req_cont-end -->
+</div>
+<!-- req-wrap-end -->
+
+</div>

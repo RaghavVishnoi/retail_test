@@ -1,19 +1,11 @@
-<div class="header">
-  <div class="center_wrapper">
+<div class="header clearfix">
+     <div class="menu"></div>
 
-    <div class="fleft">
-      <%= link_to dashboard_path do %>
-        <%= image_tag 'logo.png' %>
-      <% end %>
-    </div>
-
-    <div class="fright">
-      <% if logged_in? %>
-        <%= link_to "Log out", users_sign_out_path, :method => :delete %>
-      <% end %>
-    </div>
+     <h1 class="gione_logo">
+      <a href="">Gionee</a></h1>
+     <div class="filter"></div>
+     <div class="sort"></div>
+     <div class="request_dashboard"></div>
 
     <div class="clear"></div>
-    
-  </div>
 </div>

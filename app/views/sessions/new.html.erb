@@ -1,7 +1,7 @@
 <%= form_tag users_sign_in_path do %>
   <div class="login_wrapper" id="toggle">
     <div class="logobox">
-      <%= image_tag 'logo.png' %>
+      <%= image_tag 'gionee_logo.png' %>
     </div>
 
     <% if alert %>
@@ -13,12 +13,14 @@
       <%= password_field_tag :password, nil, :placeholder => "Password", :id => "password" %>
     </div>
     <div class="button_box">
-      <div class="fleft">
-        <%= link_to "Forgot Password", passwords_new_path %>
+      <div class="log_in">
+        <%= submit_tag "Continue >>" %>
       </div>
-      <div class="fright">
-        <%= submit_tag "Log in" %>
+      <div class="forgt_pswrd">
+        <div id="check"><input type="checkbox" checked></div>
+        <label for="check"><%= link_to "Remember Password", passwords_new_path %></label>
       </div>
+      
       <div class="clear"></div>
     </div>
   </div>

@@ -1,44 +1,39 @@
-<%= form_for @request, :html => { :class => 'user-form' } do |f| %>
 
-  <h4 id="form-title">Edit Request</h4>
 
-  <%= render :partial => "shared/error_messages", :locals => { :errors => @request.errors } %>
+<div class="request_wrap clearfix">
+<div>SIS approve</div>
+<div class="req_cont clearfix">
 
-  <div class="form-field">
-    <%= f.label :cmo_name %>
-    <%= f.text_field :cmo_name %>
-  </div>
+<div class="links_blc">
+<div class="active"><%= link_to "SIS", requests_path(:q => { :status => 'pending' }) %></div>
+<div><%= link_to "In-shop", requests_path(:q => { :status => 'declined' }) %></div>
+<div><%= link_to "GSB", requests_path(:q => { :status => 'approved' }) %></div>
+</div>
+   
+<div class="appr_info">
+<div>Deepak Sharma</div>
+<div>Dilshad garden</div>
+</div>
 
-  <div class="form-field">
-    <%= f.label :retailer_code %>
-    <%= f.text_field :retailer_code %>
-  </div>
+<div class="appr_retail">
+<div>Deepak Sharma</div>
+<div>Dilshad garden</div>
+</div>
 
-  <div class="form-field">
-    <%= f.label :rsp_name %>
-    <%= f.text_field :rsp_name %>
-  </div>
+<div class="appr_desc">
+<div>Pashi ywulf</div>
+<div>jygtwd</div>
+</div>
 
-  <div class="form-field">
-    <%= f.label :city %>
-    <%= f.text_field :city %>
-  </div>
+</div>
+<!-- req_cont-end -->
 
-  <div class="form-field">
-    <%= f.label :state %>
-    <%= f.text_field :state %>
-  </div>
+<div class="btn_blc">
+<div clss="apprv_btn"><%= f.submit "Approve" %></div>
+<div classs="decline_btn"><%= f.submit "Decline" %></div>
+</div>
+<!-- btn-blc-end -->
+</div>
+<!-- req-wrap-end -->
 
-  <div class="form-field">
-    <%= f.label :avg_store_monthly_sales %>
-    <%= f.text_field :avg_store_monthly_sales %>
-  </div>
-
-  <div class="form-field">
-    <%= f.label :avg_gionee_monthly_sales %>
-    <%= f.text_field :avg_gionee_monthly_sales %>
-  </div>
-
-  <%= f.submit "Approve" %>
-  <%= f.submit "Decline" %>
-<% end %>
+</div>
