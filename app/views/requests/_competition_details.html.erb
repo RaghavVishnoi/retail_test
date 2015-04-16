@@ -6,7 +6,7 @@
   <div class="request-field">
     <%= f.text_area :remarks, :placeholder => "Remarks" %>
   </div>
-  
+
   <%= field_set_tag "Images" do %>
     <%= link_to "Add Image", new_image_path, :remote => true %>
     <div class="images">
@@ -16,5 +16,5 @@
     </div>
   <% end %>
 
-  <%= f.submit %>
+  <%= f.submit :class => "submitt_btn"%>
 </div>

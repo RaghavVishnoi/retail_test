@@ -9,16 +9,16 @@
     </div>
 
     <div class="req_type">
-      <%= link_to "javascript:void(0);", :data => { :request_type => "sis" } do %>
-        <div class="sis select">SIS </div>
+      <%= link_to "javascript:void(0);", :class => "select", :data => { :request_type => "sis" } do %>
+        SIS 
       <% end %>
 
       <%= link_to "javascript:void(0);", :data => { :request_type => "in_shop" } do %>
-        <div class="in_shop">In-shop </div>
+        In-shop 
       <% end %>
 
       <%= link_to "javascript:void(0);", :data => { :request_type => "gsb" } do %>
-        <div class="gsb">GSB requirement</div>
+        GSB requirement
       <% end %>
     </div>
   </div>

@@ -63,8 +63,8 @@
     <% if @request.pending? %>
       <%= form_for @request do %>
         <div class="btn_blc">
-          <div class="apprv_btn"><%= submit_tag "Approve" %></div>
-          <div class="decline_btn"><%= submit_tag "Decline" %></div>
+        <%= submit_tag "Approve", :class => "apprv_btn"%>
+        <%= submit_tag "Decline", :class => "decline_btn"%>
         </div>
       <% end %>
     <% end %>
