@@ -51,7 +51,5 @@
     <%= f.select :is_sis_installed, BOOLEAN_VALUES, { :prompt => "Is Gionee SIS installed in shop?" }, { :class => "in_shop_request_type hidden"} %>
   </div>
   
-  <div class="input_txt">
     <%= render :partial => "shared/field", :locals => { :form => f, :property => @request.shop_requirements } %>
-  </div>
 </div>

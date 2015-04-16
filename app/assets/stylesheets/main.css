@@ -810,3 +810,34 @@ color: #000!important;
 .input_tx{
   clear: both;
 }
+.form-field{
+width:100%;
+display: block;
+margin-bottom: 15px;
+}
+.form-field label{
+font-size: 17px;
+width: 20%%;
+text-transform: capitalize;
+display: inline-block;
+}
+.select2-container{
+width: 100%!important;
+}
+.select2-container .select2-choice{
+width: 100%;
+  padding: 10px 8px!important;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  margin-bottom: 15px;
+  display: block;
+  font-size: 13px;
+  background: #ededed!important;
+  border: 1px solid #dedede;!important
+  outline: none;
+  -webkit-appearance: none!important;
+  appearance: none!important;
+  -webkit-border-radius: none!important;
+  border-radius: 0px!important;
+
+}
