@@ -1,19 +1,21 @@
 AVG_GIONEE_MONTHLY_SALES = [
-  ["0-20 Thousand", "0"], 
-  ["21-50 Thousand", "21000"], 
+  ["0-50 Thousand", "0"], 
   ["50 Thousand - 1 Lac", "50000"], 
-  ["Above 1 Lac", "100000"]
+  ["1 Lac - 2 Lac", "100000"],
+  ["2 Lac - 4 Lac",  "200000"],
+  ["4 Lac - 7 Lac", "400000"],
+  ["7 Lac - 15 Lac", "700000"],
+  ["15 Lac - 30 Lac", "1500000"],
+  ["30 Lac and above", "3000000"]
 ] 
 
 AVG_STORE_MONTHLY_SALES = [
-  ["0-5 Lac", "0"], 
-  ["5-10 Lac", "500000"], 
-  ["10-15 Lac", "1000000"], 
-  ["15-20 Lac", "1500000"], 
-  ["20-25 Lac", "2000000"], 
-  ["25-50 Lac", "2500000"], 
+  ["0-10 Lac", "0"], 
+  ["10-20 Lac", "1000000"],  
+  ["20-50 Lac", "2000000"],
   ["50Lac-1 Cr", "5000000"], 
-  ["1 Cr and above", "10000000"]
+  ["1 Cr to 3 Cr", "10000000"],
+  ["3 Cr and above", "30000000"]
 ]
 
 CMO_NAMES = [
@@ -70,4 +72,36 @@ STATES = [
 BOOLEAN_VALUES = [
   ["yes", "true"],
   ["no", "false"]
+]
+
+RSP_NOT_PRESENT_REASON = [
+  ["Being Appointed", "Being Appointed"],
+  ["non-rsp store", "non-rsp store"]
+]
+
+SIS_TYPES = [
+  ["A", "A"],
+  ["B", "B"],
+  ["C", "C"],
+  ["D", "D"],
+  ["E", "E"],
+  ["F", "F"]
+]
+
+SPACE_AVAILABLE = [
+  ["Left Wall", "Left Wall"],
+  ["Right Wall", "Right Wall"],
+  ["Back Wall", "Back Wall"],
+  ["Centre of Store", "Centre of Store"],
+  ["Front of Store", "Front of Store"],
+  ["Cash Counter", "Cash Counter"],
+  ["Need to create", "Need to create"]
+]
+
+GSB_TYPES = [
+  ["ACP", "ACP"],
+  ["FLEX", "FLEX"],
+  ["Non LIT", "Non LIT"],
+  ["FLAG POLE", "FLAG POLE"],
+  ["TOTEM", "TOTEM"]
 ]

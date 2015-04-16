@@ -1,0 +1,53 @@
+<div class="shop_details_page hidden">
+  <div class="pd-detail">
+    <%= f.select :state, STATES, { :prompt => "state" } %>
+  </div>
+
+  <div class="input_txt">
+    <%= f.text_field :city, :placeholder => "City" %>
+  </div>
+
+  <div class="input_tx">
+    <%= f.text_field :shop_name, :placeholder => "Shop Name" %>
+  </div>
+
+  <div class="pd-detail">
+    <%= f.text_field :shop_address, :placeholder => "Shop Address" %>
+  </div>
+
+  <div class="input_txt">
+    <%= f.text_field :shop_owner_name, :placeholder => "Shop Owner Name" %>
+  </div>
+
+  <div class="input_tx">
+    <%= f.phone_field :shop_owner_phone, :placeholder => "Shop Owner Phone" %>
+  </div>
+
+  <div class="pd-detail">
+    <%= f.select :avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES, { :prompt => "Avg. store monthly sales" } %>
+  </div>
+
+  <div class="input_txt">
+    <%= f.select :avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES, { :prompt => "Avg. gionee monthly sales" } %>
+  </div>
+
+  <div class="input_tx">
+    <%= f.select :space_available, SPACE_AVAILABLE, { :prompt => "Space availabe in store" }, { :class => 'sis_request_type request_type_field hidden' } %>
+  </div>
+
+  <div class="input_tx">
+    <%= f.select :is_gionee_gsb_present, BOOLEAN_VALUES, { :prompt => "Gionee GSB Present?" }, { :class => 'sis_request_type in_shop_request_type request_type_field hidden' } %>
+  </div>
+
+  <div class="input_txt">
+    <%= f.select :is_sis_installed, BOOLEAN_VALUES, { :prompt => "Is Gionee SIS installed in shop?" }, { :class => "in_shop_request_type gsb_request_type request_type_field hidden"} %>
+  </div>
+
+  <div class="input_txt">
+    <%= f.select :is_main_signage, BOOLEAN_VALUES, { :prompt => "Is Gionee SIS installed in shop?" }, { :class => "gsb_request_type request_type_field hidden"} %>
+  </div>
+  
+  <div class="input_txt in_shop_request_type request_type_field hidden">
+    <%= render :partial => "shared/field", :locals => { :form => f, :property => @request.shop_requirements } %>
+  </div>
+</div>

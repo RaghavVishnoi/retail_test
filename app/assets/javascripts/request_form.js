@@ -24,7 +24,7 @@ $(document).on('click', '.req_type a', function() {
   $('.request_type_field').addClass('hidden');
   $('.' + request_type + '_request_type').removeClass('hidden');
   $('.req_type .select').removeClass('select');
-  $('.req_type .' + request_type).addClass('select');
+  $(this).addClass('select');
 });
 
 

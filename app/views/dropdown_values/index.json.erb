@@ -9,8 +9,13 @@
 
   "is_sis_installed": <%= BOOLEAN_VALUES.to_json.html_safe %>,
 
-  "space_available": <%= BOOLEAN_VALUES.to_json.html_safe %>,
-
   "is_gionee_gsb_present": <%= BOOLEAN_VALUES.to_json.html_safe %>,
-  "state":  <%= STATES.to_json.html_safe %>
+
+  "state":  <%= STATES.to_json.html_safe %>,
+
+  "sis_types": <%= SIS_TYPES.to_json.html_safe %>,
+
+  "space_available": <%= SPACE_AVAILABLE.to_json.html_safe %>,
+
+  "gsb_types": <%= GSB_TYPES.to_json.html_safe %>
 }

@@ -33,4 +33,4 @@ brands.each do |brand_name|
   Field.create :entity => "Request", :display_name => field_name, :field_type => 'checkbox', :value_type => 'string', :configuration => { :values => ["Glow sign board", "SIS", "RSP"], :type => "branding_details" }
 end
 
-Field.create :entity => "Request", :display_name => "Your requirement for this shop is for", :field_type => "checkbox", :value_type => 'string', :configuration => { :values => ["Clipon (4x3 feet) LANDSCAPE", "Clipon (3x4 feet) PORTRAIT", "Clipon (3x2 feet) LANDSCAPE", "Clipon (2x3 feet) PORTRAIT", "Standee with Lights", "Counter-top with Lights"], :name => "shop_requirements" }
+Field.create :entity => "Request", :display_name => "Your requirement for this shop is for", :field_type => "checkbox", :value_type => 'string', :mandatory => true, :configuration => { :values => ["Clipon (4x3 feet) LANDSCAPE", "Clipon (3x4 feet) PORTRAIT", "Clipon (3x2 feet) LANDSCAPE", "Clipon (2x3 feet) PORTRAIT", "Standee with Lights", "Counter-top with Lights"], :name => "shop_requirements" }

@@ -2260,11 +2260,14 @@ Params:
 -- request[is_sis_installed] // true or false
 -- request[avg_store_monthly_sales]
 -- request[avg_gionee_monthly_sales]
--- request[width]
--- request[height]
 -- request[cmo_name]
 -- request[request_type]
 -- request[remarks]
+-- request[is_rsp]
+-- request[rsp_not_present_reason]
+-- request[space_available]
+-- request[type_of_sis_required]
+-- request[type_of_gsb_requested]
 
 Success Response:
 {
