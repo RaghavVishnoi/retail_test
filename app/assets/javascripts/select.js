@@ -7,6 +7,11 @@ $(document).on('ready page:load', function() {
   $('#item-select, #user-select, .ajax-select').each(function() {
     var $this = $(this);
     $this.select2({
+      createSearchChoice: function (term) {
+        if($this.data('create_search_choice')) {
+          return { id: term, text: term };  
+        }
+      },
       ajax: {
         url: $this.data('ajax-url'),
         dataType: 'json',
@@ -17,6 +22,10 @@ $(document).on('ready page:load', function() {
           }
         },
         results: function(data) {
+          var key;
+          if(key = $this.data('key')) {
+            data = data[key];
+          }
           return {
             results: $.map(data, function(item) {
               var id, text;
