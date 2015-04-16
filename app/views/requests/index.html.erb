@@ -34,8 +34,9 @@
       <% end %>
     <% end %>
 
+    <div class="response-pagination">
+      <%= will_paginate @requests %>
+    </div>
   </div>
-
-  <%= will_paginate @requests %>
 
 </div>

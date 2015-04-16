@@ -1,5 +1,5 @@
 <div class="image-container container">
-  <%= hidden_field_tag "item[image_ids][]", image.id %>
+  <%= hidden_field_tag "request[image_ids][]", image.id %>
   <%= image_tag image.image_url %>
   <%= link_to "Remove", "javascript:void(0);", :class => 'remove-field' %>
 </div>

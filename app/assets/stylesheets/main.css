@@ -559,11 +559,12 @@ color: #e5380e !important;
 }
 .apprv_btn{
   color: #fff;
-  font-size: 17px;
-  background-color: #ff9900;
+  font-size: 17px!important;
+  background-color: #ff9900!important;
   width: 15%;
-  margin: 15px;
+  margin: 15px 10px;
   display: inline-block;
+  padding: 15px 10px!important;
 }
 .apprv_btn input{
   width: 100%;
@@ -573,10 +574,11 @@ color: #e5380e !important;
 }
 .decline_btn{
   color: #fff;
-  font-size: 17px;
+  font-size: 17px!important;
   width: 15%;
-  background-color: #bcbcbc;
-  margin: 15px;
+  background-color: #bcbcbc!important;
+  padding: 15px 10px!important;
+  margin: 15px 10px;
   display: inline-block;
 }
 .decline_btn input{
@@ -627,7 +629,7 @@ display: block;
   box-sizing: border-box;
 -webkit-box-sizing: border-box;
 }
-.req_type div:nth-of-type(1){
+.req_type a div:nth-of-type(1){
 width: 32%;
   float: left;
   color: #e5380e;
@@ -640,7 +642,7 @@ width: 32%;
   box-sizing: border-box;
 -webkit-box-sizing: border-box;
 }
-.req_type div:nth-of-type(2){
+.req_type a div:nth-of-type(2){
 margin: 0 1%;
 width: 32%;
   display: inline-block;
@@ -654,7 +656,7 @@ width: 32%;
   box-sizing: border-box;
 -webkit-box-sizing: border-box;
 }
-.req_type div:nth-of-type(3){
+.req_type a div:nth-of-type(3){
 width: 32%;
   float: right;
   color: #e5380e;
@@ -787,19 +789,7 @@ font-size: 18px;
 }
 .footer{
 display: none;}
-.submt{
-  padding: 10px 15px;
-  width: 25%;
-  background-color: #ff9900;
-  margin-left: 10px;
 
-}
-.submt input[type="submit"]{
-width: 100%;
-background-color: #ff9900;
-font-size: 16px;
-margin-top: 0px;
-}
 .selected{
 color: #000!important;
 }
@@ -810,7 +800,31 @@ color: #000!important;
 .input_tx{
   clear: both;
 }
-.form-field{
+
+.competition_details_page{
+  display: block;
+  height: auto;
+}
+.request-field{
+  width: 100%;
+  display: block;
+}
+.request-field label{
+width: 100%;
+  display: block;
+  padding-bottom: 10px;
+}
+.request-field textarea{
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  height: 72px;
+  padding: 5px 8px;
+  margin: 0px;
+  font-size: 15px;
+  border: 1px solid #dedede;
+}
+/*.form-field{
 width:100%;
 display: block;
 margin-bottom: 15px;
@@ -840,4 +854,4 @@ width: 100%;
   -webkit-border-radius: none!important;
   border-radius: 0px!important;
 
-}
+}*/

@@ -4,7 +4,7 @@ class RequestsController < ApplicationController
   authorize_resource :except => [:create, :new, :autocomplete_retailer_code]
   skip_before_action :authenticate_user, :only => [:create, :new, :autocomplete_retailer_code]
 
-  PER_PAGE = 20
+  PER_PAGE = 5
 
   def index
     @requests = Request.with_query(params[:q]).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
@@ -22,9 +22,15 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new request_params
     if @request.save
-      render :json => { :result => true }
+      respond_to do |format|
+        format.html { redirect_to new_request_path }
+        format.json { render :json => { :result => true } }
+      end
     else
-      render :json => { :result => false, :errors => { :messages => @request.errors.full_messages } }
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render :json => { :result => false, :errors => { :messages => @request.errors.full_messages } } }
+      end
     end
   end
 
