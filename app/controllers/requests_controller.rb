@@ -22,9 +22,15 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new request_params
     if @request.save
-      render :json => { :result => true }
+      respond_to do |format|
+        format.html { redirect_to new_request_path }
+        format.json { render :json => { :result => true } }
+      end
     else
-      render :json => { :result => false, :errors => { :messages => @request.errors.full_messages } }
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render :json => { :result => false, :errors => { :messages => @request.errors.full_messages } } }
+      end
     end
   end
 

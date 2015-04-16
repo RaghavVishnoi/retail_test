@@ -1,4 +1,4 @@
-<div class="request-details hidden">
+<div class="shop_details_page hidden">
   <div class="pd-detail">
     <%= f.select :state, STATES, { :prompt => "state" } %>
   </div>
@@ -32,26 +32,30 @@
   </div>
 
   <div class="input_tx">
-    <%= f.select :space_available, [["yes", "true"], ["No", "false"]], { :prompt => "Space available – (4 ft width X 7 ft height ) (back wall + counter )" }, { :class => 'sis_request_type hidden' } %>
+    <%= f.select :space_available, [["yes", "true"], ["No", "false"]], { :prompt => "Space available – (4 ft width X 7 ft height ) (back wall + counter )" }, { :class => 'sis_request_type request_type_field hidden' } %>
   </div>
 
   <div class="input_tx">
-    <%= f.select :is_gionee_gsb_present, BOOLEAN_VALUES, { :prompt => "Gionee GSB Present?" }, { :class => 'sis_request_type in_shop_request_type hidden' } %>
+    <%= f.select :is_gionee_gsb_present, BOOLEAN_VALUES, { :prompt => "Gionee GSB Present?" }, { :class => 'sis_request_type in_shop_request_type request_type_field hidden' } %>
   </div>
 
   <div class="pd-detail">
-    <%= f.text_field :width, :placeholder => "Approx signage WIDTH in feet", :class => 'gsb_request_type hidden' %>
+    <%= f.text_field :width, :placeholder => "Approx signage WIDTH in feet", :class => 'gsb_request_type request_type_field hidden' %>
   </div>
 
   <div class="input_txt">
-    <%= f.text_field :height, :placeholder => "Approx signage HEIGHT in feet", :class => 'gsb_request_type hidden' %>
+    <%= f.text_field :height, :placeholder => "Approx signage HEIGHT in feet", :class => 'gsb_request_type request_type_field hidden' %>
   </div>
 
   <div class="input_txt">
-    <%= f.select :is_sis_installed, BOOLEAN_VALUES, { :prompt => "Is Gionee SIS installed in shop?" }, { :class => "in_shop_request_type hidden"} %>
+    <%= f.select :is_sis_installed, BOOLEAN_VALUES, { :prompt => "Is Gionee SIS installed in shop?" }, { :class => "in_shop_request_type gsb_request_type request_type_field hidden"} %>
+  </div>
+
+  <div class="input_txt">
+    <%= f.select :is_main_signage, BOOLEAN_VALUES, { :prompt => "Is Gionee SIS installed in shop?" }, { :class => "gsb_request_type request_type_field hidden"} %>
   </div>
   
-  <div class="input_txt">
+  <div class="input_txt in_shop_request_type request_type_field hidden">
     <%= render :partial => "shared/field", :locals => { :form => f, :property => @request.shop_requirements } %>
   </div>
 </div>

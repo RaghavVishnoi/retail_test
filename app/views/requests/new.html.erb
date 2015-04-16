@@ -25,16 +25,22 @@
 
   <div class="req_cont clearfix">
     <div class="reqstr_detail">
-      <div class="selected requestor_details" >Requestor Details <span>1</span></div>
-      <div class="shop_details">shop Details <span>2</span></div>
-      <div class="competition_details">Competition Details <span>3</span></div>
+      <div class="selected requestor_details details" >Requestor Details <span>1</span></div>
+      <div class="shop_details details">shop Details <span>2</span></div>
+      <div class="competition_details details">Competition Details <span>3</span></div>
     </div>
 
     <div class="form_cont clearfix">
-      <%= form_for @request, :html => { :class => "request-form", :data => { :pages => ['requestor_details', 'shop_details', 'competition_details'], :current_page => 0 } } do |f| %>
+      <%= form_for @request, :html => { :class => "request-form", :data => { :pages => ['.requestor_details_page', '.shop_details_page', '.competition_details_page'], :current_page => 0 } } do |f| %>
+
+        <%= render :partial => "shared/error_messages", :locals => { :errors => @request.errors } %>
+
         <%= f.hidden_field :request_type %>
+
         <%= render :partial => 'requestor_details', :locals => { :f => f } %>
+
         <%= render :partial => 'shop_details', :locals => { :f => f } %>
+        
         <%= render :partial => 'competition_details', :locals => { :f => f } %>
       <% end %>
     </div>
@@ -42,6 +48,11 @@
     <div class="submt">
       <input type="submit" value="Next" name="submit button" id="next">
     </div>
+
+    <div class="submt">
+      <input type="submit" value="Back" id="back">
+    </div>
+
   </div>
 
 </div>
