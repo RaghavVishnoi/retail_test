@@ -389,7 +389,9 @@ a{ color:#0472bf}
 .fleft{ float: left;}
 .fright{ float: right;}
 .clear{ clear: both;}
-
+.field_with_errors select, input[type="text"], input[type="tel"], input[type="e-mail"]{
+border: 1px solid #e5380e !important;
+}
 /****************************Request css******************************/
 .active a{
 text-decoration: underline !important;
