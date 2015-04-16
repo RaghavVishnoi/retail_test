@@ -587,7 +587,29 @@ color: #e5380e !important;
  background-color: #bcbcbc;
  margin-top: 0px;
 }
-
+.pagination{
+clear: both;
+  padding: 10px;
+}
+.previous_page{
+padding-right: 5px;
+}
+.current{
+  color: #e5380e !important;
+}
+.current > a{
+  color: #000;
+text-decoration: none;
+}
+a{
+   color: #000 !important;
+text-decoration: none;
+}
+.next_page{
+  padding-left: 5px;
+color: #000;
+text-decoration: none;
+}
 /*****************approver-flow********************/
 
 .req_blc{
