@@ -1,21 +1,20 @@
 <div class="requestor_details_page">
-  <div class="pd-detail">
-    <%= f.select :cmo_name, CMO_NAMES, { :prompt => "CMO Name" } %>
-  </div>
+  
+    <%= f.select :cmo_name, CMO_NAMES, { :prompt => "CMO Name" } , :class => "pd-detail"%>
+ 
 
   <div class="input_txt">
     <%= f.text_field :retailer_code, :class => 'ajax-select', :placeholder => 'Retailer Code', 'data-ajax-url' => "/requests/autocomplete_retailer_code", 'data-multiple' => false, 'data-key' => 'retailer_codes', 'data-create_search_choice' => true, 'data-initvalue' => (@request.retailer_code? ? { text: @request.retailer_code, id: @request.retailer_code } : []).to_json %>
   </div>
 
-  <div class="input_tx">
-    <%= f.text_field :rsp_name, :placeholder => "RSP name" %>
-  </div>
 
-  <div class="pd-detail">
-    <%= f.phone_field :rsp_mobile_number, :placeholder => "RSP Mobile Number" %>
-  </div>
+    <%= f.text_field :rsp_name, :placeholder => "RSP name", :class => "input_tx"%>
 
-  <div class="input_txt">
-    <%= f.text_field :rsp_app_user_id, :placeholder => "RSP sales tag app user ID" %>
-  </div>
+
+    <%= f.phone_field :rsp_mobile_number, :placeholder => "RSP Mobile Number", :class => "pd-detail"%>
+
+
+
+    <%= f.text_field :rsp_app_user_id, :placeholder => "RSP sales tag app user ID", :class => "input_txt"%>
+
 </div>
