@@ -1,33 +1,42 @@
-<div class="request_wrap clearfix">
-  <div>Select the type of request</div>
+<%= form_for @request, :html => { :class => "request-form", :data => { :pages => ['.rsp_page', '.requestor_details_page', '.shop_details_page', '.competition_details_page'], :current_page => 0 } } do |f| %>
 
-  <div class="req_blc">
-    <div class="requstr_main">
-      <div>SIS requirement</div>
-      <div>in-shop requirement</div>
-      <div>GSB requirement</div>
-    </div>
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @request.errors } %>
 
-    <div class="req_type">
-      <%= link_to "SIS", "javascript:void(0);", :class => 'select', :data => { :request_type => "sis" } %>
+  <div class="rsp_page">
+    <%= f.select :is_rsp, BOOLEAN_VALUES, { :prompt => "RSP present in shop?" } %>
 
-      <%= link_to "In-Shop", "javascript:void(0);", :data => { :request_type => "in_shop" } %>
+    <%= f.select :rsp_not_present_reason, RSP_NOT_PRESENT_REASON, { :prompt => "Select Reason" }, { :class => 'hidden' } %>
 
-      <%= link_to "GSB", "javascript:void(0);", :data => { :request_type => "gsb" } %>
-    </div>
+    <%= f.submit :class => "submitt_btn hidden" %>
   </div>
 
-  <div class="req_cont clearfix">
-    <div class="reqstr_detail">
-      <div class="selected requestor_details details" >Requestor Details <span>1</span></div>
-      <div class="shop_details details">shop Details <span>2</span></div>
-      <div class="competition_details details">Competition Details <span>3</span></div>
+  <div class="request_wrap clearfix hidden">
+    <div>Select the type of request</div>
+
+    <div class="req_blc">
+      <div class="requstr_main">
+        <div>SIS requirement</div>
+        <div>in-shop requirement</div>
+        <div>GSB requirement</div>
+      </div>
+
+      <div class="req_type">
+        <%= link_to "SIS", "javascript:void(0);", :class => 'select', :data => { :request_type => "sis" } %>
+
+        <%= link_to "In-Shop", "javascript:void(0);", :data => { :request_type => "in_shop" } %>
+
+        <%= link_to "GSB", "javascript:void(0);", :data => { :request_type => "gsb" } %>
+      </div>
     </div>
 
-    <div class="form_cont clearfix">
-      <%= form_for @request, :html => { :class => "request-form", :data => { :pages => ['.requestor_details_page', '.shop_details_page', '.competition_details_page'], :current_page => 0 } } do |f| %>
+    <div class="req_cont clearfix">
+      <div class="reqstr_detail">
+        <div class="selected requestor_details details" >Requestor Details <span>1</span></div>
+        <div class="shop_details details">shop Details <span>2</span></div>
+        <div class="competition_details details">Competition Details <span>3</span></div>
+      </div>
 
-        <%= render :partial => "shared/error_messages", :locals => { :errors => @request.errors } %>
+      <div class="form_cont clearfix">
 
         <%= f.hidden_field :request_type %>
 
@@ -36,14 +45,15 @@
         <%= render :partial => 'shop_details', :locals => { :f => f } %>
         
         <%= render :partial => 'competition_details', :locals => { :f => f } %>
-      <% end %>
+      </div>
+
+      <input type="submit" value="Next" name="submit button" id="next" class="apprv_btn hidden">
+
+      <input type="submit" value="Back" id="back" class="decline_btn hidden">
+
+
     </div>
-
-    <input type="submit" value="Next" name="submit button" id="next" class="apprv_btn">
-
-    <input type="submit" value="Back" id="back" class="decline_btn">
-
 
   </div>
 
-</div>
+<% end %>

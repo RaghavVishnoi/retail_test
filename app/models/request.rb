@@ -16,13 +16,13 @@ class Request < ActiveRecord::Base
     end
   end
 
-  validates :request_type, :presence => true
-  validates :cmo_name, :retailer_code, :rsp_name, :rsp_mobile_number, :state, :city, :shop_name, :shop_address, :shop_owner_name, :avg_store_monthly_sales, :avg_gionee_monthly_sales, :presence => true
-  validates :is_sis_installed, :inclusion => { :in => [true, false] }, :if => "gsb? || in_shop?"
-  validates :is_main_signage, :inclusion => { :in => [true, false] }, :if => :gsb?
-  validates :width, :height, :presence => true, :if => :gsb?
-  validates :is_gionee_gsb_present, :inclusion => { :in => [true, false] }, :if => :in_shop?
-  validate :validate_shop_requirements, :if => :in_shop?
+  validates :request_type, :presence => true, :if => :is_rsp?
+  validates :cmo_name, :retailer_code, :rsp_name, :rsp_mobile_number, :state, :city, :shop_name, :shop_address, :shop_owner_name, :avg_store_monthly_sales, :avg_gionee_monthly_sales, :presence => true, :if => :is_rsp?
+  validates :is_sis_installed, :inclusion => { :in => [true, false] }, :if => "is_rsp? && (gsb? || in_shop?)"
+  validates :is_main_signage, :inclusion => { :in => [true, false] }, :if => [:is_rsp?, :gsb?]
+  validates :width, :height, :presence => true, :if => [:is_rsp?, :gsb?]
+  validates :is_gionee_gsb_present, :inclusion => { :in => [true, false] }, :if => [:is_rsp?, :in_shop?]
+  validate :validate_shop_requirements, :if => [:is_rsp?, :in_shop?]
 
   def self.with_query(q)
     q = {} if !q.present? 

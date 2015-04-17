@@ -1,4 +1,5 @@
-$(document).on('click', '#next, #back', function() {
+$(document).on('click', '#next, #back', function(event) {
+  event.preventDefault();
   $(current_page()).addClass('hidden');
   var page_index = current_page_index();
   var next_page_index = ($(this).attr('id') == 'next') ? ++page_index : --page_index;
@@ -7,13 +8,18 @@ $(document).on('click', '#next, #back', function() {
   $('.req_type .select').trigger('click');
   $('.reqstr_detail .selected').removeClass('selected');
   $('.reqstr_detail .details').eq(next_page_index).addClass('selected');
-  $('#next, #back').show();
+  $('#next, #back').removeClass('hidden');
   $('.req_type').hide();
   if(current_page_index() == total_pages() - 1) {
-    $('#next').hide();
+    $('#next').addClass('hidden');
   }
   if(current_page_index() == 0) {
-    $('#back').hide();
+    $('#back').addClass('hidden');
+    $('.request_wrap').addClass('hidden');
+  }
+  if(current_page() == '.requestor_details_page') {
+    $('.request_wrap').removeClass('hidden');
+    $('.req_type').show();
   }
 });
 
@@ -43,3 +49,14 @@ function set_current_page_index(page) {
 function total_pages() {
   return $('.request-form').data('pages').length;
 }
+
+$(document).on('click', '#request_is_rsp', function() {
+  if($(this).val() == "true") {
+    $('#request_rsp_not_present_reason').addClass('hidden');
+    $('#next').trigger('click');
+  } else if($(this).val() == "false") {
+    $('.request_wrap input, .request_wrap select').val(null);
+    $('#request_rsp_not_present_reason').removeClass('hidden');
+    $('.rsp_page  input[type="submit"]').removeClass('hidden');
+  }
+});

@@ -26,7 +26,7 @@ ModuleGroup.create :name => :crm
 ModuleGroup.create :name => :survey
 ModuleGroup.create :name => :requester
 
-brands = %w{SAMSUNG HTC SONY NOKIA MICROMAX XOLO OPPO VIVO}
+brands = %w{SAMSUNG HTC SONY NOKIA MICROMAX LAVA OPPO VIVO}
 
 brands.each do |brand_name|
   field_name = "Branding available for #{brand_name} in this outlet"

@@ -47,6 +47,14 @@
     <%= f.select :is_main_signage, BOOLEAN_VALUES, { :prompt => "Is Gionee SIS installed in shop?" }, { :class => "gsb_request_type request_type_field hidden"} %>
   </div>
   
+  <div class="input_txt">
+    <%= f.text_field :width, :placeholder => "Width", :class => "gsb_request_type request_type_field hidden" %>
+  </div>
+
+  <div class="input_txt">
+    <%= f.text_field :height, :placeholder => "Height", :class => "gsb_request_type request_type_field hidden" %>
+  </div>
+
   <div class="input_txt in_shop_request_type request_type_field hidden">
     <%= render :partial => "shared/field", :locals => { :form => f, :property => @request.shop_requirements } %>
   </div>
