@@ -390,7 +390,7 @@ a{ color:#0472bf}
 .fright{ float: right;}
 .clear{ clear: both;}
 .field_with_errors select, input[type="text"], input[type="tel"], input[type="e-mail"]{
-border: 1px solid #e5380e !important;
+border: 1px solid #e5380e ;
 }
 /****************************Request css******************************/
 .active a{
@@ -750,7 +750,7 @@ font-size: 18px;
   padding: 15px 10px;
 }
 .pd-detail{
-    width: 48%;
+    width: 48% !important;
   float: left;
 }
 .pd-detail select, input[type="text"]{
@@ -803,7 +803,7 @@ font-size: 18px;
   border-radius: 0px;
 }
 .input_txt{
-  width: 50%;
+  width: 50% !important;
   float: right;
 }
 .input_txt input[type="text"]{

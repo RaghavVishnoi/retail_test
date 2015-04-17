@@ -1,35 +1,33 @@
 <div class="shop_details_page hidden">
-  <div class="pd-detail">
-    <%= f.select :state, STATES, { :prompt => "state" } %>
-  </div>
+ 
+    <%= f.select :state, STATES, { :prompt => "state" }, :class => "pd-detail"%>
 
-  <div class="input_txt">
-    <%= f.text_field :city, :placeholder => "City" %>
-  </div>
 
-  <div class="input_tx">
-    <%= f.text_field :shop_name, :placeholder => "Shop Name" %>
-  </div>
+ 
+    <%= f.text_field :city, :placeholder => "City", :class => "input_txt" %>
 
-  <div class="pd-detail">
-    <%= f.text_field :shop_address, :placeholder => "Shop Address" %>
-  </div>
 
-  <div class="input_txt">
-    <%= f.text_field :shop_owner_name, :placeholder => "Shop Owner Name" %>
-  </div>
 
-  <div class="input_tx">
-    <%= f.phone_field :shop_owner_phone, :placeholder => "Shop Owner Phone" %>
-  </div>
+    <%= f.text_field :shop_name, :placeholder => "Shop Name", :class => "input_tx"%>
 
-  <div class="pd-detail">
-    <%= f.select :avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES, { :prompt => "Avg. store monthly sales" } %>
-  </div>
 
-  <div class="input_txt">
-    <%= f.select :avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES, { :prompt => "Avg. gionee monthly sales" } %>
-  </div>
+
+    <%= f.text_field :shop_address, :placeholder => "Shop Address", :class => "pd-detail" %>
+ 
+
+
+    <%= f.text_field :shop_owner_name, :placeholder => "Shop Owner Name", :class => "input_txt" %>
+
+
+    <%= f.phone_field :shop_owner_phone, :placeholder => "Shop Owner Phone", :class => "input_tx" %>
+
+
+
+    <%= f.select :avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES, { :prompt => "Avg. store monthly sales" }, :class => "pd-detail" %>
+
+
+    <%= f.select :avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES, { :prompt => "Avg. gionee monthly sales" }, :class => "input_txt" %>
+
 
   <div class="input_tx">
     <%= f.select :space_available, SPACE_AVAILABLE, { :prompt => "Space availabe in store" }, { :class => 'sis_request_type request_type_field hidden' } %>
