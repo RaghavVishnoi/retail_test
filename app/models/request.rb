@@ -16,6 +16,8 @@ class Request < ActiveRecord::Base
     end
   end
 
+  validates :is_rsp, :inclusion => { :in => [true, false] }
+  validates :rsp_not_present_reason, :presence => true, :unless => :is_rsp?
   validates :request_type, :presence => true, :if => :is_rsp?
   validates :cmo_name, :retailer_code, :rsp_name, :rsp_mobile_number, :state, :city, :shop_name, :shop_address, :shop_owner_name, :avg_store_monthly_sales, :avg_gionee_monthly_sales, :presence => true, :if => :is_rsp?
   validates :is_sis_installed, :inclusion => { :in => [true, false] }, :if => "is_rsp? && (gsb? || in_shop?)"

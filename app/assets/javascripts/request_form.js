@@ -50,13 +50,17 @@ function total_pages() {
   return $('.request-form').data('pages').length;
 }
 
-$(document).on('click', '#request_is_rsp', function() {
-  if($(this).val() == "true") {
-    $('#request_rsp_not_present_reason').addClass('hidden');
-    $('#next').trigger('click');
-  } else if($(this).val() == "false") {
-    $('.request_wrap input, .request_wrap select').val(null);
-    $('#request_rsp_not_present_reason').removeClass('hidden');
-    $('.rsp_page  input[type="submit"]').removeClass('hidden');
-  }
+$(document).on('click', '#request_is_rsp_true', function() {
+  $('#request_rsp_not_present_reason').addClass('hidden');
+  $('#next').trigger('click');
 });
+
+$(document).on('click', '#request_is_rsp_false', function() {
+  $('.request_wrap input, .request_wrap select').val(null);
+  $('#request_rsp_not_present_reason').removeClass('hidden');
+  $('.rsp_page  input[type="submit"]').removeClass('hidden');
+});
+
+$(document).on('ready page:load', function() {
+  $('[name="request[is_rsp]"]:checked').trigger('click');
+})
