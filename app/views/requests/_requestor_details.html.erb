@@ -4,7 +4,7 @@
  
 
   <div class="input_txt">
-    <%= f.text_field :retailer_code, :class => 'ajax-select required', :error_container => '.input_txt', :placeholder => 'Retailer Code', 'data-ajax-url' => "/requests/autocomplete_retailer_code", 'data-multiple' => false, 'data-key' => 'retailer_codes', 'data-create_search_choice' => true, 'data-initvalue' => (@request.retailer_code? ? { text: @request.retailer_code, id: @request.retailer_code } : []).to_json %>
+    <%= f.text_field :retailer_code, :class => 'ajax-select required retailer_code', :error_container => '.input_txt', :placeholder => 'Retailer Code', 'data-ajax-url' => "/requests/autocomplete_retailer_code", 'data-multiple' => false, 'data-key' => 'retailer_codes', 'data-create_search_choice' => true, 'data-initvalue' => (@request.retailer_code? ? { text: @request.retailer_code, id: @request.retailer_code } : []).to_json %>
   </div>
 
 
