@@ -942,8 +942,28 @@ margin: 15px;
 }
 
 .retailer_code > a {
-  padding: 6px 8px !important;
+  padding: 5px 8px !important;
   border: 1px solid #dedede !important;
   border-radius: 0px !important; 
   -webkit-appearance: none;
+  background: #ededed !important;
+  box-shadow: none !important;
+}
+.retailer_code  .select2-choice .select2-arrow{
+ border-left: none !important;
+ background #ededed !important;
+ border-radius: 0px !important;
+ width: 32px !important;
+}
+.retailer_code .select2-choice .select2-arrow b{
+  background: url(<%= asset_path 'drop_down_arrow.png' %>)no-repeat, center center, #ededed !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background-position: 97% 3px !important;
+}
+.retailer_code .select2-choice abbr{
+  right: 39px !important;
+  top: 11px !important;
+  width:15px !important;
+  
 }
