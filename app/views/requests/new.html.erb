@@ -2,11 +2,11 @@
 
   <%= render :partial => "shared/error_messages", :locals => { :errors => @request.errors } %>
 
-  <div class="rsp_page">
-    <%= f.label :is_rsp, "RSP present in shop?" %>
-    <%= f.radio_button :is_rsp, true %><span>Yes</span>
-    <%= f.radio_button :is_rsp, false %><span>No</span>
-
+  <div class="rsp_page page">
+    <%= f.hidden_field :is_rsp %>
+    Rsp Present in Shop?
+    <input type="submit" id="request_is_rsp_true" value="Yes">
+    <input type="submit" id="request_is_rsp_false" value="No">
 
     <%= f.select :rsp_not_present_reason, RSP_NOT_PRESENT_REASON, { :prompt => "Select Reason" }, { :class => 'hidden' } %>
 
