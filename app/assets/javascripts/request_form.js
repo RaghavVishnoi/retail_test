@@ -77,23 +77,23 @@ $(document).on('submit', '.request-form', function(event) {
 
 
 $(document).on('blur', '.page:visible input, .page:visible select', function() {
-  console.log('working')
-  a = $(this);
-  if($(this).val()) {
-    $(this).closest('.field_with_errors').removeClass("field_with_errors");
+  var $error_container = $(this).closest('.field_with_errors')
+  var field = $error_container.find('input[name], select[name]').first()
+  if(field.val()) {
+    $error_container.removeClass('field_with_errors');
   }
 });
 
 function validate_form() {
   var validate = true;
-  $('.page:visible input[name], .page:visible select[name]').each(function() {
-    if(($(this).closest('.required').length > 0) &&!$(this).val()) {
+  $('.page:visible input[name]:visible, .page:visible select[name]:visible').each(function() {
+    if(($(this).closest('.required').length > 0) && !$(this).val()) {
       if(!$(this).closest('.field_with_errors').length) {
         var error_class = $(this).attr('error_container');
         var $error_container = error_class ? $(this).closest(error_class) : $(this);
         $error_container.wrap('<div class="field_with_errors"></div>');
       }
-      validate = false
+      validate = false;
     }
   });
   return validate;
