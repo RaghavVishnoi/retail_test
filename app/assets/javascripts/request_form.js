@@ -1,4 +1,4 @@
-var is_rsp_fields = '#request_retailer_code, #request_rsp_name, #request_rsp_mobile_number'
+var is_rsp_fields = '#request_rsp_name, #request_rsp_mobile_number, #request_rsp_app_user_id'
 
 $(document).on('click', '#next, #back', function(event) {
   event.preventDefault();
