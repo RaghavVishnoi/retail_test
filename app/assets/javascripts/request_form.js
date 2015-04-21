@@ -1,3 +1,5 @@
+var is_rsp_fields = '#request_retailer_code, #request_rsp_name, #request_rsp_mobile_number'
+
 $(document).on('click', '#next, #back', function(event) {
   event.preventDefault();
   if(!is_next($(this)) || validate_form()) {    
@@ -16,6 +18,7 @@ $(document).on('click', '#next, #back', function(event) {
     }
     if(current_page_index() == 0) {
       $('#back').addClass('hidden');
+      $('#next').removeClass('hidden');
       $('.request_wrap').addClass('hidden');
     }
     if(current_page() == '.requestor_details_page') {
@@ -59,16 +62,17 @@ function is_next(element) {
 $(document).on('click', '#request_is_rsp_true', function(event) {
   event.preventDefault();
   $('#request_is_rsp').val(true);
-  $('#request_rsp_not_present_reason').addClass('hidden');
+  $('#request_rsp_not_present_reason').val(null).addClass('hidden');
+  $(is_rsp_fields).attr('disabled', false);
   $('#next').trigger('click');
 });
 
 $(document).on('click', '#request_is_rsp_false', function(event) {
   event.preventDefault();
   $('#request_is_rsp').val(false);
-  $('.request_wrap input, .request_wrap select').val(null);
+  $(is_rsp_fields).attr('disabled', true).val(null).each(remove_error);
   $('#request_rsp_not_present_reason').removeClass('hidden');
-  $('.rsp_page  .submitt_btn').removeClass('hidden');
+  $('#next').removeClass('hidden');
 });
 
 $(document).on('submit', '.request-form', function(event) {
@@ -76,17 +80,19 @@ $(document).on('submit', '.request-form', function(event) {
 });
 
 
-$(document).on('blur', '.page:visible input, .page:visible select', function() {
+$(document).on('blur', '.page:visible input, .page:visible select', remove_error);
+
+function remove_error() {
   var $error_container = $(this).closest('.field_with_errors')
   var field = $error_container.find('input[name], select[name]').first()
-  if(field.val()) {
+  if(field.val() || field.attr('disabled')) {
     $error_container.removeClass('field_with_errors');
   }
-});
+}
 
 function validate_form() {
   var validate = true;
-  $('.page:visible input[name]:visible, .page:visible select[name]:visible').each(function() {
+  $('.page:visible input[name]:visible:enabled, .page:visible select[name]:visible:enabled').each(function() {
     if(($(this).closest('.required').length > 0) && !$(this).val()) {
       if(!$(this).closest('.field_with_errors').length) {
         var error_class = $(this).attr('error_container');

@@ -8,9 +8,8 @@
     <input type="submit" id="request_is_rsp_true" value="Yes" class="submitt_btn">
     <input type="submit" id="request_is_rsp_false" value="No" class="decline_btn">
 
-    <%= f.select :rsp_not_present_reason, RSP_NOT_PRESENT_REASON, { :prompt => "Select Reason" }, { :class => 'hidden' } %>
+    <%= f.select :rsp_not_present_reason, RSP_NOT_PRESENT_REASON, { :prompt => "Select Reason" }, { :class => 'hidden required' } %>
 
-    <%= f.submit :class => "submitt_btn hidden" %>
   </div>
 </div>
   <div class="request_wrap clearfix hidden">
@@ -50,13 +49,16 @@
         <%= render :partial => 'competition_details', :locals => { :f => f } %>
       </div>
 
-      <input type="submit" value="Next" name="submit button" id="next" class="apprv_btn hidden">
 
-      <input type="submit" value="Back" id="back" class="decline_btn hidden">
 
 
     </div>
 
+  </div>
+
+  <div>
+    <input type="submit" value="Next" name="submit button" id="next" class="apprv_btn hidden">
+    <input type="submit" value="Back" id="back" class="decline_btn hidden">
   </div>
 
 <% end %>
