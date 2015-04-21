@@ -2268,6 +2268,7 @@ Params:
 -- request[space_available]
 -- request[type_of_sis_required]
 -- request[type_of_gsb_requested]
+-- request[is_gsb_installed_outside]
 
 Success Response:
 {

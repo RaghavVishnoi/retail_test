@@ -23,8 +23,11 @@ class Request < ActiveRecord::Base
   validates :cmo_name, :state, :city, :shop_name, :shop_address, :shop_owner_name, :avg_store_monthly_sales, :avg_gionee_monthly_sales, :presence => true
   validates :is_sis_installed, :inclusion => { :in => [true, false] }, :if => "(gsb? || in_shop?)"
   validates :is_main_signage, :inclusion => { :in => [true, false] }, :if => :gsb?
-  validates :width, :height, :presence => true, :if => :gsb?
-  validates :is_gionee_gsb_present, :inclusion => { :in => [true, false] }, :if => :in_shop?
+  validates :width, :height, :type_of_gsb_requested, :presence => true, :if => :gsb?
+  validates :is_gsb_installed_outside?, :inclusion => { :in => [true, false] }, :if => :in_shop?
+  validates :type_of_sis_required, :presence => true, :if => :sis?
+  validates :is_gionee_gsb_present, :inclusion => { :in => [true, false] }, :if => [:sis?]
+  validates :space_available, :presence => true, :if => [:sis?, :in_shop?]
   validate :validate_shop_requirements, :if => :in_shop?
 
   def self.with_query(q)
