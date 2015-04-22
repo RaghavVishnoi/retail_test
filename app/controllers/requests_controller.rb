@@ -7,7 +7,7 @@ class RequestsController < ApplicationController
   PER_PAGE = 20
 
   def index
-    @requests = Request.with_query(params[:q]).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+    @requests = Request.with_query(params[:q]).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
   end
 
   def new
