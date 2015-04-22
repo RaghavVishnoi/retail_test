@@ -184,7 +184,12 @@ input, selct, textarea{ outline: none;}
   background: #FFF; 
   height: 320px;
   box-shadow: -1px -2px 8px 1px #ededed;
-
+  box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -os-box-sizing: border-box;
+    -ms-box-sizing: border-box; 
+  
 }
 .logobox
 {
@@ -201,7 +206,8 @@ margin: 15px 0px;
 .login_form input[type=text], .login_form input[type=password] 
 { 
   width: 100%; 
-  padding: 10px 15px; 
+  padding: 10px 15px !important;
+  font-size: 13px; 
   border: none;
   border-bottom: 1px solid #ddd;
   margin-bottom: 10px; 
@@ -899,7 +905,7 @@ color: #bbbbbb;
 .button_blc {
   background: #fff;
   margin: 0px 15px 15px 15px;
-  padding: 0 3px;
+  padding: 0 16px;
   box-sizing: border-box;
 }
 /*.form-field{
@@ -992,12 +998,12 @@ margin: 15px 15px 0px;
   width: 41% !important;
 }
 .submitt_btn{
-  width: 40% !important;
+  width: 55% !important;
 }
 .requstr_main{
   font-size: 13px !important;
   text-align: center; 
-  margin-bottom: 11px;
+  margin-bottom: 0px;
 }
 .requstr_main div:nth-of-type(2){
   margin: 0 2% !important;
@@ -1009,6 +1015,9 @@ margin: 15px 15px 0px;
 .req_type a:nth-of-type(2){
   font-size: 20px;
   height: auto;
+  text-transform: uppercase;
+  margin: 0 2%;
+  width: 32%;
 }
 .req_type a:nth-of-type(3){
   font-size: 20px;
@@ -1048,5 +1057,11 @@ input[type="e-mail"], input[type="tel"], input[type="text"], select{
 }
 .retailer_code > a{
   padding: 6px 3px !important;
+}
+.select2-container .select2-choice .select2-arrow b{
+  background: url(<%= asset_path 'drop_down_arrow.png' %>)no-repeat, center center, #ededed !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background-position: 97% 3px !important;
 }
 }
