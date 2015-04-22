@@ -11,7 +11,7 @@
   <%= f.text_field :rsp_name, :placeholder => "RSP name", :class => "input_tx required"%>
 
 
-  <%= f.phone_field :rsp_mobile_number, :placeholder => "RSP Mobile Number", :class => "pd-detail required"%>
+  <%= f.phone_field :rsp_mobile_number, :placeholder => "RSP Mobile Number", :class => "pd-detail required", :validation => "validate_mobile_number" %>
 
 
 

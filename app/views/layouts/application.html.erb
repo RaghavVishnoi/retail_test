@@ -21,6 +21,14 @@
   <div id="wrapper">
     <%= render :partial => 'shared/nav_bar' %>
 
+    <% if notice %>
+      <div id="notice"><%= notice %></div>
+    <% end %>
+    
+    <% if alert %>
+      <div id="alert"><%= alert %></div>
+    <% end %>
+
     <div class="main_container clearfix">
       <%= yield %>
     </div>

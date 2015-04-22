@@ -23,7 +23,7 @@ class RequestsController < ApplicationController
     @request = Request.new request_params
     if @request.save
       respond_to do |format|
-        format.html { redirect_to new_request_path }
+        format.html { redirect_to new_request_path, :notice => "Your Request has been submitted" }
         format.json { render :json => { :result => true } }
       end
     else

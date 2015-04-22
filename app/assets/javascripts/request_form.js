@@ -3,14 +3,14 @@ var is_rsp_fields = '#request_rsp_name, #request_rsp_mobile_number, #request_rsp
 $(document).on('click', '#next, #back', function(event) {
   event.preventDefault();
   if(!is_next($(this)) || validate_form()) {    
-    $(current_page()).addClass('hidden');
+    $(current_page() + '.page').addClass('hidden');
     var page_index = current_page_index();
     var next_page_index = is_next($(this)) ? ++page_index : --page_index;
     set_current_page_index(next_page_index);
-    $(current_page()).removeClass('hidden');
+    $(current_page() + '.page').removeClass('hidden');
     $('.req_type .select').trigger('click');
     $('.reqstr_detail .selected').removeClass('selected');
-    $('.reqstr_detail .details').eq(next_page_index).addClass('selected');
+    $('.reqstr_detail ' + current_page()).addClass('selected');
     $('#next, #back').removeClass('hidden');
     $('.req_type').hide();
     if(current_page_index() == total_pages() - 1) {
@@ -85,7 +85,7 @@ $(document).on('blur', '.page:visible input, .page:visible select', remove_error
 function remove_error() {
   var $error_container = $(this).closest('.field_with_errors')
   var field = $error_container.find('input[name], select[name]').first()
-  if(field.val() || field.attr('disabled')) {
+  if(validate_field(field) || field.attr('disabled')) {
     $error_container.removeClass('field_with_errors');
   }
 }
@@ -93,7 +93,7 @@ function remove_error() {
 function validate_form() {
   var validate = true;
   $('.page:visible input[name]:visible:enabled, .page:visible select[name]:visible:enabled').each(function() {
-    if(($(this).closest('.required').length > 0) && !$(this).val()) {
+    if(($(this).closest('.required').length > 0) && !validate_field($(this))) {
       if(!$(this).closest('.field_with_errors').length) {
         var error_class = $(this).attr('error_container');
         var $error_container = error_class ? $(this).closest(error_class) : $(this);
@@ -104,4 +104,18 @@ function validate_form() {
   });
   return validate;
 
+}
+
+function validate_field(element) {
+  var valid, val;
+  valid = val = $(element).val();
+  var validation = $(element).attr('validation');
+  if(validation == "validate_mobile_number") {
+    valid = valid && validate_mobile_number(val);
+  }
+  return valid;
+}
+
+function validate_mobile_number(val) {
+  return val.match(/^\d{10}$/);
 }
