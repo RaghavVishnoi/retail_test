@@ -80,12 +80,12 @@ RSP_NOT_PRESENT_REASON = [
 ]
 
 SIS_TYPES = [
-  ["A", "A"],
-  ["B", "B"],
-  ["C", "C"],
-  ["D", "D"],
-  ["E", "E"],
-  ["F", "F"]
+  ["7’X4ft back wall with wooden top front counter", "7’X4ft back wall with wooden top front counter"],
+  ["7’X4ft back wall with glass top front counter", "7’X4ft back wall with glass top front counter"],
+  ["2’8X2’8 island unit", "2’8X2’8 island unit"],
+  ["Only 7’X4ft back wall with phone display", "Only 7’X4ft back wall with phone display"],
+  ["6’X3’ island table with phone display", "6’X3’ island table with phone display"],
+  ["7’X 8ft back wall with wooden top front counter", "7’X 8ft back wall with wooden top front counter"]
 ]
 
 SPACE_AVAILABLE = [
