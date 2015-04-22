@@ -1050,12 +1050,15 @@ margin: 15px 15px 0px;
 }
 .appr_info{
   padding: 15px 5px !important;
+  word-wrap: break-word;
 }
 .appr_retail{
   padding: 15px 5px !important;
+  word-wrap: break-word;
 }
 .appr_desc{
   padding: 15px 5px !important;
+  word-wrap: break-word;
 }
 .reqstr_detail{
   height: auto;
@@ -1072,7 +1075,9 @@ margin: 15px 15px 0px;
   display: none;
 }
 input[type="e-mail"], input[type="tel"], input[type="text"], select{
-  padding: 10px 3px !important;
+  padding: 10px 2px !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .retailer_code > a{
   padding: 6px 3px !important;
@@ -1089,6 +1094,24 @@ font-size: 15px;
 }
 .login_form {
     margin: 16px 0px;
+}
+.req_desc div:nth-of-type(2){
+  white-space: normal;
+  min-width: 
+}
+.req_desc div:nth-of-type(2) {
+  font-size: 12px;
+  font-weight: bold;
+  color: #bbbbbb;
+  /* min-width: 40px; */
+  white-space: normal;
+  width: 100%;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+.appr_retail div:nth-of-type(2){
+  width: 100%;
+  white-space: normal;
 }
 /***************Image dialog box css************/
 .ui-dialog{
