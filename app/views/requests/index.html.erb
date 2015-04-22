@@ -22,6 +22,7 @@
 
     <% @requests.each do |request| %>
       <%= link_to [:edit, request] do %>
+      <div class="request_contain clearfix">
         <div class="req_info">
           <div><%= request.rsp_name %></div>
           <div><%= request.shop_address %></div>
@@ -31,6 +32,7 @@
           <div><%= request.shop_name %></div>
           <div><%= request.retailer_code %></div>
         </div>
+      </div>
       <% end %>
     <% end %>
 
