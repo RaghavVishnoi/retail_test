@@ -149,12 +149,18 @@ namespace :monit do
 
   task :restart do
     on roles(:web) do
-      execute "service monit restart"
+      execute "sudo service monit restart"
+    end
+  end
+
+  task :stop do
+    on roles(:web) do
+      execute "sudo service monit stop"
     end
   end
 end
 
-before "monit:restart", "monit:configure"
+# before "monit:restart", "monit:configure"
 
 before 'passenger_nginx:install', 'passenger_nginx:setup_apt_sources'
 after 'deploy:install', 'passenger_nginx:install'
@@ -169,7 +175,9 @@ after "deploy:published", "logrotate:configure"
 # after "deploy:stop", "passenger_nginx:stop"
 after "deploy:restart", "passenger_nginx:restart"
 after "deploy:restart", "delayed_job:restart"
-after "deploy:restart", "monit:restart"
+# after "deploy:restart", "monit:restart"
+before "deploy:restart", "monit:stop"
+after "passenger_nginx:restart", "monit:restart"
 
 def write_template(erb_template, target, tmp)
   template = File.read(File.join(File.dirname(__FILE__), erb_template))
