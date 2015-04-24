@@ -7,13 +7,7 @@ class DataFileUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage AWS_CONFIG[:storage] || :file
-
-  def initialize(*)
-    super
-
-    self.fog_public = false
-  end
+  storage :file
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
