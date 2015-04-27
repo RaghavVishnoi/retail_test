@@ -119,3 +119,12 @@ function validate_field(element) {
 function validate_mobile_number(val) {
   return val.match(/^\d{10}$/);
 }
+
+
+$(document).on('ready page:load', function() {
+  setTimeout(hide_flash_message, 5000);
+});
+
+function hide_flash_message() {
+  $('#notice').slideUp(1000);
+}
