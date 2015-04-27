@@ -36,6 +36,8 @@ $(document).on('click', '.req_type a', function() {
   $('.' + request_type + '_request_type').removeClass('hidden');
   $('.req_type .select').removeClass('select');
   $(this).addClass('select');
+  $('.requstr_main .selected').removeClass('selected');
+  $('.requstr_main .' + request_type).addClass('selected');
 });
 
 
