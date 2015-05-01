@@ -33,7 +33,7 @@
             <div><%= request.retailer_code %></div>
           </div>
 
-          <% request.images.each do |image| %>
+          <% request.images.first(3).each do |image| %>
             <div class="image-container">
               <%= image_tag image.image_url %>
             </div>
