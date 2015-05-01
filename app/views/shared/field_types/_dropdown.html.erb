@@ -1,1 +1,1 @@
-<%= f.select :value, options_for_select((property.field[:configuration][:values] || []), property.values.first)  %>
+<%= f.select :values, options_for_select((property.field[:configuration][:values] || []), property.values), {}, { :multiple => true }  %>

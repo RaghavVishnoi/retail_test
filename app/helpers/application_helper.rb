@@ -21,4 +21,19 @@ module ApplicationHelper
       "In-shop"
     end
   end
+
+  def monthly_sales_str(amount, values)
+    amount = amount.to_f
+    index = 0
+    values.each_with_index do |val, i| 
+      index = i
+      if amount < val[1].to_f 
+        index = index - 1
+        break
+      end
+    end
+    index = index < 0  ? 0 : index
+    v = values[index]
+    return v ? v[0] : ""
+  end
 end
