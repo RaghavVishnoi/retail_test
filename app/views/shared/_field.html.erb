@@ -2,8 +2,8 @@
 
 <%= form.fields_for "properties[#{property.field[:id]}]", property do |f| %>
 
-  <div class="request-field">
-    <%= f.label :value, property.field[:display_name] %>
+  <div class="request-field-new">
+    <%= f.label :value, property.field[:display_name], :class => "field-new-label" %>
     <%= f.hidden_field :field_id, :value => property.field[:id] %>
     <%= render :partial => "shared/field_types/#{property.field[:field_type]}", :locals => { :f => f, :property => property } %>
   </div>
