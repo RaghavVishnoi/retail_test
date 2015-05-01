@@ -19,6 +19,6 @@ class OrganizationsController < ApplicationController
     end
 
     def organization_params
-      params.require(:organization).permit(:name, :logo, :properties => [:field_id, :value])
+      params.require(:organization).permit(:name, :logo, :properties => [:field_id, :value, :values => []])
     end
 end

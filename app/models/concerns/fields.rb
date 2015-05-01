@@ -7,8 +7,10 @@ module Fields
 
   def properties=(args)
     args.values.each do |attrs|
-      field_value = initialize_field_value(attrs[:field_id].to_i)
-      field_value.value = attrs[:value]
+      [attrs[:value], attrs[:values]].flatten.compact.each do |val| 
+        field_value = initialize_field_value(attrs[:field_id].to_i)
+        field_value.value = val
+      end
     end
     @values = {}
     args
