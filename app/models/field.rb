@@ -5,7 +5,7 @@ class Field < ActiveRecord::Base
   
   serialize :configuration, Hash 
 
-  validates :entity, :display_name, :presence => true
+  validates :entity, :display_name, :field_type, :presence => true
 
   has_many :field_values, :dependent => :destroy
 

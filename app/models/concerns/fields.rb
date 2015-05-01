@@ -7,15 +7,18 @@ module Fields
 
   def properties=(args)
     args.values.each do |attrs|
-      field_value = initialize_field_value(attrs[:field_id].to_i)
-      field_value.value = attrs[:value]
+      [attrs[:value], attrs[:values]].flatten.compact.each do |val| 
+        field_value = initialize_field_value(attrs[:field_id].to_i)
+        field_value.value = val
+      end
     end
+    @values = {}
     args
   end
 
   def properties
-    @properties = []
     unless @properties.present?
+      @properties = []
       Field.with_entity(self.class.name).each do |f|
         values = find_field_values(f.id).map(&:value)
         @properties << { :field => { :id => f.id, :display_name => f.display_name, :field_type => f.field_type, :value_type => f.value_type, :mandatory => f.mandatory, :configuration => f.configuration }, :values => values }
@@ -28,7 +31,7 @@ module Fields
 
     def find_field_values(field_id)
       @values ||= {}
-      @values[field_id] ||= field_values.select { |v| v.field_id == field_id }
+      @values[field_id] ||= field_values.select { |v| v.field_id == field_id && !v.marked_for_destruction? }
     end
 
     def initialize_field_value(field_id)
