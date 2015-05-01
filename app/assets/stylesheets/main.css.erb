@@ -629,6 +629,40 @@ text-decoration: none;
 color: #000;
 text-decoration: none;
 }
+.image-container{
+  clear: both;
+  padding: 8px 15px;
+  display: block;
+  height: auto;
+}
+.image-container img{
+width: 100px !important;
+height: 83px !important;
+margin-right: 10px;
+padding-bottom: 10px;
+
+}
+.image-wrapr{
+padding: 8px 15px;
+}
+.image-wrapr img{
+margin-right: 10px;
+display: inline-block;
+  width: 150px;
+  height: 100px;
+  padding-bottom: 10px;
+
+}
+.google_icon{
+background: url(<%= asset_path '678111-map-marker-128.png' %>)no-repeat, center center;
+height: 35px;
+width: 35px;
+background-size: 35px;
+position: absolute;
+left: 2%;
+top: 83%;
+}
+
 /*****************approver-flow********************/
 
 .req_blc{
@@ -1120,6 +1154,10 @@ font-size: 15px;
 .appr_retail div:nth-of-type(2){
   width: 100%;
   white-space: normal;
+}
+.google_icon{
+left: 8% !important;
+
 }
 /***************Image dialog box css************/
 .ui-dialog{
