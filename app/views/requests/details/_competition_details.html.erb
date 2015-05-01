@@ -42,9 +42,10 @@
 <div class="image-wrapr">
   <% @request.images.each do |image| %>
       <% if image.lat? && image.long? %>
-        <div class="google_icon"></div>
+        
         <%= link_to "http://maps.google.com/maps?q=#{[image.lat, image.long].join(',')}", :target => "_blank" do %>
           <%= image_tag image.image_url %>
+          <div class="google_icon"></div>
         <% end %>
       <% else %>
         <%= image_tag image.image_url %>
