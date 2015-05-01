@@ -110,7 +110,11 @@ function validate_form() {
 
 function validate_field(element) {
   var valid, val;
-  valid = val = $(element).val();
+  if($(element).attr('type') == 'checkbox') {
+    valid = $("[name='" + $(element).attr('name') + "']").filter(':checked').length
+  } else {
+    valid = val = $(element).val();
+  }
   var validation = $(element).attr('validation');
   if(validation == "validate_mobile_number") {
     valid = valid && validate_mobile_number(val);
