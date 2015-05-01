@@ -651,7 +651,7 @@ display: inline-block;
   width: 150px;
   height: 100px;
   padding-bottom: 10px;
-
+ position: relative;
 }
 .google_icon{
 background: url(<%= asset_path '678111-map-marker-128.png' %>)no-repeat, center center;
@@ -661,6 +661,7 @@ background-size: 35px;
 position: absolute;
 left: 2%;
 top: 83%;
+z-index: 10;
 }
 .request-field-new{
 width: 100%;
@@ -1172,10 +1173,14 @@ font-size: 15px;
 }
 .google_icon{
 left: 8% !important;
-
+top: 89%;
 }
 .request-field-new label{
   width: 43%;
+}
+.image-wrapr img{
+    width: 127px;
+  height: 85px;
 }
 /***************Image dialog box css************/
 .ui-dialog{
