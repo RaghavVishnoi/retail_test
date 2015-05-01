@@ -2,63 +2,12 @@
 <div class="request_wrap clearfix">
   <div><%= request_type_name(@request) %> approve</div>
   <div class="apprvr_wrap">
-    <div class="approv_cont clearfix">
-         
-      <div class="appr_info">
-        <div>CMO Name</div>
-        <div><%= @request.cmo_name %></div>
-      </div>
 
-      <div class="appr_retail">
-        <div>Retailer Code</div>
-        <div><%= @request.retailer_code %></div>
-      </div>
+    <%= render 'requests/details/requestor_details' %>
 
-      <div class="appr_desc">
-        <div>Rsp Name</div>
-        <div><%= @request.rsp_name %></div>
-      </div>
+    <%= render 'requests/details/shop_details' %>
 
-    </div>
-
-
-    <div class="approv_cont clearfix">
-         
-      <div class="appr_info">
-        <div>City</div>
-        <div><%= @request.city %></div>
-      </div>
-
-      <div class="appr_retail">
-        <div>State</div>
-        <div><%= @request.state %></div>
-      </div>
-
-      <div class="appr_desc">
-        <div></div>
-        <div></div>
-      </div>
-
-    </div>
-
-    <div class="approv_cont clearfix">
-         
-      <div class="appr_info">
-        <div>Avg. Monthly sales</div>
-        <div><%= monthly_sales_str(@request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES) %></div>
-      </div>
-
-      <div class="appr_retail">
-        <div>Avg. Gionee Monthly Sales</div>
-        <div><%= monthly_sales_str(@request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES) %></div>
-      </div>
-
-      <div class="appr_desc">
-        <div></div>
-        <div></div>
-      </div>
-
-    </div>
+    <%= render 'requests/details/competition_details' %>
 
     <% if @request.pending? %>
       <%= form_for @request do %>

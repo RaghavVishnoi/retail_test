@@ -36,4 +36,12 @@ module ApplicationHelper
     v = values[index]
     return v ? v[0] : ""
   end
+
+  def field_display_name(field)
+    field ? field[:field][:display_name] : ""
+  end
+
+  def field_values_str(field)
+    field ? field[:values].select(&:present?).join(', ') : ""
+  end
 end

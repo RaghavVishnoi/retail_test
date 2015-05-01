@@ -1,0 +1,115 @@
+<div class="approv_cont clearfix">
+     
+  <div class="appr_info">
+    <div>City</div>
+    <div><%= @request.city %></div>
+  </div>
+
+  <div class="appr_retail">
+    <div>State</div>
+    <div><%= @request.state %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Shop Name</div>
+    <div><%= @request.shop_name %></div>
+  </div>
+
+</div>
+
+<div class="approv_cont clearfix">
+     
+  <div class="appr_info">
+    <div>Shop Address</div>
+    <div><%= @request.shop_address %></div>
+  </div>
+
+  <div class="appr_retail">
+    <div>Shop Owner Name</div>
+    <div><%= @request.shop_owner_name %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Shop Owner Phone</div>
+    <div><%= @request.shop_owner_phone %></div>
+  </div>
+
+</div>
+
+<div class="approv_cont clearfix">
+     
+  <div class="appr_info">
+    <div>Avg. Monthly sales</div>
+    <div><%= monthly_sales_str(@request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES) %></div>
+  </div>
+
+  <div class="appr_retail">
+    <div>Avg. Gionee Monthly Sales</div>
+    <div><%= monthly_sales_str(@request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES) %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Space availabe in store</div>
+    <div><%= @request.space_available %></div>
+  </div>
+
+</div>
+
+
+<div class="approv_cont clearfix">
+     
+  <div class="appr_info">
+    <div>Gionee GSB Present?</div>
+    <div><%= @request.is_gionee_gsb_present %></div>
+  </div>
+
+  <div class="appr_retail">
+    <div>Type of SIS required?</div>
+    <div><%= @request.type_of_sis_required %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Is Gionee SIS installed in shop?</div>
+    <div><%= @request.is_sis_installed %></div>
+  </div>
+
+</div>
+
+<div class="approv_cont clearfix">
+     
+  <div class="appr_info">
+    <div>Is it main signage?</div>
+    <div><%= @request.is_main_signage %></div>
+  </div>
+
+  <div class="appr_retail">
+    <div>GSB installed outside?</div>
+    <div><%= @request.is_gsb_installed_outside %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Width</div>
+    <div><%= @request.width %></div>
+  </div>
+
+</div>
+
+
+<div class="approv_cont clearfix">
+     
+  <div class="appr_info">
+    <div>Height</div>
+    <div><%= @request.height %></div>
+  </div>
+
+  <div class="appr_retail">
+    <div>Type of GSB Requested?</div>
+    <div><%= @request.type_of_gsb_requested %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div><%= field_display_name(@request.shop_requirements) %></div>
+    <div><%= field_values_str(@request.shop_requirements) %></div>
+  </div>
+
+</div>

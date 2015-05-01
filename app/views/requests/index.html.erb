@@ -22,17 +22,23 @@
 
     <% @requests.each do |request| %>
       <%= link_to [:edit, request] do %>
-      <div class="request_contain clearfix">
-        <div class="req_info">
-          <div><%= request.rsp_name %></div>
-          <div><%= request.shop_address %></div>
-        </div>
+        <div class="request_contain clearfix">
+          <div class="req_info">
+            <div><%= request.rsp_name %></div>
+            <div><%= request.shop_address %></div>
+          </div>
 
-        <div class="req_desc">
-          <div><%= request.shop_name %></div>
-          <div><%= request.retailer_code %></div>
+          <div class="req_desc">
+            <div><%= request.shop_name %></div>
+            <div><%= request.retailer_code %></div>
+          </div>
+
+          <% request.images.each do |image| %>
+            <div class="image-container">
+              <%= image_tag image.image_url %>
+            </div>
+          <% end %>
         </div>
-      </div>
       <% end %>
     <% end %>
 
