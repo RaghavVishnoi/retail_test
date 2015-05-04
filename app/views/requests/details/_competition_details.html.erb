@@ -41,10 +41,16 @@
 
 <div class="image-wrapr">
   <% @request.images.each do |image| %>
-    <%= image_tag image.image_url %>
-    <%= image.address %>
-    <% if image.lat? && image.long? %>
-      <%= link_to "", "http://maps.google.com/maps?q=#{[image.lat, image.long].join(',')}", :target => "_blank" %>
-    <% end %>
+    <div class="image_wrap_img">
+      <%= image_tag image.image_url %>
+    </div>
+      <div class="image_wrap_add">address khigiugjgkghj</div>
+      <%#= image.address %>
+      <a class="image_wrap_link"href="javascript:void(0);"><span>Link</span></a>
+
+      <% if image.lat? && image.long? %>
+        <%= link_to "", "http://maps.google.com/maps?q=#{[image.lat, image.long].join(',')}", :target => "_blank" %>
+      <% end %>
+    
   <% end %>
 </div>

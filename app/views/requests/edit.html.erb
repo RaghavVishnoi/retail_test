@@ -11,7 +11,7 @@
 
     <% if @request.pending? %>
       <%= form_for @request do %>
-        <div class="btn_blc">
+        <div class="btn_blc clearfix">
         <%= submit_tag "Approve", :class => "apprv_btn"%>
         <%= submit_tag "Decline", :class => "decline_btn"%>
         </div>
