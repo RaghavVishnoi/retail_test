@@ -19,15 +19,21 @@ AVG_STORE_MONTHLY_SALES = [
 ]
 
 CMO_NAMES = [
-  ["CMO South - Nadeem Pasha", "CMO South - Nadeem Pasha"],
+  ["Mkt Hd South - Nadeem Pasha", "Mkt Hd South - Nadeem Pasha"],
+  ["CMO Kar/Goa - Ameer", "CMO Kar/Goa - Ameer"],
   ["CMO Mum/Mah - Sameeksha Rastogi", "CMO Mum/Mah - Sameeksha Rastogi"],
-  ["CMO Raj/Guj/MP/Chattisgarh - Amit Ginani", "CMO Raj/Guj/MP/Chattisgarh - Amit Ginani"],
+  ["CMO/Mkt Hd Raj/Guj/MP/Chattisgarh - Amit Ginani", "CMO Raj/Guj/MP/Chattisgarh - Amit Ginani"],
+  ["SIS Rajasthan - Ravi Sharma", "SIS Rajasthan - Ravi Sharma"],
+  ["Brandshops Jaipur - Rahul Sharma", "Brandshops Jaipur - Rahul Sharma"],
+  ["Co-ord Head Rajasthan - Gaurav Gupta", "Co-ord Head Rajasthan - Gaurav Gupta"],
+  ["CMO Chattisgarh - Dheeraj Sharma", "CMO Chattisgarh - Dheeraj Sharma"],
+  ["CMO MP - Mahesh Gupta", "CMO MP - Mahesh Gupta"],
+  ["CMO Gujarat - Omkar", "CMO Gujarat - Omkar"],
   ["CMO Delhi/Har - Saurabh Saplok", "CMO Delhi/Har - Saurabh Saplok"],
   ["CMO UP(W) / Uttarakhand - Mr.Prashant Gupta", "CMO UP(W) / Uttarakhand - Mr.Prashant Gupta"],
-  ["CMO UP(E) - Charanjeet Singh Sodhi", "CMO UP(E) - Charanjeet Singh Sodhi"],
-  ["CMO Punjab/J&K/HP/Chd - Pawan", "CMO Punjab/J&K/HP/Chd - Pawan"],
+  ["CMO Punjab/Chd - Pawan Kumar", "CMO Punjab/Chd - Pawan Kumar"],
   ["CMO Bihar/Jharkhand/Orissa - Milon Sarkar", "CMO Bihar/Jharkhand/Orissa - Milon Sarkar"],
-  ["CMO Assam/NE - Nitin", "CMO Assam/NE - Nitin"],
+  ["CMO Assam/Manipur/Mizoram - Sanjay Singh", "CMO Assam/Manipur/Mizoram - Sanjay Singh"],
   ["CMO West Bengal - Kaushik Sen", "CMO West Bengal - Kaushik Sen"]
 ]
 
