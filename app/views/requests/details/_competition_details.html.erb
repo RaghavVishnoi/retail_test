@@ -42,10 +42,11 @@
 <div class="image-wrapr">
   <% @request.images.each do |image| %>
     <div class="image_wrap_img">
-      <%= image_tag image.image_url %>
+      <%= link_to image.image_url, :class => "img_link" do %>
+        <%= image_tag image.image_url %>
+      <% end %>
     </div>
-      <div class="image_wrap_add">address khigiugjgkghj</div>
-      <%#= image.address %>
+      <div class="image_wrap_add"><%= image.address %></div>
       <a class="image_wrap_link"href="javascript:void(0);"><span>Link</span></a>
 
       <% if image.lat? && image.long? %>

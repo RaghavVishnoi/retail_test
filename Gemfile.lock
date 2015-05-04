@@ -82,6 +82,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    colorbox-rails (0.1.2)
+      jquery-rails
+      rails (>= 3.1.1)
     colorize (0.7.3)
     commonjs (0.2.7)
     countries (0.9.3)
@@ -331,6 +334,7 @@ DEPENDENCIES
   capistrano-rails
   carrierwave (= 0.10.0)
   coffee-rails (~> 4.0.0)
+  colorbox-rails
   countries
   daemons
   delayed_job_active_record

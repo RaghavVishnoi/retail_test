@@ -134,3 +134,7 @@ $(document).on('ready page:load', function() {
 function hide_flash_message() {
   $('#notice').slideUp(1000);
 }
+
+$(document).on('ready page:load', function() {
+  $('.img_link').colorbox({ maxWidth:'95%', maxHeight:'95%', rel: 'group' })
+});

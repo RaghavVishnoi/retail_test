@@ -15,4 +15,5 @@
  *= require_self
  *= require jquery.fileupload-ui
  *= require jquery-ui/dialog
+ *= require colorbox-rails
  */
