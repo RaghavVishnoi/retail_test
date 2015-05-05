@@ -34,7 +34,8 @@ CMO_NAMES = [
   ["CMO Punjab/Chd - Pawan Kumar", "CMO Punjab/Chd - Pawan Kumar"],
   ["CMO Bihar/Jharkhand/Orissa - Milon Sarkar", "CMO Bihar/Jharkhand/Orissa - Milon Sarkar"],
   ["CMO Assam/Manipur/Mizoram - Sanjay Singh", "CMO Assam/Manipur/Mizoram - Sanjay Singh"],
-  ["CMO West Bengal - Kaushik Sen", "CMO West Bengal - Kaushik Sen"]
+  ["CMO West Bengal - Kaushik Sen", "CMO West Bengal - Kaushik Sen"],
+  ["CMO UP(E) - Charanjeet Singh", "CMO UP(E) - Charanjeet Singh"]
 ]
 
 STATES = [
