@@ -7,7 +7,8 @@
 
   <div class="filter"></div>
   <div class="sort"></div>
-  <div class="request_dashboard"></div>
-
+  <%= link_to requests_csv_new_path, :remote => true do %>
+    <div class="request_dashboard"></div>
+  <% end %>
   <div class="clear"></div>
 </div>

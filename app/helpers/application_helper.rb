@@ -42,6 +42,6 @@ module ApplicationHelper
   end
 
   def field_values_str(field)
-    field ? field[:values].select(&:present?).join(', ') : ""
+    field ? field[:values].select(&:present?).join('/') : ""
   end
 end

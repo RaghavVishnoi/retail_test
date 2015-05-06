@@ -15,6 +15,8 @@ class Request < ActiveRecord::Base
     event :decline do
       transition :pending => :declined
     end
+
+    after_transition any => [:approved, :declined], :do => :notify_cmo
   end
 
   validates :is_rsp, :inclusion => { :in => [true, false] }
@@ -48,6 +50,10 @@ class Request < ActiveRecord::Base
     end
   end
 
+  def self.between_time(start_time, end_time)
+    where("created_at between ? and ?", start_time, end_time)
+  end
+
   def shop_requirements
     properties.select { |property| property[:field][:configuration][:name] == "shop_requirements" }.first
   end
@@ -66,5 +72,9 @@ class Request < ActiveRecord::Base
     if !(shop_requirements && shop_requirements[:values].present?)
       errors[:shop_requirements] << "can't be blank"
     end
+  end
+
+  def notify_cmo
+    RequestMailer.delay.status_mail(id)
   end
 end

@@ -106,6 +106,10 @@ Rails.application.routes.draw do
     end
     resources :dropdown_values, :only => [:index]
   end
+
+  post '/requests_csv' => 'requests_csv#create'
+  get '/requests_csv/new' => "requests_csv#new"
+  get '/requests_csv/:file_name' => 'requests_csv#show', :as => 'request_csv'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
