@@ -92,3 +92,5 @@ GSB_TYPES = [
   ["FLAG POLE", "FLAG POLE"],
   ["TOTEM", "TOTEM"]
 ]
+
+DEFAULT_EMAILS = ['akash@gionee.co.in']

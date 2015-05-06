@@ -79,6 +79,6 @@ class RequestsCsv
   end
 
   def send_csv
-    RequestMailer.delay.csv_mail([], target_file_name)
+    RequestMailer.delay.csv_mail(DEFAULT_EMAILS, target_file_name)
   end
 end

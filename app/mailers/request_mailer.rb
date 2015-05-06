@@ -1,5 +1,5 @@
 class RequestMailer < ActionMailer::Base
-  default :from => "FOSEM"
+  default :from => "mkt@gionee.co.in"
 
   helper :application
 
@@ -10,7 +10,7 @@ class RequestMailer < ActionMailer::Base
 
   def status_mail(request_id)
     @request = Request.find request_id
-    to = [@request.cmo.email]
+    to = [@request.cmo.email, DEFAULT_EMAILS].flatten.compact
     subject = "Request Id - #{request_id} has been #{@request.status}."
     mail(to: to, subject: subject)
   end
