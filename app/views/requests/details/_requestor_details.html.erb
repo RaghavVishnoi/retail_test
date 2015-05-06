@@ -21,7 +21,7 @@
      
   <div class="appr_info">
     <div>CMO Name</div>
-    <div><%= @request.cmo_name %></div>
+    <div><%= @request.cmo.try(:display_name) %></div>
   </div>
 
   <div class="appr_retail">

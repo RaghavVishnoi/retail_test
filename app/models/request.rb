@@ -6,6 +6,7 @@ class Request < ActiveRecord::Base
   has_many :images, :as => :imageable, :dependent => :destroy
   belongs_to :declined_by_user, :class_name => 'User'
   belongs_to :approved_by_user, :class_name => 'User'
+  belongs_to :cmo, :class_name => 'CMO'
 
   state_machine :status, :initial => :pending do
     event :approve do
@@ -20,7 +21,7 @@ class Request < ActiveRecord::Base
   validates :rsp_not_present_reason, :presence => true, :unless => :is_rsp?
   validates :rsp_name, :rsp_mobile_number, :presence => true, :if => :is_rsp?
   validates :request_type, :presence => true
-  validates :cmo_name, :state, :city, :shop_name, :shop_address, :shop_owner_name, :avg_store_monthly_sales, :avg_gionee_monthly_sales, :retailer_code, :presence => true
+  validates :cmo, :state, :city, :shop_name, :shop_address, :shop_owner_name, :avg_store_monthly_sales, :avg_gionee_monthly_sales, :retailer_code, :presence => true
   validates :is_sis_installed, :inclusion => { :in => [true, false] }, :if => "(gsb? || in_shop?)"
   validates :is_main_signage, :inclusion => { :in => [true, false] }, :if => :gsb?
   validates :width, :height, :type_of_gsb_requested, :presence => true, :if => :gsb?
