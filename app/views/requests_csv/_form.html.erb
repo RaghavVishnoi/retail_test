@@ -1,5 +1,5 @@
 <%= form_tag requests_csv_path, :remote => true do %>
   <%= date_field_tag 'start_date', params[:start_date] %>
   <%= date_field_tag 'end_date', params[:end_date] %>
-  <%= submit_tag 'Generate CSV' %>
+  <%= submit_tag 'Generate CSV', :class => "submitt_btn csv_btn" %>
 <% end %>
