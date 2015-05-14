@@ -75,7 +75,7 @@ class RequestsCsv
       request.space_available, request.is_gionee_gsb_present, request.type_of_sis_required, request.is_sis_installed, request.is_main_signage,
       request.is_gsb_installed_outside, request.width, request.height, request.type_of_gsb_requested, field_values_str(request.shop_requirements),
       branding_details_csv(request), request.remarks, request.status
-    ].flatten.join(',')
+    ].flatten.map {|v| "\"#{v.to_s.gsub('"', '""')}\"" }.join(',')
   end
 
   def send_csv

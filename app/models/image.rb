@@ -10,10 +10,14 @@ class Image < ActiveRecord::Base
 
   private
     def reverse_geocode
-      if lat? && long?
-        geocode = Geocoder.search([lat, long]).first
-        self.skip_reverse_geocode = true
-        self.update_attribute(:address, geocode.address) if geocode
+      begin
+        if lat? && long?
+          geocode = Geocoder.search([lat, long]).first
+          self.skip_reverse_geocode = true
+          self.update_attribute(:address, geocode.address) if geocode
+        end
+      rescue
+        nil
       end
     end
 
