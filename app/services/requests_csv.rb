@@ -51,11 +51,11 @@ class RequestsCsv
   end
 
   def header
-    [ 'Id', 'Request type', 'RSP Present in Shop?', 'Reason', 'CMO Name', 'Retailer Code', 'RSP Name', 'RSP Mobile number', 'RSP sales tag app user ID', 
+    [ 'Id','status', 'Request type', 'RSP Present in Shop?', 'Reason', 'CMO Name', 'Retailer Code', 'RSP Name', 'RSP Mobile number', 'RSP sales tag app user ID', 
       'City', 'state', 'Shop Name', 'Shop Address', 'Shop Owner Name', 'Shop Owner Phone', 'Avg. Store Monthly Sales',
       'Avg. Gionee Monthly Sales', 'Space Available in Store', 'Gionee GSB Present?', 'Type of SIS required?',
       'Is Gionee SIS installed in shop?', 'Is it main signage?', 'GSB installed outside?', 'Width', 'Height',
-      'Type of GSB Requested?', 'Shop Requirements', branding_details_header, 'Remarks', 'status'
+      'Type of GSB Requested?', 'Shop Requirements', branding_details_header, 'Remarks'
     ].flatten.join(',')
   end
 
@@ -69,12 +69,12 @@ class RequestsCsv
   end
 
   def to_csv(request)
-    [ request.id, request_type_name(request), request.is_rsp, request.rsp_not_present_reason, request.cmo.try(:display_name), request.retailer_code, request.rsp_name,
+    [ request.id, request.status, request_type_name(request), request.is_rsp, request.rsp_not_present_reason, request.cmo.try(:display_name), request.retailer_code, request.rsp_name,
       request.rsp_mobile_number, request.rsp_app_user_id, request.city, request.state, request.shop_name, request.shop_address,
       request.shop_owner_name, request.shop_owner_phone, monthly_sales_str(request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES), monthly_sales_str(request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES),
       request.space_available, request.is_gionee_gsb_present, request.type_of_sis_required, request.is_sis_installed, request.is_main_signage,
       request.is_gsb_installed_outside, request.width, request.height, request.type_of_gsb_requested, field_values_str(request.shop_requirements),
-      branding_details_csv(request), request.remarks, request.status
+      branding_details_csv(request), request.remarks
     ].flatten.map {|v| "\"#{v.to_s.gsub('"', '""')}\"" }.join(',')
   end
 

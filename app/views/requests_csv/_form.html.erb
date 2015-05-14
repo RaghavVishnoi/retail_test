@@ -1,7 +1,11 @@
 <%= form_tag requests_csv_path, :remote => true do %>
-  <%= label_tag 'start_date', "From" %>
-  <%= date_field_tag 'start_date', params[:start_date], :placeholder => "From" %>
-  <%= label_tag "end_date", "Till" %>
-  <%= date_field_tag 'end_date', params[:end_date], :placeholder => "Till" %>
+  <div class="date_wrapper">
+    <%= label_tag 'start_date', "From" %>
+    <%= date_field_tag 'start_date', params[:start_date]%>
+  </div>
+  <div class="date_wrapper">
+    <%= label_tag "end_date", "Till" %>
+    <%= date_field_tag 'end_date', params[:end_date] %>
+  </div>
   <%= submit_tag 'Generate CSV', :class => "submitt_btn csv_btn" %>
 <% end %>
