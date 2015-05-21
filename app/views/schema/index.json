@@ -73,16 +73,6 @@
       "pagination": false,
       "login_required": false,
       "single_record": true
-    },
-
-    {
-      "table_name": "retailer_codes",
-      "columns": [
-        { "name": "display_name", "type": "text" }
-      ],
-      "url": "/api/v1/requests/autocomplete_retailer_code",
-      "login_required": false,
-      "pagination": true
     }
   ]
 }
