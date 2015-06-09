@@ -2,7 +2,11 @@
   
   <h4 id="form-title">Enter Request Code</h4>
   
-   
+   <% flash.each do |name, msg| -%>
+                     	<div style="color:red">
+                     		<%=msg%>
+                     	</div>
+   					 <% end %>
   <div class="form-field">
     <%= f.label :name %>
    <%= f.text_field :id %>

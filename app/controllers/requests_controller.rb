@@ -63,7 +63,13 @@ class RequestsController < ApplicationController
     end
 
     def view
+      @request=""
+      begin
        @request = Request.find(params[:request][:id])
+     rescue
+          flash.now[:error] = "Entered requested id does not exist"
+          redirect_to '/requests/show', :flash => { :error => "Entered request id does not exist" }
+       end
     end
 
     
