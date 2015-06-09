@@ -1,9 +1,22 @@
 == README
 
+== Setup
+
+bundle exec rake db:create
+bundle exec rake db:migrate
+bundle exec rake db:seed
+
+
 == Deploy
 
 bundle exec cap staging deploy
 
-== Upload Screens
+== Restart
+bundle exec cap staging deploy:restart
 
-scp -i .ec2/fosem.pem -r UIFileGenerator/ ubuntu@54.169.152.177:/var/www/fosem-staging/current/
+
+== Server Login
+ssh fosem@180.179.208.178
+
+== default emails
+constant_values

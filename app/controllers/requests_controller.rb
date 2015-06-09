@@ -12,6 +12,7 @@ class RequestsController < ApplicationController
 
   def new
     @request = Request.new
+
     respond_to do |format|
       format.html
       format.json { render :json => @request.as_json(:methods => [:shop_requirements, :branding_details]) }
@@ -22,6 +23,7 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new request_params
     if @request.save
+      
       respond_to do |format|
         format.html { redirect_to new_request_path, :notice => "Your Request has been submitted" }
         format.json { render :json => { :result => true } }
@@ -35,12 +37,17 @@ class RequestsController < ApplicationController
   end
 
 
+
   def update
+
+   
     if params[:commit] == "Approve"
       @request.approved_by_user_id = current_user.id
+      @request.comment_by_approver = params[:comment]
       @request.approve
     elsif params[:commit] == "Decline"
       @request.declined_by_user_id = current_user.id
+      @request.comment_by_approver = params[:comment]
       @request.decline
     end
     if @request.errors.present?
@@ -49,6 +56,17 @@ class RequestsController < ApplicationController
       redirect_to requests_path(:q => { :status => 'pending' })
     end
   end
+
+
+   def show
+    @request = Request.new
+    end
+
+    def view
+       @request = Request.find(params[:request][:id])
+    end
+
+    
 
   def autocomplete_retailer_code
     @requests = Request.with_retailer_code(params[:q]).select(:retailer_code).uniq.paginate(:per_page => 100, :page => (params[:page] || '1'))

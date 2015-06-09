@@ -47,13 +47,13 @@ Rails.application.routes.draw do
     resources :contacts
   end
 
-  resources :requests, :only => [:index, :edit, :update, :new, :create] do
+  resources :requests, :only => [:index, :edit, :update, :new, :create, :show] do
     get :autocomplete_retailer_code, :on => :collection
   end
 
   resources :customers_users, :only => [:new, :create, :destroy]
   
-  resources :cities, :item_regions, :categories, :collections, :sizes, :alcohol_percents, :images, :warehouses, :screens, :fields, :surveys, :holidays, :roles, :permissions, :apps, :except => [:show]
+  resources :cities, :item_regions, :categories, :collections, :sizes, :alcohol_percents, :images, :warehouses,:items, :screens, :fields, :surveys, :holidays, :roles, :permissions, :apps, :except => [:show]
   
   resources :items, :except => [:show] do
     get :autocomplete, :on => :collection
@@ -87,7 +87,7 @@ Rails.application.routes.draw do
     resources :categories, :item_regions, :cities, :collections, :sizes, :alcohol_percents, :images, :warehouses, :except => [:show]
     resources :screens, :only => [:index, :show]
     resources :items, :except => [:show] do
-      resources :inventories, :except => [:show]
+    resources :inventories, :except => [:show]
     end
     resources :data_files, :only => [:index]
     resources :folders, :except => [:index]
@@ -106,7 +106,7 @@ Rails.application.routes.draw do
     end
     resources :dropdown_values, :only => [:index]
   end
-
+  post '/requests/view' 
   post '/requests_csv' => 'requests_csv#create'
   get '/requests_csv/new' => "requests_csv#new"
   get '/requests_csv/:file_name' => 'requests_csv#show', :as => 'request_csv'

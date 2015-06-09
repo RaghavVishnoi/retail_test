@@ -1,1 +1,0 @@
-{"screen_name":"VNL01","screen_table_ids":"17","screen_url":"/api/v1/customers","screen_url_post":null,"Tables":[{"table_id":17,"css":null,"pt_id":null,"type":"LV","scrollable":"y","component_ids":"28","children":[{"components_id":28,"name":"Label","css":"L","type":"L","id":"customers","behaviour":null,"action_id":"N","target_id":null,"request_id":"CDT01","value":null}]}]}

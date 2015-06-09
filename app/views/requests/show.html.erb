@@ -1,0 +1,12 @@
+<%= form_for @request, :remote => request.format.js?, :url => {:controller => "requests", :action => "view"}, :html => { :class => 'user-form' } do |f| %>
+  
+  <h4 id="form-title">Enter Request Code</h4>
+  
+   
+  <div class="form-field">
+    <%= f.label :name %>
+   <%= f.text_field :id %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

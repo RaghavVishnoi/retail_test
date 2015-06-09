@@ -2,7 +2,7 @@
 lock '3.3.3'
 
 set :application, 'fosem-staging'
-set :repo_url, 'git@github.com:LetsgomoLabs/gionee_be.git'
+set :repo_url, 'ssh://xp-dev.com/LPTPL_GIONEE_REQUESTER_WEB'
 
 set :tmp_dir, "/home/fosem/tmp"
 
