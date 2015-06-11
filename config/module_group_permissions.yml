@@ -26,3 +26,6 @@ Request:
   group_name: "Requests"
   permissions:
     "manage, Request": "Approve/Decline Request"
+    "read, Request": "Show Request"
+    "edit, Request": "Edit Request"
+ 

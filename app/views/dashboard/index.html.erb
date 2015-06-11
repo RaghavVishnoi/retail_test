@@ -81,7 +81,7 @@
     <%# end %>
   <%# end %>
 
-  <% if can? :manage, Request %>
+  <% if can? :read, Request %>
     <%= link_to requests_path(:q => { :status => 'pending' }) do %>
       <div class="box">
         <span><i><%= image_tag 'logo.png' %></i></span>
@@ -90,6 +90,8 @@
     <% end %>
   <% end %>
 
+   
+ <!--  -->
   <%# if can? :read, User %>
     <%#= link_to user_shifts_path do %>
       <!-- <div class="box"> -->

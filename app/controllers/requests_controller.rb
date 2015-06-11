@@ -8,6 +8,7 @@ class RequestsController < ApplicationController
 
   def index
     @requests = Request.with_query(params[:q]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+    
   end
 
   def new
@@ -57,6 +58,7 @@ class RequestsController < ApplicationController
     end
   end
 
+  
 
    def show
     @request = Request.new
@@ -72,6 +74,7 @@ class RequestsController < ApplicationController
        end
     end
 
+ 
     
 
   def autocomplete_retailer_code

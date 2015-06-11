@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     resources :contacts
   end
 
-  resources :requests, :only => [:index, :edit, :update, :new, :create, :show] do
+  resources :requests, :only => [:index, :edit, :update, :new, :create] do
     get :autocomplete_retailer_code, :on => :collection
   end
 
@@ -106,7 +106,9 @@ Rails.application.routes.draw do
     end
     resources :dropdown_values, :only => [:index]
   end
+  get '/requests/show'
   post '/requests/view' 
+   
   post '/requests_csv' => 'requests_csv#create'
   get '/requests_csv/new' => "requests_csv#new"
   get '/requests_csv/:file_name' => 'requests_csv#show', :as => 'request_csv'
