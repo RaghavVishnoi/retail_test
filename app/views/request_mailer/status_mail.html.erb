@@ -28,6 +28,8 @@
 
 <% @request.branding_details.each do |branding_details| %>
   <p><%= field_display_name(branding_details) %>: <%= field_values_str(branding_details) %></p>
+
 <% end %>
 
 <p>Remarks: <%= @request.remarks %></p>
+<p>Approver Comment: <%= @request.comment_by_approver %></p>

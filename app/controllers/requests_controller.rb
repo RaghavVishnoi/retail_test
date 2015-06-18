@@ -41,14 +41,23 @@ class RequestsController < ApplicationController
 
   def update
 
-   
+      comment = params[:comment]
+      comment = comment.strip
     if params[:commit] == "Approve"
-      @request.approved_by_user_id = current_user.id
-      @request.comment_by_approver = params[:comment]
+      
+      if comment == ''
+        @request.comment_by_approver = 'ok'
+      else
+        @request.comment_by_approver = comment
+      end
       @request.approve
     elsif params[:commit] == "Decline"
       @request.declined_by_user_id = current_user.id
-      @request.comment_by_approver = params[:comment]
+      if comment == ''
+        @request.comment_by_approver = 'Not Suitable'
+      else
+        @request.comment_by_approver = comment
+      end
       @request.decline
     end
     if @request.errors.present?
