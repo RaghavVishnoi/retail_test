@@ -7,6 +7,8 @@ class Request < ActiveRecord::Base
   belongs_to :declined_by_user, :class_name => 'User'
   belongs_to :approved_by_user, :class_name => 'User'
   belongs_to :cmo, :class_name => 'CMO'
+  belongs_to :retailer,:class_name => 'RetailerState'
+
 
   state_machine :status, :initial => :pending do
     event :approve do

@@ -1,10 +1,29 @@
 class RequestsController < ApplicationController
   
   before_action :find_request, :only => [:edit, :update]
-  authorize_resource :except => [:create, :new, :autocomplete_retailer_code]
-  skip_before_action :authenticate_user, :only => [:create, :new, :autocomplete_retailer_code]
+  authorize_resource :except => [:create, :new, :autocomplete_retailer_code,:state,:city]
+  skip_before_action :authenticate_user, :only => [:create, :new, :autocomplete_retailer_code,:state,:city]
 
   PER_PAGE = 20
+
+  def state
+
+    value = params[:value]
+    @city = Retailer.where(state: value).uniq.order("city asc")
+    render :json => @city
+     
+   
+    
+  end
+
+  def city
+
+    value = params[:value]
+    puts "here is value #{value}"
+    @retailer = Retailer.where(city: value).uniq.order("city asc")
+    render :json => @retailer
+
+  end
 
   def index
     @requests = Request.with_query(params[:q]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
@@ -44,7 +63,7 @@ class RequestsController < ApplicationController
       comment = params[:comment]
       comment = comment.strip
     if params[:commit] == "Approve"
-      
+      @request.approved_by_user_id = current_user.id
       if comment == ''
         @request.comment_by_approver = 'ok'
       else
@@ -67,11 +86,11 @@ class RequestsController < ApplicationController
     end
   end
 
-  
+   
 
    def show
     @request = Request.new
-    end
+   end
 
     def view
       @request=""

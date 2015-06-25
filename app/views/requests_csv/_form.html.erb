@@ -1,11 +1,21 @@
+
+<script>
+$(document).ready(function(){
+	 
+	$( "#datepicker" ).datepicker();
+	$( "#datepicker1" ).datepicker();
+
+});
+</script>
+
 <%= form_tag requests_csv_path, :remote => true do %>
-  <div class="date_wrapper">
+  <div class="date_wrapper" id="field-width">
     <%= label_tag 'start_date', "From" %>
-    <%= date_field_tag 'start_date', params[:start_date]%>
+    <%= text_field_tag 'start_date', params[:start_date],:id => 'datepicker'%>
   </div>
-  <div class="date_wrapper">
+  <div class="date_wrapper" id="field-width">
     <%= label_tag "end_date", "Till" %>
-    <%= date_field_tag 'end_date', params[:end_date] %>
+    <%= text_field_tag 'end_date', params[:end_date] ,:id => 'datepicker1'%>
   </div>
   <%= submit_tag 'Generate CSV', :class => "submitt_btn csv_btn" %>
 <% end %>

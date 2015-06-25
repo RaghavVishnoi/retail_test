@@ -12,7 +12,7 @@
     <% if @request.pending? %>
       <%= form_for @request do %>
         <div class="btn_blc clearfix">
-         <% if can? :manage, Request %>
+         <% if can? :read, Request %>
            <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>
           <%= submit_tag "Approve", :class => "apprv_btn"%>
           <%= submit_tag "Decline", :class => "decline_btn"%>
@@ -22,3 +22,4 @@
     <% end %>
   </div>
 </div>
+
