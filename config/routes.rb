@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
   resources :attendances, :only => [:index]
 
+  resources :vendor_tasks, :only => [:index,:new,:create,:edit,:update]
+
   resources :documents, :except => [:index] do
     put :share, :on => :member
   end
@@ -51,7 +53,7 @@ Rails.application.routes.draw do
     resources :contacts
   end
 
-  resources :requests, :only => [:index, :edit, :update, :new, :create] do
+    resources :requests, :only => [:index, :edit, :update, :new, :create] do
     get :autocomplete_retailer_code, :on => :collection
   end
 
@@ -85,6 +87,8 @@ Rails.application.routes.draw do
       get '/home' => 'home#index'
       resources :attendances, :only => [:create]
       resources :citylists, :only =>[:index]
+      resources :radiofields, :only =>[:index]
+      resources :visitors, :only =>[:index]
       resources :retailerlists, :only =>[:index]
     end
   end
@@ -108,6 +112,7 @@ Rails.application.routes.draw do
     end
     resources :surveys, :only => [:index]
     resources :answers, :only => [:create]
+    resources :vendor_tasks, :only => [:index,:edit,:update,:new, :create]
     resources :requests, :only => [:new, :create] do
       get :autocomplete_retailer_code, :on => :collection
     end
@@ -116,8 +121,8 @@ Rails.application.routes.draw do
   get '/requests/state'
   get '/requests/city'
   post 'requests/modify'
-  get '/requests/show'
   post '/requests/view' 
+  post '/vendor_tasks/view'
    
   post '/requests_csv' => 'requests_csv#create'
   get '/requests_csv/new' => "requests_csv#new"

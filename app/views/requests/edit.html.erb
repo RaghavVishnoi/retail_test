@@ -1,25 +1,106 @@
+                  <% 
+                     
+                   if @request.status == 'cmo_pending'
+                    @cmo_approve_date = ''
+                    @heading = ''
+                    @status = 'Pending for CMO'
+                    @date = ''
+                    elsif @request.status == 'cmo_declined'
+                    @status = 'Declined by CMO'
+                    @date = @request.cmo_approve_date
+                    elsif @request.status == 'pending'
+                    @status = 'Approved by CMO'
+                    @date = @request.cmo_approve_date
+                    elsif @request.status == 'pending'
+                    @status = 'Pending for Approver'
+                    @date = ''
+                    elsif @request.status == 'declined'
+                    @status = 'Declined by Approver'
+                    @date = @request.approver_approve_date
+                    @heading = 'CMO approved date'
+                    @cmo_approve_date = @request.cmo_approve_date
+                    elsif @request.status == 'approved'
+                    @status = 'Approved by Approver'
+                    @date = @request.approver_approve_date
+                    @heading = 'CMO approved date'
+                    @cmo_approve_date = @request.cmo_approve_date
+                    %>
+                  <%end%> 
 <%= render :partial => "shared/error_messages", :locals => { :errors => @request.errors } %>
-<div class="request_wrap clearfix">
-  <div><%= request_type_name(@request) %> approve</div>
-  <div class="apprvr_wrap">
-
+<div class="request_wrap clearfix" >
+  <div><%= @request.request_type %> approve
+    <%= render :partial => 'search' %>
+  </div>
+   <div class="apprvr_wrap">
+   <%if( @request.request_type != 'maintenance' && @request.request_type != 'visitor')%>
     <%= render 'requests/details/requestor_details' %>
 
     <%= render 'requests/details/shop_details' %>
 
     <%= render 'requests/details/competition_details' %>
+
+    <%end%>
+
+   <%if(@request.request_type != 'sis' && @request.request_type != 'in_shop' && @request.request_type != 'gsb' && @request.request_type != 'visitor')%>
+
+    <%= render 'requests/details/maintenance_details_I' %>
+
+    <%= render 'requests/details/maintenance_details_II' %>
+
+    <%= render 'requests/details/maintenance_details_III' %>
+
+    <%end%>
+
+    <%if(@request.request_type == 'visitor')%>
+
+    <%= render 'requests/details/visitor_details' %>
+
+    <%= render 'requests/details/visitor_shop_details' %>
+
+    <%= render 'requests/details/rsp_details' %>
+
+    <%= render 'requests/details/gsb_visit_details' %>
+
+    <%= render 'requests/details/sis_visit_details' %>
+
+    <%= render 'requests/details/clipon_details' %>
+
+    <%= render 'requests/details/visitor_overall_performance' %>
+
+   <% end %> 
   
-    <% if @request.pending? %>
+    <% if can? :cmo , Request %>
       <%= form_for @request do %>
+      <% if @request.cmo_pending? %>
         <div class="btn_blc clearfix">
-         <% if can? :read, Request %>
-           <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>
-          <%= submit_tag "Approve", :class => "apprv_btn"%>
-          <%= submit_tag "Decline", :class => "decline_btn"%>
-          <%end  %>
+         
+        <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>
+        <%= hidden_field_tag "status","cmo_pending" %>
+        <%= hidden_field_tag "prev_url",  @prev_url %>
+        <%= submit_tag "Approve", :class => "apprv_btn"%>
+        <%= submit_tag "Decline", :class => "decline_btn"%>
         </div>
       <% end %>
+      <%end%>
     <% end %>
+
+    <% if can? :approve , Request %>
+      <% if @request.pending? %>
+        <%= form_for @request do %>
+          <div class="btn_blc clearfix">
+            <%= hidden_field_tag "status","pending" %>
+            <%= hidden_field_tag "prev_url",  @prev_url %>
+            <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>
+            
+          
+            <%= submit_tag "Approve", :class => "apprv_btn"%>
+            <%= submit_tag "Decline", :class => "decline_btn"%>
+          </div>
+          
+        <%end%>
+      <%end%>
+    <% end %>
+
   </div>
 </div>
 

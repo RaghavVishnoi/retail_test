@@ -1,0 +1,79 @@
+<div class="approv_cont clearfix">
+     
+  
+
+  <%if(@request.is_gionee_gsb_present == true)%>
+
+  <div class="appr_info">
+    <div>GSB Type Installed </div>
+    <div><%= @request.gsb_type_installed %></div>
+  </div>
+
+  
+
+  <div class="appr_info">
+    <div></div>
+    <div></div>
+  </div>
+
+
+  <div class="appr_info">
+    <div>Location of GSB </div>
+    <div><%= @request.location_of_gsb %></div>
+  </div>
+
+   
+
+  <div class="appr_info">
+    <div>GSB cleanliness</div>
+    <div><%= @request.gsb_cleanliness %></div>
+  </div>
+
+  
+
+  <div class="appr_info">
+    <div>Installation quality</div>
+    <div><%= @request.installation_quality %></div>
+  </div>
+
+  <div class="appr_info">
+    <div>GSB Lights working</div>
+    <div><%=@request.is_gsb_light_woring%></div>
+  </div>
+
+  <div class="appr_info">
+    <div>GSB Light throw is good</div>
+    <div><%= @request.is_gsb_light_throw_is_good %></div>
+  </div>
+
+  <div class="appr_info">
+    <div>GSB structure / Letters / Vinyl is damaged</div>
+    <div><%=@request.gsb_structured_damage  %></div>
+  </div>
+
+  <div class="appr_info">
+    <div>Any other problem variation</div>
+    <div><%=@request.gsb_other_problem%></div>
+  </div>
+
+
+  <div class="appr_info">
+    <div>Retailer Feedback</div>
+    <div><%=@request.gsb_retailer_feedback%></div>
+  </div>
+
+   <div class="appr_info">
+    <div></div>
+    <div></div>
+  </div>
+
+
+ <div class="appr_info">
+    <div></div>
+    <div></div>
+  </div>
+
+
+  <%end%>
+
+</div>

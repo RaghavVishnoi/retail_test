@@ -1,6 +1,6 @@
 class Field < ActiveRecord::Base
   enum entity: ["Organization", "Region", "Item", "Request"]
-  enum field_type: ["text", "dropdown", "checkbox"]
+  enum field_type: ["text", "dropdown", "checkbox", "radio"]
   enum value_type: ['string', 'decimal']
   
   serialize :configuration, Hash 

@@ -4,7 +4,7 @@ class ScreensController < ApplicationController
   before_action :initialize_resources, :only => [:index]
   authorize_resource :except => [:index, :show]
 
-  PER_PAGE = 20
+  PER_PAGE = 50
 
   def index
     @screens = @screens.active(params[:app_id]) if request.format.json?

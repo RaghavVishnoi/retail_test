@@ -123,13 +123,6 @@ $(document).ready(function(){
     }); 
 
            });
-  $(document).ready(function(){
-      $('#form').hide();
-      $('#click').click(function(){
-          $('#form').show();
-          $('#click').hide();
-
-      });
-  });
+   
 
        });

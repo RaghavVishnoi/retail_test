@@ -1,0 +1,46 @@
+<div class="visitor_shop_details_page page hidden" >
+
+ <script>
+	$(document).ready(function(){
+		$('#loader2').hide();
+	});
+</script>
+<%= f.select :cmo_id, CMO.display_names, { :prompt => "CMO Name" } , :class => "pd-detail required"%>
+ 
+ <div id="loader2" class="loader"><%= image_tag 'loader.gif' %></div>
+ 
+<%= f.select :retailer_code, Retailer.order(:state).all.map {|a| a.state}.uniq, { :prompt => "Select State" } , :class => "pd-detail required",:id => "get2"%>
+
+<%= f.select :retailer_code, '', { :prompt => "Select City" } , :class => "pd-detail required", :id => "city2"%>
+ 
+<%= f.select :retailer_code, '', { :prompt => "Select Retailer" } , :class => "pd-detail required",:id => "retailer2"%>
+
+<%=f.select :store_selling_gionee,VISITOR_BOOLEAN_VALUES,{:prompt => "Store selling gionee"},:class => "pd-detail required"%>
+
+
+<%=f.select :is_rsp,BOOLEAN_VALUES,{:prompt => "Is RSP Present?"},:class => "pd-detail required",:id => "is_rsp"%>
+
+<%=f.select :is_gionee_gsb_present,BOOLEAN_VALUES,{:prompt => "Is GSB Present?"},:class => "pd-detail required",:id => "is_gsb"%>
+
+<%=f.select :is_sis_installed,BOOLEAN_VALUES,{:prompt => "Is SIS Present?"},:class => "pd-detail required",:id => "is_sis"%>
+
+<%=f.select :is_clipon_present,VISITOR_BOOLEAN_VALUES,{:prompt => "Is CLIPON Present?"},:class => "pd-detail required",:id => "is_clipon"%>
+
+<%=f.select :is_countertop_present,VISITOR_BOOLEAN_VALUES,{:prompt => "Countertop present"},:class => "pd-detail required"%>
+
+<%=f.select :is_standee_present,VISITOR_BOOLEAN_VALUES,{:prompt => "Standee present"},:class => "pd-detail required"%>
+
+<%=f.select :no_of_peace_in_stock,No_OF_PIECES_IN_STOCK,{:prompt => "No of pieces in stock"},:class => "pd-detail required"%>
+
+<%=f.select :is_leaflets_available,VISITOR_BOOLEAN_VALUES,{:prompt => "Leaflets / Brochures available"},:class => "pd-detail required"%>
+
+<%=f.select :is_wall_poster_in_shop,VISITOR_BOOLEAN_VALUES,{:prompt => "Wall Posters in shop"},:class => "pd-detail required"%>
+
+<%=f.select :is_dangler_in_shop,VISITOR_BOOLEAN_VALUES,{:prompt => "Danglers in shop"},:class => "pd-detail required"%>
+ 
+ <div style="clear:both;"></div>
+ <div>
+<input type="submit" value="Next" name="submit button" id="next-v" class="apprv_btn hidden">
+<input type="submit" value="Back" id="back-v" class="decline_btn hidden">
+  </div>
+</div>

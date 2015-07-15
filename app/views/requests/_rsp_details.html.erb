@@ -1,0 +1,31 @@
+<div class="rsp_details_page page hidden" >
+
+
+
+  <%=f.select :rsp_assigned_in_store,VISITOR_BOOLEAN_VALUES,{:prompt => "RSP Assigned in store"},:class => "pd-detail required",:id => "rsp_assign"%>
+    
+ 
+
+   <div id="rsp_assigned_in_store" style="margin-top:2%;">
+   		 
+        
+        <%=f.select :rsp_present_in_shop,VISITOR_BOOLEAN_VALUES,{:prompt => "RSP Present in store"},:class => "pd-detail required"%>
+       
+        <%=f.select :rsp_in_gionee_tshirt,VISITOR_BOOLEAN_VALUES,{:prompt => "RSP in Gionee T-shirt"},:class => "pd-detail required"%>
+
+        <%=f.select :rsp_well_groomed,VISITOR_BOOLEAN_VALUES,{:prompt => "RSP well groomed"},:class => "pd-detail required"%>
+
+        <%=f.select :rsp_selling_skills,SELLING_SKILLS,{:prompt => "RSP selling skills and knowledge level"},:class => "pd-detail required"%>
+     
+
+   </div> 
+
+    
+<div style="clear:both;"></div>
+ <div>
+     <input type="submit" value="Next" name="submit button" id="next-v" class="apprv_btn hidden">
+     <input type="submit" value="Back" id="back-v" class="decline_btn hidden">
+  </div>
+  
+
+</div>

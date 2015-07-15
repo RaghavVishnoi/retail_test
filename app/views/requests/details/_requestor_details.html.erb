@@ -1,6 +1,15 @@
- 
+ <script>
+  $(document).ready(function(){
+      $('#form').hide();
+      $('#click').click(function(){
+          $('#form').show();
+          $('#click').hide();
 
-<div class="approv_cont clearfix">
+      });
+  });
+</script>
+    
+ <div class="approv_cont clearfix">
   <div class="appr_info">
     <div>RSP Present in Shop?</div>
     <div><%= @request.is_rsp %></div>
@@ -13,49 +22,65 @@
     <% end %>
   </div>
 
-  <div class="appr_desc">
-    <div></div>
-    <div></div>
+  <div class="appr_retail">
+    <div><%=@heading%></div>
+    <div><%=@cmo_approve_date%></div>
   </div>
+
+  
 </div>
 
 <div class="approv_cont clearfix">
      
   <div class="appr_info">
+    <div><%=@status%></div>
+    <div><%=@date%></div>
+  </div>
+
+  <div class="appr_retail">
     <div>CMO Name</div>
     <div><%= @request.cmo.try(:display_name) %></div>
   </div>
 
-  <div class="appr_retail">
+  <div class="appr_desc">
     
     <div>Retailer Code</div>
     <div><%= @request.retailer_code %></div>
-   
+    <% if can? :manage, Request %>
+    <div style="width:30%;margin:auto;" id="form">
+    <%= form_tag("/requests/modify", method: "post") do %>
+      <%= text_field_tag('retailer_code',nil,required:'required') %>
+      <%= hidden_field_tag('request_id', @request.id)%>
+      <%= submit_tag("Replace") %>
+      <% end %>
+      
+    </div>
+    <div> <%= submit_tag("Change Retailer Code",id:'click') %></div>
+    <%end%>
 
   </div>
 
-  <div class="appr_desc">
-    <div>Rsp Name</div>
-    <div><%= @request.rsp_name %></div>
-  </div>
+  
 
 </div>
 
 <div class="approv_cont clearfix">
      
-  <div class="appr_info">
+<div class="appr_info">
+    <div>Rsp Name</div>
+    <div><%= @request.rsp_name %></div>
+  </div>
+
+  <div class="appr_retail">
     <div>RSP Mobile Number</div>
     <div><%= @request.rsp_mobile_number %></div>
   </div>
 
-  <div class="appr_retail">
+  <div class="appr_desc">
     <div>RSP sales tag app user ID</div>
     <div><%= @request.rsp_app_user_id %></div>
   </div>
 
-  <div class="appr_desc">
-    <div></div>
-    <div></div>
-  </div>
+  
 
 </div>

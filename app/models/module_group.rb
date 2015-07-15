@@ -1,5 +1,5 @@
 class ModuleGroup < ActiveRecord::Base
-  enum name: [:login, :items, :default, :attendance, :crm, :survey, :requester]
+  enum name: [:login, :items, :default, :attendance, :crm, :survey, :requester,:vendor,:testing]
   has_many :screens, :dependent => :nullify
   has_many :apps_module_groups, :dependent => :destroy
   has_many :apps, :through => :apps_module_groups

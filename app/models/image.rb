@@ -5,6 +5,7 @@ class Image < ActiveRecord::Base
   belongs_to :imageable, :polymorphic => true
 
   validates :image, :presence => true
+ 
 
   after_save :reverse_geocode, :unless => :skip_reverse_geocode
 

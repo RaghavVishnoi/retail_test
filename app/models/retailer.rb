@@ -2,6 +2,7 @@ class Retailer < ActiveRecord::Base
 	 
 	validate :retailer_state, :presence => true
 	validate :retailer_city, :presence => true
+	
 
 def self.display_names
 	

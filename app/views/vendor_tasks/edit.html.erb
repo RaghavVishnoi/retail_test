@@ -1,0 +1,155 @@
+<div class="request_wrap clearfix"  >
+<div>Vendor Records
+<%= render :partial => 'search' %>
+</div>
+<div class="req_cont clearfix">
+<%= render :partial => "shared/error_messages", :locals => { :errors => @vendor_task.errors } %>
+  <% @vendorlist = Vendorlist.find_by(:id => @vendor_task.vendor_id) 
+     
+     if @vendor_task.cmo_pending?
+      @heading_cmo = 'Status'
+      @text_cmo = 'Pending for CMO'
+      @heading_approver = ''
+      @text_approver = ''
+    end
+    if @vendor_task.status == 'pending'
+      @heading_cmo = 'Approved by CMO'
+      @text_cmo = @vendor_task.cmo_approve_date
+      @heading_approver = 'Status'
+      @text_approver = 'Pending for Approver'
+    end
+    if @vendor_task.status == 'approved'
+      @heading_cmo = 'Approved by CMO'
+      @text_cmo = @vendor_task.cmo_approve_date
+      @heading_approver = 'Approved by approver'
+      @text_approver = @vendor_task.approver_approve_date
+    end%>
+<div class="approv_cont clearfix">
+  <div class="appr_info">
+    <div><%=@heading_cmo%></div>
+    <div><%=@text_cmo %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div><%=@heading_approver%></div>
+    <div><%=@text_approver%></div>
+  </div>
+</div>
+  
+<div class="approv_cont clearfix">
+  <div class="appr_info">
+    <div>Requested By</div>
+    <%if(@vendor_task.requestor_type == 'Vendor')%>
+    <div><%= @vendorlist.vendor_name %>-<%= @vendorlist.region+"  "+@vendorlist.state %></div>
+    <%else%>
+    <div><%= @vendor_task.other_identity %></div>
+    <%end%>
+  </div>
+
+  <div class="appr_retail">
+    <div>Retailer Code</div>
+    <div><%= @vendor_task.retailer_code %></div>
+  </div>
+
+
+  <div class="appr_desc">
+    <div>Request Id</div>
+    <div><%= @vendor_task.request_id %></div>
+  </div>
+</div>
+
+<div class="approv_cont clearfix">
+  <div class="appr_info">
+    <div>Installation Of</div>
+    <div><%= @vendor_task.installation_of %></div>
+  </div>
+
+  <div class="appr_retail">
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Installation Report</div>
+    <div><%= @vendor_task.installation_report %></div>
+  </div>
+</div>
+
+
+<div class="approv_cont clearfix">
+  <div class="appr_info">
+    <div>Comment</div>
+    <div><%= @vendor_task.comment %></div>
+  </div>
+</div> 
+
+<div class="approv_cont clearfix">
+  <div class="appr_info">
+    <div>CMO Comment</div>
+    <div><%= @vendor_task.comment_by_cmo %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Approver Comment</div>
+    <div><%= @vendor_task.comment_by_approver %></div>
+  </div>
+</div>  
+
+
+<div class="approv_cont clearfix">
+ <div class="image-wrapr">
+  <% @vendor_task.images.each do |image| %>
+  <div>
+    <div class="image_wrap_img">
+      <%= link_to image.image_url, :class => "img_link" do %>
+        <%= image_tag image.image_url %>
+      <% end %>
+    </div>
+
+    <div class="image_wrap_add"><%= image.address %></div>
+
+    <% if image.lat? && image.long? %>
+      <%= link_to "Click to open Maps", "http://maps.google.com/maps?q=#{[image.lat, image.long].join(',')}", :target => "_blank", :class => "image_wrap_link" %>
+    <% end %>
+    </div>
+  <% end %>
+ </div>
+</div>
+
+
+  <% if can? :cmo , VendorTask %>
+   <% if @vendor_task.cmo_pending? %>
+    <%= form_for @vendor_task do %>
+     
+        <div class="btn_blc clearfix">
+         
+        <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>
+        <%= hidden_field_tag "status","cmo_pending" %>
+        <%= hidden_field_tag "prev_url",  @prev_url %>
+        <%= submit_tag "Approve", :class => "apprv_btn"%>
+        <%= submit_tag "Decline", :class => "decline_btn"%>
+        </div>
+      <% end %>
+    <%end%>
+  <% end %>
+
+    <% if can? :approve , VendorTask %>
+    <% puts "hlo #{@vendor_task.status}" %>
+     <% if @vendor_task.pending? %>
+      <%= form_for @vendor_task do %>
+         
+          <div class="btn_blc clearfix">
+            <%= hidden_field_tag "status","pending" %>
+            <%= hidden_field_tag "prev_url",  @prev_url %>
+            <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>
+            
+          
+            <%= submit_tag "Approve", :class => "apprv_btn"%>
+            <%= submit_tag "Decline", :class => "decline_btn"%>
+          </div>
+          
+        <%end%>
+      <%end%>
+    <% end %>
+</div>
+</div>

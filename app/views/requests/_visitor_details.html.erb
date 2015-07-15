@@ -1,0 +1,30 @@
+<div class="clearfix visitor_details_page page" >
+
+ <script>
+	$(document).ready(function(){
+		 
+		$( "#datepicker-visitor" ).datepicker();
+
+	});
+</script>
+
+  <%= f.text_field :shop_visit_date, :placeholder => "Shop Visit Date", :class => "input_tx required",:id => 'datepicker-visitor'%>
+ 
+
+    
+
+   <%= f.text_field :shop_visit_done_by, :placeholder => "Shop Visit done by", :class => "input_tx required"%>
+   
+    
+  
+
+  <%= f.phone_field :visitor_contact_number, :placeholder => "Shop visior Mobile Number", :class => "input_tx required", :validation => "validate_mobile_number" %>
+
+<br><br>
+  
+     <input type="submit" value="Next" name="submit button" id="next-v" class="apprv_btn">
+     <input type="submit" value="Back" id="back" class="decline_btn">
+   
+  
+
+</div>

@@ -1,0 +1,50 @@
+<div class="sis_visit_details_page page hidden" >
+
+ <span><u>General Observations</u></span>
+ <br><br>
+
+<%=f.select :is_sis_present,VISITOR_BOOLEAN_VALUES,{:prompt => "SIS Presence"},:class => "pd-detail required"%>
+
+<%=f.select :is_sis_placed_properly,VISITOR_BOOLEAN_VALUES,{:prompt => "SIS placed properly with back wall / counter / visuals as per norms"},:class => "pd-detail required"%>
+    
+<%=f.select :is_sis_condition_good,VISITOR_BOOLEAN_VALUES,{:prompt => "SIS condition good"},:class => "pd-detail required"%>
+
+<%=f.select :is_sis_cleaned_daily,VISITOR_BOOLEAN_VALUES,{:prompt => "SIS cleaned daily"},:class => "pd-detail required"%>
+
+<%=f.select :is_sis_damaged,VISITOR_BOOLEAN_VALUES,{:prompt => "SIS Damaged"},:class => "pd-detail required"%>
+
+<%= f.text_field :sis_structured_flaws, :placeholder => "Any structure flaws, pls mention(Damaged, Dented, Scratches, Corners broken, Stickering etc)"%>
+      
+<%=f.select :sis_security_alarm_working,SECURITY_ALARM_WORKING,{:prompt => "Security alarm  working"},:class => "pd-detail required"%>
+
+<%=f.select :sis_security_device_charging,SECURITY_ALARM_WORKING,{:prompt => "Security device charging"},:class => "pd-detail required"%>
+
+<%=f.select :sis_demo_phones_installed,DEMO_PHONES_INSTALLED,{:prompt => "Demo phones installed"},:class => "pd-detail required"%>
+
+<%=f.select :spec_card_demo_phone_match,VISITOR_BOOLEAN_VALUES,{:prompt => "Does spec card and demo phone match"},:class => "pd-detail required"%>
+
+<%=f.select :backwall_light_working_properly,VISITOR_BOOLEAN_VALUES,{:prompt => "Backwall Lights working properly"},:class => "pd-detail required"%>
+
+<%=f.select :is_counter_lights_working,VISITOR_BOOLEAN_VALUES,{:prompt => "Counter lights working properly"},:class => "pd-detail required"%>
+
+<%=f.select :is_clip_on_lights,VISITOR_BOOLEAN_VALUES,{:prompt => "Clip on lights working properly"},:class => "pd-detail required"%>
+
+<%=f.select :dealer_switch_on_sis_lights,VISITOR_BOOLEAN_VALUES,{:prompt => "Does dealer switch on SIS lights or not"},:class => "pd-detail required"%>
+
+<%=f.select :updated_gionee_creative,VISITOR_BOOLEAN_VALUES,{:prompt => "Updated Gionee Creative in clip on"},:class => "pd-detail required"%>
+
+      <table width="100%"> <tr><td><%= f.text_area :sis_any_problem, :placeholder => "Any other problem variation, pls mention" ,:class => "visitor_text_area"%> </td></tr>
+
+       <tr><td><%= f.text_area :sis_retailer_feedback, :placeholder => "Retailer Feedback if any pls mention" ,:class => "visitor_text_area"%> </td></tr>
+
+        
+    </table>
+
+
+ <div class="button_blc clearfix">
+     <input type="submit" value="Next" name="submit button" id="next-v" class="apprv_btn hidden">
+     <input type="submit" value="Back" id="back-v" class="decline_btn hidden">
+  </div>
+  
+
+</div>

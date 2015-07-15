@@ -36,6 +36,9 @@
     <% end %>
   <% end %>
 
+   
+
+
   <%# if can? :manage, ModuleGroup %>
     <%#= link_to module_groups_path do %>
       <!-- <div class="box"> -->
@@ -81,14 +84,157 @@
     <%# end %>
   <%# end %>
 
-  <% if can? :read, Request %>
-    <%= link_to requests_path(:q => { :status => 'pending' }) do %>
+  <%      id = session[:user_id]
+          @user = User.find_by(:id => id)
+          @associated_roles = AssociatedRole.find_by(:object_id => id)
+          @role = @associated_roles.role  
+          if @role.name != 'superadmin' 
+          %>
+  <% if can? :get, Request %>
+    <%= link_to requests_path(:q => { :status => 'pending',:request_type => ['0','1','2'] }) do %>
+      <div class="box">
+       <span><i><%= image_tag 'logo.png' %></i></span>
+        Requests
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :get, Request %>
+    <%= link_to requests_path(:q => { :status => 'pending',:request_type => ['3'] }) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Maintenance Requests
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :get, Request %>
+    <%= link_to requests_path(:q => { :status => 'approved',:request_type => ['4'] }) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Audits
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :get, VendorTask %>
+    <%= link_to vendor_tasks_path(:q => { :status => 'pending'}) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Vendor Records
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :approve, Request %>
+    <%= link_to requests_path(:q => { :status => 'pending',:request_type => ['0','1','2'] }) do %>
       <div class="box">
         <span><i><%= image_tag 'logo.png' %></i></span>
         Requests
       </div>
     <% end %>
   <% end %>
+
+  <% if can? :approve, Request %>
+    <%= link_to requests_path(:q => { :status => 'pending',:request_type => '3' }) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Maintenance Requests
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :approve, Request %>
+    <%= link_to requests_path(:q => { :status => 'approved',:request_type => '4' }) do %>
+      <div class="box">
+        <%$request_type = 'visitor'%>
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Audits
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :approve, VendorTask %>
+    <%= link_to vendor_tasks_path(:q => { :status => 'pending'}) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Vendor Records
+      </div>
+    <% end %>
+  <% end %>
+
+
+  <% if can? :cmo, Request %>
+    <%= link_to requests_path(:q => { :status => 'cmo_pending',:request_type => ['0','1','2']  }) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+          Requests
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :cmo, Request %>
+    <%= link_to requests_path(:q => { :status => 'cmo_pending',:request_type => ['3']  }) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+         Maintenance Requests
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :cmo, VendorTask %>
+    <%= link_to vendor_tasks_path(:q => { :status => 'cmo_pending'}) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Vendor Records
+      </div>
+    <% end %>
+  <% end %>
+
+   
+
+ 
+
+  
+  <%else
+    if can? :manage, Request %>
+    <%= link_to requests_path(:q => { :status => ['pending','cmo_pending'],:request_type => ['0','1','2'] }) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Requests
+      </div>
+    <% end %>
+  <% end %>
+
+  <%if can? :manage, Request %>
+    <%= link_to requests_path(:q => { :status => ['pending','cmo_pending'],:request_type => ['3'] }) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Maintenance Requests
+      </div>
+    <% end %>
+  <% end %>
+
+  <%if can? :manage, Request %>
+    <%= link_to requests_path(:q => { :status => ['pending','cmo_pending'],:request_type => ['4'] }) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Audits
+      </div>
+    <% end %>
+  <% end %>
+ <%end%>
+
+ <% if can? :manage, VendorTask %>
+    <%= link_to vendor_tasks_path(:q => { :status =>  ['pending','cmo_pending']}) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Vendor Records
+      </div>
+    <% end %>
+  <% end %>
+
+ 
 
    
  <!--  -->
