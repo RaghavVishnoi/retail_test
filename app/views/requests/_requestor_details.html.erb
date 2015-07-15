@@ -1,23 +1,21 @@
 <div class="clearfix requestor_details_page page hidden" >
+<<<<<<< HEAD
 
 <script>
 	$(document).ready(function(){
 		$('#loader').hide();
 	});
 </script>
+=======
+>>>>>>> 6f897c0462e1802b6818c79497c5d9e47d8eefd3
 
   <%= f.select :cmo_id, CMO.display_names, { :prompt => "CMO Name" } , :class => "pd-detail required"%>
  
 
-    
+  <div class="input_txt">
+    <%= f.text_field :retailer_code, :class => 'ajax-select required retailer_code', :error_container => '.input_txt', :placeholder => 'Retailer Code', 'data-ajax-url' => "/requests/autocomplete_retailer_code", 'data-multiple' => false, 'data-key' => 'retailer_codes', 'data-create_search_choice' => true, 'data-initvalue' => (@request.retailer_code? ? { text: @request.retailer_code, id: @request.retailer_code } : []).to_json %>
+  </div>
 
-   <%= f.select :retailer_code, Retailer.order(:state).all.map {|a| a.state}.uniq, { :prompt => "Select State" } , :class => "pd-detail required",:id => "get"%>
-
-   <%= f.select :retailer_code, '', { :prompt => "Select City" } , :class => "pd-detail required", :id => "city"%>
- 
-   <%= f.select :retailer_code, '', { :prompt => "Select Retailer" } , :class => "pd-detail required",:id => "retailer"%>
-   
-   <div id="loader" class="loader"><%= image_tag 'loader.gif' %></div>
 
   <%= f.text_field :rsp_name, :placeholder => "RSP Name", :class => "input_tx required"%>
 
@@ -27,7 +25,5 @@
 
 
   <%= f.text_field :rsp_app_user_id, :placeholder => "RSP sales tag app user ID", :class => "input_txt"%>
-
-  
 
 </div>
