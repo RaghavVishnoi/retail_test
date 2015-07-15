@@ -1,4 +1,4 @@
-class CreateVendorlist < ActiveRecord::Migration
+class CreateVendorlists < ActiveRecord::Migration
   def change
     create_table :vendorlists do |t|
     	t.string :region
