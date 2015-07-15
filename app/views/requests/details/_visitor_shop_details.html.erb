@@ -1,0 +1,108 @@
+ <script>
+  $(document).ready(function(){
+      $('#form').hide();
+      $('#click').click(function(){
+          $('#form').show();
+          $('#click').hide();
+
+      });
+  });
+</script>
+<div class="approv_cont clearfix">
+     
+  <div class="appr_retail">
+    
+    <div>Retailer Code</div>
+    <div><%= @request.retailer_code %></div>
+    <% if can? :manage, Request %>
+    <div style="width:30%;margin:auto;" id="form">
+    <%= form_tag("/requests/modify", method: "post") do %>
+      <%= text_field_tag('retailer_code',nil,required:'required') %>
+      <%= hidden_field_tag('request_id', @request.id)%>
+      <%= submit_tag("Replace") %>
+      <% end %>
+      
+    </div>
+    <div> <%= submit_tag("Change Retailer Code",id:'click') %></div>
+    <%end%>
+
+  </div>
+
+
+  <div class="appr_desc">
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Store Selling Gionee?</div>
+    <div><%=@request.store_selling_gionee %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>RSP Present</div>
+    <div>  
+        <%if(@request.is_rsp == true)%>
+         Yes
+        <%else%>
+         No
+        <%end%>
+    </div>
+  </div>
+
+  <div class="appr_desc">
+    <div>SIS Present?</div>
+    <div>
+      <%if(@request.is_sis_installed == true)%>
+      Yes
+      <%else%>
+      No
+      <%end%>
+    </div>
+  </div>
+
+  <div class="appr_desc">
+    <div>GSB Present?</div>
+    <div>
+       <%if(@request.is_gionee_gsb_present == true)%>
+        Yes
+       <%else%>
+        No
+       <%end%>
+    </div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Countertop Present?</div>
+    <div><%=@request.is_countertop_present %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Standee Present?</div>
+    <div><%=@request.is_standee_present %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>No of pieces in stock </div>
+    <div><%=@request.no_of_peace_in_stock %></div>
+  </div>
+  <div class="appr_desc">
+    <div>Leaflets / Brochures available </div>
+    <div><%=@request.is_leaflets_available %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Wall Posters in shop </div>
+    <div><%=@request.is_wall_poster_in_shop %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Danglers in shop </div>
+    <div><%=@request.is_dangler_in_shop %></div>
+  </div>
+
+</div>   
+
+
+
+ 

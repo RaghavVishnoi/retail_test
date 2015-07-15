@@ -1,0 +1,65 @@
+ <script>
+  $(document).ready(function(){
+      $('#form').hide();
+      $('#click').click(function(){
+          $('#form').show();
+          $('#click').hide();
+
+      });
+  });
+</script>
+
+<div class="approv_cont clearfix">
+  <div class="appr_info">
+    <div>Request Type</div>
+    <div>Maintenance</div>
+  </div>
+
+  <div class="appr_retail">
+    <div><%=@heading%></div>
+    <div><%=@cmo_approve_date%></div>
+  </div>
+
+  <div class="appr_desc">
+    <div><%=@status%></div>
+    <div><%=@date%></div>
+  </div>
+</div>
+
+<div class="approv_cont clearfix">
+     
+  <div class="appr_info">
+    <div>CMO Name</div>
+    <div><%= @request.cmo.try(:display_name) %></div>
+  </div>
+
+  <div class="appr_retail">
+    
+    <div>Retailer Code</div>
+    <div><%= @request.retailer_code %></div>
+    <% if can? :manage, Request %>
+    <div style="width:30%;margin:auto;" id="form">
+    <%= form_tag("/requests/modify", method: "post") do %>
+      <%= text_field_tag('retailer_code',nil,required:'required') %>
+      <%= hidden_field_tag('request_id', @request.id)%>
+      <%= submit_tag("Replace") %>
+      <% end %>
+      
+    </div>
+    <div> <%= submit_tag("Change Retailer Code",id:'click') %></div>
+    <%end%>
+
+  </div>
+
+   
+
+</div>
+
+ 
+
+  <div class="appr_desc">
+    <div></div>
+    <div></div>
+  </div>
+
+ 

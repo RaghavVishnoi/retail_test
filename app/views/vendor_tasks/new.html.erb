@@ -1,0 +1,56 @@
+<div class="request_wrap clearfix">
+  <div>Vendor Form</div>
+    <div class="req_cont clearfix">
+      <div class="links_blc"  >
+
+ <script>
+  $(document).ready(function(){
+    $('#loader1').hide();
+    
+  });
+</script>
+        
+ <%= form_for @vendor_task, :url => {:controller => "vendor_tasks", :action => "create"} do |f| %>
+ 
+   <%= f.select :requestor_type,  VENDOR_VERIFY , { :prompt => "Type of requestor" }, { :class => "pd-detail required",:id => "vendor_verify",:required => "required"} %>
+
+    <div id="loader1" class="loader"><%= image_tag 'loader.gif' %></div>
+  
+
+	 <%= f.select :vendor_id,  Vendorlist.display_names , { :prompt => "select vendor" }, :class => "pd-detail required",:id => "vendor",:required => "required" %>
+ 
+   <%= f.text_field :other_identity, :placeholder => "*Name/Mobile Number" ,:class => "input_tx required",:id => "other",:required => "required"%>
+
+	 <%= f.text_field :request_id, :placeholder => "*Request Id" ,:required => "required",:class => "input_tx required",:required => "required"%>
+
+   <%= f.select :retailer_code, Retailer.order(:state).all.map {|a| a.state}.uniq, { :prompt => "Select State" } , :class => "pd-detail required",:id => "get1",:required => "required"%>
+
+   <%= f.select :retailer_code, '', { :prompt => "Select City" } , :class => "pd-detail required", :id => "city1",:required => "required"%>
+ 
+   <%= f.select :retailer_code, '', { :prompt => "Select Retailer" } , :class => "pd-detail required",:id => "retailer1",:required => "required"%>
+
+   <%= f.select :installation_of,  INSTALLATION_OF , { :prompt => "Installation of " }, :class => "pd-detail required",:required => "required"%>
+
+   <%= f.select :installation_report,  INSTALLATION_REPORT , { :prompt => "Installation report " },  :class => "pd-detail required",:required => "required" %>
+
+  
+	 <%= f.text_area :comment, :placeholder => "Enter your comment" ,:id => "vendor_text_area"%>
+   
+ 
+   <%= field_set_tag "Images",:id => "vendor_image_area"  do %>
+    <%= link_to "Add Image",  new_image_path(:imageable_type => "vendor_task"), :remote => true ,:id => "vendor_link"%>
+    <div class="images" id="vendor_image_area">
+      <% @vendor_task.images.each do |image| %>
+        <%= render :partial => 'images/image', :locals => { :image => image } %>
+      <% end %>
+    </div>
+  <% end %>
+
+   <%= f.submit :class => "submitt_btn" %>
+  
+
+  <%end%>
+  	</div>
+   </div>
+  </div>
+ </div>

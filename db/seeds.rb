@@ -25,6 +25,8 @@ ModuleGroup.create :name => :attendance
 ModuleGroup.create :name => :crm
 ModuleGroup.create :name => :survey
 ModuleGroup.create :name => :requester
+ModuleGroup.create :name => :vendor
+ 
 
 brands = %w{SAMSUNG HTC SONY NOKIA MICROMAX LAVA OPPO VIVO}
 

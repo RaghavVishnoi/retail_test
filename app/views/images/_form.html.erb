@@ -1,11 +1,11 @@
 <%= form_for @image, :html => { :class => 'user-form' } do |f| %>
   
   <h4 id="form-title"><%= form_title %></h4>
-  
+  <%= hidden_field_tag :imageable_type, params[:imageable_type] %>
   <%= render :partial => "shared/error_messages", :locals => { :errors => @image.errors } %>
 
   <div class="form-field">
     <%= f.label :image %>
-    <%= f.file_field :image ,:required => 'required'%>
+    <%= f.file_field :image %>
   </div>
 <% end %>

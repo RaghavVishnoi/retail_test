@@ -1,0 +1,52 @@
+<div class="approv_cont clearfix">
+     
+  
+
+  <%if(@request.is_rsp == true)%>
+
+  <div class="appr_info">
+    <div>RSP Assigned in store</div>
+    <div><%= @request.rsp_assigned_in_store %></div>
+  </div>
+
+<%if(@request.rsp_assigned_in_store == 'Yes')%>
+
+  <div class="appr_info">
+    <div></div>
+    <div></div>
+  </div>
+
+  
+
+
+  <div class="appr_info">
+    <div>RSP Present in store</div>
+    <div><%= @request.rsp_present_in_shop %></div>
+  </div>
+
+
+
+  <div class="appr_info">
+    <div>RSP in Gionee T-shirt </div>
+    <div><%= @request.rsp_in_gionee_tshirt %></div>
+  </div>
+
+  
+
+  <div class="appr_info">
+    <div>RSP well groomed</div>
+    <div><%= @request.rsp_well_groomed %></div>
+  </div>
+
+  
+
+  <div class="appr_info">
+    <div>RSP selling skills and knowledge level</div>
+    <div><%= @request.rsp_selling_skills %></div>
+  </div>
+
+  <%end%>
+
+  <%end%>
+
+</div>

@@ -1,50 +1,284 @@
+<%id = session[:user_id]
+    @user = User.find_by(:id => id)
+    @associated_roles = AssociatedRole.find_by(:object_id => id)
+    @role = @associated_roles.role
+    @email = @user.email
+    @cmo = CMO.find_by(:email => @email)
+    puts "here is cmo #{@cmo}"
+    %>
 
-
-<div class="request_wrap clearfix">
-
-  <div>Request dashboard</div>
-
+<div class="request_wrap clearfix"  >
+<%request_type = params[:q][:request_type]
+  $request_type =  params[:q][:request_type]
+  %>
+<div>Request Dashboard
+ <%= render :partial => 'search' %>
+</div>
+  
   <div class="req_cont clearfix">
-
+  
     <div class="links_blc">
-      <div class="<%= request_status_class('pending') %>">
-        <%= link_to "Pending", requests_path(:q => { :status => 'pending' }) %>
+     <% if can? :cmo , Request %>
+     <%if request_type.include?  '4'
+      else
+        %>
+          <div class="<%= request_status_class('cmo_pending') %>">
+            <%= link_to "CMO Pending", requests_path(:q => { :status => 'cmo_pending',:request_type => request_type }) %>
+          </div>
+
+          <div class="<%= request_status_class('cmo_declined') %>">
+            <%= link_to "CMO Declined", requests_path(:q => { :status => 'cmo_declined',:request_type => request_type }) %>
+          </div>
+
+          <div class="<%= request_status_class(['pending','declined','approved']) %>">
+            <%= link_to "CMO Approved", requests_path(:q => { :status => ['pending','declined','approved'],:request_type => request_type }) %>
+          </div>
+        <% end %>
+        <%end%>
+          
+           <% if can? :approve , Request %>
+           <%if request_type.include?  '4'
+            else
+              %>
+           <div class="<%= request_status_class('pending') %>">
+        
+              <%= link_to "Pending", requests_path(:q => { :status => 'pending',:request_type => request_type }) %>
       </div>
 
       <div class="<%= request_status_class('declined') %>">
-        <%= link_to "Declined", requests_path(:q => { :status => 'declined' }) %>
+        <%= link_to "Declined", requests_path(:q => { :status => 'declined',:request_type => request_type }) %>
       </div>
 
       <div class="<%= request_status_class('approved') %>">
-        <%= link_to "Approved", requests_path(:q => { :status => 'approved' }) %>
+        <%= link_to "Approved", requests_path(:q => { :status => 'approved',:request_type => request_type}) %>
       </div>
+
+        <% end%>
+       <%end%> 
+       <% if @role.name != 'superadmin' %>
+        <% if can? :get , Request %>
+        <%if request_type.include?  '4'
+      else
+        %>
+      <div class="<%= request_status_class('pending') %>">
+        
+        <%= link_to "Pending", requests_path(:q => { :status => 'pending',:request_type => request_type }) %>
+      </div>
+
+      <div class="<%= request_status_class('declined') %>">
+        <%= link_to "Declined", requests_path(:q => { :status => 'declined',:request_type => request_type }) %>
+      </div>
+
+      <div class="<%= request_status_class('approved') %>">
+        <%= link_to "Approved", requests_path(:q => { :status => 'approved',:request_type => request_type }) %>
+      </div>
+
+        <% end%>
+       <%end%> 
+     <%end%>
     </div>
-
+    
     <% @requests.each do |request| %>
-      <%= link_to [:edit, request] do %>
-        <div class="request_contain clearfix">
-          <div class="req_info">
-            <div><%= request.rsp_name %></div>
-            <div><%= request.shop_address %></div>
-          </div>
+                   <%if request.status == 'cmo_pending'
+                    status = 'Pending for CMO'
+                    date = ''
+                    elsif request.status == 'cmo_declined'
+                    status = 'Declined by CMO'
+                    date = request.cmo_approve_date
+                    elsif request.status == 'pending'
+                    status = 'Approved by CMO'
+                    date = request.cmo_approve_date
+                    elsif request.status == 'pending'
+                    status = 'Pending for Approver'
+                    date = ''
+                    elsif request.status == 'declined'
+                    status = 'Declined by Approver'
+                    date = request.cmo_approve_date
+                    elsif request.status == 'approved'
+                    status = 'Approved by Approver'
+                    date = request.cmo_approve_date
+                    %>
+                  <%end%>
+                  <% if request.request_type == 'in_shop'
+                       name = 'In Shop'
+                      elsif request.request_type == 'sis'
+                       name = 'SIS' 
+                      elsif request.request_type == 'gsb'
+                       name = 'GSB'
+                     end
+                    %>
+      <% if @role.name == 'cmo' %>
+      <% if request.cmo_id == @cmo.id%>
+         <%= link_to [:edit, request] do %>
+             <div class="request_contain clearfix">
+                 
+              <% if request.request_type == 'sis' || request.request_type == 'in_shop' || request.request_type == 'gsb'  %>
+                <div class="req_info">
+  
+                   <div><%= name %></div>
+                   <div><%= request.rsp_name %></div>
+                   <div><%= request.shop_address %></div>
+                </div>
 
-          <div class="req_desc">
-            <div><%= request.shop_name %></div>
-            <div><%= request.retailer_code %></div>
-          </div>
+                 <div class="req_desc">
+                   <div><%= status %></div>
+                   <div><%= date %></div>
+                 </div>
 
-          <% request.images.first(3).each do |image| %>
-            <div class="image-container">
-              <%= image_tag image.image_url %>
-            </div>
-          <% end %>
+             <div class="req_desc">
+                <div>Created on - <%=request.created_at.strftime("%b %d, %Y")%></div>
+                <div><%= request.shop_name %></div>
+                <div><%= request.retailer_code %></div>
+             </div>
+
+            <% request.images.first(3).each do |image| %>
+                <div class="image-container">
+                  <%= image_tag image.image_url %>
+               </div>
+            <% end %>
+            <%elsif request.request_type == 'maintenance'%>
+
+              <div class="req_info">
+                   <div>Maintenance</div>
+                   <div><%= request.maintenance_requestor %></div>
+                   <div><%= request.maintenance_requestor_mobile_number %></div>
+              </div>
+
+                <div class="req_desc">
+                   <div><%= status %></div>
+                   <div><%= date %></div>
+                 </div>
+
+              <div class="req_desc">
+                <div>Created on - <%=request.created_at.strftime("%b %d, %Y")%></div>
+                <div><%= request.type_of_problem %></div>
+                <div><%= request.retailer_code %></div>
+             </div>
+
+
+              <% request.images.first(3).each do |image| %>
+                <div class="image-container">
+                  <%= image_tag image.image_url %>
+               </div>
+             <% end %>
+             <%elsif request.request_type == 'visitor'%>
+              <div class="req_info">
+                   <div>Audits</div>
+                   <div><%= request.shop_visit_done_by %></div>
+              </div>
+
+              <div class="req_desc">
+                   <div><%= status %></div>
+                   <div><%= date %></div>
+              </div>
+
+              <div class="req_desc">
+                <div>Created on - <%=request.created_at.strftime("%b %d, %Y")%></div>
+                <div><%= request.shop_visit_date %></div>
+                <div><%= request.retailer_code %></div>
+             </div>
+
+
+              <% request.images.first(3).each do |image| %>
+                <div class="image-container">
+                  <%= image_tag image.image_url %>
+               </div>
+             <% end %>
+           <% end %>
+
         </div>
       <% end %>
-    <% end %>
+      <%end%>
 
-    <div class="response-pagination clearfix">
-      <%= will_paginate @requests %>
-    </div>
+    
+    <%else%>
+
+          <%= link_to [:edit, request] do %>
+             <div class="request_contain clearfix">
+              <% if request.request_type == 'sis' || request.request_type == 'in_shop' || request.request_type == 'gsb'  %>
+                <div class="req_info">
+                  <div><%= name %></div>
+                   <div><%= request.rsp_name %></div>
+                   <div><%= request.shop_address %></div>
+                </div>
+
+                <div class="req_desc">
+                   <div><%= status %></div>
+                   <div><%= date %></div>
+                </div>
+
+             <div class="req_desc">
+                <div>Created on - <%=request.created_at.strftime("%b %d, %Y")%></div>
+                <div><%= request.shop_name %></div>
+                <div><%= request.retailer_code %></div>
+             </div>
+
+            <% request.images.first(3).each do |image| %>
+                <div class="image-container">
+                  <%= image_tag image.image_url %>
+               </div>
+            <% end %>
+            <%elsif request.request_type == 'maintenance'%>
+
+              <div class="req_info">
+                   <div>Maintenance</div>
+                   <div><%= request.maintenance_requestor %></div>
+                   <div><%= request.maintenance_requestor_mobile_number %></div>
+              </div>
+
+              <div class="req_desc">
+                   <div><%= status %></div>
+                   <div><%= date %></div>
+              </div>
+
+              <div class="req_desc">
+                <div>Created on - <%=request.created_at.strftime("%b %d, %Y")%></div>
+                <div><%= request.type_of_problem %></div>
+                <div><%= request.retailer_code %></div>
+             </div>
+
+
+              <% request.images.first(3).each do |image| %>
+                <div class="image-container">
+                  <%= image_tag image.image_url %>
+               </div>
+             <% end %>
+             <%elsif request.request_type == 'visitor'%>
+
+              <div class="req_info">
+                   <div>Audits</div>
+                   <div><%= request.shop_visit_done_by %></div>
+              </div>
+
+              <div class="req_info">
+                   <div></div>
+                   <div></div>
+              </div>
+
+              <div class="req_desc">
+                <div>Created on - <%=request.created_at.strftime("%b %d, %Y")%></div>
+                <div><%= request.shop_visit_date %></div>
+                <div><%= request.retailer_code %></div>
+             </div>
+
+
+              <% request.images.first(3).each do |image| %>
+                <div class="image-container">
+                  <%= image_tag image.image_url %>
+               </div>
+             <% end %>
+           <% end %>
+           </div>
+      <% end %>
+    <%end%>
+
+    <% end %>
+    
+
+    
   </div>
 
+</div>
+<div class="response-pagination clearfix">
+      <%= will_paginate @requests %>
 </div>

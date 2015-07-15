@@ -22,10 +22,29 @@ User:
   group_name: "Users"
   permissions:
     "manage, User": "Create Users"
+
+
 Request:
   group_name: "Requests"
   permissions:
-    "manage, Request": "Approve/Decline Request"
-    "read, Request": "Show Request"
+    "manage, Request": "Manage Request"
+    "approve, Request": "Approver Request"
+    "get, Request": "Reader Request"
     "edit, Request": "Edit Request"
- 
+    "read, Request": "Read Request"
+    "update, Request": "Update Request"
+    "view, Request": "View Request"
+    "cmo, Request": "CMO Request"
+
+VendorTask:
+  group_name: "VendorTasks"
+  permissions:
+    "manage, VendorTask": "Manage Request"
+    "read, VendorTask": "Read Request"
+    "edit, VendorTask": "Edit Request"
+    "update, VendorTask": "Update Request"
+    "cmo, VendorTask": "CMO Request"
+    "approve, VendorTask": "Approver Request"
+    "get, VendorTask": "Reader Request"
+    "view, VendorTask": "View Request"
+

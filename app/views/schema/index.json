@@ -18,6 +18,8 @@
       "columns": [
         { "name": "id", "type": "INTEGER PRIMARY KEY  NOT NULL" },
         { "name": "jsondump", "type": "text"}
+        
+
       ],
       "url": "/api/v1/screens",
       "pagination": true,
@@ -33,7 +35,7 @@
       "pagination": false,
       "login_required": false,
       "single_record": true
-    }
+    } 
   ],
 
   "crm": [
@@ -74,5 +76,31 @@
       "login_required": false,
       "single_record": true
     }
-  ]
+  ] ,
+
+  "vendor": [
+    {
+      "table_name": "vendor_tasks",
+      "columns": [
+        { "name": "jsondump", "type": "text" }
+      ],
+      "url": "/api/v1/vendor_tasks/new",
+      "pagination": false,
+      "login_required": false,
+      "single_record": true
+    },
+    {
+      "table_name": "dropdown_values",
+      "columns": [
+        { "name": "jsondump", "type": "text" }
+      ],
+      "url": "/api/v1/dropdown_values",
+      "pagination": false,
+      "login_required": false,
+      "single_record": true
+    } 
+  ] 
+
+
+
 }

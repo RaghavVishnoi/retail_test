@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_many :reporting_users_attendances, :through => :users_reportings, :source => :attendances
   has_many :customers_users, :dependent => :destroy
   has_many :customers, :through => :customers_users
+  has_many :cmos
 
   validates_confirmation_of :password, :if => ->{ password.present? }
   validates :email, :presence => true, :uniqueness => true

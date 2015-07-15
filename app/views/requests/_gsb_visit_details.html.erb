@@ -1,0 +1,33 @@
+<div class="gsb_visit_details_page page hidden" >
+
+ <span><u>Specific GSB checks</u></span>
+ <br><br>
+
+<%=f.select :gsb_type_installed,GSB_TYPES,{:prompt => "GSB Type Installed "},:class => "pd-detail required"%>
+
+<%=f.select :location_of_gsb,LOCATION_OF_GSB,{:prompt => "Location of GSB"},:class => "pd-detail required"%>
+
+<%=f.select :gsb_cleanliness,GSB_CLEANLINESS,{:prompt => "GSB cleanliness"},:class => "pd-detail required"%>
+
+<%=f.select :installation_quality,INSTALLATION_QUALITY,{:prompt => "Installation quality"},:class => "pd-detail required"%>  
+
+<%=f.select :is_gsb_light_woring,VISITOR_BOOLEAN_VALUES,{:prompt => "GSB Lights working"},:class => "pd-detail required"%>  
+
+<%=f.select :is_gsb_light_throw_is_good,VISITOR_BOOLEAN_VALUES,{:prompt => "GSB Light throw is good"},:class => "pd-detail required"%>  
+
+
+      <table width="100%"> <tr><td><%= f.text_area :gsb_structured_damage, :placeholder => "GSB structure / Letters / Vinyl is damaged, pls mention" ,:class => "visitor_text_area"%> </td></tr>
+
+       <tr><td><%= f.text_area :gsb_other_problem, :placeholder => "Any other problem variation, pls mention" ,:class => "visitor_text_area"%> </td></tr>
+
+       <tr><td><%= f.text_area :gsb_retailer_feedback, :placeholder => "Retailer Feedback if any pls mention" ,:class => "visitor_text_area"%> </td></tr>
+    </table>
+
+
+ <div class="button_blc clearfix">
+     <input type="submit" value="Next" name="submit button" id="next-v" class="apprv_btn hidden">
+     <input type="submit" value="Back" id="back-v" class="decline_btn hidden">
+  </div>
+  
+
+</div>

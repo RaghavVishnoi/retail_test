@@ -1,0 +1,42 @@
+<div class="approv_cont clearfix">
+     
+  
+
+  <%if(@request.is_clipon_present == 'Yes')%>
+
+  <div class="appr_info">
+    <div>Good Visibility in store</div>
+    <div><%= @request.is_good_visibility_in_store %></div>
+  </div>
+
+  <%if( @request.is_good_visibility_in_store == 'Yes')%>
+
+  <div class="appr_info">
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="appr_info">
+    <div>Was on and lit in store</div>
+    <div><%= @request.lit_in_store %></div>
+  </div>
+
+  
+  <div class="appr_info">
+    <div>Has a current and relevant visual  </div>
+    <div><%= @request.has_a_relevant_visual %></div>
+  </div>
+
+  
+
+  <div class="appr_info">
+    <div>Is not working properly ? </div>
+    <div><%= @request.is_clipon_not_working_properly %></div>
+  </div>
+
+   
+  <%end%>
+
+  <%end%>
+
+</div>
