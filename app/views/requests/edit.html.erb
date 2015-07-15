@@ -73,12 +73,20 @@
       <%= form_for @request do %>
       <% if @request.cmo_pending? %>
         <div class="btn_blc clearfix">
+<<<<<<< HEAD
          
         <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>
         <%= hidden_field_tag "status","cmo_pending" %>
         <%= hidden_field_tag "prev_url",  @prev_url %>
         <%= submit_tag "Approve", :class => "apprv_btn"%>
         <%= submit_tag "Decline", :class => "decline_btn"%>
+=======
+         <% if can? :manage, Request %>
+           <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>
+          <%= submit_tag "Approve", :class => "apprv_btn"%>
+          <%= submit_tag "Decline", :class => "decline_btn"%>
+          <%end  %>
+>>>>>>> parent of f6d5011... Add state,city and retailer_code dropdown in requester form
         </div>
       <% end %>
       <%end%>
@@ -103,4 +111,3 @@
 
   </div>
 </div>
-

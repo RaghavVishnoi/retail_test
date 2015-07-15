@@ -1,29 +1,15 @@
 class RequestsController < ApplicationController
   
   before_action :find_request, :only => [:edit, :update]
+<<<<<<< HEAD
   authorize_resource :except => [:create, :new, :autocomplete_retailer_code,:state,:city]
   skip_before_action :authenticate_user, :only => [:create, :new, :autocomplete_retailer_code,:state,:city]
   PER_PAGE = 10
+=======
+  authorize_resource :except => [:create, :new, :autocomplete_retailer_code]
+  skip_before_action :authenticate_user, :only => [:create, :new, :autocomplete_retailer_code]
+>>>>>>> parent of f6d5011... Add state,city and retailer_code dropdown in requester form
 
-
-  def state
-
-    value = params[:value]
-    @city = Retailer.where(state: value).uniq.order("city asc")
-    render :json => @city
-     
-   
-    
-  end
-
-  def city
-
-    value = params[:value]
-    puts "here is value #{value}"
-    @retailer = Retailer.where(city: value).uniq.order("city asc")
-    render :json => @retailer
-
-  end
 
   def index
     
@@ -103,8 +89,32 @@ class RequestsController < ApplicationController
       redirect_to prev_url
        end
 
+<<<<<<< HEAD
+=======
+  def update
+
+      comment = params[:comment]
+      comment = comment.strip
+    if params[:commit] == "Approve"
+      
+      if comment == ''
+        @request.comment_by_approver = 'ok'
+      else
+        @request.comment_by_approver = comment
+      end
+      @request.approve
+    elsif params[:commit] == "Decline"
+      @request.declined_by_user_id = current_user.id
+      if comment == ''
+        @request.comment_by_approver = 'Not Suitable'
+      else
+        @request.comment_by_approver = comment
+      end
+      @request.decline
+>>>>>>> parent of f6d5011... Add state,city and retailer_code dropdown in requester form
     end
 
+<<<<<<< HEAD
     if  @role.name == 'cmo' ||  @role.name == 'superadmin'  &&  params[:status] == "cmo_pending"
        @request.cmo_approve_date = date
        if params[:commit] == "Approve"
@@ -141,6 +151,12 @@ class RequestsController < ApplicationController
         request.update(retailer_code: retailer_code)
         redirect_to :back, :notice => "successfully changed Retailer Code"
       end
+=======
+  
+
+   def show
+    @request = Request.new
+>>>>>>> parent of f6d5011... Add state,city and retailer_code dropdown in requester form
     end
 
    def view

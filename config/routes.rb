@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'api/v1'
-
-  get 'api/citylists'
-
   root 'dashboard#index'
   get '/dashboard' => 'dashboard#index'
   get '/users/sign_in' => "sessions#new"
@@ -86,17 +82,19 @@ Rails.application.routes.draw do
       delete '/users/sign_out' => 'sessions#destroy'
       get '/home' => 'home#index'
       resources :attendances, :only => [:create]
+<<<<<<< HEAD
       resources :citylists, :only =>[:index]
       resources :radiofields, :only =>[:index]
       resources :visitors, :only =>[:index]
       resources :retailerlists, :only =>[:index]
+=======
+>>>>>>> parent of f6d5011... Add state,city and retailer_code dropdown in requester form
     end
   end
 
   scope '/api/v1/', :as => 'api_v1', :defaults => { :format => :json }, :constraints => { :format => :json } do
     resources :categories, :item_regions, :cities, :collections, :sizes, :alcohol_percents, :images, :warehouses, :except => [:show]
     resources :screens, :only => [:index, :show]
-    
     resources :items, :except => [:show] do
     resources :inventories, :except => [:show]
     end
@@ -118,9 +116,13 @@ Rails.application.routes.draw do
     end
     resources :dropdown_values, :only => [:index]
   end
+<<<<<<< HEAD
   get '/requests/state'
   get '/requests/city'
   post 'requests/modify'
+=======
+  get '/requests/show'
+>>>>>>> parent of f6d5011... Add state,city and retailer_code dropdown in requester form
   post '/requests/view' 
   post '/vendor_tasks/view'
    

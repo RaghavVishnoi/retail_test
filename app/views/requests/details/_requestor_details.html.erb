@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  <script>
   $(document).ready(function(){
       $('#form').hide();
@@ -10,6 +11,9 @@
 </script>
     
  <div class="approv_cont clearfix">
+=======
+<div class="approv_cont clearfix">
+>>>>>>> parent of f6d5011... Add state,city and retailer_code dropdown in requester form
   <div class="appr_info">
     <div>RSP Present in Shop?</div>
     <div><%= @request.is_rsp %></div>
@@ -42,6 +46,7 @@
     <div><%= @request.cmo.try(:display_name) %></div>
   </div>
 
+<<<<<<< HEAD
   <div class="appr_desc">
     
     <div>Retailer Code</div>
@@ -58,6 +63,11 @@
     <div> <%= submit_tag("Change Retailer Code",id:'click') %></div>
     <%end%>
 
+=======
+  <div class="appr_retail">
+    <div>Retailer Code</div>
+    <div><%= @request.retailer_code %></div>
+>>>>>>> parent of f6d5011... Add state,city and retailer_code dropdown in requester form
   </div>
 
   

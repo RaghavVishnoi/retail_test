@@ -25,6 +25,7 @@
 
   "rsp_not_present_reason": <%= RSP_NOT_PRESENT_REASON.to_json.html_safe %>,
 
+<<<<<<< HEAD
   "is_gsb_installed_outside": <%= BOOLEAN_VALUES.to_json.html_safe %>,
 
   "retailer_state": <%= Retailer.order(:state).all.map {|a| [a.state]}.uniq.to_json.html_safe %>,
@@ -61,4 +62,7 @@
 
   "overall_rating":<%= OVERALL_RATING.to_json.html_safe %>
 
+=======
+  "is_gsb_installed_outside": <%= BOOLEAN_VALUES.to_json.html_safe %>
+>>>>>>> parent of f6d5011... Add state,city and retailer_code dropdown in requester form
 }

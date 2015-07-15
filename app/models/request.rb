@@ -10,6 +10,7 @@ class Request < ActiveRecord::Base
   belongs_to :declined_by_user, :class_name => 'User'
   belongs_to :approved_by_user, :class_name => 'User'
   belongs_to :cmo, :class_name => 'CMO'
+<<<<<<< HEAD
   belongs_to :retailer,:class_name => 'RetailerState'
    
   state_machine :status, :initial => :cmo_pending do
@@ -19,6 +20,10 @@ class Request < ActiveRecord::Base
     event :cmo_decline do
        transition :cmo_pending => :cmo_declined
     end
+=======
+
+  state_machine :status, :initial => :pending do
+>>>>>>> parent of f6d5011... Add state,city and retailer_code dropdown in requester form
     event :approve do
        transition :pending => :approved
     end
