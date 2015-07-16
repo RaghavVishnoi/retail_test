@@ -52,8 +52,22 @@ class Request < ActiveRecord::Base
   def self.with_query(q)
     q = {} if !q.present? 
     requests = self
+
     if q[:status].present? && q[:request_type].present?
       requests = requests.where(:status => q[:status],:request_type => q[:request_type])
+    end
+    requests
+  end
+
+  def self.with_cmo_query(q,id)
+    q = {} if !q.present? 
+    requests = self
+    user = User.find_by(:id => id)
+    email = user.email
+    cmo = CMO.find_by(:email => email)
+    cmo_id = cmo.id
+    if q[:status].present? && q[:request_type].present?
+      requests = requests.where(:status => q[:status],:request_type => q[:request_type],:cmo_id => cmo_id)
     end
     requests
   end
@@ -92,7 +106,7 @@ class Request < ActiveRecord::Base
     end
   end
 
-def self.cmo_id(id)
+def self.get_cmo_id(id)
     
     user = User.find_by(:id => id)
     email = user.email

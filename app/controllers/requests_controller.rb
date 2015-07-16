@@ -27,7 +27,14 @@ class RequestsController < ApplicationController
 
   def index
     
-    @requests = Request.with_query(params[:q]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+      role = Request.user_role(session[:user_id])
+     if role.name == 'cmo'
+       @requests = Request.with_cmo_query(params[:q],session[:user_id]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+       
+    else
+       @requests = Request.with_query(params[:q]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+        
+     end
     
     
 
@@ -148,7 +155,7 @@ class RequestsController < ApplicationController
        role = Request.user_role(session[:user_id])
 
        if role.name == 'cmo'
-        cmo_id = Request.cmo_id(session[:user_id])
+        cmo_id = Request.get_cmo_id(session[:user_id])
        else
         cmo_id = '' 
        end
