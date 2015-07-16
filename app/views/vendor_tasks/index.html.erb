@@ -38,6 +38,25 @@
             <%= link_to "Approved", vendor_tasks_path(:q => { :status => 'approved'}) %>
            </div>
         <%end%> 
+        <% if @role.name != 'superadmin' %>
+        <% if can? :get , Request %>
+        
+      <div class="<%= request_status_class('pending') %>">
+        
+        <%= link_to "Pending", requests_path(:q => { :status => 'pending'}) %>
+      </div>
+
+      <div class="<%= request_status_class('declined') %>">
+        <%= link_to "Declined", requests_path(:q => { :status => 'declined' }) %>
+      </div>
+
+      <div class="<%= request_status_class('approved') %>">
+        <%= link_to "Approved", requests_path(:q => { :status => 'approved' }) %>
+      </div>
+
+         
+       <%end%> 
+     <%end%>
       </div>
      	<% 
       id = session[:user_id]
