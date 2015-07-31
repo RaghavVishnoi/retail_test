@@ -3,8 +3,11 @@
     @associated_roles = AssociatedRole.find_by(:object_id => id)
     @role = @associated_roles.role
     @email = @user.email
-    @cmo = CMO.find_by(:email => @email)
-    puts "here is cmo #{@cmo}"
+    @cmo = CMO.where(:email => @email)
+     cmo_id = []
+     @cmo.each do |cmo|
+      cmo_id.push(cmo.id)
+     end 
     %>
 
 <div class="request_wrap clearfix"  >
@@ -108,7 +111,7 @@
                      end
                     %>
       <% if @role.name == 'cmo' %>
-      <% if request.cmo_id == @cmo.id%>
+      <% if cmo_id.include? request.cmo_id%>
          <%= link_to [:edit, request] do %>
              <div class="request_contain clearfix">
                  

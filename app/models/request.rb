@@ -49,14 +49,28 @@ class Request < ActiveRecord::Base
   validate :shop_visit_date,:shop_visit_done_by,:is_standee_present,:visitor_contact_number,:store_selling_gionee,:is_clipon_present,:is_countertop_present,:is_leaflets_available,:no_of_peace_in_stock,:is_wall_poster_in_shop,:is_dangler_in_shop,:rsp_assigned_in_store,:rsp_present_in_shop,:rsp_in_gionee_tshirt,:rsp_well_groomed,:rsp_selling_skills,:gsb_type_installed,:location_of_gsb,:gsb_cleanliness,:installation_quality,:is_gsb_light_woring,:is_gsb_light_throw_is_good,:gsb_structured_damage,:gsb_other_problem,:gsb_retailer_feedback,:is_sis_present,:is_sis_placed_properly,:is_sis_condition_good,:is_sis_cleaned_daily,:is_sis_damaged,:sis_structured_flaws,:sis_security_alarm_working,:sis_security_device_charging,:sis_demo_phones_installed,:spec_card_demo_phone_match,:backwall_light_working_properly,:is_counter_lights_working,:is_clip_on_lights,:dealer_switch_on_sis_lights,:updated_gionee_creative,:sis_any_problem,:sis_retailer_feedback,:is_good_visibility_in_store,:lit_in_store,:has_a_relevant_visual,:overall_rating,:is_clipon_not_working_properly,:overall_comments, :if => :visitor?
 
 
-  def self.with_query(q)
+ def self.with_query(q)
     q = {} if !q.present? 
     requests = self
+
     if q[:status].present? && q[:request_type].present?
       requests = requests.where(:status => q[:status],:request_type => q[:request_type])
     end
     requests
   end
+
+  def self.with_cmo_query(q,id)
+    q = {} if !q.present? 
+    requests = self
+    user = User.find_by(:id => id)
+    email = user.email
+    cmo = CMO.where(:email => email)
+    if q[:status].present? && q[:request_type].present?
+      requests = requests.where(:status => q[:status],:request_type => q[:request_type],:cmo_id => cmo)
+    end
+    requests
+  end
+
 
   def self.with_retailer_code(q)
     if q.present?
