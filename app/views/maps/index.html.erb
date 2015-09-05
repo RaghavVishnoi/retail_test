@@ -99,11 +99,11 @@ end
                 height: "toggle"
             });
             var src = $(this).attr("src");
-           if(src == '/assets/up-arrow.png'){
-             $(this).attr("src", '/assets/down-arrow.png');
+           if(src == '/assets/up-arrow.png' || src == '/uploads/up-arrow.png'){
+             $(this).attr("src", '/uploads/down-arrow.png');
            }
            else{
-             $(this).attr("src", '/assets/up-arrow.png');
+             $(this).attr("src", '/uploads/up-arrow.png');
            }
            
         });
