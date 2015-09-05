@@ -73,3 +73,17 @@ gem 'awesome_nested_set'
 gem "aws-ses", :require => 'aws/ses'
 gem 'state_machine'
 gem 'colorbox-rails'
+gem 'gmaps4rails'
+gem 'in_columns'
+gem 'roo', '~> 2.0.0'
+gem 'roo-xls'
+gem 'rack-utf8_sanitizer' 
+gem "iconv", "~> 1.0.3"
+gem 'xlsx_writer'
+gem 'rack'
+gem 'devise'
+
+ 
+require 'fileutils'
+
+ 

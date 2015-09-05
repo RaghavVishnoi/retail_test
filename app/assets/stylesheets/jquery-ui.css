@@ -32,7 +32,7 @@
 .ui-helper-clearfix:before,
 .ui-helper-clearfix:after {
 	content: "";
-	display: table;
+	display:F table;
 	border-collapse: collapse;
 }
 .ui-helper-clearfix:after {

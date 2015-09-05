@@ -1,0 +1,40 @@
+<a href="/vendor_requests/"><%= image_tag 'back.png',:title => "Back",:class => "vendor_back_button" %></a>
+<%= form_for @vendor_request, :html => { :class => 'user-form' } do |f| %>
+  
+  <h4 id="form-title">Edit Assignment</h4>
+
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @vendor_request.errors } %>
+  
+  <div class="form-field">
+    Vendor Id
+    <%=f.select :vendor_id,  Vendorlist.display_names , { :prompt => "select vendor" },:id => "vendor-request",:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   Request Id
+    <%= f.text_field :request_id,:readonly => true %>
+  </div>
+
+  <div class="form-field">
+   Assigned date
+    <%= f.text_field :assigned_date %>
+  </div>
+
+  <div class="form-field">
+   Vendor Response
+    <%= f.text_field :vendor_response %>
+  </div>
+
+  <div class="form-field">
+   Vendor Response Date
+    <%= f.text_field :vendor_response_date %>
+  </div>
+
+  <div class="form-field">
+   Request Status
+    <%= f.text_field :status %>
+  </div>
+
+  
+   <%= f.submit :value => "Update Assignment" %>
+<% end %>

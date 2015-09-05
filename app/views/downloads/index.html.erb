@@ -1,0 +1,38 @@
+<script>
+	$(document).ready(function(){
+		$('#request_csv').click(function(){
+			$('#csv-request').show();
+		});
+	});
+</script>
+<div id="csv-request">
+  <%=form_for downloads_path do%>
+    <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
+      <tr>
+        <td class="popup_title">Download Request CSV</td>
+        <td align="right" class="popup_title align_right">
+            <a href="javascript:void(0);" id="request-csv-close">Close</a>
+        </td>
+      </tr>
+      <tr>
+        <td  id="request-csv-message">From</td><td><%=date_field_tag 'from_date' %></td>
+      </tr>
+      <tr>
+        <td  id="request-csv-message">To</td><td><%=date_field_tag 'till_date' %></td>
+      </tr>
+      <tr>
+        <td  id="request-csv-message">Choose Request Type</td><td><%=select_tag 'request_type',options_for_select(["All", "GSB", "SIS","InShop", "Maintenance", "Audit" ], params[:type])%></td>
+      </tr>   
+    </table> 
+
+    <%= button_tag "Download",:value => "Download", :class => "download_button"%> 
+    <%end%>
+  </div>
+<div class="box_menu" id = 'request_csv'>
+	<div>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Requests
+      </div>
+    </div>
+</div>

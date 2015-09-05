@@ -1,9 +1,10 @@
+
 {
   "avg_gionee_monthly_sales": <%= AVG_GIONEE_MONTHLY_SALES.to_json.html_safe %>,
 
   "avg_store_monthly_sales": <%= AVG_STORE_MONTHLY_SALES.to_json.html_safe %>,
 
-  "cmo_name": <%= CMO.display_names.to_json.html_safe %>,
+  "cmo_name": <%= CMO.display_names.compact.to_json.html_safe %>,
 
   "is_main_signage": <%= BOOLEAN_VALUES.to_json.html_safe %>,
 
@@ -53,7 +54,8 @@
 
   "vendor_verify":<%= VENDOR_VERIFY.to_json.html_safe %>,
 
-  "vendor_list":<%= Vendorlist.display_names.to_json.html_safe %>,
+
+  "vendor_list":<%= Vendorlist.display_names.compact.to_json.html_safe %>,
 
   "installation_of":<%= INSTALLATION_OF.to_json.html_safe %>,
 

@@ -1,42 +1,30 @@
-<%= form_for @user, :html => { :class => 'user-form' } do |f| %>
-  
-  <h4 id="form-title"><%= form_title %></h4>
-
   <%= render :partial => "shared/error_messages", :locals => { :errors => @user.errors } %>
+<a href="/users/"><%= image_tag 'back.png',:title => "Back",:class => "back" %></a>
+
+<%= form_for @user, :html => { :class => 'user-form' } do |f| %>
+ <h4 id="form-title"><%= form_title %></h4>
+
+
   
   <div class="form-field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+    <span class="mandetory">*</span><%= f.label :email %>
+    <%= f.text_field :email,:required => "required" %>
   </div>
 
   <div class="form-field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="form-field">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-
-  <div class="form-field">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
+    <span class="mandetory">*</span><%= f.label :name %>
+    <%= f.text_field :name,:required => "required" %>
   </div>
   
-  <% if can? :manage, User %>
-    <div class="form-field">
-      <%= f.label :role_ids %>
-      <%= f.select :role_ids, Role.pluck(:name, :id), {}, { :multiple => true } %>
-    </div>
-  <% else %>
-    <div class="form-field">
-      <span class="field-name">Role</span>
-      <span class="field-value"><%= current_user.roles.pluck(:name).join(', ') %></span>
-    </div>
-  <% end %>
-
-  <% if can? :manage, User %>
+    
+      <%
+      puts "here is role #{@role}"
+      if @role.name == 'superadmin'%>
+      <div class="form-field">
+        <span class="mandetory">*</span><%= f.label :role_ids %>
+        <%= f.select :role_ids, Role.pluck(:name, :id), {}, { :multiple => false } %>
+      </div>
+      <% if can? :manage, User %>
     <div class="form-field">
       <%= f.label :department_ids, "Department" %>
       <%= f.select :department_ids, Department.pluck(:name, :id), :include_blank => true %>
@@ -95,6 +83,39 @@
       <span class="field-value"><%= current_user.weekly_offs.map(&:day).join(', ') %></span>
     </div>
   <% end %>
+      <%else%>
+      <div class="form-field">
+        <span class="mandetory">*</span><%= f.label :role_ids %>
+        <%= f.select :role_ids, Role.where(:name => ['vendor','cmo','requester']).pluck(:name, :id),{:prompt => "Select user role"},:class => 'retailer_select',:required => "required" %>
+      </div>
+      <%end%>
+      <div class="form-field">
+         <span class="mandetory">*</span>Status
+         <%= f.select :status, RETAILER_STATUS,{:prompt => "Select user status"},:class => 'retailer_select',:required => "required" %>
+      </div>
 
-  <%= f.submit %>
+      
+      <%if form_title == "New User"%>
+      <div class="form-field">
+       <span class="mandetory">*</span><%= f.label :password,:id => "confirm-password-field" %>
+       <%= f.password_field :password,:placeholder => "Enter new password",:required => "required" %>
+     </div>
+     <div class="form-field">
+       <span class="mandetory">*</span><%= f.label :password_confirmation,:id => "confirm-password-field" %>
+       <%= f.password_field :password_confirmation,:placeholder => "Confirm new password",:required => "required" %>
+     </div>
+      <%else%>
+      <div class="form-field">
+       <%= f.label :password,:id => "confirm-password-field" %>
+       <%= f.password_field :password,:placeholder => "Enter new password" %>
+     </div>
+     <div class="form-field">
+       <%= f.label :password_confirmation,:id => "confirm-password-field" %>
+       <%= f.password_field :password_confirmation,:placeholder => "Confirm new password" %>
+     </div>
+     
+     <%end%>
+     
+     <%= f.submit :id => "user-button" %>
+ 
 <% end %>

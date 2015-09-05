@@ -3,23 +3,20 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Gionee</title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-
+ 
 </head>
 <body>
 
-  <!-- <div id="page-container"> -->
-    <%#= render 'shared/organization_nav' %>
-    
-    <%#= render :partial => "shared/flash_messages" %>
 
-    <%#= yield %>
-    
-  <!-- </div> -->
   <div id="wrapper">
     <%= render :partial => 'shared/nav_bar' %>
+    <div class="logoff">
+      <a href="/users/sign_out"><%= image_tag 'turn-off1.png',:class => "logout",:title => "logout" %></a>
+    </div> 
 
     <% if notice %>
       <div id="notice"><%= notice %></div>
@@ -34,8 +31,7 @@
     </div>
   
     <div id="popup" class="hidden"></div>
-    <!-- <div class="img_mask" id="img_mask"></div> -->
-    <!-- <div id="img_popup" class="img_pop"></div> -->
+     
 
 
     <div class="footer">

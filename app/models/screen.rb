@@ -25,8 +25,9 @@ class Screen < ActiveRecord::Base
 
   private
     def ensure_only_one_start_screen
-      if is_start_screen_changed? && is_start_screen?
-        Screen.update_all(:is_start_screen => false)
+      if is_start_screen_changed? && is_start_screen? 
+        @screen = Screen.where(:module_group_id => module_group_id)
+        @screen.update_all(:is_start_screen => false)
       end
     end
 end

@@ -4,25 +4,17 @@ class RequestsController < ApplicationController
   authorize_resource :except => [:create, :new, :autocomplete_retailer_code,:state,:city]
   skip_before_action :authenticate_user, :only => [:create, :new, :autocomplete_retailer_code,:state,:city]
   PER_PAGE = 10
-
-
+   
   def state
-
     value = params[:value]
     @city = Retailer.where(state: value).uniq.order("city asc")
     render :json => @city
-     
-   
-    
   end
 
   def city
-
     value = params[:value]
-    puts "here is value #{value}"
-    @retailer = Retailer.where(city: value).uniq.order("city asc")
+    @retailer = Retailer.where(city: value,status: 'Active').uniq.order("city asc")
     render :json => @retailer
-
   end
 
   def index
@@ -30,20 +22,19 @@ class RequestsController < ApplicationController
       role = Request.user_role(session[:user_id])
      if role.name == 'cmo'
        @requests = Request.with_cmo_query(params[:q],session[:user_id]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-       
-    else
+     elsif role.name == 'requester'
+       @requests = Request.with_requester_query(params[:q],session[:user_id]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+     else
        @requests = Request.with_query(params[:q]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-        
      end
-    
-    
-
+ 
   end
 
   def new
+
     @request = Request.new
     respond_to do |format|
-      format.html
+      format.html 
       format.json { render :json => @request.as_json(:methods => [:shop_requirements, :branding_details]) }
     end
   end
@@ -52,7 +43,6 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new request_params
     if @request.save
-      puts "here is request_type #{params[:request][:request_type]}"
       if params[:request][:request_type] == 'visitor'
         @requests = Request.last 
         @requests.status = 'approved'
@@ -69,6 +59,8 @@ class RequestsController < ApplicationController
       end
     end
   end
+
+
   def edit
     @prev_url = request.referer
   end
@@ -76,7 +68,6 @@ class RequestsController < ApplicationController
 
    def update
     prev_url = params[:prev_url]
-
     id = session[:user_id]
     @user = User.find_by(:id => id)
     @associated_roles = AssociatedRole.find_by(:object_id => id)
@@ -95,6 +86,7 @@ class RequestsController < ApplicationController
           @request.comment_by_approver = comment
          end
          @request.approve
+         redirect_to request.path+'/edit?alert=true'
        elsif params[:commit] == "Decline"
          @request.declined_by_user_id = current_user.id
          if comment == ''
@@ -103,12 +95,9 @@ class RequestsController < ApplicationController
           @request.comment_by_approver = comment
          end
          @request.decline
+         redirect_to prev_url
        end
-       if @request.errors.present?
-          render :edit
-       else
-      redirect_to prev_url
-       end
+        
 
     end
 
@@ -167,8 +156,9 @@ class RequestsController < ApplicationController
        session[:requestId] = params[:id]
      if role.name == 'cmo' && cmo_id != @request.cmo_id
            redirect_to :back, :flash => { :notice => "Sorry! You can't access this request" }
+     elsif role.name == 'requester' && session[:user_id] != @request.user_id
+           redirect_to :back, :flash => { :notice => "Sorry! You can't access this request" }
      else
-
       if $request_type.include? '0' ||  '1' ||  '2'
        if @request.request_type == 'sis' || @request.request_type == 'in_shop' || @request.request_type == 'gsb'
             redirect_to "/requests/#{params[:id]}/edit"
@@ -214,7 +204,7 @@ class RequestsController < ApplicationController
   private
 
   def request_params
-    params.require(:request).permit(:retailer_code, :rsp_name, :is_rsp, :rsp_not_present_reason, :rsp_mobile_number, :rsp_app_user_id, :state, :city, :shop_name, :shop_address, :shop_owner_name, :shop_owner_phone, :is_main_signage, :is_sis_installed, :space_available, :width, :height, :type_of_sis_required, :type_of_gsb_requested, :is_gsb_installed_outside, :avg_store_monthly_sales, :avg_gionee_monthly_sales, :cmo_id, :request_type, :remarks, :is_gionee_gsb_present,:maintenance_requestor,:maintenance_requestor_mobile_number,:type_of_issue,:type_of_problem, :image_ids_string,:shop_visit_date,:shop_visit_done_by,:visitor_contact_number,:is_clipon_present,:is_countertop_present,:is_leaflets_available,:no_of_peace_in_stock,:is_wall_poster_in_shop,:is_dangler_in_shop,:rsp_assigned_in_store,:rsp_present_in_shop,:rsp_in_gionee_tshirt,:rsp_well_groomed,:rsp_selling_skills,:gsb_type_installed,:location_of_gsb,:gsb_cleanliness,:installation_quality,:is_gsb_light_woring,:is_gsb_light_throw_is_good,:gsb_structured_damage,:gsb_other_problem,:gsb_retailer_feedback,:is_sis_present,:is_sis_placed_properly,:is_sis_condition_good,:is_sis_cleaned_daily,:is_sis_damaged,:is_standee_present,:store_selling_gionee,:sis_structured_flaws,:sis_security_alarm_working,:sis_security_device_charging,:sis_demo_phones_installed,:spec_card_demo_phone_match,:backwall_light_working_properly,:is_counter_lights_working,:is_clip_on_lights,:dealer_switch_on_sis_lights,:updated_gionee_creative,:sis_any_problem,:sis_retailer_feedback,:is_good_visibility_in_store,:lit_in_store,:has_a_relevant_visual,:overall_rating,:is_clipon_not_working_properly,:overall_comments, :image_ids => [], :properties => [:field_id, :value, :values => []])
+    params.require(:request).permit(:retailer_code, :rsp_name, :is_rsp, :rsp_not_present_reason, :rsp_mobile_number, :rsp_app_user_id, :state, :city, :shop_name, :shop_address, :shop_owner_name, :shop_owner_phone, :is_main_signage, :is_sis_installed, :space_available, :width, :height, :type_of_sis_required, :type_of_gsb_requested, :is_gsb_installed_outside, :avg_store_monthly_sales, :avg_gionee_monthly_sales, :cmo_id, :request_type, :remarks, :is_gionee_gsb_present,:maintenance_requestor,:maintenance_requestor_mobile_number,:type_of_issue,:type_of_problem, :image_ids_string,:shop_visit_date,:shop_visit_done_by,:visitor_contact_number,:is_clipon_present,:is_countertop_present,:is_leaflets_available,:no_of_peace_in_stock,:is_wall_poster_in_shop,:is_dangler_in_shop,:rsp_assigned_in_store,:rsp_present_in_shop,:rsp_in_gionee_tshirt,:rsp_well_groomed,:rsp_selling_skills,:gsb_type_installed,:location_of_gsb,:gsb_cleanliness,:installation_quality,:is_gsb_light_woring,:is_gsb_light_throw_is_good,:gsb_structured_damage,:gsb_other_problem,:gsb_retailer_feedback,:is_sis_present,:is_sis_placed_properly,:is_sis_condition_good,:is_sis_cleaned_daily,:is_sis_damaged,:is_standee_present,:store_selling_gionee,:sis_structured_flaws,:sis_security_alarm_working,:sis_security_device_charging,:sis_demo_phones_installed,:spec_card_demo_phone_match,:backwall_light_working_properly,:is_counter_lights_working,:is_clip_on_lights,:dealer_switch_on_sis_lights,:updated_gionee_creative,:sis_any_problem,:sis_retailer_feedback,:is_good_visibility_in_store,:lit_in_store,:has_a_relevant_visual,:overall_rating,:is_clipon_not_working_properly,:overall_comments,:user_id, :image_ids => [], :properties => [:field_id, :value, :values => []])
   end
 
   def find_request

@@ -19,7 +19,27 @@ module ApplicationHelper
       "GSB"
     elsif request.in_shop?
       "In-shop"
+    elsif request.maintenance?
+      "Maintenance"
+    elsif request.visitor?
+      "Audit"
     end
+
+  end
+
+  def request_type_backend(request_type)
+     if request_type == 'GSB'
+       0
+     elsif request_type == 'SIS'
+       1
+     elsif request_type == 'InShop'
+       2
+     elsif request_type == 'Maintenance'
+       3
+     elsif request_type == 'Audit'
+       4
+     end      
+         
   end
 
   def monthly_sales_str(amount, values)

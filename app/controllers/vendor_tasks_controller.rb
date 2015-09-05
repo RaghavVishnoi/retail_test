@@ -1,7 +1,7 @@
 class VendorTasksController < ApplicationController
 	before_action :find_request, :only => [:edit,:update]
 	authorize_resource :except => [:new,:create]
-    skip_before_action :authenticate_user, :only => [:create, :new]
+  skip_before_action :authenticate_user, :only => [:create, :new]
 
     PER_PAGE = 10
 

@@ -26,11 +26,10 @@ class VendorTask < ActiveRecord::Base
 	validate :request_id,:vendorlist,:requestor_type,:other_identity,:installation_of,:retailer_code,:installation_report,:vendor_id,:approver_approve_date,:cmo_approve_date,:comment_by_approver,:comment_by_cmo,:status
 	
 
-	def image_ids_string=(str)
+	  def image_ids_string=(str)
      self.image_ids = str.split(',')
     end
 
-     
 
     def self.request_list(cmo_email)
     	@cmo = CMO.where(:email => cmo_email)

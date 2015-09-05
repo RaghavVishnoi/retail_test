@@ -1,0 +1,71 @@
+
+<a href="/retailers/"><%= image_tag 'back.png',:title => "Back",:class => "back" %></a>
+
+<%= form_for @retailer, :html => { :class => 'user-form' } do |f| %>
+  
+  <h4 id="form-title">Edit Retailer</h4>
+
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @retailer.errors } %>
+  
+  <div class="form-field">
+    <span class="mandetory">*</span>Retailer Name
+    <%= f.text_field :retailer_name,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>Retailer Code
+    <%= f.text_field :retailer_code,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   Sales Channel
+    <%= f.text_field :sales_channel %>
+  </div>
+
+  <div class="form-field">
+   Contact Person
+    <%= f.text_field :contact_person %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>State
+    <%= f.text_field :state,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>City
+    <%= f.text_field :city,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   Pincode
+    <%= f.text_field :pincode %>
+  </div>
+
+  <div class="form-field">
+   Tin Number
+    <%= f.text_field :tin_number %>
+  </div>
+
+  <div class="form-field">
+   Mobile Number
+    <%= f.phone_field :mobile_number %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>Status
+    <%= f.select :status, RETAILER_STATUS,{:prompt => "Select retailer status"},:class => 'retailer_select',:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   Is RSP on counter
+    <%= f.text_field :is_isp_on_counter %>
+  </div>
+
+  <div class="form-field">
+   Counter Size
+    <%= f.text_field :counter_size %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

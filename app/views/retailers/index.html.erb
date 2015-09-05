@@ -1,0 +1,78 @@
+<% if can? :manage, Retailer %>
+ <%= link_to "New Retailer", new_retailer_path, :id => 'new-button' %>
+<%end%> 
+<%if request.params.include? 'param' %>
+ <%= link_to "Clear", retailers_path ,:class => 'show-all'%>
+<%end%>
+<div>
+  <%=form_tag @retailers ,:method => 'get' do |f| %>  
+  <div id="user-search-div" class="form-field">
+     <div class="user-search-field">
+       
+       <%= text_field_tag :param, @search, :id => "retailer-search",:required => "required",:placeholder => "Enter retailer code/city/state" %>
+    </div>
+   <div>
+       <%= button_tag(type: 'submit',value: '',:class=>"hide-button") do %>
+         <i ><%= image_tag 'search.png' ,:class => "button_with_image_save"%></i> 
+       <% end %>
+   </div>
+   <div class="error" id="message"></div>
+         
+  </div>
+  <%end%>
+</div>
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Retailer Code</th>
+      <th>Retailer Name</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Status</th>
+      <% if can? :manage, Retailer %>
+       <th>Edit</th>
+      <%end%>
+      <th>Show</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @retailer.each do |retailer| %>
+      <tr>
+        <td>
+          <%=retailer.id%>
+        </td>
+        <td>
+          <%=retailer.retailer_code%>
+        </td>
+        <td>
+          <%=retailer.retailer_name%>
+        </td>
+        <td>
+          <%=retailer.city%>
+        </td>
+        <td>
+          <%=retailer.state%>
+        </td>
+        <td>
+          <%=retailer.status%>
+        </td>
+        <% if can? :manage, Retailer %>
+        <td>
+          <%= link_to "Edit", [:edit, retailer] %>
+        </td>
+        <%end%>
+        
+         
+        <td>
+          <%= link_to "Show", [retailer] %>
+        </td>
+      </tr>
+    <%end %>
+  </tbody>
+</table>
+<div class="response-pagination clearfix">
+  <%if @retailer.length > 1%>
+      <%=will_paginate @retailer%>
+  <%end%>
+</div>

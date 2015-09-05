@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   attr_accessor :skip_password_validation, :password_required
   attr_writer :shift_start_time, :shift_end_time
 
+  USER_TYPE = ['All','CMO','APPROVER','REQUESTER']
+
   has_secure_password :validations => false
 
   has_many :associated_roles, :as => :object, :dependent => :destroy
@@ -24,6 +26,7 @@ class User < ActiveRecord::Base
   has_many :customers_users, :dependent => :destroy
   has_many :customers, :through => :customers_users
   has_many :cmos
+  has_many :users
 
   validates_confirmation_of :password, :if => ->{ password.present? }
   validates :email, :presence => true, :uniqueness => true
@@ -37,7 +40,7 @@ class User < ActiveRecord::Base
   after_create :send_invite_mail
 
   scope :with_password, -> { where('password_digest is not null') }
-  scope :with_email, ->(email) { where(:email => email) }
+  scope :with_email, ->(email) { where(:email => email,:status => 'Active') }
 
   def self.with_name(name)
     if name.present?
@@ -87,8 +90,52 @@ class User < ActiveRecord::Base
       end
     end
 
+    def self.get_role(id)
+      @user = User.find_by(:id => id)
+      @associated_roles = AssociatedRole.find_by(:object_id => id)
+      @role = @associated_roles.role.name 
+    end
+
+    def self.approver_users(role)
+      @role = Role.where(:name => ['vendor','cmo','requester'])
+      @associated_roles = AssociatedRole.where(:role_id => @role)
+      @object_id = []
+      @associated_roles.each do |associated_roles|
+        @object_id = @object_id.push(associated_roles.object_id)
+      end
+      @users = User.where(:id => @object_id)
+   end
+
+   def self.find_users(role)
+      @role = Role.where(:name => role)
+      @associated_roles = AssociatedRole.where(:role_id => @role)
+      @object_id = []
+      @associated_roles.each do |associated_roles|
+        @object_id = @object_id.push(associated_roles.object_id)
+      end
+      @users = User.where(:id => @object_id)
+   end
+
+    def self.search(id,roles)
+      if roles.name == 'superadmin'
+        @users = User.where(:email => id)
+      else
+        users = User.where(:email => id)
+      end
+        associated_roles = AssociatedRole.find_by(:object_id => users)
+        if associated_roles != nil && associated_roles != ''
+        role = associated_roles.role
+          if role.name == 'cmo' || role.name == 'vendor' || role.name == 'requester'
+            user = User.where(:email => id)
+          else
+            user = ''
+          end
+        end
+      user
+    end
+
     def send_invite_mail
-      UserMailer.delay.invite_mail(email, reset_password_token)
+       UserMailer.delay.invite_mail(email, reset_password_token)
     end
 
     def set_shift_time_in_seconds
@@ -98,5 +145,11 @@ class User < ActiveRecord::Base
       if @shift_end_time
         self.shift_end_time_in_seconds = TimeHandler.seconds(timezone, @shift_end_time)
       end
+    end
+
+    def self.user_role(id)
+      user = User.find_by(:id => id)
+      associated_roles = AssociatedRole.find_by(:object_id => id)
+      role = associated_roles.role
     end
 end

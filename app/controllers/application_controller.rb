@@ -16,6 +16,9 @@ class ApplicationController < ActionController::Base
   # before_action :log_requests, :if => 'Rails.env.staging?'
   before_action :authenticate_user
 
+  
+
+
   private
     def log_requests
       LogHandler.process(request)

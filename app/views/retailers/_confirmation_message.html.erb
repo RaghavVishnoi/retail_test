@@ -1,0 +1,48 @@
+<div id="confirmation-popup">
+ <%= form_for @retailer,:url => { :action => "file_insert" } do %>
+     <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
+            <tr>
+                <td class="confirmation-popup_title">Retailers Updation Confirmation</td>
+                <td class="confirmation-popup_title align_right">
+                    <a href="javascript:void(0);" id="retailerClose">Close</a>
+                </td>
+                
+              </tr> 
+              <tr><td colspan="2" align="center"><%= submit_tag "Confirm", :id => "confirmation-popup_button"%>
+              	<%= submit_tag "Decline", :id => "confirmation-popup_button"%></td></tr>
+             <tr><td> <label class="title-label"><b>New retailers to upload</b> </label></td><td> <label class="title-label"><b> Retailers to be Inactive</b> </label></td></tr>
+             <tr><td><hr /></td><td><hr /></td></tr>
+           </table>
+        <div>
+           <table width="45%" id="confirmation">
+           	<thead>
+               <th>Retailer Code</th><th>Retailer Name</th>
+           	</thead>
+
+		        <tbody>
+            </tbody>
+				 
+           </table>
+           <table width="45%;"  id="confirmation-status" >
+           	<thead>
+               
+
+           		<th>Retailer Code</th><th>Retailer Name</th>
+           	</thead>
+
+		    <tbody>
+            </tbody>
+				 
+           </table>
+           <%=hidden_field_tag 'new_array','',:id => "new_array",:multiple => true%>
+            <%=hidden_field_tag 'update_array','',:id => "update_array"%>
+             
+       </div>
+       <div>
+             
+             
+        </div>
+    
+
+ <%end%>
+ </div>

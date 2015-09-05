@@ -20,7 +20,7 @@
 
   <% if can? :read, User %>
     <%= link_to users_path do %>
-      <div class="box">
+      <div class="box" id = "user">
         <span><i><%= image_tag 'logo.png' %></i></span>
         Users
       </div>
@@ -88,10 +88,19 @@
           @user = User.find_by(:id => id)
           @associated_roles = AssociatedRole.find_by(:object_id => id)
           @role = @associated_roles.role  
-          if @role.name != 'superadmin' 
+          if @role.name != 'superadmin'
+            if @role.name != 'requester' 
+              @status1 = 'pending'
+              @status2 = 'pending'
+            else
+              @status1 = ['cmo_pending','pending']
+              @status2 = ['cmo_pending','pending']
+             
+            end
           %>
+
   <% if can? :get, Request %>
-    <%= link_to requests_path(:q => { :status => 'pending',:request_type => ['0','1','2'] }) do %>
+    <%= link_to requests_path(:q => { :status => @status1,:request_type => ['0','1','2'] }) do %>
       <div class="box">
        <span><i><%= image_tag 'logo.png' %></i></span>
         Requests
@@ -100,7 +109,7 @@
   <% end %>
 
   <% if can? :get, Request %>
-    <%= link_to requests_path(:q => { :status => 'pending',:request_type => ['3'] }) do %>
+    <%= link_to requests_path(:q => { :status => @status2,:request_type => ['3'] }) do %>
       <div class="box">
         <span><i><%= image_tag 'logo.png' %></i></span>
         Maintenance Requests
@@ -125,6 +134,25 @@
       </div>
     <% end %>
   <% end %>
+<%if @role.name == 'reader'%>
+   <% if can? :get, Retailer %>
+    <%= link_to retailers_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Retailers
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if can? :get, CMO %>
+    <%= link_to cmos_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        CMO
+      </div>
+    <% end %>
+  <% end %>
+<%end%>  
 
   <% if can? :approve, Request %>
     <%= link_to requests_path(:q => { :status => 'pending',:request_type => ['0','1','2'] }) do %>
@@ -163,6 +191,8 @@
     <% end %>
   <% end %>
 
+  
+
 
   <% if can? :cmo, Request %>
     <%= link_to requests_path(:q => { :status => 'cmo_pending',:request_type => ['0','1','2']  }) do %>
@@ -191,11 +221,6 @@
     <% end %>
   <% end %>
 
-   
-
- 
-
-  
   <%else
     if can? :manage, Request %>
     <%= link_to requests_path(:q => { :status => ['pending','cmo_pending'],:request_type => ['0','1','2'] }) do %>
@@ -234,149 +259,70 @@
     <% end %>
   <% end %>
 
- 
+<% if can? :manage, Retailer %>
+    <%= link_to retailers_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Retailers
+      </div>
+    <% end %>
+  <% end %>
 
-   
- <!--  -->
-  <%# if can? :read, User %>
-    <%#= link_to user_shifts_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Shift Timings -->
-      <!-- </div> -->
-    <%# end %>
-  <%# end %>
+  <% if can? :manage, Vendorlist %>
+    <%= link_to vendorlists_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Vendors
+      </div>
+    <% end %>
+  <% end %>
 
-  <%# if can? :read, Attendance %>
-    <%#= link_to attendances_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'attendance.png' %></i></span> -->
-        <!-- Attendance -->
-      <!-- </div> -->
-    <%# end %>
-  <%# end %>
+  <% if can? :manage, CMO %>
+    <%= link_to cmos_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        CMO
+      </div>
+    <% end %>
+  <% end %>
 
-  <%# if can? :manage, Organization %>
+  <% if can? :manage, Map %>
+    <%= link_to maps_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Request Map
+      </div>
+    <% end %>
+  <% end %>
 
-    <%#= link_to organization_edit_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Organization -->
-      <!-- </div> -->
-    <%# end %>
+  <% if can? :manage, VendorRequest %>
+    <%= link_to vendor_requests_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Vendor Assignments
+      </div>
+    <% end %>
+  <% end %>
 
-    <%#= link_to edit_hq_addresses_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- HeadQuarter Address -->
-      <!-- </div> -->
-    <%# end %>
+<% if can? :manage, VendorAssignment %>
+    <%= link_to vendor_assignments_path(:q => {:status => 'waiting'}) do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Assignments
+      </div>
+    <% end %>
+<%end%> 
 
-    <%#= link_to addresses_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Branch Offices -->
-      <!-- </div> -->
-    <%# end %>
-
-    <%#= link_to departments_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Departments -->
-      <!-- </div> -->
-    <%# end %>
-
-    <%#= link_to regions_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Regions -->
-      <!-- </div> -->
-    <%# end %>
-
-    <%#= link_to business_units_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Business Units -->
-      <!-- </div> -->
-    <%# end %>
-
-    <%#= link_to weekly_offs_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Weekly Offs -->
-      <!-- </div> -->
-    <%# end %>
-
-    <%#= link_to items_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Items -->
-      <!-- </div> -->
-    <%# end %>
-
-    <%#= link_to cities_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Cities -->
-      <!-- </div> -->
-    <%# end %>
-
-    <%#= link_to item_regions_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Item Regions -->
-      <!-- </div> -->
-    <%# end %>
-
-    <%#= link_to categories_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Categories -->
-      <!-- </div> -->
-    <%# end %>
-
-    <%#= link_to warehouses_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Warehouses -->
-      <!-- </div> -->
-    <%# end %>
-    
-  <%# end %>
+<% if can? :manage, Download %>
+    <%= link_to downloads_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Downloads
+      </div>
+    <% end %>
+<%end%>   
 
 
-  <%# if can? :manage, Holiday %>
-    <%#= link_to holidays_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Holidays -->
-      <!-- </div> -->
-    <%# end %>
-  <%# end %>
-
-  <%# if can? :read, Customer %>
-    <%#= link_to customers_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'customer-icon.png' %></i></span> -->
-        <!-- My Customers -->
-      <!-- </div> -->
-    <%# end %>
-  <%# end %>
-
-
-  <%#= link_to [:edit, current_user] do %>
-<!--     <div class="box">
-      <span><i><%#= image_tag 'profile-icon.png' %></i></span>
-      Profile
-    </div> -->
-  <%# end %>
-
-  <%#= link_to data_files_path do %>
-<!--     <div class="box">
-      <span><i><%#= image_tag 'file-icon.png' %></i></span>
-      Files
-    </div> -->
-  <%# end %>
 
   <div class="clear"></div>
 </div>

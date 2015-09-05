@@ -1,6 +1,6 @@
  
 <%= form_for @request, :html => { :class => "request-form", :data => { :pages => ['.rsp_page', '.requestor_details_page', '.shop_details_page', '.competition_details_page'], :current_page => 0 } } do |f| %>
-
+  <%=f.hidden_field :user_id,:value => session[:user_id]%>
   <%= render :partial => "shared/error_messages", :locals => { :errors => @request.errors } %>
 <div class="rsp_wrap clearfix" id="rsp_wrap">
   <div class="rsp_page page">

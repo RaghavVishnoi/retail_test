@@ -1,0 +1,40 @@
+<a href="/vendorlists/"><%= image_tag 'back.png',:title => "Back",:class => "back" %></a>
+<%= form_for @vendor, :html => { :class => 'user-form' } do |f| %>
+  
+ <h4 id="form-title"><%= form_title %></h4>
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @vendor.errors } %>
+  
+  <div class="form-field">
+    <span class="mandetory">*</span>Vendor Name
+    <%= f.text_field :vendor_name,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>Vendor Email
+    <%= f.text_field :email,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   Region
+    <%= f.text_field :region %>
+  </div>
+
+  <div class="form-field">
+   State
+    <%= f.text_field :state %>
+  </div>
+
+  <div class="form-field">
+   Contact Person
+    <%= f.text_field :contact_person %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>Status
+    <%= f.select :status, RETAILER_STATUS,{:prompt => "Select Vendor status"},:class => 'retailer_select',:required => "required" %>
+  </div>
+
+   <%= f.submit :value => button %>
+ 
+  
+<% end %>

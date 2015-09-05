@@ -1,0 +1,123 @@
+<%@request = VendorAssignment.get_request_detail(@assignment)
+   @retailer = VendorAssignment.get_retailer_detail(@request.retailer_code)
+   @cmo = VendorAssignment.get_cmo_detail(@request.cmo_id)%>
+<a href="/vendor_assignments?q[status]=waiting"><%= image_tag 'back.png',:title => "Back",:class => "show-back-button" %></a>
+    
+<div class="super_div">
+
+  <% if @assignment.status != 'Waiting'%>
+    <div class="approv_cont clearfix">
+	  <div class="appr_info">
+	    <div></div>
+	    <div></div>
+	  </div>
+
+	  <div class="appr_retail">
+	    <div></div>
+	    <div></div>
+	  </div>
+
+	  <div class="appr_desc">
+	    <div></div>
+	    <div>
+	    <%=form_for VendorAssignment.new, :url => {:controller => "vendor_assignments", :action => "status", :id => @assignment.id}	do %>
+	    	<%= button_tag(type: 'submit',value: '',:id => 'status-button') do %>
+                <div>
+                  <span><i><%= image_tag 'update_status.png',:id => 'status-img'%></i></span>
+                              
+                </div>
+            <% end %>
+        <%end%>    
+	    </div>
+	  </div>
+
+	 </div>
+   <%end%>
+
+	<div class="approv_cont clearfix">
+	  <div class="appr_info">
+	    <div>Retailer Code</div>
+	    <div><%=@retailer.retailer_code %></div>
+	  </div>
+
+	  <div class="appr_retail">
+	    <div>State</div>
+	    <div><%=@retailer.state %></div>
+	  </div>
+
+	  <div class="appr_desc">
+	    <div>Request Id</div>
+	    <div><%=@request.id %></div>
+	  </div>
+
+	</div>
+
+	<div class="approv_cont clearfix">
+	  <div class="appr_info">
+	      <div>Retailer Name</div>
+	      <div><%=@retailer.contact_person %></div>
+	    </div>
+
+	    <div class="appr_retail">
+	      <div>City</div>
+	      <div><%=@retailer.city %></div>
+	    </div>
+
+	    <div class="appr_desc">
+	      <div>Request Type</div>
+	      <div><%=@request.request_type %></div>
+	    </div>
+    </div>
+
+    <div class="approv_cont clearfix">
+	  <div class="appr_info">
+	      <div>Retailer Mobile Number</div>
+	      <div><%=@retailer.mobile_number %></div>
+	    </div>
+
+	    <div class="appr_retail">
+	      <div></div>
+	      <div></div>
+	    </div>
+
+	    <div class="appr_desc">
+	      <div>Request Status</div>
+	      <div><%=@assignment.status %></div>
+	    </div>
+    </div>
+
+    <div class="approv_cont clearfix">
+	  <div class="appr_info">
+	      <div>Shop Name</div>
+	      <div><%=@retailer.retailer_name %></div>
+	    </div>
+
+	    <div class="appr_retail">
+	      <div></div>
+	      <div></div>
+	    </div>
+
+	    <div class="appr_desc">
+	      <div>Vendor Progress</div>
+	      <div><%=@assignment.vendor_response %></div>
+	    </div>
+    </div>
+
+    <div class="approv_cont clearfix">
+	  <div class="appr_info">
+	      <div>CMO Name</div>
+	      <div><%=@cmo.name%> - <%=@cmo.location%></div>
+	    </div>
+
+	    <div class="appr_retail">
+	      <div></div>
+	      <div></div>
+	    </div>
+
+	    <div class="appr_desc">
+	      <div>Assigned Date</div>
+	      <div><%=@assignment.assigned_date %></div>
+	    </div>
+    </div>
+    
+</div>    

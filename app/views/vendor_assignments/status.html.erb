@@ -1,0 +1,88 @@
+ <div style="width:100%;background-color:#ffffff;height:92px;border_bottom:1px solid #000000;">
+ 	<a href="/vendor_assignments/<%=params[:id]%>"><%= image_tag 'back.png',:title => "Back",:class => "show-back-button" %></a>
+ 	<br>
+ 	<div style="width:92%;height:50px;border:1px solid green;margin:auto">
+ 		<div style="background-color:green;width:<%=@average%>%;height:40px;margin-top:.4%;margin-left:.4%">
+          
+ 		</div>
+ 		 <table width="100%">
+           	<tr><td align-"left">Accept</td><td align="right">Finish</td></tr>
+         </table>
+ 	<div>
+ </div>
+</div>
+
+<div class="super_div" style="margin-top:5%;">
+ <div class="approv_cont clearfix">
+	  <div class="appr_info">
+	    <div>Stage Name</div>
+	    <div></div>
+	  </div>
+
+	  <div class="appr_retail">
+	    <div>Update Date</div>
+	    <div></div>
+	  </div>
+
+	  <div class="appr_desc">
+	    <div>Action</div>
+	    <div></div>
+	  </div>
+ </div>
+   <% @vendor_stage = VendorStage.where(:vendor_request_id => @assignment) 
+      all_stage_array = ['accepted','shop_visit','estimate_shared','po_received','in_production','in_transit','installation_complete','bill_received']
+   		@vendor_stage.each do |vendor_stage|
+   			all_stage_array.delete(vendor_stage.stage_name)
+   %>
+
+    <div class="approv_cont clearfix">
+		  <div class="appr_info">
+		    <div></div>
+		    <div><%=vendor_stage.stage_name.camelize %></div>
+		  </div>
+
+		  <div class="appr_retail">
+		    <div></div>
+		    <div><%=vendor_stage.update_date %></div>
+		  </div>
+
+		  <div class="appr_desc">
+		    <div><%= image_tag 'updated.png',:style => "width:35%;height:40px"%></div>
+		  </div>
+	 </div>
+	<%end%>
+	<%
+	puts "here is array #{all_stage_array}"
+	all_stage_array.each_with_index do |stage,index|%>
+		 <div class="approv_cont clearfix">
+			  <div class="appr_info">
+			    <div></div>
+			    <div><%=stage.camelize %></div>
+			  </div>
+
+			  <div class="appr_retail">
+			    <div></div>
+			    <div>**********</div>
+			  </div>
+
+			  <div class="appr_desc">
+			    <div></div>
+			    <div>
+			    	<%if index == 0%>
+			    	<%= link_to edit_vendor_assignment_path(@assignment.id,:status => stage) do %>
+                <div>
+                  <span><i><%= image_tag 'update.png' ,:id => 'update-button'%></i></span>
+                              
+                </div>
+            <% end %>
+			    	<%else%>
+			    		<%= image_tag 'update_inactive.png',:style => "width:35%;height:40px"%>
+			    	<%end%>
+			    	
+				    	
+			    </div>
+			  </div>
+	 </div>
+	<%end%>
+	<% puts "here is array #{all_stage_array}" %>
+</div>	

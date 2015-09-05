@@ -1,11 +1,66 @@
-<%= link_to "New User", new_user_path, :id => 'new-button' %>
+ 
+<% if can? :manage, User %>
+ <%= link_to "New User", new_user_path, :id => 'new-button' %>
+<%end%> 
+<%if request.params.include? 'param' %>
+ <%= link_to "Clear", users_path ,:class => 'show-all'%>
+<%end%><div>
+  <%=form_tag @user ,:method => 'get' do |f| %>  
+  <div id="user-search-div" class="form-field">
+     <div class="user-search-field">
+       
+       <%= text_field_tag :param, @search, :id => "retailer-search",:required => "required",:placeholder => "Enter email id" %>
+    </div>
+   <div>
+       <%= button_tag(type: 'submit',value: '',:class=>"hide-button") do %>
+         <i ><%= image_tag 'search.png' ,:class => "button_with_image_save"%></i> 
+       <% end %>
+   </div>
+   <div class="error" id="message"></div>
+         
+  </div>
+  <%end%>
+</div>
+<div class="user-category">
+ <%=form_tag users_filter_path  do |f| %> 
+  <label>All</label>
+  <%if @participants.include? 'All'%>
+    <%= check_box_tag 'All', '[cmo,vendor,requester]',:style => "margin-left:.3%",:id => "All"%>
+  <%else%>
+    <%= check_box_tag 'All', '[cmo,vendor,requester]',checked = false,:style => "margin-left:.3%",:id => "All"%>
+  <%end%>
+  <label>CMO</label>
+  <%if @participants.include? 'cmo'%>
+    <%= check_box_tag 'CMO', 'cmo',:style => "margin-left:.3%",:id => "cmo"%>
+  <%else%>
+    <%= check_box_tag 'CMO', 'cmo',checked = false,:style => "margin-left:.3%",:id => "cmo"%>
+  <%end%>
+  <label>Vendor</label>
+  <%if @participants.include? 'vendor'%>
+    <%= check_box_tag 'Vendor', 'vendor', :style => "margin-left:.3%",:id => "vendor1"%>
+  <%else%>
+    <%= check_box_tag 'Vendor', 'vendor',checked = false,:style => "margin-left:.3%",:id => "vendor1"%>
+  <%end%>
+  <label>Requester</label>
+   <%if @participants.include? 'requester'%>
+    <%= check_box_tag 'Requester', 'requester',:style => "margin-left:.3%",:id => "requester"%>
+   <%else%>
+    <%= check_box_tag 'Requester', 'requester',checked = false,:style => "margin-left:.3%",:id => "requester"%>
+   <%end%>
+    <%=submit_tag 'Get Users',:class => "user-button",:id => "approver_user_submit"%>
+  <%end%>  
+</div>
 <table class="ui table">
   <thead>
     <tr>
       <th>Email</th>
       <th>Name</th>
-      <th></th>
-      <th></th>
+      <th>Type</th>
+      <% if can? :manage, User %>
+       <th>Edit</th>
+      <%end%>
+       
+       
     </tr>
   </thead>
   <tbody>
@@ -18,11 +73,15 @@
           <%= user.name %>
         </td>
         <td>
+          <% @roles = User.user_role(user.id)%>
+          <%= @roles.name %>
+        </td>
+        <% if can? :manage, User %>
+        <td>
           <%= link_to "Edit", [:edit, user] %>
         </td>
-        <td>
-          <%= link_to "Delete", [user], method: :delete, data: { confirm: "Are you sure?" } %>
-        </td>
+        <%end%>
+         
       </tr>
     <% end %>
   </tbody>

@@ -45,7 +45,24 @@
   <div class="appr_desc">
     
     <div>Retailer Code</div>
-    <div><%= @request.retailer_code %></div>
+    <div><%= @request.retailer_code %>
+    <%@retailer = Retailer.find_by(:retailer_code => @request.retailer_code)
+      if @retailer == nil
+        @retailer_status = 'Inactive'
+      else
+        @retailer_status = @retailer.status
+      end 
+      if @retailer_status == 'Inactive'
+    %>
+    <h5 class="request-retailer-status-inactive">
+      <%=@retailer_status%>
+    </h5>
+    <%else%>
+    <h5 class="request-retailer-status-active">
+      <%=@retailer_status%>
+    </h5>
+    <%end%>
+    </div>
     <% if can? :manage, Request %>
     <div style="width:30%;margin:auto;" id="form">
     <%= form_tag("/requests/modify", method: "post") do %>

@@ -1,0 +1,75 @@
+ 
+<% if can? :manage, Vendorlist %>
+ <%= link_to "New Vendor", new_vendorlist_path, :id => 'new-button' %>
+<%end%> 
+<%if request.params.include? 'param' %>
+ <%= link_to "Clear", vendorlists_path ,:class => 'show-all'%>
+<%end%>
+<div>
+  <%=form_tag Vendorlist.new ,:method => 'get' do |f| %>  
+  <div id="user-search-div" class="form-field">
+     <div class="user-search-field">
+       
+       <%= text_field_tag :param, @search, :id => "retailer-search",:required => "required",:placeholder => "Enter Vendor name/state" %>
+    </div>
+   <div>
+       <%= button_tag(type: 'submit',value: '',:class=>"hide-button") do %>
+         <i ><%= image_tag 'search.png' ,:class => "button_with_image_save"%></i> 
+       <% end %>
+   </div>
+   <div class="error" id="message"></div>
+         
+  </div>
+  <%end%>
+</div>
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Vendor Name</th>
+      <th>State</th>
+      <th>Contact Person</th>
+      <th>Status</th>
+      <% if can? :manage, Vendorlist %>
+        <th>Edit</th>
+      <%end%>  
+      
+      <th>Show</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vendor.each do |vendor| %>
+      <tr>
+        <td>
+          <%=vendor.id%>
+        </td>
+        <td>
+          <%=vendor.vendor_name%>
+        </td>
+        <td>
+          <%=vendor.state%>
+        </td>
+        <td>
+          <%=vendor.contact_person%>
+        </td>
+        <td>
+          <%=vendor.status%>
+        </td>
+        <% if can? :manage, Vendorlist %>
+        <td>
+          <%= link_to "Edit", [:edit, vendor] %>
+        </td>
+        <%end%>
+       
+        <td>
+          <%= link_to "Show", [vendor] %>
+        </td>
+      </tr>
+    <%end %>
+  </tbody>
+</table>
+<div class="response-pagination clearfix">
+      <%if @vendor.length > 1%>
+      <%=will_paginate @vendor%>
+  <%end%>
+</div>

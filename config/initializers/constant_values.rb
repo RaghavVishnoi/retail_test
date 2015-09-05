@@ -191,6 +191,28 @@ LOCATION_OF_GSB = [
     ["Counter-top with Lights","Counter-top with Lights"]
   ]
 
+  RETAILER_STATUS = [
+    ["Active","Active"],
+    ["Inactive","Inactive"]
+  ]
+
+  CMO_STATUS = [
+    ["Active","Active"],
+    ["Inactive","Inactive"]
+  ]
+
+  REQUEST_STATUS = [
+    ["All","1"],
+    ["CMO Pending","2"],
+    ["CMO Declined","3"],
+    ["Pending","4"],
+    ["Approved","5"],
+    ["Declined","6"]
+  ]
+
+   
+
+
 
 DEFAULT_EMAILS = ['akash@gionee.co.in']
 

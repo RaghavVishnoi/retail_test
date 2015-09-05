@@ -2,18 +2,20 @@ Rails.application.routes.draw do
   get 'api/v1'
 
   get 'api/citylists'
-
+  
   root 'dashboard#index'
   get '/dashboard' => 'dashboard#index'
   get '/users/sign_in' => "sessions#new"
   post '/users/sign_in' => "sessions#create"
-  delete '/users/sign_out' => "sessions#destroy"
-
+  get '/users/sign_out' => "sessions#destroy"
   get '/organization/edit' => "organizations#edit"
   put '/organization' => "organizations#update"
-
+  post '/maps' => "maps#index"
   get '/schema' => "schema#index"
-
+  get '/users/filter' => "users#index"
+  post '/users/filter' => "users#index"
+   
+   
   resources :weekly_offs, :only => [:index, :create]
 
   resources :job_titles, :except => [:show]
@@ -31,6 +33,28 @@ Rails.application.routes.draw do
   resources :attendances, :only => [:index]
 
   resources :vendor_tasks, :only => [:index,:new,:create,:edit,:update]
+
+  resources :retailers, :only => [:index,:new,:edit,:destroy,:create,:update,:show]
+
+  resources :vendorlists, :only => [:index,:new,:edit,:destroy,:create,:update,:show]
+
+  resources :cmos, :only => [:index,:new,:edit,:destroy,:create,:update,:show]
+
+  resources :maps, :only => [:index]
+
+  resources :vendor_requests, :only => [:index,:new,:edit,:destroy,:create,:update,:show]
+
+  resources :vendor_assignments, :only => [:index,:edit,:accept,:show,:update]
+
+ 
+
+  resources :read_files do
+    collection { post :import }
+  end
+
+  resources :retailers do
+    collection { post :file_upload }
+  end
 
   resources :documents, :except => [:index] do
     put :share, :on => :member
@@ -82,21 +106,42 @@ Rails.application.routes.draw do
   namespace :api, :defaults => { :format => :json }, :constraints => {:format => :json} do
     namespace :v1 do
       get '/test' => 'test#index'
-      post '/users/sign_in' => 'sessions#create'
-      delete '/users/sign_out' => 'sessions#destroy'
+      post 'sessions/create'
+      get 'sessions/create'
+      delete 'sessions/destroy'
       get '/home' => 'home#index'
+      post 'sessions/forgot_password'
+      get 'sessions/forgot_password'
+      post 'sessions/change_password'
+      get 'sessions/change_password'
+      post 'vendors/assign_request'
+      get 'vendors/assign_request'
+      post 'vendors/get_request'
+      get 'vendors/get_request'
+      post 'vendors/get_request_status'
+      get 'vendors/get_request_status'
+      post 'vendors/update_request_status'
+      get 'vendors/update_request_status'
+      post 'vendors/reject_request'
+      get 'vendors/reject_request'
+      post 'vendors/accept_request'
+      get 'vendors/accept_request'
       resources :attendances, :only => [:create]
       resources :citylists, :only =>[:index]
       resources :radiofields, :only =>[:index]
       resources :visitors, :only =>[:index]
       resources :retailerlists, :only =>[:index]
+        
     end
   end
 
+   
+ 
+
   scope '/api/v1/', :as => 'api_v1', :defaults => { :format => :json }, :constraints => { :format => :json } do
+   
     resources :categories, :item_regions, :cities, :collections, :sizes, :alcohol_percents, :images, :warehouses, :except => [:show]
     resources :screens, :only => [:index, :show]
-    
     resources :items, :except => [:show] do
     resources :inventories, :except => [:show]
     end
@@ -108,25 +153,45 @@ Rails.application.routes.draw do
     post '/passwords' => "passwords#create"
     put '/passwords' => "passwords#update"
     resources :customers, :only => [:index, :update, :create] do
-      resources :contacts, :only => [:create, :update, :destroy]
+    resources :contacts, :only => [:create, :update, :destroy]
     end
     resources :surveys, :only => [:index]
     resources :answers, :only => [:create]
     resources :vendor_tasks, :only => [:index,:edit,:update,:new, :create]
+
     resources :requests, :only => [:new, :create] do
       get :autocomplete_retailer_code, :on => :collection
     end
     resources :dropdown_values, :only => [:index]
+     
   end
+
+  post '/cmos/file_upload' 
+  post '/retailers/search'
+  post '/users/search'
+
   get '/requests/state'
   get '/requests/city'
   post 'requests/modify'
   post '/requests/view' 
   post '/vendor_tasks/view'
-   
+ 
+  post '/retailers/file_upload'
+  post '/retailers/file_insert'
+
+  post '/vendor_assignments/status'
+  get '/vendor_assignments/status'
+
+  post '/downloads' => 'downloads#create'
+  get '/downloads' => 'downloads#index'
+  get '/downloads/new' => "downloads#new"
+  get '/downloads/:file_name' => 'downloads#show', :as => 'download'
+
   post '/requests_csv' => 'requests_csv#create'
   get '/requests_csv/new' => "requests_csv#new"
   get '/requests_csv/:file_name' => 'requests_csv#show', :as => 'request_csv'
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

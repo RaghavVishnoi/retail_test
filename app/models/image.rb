@@ -1,5 +1,6 @@
 class Image < ActiveRecord::Base
-  attr_accessor :skip_reverse_geocode
+
+  attr_accessor :skip_reverse_geocode 
   mount_uploader :image, ImageUploader
   
   belongs_to :imageable, :polymorphic => true

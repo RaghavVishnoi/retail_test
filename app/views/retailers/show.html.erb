@@ -1,0 +1,95 @@
+<a href="/retailers/"><%= image_tag 'back.png',:title => "Back",:class => "show-back-button" %></a>
+<div class="super_div">
+	<div class="approv_cont clearfix">
+<div class="appr_info">
+    <div>Retailer Code</div>
+    <div><%= @retailer.retailer_code %></div>
+  </div>
+
+  <div class="appr_retail">
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Retailer Name</div>
+    <div><%= @retailer.retailer_name%></div>
+  </div>
+
+</div>
+
+<div class="approv_cont clearfix">
+  
+  <div class="appr_info">
+      <div>Sales channel</div>
+      <div><%= @retailer.sales_channel %></div>
+    </div>
+
+    <div class="appr_retail">
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="appr_desc">
+      <div>Contact Person</div>
+      <div><%= @retailer.contact_person %></div>
+    </div>
+</div>
+
+<div class="approv_cont clearfix">
+  
+  <div class="appr_info">
+      <div>State</div>
+      <div><%= @retailer.state %></div>
+    </div>
+
+    <div class="appr_retail">
+      <div>City</div>
+      <div><%=@retailer.city%></div>
+    </div>
+
+    <div class="appr_desc">
+      <div>Pincode</div>
+      <div>
+           <%=@retailer.pincode%>
+        
+      </div>
+    </div>
+</div>
+
+<div class="approv_cont clearfix">
+  
+  <div class="appr_info">
+      <div>Tin Number</div>
+      <div><%= @retailer.tin_number %></div>
+    </div>
+
+    <div class="appr_retail">
+      <div>Mobile Number</div>
+      <div><%=@retailer.mobile_number.to_i%></div>
+    </div>
+
+    <div class="appr_desc">
+      <div>Status</div>
+      <div><%= @retailer.status %></div>
+    </div>
+</div>
+
+<div class="approv_cont clearfix">
+  
+  <div class="appr_info">
+      <div>Is RSP on counter</div>
+      <div><%= @retailer.is_isp_on_counter %></div>
+    </div>
+
+    <div class="appr_retail">
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="appr_desc">
+      <div>Counter Size</div>
+      <div><%= @retailer.counter_size %></div>
+    </div>
+</div>
+</div>

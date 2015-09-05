@@ -1,3 +1,67 @@
+<%if params[:view] == 'map'%>
+  <a href="/maps"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
+
+<%else%>
+  <%if @request.request_type == 'maintenance'%>
+    <a href="/requests?q[request_type]=3&q[status]=pending"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
+
+  <%elsif @request.request_type == 'visitor'%>
+
+    <a href="/requests?q[request_type]=4&q[status]=approved"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
+
+  <%else%>
+
+    <a href="/requests?q[request_type][]=0&q[request_type][]=1&q[request_type][]=2&q[status]=pending"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
+
+  <%end%>
+<%end%>  
+
+<%if params[:alert] == 'true'%>
+  <div id="popup-request">
+    <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
+      <tr>
+        <td class="popup_title">Confirmation message</td>
+        <td class="popup_title align_right">
+            <a href="javascript:void(0);" id="btnClose">Close</a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" id="popup-assign-message">Assign request to vendor</td>
+      </tr>   
+    </table>
+    <%= button_tag "Yes",:value => "Yes", :class => "popup_button", :id => 'popup-button'%> 
+
+    <a href='/requests?q[request_type][]=0&q[request_type][]=1&q[request_type][]=2&q[status]=pending'><%= button_tag "No",:value => "No", :class => "popup_button", :id => 'request-close'%> </a>
+  </div> 
+<%end%>
+
+
+<div id="popup-request-assignment">
+ <%= form_for VendorRequest.new do |f|%>
+     <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
+            <tr>
+                <td class="popup_title">Assign Request</td>
+                <td class="popup_title align_right">
+                    <a href="javascript:void(0);" id="btnClose-assignment">Close</a>
+                </td>
+                
+              </tr> 
+            
+             <tr>
+                  <td colspan="2"><%=f.select :vendor_id,  Vendorlist.display_names,:prompt => "Choose Vendor",:id => "popup-select",:required => "required"%></td>
+                </tr> 
+           </table>
+           <%time = Time.new%>
+    <%= f.hidden_field :request_id,:value => @request.id %>
+    <%= f.hidden_field :vendor_response,:value => "Waiting" %>
+    <%= f.hidden_field :vendor_response_date,:value => "0000-00-00" %>
+    <%= f.hidden_field :assigned_date,:value => "#{time.year}-#{time.month}-#{time.day}" %>
+    <%= f.hidden_field :status,:value => "Waiting" %>
+    <%= submit_tag "Assign", :class => "popup_button_assignment"%>
+    
+
+ <%end%>
+ </div> 
                   <% 
                      
                    if @request.status == 'cmo_pending'
@@ -28,7 +92,32 @@
                   <%end%> 
 <%= render :partial => "shared/error_messages", :locals => { :errors => @request.errors } %>
 <div class="request_wrap clearfix" >
-  <div><%= @request.request_type %> approve
+  <%if @request.request_type == 'gsb'
+     @request_type = 'GSB'
+  elsif @request.request_type == 'sis'
+     @request_type = 'SIS'
+  elsif @request.request_type == 'in_shop'
+     @request_type = 'In Shop'
+  elsif @request.request_type == 'maintenance'
+     @request_type = 'Maintenance'
+  elsif @request.request_type == 'visitor'
+     @request_type = 'Audit'
+  end
+  
+  if @request.status == 'cmo_pending'
+    @status = 'CMO Pending'
+  elsif @request.status == 'cmo_approved'
+    @status = 'CMO Approved'
+  elsif @request.status == 'pending'
+    @status = 'Pending'
+  elsif @request.status == 'approved'
+    @status = 'Approved'
+  elsif @request.status == 'declined'
+    @status = 'Declined'
+  end
+      
+  %>
+  <div><%= @request_type%>  <%= @status%> 
     <%= render :partial => 'search' %>
   </div>
    <div class="apprvr_wrap">
@@ -75,7 +164,6 @@
         <div class="btn_blc clearfix">
          
         <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>
-        <%= hidden_field_tag "status","cmo_pending" %>
         <%= hidden_field_tag "prev_url",  @prev_url %>
         <%= submit_tag "Approve", :class => "apprv_btn"%>
         <%= submit_tag "Decline", :class => "decline_btn"%>
@@ -86,7 +174,7 @@
 
     <% if can? :approve , Request %>
       <% if @request.pending? %>
-        <%= form_for @request do %>
+       <%= form_for @request do %>
           <div class="btn_blc clearfix">
             <%= hidden_field_tag "status","pending" %>
             <%= hidden_field_tag "prev_url",  @prev_url %>
@@ -97,7 +185,7 @@
             <%= submit_tag "Decline", :class => "decline_btn"%>
           </div>
           
-        <%end%>
+        <%end%> 
       <%end%>
     <% end %>
 

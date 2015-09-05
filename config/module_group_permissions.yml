@@ -22,7 +22,7 @@ User:
   group_name: "Users"
   permissions:
     "manage, User": "Create Users"
-
+    "approver, User": "Create Approver Users"
 
 Request:
   group_name: "Requests"
@@ -35,6 +35,7 @@ Request:
     "update, Request": "Update Request"
     "view, Request": "View Request"
     "cmo, Request": "CMO Request"
+    
 
 VendorTask:
   group_name: "VendorTasks"
@@ -48,3 +49,41 @@ VendorTask:
     "get, VendorTask": "Reader Request"
     "view, VendorTask": "View Request"
 
+Retailer:
+  group_name: "Retailer"
+  permissions:
+    "manage, Retailer": "Manage Retailer"
+    "get, Retailer" : "Reader Action"
+    "read, Retailer" : "Get Retailers"
+Vendor:
+  group_name: "Vendor"
+  permissions:
+    "manage, Vendorlist": "Manage Vendor"
+    "update_status, VendorRequest": "Update Vendor Request"
+
+CMO:
+  group_name: "CMO"
+  permissions:
+    "manage, CMO": "Manage CMO"
+    "get, CMO" : "Reader Action"
+MAP:
+  group_name: "MAP"
+  permissions:
+    "manage, Map": "Manage Map"
+
+VendorRequest:
+  group_name: "VendorRequest"
+  permissions:
+    "manage, VendorRequest": "Manage Vendor Requests"
+
+VendorAssignment:
+  group_name: "VendorAssignment"
+  permissions:
+    "manage, VendorAssignment": "Manage Vendor Assignments"
+
+Downloads:
+  group_name: "Downloads"
+  permissions:
+    "manage, Download": "Download Records"
+
+ 

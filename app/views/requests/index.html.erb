@@ -3,9 +3,14 @@
     @associated_roles = AssociatedRole.find_by(:object_id => id)
     @role = @associated_roles.role
     @email = @user.email
-    @cmo = CMO.find_by(:email => @email)
-    puts "here is cmo #{@cmo}"
-    %>
+    @cmo = CMO.where(:email => @email)
+    cmo_id = []
+     @cmo.each do |cmo|
+      cmo_id.push(cmo.id)
+     end
+   
+   
+%>
 
 <div class="request_wrap clearfix"  >
 <%request_type = params[:q][:request_type]
@@ -18,10 +23,11 @@
   <div class="req_cont clearfix">
   
     <div class="links_blc">
-     <% if can? :cmo , Request %>
+     <% if can? :cmo , Request%>
      <%if request_type.include?  '4'
       else
         %>
+
           <div class="<%= request_status_class('cmo_pending') %>">
             <%= link_to "CMO Pending", requests_path(:q => { :status => 'cmo_pending',:request_type => request_type }) %>
           </div>
@@ -34,6 +40,20 @@
             <%= link_to "CMO Approved", requests_path(:q => { :status => ['pending','declined','approved'],:request_type => request_type }) %>
           </div>
         <% end %>
+        <%end%>
+
+        <%if @role.name == 'requester'%>
+          <div class="<%= request_status_class('cmo_pending') %>">
+            <%= link_to "CMO Pending", requests_path(:q => { :status => 'cmo_pending',:request_type => request_type }) %>
+          </div>
+
+          <div class="<%= request_status_class('cmo_declined') %>">
+            <%= link_to "CMO Declined", requests_path(:q => { :status => 'cmo_declined',:request_type => request_type }) %>
+          </div>
+
+          <div class="<%= request_status_class(['pending','declined','approved']) %>">
+            <%= link_to "CMO Approved", requests_path(:q => { :status => ['pending','declined','approved'],:request_type => request_type }) %>
+          </div>
         <%end%>
           
            <% if can? :approve , Request %>
@@ -108,7 +128,7 @@
                      end
                     %>
       <% if @role.name == 'cmo' %>
-      <% if request.cmo_id == @cmo.id%>
+      <% if cmo_id.include? request.cmo_id%>
          <%= link_to [:edit, request] do %>
              <div class="request_contain clearfix">
                  

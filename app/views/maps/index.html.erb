@@ -1,0 +1,417 @@
+<%
+
+if @request_type != nil
+  request_type = @request_type[:request_type].map!(&:to_s)
+  request_type.each_with_index do |s,index|
+     if s == '0'
+      request_type[index] = 'GSB'
+     elsif s == '1'
+      request_type[index] = 'SIS'
+     elsif s == '2'
+      request_type[index] = 'In-shop'
+     elsif s == '3'
+      request_type[index] = 'Maintenance'
+     elsif s == '4'
+      request_type[index] = 'Audit'
+     end
+  end
+else
+  request_type = ['All']
+end
+if @status != nil
+  status = @status[0][:status]
+  status.each_with_index do |s,index|
+     if s == 'cmo_pending'
+      status[index] = 'CMO Pending'
+     elsif s == 'cmo_declined'
+      status[index] = 'CMO Declined'
+     elsif s == 'pending'
+      status[index] = 'Pending'
+     elsif s == 'approved'
+      status[index] = 'Approved'
+     elsif s == 'declined'
+      status[index] = 'Declined'
+     end
+  end
+else
+  status= ['All']
+end
+%>
+ <div class="box">
+        <div class="box-inner">
+            <span class="map-span-super">Filter Result</span>
+            <%=form_for maps_path  do %>
+                <table width="96%"><tr><td class="map-table">Choose Request Type</td>
+                  <td colspan="3"><%= collection_check_boxes('request_type','request_type',Map::REQUEST_TYPE,:to_s,:to_s,{:checked => request_type},{:class => "request-type"})%></td></tr>
+                  <tr><td colspan="6"><hr /></td></tr>
+                  <tr><td>Choose Status</td>
+                   <td colspan="3"><%= collection_check_boxes('status','status',Map::REQUEST_STATUS,:to_s,:to_s,{:checked => status},{:class => "request-type"})%></td> </tr>
+                   <tr><td colspan="6"><hr /></td></tr>
+                   <tr><td class="map-label-state">Choose State</td>
+                    <td class="map-select-state"><%=select_tag 'state',options_for_select(['All State'] + Retailer.order(:state).all.map  {|a| a.state}.uniq, :selected => @state)%></td>
+                    <td class="map-label-cmo">Choose CMO</td>
+                    <td><%=select_tag 'cmo',options_for_select(CMO.display_names,:selected => @cmo),:prompt => "All CMO"%></td><td></td><td></td></tr>
+                    <tr><td colspan="6"><hr /></td></tr>
+                    <tr><td>From</td>
+                        <td><%=text_field_tag 'from',nil,:id => "map-date-from",:value => @from%></td>
+                        <td class="map-date-to">To</td><td><%=text_field_tag 'to',nil,:id => "map-date-to",:value => @to%></td>
+                        <td class="map-store-size-label">Store Size</td>
+                        <td class="map-store-size-select"><%=select_tag 'store_size',options_for_select(['All Size'] + Map::AVG_STORE_MONTHLY_SALES,:selected => @store_size)%></td></tr>
+                        <tr><td colspan="6"><hr /></td></tr>
+                        <tr>
+                          <td>RSP Present</td><td> <%=select_tag 'rsp_present',options_for_select(['All'] + BOOLEAN_VALUES,:selected => @rsp_present,:selected => @rsp_present)%></td>
+                          <td class="map-gionee-sales-label">Gionee Sales</td></td><td> <%=select_tag 'gionee_sales',options_for_select(['Whole Sale'] + Map::AVG_GIONEE_MONTHLY_SALES,:selected => @gionee_sales)%></td>
+                          <td></td><td> <%=submit_tag "Submit",:id => 'map-submit'%> </td>
+                        </tr>  
+                        <tr><td colspan="6"><hr /></td></tr>  
+                </table>
+              <%end%>
+          </div>      
+        </div>
+  
+    
+        
+ 
+  
+  <%= image_tag 'down-arrow.png',:class => "slide-right",:style => "width:20px;height:20px",:title => "Filter result here"%>
+  
+
+ <div id="map_wrapper">
+   <div class="custom_select">
+     <div class="clearfix"></div>
+   </div>
+   <div id="map_canvas" class="mapping"></div>
+ </div>
+
+
+<script>
+    $(document).ready(function(){
+
+        $(".box").hide();
+        $(".slide-right").hover(function(){
+           $(this).css('cursor', 'pointer');
+        });
+
+        
+        $(".slide-right").click(function(){
+
+            $(".box").animate({
+                height: "toggle"
+            });
+            var src = $(this).attr("src");
+           if(src == '/assets/up-arrow.png'){
+             $(this).attr("src", '/assets/down-arrow.png');
+           }
+           else{
+             $(this).attr("src", '/assets/up-arrow.png');
+           }
+           
+        });
+        $( "#map-date-to" ).datepicker();
+        $( "#map-date-from" ).datepicker();
+
+        $("#map-submit").click(function () {
+            var val = $('#status').val();
+            var cmo = $("#cmo").val();
+            location.href="?status="+val+"&&cmo="+cmo;
+       
+        });
+       
+
+        var sPageURL = window.location.search.substring(1);
+        if(sPageURL != '' && sPageURL != null){
+          var first = sPageURL.split("&&");
+            var status = first[0].split("=");
+
+            
+            $("#status option").each(function() {
+               this.selected = $(this).val() == status[1];
+            });
+
+            if(first[1] != null){
+              var second  = first[1].split("=");
+              var cmo = second[1];
+              $("#cmo option").each(function() {
+              this.selected = $(this).val() == cmo;
+            });
+            }
+           
+
+             
+
+        }
+        else{
+          $('#status1').prop("checked", true)
+        }
+         
+        $('#request_type_request_type_all').click(function(){
+      if ($('#request_type_request_type_all').is(':checked') == true){
+        $('#request_type_request_type_gsb').attr('checked', false);
+        $('#request_type_request_type_in-shop').attr('checked', false);
+        $('#request_type_request_type_sis').attr('checked', false);
+        $('#request_type_request_type_maintenance').attr('checked', false);
+        $('#request_type_request_type_audit').attr('checked', false);
+      }
+    });
+     $('#request_type_request_type_gsb').click(function(){
+      $('#request_type_request_type_all').attr('checked', false);
+     });
+     $('#request_type_request_type_in-shop').click(function(){
+      $('#request_type_request_type_all').attr('checked', false);
+     });
+     $('#request_type_request_type_sis').click(function(){
+      $('#request_type_request_type_all').attr('checked', false);
+     });
+     $('#request_type_request_type_maintenance').click(function(){
+      $('#request_type_request_type_all').attr('checked', false);
+     });
+     $('#request_type_request_type_audit').click(function(){
+      $('#request_type_request_type_all').attr('checked', false);
+     });
+
+    $('#status_status_all').click(function(){
+      if ($('#status_status_all').is(':checked') == true){
+        $('#status_status_cmo_pending').attr('checked', false);
+        $('#status_status_cmo_declined').attr('checked', false);
+        $('#status_status_pending').attr('checked', false);
+        $('#status_status_approved').attr('checked', false);
+        $('#status_status_declined').attr('checked', false);
+       
+      }
+
+      
+    });
+    $('#status_status_cmo_pending').click(function(){
+      $('#status_status_all').attr('checked', false);
+    });
+    $('#status_status_cmo_declined').click(function(){
+      $('#status_status_all').attr('checked', false);
+    });
+    $('#status_status_approved').click(function(){
+      $('#status_status_all').attr('checked', false);
+    });
+    $('#status_status_pending').click(function(){
+      $('#status_status_all').attr('checked', false);
+    });
+    $('#status_status_declined').click(function(){
+      $('#status_status_all').attr('checked', false);
+    });
+
+
+    $(".slide-down").click(function(){
+        $("#marker-sign").slideDown(100);
+        $(".slide-up").show();
+        $(".slide-down").hide(); 
+        $('.map-markers').css('margin-top','-15%');
+
+         
+    });
+     $(".slide-up").click(function(){
+        $("#marker-sign").slideUp(100);
+        $(".slide-up").hide();
+        $(".slide-down").show();
+        $('.map-markers').css('margin-top','-5%');
+        
+       
+    });
+
+    });
+ 
+    var myJsArray = [] ;
+     <%
+
+     @map.each do |request|
+     @image = Image.where(:imageable_id => request.id)
+     @image.each do |image|
+       if image.lat.to_f > 0.0 && image.long.to_f > 0.0
+    %>
+        
+        myJsArray.push(<%=image.lat.to_f%>,<%=image.long.to_f%>,"<%=request.status%>","<%=request.request_type%>","<%=request.id%>");
+      <%end%>
+     <%end%>
+    <%end%>
+    jQuery(function($) {
+    // Asynchronously Load the map API 
+    var script = document.createElement('script');
+    script.src = "http://maps.googleapis.com/maps/api/js??center=Berkeley&sensor=false&callback=initialize";
+    document.body.appendChild(script);
+});
+
+function initialize() {
+    var map;
+    var bounds = new google.maps.LatLngBounds();
+    var mapOptions = {
+        zoom:14,
+        center: new google.maps.LatLng(22.0, 77.0),
+        mapTypeId: 'roadmap'
+    };
+                    
+    // Display a map on the page
+    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+    map.setTilt(45);
+        
+    // Multiple Markers
+   
+    var len = myJsArray.length;
+    var markers = [];
+        for(var j=0;j<myJsArray.length;j=j+5)  {  
+       
+
+        markers.push(['',myJsArray[j],myJsArray[j+1],myJsArray[j+2],myJsArray[j+3],myJsArray[j+4]]);
+        
+    }
+      
+      console.log(markers); 
+         
+                      
+    // Info Window Content
+    var infoWindowContent = [];
+        
+    // Display multiple markers on a map
+
+     var infoWindow = new google.maps.InfoWindow(), marker, i;
+     
+    // Loop through our array of markers & place each one on the map
+    console.log(markers.length);  
+    if(markers.length == 0){
+
+        var position = new google.maps.LatLng(22, 77);
+        bounds.extend(position);
+        marker = new google.maps.Marker({
+            
+            map: map,
+            title: 'INDIA'
+
+        });
+        
+        // Allow each marker to have an info window    
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.setContent(infoWindowContent[i]);
+                infoWindow.open(map, marker);
+            }
+        })(marker, i));
+
+        // Automatically center the map fitting all markers on the screen
+        map.fitBounds(bounds);
+
+    }else{
+    for( i = 0; i < markers.length; i++ ) {
+         
+
+        var marker_image = "";
+        if(markers[i][3] == 'cmo_pending'){
+            if(markers[i][4] == 'gsb'){
+              marker_image = "cp_gsb.png";
+            }else if(markers[i][4] == 'in_shop'){
+              marker_image = "cp_inshop.png";
+            }else if(markers[i][4] == 'sis'){
+              marker_image = "cp_sis.png";
+            }else if(markers[i][4] == 'maintenance'){
+              marker_image = "cp_maintenance.png";
+            }else{
+              marker_image = "cp_visit.png";
+            }
+        }else if(markers[i][3] == 'cmo_declined'){
+            if(markers[i][4] == 'gsb'){
+              marker_image = "cd_gsb.png";
+            }else if(markers[i][4] == 'in_shop'){
+              marker_image = "cd_inshop.png";
+            }else if(markers[i][4] == 'sis'){
+              marker_image = "cd_sis.png";
+            }else if(markers[i][4] == 'maintenance'){
+              marker_image = "cd_maintenance.png";
+            }else{
+              marker_image = "cd_visit.png";
+            }
+        }else if(markers[i][3] == 'pending'){
+           if(markers[i][4] == 'gsb'){
+              marker_image = "p_gsb.png";
+            }else if(markers[i][4] == 'in_shop'){
+              marker_image = "p_inshop.png";
+            }else if(markers[i][4] == 'sis'){
+              marker_image = "p_sis.png";
+            }else if(markers[i][4] == 'maintenance'){
+              marker_image = "p_maintenance.png";
+            }else{
+              marker_image = "p_visit.png";
+            }
+        }else if(markers[i][3] == 'approved'){
+            if(markers[i][4] == 'gsb'){
+              marker_image = "a_gsb.png";
+            }else if(markers[i][4] == 'in_shop'){
+              marker_image = "a_inshop.png";
+            }else if(markers[i][4] == 'sis'){
+              marker_image = "a_sis.png";
+            }else if(markers[i][4] == 'maintenance'){
+              marker_image = "a_maintenance.png";
+            }else{
+              marker_image = "a_visit.png";
+            }
+        }else if(markers[i][3] == 'declined'){
+            if(markers[i][4] == 'gsb'){
+              marker_image = "d_gsb.png";
+            }else if(markers[i][4] == 'in_shop'){
+              marker_image = "d_inshop.png";
+            }else if(markers[i][4] == 'sis'){
+              marker_image = "d_sis.png";
+            }else if(markers[i][4] == 'maintenance'){
+              marker_image = "d_maintenance.png";
+            }else{
+              marker_image = "d_visit.png";
+            }
+        }
+        // var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"+image_url);
+        if (markers[i][1] != 0){
+        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+        bounds.extend(position);
+        marker = new google.maps.Marker({
+            position: position,
+            icon: 'assets/markers/'+marker_image,
+            map: map,
+            title: markers[i][0],
+            url: '/requests/'+markers[i][5]+'/edit?view=map'
+        });
+       
+        // Allow each marker to have an info window    
+         google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+               window.location.href = this.url;
+            }
+        })(marker, i));
+
+        // Automatically center the map fitting all markers on the screen
+        map.fitBounds(bounds);
+    }
+  }
+}
+
+    // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+      var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+        this.setZoom(5);
+        google.maps.event.removeListener(boundsListener);
+    });
+    
+}
+</script>
+<div class="map-markers">
+  <%= image_tag 'maximize.png',:class => "slide-down",:title => "Filter result here"%>
+  <%= image_tag 'minimize.png',:class => "slide-up",:title => "Filter result here"%>
+    <div id="marker-sign">
+    <table width="100%" id="markers-sign">
+        <tr>
+          <td class="map-markers-cell"><span>CMO Pending</span></td><td class="map-markers-cell"><span>CMO Declined</span></td><td class="map-markers-cell"><span>Pending</span></td><td class="map-markers-cell"><span>Approved</span></td><td class="map-markers-cell"><span>Declined</span></td></tr>
+          <tr><td><img src="assets/markers/cp_gsb.png" class="map-markers-img"/><span class="map-markers-span">- GSB</span></td><td><img src="assets/markers/cd_gsb.png" class="map-markers-img"/><span class="map-markers-span">- GSB</span></td><td><img src="assets/markers/p_gsb.png" class="map-markers-img"/><span class="map-markers-span">- GSB</span></td><td><img src="assets/markers/a_gsb.png" class="map-markers-img"/><span class="map-markers-span">- GSB</span></td><td><img src="assets/markers/d_gsb.png" class="map-markers-img"/><span class="map-markers-span">- GSB</span></td>
+        </tr>
+        <tr><td><img src="assets/markers/cp_inshop.png" class="map-markers-img"/><span class="map-markers-span">- In-shop</span></td><td><img src="assets/markers/cd_inshop.png" class="map-markers-img"/><span class="map-markers-span">- In-shop</span></td><td><img src="assets/markers/p_inshop.png" class="map-markers-img"/><span class="map-markers-span">- In-shop</span></td><td><img src="assets/markers/a_inshop.png" class="map-markers-img"/><span class="map-markers-span">- In-shop</span></td><td><img src="assets/markers/d_inshop.png" class="map-markers-img"/><span class="map-markers-span">- In-shop</span></td>
+        </tr>
+        <tr><td><img src="assets/markers/cp_sis.png" class="map-markers-img"/><span class="map-markers-span">- SIS</span></td><td><img src="assets/markers/cd_sis.png" class="map-markers-img"/><span class="map-markers-span">- SIS</span></td><td><img src="assets/markers/p_gsb.png" class="map-markers-img"/><span class="map-markers-span">- SIS</span></td><td><img src="assets/markers/a_sis.png" class="map-markers-img"/><span class="map-markers-span">- SIS</span></td><td><img src="assets/markers/d_sis.png" class="map-markers-img"/><span class="map-markers-span">- SIS</span></td>
+        </tr>
+        <tr><td><img src="assets/markers/cp_maintenance.png" class="map-markers-img"/><span class="map-markers-span">- Maintenance</span></td><td><img src="assets/markers/cd_maintenance.png" class="map-markers-img"/><span class="map-markers-span">- Maintenance</span></td><td><img src="assets/markers/p_maintenance.png" class="map-markers-img"/><span class="map-markers-span">- Maintenance</span></td><td><img src="assets/markers/a_maintenance.png" class="map-markers-img"/><span class="map-markers-span">- Maintenance</span></td><td><img src="assets/markers/d_maintenance.png" class="map-markers-img"/><span class="map-markers-span">- Maintenance</span></td>
+        </tr>
+        <tr><td><img src="assets/markers/cp_visit.png" class="map-markers-img"/><span class="map-markers-span">- Audit</span></td><td><img src="assets/markers/cd_visit.png" class="map-markers-img"/><span class="map-markers-span">- Audit</span></td><td><img src="assets/markers/p_visit.png" class="map-markers-img"/><span class="map-markers-span">- Audit</span></td><td><img src="assets/markers/a_visit.png" class="map-markers-img"/><span class="map-markers-span">- Audit</span></td><td><img src="assets/markers/d_visit.png" class="map-markers-img"/><span class="map-markers-span">- Audit</span></td>
+        </tr>
+            
+    </table>  
+    </div>  
+</div>

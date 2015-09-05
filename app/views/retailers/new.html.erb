@@ -1,0 +1,171 @@
+
+ <%@new_retailers = {}
+  
+ %>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script>
+$(document).ready(function() {
+
+var bar = $('.bar');
+var percent = $('.percent');
+var status = $('#status');
+
+$('#file-submit').click(function(){
+
+
+ 
+$('#uploadForm').ajaxForm({
+    beforeSend: function() {
+   
+        $('#loader_img').show();
+         
+    },
+    complete: function(xhr,data) {
+        $('#loader_img').hide();
+        
+        
+        
+        var obj = jQuery.parseJSON(xhr.responseText);
+        var arr  = obj.retailers;
+        console.log(arr);
+        if(arr != 'false'){
+        $('#confirmation-popup').show(); 
+         var new_array = [] 
+         var update_array = []
+         var tbody = [$('#confirmation tbody'),$('#confirmation-status tbody')];
+         var arr1 = []
+         var arr2 = [] 
+         for(var i=0;i<tbody.length;i++){
+          
+            if (i == '0'){
+              arr1 = arr[0]
+               
+              for(var j=0;j<arr1.length;j++){
+                var tr = $('<tr>');
+                new_array.push(arr1[j][1])
+               $('<td style="padding-left:9%">').html(arr1[j][1]).appendTo(tr); 
+               $('<td style="padding-left:24%">').html(arr1[j][0]).appendTo(tr); 
+              tbody[i].append(tr);
+            }
+            
+          }
+            else{
+               
+               arr2 = arr[1]
+               arr3 = arr[2] 
+               
+               for(var v=0;v<arr2.length;v++){
+                 
+                var tr = $('<tr>');
+               update_array.push(arr2[v]);
+               $('<td style="padding-left:13%">').html(arr2[v]).appendTo(tr); 
+               $('<td style="padding-left:18%">').html(arr3[v]).appendTo(tr); 
+            tbody[i].append(tr);
+            }
+           }
+  
+       }
+
+       $("#new_array").val(new_array);
+       $("#update_array").val(update_array); 
+      }
+      else{
+        $('#error-popup').show(); 
+      }
+     },
+    
+    
+       
+    
+    }); 
+
+  });
+
+}); 
+
+</script>
+ <%= render 'retailers/confirmation_message' %>
+ <%= render 'retailers/error_message' %>
+ <%= form_for @retailer,:url => { :action => "file_upload" }, :html => { :class => 'user-form',:id => 'uploadForm' } do |f| %>
+ 
+  <div  class="file-div">
+    <label><b>Upload Excel/CSV</b></label>
+    <%= f.file_field :file,:class => "file-field",:required => "required",:id => "fileupload"%>
+    <%=f.button :value => "Upload Retailers",:id => "file-submit"%>
+  </div>
+ <div id="loader_img"><%= image_tag 'loader.gif' %></div>
+ 
+<%end%>
+ 
+ <a href="/retailers/"><%= image_tag 'back.png',:title => "Back",:class => "vendor_back_button" %></a>
+  
+
+<%= form_for @retailer, :html => { :class => 'user-form' } do |f| %>
+  
+  <h4 id="form-title">New Retailer</h4>
+  
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @retailer.errors } %>
+  
+  <div class="form-field">
+    <span class="mandetory">*</span>Retailer Name
+    <%= f.text_field :retailer_name,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>Retailer Code
+    <%= f.text_field :retailer_code,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   Sales Channel
+    <%= f.text_field :sales_channel %>
+  </div>
+
+  <div class="form-field">
+   Contact Person
+    <%= f.text_field :contact_person %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>State
+    <%= f.text_field :state,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>City
+    <%= f.text_field :city,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   Pincode
+    <%= f.text_field :pincode %>
+  </div>
+
+  <div class="form-field">
+   Tin Number
+    <%= f.text_field :tin_number %>
+  </div>
+
+  <div class="form-field">
+   Mobile Number
+    <%= f.text_field :mobile_number %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>Status
+    <%= f.select :status, RETAILER_STATUS,{:prompt => "Select Retailer status"},:class => 'retailer_select',:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   Is RSP on couter
+    <%= f.text_field :is_isp_on_counter %>
+  </div>
+
+  <div class="form-field">
+   Counter Size
+    <%= f.text_field :counter_size %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

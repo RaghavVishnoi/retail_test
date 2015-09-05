@@ -1,0 +1,42 @@
+ <a href="/cmos/"><%= image_tag 'back.png',:title => "Back",:class => "back" %></a>
+<%= form_for @cmo, :html => { :class => 'user-form' } do |f| %>
+   <h4 id="form-title"><%= form_title %></h4>
+  
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @cmo.errors } %>
+  
+  <div class="form-field">
+    <span class="mandetory">*</span>CMO Name
+    <%= f.text_field :name ,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>CMO Designation
+    <%= f.text_field :designation,:required => "required"  %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>Location
+    <%= f.text_field :location,:required => "required"  %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>Contact Number
+    <%= f.phone_field :phone,:required => "required"  %>
+  </div>
+
+
+  <div class="form-field">
+   <span class="mandetory">*</span>Email
+    <%= f.text_field :email ,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>Status
+    <%= f.select :status, CMO_STATUS,{:prompt => "Select retailer status"},:class => 'retailer_select',:required => "required" %>
+  </div>
+
+  
+   <%= f.submit :value => button%>
+    
+  
+<% end %>

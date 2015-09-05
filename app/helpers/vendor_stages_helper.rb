@@ -1,0 +1,2 @@
+module VendorStagesHelper
+end

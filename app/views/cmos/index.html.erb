@@ -1,0 +1,78 @@
+<% if can? :manage, CMO %>
+ <%= link_to "New CMO", new_cmo_path, :id => 'new-button' %>
+<%end%> 
+<%if request.params.include? 'param' %>
+ <%= link_to "Clear", cmos_path ,:class => 'show-all'%>
+<%end%>
+<div>
+  <%=form_tag CMO.new ,:method => 'get' do |f| %>  
+  <div id="user-search-div" class="form-field">
+     <div class="user-search-field">
+       
+       <%= text_field_tag :param, @search, :id => "retailer-search",:required => "required",:placeholder => "Enter CMO name" %>
+    </div>
+   <div>
+       <%= button_tag(type: 'submit',value: '',:class=>"hide-button") do %>
+         <i ><%= image_tag 'search.png' ,:class => "button_with_image_save"%></i> 
+       <% end %>
+   </div>
+   <div class="error" id="message"></div>
+         
+  </div>
+  <%end%>
+</div>
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>CMO Name</th>
+      <th>Designation</th>
+      <th>Location</th>
+      <th>Email</th>
+      <th>Status</th>
+      <% if can? :manage, CMO %>
+      <th>Edit</th>
+      <% end %>
+       <th>Show</th>
+    
+    </tr>
+  </thead>
+  <tbody>
+    <% @cmo.each do |cmo| %>
+      <tr>
+        <td>
+          <%=cmo.id%>
+        </td>
+        <td>
+          <%=cmo.name%>
+        </td>
+        <td>
+          <%=cmo.designation%>
+        </td>
+        <td>
+          <%=cmo.location%>
+        </td>
+        <td>
+          <%=cmo.email%>
+        </td>
+        <td>
+          <%=cmo.status%>
+        </td>
+        <% if can? :manage, CMO %>
+        <td>
+          <%= link_to "Edit", [:edit, cmo] %>
+        </td>
+        <% end %>
+        <td>
+          <%= link_to "Show", [cmo] %>
+        </td>
+      </tr>
+    <%end %>
+  </tbody>
+</table>
+<div class="response-pagination clearfix">
+   <%if @cmo.length > 1%>
+      <%=will_paginate @cmo%>
+  <%end%>
+</div>  
+    
