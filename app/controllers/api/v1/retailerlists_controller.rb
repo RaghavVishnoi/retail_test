@@ -7,7 +7,7 @@ module Api
     		value = params[:value]
         arr = [:retailer_code => '*Select Retailer Code']
 
-			  @city = arr+Retailer.where(city: value,status: 'Active').select(:retailer_code,:retailer_name).order("lfr_chain desc")
+			  @city = arr+Retailer.where(city: value,status: 'Active').select(:retailer_code,:retailer_name).order("lfr_chain desc,retailer_name asc")
 
         render :json => @city
     	end
