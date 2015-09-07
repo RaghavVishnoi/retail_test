@@ -23,12 +23,7 @@ $(document).on('click', '.show-details', function() {
 });
  $(document).ready(function() {
 
-        $('#request_csv').click(function(){
-           $('#csv-request').show();
-        });
-        $('#request-csv-close').click(function(){
-           $('#csv-request').hide();
-        });
+
 
         $("#request-close").click(function ()
             {
