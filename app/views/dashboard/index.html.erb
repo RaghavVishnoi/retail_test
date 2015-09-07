@@ -37,53 +37,6 @@
   <% end %>
 
    
-
-
-  <%# if can? :manage, ModuleGroup %>
-    <%#= link_to module_groups_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Modules -->
-      <!-- </div> -->
-    <%# end %>
-  <%# end %>
-
-  <%# if can? :manage, App %>
-    <%#= link_to apps_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Apps -->
-      <!-- </div> -->
-    <%# end %>
-  <%# end %>
-
-  <%# if can? :manage, Screen %>
-    <%#= link_to screens_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Screens -->
-      <!-- </div> -->
-    <%# end %>
-  <%# end %>
-
-  <%# if can? :manage, Field %>
-    <%#= link_to fields_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Fields -->
-      <!-- </div> -->
-    <%# end %>
-  <%# end %>
-
-  <%# if can? :manage, Survey %>
-    <%#= link_to surveys_path do %>
-      <!-- <div class="box"> -->
-        <!-- <span><i><%#= image_tag 'logo.png' %></i></span> -->
-        <!-- Surveys -->
-      <!-- </div> -->
-    <%# end %>
-  <%# end %>
-
   <%      id = session[:user_id]
           @user = User.find_by(:id => id)
           @associated_roles = AssociatedRole.find_by(:object_id => id)

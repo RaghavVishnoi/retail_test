@@ -22,6 +22,14 @@ $(document).on('click', '.show-details', function() {
   create_popup($(this).closest('tr').find('.details').clone().removeClass('hidden'));
 });
  $(document).ready(function() {
+
+        $('#request_csv').click(function(){
+           $('#csv-request').show();
+        });
+        $('#request-csv-close').click(function(){
+           $('#csv-request').hide();
+        });
+
         $("#request-close").click(function ()
             {
               $('#popup-request').hide();
