@@ -182,7 +182,7 @@ after "passenger_nginx:restart", "monit:restart"
 def write_template(erb_template, target, tmp)
   template = File.read(File.join(File.dirname(__FILE__), erb_template))
   result = ERB.new(template).result(binding)
-  tmp_path = "/tmp/#{tmp}"
+  tmp_path = "/etc/#{tmp}"
   upload! StringIO.new(result), tmp_path
   execute "sudo mv #{tmp_path} #{target}"
 end
