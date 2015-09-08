@@ -37,7 +37,7 @@ gem 'capistrano-rails', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'mysql2'
+# gem 'mysql2'
 gem 'pry', :group => :development
 gem 'will_paginate'
 gem 'geocoder'
