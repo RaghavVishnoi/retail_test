@@ -389,7 +389,6 @@ DEPENDENCIES
   less-rails
   letter_opener
   mysql2
-  pg
   pry
   rack
   rack-utf8_sanitizer
