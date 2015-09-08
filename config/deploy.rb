@@ -134,7 +134,7 @@ end
 namespace :logrotate do
   task :configure do
     on roles(:web) do
-      write_template("deploy/logrotate/log.conf", "/etc/logrotate.d/fosem", 'logrotate')
+      write_template("deploy/logrotate/log.conf", "/etc/logrotate.d/nginx", 'logrotate')
     end
   end
 end
