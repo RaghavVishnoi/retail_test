@@ -108,7 +108,7 @@ namespace :passenger_nginx do
 
   task :configure do
     on roles(:web) do
-      write_template("deploy/nginx/nginx.conf.erb", "/opt/nginx/conf/nginx.conf", "nginx.conf")
+      write_template("deploy/nginx/nginx.conf.erb", "/etc/nginx/nginx.conf", "nginx.conf")
     end
   end
 
