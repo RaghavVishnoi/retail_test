@@ -51,7 +51,7 @@ gem 'fog'
 # gem 'pg'
 gem 'aws-sdk'
 gem 'delayed_job_active_record'
-gem 'activerecord4-redshift-adapter', github: 'aamine/activerecord4-redshift-adapter'
+# gem 'activerecord4-redshift-adapter', github: 'aamine/activerecord4-redshift-adapter'
 gem 'daemons'
 gem "letter_opener", :group => :development
 gem 'cancan'
