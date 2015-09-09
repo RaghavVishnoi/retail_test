@@ -26,7 +26,7 @@ class PasswordsController < ApplicationController
       respond_to do |format|
         format.html do 
           sign_in @user
-          
+          redirect_to '/users/sign_out', notice: "Password updated successfully"
         end
         format.json { render :json => { :result => true } }
       end
