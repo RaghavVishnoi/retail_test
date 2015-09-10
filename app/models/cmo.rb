@@ -26,4 +26,6 @@ class CMO < ActiveRecord::Base
      "#{designation} #{location} - #{name}"
     end
   end
+
+   
 end
