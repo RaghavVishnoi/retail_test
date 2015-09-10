@@ -108,7 +108,7 @@ namespace :passenger_nginx do
 
   task :configure do
     on roles(:web) do
-      write_template("deploy/nginx/nginx.conf.erb", "/opt/nginx/conf/nginx.conf", "nginx.conf")
+      write_template("deploy/nginx/nginx.conf.erb", "/etc/nginx/nginx.conf", "nginx.conf")
     end
   end
 
@@ -134,7 +134,7 @@ end
 namespace :logrotate do
   task :configure do
     on roles(:web) do
-      write_template("deploy/logrotate/log.conf", "/etc/logrotate.d/fosem", 'logrotate')
+      write_template("deploy/logrotate/log.conf", "/etc/logrotate.d/nginx", 'logrotate')
     end
   end
 end
@@ -182,7 +182,7 @@ after "passenger_nginx:restart", "monit:restart"
 def write_template(erb_template, target, tmp)
   template = File.read(File.join(File.dirname(__FILE__), erb_template))
   result = ERB.new(template).result(binding)
-  tmp_path = "/tmp/#{tmp}"
+  tmp_path = "/etc/#{tmp}"
   upload! StringIO.new(result), tmp_path
   execute "sudo mv #{tmp_path} #{target}"
 end
