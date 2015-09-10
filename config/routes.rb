@@ -107,6 +107,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/test' => 'test#index'
       post 'sessions/create'
+      post 'retailerlists/retailers'
+      get 'retailerlists/retailers'
       get 'sessions/create'
       delete 'sessions/destroy'
       get '/home' => 'home#index'
