@@ -73,7 +73,7 @@ class RequestsCsv
       ].flatten.join(',')
      elsif @request_type == 'Maintenance'
       [ 'Id','status', 'Request type', 'RSP Present in Shop?', 'Reason', 'CMO Name', 'Retailer Code', 
-         'Remarks', 'Approver Comment','CMO Comment','Submitted date','Type of Issue','Type of Problem'
+         'City','State','Shop Name','Shop Address','Retailer Name','Retailer Mobile Number','Remarks', 'Approver Comment','CMO Comment','Submitted date','Type of Issue','Type of Problem'
       ].flatten.join(',')
      elsif @request_type == 'Audit'
       [ 'Id','status', 'Request type', 'RSP Present in Shop?', 'Reason', 'CMO Name', 'Retailer Code','Remarks', 'Approver Comment','CMO Comment','Submitted date','Shop Visit Date',
@@ -91,26 +91,72 @@ class RequestsCsv
 
 
   def create_csv_file
-   write_file header
    if @request_type == 'All' || @request_type == '' || @request_type == nil
+    write_file header
     Request.between_time(from_date, till_date).find_each(batch_size: 100) do |request|
+      
       write_file to_csv(request)
     end
+
    else
+    write_file header
     request_type = request_type_backend(@request_type)
     Request.where(:request_type => request_type,:created_at => from_date..till_date).find_each(batch_size: 100) do |request|
       write_file to_csv(request)
+       
     end   
    end
-    file.close
-    File.rename(file_path, target_file_path)
+
+     file.close
+      File.rename(file_path, target_file_path)
   end
 
   def to_csv(request)
+    retailer_code = request.retailer_code.upcase
+    @retailer = Retailer.find_by(:retailer_code => retailer_code)
+
+    if request.city == '' && @retailer != nil || request.city == nil && @retailer != nil
+       @retailer_city = @retailer.city
+    else
+      @retailer_city = request.city
+    end
+
+    if request.state == '' && @retailer != nil || request.state == nil && @retailer != nil
+      @retailer_state = @retailer.state
+    else
+      @retailer_state = request.state
+    end
+
+    if request.shop_name == '' && @retailer != nil || request.shop_name == nil && @retailer != nil
+      @shop_name = @retailer.retailer_name
+    else
+      @shop_name = request.shop_name
+    end
+
+    if request.shop_owner_name == '' && @retailer != nil || request.shop_owner_name == nil && @retailer != nil 
+     @shop_owner_name = @retailer.contact_person
+    else
+     @shop_owner_name = request.shop_owner_name
+    end
+
+    if request.shop_owner_phone == '' && @retailer != nil || request.shop_owner_phone == nil && @retailer != nil
+     @shop_owner_phone = @retailer.mobile_number
+    else
+     @shop_owner_phone = request.shop_owner_phone  
+    end
+
+    if request.shop_address == '' && @retailer != nil || request.shop_address == nil && @retailer != nil
+     @shop_address = @retailer.address
+    else
+     @shop_address = request.shop_address
+    end
+
+
+    
     if @request_type == 'All' || @request_type == '' || @request_type == nil
       [ request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, request.cmo.try(:display_name), request.retailer_code, request.rsp_name,
-      request.rsp_mobile_number, request.rsp_app_user_id, request.city, request.state, request.shop_name, request.shop_address,
-      request.shop_owner_name, request.shop_owner_phone, monthly_sales_str(request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES), monthly_sales_str(request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES),
+      request.rsp_mobile_number, request.rsp_app_user_id,@retailer_city, @retailer_state, @shop_name, @shop_address,
+      @shop_owner_name, @shop_owner_phone, monthly_sales_str(request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES), monthly_sales_str(request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES),
       request.space_available, request.is_gionee_gsb_present, request.type_of_sis_required, request.is_sis_installed, request.is_main_signage,
       request.is_gsb_installed_outside, request.width, request.height, request.type_of_gsb_requested, field_values_str(request.shop_requirements),
       branding_details_csv(request), request.remarks, request.comment_by_approver,request.comment_by_cmo,  request.created_at.strftime("%b %d, %Y"),request.type_of_issue,request.type_of_problem
@@ -118,14 +164,15 @@ class RequestsCsv
 
      elsif @request_type == 'GSB' || @request_type == 'SIS' || @request_type == 'InShop'
       [ request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, request.cmo.try(:display_name), request.retailer_code, request.rsp_name,
-      request.rsp_mobile_number, request.rsp_app_user_id, request.city, request.state, request.shop_name, request.shop_address,
-      request.shop_owner_name, request.shop_owner_phone, monthly_sales_str(request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES), monthly_sales_str(request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES),
+      request.rsp_mobile_number, request.rsp_app_user_id,@retailer_city, @retailer_state, @shop_name, @shop_address,
+      @shop_owner_name, @shop_owner_phone, monthly_sales_str(request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES), monthly_sales_str(request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES),
       request.space_available, request.is_gionee_gsb_present, request.type_of_sis_required, request.is_sis_installed, request.is_main_signage,
       request.is_gsb_installed_outside, request.width, request.height, request.type_of_gsb_requested, field_values_str(request.shop_requirements),
       branding_details_csv(request), request.remarks, request.comment_by_approver, request.comment_by_cmo,  request.created_at.strftime("%b %d, %Y")
       ].flatten.map {|v| "\"#{v.to_s.gsub('"', '""')}\"" }.join(',')
      elsif @request_type == 'Maintenance'
-      [ request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, request.cmo.try(:display_name), request.retailer_code, request.remarks, request.comment_by_approver, request.comment_by_cmo, 
+      [ request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, request.cmo.try(:display_name), request.retailer_code,@retailer_city, @retailer_state, @shop_name, @shop_address,
+      @shop_owner_name, @shop_owner_phone, request.remarks, request.comment_by_approver, request.comment_by_cmo, 
        request.created_at.strftime("%b %d, %Y"),request.type_of_issue,request.type_of_problem
       ].flatten.map {|v| "\"#{v.to_s.gsub('"', '""')}\"" }.join(',')
      elsif @request_type == 'Audit'

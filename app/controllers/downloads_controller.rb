@@ -6,7 +6,7 @@ class DownloadsController < ApplicationController
 
 	def create
 		RequestsCsv.new(params[:from_date].to_s, params[:till_date].to_s,params[:request_type]).delay.generate
-	    redirect_to downloads_path
+	    redirect_to downloads_path, :notice => "link send to your email"
     end
 
     def find_file
