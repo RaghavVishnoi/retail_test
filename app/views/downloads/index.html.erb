@@ -6,12 +6,43 @@
     $('#request-csv-close').click(function(){
       $('#csv-request').hide();
     });
+    $('.download_button').click(function(){
+      alert('enter');
+      var from_date = $('#from_date').val();
+      var till_date = $('#till_date').val();
+      var request_type = $('#request_type').val();
+      console.log(from_date);
+      $.ajax({
+                 url: "/downloads",   
+                 type: "POST",
+                 data: {  from_date : from_date,
+                         till_date : till_date,
+                         request_type : request_type,
+
+                }, 
+                dataType: 'text',
+                 
+                complete: function() {
+
+                },
+
+                success: function(data, textStatus, xhr) {
+                  
+                  var response = JSON.parse(data);
+                  alert(response.result);
+                },
+                error: function() {
+                         alert("Ajax error!")
+                }
+              });
+
+    });
+    
 	});
 </script>
 <div><%=notice%></div>
 <div id="csv-request">
-  <%=form_for downloads_path do%>
-    <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
+ <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
       <tr>
         <td class="popup_title">Download Request CSV</td>
         <td align="right" class="popup_title align_right">
@@ -19,18 +50,18 @@
         </td>
       </tr>
       <tr>
-        <td  id="request-csv-message">From</td><td><%=date_field_tag 'from_date' %></td>
+        <td  id="request-csv-message">From</td><td><%=date_field_tag 'from_date','', :id => 'from_date' %></td>
       </tr>
       <tr>
-        <td  id="request-csv-message">To</td><td><%=date_field_tag 'till_date' %></td>
+        <td  id="request-csv-message">To</td><td><%=date_field_tag 'till_date','',:id => 'till_date' %></td>
       </tr>
       <tr>
-        <td  id="request-csv-message">Choose Request Type</td><td><%=select_tag 'request_type',options_for_select(["All", "GSB", "SIS","InShop", "Maintenance", "Audit" ], params[:type])%></td>
+        <td  id="request-csv-message">Choose Request Type</td><td><%=select_tag 'request_type',options_for_select(["All", "GSB", "SIS","InShop", "Maintenance", "Audit" ], params[:type]), :id => 'request_type'%></td>
       </tr>   
     </table> 
 
     <%= button_tag "Download",:value => "Download", :class => "download_button"%> 
-    <%end%>
+    
   </div>
 <div class="box_menu" id = 'request_csv'>
 	<div>
