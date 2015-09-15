@@ -42,6 +42,10 @@ module ApplicationHelper
          
   end
 
+  def get_retailer(retailer_code)
+    Retailer.find_by(:retailer_code => retailer_code)
+  end
+
   def monthly_sales_str(amount, values)
     amount = amount.to_f
     index = 0

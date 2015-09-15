@@ -77,7 +77,7 @@ class RetailersController < ApplicationController
     end
 
     def retailer_params
-    	params.require(:retailer).permit(:retailer_code,:retailer_name,:sales_channel,:contact_person,:state,:city,:pincode,:tin_number,:mobile_number,:status,:is_isp_on_counter,:counter_size,:record_creation_date)
+    	params.require(:retailer).permit(:retailer_code,:retailer_name,:address,:sales_channel,:contact_person,:state,:city,:pincode,:tin_number,:mobile_number,:status,:is_isp_on_counter,:counter_size,:record_creation_date)
     end
 
     def set_retailer

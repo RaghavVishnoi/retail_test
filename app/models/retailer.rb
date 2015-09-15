@@ -1,7 +1,9 @@
 class Retailer < ActiveRecord::Base
 	 
 	validates :retailer_code, :presence => true, :uniqueness => {:message => "Retailer code can't be duplicate"}
-	validates :retailer_name,:state,:city,:status, :presence => {:message => "Some Values are required"}
+	validates :retailer_name,:address,:state,:city,:status, :presence => {:message => "Some Values are required"}
+    validate :mobile_number
+
 
 def self.search(id)
 
@@ -64,5 +66,7 @@ def self.display_names
     name = Retailer.select(:state).uniq
    
   end
+
+  
 	 
 end

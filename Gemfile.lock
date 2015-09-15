@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/aamine/activerecord4-redshift-adapter.git
+  revision: fbca59d81a35453317b4a2307a984997621b04cd
+  specs:
+    activerecord4-redshift-adapter (0.1.1)
+      activerecord (>= 4.0.0)
+      pg
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -215,6 +223,7 @@ GEM
       nokogiri
       rbvmomi
     orm_adapter (0.5.0)
+    pg (0.17.1)
     polyglot (0.3.5)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -350,6 +359,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  activerecord4-redshift-adapter!
   awesome_nested_set
   aws-sdk
   aws-ses
@@ -379,6 +389,7 @@ DEPENDENCIES
   less-rails
   letter_opener
   mysql2
+  pg
   pry
   rack
   rack-utf8_sanitizer

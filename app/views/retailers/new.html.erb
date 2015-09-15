@@ -138,6 +138,13 @@ $('#uploadForm').ajaxForm({
   </div>
 
   <div class="form-field">
+   <span class="mandetory">*</span>Address
+   <br>
+    <%= f.text_area :address,:required => "required",:style => "" %>
+  </div>
+
+
+  <div class="form-field">
    Pincode
     <%= f.text_field :pincode %>
   </div>
