@@ -15,7 +15,7 @@
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server '180.179.208.178', user: 'fosem', roles: %w{web app db}, my_property: :my_value
+server '43.252.88.222', user: 'fosem', roles: %w{web app db}, my_property: :my_value
 
 
 
