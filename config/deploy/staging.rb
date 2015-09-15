@@ -17,6 +17,7 @@
 
 server '43.252.88.222', user: 'root', roles: %w{web app db}, my_property: :my_value
 
+
 set :ssh_options, {
   keys: %w{~/.ssh/id_rsa},
   forward_agent: true

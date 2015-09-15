@@ -6,6 +6,7 @@ set :repo_url, 'ssh://xp-dev.com/LPTPL_GIONEE_REQUESTER_WEB'
 
 set :tmp_dir, "/home/fosem/tmp"
 
+
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
