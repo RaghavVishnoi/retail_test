@@ -214,5 +214,5 @@ LOCATION_OF_GSB = [
 
 
 
-DEFAULT_EMAILS = ['raghav.singh@lptpl.com']
+DEFAULT_EMAILS = ['raghav.singh@lptpl.com ']
 

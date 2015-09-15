@@ -31,6 +31,7 @@ default: &default
   password: CrpNegmc6XMGcjfs
 
 
+
 development:
   <<: *default
   database: development_fosem1
