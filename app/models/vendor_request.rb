@@ -2,8 +2,9 @@ class VendorRequest < ActiveRecord::Base
 
 	belongs_to :requests
 	has_many :vendor_stages
-	validate :request_id,:vendor_id,:vendor_response,:assigned_date,:status, :presence => true
+	validate :vendor_id,:vendor_response,:assigned_date,:status, :presence => true
     validates :vendor_id, :presence => true
+    validates :request_id, :presence => true
 
 	def self.vendor_email(id)
 		email = Vendorlist.find_by(:id => id)
