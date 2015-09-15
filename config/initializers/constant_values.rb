@@ -63,7 +63,7 @@ BOOLEAN_VALUES = [
 
 RSP_NOT_PRESENT_REASON = [
   ["Being Appointed", "Being Appointed"],
-  ["non-rsp store", "non-rsp store"]
+  ["Non-RSP Store", "Non-RSP Store"]
 ]
 
 SIS_TYPES = [
