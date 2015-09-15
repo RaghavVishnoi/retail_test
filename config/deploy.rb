@@ -8,6 +8,7 @@ set :tmp_dir, "/home/fosem/tmp"
 
 
 
+
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
