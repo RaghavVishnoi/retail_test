@@ -2,7 +2,7 @@
  <%= link_to "New CMO", new_cmo_path, :id => 'new-button' %>
 <%end%> 
 <%if request.params.include? 'param' %>
- <%= link_to "Clear", cmos_path ,:class => 'show-all'%>
+ <%= link_to "Clear", cmos_path ,:class => 'show-all-user'%>
 <%end%>
 <div>
   <%=form_tag CMO.new ,:method => 'get' do |f| %>  

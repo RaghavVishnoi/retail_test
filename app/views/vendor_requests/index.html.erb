@@ -1,7 +1,7 @@
 
 
 <%if request.params.include? 'param' %>
-  <%= link_to "Clear", vendor_requests_path ,:class => 'show-all'%>
+  <%= link_to "Clear", vendor_requests_path ,:class => 'show-all-vendor-request'%>
 <%end%>
 <% if can? :manage, VendorRequest %>
  <%= link_to "New Vendor Assignment", {controller: "vendor_requests", action: "new"}, id: "new-button" %>

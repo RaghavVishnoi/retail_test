@@ -3,7 +3,7 @@
  <%= link_to "New User", new_user_path, :id => 'new-button' %>
 <%end%> 
 <%if request.params.include? 'param' %>
- <%= link_to "Clear", users_path ,:class => 'show-all'%>
+ <%= link_to "Clear", users_path ,:class => 'show-all-user'%>
 <%end%><div>
   <%=form_tag @user ,:method => 'get' do |f| %>  
   <div id="user-search-div" class="form-field">

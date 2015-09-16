@@ -50,13 +50,13 @@
         </td>
       </tr>
       <tr>
-        <td  id="request-csv-message">From</td><td><%=date_field_tag 'from_date','', :id => 'from_date' %></td>
+        <td  id="request-csv-message">From</td><td style="padding-top:8%"><%=date_field_tag 'from_date','', :id => 'from_date' %></td>
       </tr>
       <tr>
-        <td  id="request-csv-message">To</td><td><%=date_field_tag 'till_date','',:id => 'till_date' %></td>
+        <td  id="request-csv-message">To</td><td style="padding-top:8%"><%=date_field_tag 'till_date','',:id => 'till_date' %></td>
       </tr>
       <tr>
-        <td  id="request-csv-message">Choose Request Type</td><td><%=select_tag 'request_type',options_for_select(["All", "GSB", "SIS","InShop", "Maintenance", "Audit" ], params[:type]), :id => 'request_type'%></td>
+        <td  id="request-csv-message">Choose Request Type</td><td style="padding-top:8%"><%=select_tag 'request_type',options_for_select(["All", "GSB", "SIS","InShop", "Maintenance", "Audit" ], params[:type]), :id => 'request_type'%></td>
       </tr>   
     </table> 
 
