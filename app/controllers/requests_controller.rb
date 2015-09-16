@@ -143,7 +143,7 @@ class RequestsController < ApplicationController
        role = Request.user_role(session[:user_id])
 
        if role.name == 'cmo'
-        cmo_id = Request.cmo_id(session[:user_id])
+        cmo_id = Request.get_cmo_id(session[:user_id])
        else
         cmo_id = '' 
        end
