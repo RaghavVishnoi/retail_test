@@ -29,12 +29,12 @@ def self.insert_data(new_retailers_array,inactive_retailers_array,file)
 							@file_read = Retailer.new
 							 
 					   	 	   (1...columns.length-2).each do |column_count|
-					   	 	   	if columns[column_count] == 'retailer_code'
-					   	 	  	    @file_read["#{columns[column_count]}"] = row[column_count-1].strip
-					   	 	  	else
-					   	 	  		@file_read["#{columns[column_count]}"] = row[column_count-1]
-					   	 	  	end
-					           end 
+						   	 	   	if columns[column_count] == 'retailer_code'
+						   	 	  	    @file_read["#{columns[column_count]}"] = row[column_count-1].strip
+						   	 	  	else
+						   	 	  		@file_read["#{columns[column_count]}"] = row[column_count-1]
+						   	 	  	end
+					   	 	   end 
 				            @file_read.save
 				        	  
 				   	 	end

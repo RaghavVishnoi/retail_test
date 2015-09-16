@@ -49,7 +49,6 @@ class ReadFile < ActiveRecord::Base
      end
   if @column_count != false
   	@retailer_name = Retailer.where(:retailer_code => @retailer_code).pluck(:retailer_name)
-  	puts "here is retailer name #{@retailer_name}"
   	@object.push(@new_retailers)
     @object.push(@retailer_code)
     @object.push(@retailer_name)
