@@ -48,7 +48,7 @@ class VendorRequest < ActiveRecord::Base
         @vendor_request.save
 	end
 
-	def self.filter(request_type,filter_type,id)
+	def self.filter(request_type,filter_type,param)
 		if request_type == 'All Requests'
 			request_type = [0,1,2,3,4]
 		elsif request_type == 'GSB'
@@ -66,18 +66,22 @@ class VendorRequest < ActiveRecord::Base
 		  request=Request.arel_table
           assigned_request = VendorRequest.get_unassigned_request
           request = Request.where(Request.arel_table[:id].not_in(assigned_request))
-
+          retailer_code = request.all.pluck(:retailer_code)
 		if filter_type == 'Retailer Code'
-		  @request = request.where(:retailer_code => id,:request_type => request_type)
+		  @request = request.where(:retailer_code => param,:request_type => request_type)
           
         elsif filter_type == 'Request Id'
-          @request = request.where(:id => id,:request_type => request_type)
+		  @request = request.where(:id => param,:request_type => request_type)
           	  
 		elsif filter_type == 'State'
-		  @request = request.where(:state => id,:request_type => request_type)
+		  retailers = Retailer.where(:retailer_code => retailer_code,:state => param).pluck(:retailer_code)
+          @request = request.where(:retailer_code => retailers,:request_type => request_type)
 
 		elsif filter_type == 'City'
-		  @request = request.where(:city => id,:request_type => request_type)
+		  retailers = Retailer.where(:retailer_code => retailer_code,:city => param).pluck(:retailer_code)
+          @request = request.where(:retailer_code => retailers,:request_type => request_type)
+		else
+		  @request = request.where(:request_type => request_type)	
 		end
 	 end
   end

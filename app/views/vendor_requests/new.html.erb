@@ -59,7 +59,7 @@
      <div class="user-search-field">
       <%=select_tag 'request_type',options_for_select([ "All Requests", "GSB","SIS","In Shop","Maintenance","Audit"], params[:request_type]),:multiple => false,:style => "position:absolute;margin-left:-30%;width:15%"%>
        <%=select_tag 'filter_type',options_for_select([ "All","Retailer Code","Request Id", "State","City"], params[:filter_type]),:multiple => false,:style => "position:absolute;margin-left:-14%;width:12%"%>
-       <%= text_field_tag :param, params[:search], :id => "retailer-search",:required => "required",:placeholder => "Enter keyword to search",:value => params[:param] %>
+       <%= text_field_tag :param, params[:search], :id => "retailer-search",:placeholder => "Enter keyword to search",:value => params[:param] %>
     </div>
    <div>
        <%= button_tag(name: "commit",value: "filter",type: 'submit',:class=>"hide-button") do %>
