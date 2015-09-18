@@ -10,7 +10,7 @@
       var from_date = $('#from_date').val();
       var till_date = $('#till_date').val();
       var request_type = $('#request_type').val();
-      if(from_date == '' || till_date == '' request_type == ''){
+      if(from_date == '' || till_date == '' || request_type == ''){
           alert("Please fill all required fields");
           location.href = '/downloads'
       }
