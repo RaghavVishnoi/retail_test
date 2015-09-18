@@ -4,10 +4,9 @@ module Api
       skip_authorize_resource
       skip_before_action :authenticate_user
         def index
-
           value = params[:value]
           arr = [:retailer_code => '*Select Retailer Code']
-          @city = arr+Retailer.where(city: value,status: 'Active').select(:retailer_code,:retailer_name).order("lfr_chain desc,retailer_name asc")
+          @city = arr+Retailer.where(city: [value,'undefined'],status: 'Active').select(:retailer_code,:retailer_name).order("lfr_chain desc,retailer_name asc")
           render :json => @city
         end
 

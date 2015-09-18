@@ -71,8 +71,7 @@ SIS_TYPES = [
   ["7’X4ft back wall with glass top front counter", "7’X4ft back wall with glass top front counter"],
   ["2’8X2’8 island unit", "2’8X2’8 island unit"],
   ["Only 7’X4ft back wall with phone display", "Only 7’X4ft back wall with phone display"],
-  ["6’X3’ island table with phone display", "6’X3’ island table with phone display"],
-  ["7’X 8ft back wall with wooden top front counter", "7’X 8ft back wall with wooden top front counter"]
+  ["7’8’’X 8ft back wall with wooden top front counter", "7’8’’X 8ft back wall with wooden top front counter"]
 ]
 
 SPACE_AVAILABLE = [
@@ -95,9 +94,7 @@ SELLING_SKILLS = [
 GSB_TYPES = [
   ["ACP", "ACP"],
   ["FLEX", "FLEX"],
-  ["Non LIT", "Non LIT"],
-  ["FLAG POLE", "FLAG POLE"],
-  ["TOTEM", "TOTEM"]
+  
 ]
 
  VISITOR_BOOLEAN_VALUES = [
@@ -183,10 +180,10 @@ LOCATION_OF_GSB = [
   ]
 
   REQUIREMENT_FOR_THIS_SHOP = [
-    ["Clipon (4x3 feet) LANDSCAPE","Clipon (4x3 feet) LANDSCAPE"],
-    ["Clipon (3x4 feet) PORTRAIT","Clipon (3x4 feet) PORTRAIT"],
-    ["Clipon (3x2 feet) LANDSCAPE","Clipon (3x2 feet) LANDSCAPE"],
-    ["Clipon (2x3 feet) PORTRAIT","Clipon (2x3 feet) PORTRAIT"],
+    ["Flange","Flange"],
+    ["In-Shop","In-Shop"],
+    ["Window one way vision","Window one way vision"],
+    ["Clipon (2x3 feet) Vertical only in In-Shop","Clipon (2x3 feet) Vertical only in In-Shop"],
     ["Standee with Lights","Standee with Lights"],
     ["Counter-top with Lights","Counter-top with Lights"]
   ]

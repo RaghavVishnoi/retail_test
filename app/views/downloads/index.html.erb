@@ -7,10 +7,15 @@
       $('#csv-request').hide();
     });
     $('.download_button').click(function(){
-      alert('enter');
       var from_date = $('#from_date').val();
       var till_date = $('#till_date').val();
       var request_type = $('#request_type').val();
+      if(from_date == '' || till_date == '' request_type == ''){
+          alert("Please fill all required fields");
+          location.href = '/downloads'
+      }
+      else{
+      
       console.log(from_date);
       $.ajax({
                  url: "/downloads",   
@@ -29,13 +34,13 @@
                 success: function(data, textStatus, xhr) {
                   
                   var response = JSON.parse(data);
-                  alert(response.result);
+                  
                 },
                 error: function() {
                          alert("Ajax error!")
                 }
               });
-
+        }
     });
     
 	});
