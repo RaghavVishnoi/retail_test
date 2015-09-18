@@ -181,7 +181,7 @@ LOCATION_OF_GSB = [
 
   REQUIREMENT_FOR_THIS_SHOP = [
     ["Flange","Flange"],
-    ["In-Shop","In-Shop"],
+    ["In Shop","In Shop"],
     ["Window one way vision","Window one way vision"],
     ["Clipon (2x3 feet) Vertical only in In-Shop","Clipon (2x3 feet) Vertical only in In-Shop"],
     ["Standee with Lights","Standee with Lights"],
@@ -210,5 +210,5 @@ LOCATION_OF_GSB = [
    
 
 
-DEFAULT_EMAILS = ['ankita.rai@techbirds.in']
+DEFAULT_EMAILS = ['akash@gionee.co.in']
  
