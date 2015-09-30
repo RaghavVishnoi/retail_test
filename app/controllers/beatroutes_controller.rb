@@ -1,6 +1,7 @@
 class BeatroutesController < ApplicationController
 	  before_action :set_beatroute, :only => [:edit, :update,:previous_month_sales,:csv_insert]
     authorize_resource :only => [:create,:new,:previous_month_sales,:csv_insert]
+    skip_before_action :authenticate_user
     PER_PAGE = 1000
 
 
