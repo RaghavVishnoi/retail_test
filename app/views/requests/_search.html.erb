@@ -4,7 +4,7 @@
    <div id="search-div" class="form-field">
      <div class="search-field">
        <%=select_tag 'type',options_for_select(["Request Id","RetailerCode"], params[:type]),:multiple => false,:style => "position:absolute;margin-left:-13%;width:10%;font-size:73%;"%>
-       <%= text_field_tag "id",'', :id => "search",:required => "required",:placeholder => "Enter request id",:value => params[:retailer_code] %>
+       <%= text_field_tag "id",'', :id => "search",:required => "required",:placeholder => "Enter request id/retailer code",:value => params[:retailer_code] %>
     </div>
    <div>
        <%= button_tag(type: 'submit',value: '',:class=>"hide-button") do %>

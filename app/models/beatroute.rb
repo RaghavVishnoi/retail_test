@@ -69,7 +69,7 @@ class Beatroute < ActiveRecord::Base
 				 @beatroute.inshop_branding = row[25]
 				 @beatroute.sis = row[26]
 				 @beatroute.gsb = row[27]
-				 @beatroute.created_at = Time.Now
+				 @beatroute.created_at = Time.now
 				 if @beatroute.save
 				 	begin
 					  @upload_file = UploadFile.where(:id => upload_files.id).update_all(status: 'Uploaded',inserted_on: Time.now)
