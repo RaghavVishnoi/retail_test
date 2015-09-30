@@ -273,6 +273,15 @@
         Downloads
       </div>
     <% end %>
+<%end%> 
+
+<% if can? :manage, Beatroute %>
+    <%= link_to beatroutes_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Beat Routes
+      </div>
+    <% end %>
 <%end%>   
 
 

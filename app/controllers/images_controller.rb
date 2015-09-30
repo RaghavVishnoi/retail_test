@@ -4,9 +4,11 @@ class ImagesController < ApplicationController
   
   def new
     @image = Image.new
+    
   end
   
   def create
+    
     @image = Image.new image_params
     if @image.save
       respond_to do |format|

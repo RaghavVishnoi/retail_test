@@ -38,6 +38,7 @@ $(document).on('click', '.show-details', function() {
               $('#confirmation-popup').hide();
                  
             });
+        
         $('#popup-button').click(function() {
           if($('#popup-button').val() == 'Yes'){
              $('#popup-request').hide();

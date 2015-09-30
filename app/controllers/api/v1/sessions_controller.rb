@@ -11,8 +11,7 @@ module Api
            if @user == nil || @user == ''
             render :json => { :result => false, :message => 'Login id/password does not match'}
            else
-            puts "here is user #{@user.id}"
-             @role = User.user_role(@user.id)
+            @role = User.user_role(@user.id)
              if (@role.name == 'requester' && params[:request][:app_id] == '1' && @user.status == 'Active') || (@role.name == 'vendor' && params[:request][:app_id] == '2' && @user.status == 'Active')
                if @user && @user.authenticate(params[:session][:password])
                  sign_in @user

@@ -1,15 +1,110 @@
  <script>
   $(document).ready(function(){
+
       $('#form').hide();
       $('#click').click(function(){
           $('#form').show();
           $('#click').hide();
 
       });
+     
+      $('.sales-icon').click(function() {
+        var retailer_code = $('#retailer-code').val();
+         
+      $.ajax({
+                url: "/requests/previous_month_sales",   
+                type: "GET",
+                data: { retailer_code : retailer_code}, 
+                dataType: 'text',
+                 
+                complete: function() {
+
+                },
+
+                success: function(data, textStatus, xhr) {
+                  var response = JSON.parse(data);
+                  var retailer = response.retailer[0]
+                  var beatroute = response.beatroute[0]
+                  $('#retailer-sales').show();
+                  var tbody = $('#personal-detail tbody')
+                  var tr = $('<tr>');
+                  $('<td style="padding-left:5%">').html(retailer.contact_person).appendTo(tr);
+                  $('<td style="padding-left:5%">').html(retailer.retailer_code).appendTo(tr);
+                  $('<td style="padding-left:9%">').html(retailer.retailer_name).appendTo(tr);
+                  $('<td style="padding-left:5%">').html(retailer.mobile_number).appendTo(tr);
+                  
+                  tbody.append(tr); 
+
+                  var tbody_sales = $('#sales-detail tbody')
+                  var tr_sales = $('<tr>');
+                  $('<td style="padding-left:5%">').html(beatroute.last_month_avg_sales_volume).appendTo(tr_sales);
+                  $('<td style="padding-left:5%">').html(beatroute.last_month_avg_sales_value).appendTo(tr_sales);
+                  $('<td style="padding-left:9%">').html(beatroute.mtd_avg_sales_volume).appendTo(tr_sales);
+                  $('<td style="padding-left:5%">').html(beatroute.mtd_avg_sales_value).appendTo(tr_sales);
+                  
+                  tbody_sales.append(tr_sales); 
+
+                  var tbody_attendance = $('#attendance-detail tbody')
+                  var tr_attendance = $('<tr>');
+                  $('<td style="padding-left:10%">').html(beatroute.rsp_name).appendTo(tr_attendance);
+                  $('<td style="padding-left:8%">').html(beatroute.rsp_id).appendTo(tr_attendance);
+                  $('<td style="padding-left:9%">').html('').appendTo(tr_attendance);
+                  $('<td style="padding-left:20%">').html(beatroute.avg_last_month_attendance).appendTo(tr_attendance);
+                  
+                  tbody_attendance.append(tr_attendance); 
+
+                  var tbody_stock = $('#stock-detail tbody')
+                  var tr_stock = $('<tr>');
+                  $('<td style="padding-left:17%">').html(beatroute.last_reported_stock).appendTo(tr_stock);
+                  $('<td style="padding-left:14%">').html(beatroute.models_in_stock).appendTo(tr_stock);
+                  
+                  tbody_stock.append(tr_stock); 
+
+                }
+        });          
+
+    });
+  $('.request-icon').click(function() {
+        var retailer_code = $('#retailer-code').val();
+         
+      $.ajax({
+                url: "/requests/retailer_requests",   
+                type: "GET",
+                data: { retailer_code : retailer_code}, 
+                dataType: 'text',
+                 
+                complete: function() {
+
+                },
+
+                success: function(data, textStatus, xhr) {
+                  var response = JSON.parse(data);
+                  for(var i=0;i<response.requests.length;i++){
+                    var requests = response.requests[i]
+                    $('#retailer-requests').show();
+
+                    var tbody = $('#request-detail tbody')
+                    var tr = $('<tr>');
+
+                    $('<td style="padding-left:5%">').html(requests.id).appendTo(tr);
+                    $('<td style="padding-left:5%">').html(requests.request_type.toUpperCase() ).appendTo(tr);
+                    $('<td style="padding-left:5%">').html(requests.status.toUpperCase()).appendTo(tr);
+                    $('<td style="padding-left:9%">').html(requests.cmo_approve_date).appendTo(tr);
+                    $('<td style="padding-left:5%">').html(requests.approver_approve_date).appendTo(tr);
+                    $('<td style="padding-left:1%">').html('<a href="/requests/'+requests.id+'/edit" class="index-link">Show</a>').appendTo(tr);
+                    
+                    tbody.append(tr); 
+                  }
+                  
+                }
+              });
+    });
+   
   });
 </script>
-    
- <div class="approv_cont clearfix">
+ <%= render 'requests/sales' %>
+ <%= render 'requests/retailer_requests' %>
+  <div class="approv_cont clearfix">
   <div class="appr_info">
     <div>RSP Present in Shop?</div>
     <div><%= @request.is_rsp %></div>
@@ -46,6 +141,7 @@
     
     <div>Retailer Code</div>
     <div><%= @request.retailer_code %>
+
     <%@retailer = Retailer.find_by(:retailer_code => @request.retailer_code)
       if @retailer == nil
         @retailer_status = 'Inactive'
@@ -61,7 +157,11 @@
     <h5 class="request-retailer-status-active">
       <%=@retailer_status%>
     </h5>
+    <%= hidden_field_tag 'retailer_code',@retailer.retailer_code,:id => 'retailer-code'%>
     <%end%>
+        <%= image_tag 'request-icon.png',:class => "request-icon"  %>
+        <%= image_tag 'retailer_record.png',:class => "sales-icon"  %>
+        
     </div>
     <% if can? :manage, Request %>
     <div style="width:30%;margin:auto;" id="form">

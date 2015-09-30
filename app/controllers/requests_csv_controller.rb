@@ -2,8 +2,7 @@ class RequestsCsvController < ApplicationController
   before_action :find_file, :only => [:show]
 
   def create
-    
-    RequestsCsv.new(params[:start_date].to_s, params[:end_date].to_s,'').delay.generate
+    RequestsCsv.new(params[:start_date].to_s, params[:end_date].to_s,'',session[:user_id]).delay.generate
     respond_to do |format|
       format.js
     end

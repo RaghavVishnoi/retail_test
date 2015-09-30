@@ -26,7 +26,6 @@ class RetailersController < ApplicationController
 		if @retailer.save
 			redirect_to retailers_path, notice: "Retailer created successfully"
 		else
-            puts "error message #{@retailer.errors.messages.values}"
             redirect_to new_retailer_path, :notice => @retailer.errors.messages.values[0][0]
 		end	
     end

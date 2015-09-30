@@ -86,4 +86,9 @@ Downloads:
   permissions:
     "manage, Download": "Download Records"
 
- 
+BeatRoute:
+  group_name: "Beatroutes"
+  permissions:
+    "manage, Beatroute": "Download Records"    
+
+  

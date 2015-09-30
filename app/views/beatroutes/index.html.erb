@@ -1,0 +1,60 @@
+<%puts "here is beat routes #{@beatroutes.length}"%>
+<% if can? :manage, Beatroute %>
+ <%= link_to "New Record", new_beatroute_path, :id => 'new-button' %>
+<%end%> 
+<%if request.params.include? 'param' %>
+ <%= link_to "Clear", beatroutes_path ,:class => 'show-all'%>
+<%end%>
+ 
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Retailer Code</th>
+      <th>Shop Name</th>
+      <th>RSP Name</th>
+      <th>Distributor Name</th>
+      <th>TSM Name</th>
+      <th>Uploaded Time</th>
+      <% if can? :manage, Beatroute %>
+       <th>Stock</th>
+      <%end%>
+      <% if can? :manage, Beatroute %>
+       <th>Sales</th>
+      <%end%>
+      <% if can? :manage, Beatroute %>
+       <th>Attendance</th>
+      <%end%>
+      <% if can? :manage, Beatroute %>
+       <th>Other</th>
+      <%end%>
+      <th>Edit</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <%@beatroutes.each do |beatroute|%>
+      <tr>
+        <td><%=beatroute.retailer_code %></td>
+        <td><%=beatroute.retailer_name %></td>
+        <td><%=beatroute.rsp_name %></td>
+        <td><%=beatroute.distributor_name %></td>
+        <td><%=beatroute.tsm_name %></td>
+        <td><%=beatroute.created_at.strftime("%b %d, %Y") %></td>
+        <td>
+          <%= link_to "Stock", "/beatroutes/show?bid=#{beatroute.id}&&type=stock",:class => "index-link" %>
+        </td>
+         <td>
+          <%= link_to "Sales", "/beatroutes/show?bid=#{beatroute.id}&&type=sales",:class => "index-link" %>
+        </td>
+         <td>
+          <%= link_to "Attendance", "/beatroutes/show?bid=#{beatroute.id}&&type=attendance",:class => "index-link" %>
+        </td>
+         <td>
+          <%= link_to "Other", "/beatroutes/show?bid=#{beatroute.id}&&type=other",:class => "index-link" %>
+        </td>
+        <td><%=link_to "Edit",[:edit,beatroute],:class => "index-link" %></td>
+         
+      </tr>
+    <%end%>
+  </tbody>
+ </table> 

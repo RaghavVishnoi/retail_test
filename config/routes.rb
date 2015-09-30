@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/schema' => "schema#index"
   get '/users/filter' => "users#index"
   post '/users/filter' => "users#index"
-   
+ 
    
   resources :weekly_offs, :only => [:index, :create]
 
@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 
   resources :vendor_assignments, :only => [:index,:edit,:accept,:show,:update]
 
- 
+  resources :beatroutes, :only => [:index,:new,:edit,:create,:update,:show]
 
   resources :read_files do
     collection { post :import }
@@ -193,7 +193,19 @@ Rails.application.routes.draw do
   get '/requests_csv/new' => "requests_csv#new"
   get '/requests_csv/:file_name' => 'requests_csv#show', :as => 'request_csv'
 
+  post 'requests/previous_month_sales' 
+  get 'requests/previous_month_sales' 
+
+  post 'requests/retailer_requests' 
+  get 'requests/retailer_requests'
+
+  post 'beatroutes/file_upload'
+  get 'beatroutes/file_upload'
+
   
+   
+   
+   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

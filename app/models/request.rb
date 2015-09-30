@@ -61,6 +61,15 @@ class Request < ActiveRecord::Base
     requests
   end
 
+  def self.with_retailer_query(q,retailer_code)
+    q = {} if !q.present? 
+    requests = self
+    if q[:status].present? && q[:request_type].present?
+      requests = requests.where(:status => q[:status],:request_type => q[:request_type],:retailer_code => retailer_code)
+    end
+    requests
+  end
+
   def self.with_cmo_query(q,id)
     q = {} if !q.present? 
     requests = self
@@ -69,6 +78,18 @@ class Request < ActiveRecord::Base
     cmo = CMO.where(:email => email)
     if q[:status].present? && q[:request_type].present?
       requests = requests.where(:status => q[:status],:request_type => q[:request_type],:cmo_id => cmo)
+    end
+    requests
+  end
+
+  def self.with_cmo_retailer_query(q,id,retailer_code)
+    q = {} if !q.present? 
+    requests = self
+    user = User.find_by(:id => id)
+    email = user.email
+    cmo = CMO.where(:email => email)
+    if q[:status].present? && q[:request_type].present?
+      requests = requests.where(:status => q[:status],:request_type => q[:request_type],:cmo_id => cmo,:retailer_code => retailer_code)
     end
     requests
   end
@@ -82,6 +103,15 @@ class Request < ActiveRecord::Base
       requests = requests.where(:status => q[:status],:request_type => q[:request_type],:user_id => user)
     end
     requests
+  end
+
+  def self.search(param,type)
+    if type == 'Request Id'
+      @request = Request.find_by(id: param)
+    else
+      @request = Request.where(:retailer_code => param)
+    end
+    
   end
 
   def self.with_retailer_code(q)
@@ -131,6 +161,10 @@ def self.user_role(id)
   user = User.find_by(:id => id)
   associated_roles = AssociatedRole.find_by(:object_id => id)
   role = associated_roles.role
+end
+
+def self.retailer_requests(retailer_code)
+  Request.where(:retailer_code => retailer_code)
 end
 
  def notify_cmo

@@ -5,4 +5,5 @@ class FileMailer < ActionMailer::Base
     @file_url = file_url
     mail(to: email, subject: 'File')
   end
+
 end

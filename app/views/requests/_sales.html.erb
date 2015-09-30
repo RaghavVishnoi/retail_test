@@ -1,0 +1,82 @@
+<script>
+  $(document).ready(function(){
+    $('#salesClose').click(function(){
+        $('#retailer-sales').hide();
+        location.reload(true);
+    });
+  });
+</script>
+<div id="retailer-sales">
+	<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
+            <tr>
+                <td class="retailer-sales_title">Sales data</td>
+                <td class="retailer-sales_title align_right">
+                    <label id="salesClose">Close</label>
+                </td>
+                
+              </tr> 
+             
+    </table>
+        <div>
+          <table width="100%" id="personal-detail">
+           	<thead>
+               <th style="font-size:18px;" colspan="4">Basic Information</th>
+            </thead>
+            <thead>
+            	<th colspan="4"><hr /></th>
+            </thead>
+            <thead>
+               <th>Retailer Name</th><th>Retailer Code</th><th>Shop Name</th><th>Contact Number</th>
+            </thead>
+			      <tbody>
+			         <tr><td></td></tr>
+            </tbody>
+          </table>
+
+            <table width="100%" id="sales-detail">
+             	<thead>
+                 <th style="font-size:18px;" colspan="4">Sales Information</th>
+              </thead>
+              <thead>
+              	<th colspan="4"><hr /></th>
+              </thead>
+              <thead>
+                 <th>Avg. sales volume</th><th>Avg. sales value</th><th>MTD Avg. sales volume</th><th>MTD Avg. sales value</th>
+              </thead>
+  			      <tbody>
+  			        <tr><td></td></tr>
+              </tbody>
+           </table>
+
+           <table width="100%" id="attendance-detail">
+            <thead>
+               <th style="font-size:18px;" colspan="4">Attendance Record</th>
+            </thead>
+            <thead>
+              <th colspan="4"><hr /></th>
+            </thead>
+            <thead>
+               <th>RSP Name</th><th>RSP Id</th><th></th><th>Avg. Attendance</th>
+            </thead>
+            <tbody>
+              <tr><td></td></tr>
+            </tbody>
+          </table>
+
+          <table width="100%" id="stock-detail">
+            <thead>
+               <th style="font-size:18px;" colspan="4">Stock Information</th>
+            </thead>
+            <thead>
+              <th colspan="4"><hr /></th>
+            </thead>
+            <thead>
+               <th>Last reported stock</th><th>Models in stock</th
+            </thead>
+            <tbody>
+              <tr><td></td></tr>
+            </tbody>
+          </table>
+
+       </div>
+</div>       

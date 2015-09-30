@@ -1,0 +1,153 @@
+<a href="/beatroutes/"><%= image_tag 'back.png',:title => "Back",:class => "back" %></a>
+<%= form_for @beatroute, :html => { :class => 'user-form' } do |f| %>
+   <h4 id="form-title"><%= form_title %></h4>
+  
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @beatroute.errors } %>
+  
+  <div class="form-field">
+    Distributor Name
+    <%= f.text_field :distributor_name%>
+  </div>
+
+  <div class="form-field">
+    TSM Name
+    <%= f.text_field :tsm_name%>
+  </div>
+
+  <div class="form-field">
+   RSP Name
+    <%= f.text_field :rsp_name %>
+  </div>
+
+  <div class="form-field">
+    RSP Id
+    <%= f.phone_field :rsp_id%>
+  </div>
+
+
+  <div class="form-field">
+   Employee Code
+    <%= f.text_field :employee_code%>
+  </div>
+
+  <div class="form-field">
+   Shop Code
+    <%= f.text_field :shop_code %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>Retailer Code
+    <%= f.text_field :retailer_code ,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   <span class="mandetory">*</span>Retailer Name
+    <%= f.text_field :retailer_name ,:required => "required" %>
+  </div>
+
+  <div class="form-field">
+   City
+    <%= f.text_field :city%>
+  </div>
+
+  <div class="form-field">
+   Last month avg sales volume
+    <%= f.text_field :last_month_avg_sales_volume%>
+  </div>
+
+  <div class="form-field">
+   Last month avg sales value
+    <%= f.text_field :last_month_avg_sales_value%>
+  </div>
+
+  <div class="form-field">
+    MTD avg sales volume
+    <%= f.text_field :mtd_avg_sales_volume%>
+  </div>
+
+  <div class="form-field">
+    MTD avg sales value
+    <%= f.text_field :mtd_avg_sales_value%>
+  </div>
+
+  <div class="form-field">
+    Avg last month attendance
+    <%= f.text_field :avg_last_month_attendance %>
+  </div>
+
+  <div class="form-field">
+    Last reported stock-number
+    <%= f.text_field :last_reported_stock%>
+  </div>
+
+  <div class="form-field">
+    Models in stock
+    <%= f.text_field :models_in_stock%>
+  </div>
+
+  <div class="form-field">
+    Distance between beatroute and app locations
+    <%= f.text_field :distance_btwn_beatroute_and_app_location%>
+  </div>
+
+  
+
+  <div class="form-field">
+    SIS type
+    <%= f.text_field :sis_type %>
+  </div>
+
+  <div class="form-field">
+   SIS installed on
+    <%= f.text_field :sis_installed_on %>
+  </div>
+
+  <div class="form-field">
+    GSB type
+    <%= f.text_field :gsb_type %>
+  </div>
+
+  <div class="form-field">
+    GSB installed on
+    <%= f.text_field :gsb_installed_on  %>
+  </div>
+
+  <div class="form-field">
+    Clipon
+    <%= f.text_field :clipon %>
+  </div>
+
+  <div class="form-field">
+    Countertop
+    <%= f.text_field :countertop %>
+  </div>
+
+  <div class="form-field">
+    Flange
+    <%= f.text_field :flange  %>
+  </div>
+
+  <div class="form-field">
+    Standee
+    <%= f.text_field :standee  %>
+  </div>
+
+  <div class="form-field">
+    Inshop branding
+    <%= f.text_field :inshop_branding %>
+  </div>
+
+  <div class="form-field">
+    SIS
+    <%= f.text_field :sis %>
+  </div>
+
+  <div class="form-field">
+    GSB
+    <%= f.text_field :gsb  %>
+  </div>
+
+  <%= f.submit :value => button%>
+
+
+<%end%>  

@@ -28,8 +28,7 @@ class CmosController < ApplicationController
 		if @cmo.save
 			redirect_to cmos_path, notice: "CMO created successfully"
 		else
-            puts "here is cmos #{@cmo}"
-			redirect_to new_cmo_path
+            redirect_to new_cmo_path, :notice => @cmo.errors.messages.values[0][0]
 		end	
     end
  

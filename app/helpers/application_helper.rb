@@ -42,6 +42,8 @@ module ApplicationHelper
          
   end
 
+   
+
   def get_retailer(retailer_code)
     Retailer.find_by(:retailer_code => retailer_code)
   end

@@ -2,8 +2,8 @@ class CMO < ActiveRecord::Base
   has_many :requests
   belongs_to :user, :foreign_key => :email
 
-  validates :name,:location,:designation,:email,:phone, :presence => true
- 
+  validates :name,:location,:designation,:phone, :presence => true
+  validates :email, :presence => true, :uniqueness => {:message => "email already exist"}
   
   def self.search(id)
 

@@ -3,12 +3,14 @@ class RequestsCsv
   include ApplicationHelper
 
 
-  def initialize(from, till, request_type)
+  def initialize(from, till, request_type,user_id)
     @from_date = Time.zone.parse(from) || Time.current
     @till_date = Time.zone.parse(till) || Time.current
     @from_date = @from_date.beginning_of_day
     @till_date = @till_date.end_of_day
     @request_type = request_type
+    @user_id = user_id
+    @role =  Request.user_role(user_id)
 
   end
 
@@ -92,22 +94,31 @@ class RequestsCsv
 
   def create_csv_file
    if @request_type == 'All' || @request_type == '' || @request_type == nil
-    write_file header
-    Request.between_time(from_date, till_date).find_each(batch_size: 100) do |request|
-      
-      write_file to_csv(request)
-    end
+      write_file header
 
+      if @role.name == 'cmo'
+         @user = User.find_by(:id => @user_id)
+         @cmo = CMO.find_by(:email => @user.email)
+         if @cmo != nil
+           Request.where(:cmo_id => @cmo).between_time(from_date, till_date).find_each(batch_size: 100) do |request|
+              write_file to_csv(request)
+           end
+         else
+              write_file to_csv('No Record')
+         end
+      else
+         Request.between_time(from_date, till_date).find_each(batch_size: 100) do |request|
+           write_file to_csv(request)
+         end
+      end
    else
-    write_file header
-    request_type = request_type_backend(@request_type)
-    Request.where(:request_type => request_type,:created_at => from_date..till_date).find_each(batch_size: 100) do |request|
-      write_file to_csv(request)
-       
-    end   
-   end
-
-     file.close
+      write_file header
+      request_type = request_type_backend(@request_type)
+      Request.where(:request_type => request_type,:created_at => from_date..till_date).find_each(batch_size: 100) do |request|
+        write_file to_csv(request)
+      end
+   end   
+      file.close
       File.rename(file_path, target_file_path)
   end
 

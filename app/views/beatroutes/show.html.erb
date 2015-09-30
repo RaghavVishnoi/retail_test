@@ -1,0 +1,13 @@
+<a href="/beatroutes/"><%= image_tag 'back.png',:title => "Back",:class => "show-back-button" %></a>
+<%if params[:type] == 'stock' %>
+ <%= render 'beatroutes/stock' %>
+<%end%>
+<%if params[:type] == 'sales' %>
+ <%= render 'beatroutes/sales' %>
+<%end%>
+<%if params[:type] == 'attendance' %>
+ <%= render 'beatroutes/attendance' %>
+<%end%>
+<%if params[:type] == 'other' %>
+ <%= render 'beatroutes/other' %>
+<%end%>
