@@ -84,7 +84,7 @@ class RequestsCsv
         'Location of GSB','GSB cleanliness','Installation quality','Is GSB light working','IS GSB light throw is good','GSB structured damaged','GSB other problem','GSB retailer feedback',
         'Is SIS present','Is SIS placed properly','Is SIS condition good','Is SIS cleaned daily','Is SIS damaged','SIS structured flaws','SIS security alarm working','SIS security device chargin',
         'SIS demo phone installed','Spec card demo phone match','Backwall light working properly','Is counter lights working','Is clipon on light','Dealer switch on SIS lights','Update Gionee creative','SIS any problem',
-        'SIS retailer feedback','Is good visibility in store','Lit in store','Has a relevant visual','Overall rating','Is clipon not working properly','Overall comments'].flatten.join(',')
+        'SIS retailer feedback','Is good visibility in store','Lit in store','Has a relevant visual','Overall rating','Is clipon not working properly','Shop Requirements', branding_details_header,'Overall comments'].flatten.join(',')
       
      end
         
@@ -193,7 +193,7 @@ class RequestsCsv
        request.gsb_cleanliness,request.installation_quality,request.is_gsb_light_woring,request.is_gsb_light_throw_is_good,request.gsb_structured_damage,request.gsb_other_problem,request.gsb_retailer_feedback,request.is_sis_present,request.is_sis_placed_properly,request.is_sis_condition_good,
        request.is_sis_cleaned_daily,request.is_sis_damaged,request.sis_structured_flaws,request.sis_security_alarm_working,request.sis_security_device_charging,request.sis_demo_phones_installed,request.spec_card_demo_phone_match,request.backwall_light_working_properly,
        request.is_counter_lights_working,request.is_clip_on_lights,request.dealer_switch_on_sis_lights,request.updated_gionee_creative,request.sis_any_problem,request.sis_retailer_feedback,request.is_good_visibility_in_store,request.lit_in_store,request.has_a_relevant_visual,
-       request.overall_rating,request.is_clipon_not_working_properly,request.overall_comments
+       request.overall_rating,request.is_clipon_not_working_properly,field_values_str(request.shop_requirements),branding_details_csv(request),request.overall_comments
       ].flatten.map {|v| "\"#{v.to_s.gsub('"', '""')}\"" }.join(',')
       
      end
