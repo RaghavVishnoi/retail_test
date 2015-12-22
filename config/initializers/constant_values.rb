@@ -94,7 +94,7 @@ SELLING_SKILLS = [
 GSB_TYPES = [
   ["ACP", "ACP"],
   ["FLEX", "FLEX"],
-  
+  ["VINYL+FLEX","VINYL+FLEX"]
 ]
 
  VISITOR_BOOLEAN_VALUES = [
@@ -207,8 +207,21 @@ LOCATION_OF_GSB = [
     ["Declined","6"]
   ]
 
+  STATUS = [
+    ["CMO Pending","cmo_pending"],
+    ["CMO Declined","cmo_declined"],
+    ["Pending","pending"],
+    ["Approved","approved"],
+    ["Declined","declined"]
+  ]
+
+  USER_TYPE = [
+    ["Requester","1"],
+    ["Vendor","2"]
+  ]
+
    
 
 
-DEFAULT_EMAILS = ['akash@gionee.co.in']
+DEFAULT_EMAILS = ['akash@gionee.co.in','nikhil.kaura@gionee.co.in']
  
