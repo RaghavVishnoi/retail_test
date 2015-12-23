@@ -148,15 +148,15 @@ class User < ActiveRecord::Base
       end
     end
 
-    def self.user_roles(id)
-      user = User.find_by(:id => id)
-      associated_roles = AssociatedRole.where(:object_id => id) 
-      role = []
-        associated_roles.each do |associated_role|
-          role.push(associated_role.role.name)   
-        end
-        role
-    end
+    # def self.user_roles(id)
+    #   user = User.find_by(:id => id)
+    #   associated_roles = AssociatedRole.where(:object_id => id) 
+    #   role = []
+    #     associated_roles.each do |associated_role|
+    #       role.push(associated_role.role.name)   
+    #     end
+    #     role
+    # end
 
     def self.user_role(id)
       user = User.find_by(:id => id)
