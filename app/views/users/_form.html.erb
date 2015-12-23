@@ -25,7 +25,7 @@
       <%if @role.name == 'superadmin'%>
         <div class="form-field">
           <span class="mandetory">*</span><%= f.label :role_ids %>
-          <%= f.select :role_ids, Role.pluck(:name, :id), {}, { :multiple => true } %>
+          <%= f.select :role_ids, Role.pluck(:name, :id), {}, { :multiple => false } %>
         </div>
         <% if can? :manage, User %>
           <div class="form-field">
@@ -89,7 +89,7 @@
     <%else%>
       <div class="form-field">
         <span class="mandetory">*</span><%= f.label :role_ids %>
-        <%= f.select :role_ids, Role.where(:name => ['vendor','cmo','requester']).pluck(:name, :id),{:prompt => "Select user role"},:class => 'retailer_select',:required => "required",:multiple => true %>
+        <%= f.select :role_ids, Role.where(:name => ['vendor','cmo','requester']).pluck(:name, :id),{:prompt => "Select user role"},:class => 'retailer_select',:required => "required" %>
       </div>
     <%end%>
       <div class="form-field">
