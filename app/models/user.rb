@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :if => ->{ password.present? }
   validates :email, :presence => true, :uniqueness => true
   validates :name, :presence => true
+  validates :state, :presence => true
   validates :reset_password_token, :uniqueness => true, :allow_nil => true
   validates :password, :presence => true, :unless => :password_not_required?
 
@@ -145,6 +146,16 @@ class User < ActiveRecord::Base
       if @shift_end_time
         self.shift_end_time_in_seconds = TimeHandler.seconds(timezone, @shift_end_time)
       end
+    end
+
+    def self.user_roles(id)
+      user = User.find_by(:id => id)
+      associated_roles = AssociatedRole.where(:object_id => id) 
+      role = []
+        associated_roles.each do |associated_role|
+          role.push(associated_role.role.name)   
+        end
+        role
     end
 
     def self.user_role(id)

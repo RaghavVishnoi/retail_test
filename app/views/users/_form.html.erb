@@ -15,80 +15,83 @@
     <span class="mandetory">*</span><%= f.label :name %>
     <%= f.text_field :name,:required => "required" %>
   </div>
+
+  <div class="form-field">
+    <span class="mandetory">*</span>State
+    <%= f.text_field :state,:required => "required" %>
+  </div>
   
     
-      <%
-      puts "here is role #{@role}"
-      if @role.name == 'superadmin'%>
-      <div class="form-field">
-        <span class="mandetory">*</span><%= f.label :role_ids %>
-        <%= f.select :role_ids, Role.pluck(:name, :id), {}, { :multiple => false } %>
-      </div>
+      <%if @role.name == 'superadmin'%>
+        <div class="form-field">
+          <span class="mandetory">*</span><%= f.label :role_ids %>
+          <%= f.select :role_ids, Role.pluck(:name, :id), {}, { :multiple => true } %>
+        </div>
+        <% if can? :manage, User %>
+          <div class="form-field">
+            <%= f.label :department_ids, "Department" %>
+            <%= f.select :department_ids, Department.pluck(:name, :id), :include_blank => true %>
+          </div>
+       <% else %>
+          <div class="form-field">
+            <span class="field-name">Department</span>
+            <span class="field-value"><%= current_user.departments.map(&:name).join(', ') %></span>
+          </div>
+       <% end %>
+
       <% if can? :manage, User %>
-    <div class="form-field">
-      <%= f.label :department_ids, "Department" %>
-      <%= f.select :department_ids, Department.pluck(:name, :id), :include_blank => true %>
-    </div>
-  <% else %>
-    <div class="form-field">
-      <span class="field-name">Department</span>
-      <span class="field-value"><%= current_user.departments.map(&:name).join(', ') %></span>
-    </div>
-  <% end %>
+        <div class="form-field">
+          <%= f.label :region_ids, "Regions" %>
+          <%= f.select :region_ids, Region.pluck(:name, :id), {}, { :multiple => true } %>
+        </div>
+      <% else %>
+        <div class="form-field">
+          <span class="field-name">Regions</span>
+          <span class="field-value"><%= current_user.regions.map(&:name).join(', ') %></span>
+        </div>
+      <% end %>
 
-  <% if can? :manage, User %>
-    <div class="form-field">
-      <%= f.label :region_ids, "Regions" %>
-      <%= f.select :region_ids, Region.pluck(:name, :id), {}, { :multiple => true } %>
-    </div>
-  <% else %>
-    <div class="form-field">
-      <span class="field-name">Regions</span>
-      <span class="field-value"><%= current_user.regions.map(&:name).join(', ') %></span>
-    </div>
-  <% end %>
-
-  <% if can? :manage, User %>
-    <div class="form-field">
-      <%= f.label :business_unit_ids, "Business Units" %>
-      <%= f.select :business_unit_ids, BusinessUnit.pluck(:name, :id), {}, { :multiple => true } %>
-    </div>
-  <% else %>
-    <div class="form-field">
-      <span class="field-name">Business Units</span>
-      <span class="field-value"><%= current_user.business_units.map(&:name).join(', ') %></span>
-    </div>
-  <% end %>
+      <% if can? :manage, User %>
+        <div class="form-field">
+          <%= f.label :business_unit_ids, "Business Units" %>
+          <%= f.select :business_unit_ids, BusinessUnit.pluck(:name, :id), {}, { :multiple => true } %>
+        </div>
+      <% else %>
+        <div class="form-field">
+          <span class="field-name">Business Units</span>
+          <span class="field-value"><%= current_user.business_units.map(&:name).join(', ') %></span>
+        </div>
+      <% end %>
   
-  <% if can? :manage, User %>
-    <div class="form-field">
-      <%= f.label :job_title_ids, "Job Titles" %>
-      <%= f.select :job_title_ids, JobTitle.pluck(:title, :id), {}, { :multiple => true } %>
-    </div>
-  <% else %>
-    <div class="form-field">
-      <span class="field-name">Job Titles</span>
-      <span class="field-value"><%= current_user.job_titles.map(&:title).join(', ') %></span>
-    </div>
-  <% end %>
+      <% if can? :manage, User %>
+        <div class="form-field">
+          <%= f.label :job_title_ids, "Job Titles" %>
+          <%= f.select :job_title_ids, JobTitle.pluck(:title, :id), {}, { :multiple => true } %>
+        </div>
+      <% else %>
+        <div class="form-field">
+          <span class="field-name">Job Titles</span>
+          <span class="field-value"><%= current_user.job_titles.map(&:title).join(', ') %></span>
+        </div>
+      <% end %>
   
-  <% if can? :manage, User %>
-    <div class="form-field">
-      <%= f.label :weekly_off_ids, "Weekly Offs" %>
-      <%= f.select :weekly_off_ids, WeeklyOff.all.map { |w| [w.day, w.id] }, {}, { :multiple => true } %>
-    </div>
-  <% else %>
-    <div class="form-field">
-      <span class="field-name">Weekly Offs</span>
-      <span class="field-value"><%= current_user.weekly_offs.map(&:day).join(', ') %></span>
-    </div>
-  <% end %>
-      <%else%>
+      <% if can? :manage, User %>
+        <div class="form-field">
+          <%= f.label :weekly_off_ids, "Weekly Offs" %>
+          <%= f.select :weekly_off_ids, WeeklyOff.all.map { |w| [w.day, w.id] }, {}, { :multiple => true } %>
+        </div>
+      <% else %>
+        <div class="form-field">
+          <span class="field-name">Weekly Offs</span>
+          <span class="field-value"><%= current_user.weekly_offs.map(&:day).join(', ') %></span>
+        </div>
+      <% end %>
+    <%else%>
       <div class="form-field">
         <span class="mandetory">*</span><%= f.label :role_ids %>
-        <%= f.select :role_ids, Role.where(:name => ['vendor','cmo','requester']).pluck(:name, :id),{:prompt => "Select user role"},:class => 'retailer_select',:required => "required" %>
+        <%= f.select :role_ids, Role.where(:name => ['vendor','cmo','requester']).pluck(:name, :id),{:prompt => "Select user role"},:class => 'retailer_select',:required => "required",:multiple => true %>
       </div>
-      <%end%>
+    <%end%>
       <div class="form-field">
          <span class="mandetory">*</span>Status
          <%= f.select :status, RETAILER_STATUS,{:prompt => "Select user status"},:class => 'retailer_select',:required => "required" %>
