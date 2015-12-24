@@ -223,5 +223,6 @@ LOCATION_OF_GSB = [
    
 
 
-DEFAULT_EMAILS = ['akash@gionee.co.in','nikhil.kaura@gionee.co.in']
+DEFAULT_EMAILS = ['akash@gionee.co.in']
+CSV_EMAILS = ['akash@gionee.co.in','Nikhil.kaura@gionee.co.in','mahesh.bora@gionee.co.in','jaipal.singh@gionee.co.in','raghav.singh@lptpl.com']
  

@@ -24,7 +24,7 @@ class RequestMailer < ActionMailer::Base
 
   def csv_mail(emails, file_name)
     @file_name = file_name
-    mail(to: emails, subject: 'CSV link')
+    mail(to: emails[0], subject: 'CSV link',cc:emails.drop(1))
   end
  
 end

@@ -5,7 +5,7 @@ class DownloadsController < ApplicationController
 	end
 
 	def create
-		RequestsCsv.new(params[:from_date].to_s, params[:till_date].to_s,params[:request_type]).delay.generate
+		RequestsCsv.new(params[:from_date].to_s, params[:till_date].to_s,params[:request_type],session[:user_id]).delay.generate
 	   render :json => {:result => "CSV link send to your mail"}
   end
 
