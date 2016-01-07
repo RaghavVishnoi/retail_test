@@ -1,40 +1,40 @@
-<%= render :partial => 'data_files/absolute_path' %>
 
-<%= form_for @data_file, :html => { :class => 'user-form' } do |f| %>
+<script>
+  $(document).ready(function(){
+    $('.tag-link').click(function(){
+      $('#tag-popup').show();
+    });
+   
+   });
+</script>
+<%=render 'tag_form.html.erb' %>
+<%= form_for @document, :html => { :class => 'user-form',:multipart=>true } do |f| %>
   
-  <%= f.hidden_field :parent_id %>
-
+  
   <h4 id="form-title"><%= form_title %></h4>
 
-  <%= render :partial => "shared/error_messages", :locals => { :errors => @data_file.errors } %>
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @document.errors } %>
 
   <div class="form-field">
-    <%= f.label :item_id %>
-    <%= f.text_field :item_id, :id => 'item-select', 'data-text' => @data_file.item.try(:name), 'data-id' => @data_file.item_id, 'data-ajax-url' => "/items/autocomplete", 'data-multiple' => false, :placeholder => 'Select Item', 'data-initvalue' => { text: @data_file.item.try(:name), id: @data_file.item.try(:id) }.to_json  %>
-
+    <span class="mandetory">*</span>Document Title
+    <%= f.text_field :document_title ,:required => "required" %>
   </div>
 
   <div class="form-field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <%= render :partial => 'data_files/access_fields', :locals => { :f => f } %>
-
-  <div class="form-field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+    <span class="mandetory">*</span>Add Level
+    <%= f.select :level, Level.all.pluck(:level_name),{:prompt => "Select level"},:class => 'retailer_select',:required => "required" %>
   </div>
 
   <div class="form-field">
-    <%= f.label :sharable %>
-    <%= f.check_box :sharable %>
-  </div>
-  
-  <div class="form-field">
-    <%= f.label :data_file, "Document" %>
-    <%= f.file_field :data_file %>
+    <span class="mandetory">*</span>Add Tag<span class="tag-link">create tag</span>
+    <%= f.select :tag, Tag.all.pluck(:tag_name),{:prompt => "Select tag"},:class => 'tag-select',:required => "required",:multiple => true %>
   </div>
 
-  <%= f.submit %>
+  <div class="form-field">
+    <span class="mandetory">*</span>Upload Document
+    <%= f.file_field :file,:required => "required" %>
+  </div>
+
+
+  <%= f.submit :value => "Upload Document"%>
 <% end %>

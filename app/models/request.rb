@@ -49,12 +49,12 @@ class Request < ActiveRecord::Base
   validate :validate_shop_requirements, :if => :in_shop?
   validate :maintenance_requestor,:maintenance_requestor_mobile_number,:type_of_issue,:type_of_problem, :if => :maintenance?
   validate :shop_visit_date,:shop_visit_done_by,:is_standee_present,:visitor_contact_number,:store_selling_gionee,:is_clipon_present,:is_countertop_present,:is_leaflets_available,:no_of_peace_in_stock,:is_wall_poster_in_shop,:is_dangler_in_shop,:rsp_assigned_in_store,:rsp_present_in_shop,:rsp_in_gionee_tshirt,:rsp_well_groomed,:rsp_selling_skills,:gsb_type_installed,:location_of_gsb,:gsb_cleanliness,:installation_quality,:is_gsb_light_woring,:is_gsb_light_throw_is_good,:gsb_structured_damage,:gsb_other_problem,:gsb_retailer_feedback,:is_sis_present,:is_sis_placed_properly,:is_sis_condition_good,:is_sis_cleaned_daily,:is_sis_damaged,:sis_structured_flaws,:sis_security_alarm_working,:sis_security_device_charging,:sis_demo_phones_installed,:spec_card_demo_phone_match,:backwall_light_working_properly,:is_counter_lights_working,:is_clip_on_lights,:dealer_switch_on_sis_lights,:updated_gionee_creative,:sis_any_problem,:sis_retailer_feedback,:is_good_visibility_in_store,:lit_in_store,:has_a_relevant_visual,:overall_rating,:is_clipon_not_working_properly,:overall_comments, :if => :visitor?
+  validate :other_name,:other_phone,:other_address,:lfr_name,:lfr_phone,:lfr_app_user_id
   after_create :notify_cmo
 
   def self.with_query(q)
     q = {} if !q.present? 
     requests = self
-
     if q[:status].present? && q[:request_type].present?
       requests = requests.where(:status => q[:status],:request_type => q[:request_type])
     end
@@ -68,6 +68,25 @@ class Request < ActiveRecord::Base
       requests = requests.where(:status => q[:status],:request_type => q[:request_type],:retailer_code => retailer_code)
     end
     requests
+  end
+
+
+  def self.with_state_query(q,state,current_user)
+    requests = self
+    if q[:status].present? && q[:request_type].present?
+      @retailer_code = Retailer.where(:state => state).pluck(:retailer_code)
+      if user_role(current_user.id).name == 'cmo'
+        @request = requests.where(:retailer_code => @retailer_code,:cmo_id => current_user.id,:request_type => q[:request_type])
+      else
+        @request = requests.where(:retailer_code => @retailer_code,:request_type => q[:request_type])
+      end
+    end
+    @request
+  end
+
+  def self.with_supercmo_query(status,request_type,id)
+    status = status.split(" ");
+    Request.where(:status => status,:request_type => request_type.split(" "),:cmo_id => id)
   end
 
   def self.with_cmo_query(q,id)
@@ -94,16 +113,6 @@ class Request < ActiveRecord::Base
     requests
   end
 
-  def self.with_requester_query(q,id)
-    q = {} if !q.present? 
-    requests = self
-    user = User.find_by(:id => id)
-     
-    if q[:status].present? && q[:request_type].present?
-      requests = requests.where(:status => q[:status],:request_type => q[:request_type],:user_id => user)
-    end
-    requests
-  end
 
   def self.search(param,type)
     if type == 'Request Id'
@@ -165,6 +174,10 @@ end
 
 def self.retailer_requests(retailer_code)
   Request.where(:retailer_code => retailer_code)
+end
+
+def self.change_status(status,request_id)
+  Request.where(:id => request_id).update_all(status: status)
 end
 
  def notify_cmo

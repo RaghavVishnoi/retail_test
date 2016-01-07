@@ -13,11 +13,21 @@ module Api
 
         def retailers
           retailer_code = params[:retailer_code]
-          @retailers  = Retailer.find_by(:retailer_code => retailer_code)
+          @retailers  = Retailer.find_by(:retailer_code => retailer_code,:status => 'Active')
           if @retailers != nil && @retailers != '' 
              render :json => {:result => true, :retailers => @retailers}
           else
              render :json => {:result => false, :message => 'Retailer code not exist'}
+          end
+        end
+
+        def search_retailer
+          retailer_code = params[:retailer_code]
+          retailer_list = Retailer.where("retailer_code LIKE ?","%#{retailer_code}%").pluck(:retailer_code)
+          if retailer_list.size != 0
+            render :json => {:result => true, :retailer_list => retailer_list}
+          else
+            render :json => {:result => false, :retailer_list => "No retailer code match"}
           end
         end
   end

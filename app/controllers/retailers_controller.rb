@@ -1,6 +1,8 @@
 class RetailersController < ApplicationController
-	before_action :set_retailer, :only => [:edit, :update, :destroy]
+  include RetailersHelper
+	  before_action :set_retailer, :only => [:edit, :update, :destroy,:upload_data]
     authorize_resource :only => [:create,:new]
+    
     PER_PAGE = 100
     
 
@@ -36,14 +38,10 @@ class RetailersController < ApplicationController
     end
 
     def file_insert
-         @file = ReadFile.file_insert
-        if params[:commit] == 'Confirm'
-            @file_date = Retailer.insert_data(params[:new_array],params[:update_array],@file)
-            redirect_to retailers_path, :notice => "Retailers file successfully imported"
-        else
-            redirect_to new_retailer_path, :notice => "Decline process"
-        end
+        @file = ReadFile.file_insert(params[:new_array],params[:update_array])
+        redirect_to retailers_path, :notice => "File upload in process,you'll get mail once done"
     end
+
 
     def search
         
@@ -59,7 +57,23 @@ class RetailersController < ApplicationController
     end
 
     def show
-    	@retailer = Retailer.find(params[:id])
+        if params[:id] == 'upload_data'
+           @upload = Retailer.file_to_upload
+           puts "here is upload #{@upload}"
+           @upload.each do |upload|
+                new_retailers = Retailer.new_retailers(upload)
+                update_retailers = Retailer.update_retailers(upload)
+                url = "public/uploads/retailer/upload/"+upload.id.to_s+"/"+upload.file_name.to_s
+                @file_data = Retailer.insert_data(new_retailers,update_retailers,url,upload)
+            end 
+         if @file_data == 'success'
+            render :json => {:result => @file_data}
+         else
+            render :json => {:result => 'No Data'}
+         end
+        else
+    	  @retailer = Retailer.find(params[:id])
+        end
     end
 
     def update 
@@ -85,5 +99,9 @@ class RetailersController < ApplicationController
         redirect_to retailers_url, alert: "Retailer not found"
       end
     end
+
+    def zed_sales
+      zedsales_upload('','')
+    end 
 
 end

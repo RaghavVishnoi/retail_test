@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-  
+  include RequestsHelper
   before_action :find_request, :only => [:edit, :update]
   authorize_resource :except => [:create, :new, :autocomplete_retailer_code,:state,:city,:previous_month_sales,:retailer_requests,:modify]
   skip_before_action :authenticate_user, :only => [:create, :new, :autocomplete_retailer_code,:state,:city,:previous_month_sales,:retailer_requests,:modify]
@@ -17,33 +17,31 @@ class RequestsController < ApplicationController
     render :json => @retailer
   end
 
-  def index
+    def index
       role = User.user_roles(session[:user_id])
       if role.include?('cmo')
-        if params[:retailer_code] == '' || params[:retailer_code] == nil
-           @requests = Request.with_cmo_query(params[:q],session[:user_id]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-        else
-           @requests = Request.with_cmo_retailer_query(params[:q],session[:user_id],params[:retailer_code]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-        
-        end
-      elsif role.include?('requester')
-            @requests = Request.with_requester_query(params[:q],session[:user_id]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-         
+        if params[:type] == 'RetailerCode' 
+            @requests = Request.with_cmo_retailer_query(params[:q],current_user.id,params[:retailer_code]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+          elsif params[:type] == 'State'
+            @requests = Request.with_state_query(params[:q],params[:state],current_user).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+          else
+            @requests = Request.with_cmo_query(params[:q],current_user.id).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+          end   
       elsif role.include?('supercmo') && params[:commit] == 'Search'
             @requests = Request.with_supercmo_query(params[:q][:status],params[:q][:request_type],params[:cmo]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
       else
-          if params[:retailer_code] == '' || params[:retailer_code] == nil
-            @requests = Request.with_query(params[:q]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-          else
+          if params[:type] == 'RetailerCode' 
             @requests = Request.with_retailer_query(params[:q],params[:retailer_code]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-          
+          elsif params[:type] == 'State'
+            @requests = Request.with_state_query(params[:q],params[:state],current_user).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+          else
+            @requests = Request.with_query(params[:q]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
           end
       end
        
   end
 
   def new
-
     @request = Request.new
     respond_to do |format|
       format.html 
@@ -157,60 +155,17 @@ class RequestsController < ApplicationController
             redirect_to :back, :notice => "successfully changed Retailer Code"
           end
         end
-   end
+  end
 
-   def view
-      @request=""
-       role = Request.user_role(session[:user_id])
-
-       if role.name == 'cmo'
-        cmo_id = Request.get_cmo_id(session[:user_id])
-       else
-        cmo_id = '' 
-       end
-        
+  def view
+       role = User.user_roles(current_user.id) 
       begin
-         id = session[:requestId]
-         @request = Request.search(params[:id],params[:type])
-         session[:requestId] = params[:id]
-         if role.name == 'cmo' && cmo_id != @request.cmo_id
-               redirect_to :back, :flash => { :notice => "Sorry! You can't access this request" }
-         elsif role.name == 'requester' && session[:user_id] != @request.user_id
+         if role == 'cmo' && cmo_id != @request.cmo_id
                redirect_to :back, :flash => { :notice => "Sorry! You can't access this request" }
          else
-           puts "here is type #{params[:type]}"
-          if params[:type] == 'Request Id'
-
-                if $request_type.include? '0' ||  '1' ||  '2'
-                  if @request.request_type == 'sis' || @request.request_type == 'in_shop' || @request.request_type == 'gsb'
-                      redirect_to "/requests/#{params[:id]}/edit"
-                  else
-                      redirect_to :back, :flash => { :notice => "Entered request id does not exist" }
-                  end
-                end 
-
-                if $request_type.include? '3' 
-                  if @request.request_type == 'maintenance'
-                     redirect_to "/requests/#{params[:id]}/edit"
-                  else
-                     redirect_to :back, :flash => { :notice => "Entered request id does not exist" }
-                  end
-                end
-
-                if $request_type.include? '4' 
-                  if $request_type == 'visitor'
-                    redirect_to "/requests/#{params[:id]}/edit"
-                  else
-                    redirect_to :back, :flash => { :notice => "Entered request id does not exist" }
-                  end  
-                end
-            else
-              redirect_to requests_path+'?q[request_type][]=0&q[request_type][]=1&q[request_type][]=2&q[status][]=pending&q[status][]=approved&q[status][]=declined&retailer_code='+params[:id]+'&type=RetailerCode'
-            end
-
+               redirect_to requests_search(role,params[:type],params[:id],$request_type.to_s,current_user)
          end 
       rescue => ex
-        puts "exception #{ex.backtrace}"
         begin
           redirect_to :back, :flash => { :notice => "Entered request id does not exist" }
         rescue

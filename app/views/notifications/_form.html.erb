@@ -1,0 +1,24 @@
+
+<%= form_for @notification, :html => { :class => 'user-form',:multipart=>true } do |f| %>
+  <h4 id="form-title"><%= form_title %></h4>
+
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @notification.errors } %>
+
+  <div class="form-field">
+    <span class="mandetory">*</span>State
+    <%= f.select :state, Device.all.pluck(:device_holder_state).uniq,{:prompt => "Select level"},:class => 'retailer_select',:required => "required" %>
+  </div>
+
+
+  <div class="form-field">
+    <span class="mandetory">*</span>Users Type
+    <%= f.select :app_id, USER_TYPE,{:prompt => "Select user type"},:class => 'retailer_select',:required => "required" %>
+  </div>
+
+  <div class="form-field">
+    <span class="mandetory">*</span>Message
+    <%= f.text_area :message ,:required => "required",:style => "position:absolute;margin-top:2%;margin-left:-5.5%;width:19%;height:100px;" %>
+  </div>
+
+  <%= f.submit :value => "Send Notification",:style=>"margin-top:25%"%>
+<% end %>

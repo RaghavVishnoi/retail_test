@@ -1,0 +1,45 @@
+
+
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>User Email</th>
+      <th>User State</th>
+      <th>User City</th>
+      <th>Device Name</th>
+      <th>Device IMEI</th>
+      <th>User Type</th>
+       <th>Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @devices.each do |device| %>
+      <tr>
+        <td>
+          <%=device.device_holder_email%>
+        </td>
+        <td>
+          <%=device.device_holder_State%>
+        </td>
+        <td>
+          <%=device.device_holder_city%>
+        </td>
+        <td>
+          <%=device.device_name%>
+        </td>
+        <td>
+          <%=device.device_imei%>
+        </td>
+        <td>
+          <%=device.app_id%>
+        </td>
+        <td><%=link_to :status,'Remove',:confirm => "are you sure?"%></td>
+      </tr>
+    <%end %>
+  </tbody>
+</table>
+<div class="response-pagination clearfix">
+  <%if @devices.length > 1%>
+      <%=will_paginate @devices%>
+  <%end%>
+</div>

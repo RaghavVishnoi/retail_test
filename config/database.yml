@@ -28,7 +28,7 @@ default: &default
   pool: 5
   timeout: 5000
   username: root
-  password: CrpNegmc6XMGcjfs
+  password: root
 
 
 

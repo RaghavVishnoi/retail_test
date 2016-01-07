@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token, :if => "request.format.json?"
-  
+  after_filter :add_allow_credentials_headers
+
   helper_method :current_user, :logged_in?
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -19,7 +20,13 @@ class ApplicationController < ActionController::Base
   
 
 
+
   private
+    def add_allow_credentials_headers                                                                                                                                                                                                                                                        
+      response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || '*'                                                                                                                                                                                                     
+      response.headers['Access-Control-Allow-Credentials'] = 'true'                                                                                                                                                                                                                          
+    end 
+
     def log_requests
       LogHandler.process(request)
     end

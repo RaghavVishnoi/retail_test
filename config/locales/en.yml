@@ -20,4 +20,22 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+ date:
+   validation:
+     errors:
+       format: 'Date format is not valid!'
+       range: 'Date range must be from 1 to 31 days!'
+
+ state:
+  validation:
+    errors:
+      exist: 'Please select atleast one state!'
+
+ request:
+   validation:
+     errors:
+       exist:  
+         type: 'Please select atleast one type of request!'
+         id: 'Please select atleast one request!'
+
+ 

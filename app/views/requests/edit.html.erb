@@ -3,15 +3,20 @@
 
 <%else%>
   <%if @request.request_type == 'maintenance'%>
-    <a href="/requests?q[request_type]=3&q[status]=pending"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
-
+    <%if User.user_roles(current_user.id).include?('cmo')%>
+        <a href="/requests?q[request_type]=3&q[status]=cmo_pending"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
+      <%else%>
+        <a href="/requests?q[request_type]=3&q[status]=pending"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
+      <%end%>
   <%elsif @request.request_type == 'visitor'%>
-
     <a href="/requests?q[request_type]=4&q[status]=approved"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
-
   <%else%>
-
-    <a href="/requests?q[request_type][]=0&q[request_type][]=1&q[request_type][]=2&q[status]=pending"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
+     <%if User.user_roles(current_user.id).include?('cmo')%>
+       <a href="/requests?q[request_type][]=0&q[request_type][]=1&q[request_type][]=2&q[status]=cmo_pending"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
+     <%else%>
+       <a href="/requests?q[request_type][]=0&q[request_type][]=1&q[request_type][]=2&q[status]=pending"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
+     <%end%>
+   
 
   <%end%>
 <%end%>  
@@ -117,7 +122,11 @@
   end
       
   %>
-  <div><%= @request_type%>  <%= @status%> 
+  <div><%= @request_type%>  
+    <%if @status == 'pending' && User.user_roles(current_user.id).include?('cmo') 
+      @status = 'CMO Approved'
+    end%>
+    <%=@status %>
     <%= render :partial => 'search' %>
   </div>
    <div class="apprvr_wrap">

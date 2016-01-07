@@ -220,9 +220,13 @@ LOCATION_OF_GSB = [
     ["Vendor","2"]
   ]
 
-   
+  
 
-
+REQUEST_TYPE = ['SIS','GSB','IN_SHOP','MAINTENANCE','AUDIT']
+TYPE = ['sis','gsb','in_shop','maintenance','audit']
+STAT = ['pending','approved','declined']   
+ZED_SALES_URL = ['http://api.zed-axis.in/Service.svc/GetAllRetailerList?strUID=techBirdsSales&strPwd=ch3FSE212!$cGH2&strReqKey=GioneeSalestechBirds']
+ZED_SALES_PARAMS = ['BeginTime','EndTime']
 DEFAULT_EMAILS = ['akash@gionee.co.in']
-CSV_EMAILS = ['akash@gionee.co.in','Nikhil.kaura@gionee.co.in','mahesh.bora@gionee.co.in','jaipal.singh@gionee.co.in','raghav.singh@lptpl.com']
+CSV_EMAILS = ['akash@gionee.co.in','Nikhil.kaura@gionee.co.in','mahesh.bora@gionee.co.in','jaipal.singh@gionee.co.in']
  

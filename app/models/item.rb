@@ -10,7 +10,7 @@ class Item < ActiveRecord::Base
   belongs_to :size
   has_many :images, :as => :imageable, :dependent => :destroy
   has_many :inventories, :dependent => :destroy
-  has_many :documents, :dependent => :nullify
+   
 
   validates :name, :presence => true
 

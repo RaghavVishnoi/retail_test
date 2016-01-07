@@ -82,6 +82,10 @@ gem "iconv", "~> 1.0.3"
 gem 'xlsx_writer'
 gem 'rack'
 gem 'devise'
+gem 'rpush'
+gem 'httparty'
+#To use schedular
+gem 'rufus-scheduler', '3.0.2'
 
  
 require 'fileutils'

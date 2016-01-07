@@ -128,7 +128,20 @@
 <div class="approv_cont clearfix">
      
   <div class="appr_info">
-    <div><%=@status%></div>
+    <div><%=@status%>
+      <% if can? :approve, Request %>
+        <div style="width:30%;margin:auto;" id="form">
+          <%= form_tag("/requests/modify", method: "post") do %>
+            <%=select_tag 'status',options_for_select(STATUS),:prompt => @request.status%>
+            <%= hidden_field_tag('request_id', @request.id)%>
+            <%= submit_tag("Update") %>
+          <% end %>
+        </div>
+        <div><%= submit_tag("Change Status",id:'click') %></div>
+    <%end%>
+
+
+    </div>
     <div><%=@date%></div>
   </div>
 
@@ -182,8 +195,9 @@
 </div>
 
 <div class="approv_cont clearfix">
+<%if(@request.is_rsp == true)%>
      
-<div class="appr_info">
+ <div class="appr_info">
     <div>Rsp Name</div>
     <div><%= @request.rsp_name %></div>
   </div>
@@ -197,6 +211,46 @@
     <div>RSP sales tag app user ID</div>
     <div><%= @request.rsp_app_user_id %></div>
   </div>
+ <%elsif @request.lfr_name != nil%>
+
+    <div class="appr_info">
+      <div>LFR Name</div>
+      <div><%= @request.lfr_name %></div>
+    </div>
+
+    <div class="appr_info">
+      <div>LFR Phone</div>
+      <div><%= @request.lfr_phone %></div>
+    </div>
+
+    <div class="appr_info">
+      <div>LFR User Id</div>
+      <div><%= @request.lfr_app_user_id %></div>
+    </div>
+
+   <%elsif @request.other_name != nil%>
+     
+    <div class="appr_info">
+      <div>Other Name</div>
+      <div><%= @request.other_name %></div>
+    </div>
+
+
+
+    <div class="appr_info">
+      <div>Other Phone</div>
+      <div><%= @request.other_phone %></div>
+    </div>
+
+    
+
+    <div class="appr_info">
+      <div>Other Address</div>
+      <div><%= @request.other_address %></div>
+    </div>
+
+
+   <%end%>
 
   
 

@@ -1,0 +1,38 @@
+ 
+<% if can? :manage, Notification %>
+ <%= link_to "Send New Notification", new_notification_path, :id => 'new-button' %>
+<%end%> 
+
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Message</th>
+      <th>State</th>
+      <th>Send Date</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @notifications.each do |notification| %>
+      <tr>
+        <td>
+          <%=notification.message%>
+        </td>
+        <td>
+          <%=notification.state%>
+        </td>
+        <td>
+          <%=notification.send_date.strftime("%b %d, %Y")%>
+        </td>
+        <td>
+          <%=notification.status%>
+        </td>
+      </tr>
+    <%end %>
+  </tbody>
+</table>
+<div class="response-pagination clearfix">
+  <%if @notifications.length > 1%>
+      <%=will_paginate @notifications%>
+  <%end%>
+</div>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/schema' => "schema#index"
   get '/users/filter' => "users#index"
   post '/users/filter' => "users#index"
+  get '/retailers/zed_sales'
  
    
   resources :weekly_offs, :only => [:index, :create]
@@ -48,6 +49,16 @@ Rails.application.routes.draw do
 
   resources :beatroutes, :only => [:index,:new,:edit,:create,:update,:show]
 
+  resources :repositories, :only => [:index,:new,:edit,:create,:update,:show]
+
+  resources :tags, :only => [:index,:new,:create]
+
+  resources :notifications, :only => [:index,:new,:create]
+
+  resources :devices, :only => [:index]
+
+  resources :helps, :only => [:index]
+
   resources :read_files do
     collection { post :import }
   end
@@ -56,10 +67,8 @@ Rails.application.routes.draw do
     collection { post :file_upload }
   end
 
-  resources :documents, :except => [:index] do
-    put :share, :on => :member
-  end
-  
+  resources :documents, :only => [:index,:new,:create]
+    
   resources :module_groups, :only => [:index, :edit, :update]
 
   resources :addresses, :except => [:show] do
@@ -103,17 +112,24 @@ Rails.application.routes.draw do
   get '/passwords/new' => "passwords#new"
   post '/passwords' => "passwords#create"
 
+
   namespace :api, :defaults => { :format => :json }, :constraints => {:format => :json} do
     namespace :v1 do
       get '/test' => 'test#index'
+      post '/response/parser'
       post 'sessions/create'
       post 'retailerlists/retailers'
       get 'retailerlists/retailers'
+      get '/statelists' => 'statelists#index'
+      post 'retailerlists/search_retailer'
+      get 'retailerlists/search_retailer'
       get 'sessions/create'
       delete 'sessions/destroy'
       get '/home' => 'home#index'
       post 'sessions/forgot_password'
       get 'sessions/forgot_password'
+      post '/sessions' => 'sessions#index'
+      post 'sessions/edit'
       post 'sessions/change_password'
       get 'sessions/change_password'
       post 'vendors/assign_request'
@@ -128,6 +144,15 @@ Rails.application.routes.draw do
       get 'vendors/reject_request'
       post 'vendors/accept_request'
       get 'vendors/accept_request'
+      post 'devices/registration'
+      post 'devices/update'
+      get 'documents/list'
+      get '/repository' => 'repository#index'
+      get '/repository/tag' => 'repository#tag_name'
+      get '/repository/uploader' => 'repository#uploaded_by'
+      get '/repository/search' => 'repository#search'
+      
+      
       resources :attendances, :only => [:create]
       resources :citylists, :only =>[:index]
       resources :radiofields, :only =>[:index]
@@ -149,9 +174,9 @@ Rails.application.routes.draw do
     end
     resources :data_files, :only => [:index]
     resources :folders, :except => [:index]
-    resources :documents, :except => [:index] do
-      put :share, :on => :member
-    end
+    # resources :documents, :except => [:index] do
+    #   put :share, :on => :member
+    # end
     post '/passwords' => "passwords#create"
     put '/passwords' => "passwords#update"
     resources :customers, :only => [:index, :update, :create] do
@@ -180,7 +205,7 @@ Rails.application.routes.draw do
  
   post '/retailers/file_upload'
   post '/retailers/file_insert'
-
+  
   post '/vendor_assignments/status'
   get '/vendor_assignments/status'
 
@@ -202,8 +227,19 @@ Rails.application.routes.draw do
   post 'beatroutes/file_upload'
   get 'beatroutes/file_upload'
 
-  
-   
+  get 'tags/create'
+
+  namespace :api, :defaults => { :format => :json }, :constraints => {:format => :json} do
+    namespace :gpulse do
+      get '/maps' => 'maps#index'
+      get '/cmos' => 'cmos#index'
+      get '/statelists' => 'statelists#index'
+      post 'requests/shop_branding'
+      post 'requests/shop_list'
+      post 'requests/request_data'
+      
+    end
+  end 
    
    
   # The priority is based upon order of creation: first created -> highest priority.

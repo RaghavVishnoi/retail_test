@@ -282,7 +282,27 @@
         Beat Routes
       </div>
     <% end %>
-<%end%>   
+<%end%> 
+
+<% if can? :manage, Document %>
+    <%= link_to documents_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Repository
+      </div>
+    <% end %>
+<%end%>  
+
+<% if can? :manage, Notification %>
+    <%= link_to notifications_path do %>
+      <div class="box">
+        <span><i><%= image_tag 'logo.png' %></i></span>
+        Notification
+      </div>
+    <% end %>
+<%end%>  
+
+
 
 
 

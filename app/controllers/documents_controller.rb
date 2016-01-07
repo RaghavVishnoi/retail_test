@@ -1,11 +1,34 @@
-class DocumentsController < DataFilesController
-
-  private
-    def data_file_params
-      params.require(:document).permit(:name, :parent_id, :item_id, :description, :data_file, :sharable, :user_ids_string, :role_ids => [], :region_ids => [], :user_ids => [])
+class DocumentsController <  ApplicationController
+ include RepositoriesHelper
+  PER_PAGE = 50
+  def index
+    if params[:button] == 'search'
+        @documents = Document.search(params[:type],params[:param],get_role).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+        if @documents.length < 1
+          redirect_to documents_path,:notice => "No document found"
+        end
+           
+    else
+  	    @documents = get_document.paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+        respond_to do |format|
+            format.html 
+            format.json {render :json => { :result => true, :documents => @documents}}
+        end  
     end
+    
+  end
 
-    def initialize_data_file
-      @data_file = current_user.owned_files.new :parent_id => params[:parent_id], :type => "Document"
-    end
+  def new
+    @document = Document.new
+  end
+
+  def create
+    @document = add_document document_param
+    redirect_to documents_path,:notice => 'Document inserted successfully'
+  end 
+
+  def document_param
+    params.require(:document).permit(:document_title, :level,{:tag => []}, :file_size, :file)
+  end
+
 end

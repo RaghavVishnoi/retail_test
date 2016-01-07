@@ -11,8 +11,6 @@ class Map < ActiveRecord::Base
 	validate :status
 	def self.image_data(request_type,status,state,cmo,from,to,store_size,rsp_present,gionee_sales)
 		@request_type = '',@status = '',@state = [],@cmo = '',@from = '',@to = '',@store_size = '',@rsp_present = '',@gionee_sales = ''
-
-        
         if status[:status].include? 'All'
         	@status = ['cmo_pending','cmo_declined','pending','approved','declined']
 
@@ -46,7 +44,8 @@ class Map < ActiveRecord::Base
         	@request_type = request_type[:request_type]
         	@request_type.delete_at(@request_type.length)
         	 
-        	(0...@request_type.length-1).each do |stat|
+        	(0..@request_type.length-1).each do |stat|
+                puts "request_type #{@request_type[stat]}"
         		if @request_type[stat] == 'GSB'
         			@request_type[stat] = 0
         		end
@@ -65,7 +64,7 @@ class Map < ActiveRecord::Base
         		
 
         	end
-        	@request_type.pop
+        	 
 
         end
 
@@ -103,8 +102,9 @@ class Map < ActiveRecord::Base
         end
 
         if from == '' || from ==nil || to == '' || to== nil
+             puts "#{@status} --- #{@request_type} --- #{@cmo} --- #{@gionee_sales} --- #{@store_size} ---1 #{@state} --- #{}"
              @request = Request.where(:status => @status,:request_type => @request_type,:cmo_id => @cmo,:avg_gionee_monthly_sales => @gionee_sales,:avg_store_monthly_sales => @store_size ,:state => @state,:is_rsp => rsp_present)#.last(50)
-        
+              
         else
             @from_date = Time.zone.parse(from) || Time.current
             @till_date = Time.zone.parse(to) || Time.current
@@ -113,16 +113,6 @@ class Map < ActiveRecord::Base
             @request = Request.where(:status => @status,:request_type => @request_type,:cmo_id => @cmo,:state => @state,:is_rsp => rsp_present,:avg_gionee_monthly_sales => @gionee_sales,:avg_store_monthly_sales => @store_size ,:created_at => @from_date..@till_date)#.last(50)
         
         end
- 
-         		
-      
-		 
-			 
-		
-		 
-		
-	end
-
-
-
+            
+ end
 end

@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :if => ->{ password.present? }
   validates :email, :presence => true, :uniqueness => true
   validates :name, :presence => true
-  #validates :state, :presence => true
+  validates :state, :presence => true
   validates :reset_password_token, :uniqueness => true, :allow_nil => true
   validates :password, :presence => true, :unless => :password_not_required?
 

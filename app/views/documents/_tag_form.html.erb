@@ -1,0 +1,61 @@
+<script>
+  $(document).ready(function(){
+    $('.close-tag').click(function(){
+      $('#tag-popup').hide();
+    });
+    $('#tag-button').click(function(){
+        var tag_value = $('#tag-text').val()
+        if(tag_value == ""){
+            alert("Please insert tag name");
+        }else{
+    	var tag = {'tag_name':$('#tag-text').val()}
+    	$.ajax({
+    		url: '/tags/create',
+    		type: 'GET',
+    		data: {'tag':tag},
+    		dataType: 'text',
+
+    		complete: function(data){
+
+    		},
+    		success: function(data,status,xhr){
+    			var response = JSON.parse(data);
+    			console.log('result'+response.tag);
+    			var select = document.getElementsByClassName("tag-select");
+    			console.log("rrrrr"+select); 
+    			var tag = response.tag;
+    			var tag_name = tag.tag_name;
+    			
+    			if(response.result == 'success'){
+    				$("#document_tag").append("<option value="+tag_name+">"+tag_name+"</option>");
+    				
+    				$('#tag-popup').hide();
+    			}
+
+    		}
+
+    	});
+    }
+    });
+   });
+</script>
+
+<div id="tag-popup">
+	 
+		 <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+		            <tr>
+		                <td class="tag-popup_title">Create new tag</td>
+		                <td class="tag-popup_title" align="right">
+		                    <label class="close-tag">Close</label>
+		                </td>
+
+		            </tr> 
+		            <tr><td colspan="2" class="tag_message">
+		            	
+		            		<%=text_field_tag 'tag_name','' ,:id => 'tag-text',:placeholder => "Enter ",:required => 'required'%>
+		            	
+		            </td></tr>
+		            <tr><td colsan="2" align="center"><%=submit_tag "Create", :id => "tag-button"%></td></tr>
+		 </table>
+   
+ </div>               

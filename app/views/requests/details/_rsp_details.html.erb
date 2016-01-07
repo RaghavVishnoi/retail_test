@@ -1,8 +1,6 @@
 <div class="approv_cont clearfix">
      
-  
-
-  <%if(@request.is_rsp == true)%>
+<%if(@request.is_rsp == true)%>
 
   <div class="appr_info">
     <div>RSP Assigned in store</div>
@@ -15,8 +13,6 @@
     <div></div>
     <div></div>
   </div>
-
-  
 
 
   <div class="appr_info">
@@ -46,7 +42,46 @@
   </div>
 
   <%end%>
+   <%elsif @request.lfr_name != nil%>
 
-  <%end%>
+     <div class="appr_info">
+      <div>LFR Name</div>
+      <div><%= @request.lfr_name %></div>
+    </div>
+
+
+
+    <div class="appr_info">
+      <div>LFR Phone</div>
+      <div><%= @request.lfr_phone %></div>
+    </div>
+
+    
+
+    <div class="appr_info">
+      <div>LFR User Id</div>
+      <div><%= @request.lfr_app_user_id %></div>
+    </div>
+
+   <%elsif @request.other_name != nil%>
+     <div class="appr_info">
+      <div>Other Name</div>
+      <div><%= @request.other_name %></div>
+    </div>
+
+
+
+    <div class="appr_info">
+      <div>Other Phone</div>
+      <div><%= @request.other_phone %></div>
+    </div>
+
+    
+
+    <div class="appr_info">
+      <div>Other Address</div>
+      <div><%= @request.other_address %></div>
+    </div>
+   <%end%>
 
 </div>

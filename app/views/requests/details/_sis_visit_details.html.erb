@@ -1,15 +1,14 @@
 <div class="approv_cont clearfix">
      
-  
 
-  <%if(@request.is_sis_installed == true)%>
+  <%if(@request.is_sis_present != nil)%>
 
-  <div class="appr_info">
+   <div class="appr_info">
     <div>SIS Presence</div>
     <div><%= @request.is_sis_present %></div>
   </div>
 
-   <div class="appr_info">
+  <div class="appr_info">
     <div></div>
     <div></div>
   </div>
@@ -60,10 +59,6 @@
     <div><%= @request.sis_demo_phones_installed %></div>
   </div>
 
-  <div class="appr_info">
-    <div>Does spec card and demo phone match</div>
-    <div><%= @request.spec_card_demo_phone_match %></div>
-  </div>
 
   <div class="appr_info">
     <div>Backwall Lights working properly</div>
@@ -102,5 +97,7 @@
   </div>
 
   <%end%>
+
+ 
 
 </div>

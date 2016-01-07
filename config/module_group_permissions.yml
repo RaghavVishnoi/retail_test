@@ -35,6 +35,9 @@ Request:
     "update, Request": "Update Request"
     "view, Request": "View Request"
     "cmo, Request": "CMO Request"
+    "supercmo, Request": "Super CMO Request"
+
+
     
 
 VendorTask:
@@ -89,6 +92,16 @@ Downloads:
 BeatRoute:
   group_name: "Beatroutes"
   permissions:
-    "manage, Beatroute": "Download Records"    
+    "manage, Beatroute": "Beatroute Records"    
+
+Document:
+  group_name: "Document"
+  permissions:
+    "manage, Document": "Document Records" 
+
+Notification:
+  group_name: "Notification"
+  permissions:
+    "manage, Notification": "Notification"       
 
   

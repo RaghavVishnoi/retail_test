@@ -73,8 +73,8 @@
           <%= user.name %>
         </td>
         <td>
-          <% @roles = User.user_role(user.id)%>
-          <%= @roles.name %>
+          <% @roles = User.user_roles(user.id)%>
+          <%= @roles.join(',') %>
         </td>
         <% if can? :manage, User %>
         <td>
