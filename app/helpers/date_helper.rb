@@ -13,7 +13,7 @@ module DateHelper
             start_date = cast_date(start_date)
             end_date =  cast_date(end_date)
             range = date_range(start_date,end_date)
-            if range > 31 || range <= 0
+            if range > 31 || range < 0
                 '1'
             end         
         rescue
