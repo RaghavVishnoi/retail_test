@@ -51,6 +51,7 @@ module RepositoriesHelper
        insert_document_detail(document_param[:document_title],document_param[:file].original_filename,document_param[:file].size).save
        add_file(document_param[:file])
        create_association(level_id,tag_id)
+      
     end
 
     def insert_document_detail(title,file_name,file_size)
