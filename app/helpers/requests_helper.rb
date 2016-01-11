@@ -6,57 +6,58 @@ module RequestsHelper
 		else
 			 @state = state.split(',')
 		end
-		t = []
-		TYPE.each do |rtype|
-			data = []		
-			type = {}
-			type[:request_type] = rtype
-		    states = {}		
-		    type_request = find_request_by_request_type(request_type(rtype))			    
-			@state.each do |state|
-				@stat = {}
-				if state.kind_of?(Array)
-				  @stat[:state] = state.join(',')
-				else
-				  @stat[:state] = state
+		@count = Request.where(:state => @state,:created_at => start_date..end_date).group(:request_type,:state,:status).order('request_type ASC').count('status')
+		puts @count.length
+		request = []
+			
+			TYPE.each do |type|
+				types = {}
+				data = []
+		    	types[:request_type] = REQ_TYPE[type]
+				@state.each do |state|
+					@stat = {:approved => 0,:declined => 0,:pending => 0,:cmo_pending => 0,:fixed => 0,:in_transit => 0,:audited => 0}
+					if state.kind_of?(Array)
+						@stat[:state] = state.join(',')
+					else
+						@stat[:state] = state
+					end
+					@count.each do |key,value|
+						if key[0] == type && key[1] == state 
+							@stat[key[2]] = value
+						end
+
+					end
+					data.push(@stat)
 				end
-				state_request = find_request_by_state(type_request,state)
-				date_request = find_request_by_date(state_request,start_date,end_date)										
-				STAT.each do |status|
-					status_request = find_request_by_status(date_request,status)				
-					@stat[status] = status_request.length					
-				end
-				@stat[:fixed] = 0
-				@stat[:acheived] = 0
-				@stat[:in_transit] = 0
-				@stat[:audited] = 0
-				data.push(@stat)
-			    type[:data] = data
-						
+				types[:data] = data
+				request.push(types)
 			end
-			t.push(type)
-		end	
-		t
+		request
 	end
 
 	def shop_list_details(start_date,end_date,request_type,states)
 		type = []
-		type_request = find_request_by_request_type(request_type(request_type))
-		date_request = find_request_by_date(type_request,start_date,end_date)
+		type_request = Request.where(:request_type => request_type(request_type),:created_at => start_date..end_date)
 		@states = state(states)
-		@states.each do |state|
-			@stat = {}
-			@stat[:state] = state
-		    state_request = find_request_by_state(date_request,state)
+		@states.each do |state|			
+		    state_request = find_request_by_state(type_request,state)
 		    STAT.each do |status|
-					status_request = find_request_by_status(state_request,status)				
+		    	    status_request = find_request_by_status(state_request,status)				
 					status_request.each do |request|
+					   @stat = {}
+			           @stat[:state] = state	
 					   @stat[:id] = request.id	
 					   @stat[:date] = request.created_at
+					   @stat[:request_type] = request.request_type
 					   retailer = find_shop_by_retailer(request.retailer_code)
-					   @stat[:shop_name] = retailer.retailer_name
-					   @stat[:status] = request.status.camelize
-					   type.push(@stat)
+					   @stat[:retailer_code] = request.retailer_code
+					   if retailer != nil
+					    @stat[:shop_name] = retailer.retailer_name
+					   else
+					   	@stat[:shop_name] = 'Undefined'
+					   end					   
+					    @stat[:status] = request.status.camelize
+					    type.push(@stat)
 					end			
 			end
 		end
@@ -67,19 +68,37 @@ module RequestsHelper
 		type = {}
 		request = Request.find(id)
 		retailer = find_shop_by_retailer(request.retailer_code)
+		type[:retailer_code] = request.retailer_code
+		if retailer != nil
+			type[:shop_name] = retailer.retailer_name
+			type[:contact_person] = retailer.contact_person
+			type[:address] = retailer.address
+		else
+			type[:shop_name] = 'Undefined'
+			type[:contact_person] = 'Undefined'
+			type[:address] = 'Undefined'
+		end
 		beatroute = Beatroute.find_by(:retailer_code => request.retailer_code,:created_at => request.created_at.prev_month..request.created_at)
-		type[:retailer_code] = retailer.retailer_code
-		type[:shop_name] = retailer.retailer_name
-		type[:contact_person] = retailer.contact_person
-		type[:address] = retailer.address
-		type[:vol_sale] = beatroute.mtd_avg_sales_volume
-		type[:last_month_sale] = beatroute.last_month_avg_sales_volume
+		if beatroute != nil
+			type[:vol_sale] = beatroute.mtd_avg_sales_volume
+			type[:last_month_sale] = beatroute.last_month_avg_sales_volume
+		else
+		    type[:vol_sale] = 'N/A'
+			type[:last_month_sale] = request.avg_store_monthly_sales
+		end	
 		type[:last_month_average_sale] = request.avg_gionee_monthly_sales
 		if Request.find_by(:retailer_code == request.retailer_code,:request_type => 4)
 		  type[:audited] = 'Yes'
 		else
 		  type[:audited] = 'No'
 		end
+		image = Image.find_by(:imageable_id => request.id)
+		if image != nil
+			image_url = image.image.to_s
+			type[:image] = image_url
+		else
+			type[:image] = ''
+		end	
 		type
 	end
 
@@ -127,6 +146,8 @@ module RequestsHelper
 			4
 		end
 	end
+
+
 
 	def state(value)
 			if value == 'all' || value == 'All' || value == 'ALL'
@@ -210,5 +231,4 @@ module RequestsHelper
 			 
 	    
     end  
-
 end
