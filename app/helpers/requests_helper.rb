@@ -95,7 +95,7 @@ module RequestsHelper
 		if images != nil
 			images.each do |image|
 				image_url = image.image.to_s
-				 url.push('localhost:3000'+image_url)
+				 url.push('http://requesterapp.gionee.co.in'+image_url)
 			end	
 	    type[:image] = url	
 		else
