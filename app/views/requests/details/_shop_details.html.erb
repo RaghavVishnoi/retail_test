@@ -65,7 +65,10 @@
 
   <div class="appr_retail">
     <div>Type of SIS required?</div>
-    <div><%= @request.type_of_sis_required %></div>
+    <div><%if @request.type_of_sis_required != nil%>
+      <%= @request.type_of_sis_required.tr("?","'") %>
+     <%end%> 
+    </div>
   </div>
 
   <div class="appr_desc">

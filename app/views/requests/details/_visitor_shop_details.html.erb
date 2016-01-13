@@ -27,8 +27,50 @@
     <%end%>
 
   </div>
+    
+  <div class="appr_retail">
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="appr_retail">
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="appr_info">
+    <div>City</div>
+    <div><%= @request.city %></div>
+  </div>
+
+  <div class="appr_retail">
+    <div>State</div>
+    <div><%= @request.state %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Shop Name</div>
+    <div><%= @request.shop_name %></div>
+  </div>
 
 
+  <div class="appr_info">
+    <div>Shop Address</div>
+    <div><%= @request.shop_address %></div>
+  </div>
+
+  <div class="appr_retail">
+    <div>Shop Owner Name</div>
+    <div><%= @request.shop_owner_name %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Shop Owner Phone</div>
+    <div><%= @request.shop_owner_phone %></div>
+  </div>
+</div>
+
+<div class="approv_cont clearfix">
   <div class="appr_desc">
     <div></div>
     <div></div>
@@ -50,6 +92,63 @@
     </div>
   </div>
 
+<%if(@request.is_rsp == true)%>
+     
+ <div class="appr_info">
+    <div>Rsp Name</div>
+    <div><%= @request.rsp_name %></div>
+  </div>
+
+  <div class="appr_retail">
+    <div>RSP Mobile Number</div>
+    <div><%= @request.rsp_mobile_number %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>RSP sales tag app user ID</div>
+    <div><%= @request.rsp_app_user_id %></div>
+  </div>
+ <%elsif @request.lfr_name != nil%>
+
+    <div class="appr_info">
+      <div>LFR Name</div>
+      <div><%= @request.lfr_name %></div>
+    </div>
+
+    <div class="appr_info">
+      <div>LFR Phone</div>
+      <div><%= @request.lfr_phone %></div>
+    </div>
+
+    <div class="appr_info">
+      <div>LFR User Id</div>
+      <div><%= @request.lfr_app_user_id %></div>
+    </div>
+
+   <%elsif @request.other_name != nil%>
+     
+    <div class="appr_info">
+      <div>Other Name</div>
+      <div><%= @request.other_name %></div>
+    </div>
+
+
+
+    <div class="appr_info">
+      <div>Other Phone</div>
+      <div><%= @request.other_phone %></div>
+    </div>
+
+    
+
+    <div class="appr_info">
+      <div>Other Address</div>
+      <div><%= @request.other_address %></div>
+    </div>
+
+
+   <%end%>
+
   <div class="appr_desc">
     <div>SIS Present?</div>
     <div>
@@ -69,6 +168,13 @@
        <%else%>
         No
        <%end%>
+    </div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Clipon Present?</div>
+    <div>
+       <%=@request.is_clipon_present %>
     </div>
   </div>
 

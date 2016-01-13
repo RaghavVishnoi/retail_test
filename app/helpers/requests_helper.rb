@@ -2,20 +2,18 @@ module RequestsHelper
 
 	def shop_branding_details(start_date,end_date,state)
 		if state == nil || state.length == 0 || state == 'All'
-			 @state = Retailer.order(:state).all.map {|a| [a.state]}.uniq
+			 @state = Retailer.all.pluck(:state).uniq
 		else
 			 @state = state.split(',')
 		end
 		@count = Request.where(:state => @state,:created_at => start_date..end_date).group(:request_type,:state,:status).order('request_type ASC').count('status')
-		puts @count.length
-		request = []
-			
+		request = []		
 			TYPE.each do |type|
 				types = {}
 				data = []
 		    	types[:request_type] = REQ_TYPE[type]
 				@state.each do |state|
-					@stat = {:approved => 0,:declined => 0,:pending => 0,:cmo_pending => 0,:fixed => 0,:in_transit => 0,:audited => 0}
+					@stat = {:approved => 0,:declined => 0,:pending => 0,:cmo_pending => 0,:cmo_declined => 0,:fixed => 0,:in_transit => 0,:audited => 0}
 					if state.kind_of?(Array)
 						@stat[:state] = state.join(',')
 					else
@@ -61,7 +59,7 @@ module RequestsHelper
 					end			
 			end
 		end
-		type
+		type.uniq
 	end
 
 	def request_details(id)
@@ -92,10 +90,14 @@ module RequestsHelper
 		else
 		  type[:audited] = 'No'
 		end
-		image = Image.find_by(:imageable_id => request.id)
-		if image != nil
-			image_url = image.image.to_s
-			type[:image] = image_url
+		images = Image.where(:imageable_id => request.id)
+		url = []
+		if images != nil
+			images.each do |image|
+				image_url = image.image.to_s
+				 url.push('localhost:3000'+image_url)
+			end	
+	    type[:image] = url	
 		else
 			type[:image] = ''
 		end	
