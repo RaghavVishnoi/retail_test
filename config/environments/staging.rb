@@ -84,10 +84,10 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
+    address:              'smtp.mandrillapp.com',
     port:                 587,
-    user_name:            'mkt@gionee.co.in',
-    password:             'Gionee@#4321',
+    user_name:            'hardeep.singh@gionee.co.in',
+    password:             'KQHuJC1I5D2qYhVr3Zt5vw',
     authentication:       'plain',
     enable_starttls_auto: true  }
 end
