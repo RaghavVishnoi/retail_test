@@ -92,7 +92,7 @@ SELLING_SKILLS = [
 ]
 
 GSB_TYPES = [
-  ["FLEX", "FLEX"]
+  ["FLEX", "FLEX"],
   ["VINYL+FLEX","VINYL+FLEX"]
 ]
 
