@@ -168,7 +168,7 @@ Rails.application.routes.draw do
   scope '/api/v1/', :as => 'api_v1', :defaults => { :format => :json }, :constraints => { :format => :json } do
    
     resources :categories, :item_regions, :cities, :collections, :sizes, :alcohol_percents, :images, :warehouses, :except => [:show]
-    resources :screens, :only => [:index, :show]
+    #resources :screens, :only => [:index, :show]
     resources :items, :except => [:show] do
     resources :inventories, :except => [:show]
     end
