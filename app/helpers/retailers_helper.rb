@@ -1,8 +1,6 @@
 module RetailersHelper
 	require 'httparty'
 	def zedsales_upload(begin_time,end_time)
-		begin_time = '12/17/2015'
-		end_time = '12/18/2015'
 		param1 = ZED_SALES_PARAMS[0]
 		param2 = ZED_SALES_PARAMS[1]
 		url = ZED_SALES_URL[0]+'&'+param1+'='+begin_time+'&'+param2+'='+end_time
