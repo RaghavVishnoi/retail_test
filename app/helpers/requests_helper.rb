@@ -85,9 +85,9 @@ module RequestsHelper
 			type[:last_month_sale] = request.avg_store_monthly_sales
 		end	
 		type[:last_month_average_sale] = request.avg_gionee_monthly_sales
-		@audit_date = Request.where(:retailer_code == request.retailer_code,:request_type => 4).order('id desc').pluck(:created_at)
+		@audit_date = Request.where(:retailer_code => request.retailer_code,:request_type => 4).last
 		if @audit_date != nil 
-		  type[:audited] = @audit_date.first
+		  type[:audited] = @audit_date.created_at
 		else
 		  type[:audited] = 'No'
 		end
