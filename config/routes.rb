@@ -189,7 +189,7 @@ Rails.application.routes.draw do
     resources :requests, :only => [:new, :create] do
       get :autocomplete_retailer_code, :on => :collection
     end
-    #resources :dropdown_values, :only => [:index]
+    resources :dropdown_values, :only => [:index]
      
   end
 
