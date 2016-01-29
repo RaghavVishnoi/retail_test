@@ -23,7 +23,7 @@ module Api
 
         def search_retailer
           retailer_code = params[:retailer_code]
-          retailer_list = Retailer.where("retailer_code LIKE ?","%#{retailer_code}%").pluck(:retailer_code)
+          retailer = Retailer.where("retailer_code LIKE ? AND status = 'Active'","%#{retailer_code}%")
           if retailer_list.size != 0
             render :json => {:result => true, :retailer_list => retailer_list}
           else
