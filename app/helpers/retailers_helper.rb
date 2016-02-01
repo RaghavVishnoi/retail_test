@@ -16,19 +16,17 @@ module RetailersHelper
 		    		create_retailer(data)
 		    	end
 		    end
-		end    
-		
-		render :json => retailers_data
+		end    	
 	end
 
 	def update_retailer(data)
-		@status = data['Status'] == 1 ? "Active" : "Inactive"
+		@status = data['Status'] == '1' ? "Active" : "Inactive"
 		retailer = Retailer.find_by(:retailer_code => data['RetailerCode'])
 		retailer.update(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'])
 	end
 
 	def create_retailer(data)
-		@status = data['Status'] == 1 ? "Active" : "Inactive"
+		@status = data['Status'] == '1' ? "Active" : "Inactive"
 		Retailer.create(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'])
 	end
 end
