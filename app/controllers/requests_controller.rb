@@ -21,24 +21,23 @@ class RequestsController < ApplicationController
       role = User.user_roles(session[:user_id])
       if role.include?('cmo')
         if params[:type] == 'RetailerCode' 
-            @requests = Request.with_cmo_retailer_query(params[:q],current_user.id,params[:retailer_code]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+            @requests = Request.with_cmo_retailer_query(params[:q],current_user.id,params[:retailer_code]).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
           elsif params[:type] == 'State'
-            @requests = Request.with_state_query(params[:q],params[:state],current_user).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+            @requests = Request.with_state_query(params[:q],params[:state],current_user).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
           else
-            @requests = Request.with_cmo_query(params[:q],current_user.id).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+            @requests = Request.with_cmo_query(params[:q],current_user.id).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
           end   
       elsif role.include?('supercmo') && params[:commit] == 'Search'
-            @requests = Request.with_supercmo_query(params[:q][:status],params[:q][:request_type],params[:cmo]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+            @requests = Request.with_supercmo_query(params[:q][:status],params[:q][:request_type],params[:cmo]).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
       else
           if params[:type] == 'RetailerCode' 
-            @requests = Request.with_retailer_query(params[:q],params[:retailer_code]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+            @requests = Request.with_retailer_query(params[:q],params[:retailer_code]).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
           elsif params[:type] == 'State'
-            @requests = Request.with_state_query(params[:q],params[:state],current_user).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+            @requests = Request.with_state_query(params[:q],params[:state],current_user).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
           else
             @requests = Request.with_query(params[:q]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
           end
-      end
-       
+      end      
   end
 
   def new
