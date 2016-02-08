@@ -35,7 +35,7 @@ class RequestsController < ApplicationController
           elsif params[:type] == 'State'
             @requests = Request.with_state_query(params[:q],params[:state],current_user).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
           else
-            @requests = Request.with_query(params[:q]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+            @requests = Request.with_query(params[:q]).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
           end
       end      
   end
