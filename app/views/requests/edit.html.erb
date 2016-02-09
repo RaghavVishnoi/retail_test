@@ -153,19 +153,24 @@
 
     <%= render 'requests/details/visitor_details' %>
 
-    <%= render 'requests/details/visitor_shop_details' %>
+    <%if @request.is_audit_done == true%>
 
-    <%= render 'requests/details/rsp_details' %>
+      <%= render 'requests/details/visitor_shop_details' %>
 
-    <%= render 'requests/details/gsb_visit_details' %>
+      <%= render 'requests/details/rsp_details' %>
 
-    <%= render 'requests/details/sis_visit_details' %>
+      <%= render 'requests/details/gsb_visit_details' %>
 
-    <%= render 'requests/details/clipon_details' %>
+      <%= render 'requests/details/sis_visit_details' %>
 
-    <%= render 'requests/details/visitor_competition_details' %>
+      <%= render 'requests/details/clipon_details' %>
 
-    <%= render 'requests/details/visitor_overall_performance' %>
+      <%= render 'requests/details/visitor_competition_details' %>
+    <%else%>
+      <%= render 'requests/details/audit_not_done_reasons' %> 
+    <%end%>  
+
+      <%= render 'requests/details/visitor_overall_performance' %>
 
    <% end %> 
   
@@ -189,13 +194,10 @@
           <div class="btn_blc clearfix">
             <%= hidden_field_tag "status","pending" %>
             <%= hidden_field_tag "prev_url",  @prev_url %>
-            <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>
-            
-          
+            <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>          
             <%= submit_tag "Approve", :class => "apprv_btn"%>
             <%= submit_tag "Decline", :class => "decline_btn"%>
-          </div>
-          
+          </div>         
         <%end%> 
       <%end%>
     <% end %>

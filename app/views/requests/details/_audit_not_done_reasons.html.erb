@@ -1,0 +1,53 @@
+<div class="approv_cont clearfix">
+  <div class="appr_info">
+    <div>Is Audit Done?</div>
+    <%if @request.is_audit_done == true%>
+      <div>Yes</div>
+    <%else%>
+      <div>No</div>
+    <%end%>  
+  </div>
+
+  <div class="appr_retail">
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="appr_desc">
+    <div></div>
+    <div></div>
+  </div>
+</div>
+<div class="approv_cont clearfix">
+  <div class="appr_info">
+    <div>Today’s store open or closed</div>
+    <div><%=@request.store_open %></div>
+  </div>
+
+  <div class="appr_retail">
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Store under renovation</div>
+    <div><%=@request.store_renovation%></div>
+  </div>
+</div>
+
+<div class="approv_cont clearfix">
+  <div class="appr_info">
+    <div>Not allowed by store owner</div>
+    <div><%=@request.store_shifted%></div>
+  </div>
+
+  <div class="appr_retail">
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Store shifted/relocated</div>
+    <div><%=@request.not_allowed_in_store%></div>
+  </div>
+</div>
