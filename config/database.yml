@@ -34,7 +34,7 @@ default: &default
 
 development:
   <<: *default
-  database: development_fosem1
+  database: staging_fosem
 
 staging:
   <<: *default
