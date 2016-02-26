@@ -105,6 +105,84 @@ module RequestsHelper
 		type
 	end
 
+	def shop_data(state,start_date,end_date)
+		sql = "select temp1.*,temp2.*,im.lat,im.long from 
+		(select rs.retailer_name,rs.state,rs.city,rs.counter_size, rs.retailer_code rsrc from retailers rs where state='#{state}'
+		 AND status='Active') as temp1 left outer join (select rq.id,rq.request_type,
+		 rq.status,rq.created_at,rq.cmo_approve_date,approver_approve_date,rq.avg_store_monthly_sales,rq.retailer_code rqrc from requests rq where 
+		 rq.created_at BETWEEN '#{start_date}' AND '#{end_date}' AND
+		  rq.request_type != 3 AND rq.retailer_code in (select rs.retailer_code rsrc 
+		  	from retailers rs where state='#{state}' AND status='Active')) as temp2 on temp1.rsrc = temp2.rqrc  left outer join images im on im.imageable_id=temp2.id;"
+
+					@result = ActiveRecord::Base.connection.execute(sql)
+					results = {}
+					@result.each do |result|
+						shop_data = {}
+						if results.has_key?(result[4])
+							values = results[result[4]]
+							value = values[:request]
+							req = {}
+							if result[5] != nil 
+								req[:id] = result[5]
+								req[:request_type] = REQUEST_TYPE[result[6].to_i]
+								req[:created_at] = result[8]
+								req[:cmo_approve_date] = result[9]
+								req[:approver_approve_date] = result[10]
+								req[:status] = result[7]
+								value.push(req)
+								values[:request] = value
+								values[:lat] = result[13]
+								values[:long] = result[14]
+								values[:sales_volume] = result[11]
+								if result[6] == 4
+									values[:shop_visit_date] = result[8]
+								end
+								results[result[4]] = values
+							else
+								results[result[4]] = values								
+							end
+
+						else
+							requests = []
+							request = {}
+							shop_data[:shop_name] = result[0]
+							shop_data[:city] = result[2]
+							shop_data[:state] = result[1]
+							shop_data[:retailer_code] = result[4]
+							shop_data[:counter_size] = result[3]
+							results[result[4]] = shop_data
+							if result[5] != nil
+								request[:id] = result[5]
+								request[:request_type] = REQUEST_TYPE[result[6].to_i]
+								request[:created_at] = result[8]
+								request[:cmo_approve_date] = result[9]
+								request[:sales_volume] = result[10]
+								request[:status] = result[7]
+								shop_data[:lat] = result[13]
+								shop_data[:long] = result[14]
+								shop_data[:avg_gionee_monthly_sales] = result[11]
+								if result[6] == 4
+									shop_data[:shop_visit_date] = result[8]
+								else
+									shop_data[:shop_visit_date] = 'No Record'
+								end
+								requests.push(request)	
+														
+							else
+							    '[]'	
+							end
+							shop_data[:request] = requests
+					    end
+					end
+					results.values
+	     
+		
+	end
+
+	def find_shop_location(id)
+		Image.find_by(imageable_id: id)
+	end
+
 	def find_shop_by_retailer(retailer_code)
 		Retailer.find_by(:retailer_code => retailer_code)
 	end

@@ -237,6 +237,7 @@ Rails.application.routes.draw do
       post 'requests/shop_branding'
       post 'requests/shop_list'
       post 'requests/request_data'
+      get 'requests/shop_info'
       
     end
   end 

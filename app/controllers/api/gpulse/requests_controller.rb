@@ -4,6 +4,15 @@ module Api
     	include DateHelper
          include RequestsHelper
           skip_before_action :verify_authenticity_token
+
+      def shop_info
+          state = params[:state]
+          start_date = params[:start_date]
+          end_date   = params[:end_date]
+          shop_info = shop_data(state,start_date,end_date)
+          render :json => {:result =>  true,:object => shop_info}
+      end    
+
     	def shop_branding
             result = date_valid(params[:start_date],params[:end_date])
             if result == '0'
