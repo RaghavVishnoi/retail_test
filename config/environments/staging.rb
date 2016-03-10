@@ -87,7 +87,7 @@ Rails.application.configure do
     address:              'smtp.mandrillapp.com',
     port:                 587,
     user_name:            'hardeep.singh@gionee.co.in',
-    password:             'KQHuJC1I5D2qYhVr3Zt5vw',
+    password:             'paHdXRP-JK47vBNM-EE2EA',
     authentication:       'plain',
     enable_starttls_auto: true  }
 end
