@@ -7,7 +7,7 @@ scheduler = Rufus::Scheduler.singleton
 # scheduler.every '2s' do
 # 	Rpush.push
 # end
-scheduler.in '30m' do
+scheduler.every '30m' do
 	end_time = Time.now
 	begin_time = end_time.yesterday.strftime("%Y-%m-%d")
 	end_time = end_time.strftime("%Y-%m-%d")
