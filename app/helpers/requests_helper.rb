@@ -106,7 +106,7 @@ module RequestsHelper
 	end
 
 	def shop_data(state,start_date,end_date)
-		sql = "select temp1.*,temp2.*,im.lat,im.long from 
+		sql = "select temp1.*,temp2.*,im.lat,im.long,im.image,im.id from 
 		(select rs.retailer_name,rs.state,rs.city,rs.counter_size, rs.retailer_code rsrc from retailers rs where state='#{state}'
 		 AND status='Active') as temp1 left outer join (select rq.id,rq.request_type,
 		 rq.status,rq.created_at,rq.cmo_approve_date,approver_approve_date,rq.avg_store_monthly_sales,rq.retailer_code rqrc from requests rq where 
@@ -133,6 +133,8 @@ module RequestsHelper
 								values[:request] = value
 								values[:lat] = result[13]
 								values[:long] = result[14]
+								image_url = "http://requesterapp.gionee.co.in/uploads/image/image"+"/"+result[16].to_s+"/"+result[15].to_s
+								values[:image_url] = image_url
 								values[:sales_volume] = result[11]
 								if result[6] == 4
 									values[:shop_visit_date] = result[8]
