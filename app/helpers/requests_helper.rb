@@ -163,6 +163,8 @@ module RequestsHelper
 								request[:status] = result[8]
 								shop_data[:lat] = result[14]
 								shop_data[:long] = result[15]
+								image_url = "http://requesterapp.gionee.co.in/uploads/image/image"+"/"+result[17].to_s+"/"+result[16].to_s
+								shop_data[:image_url] = image_url
 								shop_data[:avg_gionee_monthly_sales] = result[12]
 								if result[7] == 4
 									shop_data[:shop_visit_date] = result[9]
