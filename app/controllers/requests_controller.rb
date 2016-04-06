@@ -13,13 +13,13 @@ class RequestsController < ApplicationController
 
   def city
     value = params[:value]
-    @retailer = Retailer.where(city: value,status: 'Active').uniq.order("city asc")
+    @retailer = Retailer.where(city: value,status: ACTIVE).uniq.order("city asc")
     render :json => @retailer
   end
 
     def index
       role = User.user_roles(session[:user_id])
-      if role.include?('cmo')
+      if role.include?(Cmo)
         if params[:type] == 'RetailerCode' 
             @requests = Request.with_cmo_retailer_query(params[:q],current_user.id,params[:retailer_code]).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
         elsif params[:type] == 'State'
@@ -27,7 +27,7 @@ class RequestsController < ApplicationController
         else
             @requests = Request.with_cmo_query(params[:q],current_user.id).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
           end   
-      elsif role.include?('supercmo') && params[:commit] == 'Search'
+      elsif role.include?(SUPERCMO) && params[:commit] == 'Search'
             @requests = Request.with_supercmo_query(params[:q][:status],params[:q][:request_type],params[:cmo]).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
       else
           if params[:type] == 'RetailerCode' 
@@ -59,7 +59,7 @@ class RequestsController < ApplicationController
       end
       respond_to do |format|
         format.html { redirect_to new_request_path, :notice => "Your Request has been submitted" }
-        format.json { render :json => { :result => true } }
+        format.json { render :json => { :result => true,:data => {request_id: @request.id} } }
       end
     else
       respond_to do |format|
@@ -85,7 +85,7 @@ class RequestsController < ApplicationController
     if  @role.include?('approver') ||  @role.include?('superadmin')   &&  params[:status] == "pending"
           date = Time.now.to_date
           @request.approver_approve_date = date
-       if params[:commit] == "Approve"
+       if params[:commit] == APPROVE
           @request.approved_by_user_id = current_user.id
          if comment == ''
           @request.comment_by_approver = 'ok'
@@ -94,7 +94,7 @@ class RequestsController < ApplicationController
          end
          @request.approve
          redirect_to request.path+'/edit?alert=true'
-       elsif params[:commit] == "Decline"
+       elsif params[:commit] == DECLINE
          @request.declined_by_user_id = current_user.id
          if comment == ''
           @request.comment_by_approver = 'Not Suitable'
@@ -110,14 +110,14 @@ class RequestsController < ApplicationController
 
     if  @role.include?('cmo') ||  @role.include?('superadmin')  &&  params[:status] == "cmo_pending"
        @request.cmo_approve_date = date
-       if params[:commit] == "Approve"
+       if params[:commit] == APPROVE
          if comment == ''
            @request.comment_by_cmo = 'ok'
          else
            @request.comment_by_cmo = comment
          end
          @request.cmo_approve
-       elsif params[:commit] == "Decline"
+       elsif params[:commit] == DECLINE
          if comment == ''
            @request.comment_by_cmo = 'Not Suitable'
          else
@@ -140,7 +140,7 @@ class RequestsController < ApplicationController
         if params[:commit] == 'Update' && params[:status] != nil && params[:request_id] != nil
            status = Request.change_status(params[:status],params[:request_id])
            if status > 0
-             redirect_to '/requests?q[request_type][]=0&q[request_type][]=1&q[request_type][]=2&q[status]=pending'
+             redirect_to PENDING_URL
            else
              redirect_to request.referer,:notice => "Try again!"
            end
