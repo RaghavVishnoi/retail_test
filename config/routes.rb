@@ -241,6 +241,14 @@ Rails.application.routes.draw do
       
     end
   end 
+
+  namespace :api, :defaults => { :format => :json }, :constraints => {:format => :json} do
+    namespace :gstar do
+      get '/shops/ndList'
+      get '/shops/rdList'
+      get '/shops/shopList'
+    end
+  end 
    
    
   # The priority is based upon order of creation: first created -> highest priority.
