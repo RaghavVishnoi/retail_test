@@ -228,7 +228,7 @@ STAT = ['pending','approved','declined','cmo_pending','cmo_declined']
 ZED_SALES_URL = ['http://api.zed-axis.in/Service.svc/GetAllRetailerList?strUID=techBirdsSales&strPwd=ch3FSE212!$cGH2&strReqKey=GioneeSalestechBirds']
 ZED_SALES_PARAMS = ['BeginTime','EndTime']
 DEFAULT_EMAILS = ['akash@gionee.co.in']
-CSV_EMAILS = ['akash@gionee.co.in','Nikhil.kaura@gionee.co.in','mahesh.bora@gionee.co.in','jaipal.singh@gionee.co.in','dinesh.upadhyay@theradicles.com','raghav.singh@lptpl.com']
+CSV_EMAILS = ['akash@gionee.co.in','Nikhil.kaura@gionee.co.in','mahesh.bora@gionee.co.in','jaipal.singh@gionee.co.in','dinesh.upadhyay@theradicles.com','saurabh.khurana@gionee.co.in','raghav.singh@lptpl.com']
  
 
 PENDING_URL = "/requests?q[request_type][]=0&q[request_type][]=1&q[request_type][]=2&q[status]=pending" 
