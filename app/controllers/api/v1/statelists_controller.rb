@@ -4,7 +4,7 @@ module Api
       skip_before_action :verify_authenticity_token
       
         def index
-            @state = Retailer.all.pluck(:state).uniq
+            @state = State.all.pluck(:id,:name)
 			render :json => {:result => true,:state => @state}
     	end
      end

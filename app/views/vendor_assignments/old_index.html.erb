@@ -1,0 +1,160 @@
+<div class="error" id="message"></div>
+<div class="request_wrap clearfix"  >
+<div>Vendor Dashboard
+  
+</div>
+<%if request.params.include? 'param' %>
+ <%= link_to "Clear", vendor_assignments_path(:q => { :status => params[:q][:status] }) ,:class => 'show_all_assignments'%>
+<%end%>
+  <div>
+  <%=form_tag @vendor_assignments ,:method => 'get' do |f| %>  
+  <div id="user-search-div" class="form-field">
+     <div class="user-search-field">
+       <%= hidden_field_tag 'q[status]', params[:q][:status], :id => "retailer-search",:required => "required",:placeholder => "Enter retailer code/city/state" %>
+       <%= text_field_tag :param, @search, :id => "retailer-search",:required => "required",:placeholder => "Enter retailer code/city/state" %>
+    </div>
+   <div>
+       <%= button_tag(type: 'submit',value: 'search',:class=>"hide-button") do %>
+         <i ><%= image_tag 'search.png' ,:class => "button_with_image_save"%></i> 
+       <% end %>
+   </div>
+   <div class="error" id="message"></div>
+         
+  </div>
+  <%end%>
+</div>
+  <div class="req_cont clearfix">
+
+    <div class="links_blc">
+
+          <div class="<%= request_status_class('waiting') %>">
+            <%= link_to "Pending", vendor_assignments_path(:q => { :status => 'waiting' }) %>
+          </div>
+
+          <div class="<%= request_status_class('accepted') %>">
+            <%= link_to "Accepted", vendor_assignments_path(:q => { :status => 'accepted' })%>
+          </div>
+
+          <div class="<%= request_status_class('finished') %>">
+            <%= link_to "Finished", vendor_assignments_path(:q => { :status => 'finished' }) %>
+          </div>
+          <%
+          if params[:q][:status] == 'waiting' && @assignments.length > 0
+             id = VendorAssignment.get_assignment_id(@assignments)
+            %>
+           <%= link_to edit_vendor_assignment_path(id,:status => 'accepted') do %>
+                <div>
+                  <span><i><%= image_tag 'accept_all.png' ,:id => 'accept-all'%></i></span>
+                              
+                </div>
+            <% end %>
+          <%end%> 
+     </div>
+
+      
+
+<%@assignments.each do |assignment|%>
+ <%@request = VendorAssignment.get_request_detail(assignment)
+   @retailer = VendorAssignment.get_retailer_detail(@request.retailer_code)
+   @cmo = VendorAssignment.get_cmo_detail(@request.cmo_id)%>
+   <%= link_to vendor_assignment_path(assignment.id) do %>
+   <div class="request_contain clearfix">
+                <div class="req_info">
+  					       <div></div>
+                   <div>Retailer Code</div>
+                   <div><%=@retailer.retailer_code %></div>
+                </div>
+
+
+                <div class="req_desc">
+	                <div></div>
+	                <div>Request Id</div>
+	                <div><%=@request.id %></div>
+                </div>
+
+                <div class="req_info">
+  					       <div></div>
+                   <div>Retailer Name</div>
+                   <div><%=@retailer.contact_person%></div>
+                </div>
+
+                <div class="req_desc">
+	                <div></div>
+	                <div>Request Type</div>
+	                <div><%=@request.request_type.camelize %></div>
+                </div>
+
+                <div class="req_info">
+  					       <div></div>
+                   <div>State</div>
+                   <div><%=@retailer.state%></div>
+                </div>
+
+                <div class="req_desc">
+	                <div></div>
+	                <div>CMO Name</div>
+	                <div><%=@cmo.name%></div>
+                </div>
+
+                <div class="req_info">
+  					       <div></div>
+                   <div>City</div>
+                   <div><%=@retailer.city%></div>
+                </div>
+
+                <div class="req_desc">
+	                <div></div>
+	                <div>Assigned Date</div>
+	                <div><%=assignment.assigned_date %></div>
+                </div>
+
+                <div class="req_info">
+                   <div></div>
+                   <div></div>
+                   <div></div>
+                </div>
+
+                <div class="req_desc">
+                  <div></div>
+                  <div></div>
+                  <%if assignment.status == 'Waiting' %>
+                      <div> 
+                        <%= link_to edit_vendor_assignment_path(assignment.id,:status => 'accepted') do %>
+                            <div>
+                              <span><i><%= image_tag 'accept.png' ,:id => 'accept'%></i></span>
+                              
+                            </div>
+                        <% end %>
+
+                        <%= link_to edit_vendor_assignment_path(assignment.id,:status => 'rejected') do %>
+                            <div>
+                              <span><i><%= image_tag 'reject.png',:id => 'reject' %></i></span>
+                              
+                            </div>
+                        <% end %>
+                      </div>
+                  <%end%>  
+                </div>
+
+                
+      </div>
+     <%end%>   
+     <%end%> 
+     <%if @assignments.length > 1%>
+     <div class="response-pagination clearfix">
+       <%= will_paginate @assignments %>
+     </div>
+     <%end%>
+    </div>
+ </div>  
+<script type="text/javascript">
+  $('#assignment').attr("class",'active') 
+</script>
+            
+           
+
+
+
+
+
+

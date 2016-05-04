@@ -35,7 +35,7 @@ class BeatroutesController < ApplicationController
         @result = Beatroute.insert_records
          render :json => @result
       else
-    	 @beatroute = Beatroute.single_record(params[:bid])
+    	 @beatroute = Beatroute.single_record(params[:id])
       end
     end
 

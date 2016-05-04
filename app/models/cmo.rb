@@ -1,14 +1,13 @@
 class CMO < ActiveRecord::Base
   has_many :requests
+  belongs_to :rrm
   belongs_to :user, :foreign_key => :email
 
   validates :name,:location,:designation,:phone, :presence => true
   validates :email, :presence => true, :uniqueness => {:message => "email already exist"}
   
   def self.search(id)
-
 	 @cmo = CMO.where("name like ?", "%#{id}%") 
-
   end
  
 

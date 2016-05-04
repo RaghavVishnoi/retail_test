@@ -1,310 +1,65 @@
-<div class="box_menu">
-
-  <% if can? :manage, Role %>
-    <%= link_to roles_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Roles
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :manage, Permission %>
-    <%= link_to permissions_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Permissions
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :read, User %>
-    <%= link_to users_path do %>
-      <div class="box" id = "user">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Users
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :read, UsersReporting %>
-    <%= link_to users_reportings_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'our-team.png' %></i></span>
-        My Team
-      </div>
-    <% end %>
-  <% end %>
-
-   
-  <%      id = session[:user_id]
-          @user = User.find_by(:id => id)
-          @associated_roles = AssociatedRole.find_by(:object_id => id)
-          @role = @associated_roles.role  
-          if @role.name != 'superadmin'
-            if @role.name != 'requester' 
-              @status1 = 'pending'
-              @status2 = 'pending'
-            else
-              @status1 = ['cmo_pending','pending']
-              @status2 = ['cmo_pending','pending']
-             
-            end
-          %>
-
-  <% if can? :get, Request %>
-    <%= link_to requests_path(:q => { :status => @status1,:request_type => ['0','1','2'] }) do %>
-      <div class="box">
-       <span><i><%= image_tag 'logo.png' %></i></span>
-        Requests
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :get, Request %>
-    <%= link_to requests_path(:q => { :status => @status2,:request_type => ['3'] }) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Maintenance Requests
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :get, Request %>
-    <%= link_to requests_path(:q => { :status => 'approved',:request_type => ['4'] }) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Audits
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :get, VendorTask %>
-    <%= link_to vendor_tasks_path(:q => { :status => 'pending'}) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Vendor Records
-      </div>
-    <% end %>
-  <% end %>
-<%if @role.name == 'reader'%>
-   <% if can? :get, Retailer %>
-    <%= link_to retailers_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Retailers
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :get, CMO %>
-    <%= link_to cmos_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        CMO
-      </div>
-    <% end %>
-  <% end %>
-<%end%>  
-
-  <% if can? :approve, Request %>
-    <%= link_to requests_path(:q => { :status => 'pending',:request_type => ['0','1','2'] }) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Requests
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :approve, Request %>
-    <%= link_to requests_path(:q => { :status => 'pending',:request_type => '3' }) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Maintenance Requests
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :approve, Request %>
-    <%= link_to requests_path(:q => { :status => 'approved',:request_type => '4' }) do %>
-      <div class="box">
-        <%$request_type = 'visitor'%>
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Audits
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :approve, VendorTask %>
-    <%= link_to vendor_tasks_path(:q => { :status => 'pending'}) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Vendor Records
-      </div>
-    <% end %>
-  <% end %>
-
-  
-
-
-  <% if can? :cmo, Request %>
-    <%= link_to requests_path(:q => { :status => 'cmo_pending',:request_type => ['0','1','2']  }) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-          Requests
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :cmo, Request %>
-    <%= link_to requests_path(:q => { :status => 'cmo_pending',:request_type => ['3']  }) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-         Maintenance Requests
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :cmo, VendorTask %>
-    <%= link_to vendor_tasks_path(:q => { :status => 'cmo_pending'}) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Vendor Records
-      </div>
-    <% end %>
-  <% end %>
-
-  <%else
-    if can? :manage, Request %>
-    <%= link_to requests_path(:q => { :status => ['pending','cmo_pending'],:request_type => ['0','1','2'] }) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Requests
-      </div>
-    <% end %>
-  <% end %>
-
-  <%if can? :manage, Request %>
-    <%= link_to requests_path(:q => { :status => ['pending','cmo_pending'],:request_type => ['3'] }) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Maintenance Requests
-      </div>
-    <% end %>
-  <% end %>
-
-  <%if can? :manage, Request %>
-    <%= link_to requests_path(:q => { :status => ['pending','cmo_pending'],:request_type => ['4'] }) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Audits
-      </div>
-    <% end %>
-  <% end %>
- <%end%>
-
- <% if can? :manage, VendorTask %>
-    <%= link_to vendor_tasks_path(:q => { :status =>  ['pending','cmo_pending']}) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Vendor Records
-      </div>
-    <% end %>
-  <% end %>
-
-<% if can? :manage, Retailer %>
-    <%= link_to retailers_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Retailers
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :manage, Vendorlist %>
-    <%= link_to vendorlists_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Vendors
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :manage, CMO %>
-    <%= link_to cmos_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        CMO
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :manage, Map %>
-    <%= link_to maps_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Request Map
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if can? :manage, VendorRequest %>
-    <%= link_to vendor_requests_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Vendor Assignments
-      </div>
-    <% end %>
-  <% end %>
-
-<% if can? :manage, VendorAssignment %>
-    <%= link_to vendor_assignments_path(:q => {:status => 'waiting'}) do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Assignments
-      </div>
-    <% end %>
-<%end%> 
-
-<% if can? :manage, Download %>
-    <%= link_to downloads_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Downloads
-      </div>
-    <% end %>
-<%end%> 
-
-<% if can? :manage, Beatroute %>
-    <%= link_to beatroutes_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Beat Routes
-      </div>
-    <% end %>
-<%end%> 
-
-<% if can? :manage, Document %>
-    <%= link_to documents_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Repository
-      </div>
-    <% end %>
-<%end%>  
-
-<% if can? :manage, Notification %>
-    <%= link_to notifications_path do %>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Notification
-      </div>
-    <% end %>
-<%end%>  
-
-
-
-
-
-  <div class="clear"></div>
+<div id="nav-col-submenu"></div>
 </div>
+<div id="content-wrapper">
+
+<% if User.user_roles(current_user.id).include? 'cmo'%>
+	<%=render 'dashboard/cmo'%>
+<%elsif User.user_roles(current_user.id).include? 'vendor'%>	
+	<%=render 'dashboard/vendor'%>
+<%else%>
+	<%if User.user_roles(current_user.id).include? 'approver'%>
+	<div class="div-left">
+		<div class="btn-group" data-toggle="buttons">
+			<label class="btn btn-primary <%='active' if params[:v] == 'rrm'%>" id="rrm">
+				<input type="radio" name="view"> RRM 
+			</label>
+			<label class="btn btn-primary <%='active' if params[:v] == 'state' || params[:v] == nil%>" id="state">
+				<input type="radio" name="view"> State
+			</label>
+		</div>
+	</div>
+	<%end%>
+	
+	<%if params[:v] == 'rrm'%>
+		<%=render 'dashboard/admin_rrm'%>
+	<%else%>
+		<%=render 'dashboard/admin_state'%>
+	<%end%>	
+<%end%>
+
+</div>
+<script type="text/javascript">
+ 
+	$("#rrm").click(function(){
+		if(location.href.indexOf('?') === -1){
+			location.href = '/dashboard?v=rrm'
+		}else{
+			params = location.href.split('?')[1]			 
+			if(params != 'undefined' && params.length!=0){
+				if(location.href.indexOf('v=') === -1){
+  					location.href = '/dashboard?v=rrm&'+params
+				}else{
+					old_params = params.split('v=')[1]
+					if(location.href.indexOf('rrm') === -1){
+						old_params = old_params.replace("state","rrm")
+						location.href = '/dashboard?v='+old_params
+					}else{
+						location.href = '/dashboard?v='+old_params
+					}
+ 					
+				}
+				
+			}else{
+				location.href = '/dashboard?v=rrm'
+			}
+		}		
+ 	});
+ 	
+ 	$("#state").click(function(){
+		location.href = '/dashboard?v=state'
+ 	})
+
+
+	$('#dashboard').attr("class",'active')
+	
+</script>	

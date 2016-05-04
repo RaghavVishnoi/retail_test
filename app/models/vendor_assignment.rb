@@ -4,7 +4,6 @@ class VendorAssignment < ActiveRecord::Base
 	has_many :vendor_stages
 
 	def self.assignments(user_id,status)
-		puts "here is status #{status}"
 		@users = User.find_by(:id => user_id)
     	if @users != nil && @users != ''
     	   @vendor = Vendorlist.where(:email => @users.email)
@@ -15,7 +14,6 @@ class VendorAssignment < ActiveRecord::Base
 	end
 
 	def self.get_request_detail(vendor_assignment)
-
 		Request.find_by(:id => vendor_assignment.request_id)
 	end
 

@@ -1,78 +1,108 @@
-<% if can? :manage, Retailer %>
- <%= link_to "New Retailer", new_retailer_path, :id => 'new-button' %>
-<%end%> 
-<%if request.params.include? 'param' %>
- <%= link_to "Clear", retailers_path ,:class => 'show-all'%>
-<%end%>
-<div>
-  <%=form_tag @retailers ,:method => 'get' do |f| %>  
-  <div id="user-search-div" class="form-field">
-     <div class="user-search-field">
-       
-       <%= text_field_tag :param, @search, :id => "retailer-search",:required => "required",:placeholder => "Enter retailer code/city/state" %>
-    </div>
-   <div>
-       <%= button_tag(type: 'submit',value: '',:class=>"hide-button") do %>
-         <i ><%= image_tag 'search.png' ,:class => "button_with_image_save"%></i> 
-       <% end %>
-   </div>
-   <div class="error" id="message"></div>
-         
-  </div>
-  <%end%>
+<script>
+	function state(){
+		state = $('#state_shops option:selected').text();
+		location.href = "?state="+state
+	}
+	function city(){
+		city = $('#city_shops option:selected').text();
+		location.href = "?state=<%=params[:state]%>&city="+city 
+	}
+	function shop(){
+		shop = $('#shop option:selected').val();
+		location.href = "?state=<%=params[:state]%>&city=<%=params[:city]%>&shop="+shop 
+	}
+
+
+</script>
+	<div id="nav-col-submenu"></div>
+	</div>
+
+<div id="content-wrapper">
+<div class="row">
+<div class="col-lg-12">
+	<div class="add_new_notfcn">
+		<h4><i class="fa fa-plus-square fa-lg"></i><span> <%= link_to "New Retailer", new_retailer_path %></span></h4>
+	</div>
 </div>
-<table class="ui table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Retailer Code</th>
-      <th>Retailer Name</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Status</th>
-      <% if can? :manage, Retailer %>
-       <th>Edit</th>
-      <%end%>
-      <th>Show</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @retailer.each do |retailer| %>
-      <tr>
-        <td>
-          <%=retailer.id%>
-        </td>
-        <td>
-          <%=retailer.retailer_code%>
-        </td>
-        <td>
-          <%=retailer.retailer_name%>
-        </td>
-        <td>
-          <%=retailer.city%>
-        </td>
-        <td>
-          <%=retailer.state%>
-        </td>
-        <td>
-          <%=retailer.status%>
-        </td>
-        <% if can? :manage, Retailer %>
-        <td>
-          <%= link_to "Edit", [:edit, retailer] %>
-        </td>
-        <%end%>
-        
-         
-        <td>
-          <%= link_to "Show", [retailer] %>
-        </td>
-      </tr>
-    <%end %>
-  </tbody>
-</table>
-<div class="response-pagination clearfix">
-  <%if @retailer.length > 1%>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+	<div class="main-box clearfix">
+	<div class="clearfix">
+		<div class="common_page notification_page">
+		<div class="hdr">
+		<div class="row">
+			<div class="col-md-5">
+				<div class="txt">Retailer</div>
+			</div>
+			<div class="col-md-6">
+				<div class="col-md-3">
+					<%= select_tag :state_shops, options_for_select(['All']+State.all.pluck(:name),params[:state]),:class => 'form-control custm_select',:required => "required",:onchange => "state() " %>
+					 
+				</div>
+				<div class="col-md-3">
+					<%= select_tag :city_shops, options_for_select(['All']+Retailer.where(state: params[:state]).pluck(:city).uniq,params[:city]),:class => 'form-control custm_select',:required => "required",:onchange => "city() " %>
+					 
+				</div>
+				<div class="col-md-3">
+					<%= select_tag :shop, options_for_select(['All']+Retailer.city_retailer(params[:city]),params[:shop]),:class => 'form-control custm_select',:required => "required",:onchange => "shop()" %>
+					 
+				</div>
+
+
+				 
+
+
+		</div>
+		</div>
+		</div>
+
+	<% @retailer.each do |retailer| %>
+		<div class="ntifctn_blk">
+			<div class="row">
+				<div class="col-md-8">
+					<p><%=retailer.retailer_code%> <span class="blue">  <%=retailer.retailer_name%> </span></p>
+					<p>  <%=retailer.state%>,<%=retailer.city%></p>
+				</div>
+
+				<div class="col-md-4">
+					<ul class="list-inline list-unstyled edt_del">
+						<li class="blue"><i class="fa fa-pencil"></i><span>
+
+       
+         				 <%= link_to "Edit", [:edit, retailer] %>
+        				 
+						</span></li>
+						 <li class="blue">
+                                  <i class="fa fa-trash-o"></i>
+                                  <span>
+                                  <%= link_to "Show", [retailer] %>
+
+                                  </span>
+                                </li>
+
+						<li class="blue"><i class="fa fa-trash-o"></i><span><a href="">Delete</a></span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+ 	<%end%>
+		<%if @retailer.length > 1%>
       <%=will_paginate @retailer%>
   <%end%>
+
+			</div>
+		</div>
+		</div>
+	</div>
 </div>
+<script type="text/javascript">
+  $('#retailer').attr("class",'active') 
+</script>
+
+
+			
+		
+
+	

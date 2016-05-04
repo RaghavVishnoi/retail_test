@@ -6,17 +6,7 @@ class VendorlistsController < ApplicationController
 
 
 	def index
-        if params[:param] == nil || params[:param] == ''
-		  @vendor = Vendorlist.all.paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-        else
-          @vendor = Vendorlist.search(params[:param]).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-              if @vendor.length < 1
-                redirect_to vendorlists_path, notice: "No record found"
-              else
-                @search = params[:param]
-              end 
-        end  
-        
+        @vendor = Vendorlist.all.paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
 	end
 
 	def new 
@@ -45,6 +35,8 @@ class VendorlistsController < ApplicationController
 
     end
 
+     
+
     def show
         @vendor = Vendorlist.find(params[:id])
     end
@@ -61,6 +53,8 @@ class VendorlistsController < ApplicationController
     	@vendor.destroy
         redirect_to vendorlists_path, notice: "Vendor deleted successfully from record"
     end
+
+    
 
     def vendor_params
     	params.require(:vendorlist).permit(:region,:state,:vendor_name,:contact_person,:email,:status)

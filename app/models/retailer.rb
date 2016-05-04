@@ -83,6 +83,67 @@ def display_name
     name = Retailer.select(:state).uniq
 end
 
+def self.state_retailers(state)
+	case state
+	when 'All'
+		[]
+	else
+		state_retailer(Retailer.where(state: state,status: 'Active').order('retailer_code asc'))
+	end	
+end
+
+def self.state_retailer(retailers)
+	retailers.map { |c| [c.retailer_code+" - "+c.retailer_name, c.retailer_code] }	
+end
+
+def self.retailer_data(code,type)
+	@retailer = Retailer.find_by(retailer_code: code)
+	case type
+	when 'name'
+		@retailer.retailer_name if @retailer != nil
+	when 'address'
+		@retailer.address if @retailer != nil
+	when 'contact_person'
+		@retailer.contact_person if @retailer != nil
+	when 'phone'
+		@retailer.mobile_number if @retailer != nil
+	when 'city'
+		@retailer.city if @retailer != nil
+	when 'state'
+		@retailer.state if @retailer != nil		 
+	when 'pincode'
+		@retailer.pincode if @retailer != nil			
+	end
+end
+
+def self.select(params)
+	case params[:state]
+	when nil,'','All'
+		Retailer.all
+	else
+		case params[:city]
+		when nil,'','All'
+			Retailer.where(state: params[:state])
+		else
+			case params[:shop]
+			when nil,'','All'
+				Retailer.where(city: params[:city])
+			else
+				Retailer.where(retailer_code: params[:shop])
+			end
+		end	
+	end	
+end
+
+def self.city_retailer(city)
+	case city
+	when 'All',nil,''
+		[]		
+	else
+		state_retailer(Retailer.where(city: city,status: 'Active').order('retailer_code asc'))
+	end
+end
+
 
 
   

@@ -10,7 +10,7 @@ module Api
 
              
             arr = [:city => '*Select City']
-            @city = arr+Retailer.where(state: value).select(:city).uniq.order("city asc")
+            @city = arr+Retailer.where(state: State.find(value).name).select(:city).uniq.order("city asc")
 
             render :json => @city
     	end

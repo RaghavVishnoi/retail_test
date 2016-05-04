@@ -1,0 +1,90 @@
+			<div class="col-md-6">
+					<div class="gsb_blk">
+						<h2>
+							<%=@request.request_type.camelize.upcase%>
+						</h2>
+						<div class="row">
+							<div class="col-md-8">
+							RRM
+							</div>
+							<div class="col-md-4">
+								<div class="blue">
+								<%=UserState.user(@request.state_id,'rrm').join(',')%>
+								</div>
+							</div>
+							 
+						</div>
+
+						<div class="row">
+							<div class="col-md-8">
+							<%="CMO" if Request.request_approver(@request.id,'CMO') != nil %>
+							</div>
+							<div class="col-md-4">
+								<div class="blue">
+								<%=Request.request_approver(@request.id,'CMO').name if Request.request_approver(@request.id,'CMO') != nil %>
+								</div>
+							</div>	
+							 
+						</div>
+						<div class="row mr_btm" >
+							<div class="col-md-4">
+							Status
+							</div>
+							<div class="col-md-4">
+								 
+								
+							</div>	
+							<div class="col-md-4">
+								<div class="<%=if @request.status == 'declined' || @request.status == 'cmo_decliend' then "red" else "green" end%>">
+								<%=@request.status.camelize%>
+								</div>
+							</div>
+						</div>
+						<div class="row" >
+							<div class="col-md-4">
+							Generated On
+							</div>
+							<div class="col-md-4">
+								 
+								
+							</div>	
+							<div class="col-md-4">
+								<div class="green">
+								<%=@request.created_at.strftime("%b %d, %Y")%>
+								</div>
+							</div>
+						</div>
+
+						 
+
+						<div class="row" >
+							<div class="col-md-6">
+								Approved by CMO On
+							</div>
+							<div class="col-md-2">
+								 
+								
+							</div>	
+							<div class="col-md-4">
+								<div class="green">
+								<%=if @request.cmo_approve_date != nil then @request.cmo_approve_date.to_date.strftime("%b %d,%Y") else 'Pending' end%>
+								</div>
+							</div>
+						</div>
+
+						<div class="row" >
+							<div class="col-md-6">
+								Approved by RRM/HO On
+							</div>
+							<div class="col-md-2">
+								 
+								
+							</div>	
+							<div class="col-md-4">
+								<div class="green">
+								<%=if @request.approver_approve_date != nil then @request.approver_approve_date.to_date.strftime("%b %d,%Y") else 'Pending' end%>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	

@@ -1,10 +1,11 @@
 class PermissionsController < ApplicationController
 
+  PER_PAGE = 20
   before_action :find_permission, :only => [:edit, :update, :destroy]
   authorize_resource
 
   def index
-    @permissions = Permission.includes(:role)
+    @permissions = Permission.includes(:role).paginate(:per_page => PER_PAGE,:page => (params[:page] || 1))
   end
 
   def new

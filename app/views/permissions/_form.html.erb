@@ -1,18 +1,62 @@
-<%= form_for @permission, :html => { :class => 'user-form' } do |f| %>
+ <div id="nav-col-submenu"></div>
 
-  <h4 id="form-title"><%= form_title %></h4>
+</div>
 
+
+<div id="content-wrapper">
   <%= render :partial => "shared/error_messages", :locals => { :errors => @permission.errors } %>
 
-  <div class="form-field">
-    <%= f.label :role_id %>
-    <%= f.select :role_id, Role.pluck(:name, :id) %>
+  <div class="row">
+    <div class="col-lg-12">
+    <div class="main-box clearfix">
+    <div class="clearfix">
+      <div class="user_page">
+      <h2><%= form_title %></h2>
+      
+        <%= form_for @permission do |f| %>
+          
+          <div class="row">
+            <!-- left part of form end --> 
+           <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Role</label>
+                <div class="col-md-9">
+  
+
+  <%= f.select :role_id, Role.pluck(:name, :id),{},:class => 'retailer_select',:required => "required" %>
+                </div>
+              </div>
+            </div>
+               <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Permission</label>
+                <div class="col-md-9">
+  
+
+  <%= f.select :action_permission, permission_options(@permission.action_permission),{},:class => 'retailer_select',:required => "required" %>
+                </div>
+              </div>
+            </div>
+         </div>
+          
+            
+            <div class="col-md-1">
+               <%= f.submit "Submit",:class => "btn btn-success rrm_frm_btn" %>
+              
+            </div>
+            <div class="col-md-2">
+               <%= link_to "Cancel",permissions_path,:class => "btn btn-danger ",data: { confirm: 'Are you sure?'} %>
+              
+            </div>
+          </div>
+        <% end %>
+      
+
+        </div>
+      </div>
+      </div>
+    </div>
   </div>
 
-  <div class="form-field">
-    <%= f.label :action_permission, "Action" %>
-    <%= f.select :action_permission, permission_options(@permission.action_permission) %>
-  </div>
-
-  <%= f.submit %>
-<% end %>
+</div>
+      

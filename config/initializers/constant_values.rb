@@ -238,3 +238,25 @@ DECLINE = "Decline"
 Cmo = "cmo"
 SUPERCMO = "supercmo"
 APPROVER = "approver"
+RRMS = "rrm"
+
+
+REQUESTS_STATUS = {
+  'cmo_pending' => 'Pending for CMO',
+  'cmo_declined' => 'Declined by CMO',
+  'pending' => 'Approved by CMO' ,
+  'pending' => 'Pending for Approver',
+  'declined' => 'Declined by Approver' ,
+  'approved' => 'Approved by Approver' 
+
+}
+
+ RRM_STATUS = [
+    ["Active","Active"],
+    ["Inactive","Inactive"]
+  ]
+
+
+
+
+  

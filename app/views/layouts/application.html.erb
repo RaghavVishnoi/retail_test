@@ -1,43 +1,129 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Gionee</title>
+  <%= favicon_link_tag 'fevicon.jpg' %>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+   <link data-turbolinks-track="true" href="/assets/select2.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/beatroute.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/cmos.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/device_registration.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/devices.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/downloads.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/gmails.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/helps.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/jquery-ui.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/levels.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/login.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/main.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/maps.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/bootstrap/bootstrap.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/bootstrap/bootstrap.min.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/calendar_filter.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/compiled/calendar.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/compiled/custom.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/compiled/theme_styles.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/compiled/wizard.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/libs/daterangepicker.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/libs/font-awesome.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/libs/jquery-jvectormap-1.2.2.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/libs/nanoscroller.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/libs/weather-icons.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/notifications.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/repositories.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/retailers.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/rrms.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/semantic-ui.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/style.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/tags.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/user_data.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/vendor_assignments.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/vendor_requests.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/vendor_stages.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/vendors.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/application.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/jquery.fileupload-ui.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/jquery-ui/theme.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/jquery-ui/core.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/jquery-ui/button.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/jquery-ui/draggable.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/jquery-ui/resizable.css?body=1" media="all" rel="stylesheet" />
+
+<link data-turbolinks-track="true" href="/assets/jquery-ui/dialog.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/colorbox-rails/colorbox-rails.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/colorbox-rails.css?body=1" media="all" rel="stylesheet" />
+<link data-turbolinks-track="true" href="/assets/new_design/left_menu.css?body=1" media="all" rel="stylesheet" />
+
+ 
+<script data-turbolinks-track="true" src="/assets/jquery_ujs.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/turbolinks.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/add_fields.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/beatroute.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/cmos.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/device_registration.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/devices.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/downloads.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/file-progress.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/gmails.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/helps.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/image_upload.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/jquery-1.10.2.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/jquery-ui.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/levels.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/maintenance_dropdown.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/mapmarker.jquery.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/new_design/bootstrap.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/new_design/datefield.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/new_design/demo-skin-changer.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/new_design/error_messages.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/new_design/jquery.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/new_design/pace.min.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/new_design/scripts.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/notifications.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/popup.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/repositories.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/request_dropdown.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/request_form.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/retailers.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/rrms.js?body=1"></script>
+<script data-turbolinks-track="true" src="/assets/search.js?body=1"></script>
+ 
+   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+ 
   <%= csrf_meta_tags %>
  
 </head>
-<body>
-
+<body class="theme-red  pace-done">
 
   <div id="wrapper">
-    <%= render :partial => 'shared/nav_bar' %>
-    <div class="logoff">
-      <a href="/users/sign_out"><%= image_tag 'turn-off1.png',:class => "logout",:title => "logout" %></a>
-    </div> 
-
-    <% if notice %>
-      <div id="notice"><%= notice %></div>
-    <% end %>
     
-    <% if alert %>
-      <div id="alert"><%= alert %></div>
-    <% end %>
-
     <div class="main_container clearfix">
-      <%= yield %>
+        <div id="theme-wrapper">
+          <%=render partial: 'common/header'%>
+          <div id="page-wrapper" class="container">
+            <div class="row">
+              <div id="nav-col">
+                <%=render partial: 'common/menubar'%>
+
+                <%= yield %>
+              </div>
+             </div>
+            </div>
+          
+          <%=render partial: 'common/footer'%>
+        </div>  
     </div>
   
     <div id="popup" class="hidden"></div>
      
 
 
-    <div class="footer">
-      &copy; Copyright 2015, Feet on street all right reserved.
-    </div>
+    
     
   </div>
+
 </body>
 </html>

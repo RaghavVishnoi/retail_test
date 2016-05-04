@@ -8,20 +8,21 @@ class Beatroute < ActiveRecord::Base
 	end
 
 	def self.save(upload)
-	    name =  upload.original_filename
+ 	    name =  upload.original_filename
 	    directory = "public/uploads/beatroute/upload"
 	    # create the file path
 	    string = upload.original_filename.partition(".").last
 	    
 	    if string == 'csv' || string == 'CSV'
-	    	csv = CSV.read(upload.path, headers: false)
-	    	header = csv[0]
-	    	if header[0].upcase == 'Distributor Name'.upcase && header[1].upcase == 'TSM Name'.upcase && header[2].upcase == 'RSP Name'.upcase && header[3].upcase == 'RSP ID'.upcase && header[4].upcase == 'Employee Code'.upcase && header[5].upcase == 'BeatRoute Shop Code'.upcase && header[6].upcase == 'Zed Sales Shop Code'.upcase && header[7].upcase == 'Retailer Name'.upcase && header[8].upcase == 'City'.upcase && header[9].upcase == 'Last Month Avg Sales Volume'.upcase && header[10].upcase == 'Last Month Avg Sales Value'.upcase && header[11].upcase == 'MTD Avg Sales Volume'.upcase && header[12].upcase == 'MTD Avg Sales Value'.upcase && header[13].upcase == 'Avg Last Month Attendance Days'.upcase && header[14].upcase == 'Last Reported Stock - Number'.upcase && header[15].upcase == 'Models In stock'.upcase && header[16].upcase == 'Distance between Beatroute and APP locations'.upcase && header[17].upcase == 'SIS Type'.upcase && header[18].upcase == 'Installed on'.upcase && header[19].upcase == 'GSB Type'.upcase && header[20].upcase == 'Installed on'.upcase && header[21].upcase == 'Clipon'.upcase && header[22].upcase == 'Countertop'.upcase && header[23].upcase == 'Flange'.upcase && header[24].upcase == 'Standee'.upcase && header[25].upcase == 'Inshop Branding'.upcase && header[26].upcase == 'SIS'.upcase && header[27].upcase == 'GSB'.upcase
+ 	    	csv = CSV.read(upload.path, headers: false)
+ 	    	header = csv[0]
+ 	    	if header[0].upcase == 'Distributor Name'.upcase && header[1].upcase == 'TSM Name'.upcase && header[2].upcase == 'RSP Name'.upcase && header[3].upcase == 'RSP ID'.upcase && header[4].upcase == 'Employee Code'.upcase && header[5].upcase == 'BeatRoute Shop Code'.upcase && header[6].upcase == 'Zed Sales Shop Code'.upcase && header[7].upcase == 'Retailer Name'.upcase && header[8].upcase == 'City'.upcase && header[9].upcase == 'Last Month Avg Sales Volume'.upcase && header[10].upcase == 'Last Month Avg Sales Value'.upcase && header[11].upcase == 'MTD Avg Sales Volume'.upcase && header[12].upcase == 'MTD Avg Sales Value'.upcase && header[13].upcase == 'Avg Last Month Attendance Days'.upcase && header[14].upcase == 'Last Reported Stock - Number'.upcase && header[15].upcase == 'Models In stock'.upcase && header[16].upcase == 'Distance between Beatroute and APP locations'.upcase && header[17].upcase == 'SIS Type'.upcase && header[18].upcase == 'Installed on'.upcase && header[19].upcase == 'GSB Type'.upcase && header[20].upcase == 'Installed on'.upcase && header[21].upcase == 'Clipon'.upcase && header[22].upcase == 'Countertop'.upcase && header[23].upcase == 'Flange'.upcase && header[24].upcase == 'Standee'.upcase && header[25].upcase == 'Inshop Branding'.upcase && header[26].upcase == 'SIS'.upcase && header[27].upcase == 'GSB'.upcase
+	    		puts "name #{name}"
 	    		path = File.join(directory, name)
 	            File.open(path, "wb") { |f| f.write(upload.read) }
 	            @file = UploadFile.new
 	            @file.file_name = upload.original_filename
-	            @file.uploaded_on = Time.now
+ 	            @file.uploaded_on = Time.now
 	            @file.type = 'Beatroute'
 	            @file.status = 'Pending'
 	            @file.save
@@ -39,7 +40,9 @@ class Beatroute < ActiveRecord::Base
 		@upload_files = UploadFile.where(:type => 'Beatroute',:status => 'Pending')
 		@upload_files.each do |upload_files|
 			csv = CSV.read('public/uploads/beatroute/upload/'+upload_files.file_name,headers: true)
+			puts "csv length #{csv.length}"
 			csv.each_with_index do |row,index|
+				if index < csv.length-1
 				 @beatroute = Beatroute.new
 				 @beatroute.distributor_name = row[0]
 				 @beatroute.tsm_name = row[1]
@@ -82,6 +85,7 @@ class Beatroute < ActiveRecord::Base
 				 else
 				 	  'failure'
 				 end
+				end
 
 			end	
 		end	

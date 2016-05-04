@@ -1,77 +1,129 @@
-
-
-<%if request.params.include? 'param' %>
-  <%= link_to "Clear", vendor_requests_path ,:class => 'show-all-vendor-request'%>
-<%end%>
-<% if can? :manage, VendorRequest %>
- <%= link_to "New Vendor Assignment", {controller: "vendor_requests", action: "new"}, id: "new-button" %>
-
-<%end%>
-<div>
-  <%=form_tag VendorRequest.new,:method => "get"  do |f| %>  
-  <div id="user-search-div" class="form-field">
-     <div class="user-search-field">
-       <%=select_tag 'type',options_for_select([ "Vendor Id", "Request Id","Request Status", "Vendor Response" ], params[:type]),:multiple => false,:style => "position:absolute;margin-left:-15%;width:12%"%>
-       <%= text_field_tag :param, params[:search], :id => "retailer-search",:required => "required",:placeholder => "Enter keyword to search",:value => params[:param] %>
-    </div>
-   <div>
-       <%= button_tag(type: 'submit',value: 'Search',:class=>"hide-button") do %>
-         <i ><%= image_tag 'search.png' ,:class => "button_with_image_save"%></i> 
-       <% end %>
-   </div>
-   <div class="error" id="message"></div>
-         
+<div id="nav-col-submenu"></div>
   </div>
-  <%end%>
+ 
+<div id="content-wrapper">
+	<div class="row mr_btm">
+     <div class="col-lg-12">
+        <div class="main-box-body clearfix">
+            <div class="row">
+     
+            <div class="col-md-3">
+                <div class="add_new_notfcn">
+                  <h4><i class="fa fa-plus-square fa-lg"></i>
+                    <span>
+          <%= link_to "New Assignment","/vendor_requests/new" %>
+             </span>
+                  </h4>
+                </div>
+              </div>           
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="main-box clearfix">
+          <div class="clearfix">
+              <div class="common_page user">
+              <div class="user_tab">
+              <div class="row">
+                <div class="col-md-2">
+                  <h4>Assignments</h4>
+                </div>
+                <div class="col-md-6">
+                <ul class="list-inline list-unstyled" id="myTab">
+
+               
+                </ul>
+
+                </div>
+                
+                <div class="col-md-4">
+
+                  <%=form_tag '/vendor_request/search' ,:method => 'get' do |f| %>  
+                    <div id="user-search-div" class="form-field">
+                       <div class="user-search-field">
+                         <%= text_field_tag :email, params[:email], :id => "retailer-search",:required => "required",:placeholder => "Request Id",:class => 'search_email' %>
+                      </div>
+                      <div>
+                        <% if params[:email] == nil %>
+                         <%= button_tag(type: 'submit',value: 'search',:class=>"hide-button") do %>
+                           <i class="fa fa-search search-icon"></i> 
+                         <% end %>
+
+                        <% else %>
+
+                            <%= button_tag(type: 'submit',value: 'search',:class=>"clear-button") do %>
+                           <a href="/users"><i class="fa fa-times-circle-o"></i></a> 
+                        <% end %>
+                          <% end %>
+                      </div> 
+                    <div class="error" id="message"></div>
+               
+                  </div>
+      <%end%>   
+
+                </div>
+              </div>
+              </div>
+
+                <div id='content' class="tab-content" >
+               <% @vendor_request.each do |vendor_request| %>
+                 
+                    <div class="tab-pane active" id="all">
+                    	
+                      <div class="row">
+                      	   
+                          <div class="col-md-8">
+                            <div class="parent">
+                            	<ul class="list-unstyled">
+                            		<li> Request Id</li>
+                            		<li>
+                            	<a href="/requests/<%=vendor_request.request_id%>/edit?q[request_type]=<%=Request.find(vendor_request.request_id).request_type%>"  class="blue"><%=vendor_request.request_id%>
+                            			</a>	
+                            		</li>
+                            	</ul>
+                            	<ul class="list-unstyled">
+                            		<li> Vendor Name</li>
+                            		<li class="blue"><%=Vendorlist.find(vendor_request.vendor_id).vendor_name%></li>
+                            	</ul>
+                            </div>                           
+                          </div>
+
+                          <div class="col-md-3">
+
+                          	<ul class="list-unstyled">
+	                    		<li>Assigned  Date</li>
+	                    		<li class="blue"><%=vendor_request.assigned_date.strftime("%d %b,%Y")%></li>
+                            	</ul>
+                            	<ul class="list-unstyled">
+	                    		<li>Current Status</li>
+	                    		<li class="blue"><%=vendor_request.vendor_response%></li>
+                            	</ul>
+                               
+                        </div>
+                        <a href="/vendor_requests/<%=vendor_request.id%>">
+                        	<div class="col-md-1 arrow_circl_rgt">
+                        	<i aria-hidden="true" class="fa fa-arrow-circle-right"></i>
+							</div>
+						</a>
+                        
+                </div>
+                   
+                </div>
+            
+
+              <% end %>
+                <%= will_paginate @vendor_request %>
+              </div>
+
+	   		</div>
+	 	</div>
+	</div>
 </div>
-<table class="ui table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Vendor Id</th>
-      <th>Request Id</th>
-      <th>Vendor Response</th>
-      <th>Assigned date</th>
-      <% if can? :manage, VendorRequest %>
-      <th>Unassign</th>
-      <th>Edit</th>
-      <%end%>
-      <th>Show</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @vendor_request.each do |vendor_request| %>
-      <tr>
-        <td>
-          <%=vendor_request.id%>
-        </td>
-        <td>
-          <%=vendor_request.vendor_id%>
-        </td>
-        <td>
-          <%=vendor_request.request_id%>
-        </td>
-        <td>
-          <%=vendor_request.vendor_response%>
-        </td>
-        <td>
-          <%=vendor_request.assigned_date%>
-        </td>
-        <% if can? :manage, VendorRequest %>
-        <td>
-          <%= link_to "Unassign", [vendor_request], method: :delete, data: { confirm: "Are you sure?" },:style => 'color:red'%>
-        </td>
-        <td>
-          <%= link_to "Edit", [:edit, vendor_request] %>
-        </td>
-        <%end%>
-        <td>
-          <%= link_to "Show", [vendor_request] %>
-        </td>
-      </tr>
-    <%end %>
-  </tbody>
-</table>
-<div class="response-pagination clearfix">
-  <%= will_paginate @vendor_request %>
 </div>
+</div>
+
+<script type="text/javascript">
+  $('#vendor').attr("class",'active')
+</script>   

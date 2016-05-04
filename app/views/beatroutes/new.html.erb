@@ -1,11 +1,6 @@
-<%= form_for @beatroute,:url => { :action => "file_upload" }, :html => { :class => 'user-form',:id => 'uploadForm' } do |f| %>
- 
-  <div  class="file-div">
-    <label><b>Upload CSV</b></label>
-    <%= f.file_field :file,:class => "file-field",:required => "required",:id => "fileupload"%>
-    <%=f.button :value => "Upload Record",:id => "file-submit"%>
-  </div>
-  
-<%end%>
-<%=link_to "Get Format",'/uploads/beatroute/format/format.csv',:class=>"format-link"%>
+
+
 <%= render :partial => 'form', :locals => { :form_title => "New Beatroute Record",:button => "Create Beatroute Record" } %>
+<script type="text/javascript">
+  $('#beatroute').attr("class",'active') 
+</script> 

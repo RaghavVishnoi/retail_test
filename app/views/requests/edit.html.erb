@@ -1,25 +1,3 @@
-<%if params[:view] == 'map'%>
-  <a href="/maps"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
-
-<%else%>
-  <%if @request.request_type == 'maintenance'%>
-    <%if User.user_roles(current_user.id).include?('cmo')%>
-        <a href="/requests?q[request_type]=3&q[status]=cmo_pending"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
-      <%else%>
-        <a href="/requests?q[request_type]=3&q[status]=pending"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
-      <%end%>
-  <%elsif @request.request_type == 'visitor'%>
-    <a href="/requests?q[request_type]=4&q[status]=approved"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
-  <%else%>
-     <%if User.user_roles(current_user.id).include?('cmo')%>
-       <a href="/requests?q[request_type][]=0&q[request_type][]=1&q[request_type][]=2&q[status]=cmo_pending"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
-     <%else%>
-       <a href="/requests?q[request_type][]=0&q[request_type][]=1&q[request_type][]=2&q[status]=pending"><%= image_tag 'back.png',:title => "Back",:class => "show-request-back-button" %></a>
-     <%end%>
-   
-
-  <%end%>
-<%end%>  
 
 <%if params[:alert] == 'true'%>
   <div id="popup-request">
@@ -27,7 +5,7 @@
       <tr>
         <td class="popup_title">Confirmation message</td>
         <td class="popup_title align_right">
-            <a href="javascript:void(0);" id="btnClose">Close</a>
+            <a href="javascript:void(0);" id="request-popup-close">Close</a>
         </td>
       </tr>
       <tr>
@@ -36,11 +14,9 @@
     </table>
     <%= button_tag "Yes",:value => "Yes", :class => "popup_button", :id => 'popup-button'%> 
 
-    <a href='/requests?q[request_type][]=0&q[request_type][]=1&q[request_type][]=2&q[status]=pending'><%= button_tag "No",:value => "No", :class => "popup_button", :id => 'request-close'%> </a>
+    <%= button_tag "No",:value => "No", :class => "popup_button", :id => 'request-close'%>
   </div> 
 <%end%>
-
-
 <div id="popup-request-assignment">
  <%= form_for VendorRequest.new do |f|%>
      <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
@@ -67,141 +43,84 @@
 
  <%end%>
  </div> 
-                  <% 
-                     
-                   if @request.status == 'cmo_pending'
-                    @cmo_approve_date = ''
-                    @heading = ''
-                    @status = 'Pending for CMO'
-                    @date = ''
-                    elsif @request.status == 'cmo_declined'
-                    @status = 'Declined by CMO'
-                    @date = @request.cmo_approve_date
-                    elsif @request.status == 'pending'
-                    @status = 'Approved by CMO'
-                    @date = @request.cmo_approve_date
-                    elsif @request.status == 'pending'
-                    @status = 'Pending for Approver'
-                    @date = ''
-                    elsif @request.status == 'declined'
-                    @status = 'Declined by Approver'
-                    @date = @request.approver_approve_date
-                    @heading = 'CMO approved date'
-                    @cmo_approve_date = @request.cmo_approve_date
-                    elsif @request.status == 'approved'
-                    @status = 'Approved by Approver'
-                    @date = @request.approver_approve_date
-                    @heading = 'CMO approved date'
-                    @cmo_approve_date = @request.cmo_approve_date
-                    %>
-                  <%end%> 
-<%= render :partial => "shared/error_messages", :locals => { :errors => @request.errors } %>
-<div class="request_wrap clearfix" >
-  <%if @request.request_type == 'gsb'
-     @request_type = 'GSB'
-  elsif @request.request_type == 'sis'
-     @request_type = 'SIS'
-  elsif @request.request_type == 'in_shop'
-     @request_type = 'In Shop'
-  elsif @request.request_type == 'maintenance'
-     @request_type = 'Maintenance'
-  elsif @request.request_type == 'visitor'
-     @request_type = 'Audit'
-  end
-  
-  if @request.status == 'cmo_pending'
-    @status = 'CMO Pending'
-  elsif @request.status == 'cmo_approved'
-    @status = 'CMO Approved'
-  elsif @request.status == 'pending'
-    @status = 'Pending'
-  elsif @request.status == 'approved'
-    @status = 'Approved'
-  elsif @request.status == 'declined'
-    @status = 'Declined'
-  end
-      
-  %>
-  <div><%= @request_type%>  
-    <%if @status == 'pending' && User.user_roles(current_user.id).include?('cmo') 
-      @status = 'CMO Approved'
-    end%>
-    <%=@status %>
-    <%= render :partial => 'search' %>
-  </div>
-   <div class="apprvr_wrap">
-   <%if( @request.request_type != 'maintenance' && @request.request_type != 'visitor')%>
-    <%= render 'requests/details/requestor_details' %>
 
-    <%= render 'requests/details/shop_details' %>
-
-    <%= render 'requests/details/competition_details' %>
-
-    <%end%>
-
-   <%if(@request.request_type != 'sis' && @request.request_type != 'in_shop' && @request.request_type != 'gsb' && @request.request_type != 'visitor')%>
-
-    <%= render 'requests/details/maintenance_details_I' %>
-
-    <%= render 'requests/details/maintenance_details_II' %>
-
-    <%= render 'requests/details/maintenance_details_III' %>
-
-    <%end%>
-
-    <%if(@request.request_type == 'visitor')%>
-
-    <%= render 'requests/details/visitor_details' %>
-
-    <%if @request.is_audit_done == true%>
-
-      <%= render 'requests/details/visitor_shop_details' %>
-
-      <%= render 'requests/details/rsp_details' %>
-
-      <%= render 'requests/details/gsb_visit_details' %>
-
-      <%= render 'requests/details/sis_visit_details' %>
-
-      <%= render 'requests/details/clipon_details' %>
-
-      <%= render 'requests/details/visitor_competition_details' %>
-    <%else%>
-      <%= render 'requests/details/audit_not_done_reasons' %> 
-    <%end%>  
-
-      <%= render 'requests/details/visitor_overall_performance' %>
-
-   <% end %> 
-  
-    <% if can? :cmo , Request %>
-      <%= form_for @request do %>
-      <% if @request.cmo_pending? %>
-        <div class="btn_blc clearfix">
-         
-        <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>
-        <%= hidden_field_tag "prev_url",  @prev_url %>
-        <%= submit_tag "Approve", :class => "apprv_btn"%>
-        <%= submit_tag "Decline", :class => "decline_btn"%>
-        </div>
-      <% end %>
-      <%end%>
-    <% end %>
-
-    <% if can? :approve , Request %>
-      <% if @request.pending? %>
-       <%= form_for @request do %>
-          <div class="btn_blc clearfix">
-            <%= hidden_field_tag "status","pending" %>
-            <%= hidden_field_tag "prev_url",  @prev_url %>
-            <%= text_area_tag('comment',nil, class: 'comment-field',:placeholder => "Enter your comment here") %>          
-            <%= submit_tag "Approve", :class => "apprv_btn"%>
-            <%= submit_tag "Decline", :class => "decline_btn"%>
-          </div>         
-        <%end%> 
-      <%end%>
-    <% end %>
-
-  </div>
+<div id="nav-col-submenu"></div>
 </div>
+				
+	<div id="content-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="common_page gsb_page">
+					<div class="clearfix"></div>
+        <a href="<%=session[:prev_url]%>">  
+          <i class="fa fa-arrow-circle-left back-icon" aria-hidden="true" ></i></a>
+						<div class="row">
+									
+						<% if params[:q][:request_type] == '4'  %>
+									<%= render 'requests/details/audit_details' %>
+                    <%=render 'requests/details/shop_details'%>
+                     
+                    <%if @request.is_audit_done == true%>
+                         <%=render 'requests/details/photo'%>
+                         <%=render 'requests/details/sales'%>
+                         <%=render 'requests/details/branding_detail'%>
 
+                          <%= render 'requests/details/audit_overview'%>
+          
+                          <%= render 'requests/details/rsp_audit'%>
+                        
+                          <%= render 'requests/details/gsb_audit'%>
+
+                          <%= render 'requests/details/sis_visit_details' %>
+
+                          <%= render 'requests/details/clipon_details' %>
+                    <%else%>
+                        <%=render 'requests/details/audit_not_done_reasons' %>
+                    <%end%>
+									<% else %>
+									<%=render 'requests/details/request_details'%>
+									<%=render 'requests/details/action'%> 
+                  <%=render 'requests/details/shop_details'%> 
+                  <%=render 'requests/details/sales'%>  
+                  <%=render 'requests/details/branding_detail'%>
+                  <%=render 'requests/details/photo'%>
+
+                  <%=render 'requests/details/action_details' if @request.status != 'cmo_pending'%>   
+						<% end %>
+												
+						</div>
+					</div>
+				</div>
+		 
+			
+          
+
+			   
+    		
+    		 
+
+    		
+    		
+         
+        
+       
+</div>
+    		
+
+			
+<%=render partial: 'page_js/menubar'%>
+<script>
+ 	$("#request-close").click(function(){
+ 		url = window.location.href.split("&alert")[0]
+		location.href = url;
+	});
+	$("#request-popup-close").click(function(){
+ 		url = window.location.href.split("&alert")[0]
+		location.href = url;
+	});
+	$("#popup-button").click(function(){
+ 		$(this).attr("style","display:none");
+ 		$('#popup-request-assignment').attr("style","display:block");
+	});
+ 	
+</script>

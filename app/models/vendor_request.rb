@@ -1,6 +1,6 @@
 class VendorRequest < ActiveRecord::Base
 
-	belongs_to :requests
+	belongs_to :request
 	has_many :vendor_stages
 	validate :vendor_id,:vendor_response,:assigned_date,:status, :presence => true
     validates :vendor_id, :presence => true
@@ -15,9 +15,7 @@ class VendorRequest < ActiveRecord::Base
 		@assigned_request = VendorRequest.all.where.not(:status => 'Rejected')
 		assigned_request = []
 		@assigned_request.each do |assignment|
-			assigned_request.push(assignment.request_id)
-			puts "here is unassigned request #{assignment.request_id}"
-		 
+			assigned_request.push(assignment.request_id)		 
 		end
 		assigned_request
 
@@ -84,4 +82,32 @@ class VendorRequest < ActiveRecord::Base
 		  @request = request.where(:request_type => request_type)	
 		end
 	 end
+
+	 def self.assignments(assigned_request,type)
+	 	case type
+	 	when 'All','',nil
+	 		Request.where.not(id: assigned_request,request_type: 4)
+	 	else
+	 		Request.where.not(id: assigned_request,request_type: 4).where(request_type: type)
+	 	end
+	 end
+
+	 def self.request_count_by_type(user_id,request_type,from,to,status)
+	 	start_date = if from != '' && from != nil then from else (Time.now - 1.month).to_date end
+    	end_date = if to != '' && to != nil then (Time.parse(to) + 1.day) else Time.now.to_date + 1 end
+	 	case status
+	 	when 0
+	 		request_ids = self.where(vendor_id: user_id,status: 'Waiting').pluck(:request_id)
+	 	when 1
+	 		request_ids = self.where(vendor_id: user_id,status: 'Accepted').pluck(:request_id)
+	 	when 2
+	 		request_ids = self.where(vendor_id: user_id,status: 'Finished').pluck(:request_id)
+	 	when 3
+	 		request_ids = self.where(vendor_id: user_id,status: 'Rejected').pluck(:request_id)
+	 	end
+	 		VendorRequest.where(request_id: Request.where(id: request_ids,request_type: request_type,created_at: start_date..end_date)).count 
+	 end
+
+
+
   end

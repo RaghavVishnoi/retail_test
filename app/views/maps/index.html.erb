@@ -1,417 +1,631 @@
-<%
 
-if @request_type != nil
-  request_type = @request_type[:request_type].map!(&:to_s)
-  request_type.each_with_index do |s,index|
-     if s == '0'
-      request_type[index] = 'GSB'
-     elsif s == '1'
-      request_type[index] = 'SIS'
-     elsif s == '2'
-      request_type[index] = 'In-shop'
-     elsif s == '3'
-      request_type[index] = 'Maintenance'
-     elsif s == '4'
-      request_type[index] = 'Audit'
-     end
-  end
-else
-  request_type = ['All']
-end
-if @status != nil
-  status = @status[0][:status]
-  status.each_with_index do |s,index|
-     if s == 'cmo_pending'
-      status[index] = 'CMO Pending'
-     elsif s == 'cmo_declined'
-      status[index] = 'CMO Declined'
-     elsif s == 'pending'
-      status[index] = 'Pending'
-     elsif s == 'approved'
-      status[index] = 'Approved'
-     elsif s == 'declined'
-      status[index] = 'Declined'
-     end
-  end
-else
-  status= ['All']
-end
-%>
- <div class="box">
-        <div class="box-inner">
-            <span class="map-span-super">Filter Result</span>
-            <%=form_for maps_path  do %>
-                <table width="96%"><tr><td class="map-table">Choose Request Type</td>
-                  <td colspan="3"><%= collection_check_boxes('request_type','request_type',Map::REQUEST_TYPE,:to_s,:to_s,{:checked => request_type},{:class => "request-type"})%></td></tr>
-                  <tr><td colspan="6"><hr /></td></tr>
-                  <tr><td>Choose Status</td>
-                   <td colspan="3"><%= collection_check_boxes('status','status',Map::REQUEST_STATUS,:to_s,:to_s,{:checked => status},{:class => "request-type"})%></td> </tr>
-                   <tr><td colspan="6"><hr /></td></tr>
-                   <tr><td class="map-label-state">Choose State</td>
-                    <td class="map-select-state"><%=select_tag 'state',options_for_select(['All State'] + Retailer.order(:state).all.map  {|a| a.state}.uniq, :selected => @state)%></td>
-                    <td class="map-label-cmo">Choose CMO</td>
-                    <td><%=select_tag 'cmo',options_for_select(CMO.display_names,:selected => @cmo),:prompt => "All CMO"%></td><td></td><td></td></tr>
-                    <tr><td colspan="6"><hr /></td></tr>
-                    <tr><td>From</td>
-                        <td><%=text_field_tag 'from',nil,:id => "map-date-from",:value => @from%></td>
-                        <td class="map-date-to">To</td><td><%=text_field_tag 'to',nil,:id => "map-date-to",:value => @to%></td>
-                        <td class="map-store-size-label">Store Size</td>
-                        <td class="map-store-size-select"><%=select_tag 'store_size',options_for_select(['All Size'] + Map::AVG_STORE_MONTHLY_SALES,:selected => @store_size)%></td></tr>
-                        <tr><td colspan="6"><hr /></td></tr>
-                        <tr>
-                          <td>RSP Present</td><td> <%=select_tag 'rsp_present',options_for_select(['All'] + BOOLEAN_VALUES,:selected => @rsp_present,:selected => @rsp_present)%></td>
-                          <td class="map-gionee-sales-label">Gionee Sales</td></td><td> <%=select_tag 'gionee_sales',options_for_select(['Whole Sale'] + Map::AVG_GIONEE_MONTHLY_SALES,:selected => @gionee_sales)%></td>
-                          <td></td><td> <%=submit_tag "Submit",:id => 'map-submit'%> </td>
-                        </tr>  
-                        <tr><td colspan="6"><hr /></td></tr>  
-                </table>
-              <%end%>
-          </div>      
-        </div>
-  
-    
-        
+<style>
+      
+      #map {
  
-  
-  <%= image_tag 'down-arrow.png',:class => "slide-right",:style => "width:20px;height:20px",:title => "Filter result here"%>
-  
-
- <div id="map_wrapper">
-   <div class="custom_select">
-     <div class="clearfix"></div>
-   </div>
-   <div id="map_canvas" class="mapping"></div>
- </div>
-
+        width:1050px;
+ 
+        height:600px;
+ 
+      }
+    </style>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="/assets/maplace.min.js"></script>
 
 <script>
-    $(document).ready(function(){
 
-        $(".box").hide();
-        $(".slide-right").hover(function(){
-           $(this).css('cursor', 'pointer');
-        });
-
-        
-        $(".slide-right").click(function(){
-
-            $(".box").animate({
-                height: "toggle"
-            });
-            var src = $(this).attr("src");
-           if(src == '/assets/up-arrow.png' || src == '/uploads/up-arrow.png'){
-             $(this).attr("src", '/uploads/down-arrow.png');
-           }
-           else{
-             $(this).attr("src", '/uploads/up-arrow.png');
-           }
-           
-        });
-        $( "#map-date-to" ).datepicker();
-        $( "#map-date-from" ).datepicker();
-
-        $("#map-submit").click(function () {
-            var val = $('#status').val();
-            var cmo = $("#cmo").val();
-            location.href="?status="+val+"&&cmo="+cmo;
-       
-        });
-       
-
-        var sPageURL = window.location.search.substring(1);
-        if(sPageURL != '' && sPageURL != null){
-          var first = sPageURL.split("&&");
-            var status = first[0].split("=");
-
-            
-            $("#status option").each(function() {
-               this.selected = $(this).val() == status[1];
-            });
-
-            if(first[1] != null){
-              var second  = first[1].split("=");
-              var cmo = second[1];
-              $("#cmo option").each(function() {
-              this.selected = $(this).val() == cmo;
-            });
-            }
-           
-
-             
-
-        }
-        else{
-          $('#status1').prop("checked", true)
-        }
-         
-        $('#request_type_request_type_all').click(function(){
-      if ($('#request_type_request_type_all').is(':checked') == true){
-        $('#request_type_request_type_gsb').attr('checked', false);
-        $('#request_type_request_type_in-shop').attr('checked', false);
-        $('#request_type_request_type_sis').attr('checked', false);
-        $('#request_type_request_type_maintenance').attr('checked', false);
-        $('#request_type_request_type_audit').attr('checked', false);
-      }
-    });
-     $('#request_type_request_type_gsb').click(function(){
-      $('#request_type_request_type_all').attr('checked', false);
-     });
-     $('#request_type_request_type_in-shop').click(function(){
-      $('#request_type_request_type_all').attr('checked', false);
-     });
-     $('#request_type_request_type_sis').click(function(){
-      $('#request_type_request_type_all').attr('checked', false);
-     });
-     $('#request_type_request_type_maintenance').click(function(){
-      $('#request_type_request_type_all').attr('checked', false);
-     });
-     $('#request_type_request_type_audit').click(function(){
-      $('#request_type_request_type_all').attr('checked', false);
-     });
-
-    $('#status_status_all').click(function(){
-      if ($('#status_status_all').is(':checked') == true){
-        $('#status_status_cmo_pending').attr('checked', false);
-        $('#status_status_cmo_declined').attr('checked', false);
-        $('#status_status_pending').attr('checked', false);
-        $('#status_status_approved').attr('checked', false);
-        $('#status_status_declined').attr('checked', false);
-       
-      }
-
-      
-    });
-    $('#status_status_cmo_pending').click(function(){
-      $('#status_status_all').attr('checked', false);
-    });
-    $('#status_status_cmo_declined').click(function(){
-      $('#status_status_all').attr('checked', false);
-    });
-    $('#status_status_approved').click(function(){
-      $('#status_status_all').attr('checked', false);
-    });
-    $('#status_status_pending').click(function(){
-      $('#status_status_all').attr('checked', false);
-    });
-    $('#status_status_declined').click(function(){
-      $('#status_status_all').attr('checked', false);
-    });
-
-
-    $(".slide-down").click(function(){
-        $("#marker-sign").slideDown(100);
-        $(".slide-up").show();
-        $(".slide-down").hide(); 
-        $('.map-markers').css('margin-top','-15%');
-
-         
-    });
-     $(".slide-up").click(function(){
-        $("#marker-sign").slideUp(100);
-        $(".slide-up").hide();
-        $(".slide-down").show();
-        $('.map-markers').css('margin-top','-5%');
-        
-       
-    });
-
-    });
+$(document).ready(function(){
  
-    var myJsArray = [] ;
-     <%
+  map_data(0,0,'All State',[0,1,2,3,4],['all'])
+    
+  $('#ajaxButton').click(function(){
+    var request_type = []
+    var status = []
+    request_type.push('all');
+    status.push('all')
+ 
+    var state = []; 
 
-     @map.each do |request|
-     @image = Image.where(:imageable_id => request.id)
-     @image.each do |image|
-       if image.lat.to_f > 0.0 && image.long.to_f > 0.0
-    %>
+    $('#state option:selected').each(function(i, selected){ 
+      if($(selected).val() == 'All State')
+      {
+        state[i] = $(selected).val();
+      }else{
+      state[i] = parseInt($(selected).val()); 
+      }
+    });
+
+    var from_date = $('#map-date-from').val();
+    var till_date = $('#map-date-to').val();
+
+        if(from_date == '' || till_date == '' || state == ''){
+          alert("Please fill all required fields");
+          
+      }
+      else{
         
-        myJsArray.push(<%=image.lat.to_f%>,<%=image.long.to_f%>,"<%=request.status%>","<%=request.request_type%>","<%=request.id%>");
-      <%end%>
-     <%end%>
-    <%end%>
-    jQuery(function($) {
-    // Asynchronously Load the map API 
-    var script = document.createElement('script');
-    script.src = "http://maps.googleapis.com/maps/api/js??center=Berkeley&sensor=false&callback=initialize";
-    document.body.appendChild(script);
-});
+      map_data(from_date,till_date,state,[0,1,2,3,4],status)
+      $(".click-hide").css('display','block');
 
-function initialize() {
-    var map;
-    var bounds = new google.maps.LatLngBounds();
-    var mapOptions = {
-        zoom:14,
-        center: new google.maps.LatLng(22.0, 77.0),
-        mapTypeId: 'roadmap'
-    };
-                    
-    // Display a map on the page
-    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-    map.setTilt(45);
-        
-    // Multiple Markers
-   
-    var len = myJsArray.length;
-    var markers = [];
-        for(var j=0;j<myJsArray.length;j=j+5)  {  
-       
+    }//end of else block
+    
+    
 
-        markers.push(['',myJsArray[j],myJsArray[j+1],myJsArray[j+2],myJsArray[j+3],myJsArray[j+4]]);
-        
-    }
-      
-      console.log(markers); 
-         
-                      
-    // Info Window Content
-    var infoWindowContent = [];
-        
-    // Display multiple markers on a map
-
-     var infoWindow = new google.maps.InfoWindow(), marker, i;
-     
-    // Loop through our array of markers & place each one on the map
-    console.log(markers.length);  
-    if(markers.length == 0){
-
-        var position = new google.maps.LatLng(22, 77);
-        bounds.extend(position);
-        marker = new google.maps.Marker({
+  $('#all_id').on('click',function(){
+      if($('#all_id').is(':checked') == true){
+          
+          request_type.push('all')
+          map_data(from_date,till_date,state,[0,1,2,3,4],status)
+      }
+      if($('#all_id').is(':checked') == false)  {
+         request_type.splice(request_type.indexOf('all'),1);
             
-            map: map,
-            title: 'INDIA'
+      }
+        request_type = []
+        request_type.push('all');
 
-        });
-        
-        // Allow each marker to have an info window    
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-                infoWindow.setContent(infoWindowContent[i]);
-                infoWindow.open(map, marker);
-            }
-        })(marker, i));
-
-        // Automatically center the map fitting all markers on the screen
-        map.fitBounds(bounds);
-
-    }else{
-    for( i = 0; i < markers.length; i++ ) {
-         
-
-        var marker_image = "";
-        if(markers[i][3] == 'cmo_pending'){
-            if(markers[i][4] == 'gsb'){
-              marker_image = "cp_gsb.png";
-            }else if(markers[i][4] == 'in_shop'){
-              marker_image = "cp_inshop.png";
-            }else if(markers[i][4] == 'sis'){
-              marker_image = "cp_sis.png";
-            }else if(markers[i][4] == 'maintenance'){
-              marker_image = "cp_maintenance.png";
-            }else{
-              marker_image = "cp_visit.png";
-            }
-        }else if(markers[i][3] == 'cmo_declined'){
-            if(markers[i][4] == 'gsb'){
-              marker_image = "cd_gsb.png";
-            }else if(markers[i][4] == 'in_shop'){
-              marker_image = "cd_inshop.png";
-            }else if(markers[i][4] == 'sis'){
-              marker_image = "cd_sis.png";
-            }else if(markers[i][4] == 'maintenance'){
-              marker_image = "cd_maintenance.png";
-            }else{
-              marker_image = "cd_visit.png";
-            }
-        }else if(markers[i][3] == 'pending'){
-           if(markers[i][4] == 'gsb'){
-              marker_image = "p_gsb.png";
-            }else if(markers[i][4] == 'in_shop'){
-              marker_image = "p_inshop.png";
-            }else if(markers[i][4] == 'sis'){
-              marker_image = "p_sis.png";
-            }else if(markers[i][4] == 'maintenance'){
-              marker_image = "p_maintenance.png";
-            }else{
-              marker_image = "p_visit.png";
-            }
-        }else if(markers[i][3] == 'approved'){
-            if(markers[i][4] == 'gsb'){
-              marker_image = "a_gsb.png";
-            }else if(markers[i][4] == 'in_shop'){
-              marker_image = "a_inshop.png";
-            }else if(markers[i][4] == 'sis'){
-              marker_image = "a_sis.png";
-            }else if(markers[i][4] == 'maintenance'){
-              marker_image = "a_maintenance.png";
-            }else{
-              marker_image = "a_visit.png";
-            }
-        }else if(markers[i][3] == 'declined'){
-            if(markers[i][4] == 'gsb'){
-              marker_image = "d_gsb.png";
-            }else if(markers[i][4] == 'in_shop'){
-              marker_image = "d_inshop.png";
-            }else if(markers[i][4] == 'sis'){
-              marker_image = "d_sis.png";
-            }else if(markers[i][4] == 'maintenance'){
-              marker_image = "d_maintenance.png";
-            }else{
-              marker_image = "d_visit.png";
-            }
-        }
-        // var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"+image_url);
-        if (markers[i][1] != 0){
-        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
-        bounds.extend(position);
-        marker = new google.maps.Marker({
-            position: position,
-            icon: '/uploads/markers/'+marker_image,
-            map: map,
-            title: markers[i][0],
-            url: '/requests/'+markers[i][5]+'/edit?view=map'
-        });
+        $('#gsb_id').attr('checked', false);
+        $('#sis_id').attr('checked', false);
+        $('#inshop_id').attr('checked', false);
+        $('#maintenance_id').attr('checked', false);
+        $('#audit_id').attr('checked', false);
        
-        // Allow each marker to have an info window    
-         google.maps.event.addListener(marker, 'click', (function(marker, i) {
+      });
+
+        $("#gsb_id").click(function(){
+          //if(request_type.includes('all'))
+          if($.inArray('all', request_type) > -1)
+            {
+              request_type.splice(request_type.indexOf('all'),1);
+              $('#all_id').attr('checked', false);
+            }
+          if($('#gsb_id').is(':checked') == false){
+             request_type.splice(request_type.indexOf(0),1);
+          }
+          if($('#gsb_id').is(':checked') == true){
+            request_type.push(0)
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+             
+        $("#sis_id").click(function(){
+         // if(request_type.includes('all'))
+           if($.inArray('all', request_type) > -1)
+            {
+              request_type.splice(request_type.indexOf('all'),1);
+              $('#all_id').attr('checked', false);
+            }
+          if($('#sis_id').is(':checked') == false){
+             request_type.splice(request_type.indexOf(1),1);
+          }
+          if($('#sis_id').is(':checked') == true){
+            request_type.push(1)
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      }); 
+        $("#inshop_id").click(function(){
+         // if(request_type.includes('all'))
+           if($.inArray('all', request_type) > -1)
+            {
+              request_type.splice(request_type.indexOf('all'),1);
+              $('#all_id').attr('checked', false);
+            }
+          if($('#inshop_id').is(':checked') == false){
+             request_type.splice(request_type.indexOf(2),1);
+          }
+          if($('#inshop_id').is(':checked') == true){
+            request_type.push(2)
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+        $("#maintenance_id").click(function(){
+          //if(request_type.includes('all'))
+          if($.inArray('all', request_type) > -1)
+            {
+              request_type.splice(request_type.indexOf('all'),1);
+              $('#all_id').attr('checked', false);
+            }
+          if($('#maintenance_id').is(':checked') == false){
+             request_type.splice(request_type.indexOf(3),1);
+          }
+          if($('#maintenance_id').is(':checked') == true){
+            request_type.push(3)
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      }); 
+       $("#audit_id").click(function(){
+          //if(request_type.includes('all'))
+          if($.inArray('all', request_type) > -1)
+            {
+              request_type.splice(request_type.indexOf('all'),1);
+              $('#all_id').attr('checked', false);
+            }
+          if($('#audit_id').is(':checked') == false){
+             request_type.splice(request_type.indexOf(4),1);
+          }
+          if($('#audit_id').is(':checked') == true){
+            request_type.push(4)
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      }); 
+
+
+      
+
+  $('#status_all_id').on('click',function(){
+      if($('#status_all_id').is(':checked') == true){
+          status = []
+         status.push('all');
+          map_data(from_date,till_date,state,request_type,status)
+      }
+      if($('#status_all_id').is(':checked') == false)  {
+          
+          status.splice(status.indexOf('all'),1);
+            
+      }
+       
+
+
+        $('#cmopending_id').attr('checked', false);
+        $('#cmodeclined_id').attr('checked', false);
+        $('#pending_id').attr('checked', false);
+        $('#approved_id').attr('checked', false);
+        $('#declined_id').attr('checked', false);
+       
+      });
+
+        $("#cmopending_id").click(function(){
+          if($.inArray('all', status) > -1)
+            {
+              status.splice(status.indexOf('all'),1);
+              $('#status_all_id').attr('checked', false);
+            }
+          if($('#cmopending_id').is(':checked') == false){
+             status.splice(status.indexOf('cmo_pending'),1);
+          }
+          if($('#cmopending_id').is(':checked') == true){
+            status.push('cmo_pending')
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+
+         $("#cmodeclined_id").click(function(){
+          //if(status.includes('all'))
+           if($.inArray('all', status) > -1)
+            {
+              status.splice(status.indexOf('all'),1);
+              $('#status_all_id').attr('checked', false);
+            }
+          if($('#cmodeclined_id').is(':checked') == false){
+             status.splice(status.indexOf('cmo_declined'),1);
+          }
+          if($('#cmodeclined_id').is(':checked') == true){
+            status.push('cmo_declined')
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+
+      $("#pending_id").click(function(){
+        // if(status.includes('all'))
+          if($.inArray('all', status) > -1)
+            {
+              status.splice(status.indexOf('all'),1);
+              $('#status_all_id').attr('checked', false);
+            }
+          if($('#pending_id').is(':checked') == false){
+             status.splice(status.indexOf('pending'),1);
+          }
+          if($('#pending_id').is(':checked') == true){
+            status.push('pending')
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+
+      $("#approved_id").click(function(){
+          //if(status.includes('all'))
+            if($.inArray('all', status) > -1)
+            {
+              status.splice(status.indexOf('all'),1);
+              $('#status_all_id').attr('checked', false);
+            }
+          if($('#approved_id').is(':checked') == false){
+             status.splice(status.indexOf('approved'),1);
+          }
+          if($('#approved_id').is(':checked') == true){
+            status.push('approved')
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+
+      $("#declined_id").click(function(){
+          //if(status.includes('all'))
+            if($.inArray('all', status) > -1)
+            {
+              status.splice(status.indexOf('all'),1);
+              $('#status_all_id').attr('checked', false);
+            }
+          if($('#declined_id').is(':checked') == false){
+             status.splice(status.indexOf('declined'),1);
+          }
+          if($('#declined_id').is(':checked') == true){
+            status.push('declined')
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+
+        
+    
+
+
+  });
+
+  
+  function map_data(
+    from_date,till_date,state,request_type,status_type){
+    $('.loader').attr("style","display:block");
+     $.ajax({
+                 url: "/maps/map_data",   
+                 type: "POST",
+                 data: {  from_date : from_date,
+                         till_date : till_date,
+                         state : state,
+                         request_type : request_type,
+                         status_type: status_type
+
+                }, 
+                dataType: "text",
+                 
+                complete: function() {
+                  $('.loader').attr("style","display:none");
+                },
+
+            success: function(data) {     
+              var lln = []    
+              
+              var response = JSON.parse(data);
+                console.log(response);
+
+ 
+                for(i=0;i<response.length;i++){
+                 
+              //if(response[i]['lat'] != 0.0 && response[i]['lat'] != 'undefined' && response[i]['long'] != 0.0 && response[i]['long'] != 'undefined'){
+                if(response[i][3] != 0.0 && response[i][3] != 'undefined' && response[i][4] != 0.0 && response[i][4] != 'undefined'){
+
+                    //if(response[i]['status']=="approved"){
+                      if(response[i][1]=="approved"){
+                      var icon = "";
+                       //switch (parseInt(response[i]['request_type'])) {
+                        switch (parseInt(response[i][0])) {
+                              case 0:
+                                 icon= '/assets/a_gsb.png'
+
+                              break;
+                              case 1:
+                                 icon= '/assets/a_sis.png'
+                              break;
+                              case 2:
+                                 icon= '/assets/a_inshop.png'
+                              break;
+                              case 3:
+                                   icon= '/assets/a_maintenance.png'
+                              break;
+                              case 4:
+                                 icon= '/assets/a_visit.png'
+                              break;
+                      }
+                    
+
+                       
+                        //lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 4,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']})
+                        lln.push({lat: response[i][3],lon: response[i][4],zoom: 4,icon: icon,reqId: response[i][5],reqType: response[i][0]})
+                    }
+
+                  //else if(response[i]['status']=="declined"){
+                    else if(response[i][1]=="declined"){
+                        var icon = "";
+                      //switch ( parseInt(response[i]['request_type']) ) {
+                        switch ( parseInt(response[i][0]) ) {
+                              case 0:
+                                 icon= '/assets/d_gsb.png'
+                              break;
+                              case 1:
+                                icon= '/assets/d_sis.png'
+                              break;
+                              case 2:
+                                   icon= '/assets/d_inshop.png'
+                              break;
+                              case 3:
+                                   icon= '/assets/d_maintenance.png'
+                              break;
+                              case 4:
+                                  icon= '/assets/d_visit.png'
+                              break;
+                      }
+                      
+                      //lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']});
+                      lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]});
+                  }
+                  
+               // else if(response[i]['status']=="cmo_pending"){
+                else if(response[i][1]=="cmo_pending"){
+                  var icon = "";
+                      //switch ( parseInt(response[i]['request_type'])) {
+                        switch ( parseInt(response[i][0])) {
+                              case 0:
+                                  icon= '/assets/cp_gsb.png'
+                              break;
+                              case 1:
+                                 icon= '/assets/cp_sis.png'
+                              break;
+                              case 2:
+                                  icon= '/assets/cp_inshop.png'
+                              break;
+                              case 3:
+                                  icon= '/assets/cp_maintenance.png'
+                              break;
+                              case 4:
+                                 icon= '/assets/cp_visit.png'
+                              break;
+                        }
+                     
+                    //lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']});
+                    lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]});
+                  }
+
+                //else if(response[i]['status']=="cmo_declined"){
+                  else if(response[i][1]=="cmo_declined"){
+                    var icon = "";
+                      //switch ( parseInt(response[i]['request_type'])) {
+                        switch ( parseInt(response[i][0])) {
+                              case 0:
+                                  icon= '/assets/cd_gsb.png'
+                              break;
+                              case 1:
+                                 icon= '/assets/cd_sis.png'
+                              break;
+                              case 2:
+                                  icon= '/assets/cd_inshop.png'
+                              break;
+                              case 3:
+                                   icon= '/assets/cd_maintenance.png'
+                              break;
+                              case 4:
+                                  icon= '/assets/cd_visit.png'
+                              break;
+                        }
+
+
+                    //lln.push({lat: response[i]['lat'],lon: response[i]['long' ],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']});
+                    lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]});
+                  }
+                   //else if(response[i]['status']=='pending'){
+                    else if(response[i][1]=='pending'){
+                      var icon = "";
+                        //switch ( parseInt(response[i]['request_type']) ) {
+                          switch ( parseInt(response[i][0]) ) {
+                              case 0:
+                                  icon= '/assets/p_gsb.png'
+                              break;
+                              case 1:
+                               icon= '/assets/p_sis.png'
+                              break;
+                              case 2:
+                                   icon= '/assets/p_inshop.png'
+                              break;
+                              case 3:
+                                  icon= '/assets/p_maintenance.png'
+                              break;
+                              case 4:
+                                 icon= '/assets/p_visit.png'
+                              break;
+                        }
+
+                      //lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']})
+                      lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]})
+                  }
+                  
+                     
+                  }//end of main if
+                        
+              }//end of for loop
+ 
+                    initMap(lln);
+ 
+                   
+                
+
+            },//end of success function
+                error: function() {
+                         alert("Ajax error!")
+                }
+        });
+  }
+});
+ 
+
+</script>
+
+
+<div id="nav-col-submenu"></div>
+  </div>
+ 
+<div id="content-wrapper">
+  
+                
+  <div class="row">
+
+     <div class="col-lg-12" style="padding-left:0;">
+
+<div id="cover"></div>
+<nav id="main-nav">
+  
+  <div id="nav-button" class="cus-pad"><span class="fa fa-navicon"></span></div>
+
+  <div id="nav-list" class="custom-hide">
+<%=form_for maps_path  do %>
+<div class="cus-pad">
+  <h4>Choose State</h4>
+    <%=select_tag 'state',options_for_select(['All State'] + State.permit_state(current_user)),:multiple=>true %>
+
+
+<br>
+<h4>From</h4>
+    <%=date_field_tag 'from',nil,:id => "map-date-from",:value => @from%>
+    <h4>To</h4>
+    <%=date_field_tag 'to',nil,:id => "map-date-to",:value => @to%>
+
+<div class="" style="text-align:right;">
+
+<button type="button" class="btn btn-labeled btn-info"  id="ajaxButton" name="commit"> <span class="btn-label"> </span>  button</button>
+</div>
+
+</div>
+<div class="click-hide">
+
+
+      <div class="cus-pad">
+        <h4>Choose Request Type</h4>
+    <ul class="check-block" style="padding:0">
+
+       
+<li><%=image_tag "all_request.png",:class=>"map_icon"%><label> All </label><%= check_box_tag :all_id,'all',checked = true,:class=>'checkb' %> </li>
+
+<li><%=image_tag "gsb.png",:class=>"map_icon"%><label> GSB</label><%= check_box_tag :gsb_id,'gsb',checked = false,:class=>'checkb' %></li>
+
+<li><%=image_tag "inshop.png",:class=>"map_icon"%><label> In-shop </label><%= check_box_tag :inshop_id,'inshop',checked = false,:class=>'checkb' %> </li>
+
+<li><%=image_tag "sisp.png",:class=>"map_icon"%><label> SIS </label><%= check_box_tag :sis_id,'sis',checked = false,:class=>'checkb' %> </li>
+
+<li><%=image_tag "maintenance.png",:class=>"map_icon"%><label> Maintenance </label><%= check_box_tag :maintenance_id,'maintenance',checked = false,:class=>'checkb' %> </li>
+
+<li><%=image_tag "audit.png",:class=>"map_icon"%><label> Audit </label><%= check_box_tag :audit_id,'audit',checked = false,:class=>'checkb' %> </li>
+
+
+    </ul>
+<h4>Choose Status</h4>
+    <ul class="check-block" style="padding:0">
+        <li><%=image_tag "all_type.png",:class=>"map_icon"%><label> All </label><%= check_box_tag :status_all_id,'all',checked= true,:class=>'checkb' %> </li>
+
+          <li><%=image_tag "cpending.png",:class=>"map_icon"%><label>CMO Pending </label><%= check_box_tag :cmopending_id,'cmo_pending',checked= false,:class=>'checkb' %> </li>
+
+          <li> <%=image_tag "cdeclined.png",:class=>"map_icon"%><label> CMO Declined </label><%= check_box_tag :cmodeclined_id,'cmo_declined',checked= false,:class=>'checkb' %></li>
+
+          <li><%=image_tag "pending.png",:class=>"map_icon"%><label> Pending </label><%= check_box_tag :pending_id,'pending',checked= false,:class=>'checkb' %> </li>
+
+          <li><%=image_tag "approved.png",:class=>"map_icon"%><label> Approved </label><%= check_box_tag :approved_id,'approved',checked= false,:class=>'checkb' %> </li>
+
+          <li><%=image_tag "declined.png",:class=>"map_icon"%><label> Declined </label><%= check_box_tag :declined_id,'declined',checked= false,:class=>'checkb' %> </li>
+    </ul>
+  <br>
+
+ 
+
+      </div>
+</div>
+
+<div class="select_hide">
+<div class="cus-pad">
+    
+    <h4>Store Size</h4>
+    <%=select_tag 'store_size',options_for_select(['All Size'] + Map::AVG_STORE_MONTHLY_SALES,:selected => @store_size)%>
+<br>
+    <h4>RSP Present</h4>
+
+     <%=select_tag 'rsp_present',options_for_select(['All'] + BOOLEAN_VALUES,:selected => @rsp_present,:selected => @rsp_present)%>
+<br>
+     <h4>Gionee Sales</h4>
+
+     <%=select_tag 'gionee_sales',options_for_select(['Whole Sale'] + Map::AVG_GIONEE_MONTHLY_SALES,:selected => @gionee_sales)%>
+
+    
+
+</div>
+
+</div>
+  </div>
+
+  <% end %>
+</nav>
+
+
+<div class="loader"><img src='/assets/loader2.gif' /></div>
+    <div id="map"></div>
+ 
+    <script>
+    function initMap(lln){
+            
+           var myLatLng = {lat: -25.363, lng: 131.044};
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 5,
+            center: {lat: 20.5937, lng: 78.9629}
+          });
+ 
+
+        for(i=0 ;i<lln.length;i++) {
+          var position = new google.maps.LatLng(lln[i]['lat'], lln[i]['lon']);
+
+          var marker = new google.maps.Marker({
+            position: position,
+            icon: lln[i]['icon'],
+            map: map,
+            title: 'Hello World!',
+            url: '/requests/'+lln[i]['reqId']+'/edit?q[request_type]='+lln[i]['reqType']
+
+          });
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
                window.location.href = this.url;
             }
         })(marker, i));
-
-        // Automatically center the map fitting all markers on the screen
-        map.fitBounds(bounds);
-    }
-  }
+        }
 }
+    </script>
+ 
+     </div>
+ </div>
+</div> 
+ 
+ 
+ <script>
 
-    // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
-      var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-        this.setZoom(5);
-        google.maps.event.removeListener(boundsListener);
-    });
-    
-}
+
+$('#nav-button').click( function(){
+    $(this).toggleClass('width');
+    $(this).parent().toggleClass('show');
+    $(this).children().toggleClass( 'fa-navicon').toggleClass( 'fa-times-circle-o');
+    $('#nav-list').toggleClass('nav-show'); $('#cover').toggleClass('display'); 
+ 
+});
 </script>
-<div class="map-markers">
-  <%= image_tag 'maximize.png',:class => "slide-down",:title => "Filter result here"%>
-  <%= image_tag 'minimize.png',:class => "slide-up",:title => "Filter result here"%>
-    <div id="marker-sign">
-    <table width="100%" id="markers-sign">
-        <tr>
-          <td class="map-markers-cell"><span>CMO Pending</span></td><td class="map-markers-cell"><span>CMO Declined</span></td><td class="map-markers-cell"><span>Pending</span></td><td class="map-markers-cell"><span>Approved</span></td><td class="map-markers-cell"><span>Declined</span></td></tr>
-          <tr><td><img src="/uploads/markers/cp_gsb.png" class="map-markers-img"/><span class="map-markers-span">- GSB</span></td><td><img src="/uploads/markers/cd_gsb.png" class="map-markers-img"/><span class="map-markers-span">- GSB</span></td><td><img src="/uploads/markers/p_gsb.png" class="map-markers-img"/><span class="map-markers-span">- GSB</span></td><td><img src="/uploads/markers/a_gsb.png" class="map-markers-img"/><span class="map-markers-span">- GSB</span></td><td><img src="/uploads/markers/d_gsb.png" class="map-markers-img"/><span class="map-markers-span">- GSB</span></td>
-        </tr>
-        <tr><td><img src="/uploads/markers/cp_inshop.png" class="map-markers-img"/><span class="map-markers-span">- In-shop</span></td><td><img src="/uploads/markers/cd_inshop.png" class="map-markers-img"/><span class="map-markers-span">- In-shop</span></td><td><img src="/uploads/markers/p_inshop.png" class="map-markers-img"/><span class="map-markers-span">- In-shop</span></td><td><img src="/uploads/markers/a_inshop.png" class="map-markers-img"/><span class="map-markers-span">- In-shop</span></td><td><img src="/uploads/markers/d_inshop.png" class="map-markers-img"/><span class="map-markers-span">- In-shop</span></td>
-        </tr>
-        <tr><td><img src="/uploads/markers/cp_sis.png" class="map-markers-img"/><span class="map-markers-span">- SIS</span></td><td><img src="/uploads/markers/cd_sis.png" class="map-markers-img"/><span class="map-markers-span">- SIS</span></td><td><img src="/uploads/markers/p_gsb.png" class="map-markers-img"/><span class="map-markers-span">- SIS</span></td><td><img src="/uploads/markers/a_sis.png" class="map-markers-img"/><span class="map-markers-span">- SIS</span></td><td><img src="/uploads/markers/d_sis.png" class="map-markers-img"/><span class="map-markers-span">- SIS</span></td>
-        </tr>
-        <tr><td><img src="/uploads/markers/cp_maintenance.png" class="map-markers-img"/><span class="map-markers-span">- Maintenance</span></td><td><img src="/uploads/markers/cd_maintenance.png" class="map-markers-img"/><span class="map-markers-span">- Maintenance</span></td><td><img src="/uploads/markers/p_maintenance.png" class="map-markers-img"/><span class="map-markers-span">- Maintenance</span></td><td><img src="/uploads/markers/a_maintenance.png" class="map-markers-img"/><span class="map-markers-span">- Maintenance</span></td><td><img src="/uploads/markers/d_maintenance.png" class="map-markers-img"/><span class="map-markers-span">- Maintenance</span></td>
-        </tr>
-        <tr><td><img src="/uploads/markers/cp_visit.png" class="map-markers-img"/><span class="map-markers-span">- Audit</span></td><td><img src="/uploads/markers/cd_visit.png" class="map-markers-img"/><span class="map-markers-span">- Audit</span></td><td><img src="/uploads/markers/p_visit.png" class="map-markers-img"/><span class="map-markers-span">- Audit</span></td><td><img src="/uploads/markers/a_visit.png" class="map-markers-img"/><span class="map-markers-span">- Audit</span></td><td><img src="/uploads/markers/d_visit.png" class="map-markers-img"/><span class="map-markers-span">- Audit</span></td>
-        </tr>
-            
-    </table>  
-    </div>  
-</div>
+
+
+ 
+     
+         
+   
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4jlTEhC8Yx1Z0fIGZgPe0KD0b9_CjbMM">
+    </script>
+   
+ 

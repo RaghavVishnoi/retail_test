@@ -1,124 +1,128 @@
- <%= render :partial => "shared/error_messages", :locals => { :errors => @user.errors } %>
-<a href="/users/"><%= image_tag 'back.png',:title => "Back",:class => "back" %></a>
+<div id="nav-col-submenu"></div>
 
-<%= form_for @user, :html => { :class => 'user-form' } do |f| %>
- <h4 id="form-title"><%= form_title %></h4>
+</div>
 
 
-  
-  <div class="form-field">
-    <span class="mandetory">*</span><%= f.label :email %>
-    <%= f.text_field :email,:required => "required" %>
-  </div>
+<div id="content-wrapper">
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @user.errors } %>
 
-  <div class="form-field">
-    <span class="mandetory">*</span><%= f.label :name %>
-    <%= f.text_field :name,:required => "required" %>
-  </div>
-
-  <div class="form-field">
-    <span class="mandetory">*</span><%= f.label :state %>
-    <%= f.text_field :state,:required => "required" %>
-  </div>
-  
-    
-      <%
-      if @role.name == 'superadmin'%>
-      <div class="form-field">
-        <span class="mandetory">*</span><%= f.label :role_ids %>
-        <%= f.select :role_ids, Role.pluck(:name, :id), {}, { :multiple => false } %>
-      </div>
-      <% if can? :manage, User %>
-    <div class="form-field">
-      <%= f.label :department_ids, "Department" %>
-      <%= f.select :department_ids, Department.pluck(:name, :id), :include_blank => true %>
-    </div>
-  <% else %>
-    <div class="form-field">
-      <span class="field-name">Department</span>
-      <span class="field-value"><%= current_user.departments.map(&:name).join(', ') %></span>
-    </div>
-  <% end %>
-
-  <% if can? :manage, User %>
-    <div class="form-field">
-      <%= f.label :region_ids, "Regions" %>
-      <%= f.select :region_ids, Region.pluck(:name, :id), {}, { :multiple => true } %>
-    </div>
-  <% else %>
-    <div class="form-field">
-      <span class="field-name">Regions</span>
-      <span class="field-value"><%= current_user.regions.map(&:name).join(', ') %></span>
-    </div>
-  <% end %>
-
-  <% if can? :manage, User %>
-    <div class="form-field">
-      <%= f.label :business_unit_ids, "Business Units" %>
-      <%= f.select :business_unit_ids, BusinessUnit.pluck(:name, :id), {}, { :multiple => true } %>
-    </div>
-  <% else %>
-    <div class="form-field">
-      <span class="field-name">Business Units</span>
-      <span class="field-value"><%= current_user.business_units.map(&:name).join(', ') %></span>
-    </div>
-  <% end %>
-  
-  <% if can? :manage, User %>
-    <div class="form-field">
-      <%= f.label :job_title_ids, "Job Titles" %>
-      <%= f.select :job_title_ids, JobTitle.pluck(:title, :id), {}, { :multiple => true } %>
-    </div>
-  <% else %>
-    <div class="form-field">
-      <span class="field-name">Job Titles</span>
-      <span class="field-value"><%= current_user.job_titles.map(&:title).join(', ') %></span>
-    </div>
-  <% end %>
-  
-  <% if can? :manage, User %>
-    <div class="form-field">
-      <%= f.label :weekly_off_ids, "Weekly Offs" %>
-      <%= f.select :weekly_off_ids, WeeklyOff.all.map { |w| [w.day, w.id] }, {}, { :multiple => true } %>
-    </div>
-  <% else %>
-    <div class="form-field">
-      <span class="field-name">Weekly Offs</span>
-      <span class="field-value"><%= current_user.weekly_offs.map(&:day).join(', ') %></span>
-    </div>
-  <% end %>
-      <%else%>
-      <div class="form-field">
-        <span class="mandetory">*</span><%= f.label :role_ids %>
-        <%= f.select :role_ids, Role.where(:name => ['vendor','cmo','requester']).pluck(:name, :id),{:prompt => "Select user role"},:class => 'retailer_select',:required => "required",:multiple => true %>
-      </div>
-      <%end%>
-      <div class="form-field">
-         <span class="mandetory">*</span>Status
-         <%= f.select :status, RETAILER_STATUS,{:prompt => "Select user status"},:class => 'retailer_select',:required => "required" %>
-      </div>
-
+  <div class="row">
+    <div class="col-lg-12">
+    <div class="main-box clearfix">
+    <div class="clearfix">
+      <div class="user_page">
+      <h2>Edit User</h2>
       
-      <%if form_title == "New User"%>
-      <div class="form-field">
-       <span class="mandetory">*</span><%= f.label :password,:id => "confirm-password-field" %>
-       <%= f.password_field :password,:placeholder => "Enter new password",:required => "required" %>
-     </div>
-     <div class="form-field">
-       <span class="mandetory">*</span><%= f.label :password_confirmation,:id => "confirm-password-field" %>
-       <%= f.password_field :password_confirmation,:placeholder => "Confirm new password",:required => "required" %>
-     </div>
-      <%else%>
-      <div class="form-field">
-       <%= f.label :password,:id => "confirm-password-field" %>
-       <%= f.password_field :password,:placeholder => "Enter new password" %>
-     </div>
-     <div class="form-field">
-       <%= f.label :password_confirmation,:id => "confirm-password-field" %>
-       <%= f.password_field :password_confirmation,:placeholder => "Confirm new password" %>
-     </div>
-     
-     <%end%>
-     
-     <%= f.submit :id => "user-button" %>
-    <%end%> 
+        <%= form_for @user do |f| %>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Name</label>
+                <div class="col-md-9">
+                <%= f.text_field :name,:required => "required",class: "form-control",placeholder: "name" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Phone</label>
+                <div class="col-md-9">
+                <%= f.phone_field :phone,:required => "required",class: "form-control",placeholder: "phone"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- left part of form end --> 
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Email</label>
+                <div class="col-md-9">
+               <%= f.email_field :email,:required => "required",class: "form-control",placeholder: "email" %>
+                  
+                </div>
+              </div>
+            </div>
+               <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Status</label>
+                <div class="col-md-9">
+  
+
+  <%= f.select :status, RETAILER_STATUS,{:prompt => "Select user status"},:class => 'retailer_select',:required => "required" %>
+                </div>
+              </div>
+            </div>
+         </div>
+         <% if type!= 'edit'%>
+           <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Password</label>
+                <div class="col-md-9">
+               <%= f.password_field :password,:placeholder => "Enter new password",:required => "required",class: "form-control",placeholder: "password",:autocomplete => :off %>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-4">Password confirmation</label>
+                <div class="col-md-9">
+<%= f.password_field :password_confirmation,:placeholder => "Confirm new password",:required => "required",class: "form-control",placeholder: "confirm password",:autocomplete => :off %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%end %>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Role</label>
+                <div class="col-md-9">
+<%= f.select :role_ids, User.acceptable_role(User.user_role(current_user.id)).select {|arr| arr[0].capitalize!},{:prompt => "Select user role"},:class => 'retailer_select roles',:required => "required",:multiple => true %>
+                  
+                </div>
+              </div>
+            </div>
+         
+                <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">State</label>
+                <div class="col-md-9">
+ <%= f.select :state_ids, State.permit_state(current_user),{:prompt => "Select state"},:required => "required" ,  :multiple => true,:id=>'state_ids_'  %>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+            <!-- <div class="col-md-12">
+              <div class="checkbox-nice">
+                <input type="checkbox" id="remember-me2" checked="checked">
+                <label for="remember-me2">
+                  Do you want send your password on email when submit ?
+                </label>
+              </div>  
+            </div> -->
+            <div class="col-md-1">
+               <%= f.submit "Submit",:class => "btn btn-success rrm_frm_btn" %>
+              
+            </div>
+            <div class="col-md-2">
+               <%= link_to "Cancel",users_path,:class => "btn btn-danger ",data: { confirm: 'Are you sure?'} %>
+              
+            </div>
+          </div>
+        <% end %>
+      
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+      

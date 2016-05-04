@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/users/filter' => "users#index"
   post '/users/filter' => "users#index"
   get '/retailers/zed_sales'
+  post '/maps/map_data'
  
    
   resources :weekly_offs, :only => [:index, :create]
@@ -106,6 +107,8 @@ Rails.application.routes.draw do
   resources :user_shifts, :only => [:index, :update] do
     put :update_all, :on => :collection
   end
+
+  resources :rrms
 
   get '/passwords/edit' => "passwords#edit"
   put '/passwords' => "passwords#update"
@@ -241,16 +244,17 @@ Rails.application.routes.draw do
       
     end
   end 
+   
+  resources :user_data, :only =>[:new,:create,:index]
+   
 
-  namespace :api, :defaults => { :format => :json }, :constraints => {:format => :json} do
+  namespace :api, :defaults => {:format => :json},:constraints => {:format => :json} do
     namespace :gstar do
       get '/shops/ndList'
       get '/shops/rdList'
       get '/shops/shopList'
     end
   end 
-   
-   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -305,4 +309,16 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+#######################################new design routes##############################
+  get '/dashboard/new'
+ 
+  get '/users/change_status'
+
+  get '/users/reset_password'
+  post '/users/reset_password' => 'users#change_password' 
+
+  get '/retailers/filter' => "retailers#index"
+   resources :users,:only => [:show,:index]
+
+
 end

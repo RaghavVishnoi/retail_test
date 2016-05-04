@@ -1,1 +1,14 @@
-<%= render :partial => 'form', :locals => { :form_title => "New User" } %>
+<% if params[:user] == 'cmo'%>
+	<%= render :partial => 'cmo', :locals =>{:type => "new"} %>
+<% elsif params[:user] == 'rrm'%>
+	<%= render :partial => 'rrm', :locals =>{:type => "new"} %>
+<% elsif params[:user] == 'auditor'%>
+	<%= render :partial => 'auditor', :locals =>{:type => "new"} %>
+<% elsif params[:user] == 'requester'%>
+	<%= render :partial => 'requester', :locals =>{:type => "new"} %>
+<% else %>
+	<%= render :partial => 'form', :locals =>{:type => "new"} %>
+<% end %>
+<script type="text/javascript">
+  $('#user').attr("class",'active')
+</script>   

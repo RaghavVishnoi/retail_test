@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def permission_name(subject_class, action_permission)
+  def permission_name(subject_class, action_permission) 
     Permission::Actions[subject_class][:permissions][action_permission]
   end
 
@@ -28,15 +28,15 @@ module ApplicationHelper
   end
 
   def request_type_backend(request_type)
-     if request_type == 'GSB'
+     if request_type == 'GSB' || request_type == 'gsb'
        0
-     elsif request_type == 'SIS'
+     elsif request_type == 'SIS' || request_type == 'sis'
        1
-     elsif request_type == 'InShop'
+     elsif request_type == 'InShop' || request_type == 'in_shop'
        2
-     elsif request_type == 'Maintenance'
+     elsif request_type == 'Maintenance' || request_type == 'maintenance'
        3
-     elsif request_type == 'Audit'
+     elsif request_type == 'Audit' || request_type == 'audit'
        4
      end      
          
@@ -70,4 +70,9 @@ module ApplicationHelper
   def field_values_str(field)
     field ? field[:values].select(&:present?).join('/') : ""
   end
+
+  def request_cmo(request_id)
+    RequestActivity.action_user(request_id,'cmo_approved,cmo_declined')
+  end
+
 end

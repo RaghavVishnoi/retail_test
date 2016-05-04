@@ -1,44 +1,4 @@
-<script>
-  $(document).ready(function(){
-    $('.close-tag').click(function(){
-      $('#tag-popup').hide();
-    });
-    $('#tag-button').click(function(){
-        var tag_value = $('#tag-text').val()
-        if(tag_value == ""){
-            alert("Please insert tag name");
-        }else{
-    	var tag = {'tag_name':$('#tag-text').val()}
-    	$.ajax({
-    		url: '/tags/create',
-    		type: 'GET',
-    		data: {'tag':tag},
-    		dataType: 'text',
-
-    		complete: function(data){
-
-    		},
-    		success: function(data,status,xhr){
-    			var response = JSON.parse(data);
-    			console.log('result'+response.tag);
-    			var select = document.getElementsByClassName("tag-select");
-    			console.log("rrrrr"+select); 
-    			var tag = response.tag;
-    			var tag_name = tag.tag_name;
-    			
-    			if(response.result == 'success'){
-    				$("#document_tag").append("<option value="+tag_name+">"+tag_name+"</option>");
-    				
-    				$('#tag-popup').hide();
-    			}
-
-    		}
-
-    	});
-    }
-    });
-   });
-</script>
+ 
 
 <div id="tag-popup">
 	 

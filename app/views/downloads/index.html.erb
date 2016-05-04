@@ -1,28 +1,110 @@
-<script>
-	$(document).ready(function(){
-		$('#request_csv').click(function(){
-			$('#csv-request').show();
+
+<div id="nav-col-submenu"></div>
+</div>
+
+<div id="content-wrapper">
+
+<div class="row">
+<div class="col-lg-12">
+	<div class="main-box clearfix">
+		<div class="clearfix">
+			<div class="common_page download_page">
+				<h2>Downloads</h2>
+
+				<div id="csv-request">
+ <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
+      <tr>
+        <td class="popup_title">Download Request CSV</td>
+        <td align="right" class="popup_title align_right">
+            <a href="javascript:void(0);" id="request-csv-close">Close</a>
+        </td>
+      </tr>
+      <tr>
+        <td  id="request-csv-message">From</td><td style="padding-top:8%"><%=date_field_tag 'from_date','', :id => 'from_date' %></td>
+      </tr>
+      <tr>
+        <td  id="request-csv-message">To</td><td style="padding-top:8%"><%=date_field_tag 'till_date','',:id => 'till_date' %></td>
+      </tr>
+      <tr>
+        <td  id="request-csv-message">Request Type</td><td style="padding-top:8%"><%= label_tag :sss,nil,:id => 'request_type'%></td>
+      </tr>   
+    </table> 
+
+    <%= button_tag "Download",:value => "Download", :class => "download_button"%> 
+    
+  </div>
+
+				<div class="download_blk">
+
+					<div class="row">
+						
+						<div class="cmmn_btn_blk">
+							<button class="request_csv cmmn_btn btn_gsb form-control " >GSB </button>
+						</div>
+						
+
+						<div class="cmmn_btn_blk">
+							<button class="request_csv cmmn_btn btn_sis form-control" >SIS </button>
+						</div>
+						<div class="cmmn_btn_blk">
+							<button class="request_csv cmmn_btn btn_inshop form-control" >INSHOP </button>
+						</div>
+						<div class="cmmn_btn_blk">
+							<button class="request_csv cmmn_btn btn_mentinace form-control" >MAINTENANCE </button>
+						</div>
+						<div class="cmmn_btn_blk">
+							<button class="request_csv cmmn_btn btn_audit form-control" >AUDIT</button>
+						</div>
+						
+
+			
+					</div>
+				</div>
+
+				
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+					
+			
+	</div>
+		
+
+	<script>
+		var type;
+ 		$('.request_csv').click(function(){
+			type = $(this).text()				
+			$('#request_type').text(type);
+			
+			if(type == 'INSHOP'){
+				type = 'in_shop'
+			}else{
+				type = type.toLowerCase();
+			}
+			
+		$('#csv-request').show();
+			
 		});
-    $('#request-csv-close').click(function(){
-      $('#csv-request').hide();
-    });
-    $('.download_button').click(function(){
+	    $('#request-csv-close').click(function(){
+	      $('#csv-request').hide();
+	    });
+    $('.download_button').click(function(){	
       var from_date = $('#from_date').val();
       var till_date = $('#till_date').val();
-      var request_type = $('#request_type').val();
-      if(from_date == '' || till_date == '' || request_type == ''){
+      if(from_date == '' || till_date == ''){
           alert("Please fill all required fields");
           location.href = '/downloads'
       }
       else{
       
-      console.log(from_date);
       $.ajax({
                  url: "/downloads",   
                  type: "POST",
                  data: {  from_date : from_date,
-                         till_date : till_date,
-                         request_type : request_type,
+                          till_date : till_date,
+                          request_type : type,
 
                 }, 
                 dataType: 'text',
@@ -42,38 +124,21 @@
                 }
               });
         }
+
+
+       //  $('.btn_gsb').click(function() {
+       //      var selected= $(".btn_gsb").val();
+       //     alert(selected);
+            
+       // });
+ 
+				
     });
     
-	});
+   
+	
 </script>
-<div><%=notice%></div>
-<div id="csv-request">
- <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
-      <tr>
-        <td class="popup_title">Download Request CSV</td>
-        <td align="right" class="popup_title align_right">
-            <a href="javascript:void(0);" id="request-csv-close">Close</a>
-        </td>
-      </tr>
-      <tr>
-        <td  id="request-csv-message">From</td><td style="padding-top:8%"><%=date_field_tag 'from_date','', :id => 'from_date' %></td>
-      </tr>
-      <tr>
-        <td  id="request-csv-message">To</td><td style="padding-top:8%"><%=date_field_tag 'till_date','',:id => 'till_date' %></td>
-      </tr>
-      <tr>
-        <td  id="request-csv-message">Choose Request Type</td><td style="padding-top:8%"><%=select_tag 'request_type',options_for_select(["All", "GSB", "SIS","InShop", "Maintenance", "Audit" ], params[:type]), :id => 'request_type'%></td>
-      </tr>   
-    </table> 
-
-    <%= button_tag "Download",:value => "Download", :class => "download_button"%> 
-    
-  </div>
-<div class="box_menu" id = 'request_csv'>
-	<div>
-      <div class="box">
-        <span><i><%= image_tag 'logo.png' %></i></span>
-        Requests
-      </div>
-    </div>
-</div>
+<script type="text/javascript">
+  $('#reports').attr("class",'active')
+  $('#downloads a').attr("style",'color:red !important')
+</script>   

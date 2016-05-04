@@ -1,0 +1,77 @@
+
+
+<%if request.params.include? 'param' %>
+  <%= link_to "Clear", vendor_requests_path ,:class => 'show-all-vendor-request'%>
+<%end%>
+<% if can? :manage, VendorRequest %>
+ <%= link_to "New Vendor Assignment", {controller: "vendor_requests", action: "new"}, id: "new-button" %>
+
+<%end%>
+<div>
+  <%=form_tag VendorRequest.new,:method => "get"  do |f| %>  
+  <div id="user-search-div" class="form-field">
+     <div class="user-search-field">
+       <%=select_tag 'type',options_for_select([ "Vendor Id", "Request Id","Request Status", "Vendor Response" ], params[:type]),:multiple => false,:style => "position:absolute;margin-left:-15%;width:12%"%>
+       <%= text_field_tag :param, params[:search], :id => "retailer-search",:required => "required",:placeholder => "Enter keyword to search",:value => params[:param] %>
+    </div>
+   <div>
+       <%= button_tag(type: 'submit',value: 'Search',:class=>"hide-button") do %>
+         <i ><%= image_tag 'search.png' ,:class => "button_with_image_save"%></i> 
+       <% end %>
+   </div>
+   <div class="error" id="message"></div>
+         
+  </div>
+  <%end%>
+</div>
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Vendor Id</th>
+      <th>Request Id</th>
+      <th>Vendor Response</th>
+      <th>Assigned date</th>
+      <% if can? :manage, VendorRequest %>
+      <th>Unassign</th>
+      <th>Edit</th>
+      <%end%>
+      <th>Show</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vendor_request.each do |vendor_request| %>
+      <tr>
+        <td>
+          <%=vendor_request.id%>
+        </td>
+        <td>
+          <%=vendor_request.vendor_id%>
+        </td>
+        <td>
+          <%=vendor_request.request_id%>
+        </td>
+        <td>
+          <%=vendor_request.vendor_response%>
+        </td>
+        <td>
+          <%=vendor_request.assigned_date%>
+        </td>
+        <% if can? :manage, VendorRequest %>
+        <td>
+          <%= link_to "Unassign", [vendor_request], method: :delete, data: { confirm: "Are you sure?" },:style => 'color:red'%>
+        </td>
+        <td>
+          <%= link_to "Edit", [:edit, vendor_request] %>
+        </td>
+        <%end%>
+        <td>
+          <%= link_to "Show", [vendor_request] %>
+        </td>
+      </tr>
+    <%end %>
+  </tbody>
+</table>
+<div class="response-pagination clearfix">
+  <%= will_paginate @vendor_request %>
+</div>

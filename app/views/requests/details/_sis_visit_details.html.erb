@@ -1,103 +1,205 @@
-<div class="approv_cont clearfix">
-     
+ <%if(@request.is_sis_present != nil)%>
 
-  <%if(@request.is_sis_present != nil)%>
+<section class="comments_sectn">
+  <div class="row"> 
+    <div class="col-lg-12">
+      <div class="main-box clearfix">
+        <div class="clearfix">
+          <div class="common_page gsb_page">
+            <h2>SIS Audit</h2>
+            <div class="comments_blk">
+              
+              <div class="row">
+                <div class="col-md-5">
+                  SIS Presence
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                    <%= @request.is_sis_present %>
+                  </div>
+                </div>
+              </div>
 
-   <div class="appr_info">
-    <div>SIS Presence</div>
-    <div><%= @request.is_sis_present %></div>
+             <div class="row">
+                <div class="col-md-5">
+                  SIS placed properly with back wall / counter / visuals as per norms
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                    <%=@request.is_sis_placed_properly%>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-5">
+                 SIS condition good
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                    <%= @request.is_sis_condition_good %>
+                  </div>
+                </div>
+              </div>
+
+               <div class="row">
+                <div class="col-md-5">
+                SIS cleaned daily 
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                   <%= @request.is_sis_cleaned_daily %>
+                  </div>
+                </div>
+              </div>
+
+                 <div class="row">
+                <div class="col-md-5">
+                SIS Damaged
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                   <%= @request.is_sis_damaged %>
+                  </div>
+                </div>
+              </div>
+
+                <div class="row">
+                <div class="col-md-5">
+               Structure Flaws
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                  <%= @request.sis_structured_flaws %>
+                  </div>
+                </div>
+              </div>
+
+                  <div class="row">
+                <div class="col-md-5">
+              Security alarm working
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                  <%= @request.sis_security_alarm_working %>
+                  </div>
+                </div>
+              </div>
+
+               <div class="row">
+                <div class="col-md-5">
+             Security device charging
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                 <%= @request.sis_security_device_charging %>
+                  </div>
+                </div>
+              </div>
+
+
+                <div class="row">
+                <div class="col-md-5">
+            Demo phones installed
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                 <%= @request.sis_demo_phones_installed %>
+                  </div>
+                </div>
+              </div>
+
+                 <div class="row">
+                <div class="col-md-5">
+          Backwall Lights working properly
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                 <%= @request.backwall_light_working_properly %>
+                  </div>
+                </div>
+              </div>
+
+                 <div class="row">
+                <div class="col-md-5">
+          Counter lights working properly
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                 <%= @request.is_counter_lights_working %>
+                  </div>
+                </div>
+              </div>
+
+
+                 <div class="row">
+                <div class="col-md-5">
+          Clip on lights working properly
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                 <%= @request.is_clip_on_lights %>
+                  </div>
+                </div>
+              </div>
+
+                  <div class="row">
+                <div class="col-md-5">
+          Does dealer switch on SIS lights or not
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+                <%= @request.dealer_switch_on_sis_lights %>
+                  </div>
+                </div>
+              </div>
+
+                 <div class="row">
+                <div class="col-md-5">
+         Updated Gionee Creative in clip on
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+               <%= @request.updated_gionee_creative %>
+                  </div>
+                </div>
+              </div>
+
+                 <div class="row">
+                <div class="col-md-5">
+        Any other problem variation
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+               <%= @request.sis_any_problem %>
+                  </div>
+                </div>
+              </div>
+
+                 <div class="row">
+                <div class="col-md-5">
+        Retailer FeedBack
+                </div>
+                <div class="col-md-4">
+                  <div class="blue">
+              <%= @request.sis_retailer_feedback %>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              
+
+              
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="appr_info">
-    <div></div>
-    <div></div>
-  </div>
-
-
-  <div class="appr_info">
-    <div>SIS placed properly with back wall / counter / visuals as per norms</div>
-    <div><%=@request.is_sis_placed_properly%></div>
-  </div>
-
-
-  <div class="appr_info">
-    <div>SIS condition good</div>
-    <div><%= @request.is_sis_condition_good %></div>
-  </div>
-
-  
- 
-
-  <div class="appr_info">
-    <div>SIS cleaned daily </div>
-    <div><%= @request.is_sis_cleaned_daily %></div>
-  </div>
-
- 
-  <div class="appr_info">
-    <div>SIS Damaged</div>
-    <div><%= @request.is_sis_damaged %></div>
-  </div>
-
-  <div class="appr_info">
-    <div>Structure Flaws</div>
-    <div><%= @request.sis_structured_flaws %></div>
-  </div>
-
-  <div class="appr_info">
-    <div>Security alarm working</div>
-    <div><%= @request.sis_security_alarm_working %></div>
-  </div>
-
-  <div class="appr_info">
-    <div>Security device charging</div>
-    <div><%= @request.sis_security_device_charging %></div>
-  </div>
-
-  <div class="appr_info">
-    <div>Demo phones installed</div>
-    <div><%= @request.sis_demo_phones_installed %></div>
-  </div>
-
-
-  <div class="appr_info">
-    <div>Backwall Lights working properly</div>
-    <div><%= @request.backwall_light_working_properly %></div>
-  </div>
-
-  <div class="appr_info">
-    <div>Counter lights working properly</div>
-    <div><%= @request.is_counter_lights_working %></div>
-  </div>
-
-  <div class="appr_info">
-    <div>Clip on lights working properly</div>
-    <div><%= @request.is_clip_on_lights %></div>
-  </div>
-
-  <div class="appr_info">
-    <div>Does dealer switch on SIS lights or not</div>
-    <div><%= @request.dealer_switch_on_sis_lights %></div>
-  </div>
-
-
-  <div class="appr_info">
-    <div>Updated Gionee Creative in clip on</div>
-    <div><%= @request.updated_gionee_creative %></div>
-  </div>
-
-  <div class="appr_info">
-    <div>Any other problem variation</div>
-    <div><%= @request.sis_any_problem %></div>
-  </div>
-
-  <div class="appr_info">
-    <div>Retailer FeedBack</div>
-    <div><%= @request.sis_retailer_feedback %></div>
-  </div>
-
-  <%end%>
-
- 
-
-</div>
+</section>  
+<% end %>

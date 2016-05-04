@@ -36,9 +36,9 @@ Request:
     "view, Request": "View Request"
     "cmo, Request": "CMO Request"
     "supercmo, Request": "Super CMO Request"
+    "rrm, Request": "Super RRM Request"
 
 
-    
 
 VendorTask:
   group_name: "VendorTasks"
@@ -59,9 +59,9 @@ Retailer:
     "get, Retailer" : "Reader Action"
     "read, Retailer" : "Get Retailers"
 Vendor:
-  group_name: "Vendor"
+  group_name: "Vendorlist"
   permissions:
-    "manage, Vendorlist": "Manage Vendor"
+    "manage, Vendorlist": "Manage Vendorlist"
     "update_status, VendorRequest": "Update Vendor Request"
 
 CMO:
@@ -92,16 +92,19 @@ Downloads:
 BeatRoute:
   group_name: "Beatroutes"
   permissions:
-    "manage, Beatroute": "Beatroute Records"    
+    "manage, Beatroute": "Beatroute Records"
 
 Document:
   group_name: "Document"
   permissions:
-    "manage, Document": "Document Records" 
+    "manage, Document": "Document Records"
 
 Notification:
   group_name: "Notification"
   permissions:
-    "manage, Notification": "Notification"       
+    "manage, Notification": "Notification"
 
-  
+RRM:
+  group_name: "RRM"
+  permissions:
+    "manage, RRM": "RRM"

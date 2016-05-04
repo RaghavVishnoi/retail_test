@@ -1,60 +1,67 @@
-<%puts "here is beat routes #{@beatroutes.length}"%>
-<% if can? :manage, Beatroute %>
- <%= link_to "New Record", new_beatroute_path, :id => 'new-button' %>
-<%end%> 
-<%if request.params.include? 'param' %>
- <%= link_to "Clear", beatroutes_path ,:class => 'show-all'%>
-<%end%>
- 
-<table class="ui table">
-  <thead>
-    <tr>
-      <th>Retailer Code</th>
-      <th>Shop Name</th>
-      <th>RSP Name</th>
-      <th>Distributor Name</th>
-      <th>TSM Name</th>
-      <th>Uploaded Date</th>
-      <% if can? :manage, Beatroute %>
-       <th>Stock</th>
-      <%end%>
-      <% if can? :manage, Beatroute %>
-       <th>Sales</th>
-      <%end%>
-      <% if can? :manage, Beatroute %>
-       <th>Attendance</th>
-      <%end%>
-      <% if can? :manage, Beatroute %>
-       <th>Other</th>
-      <%end%>
-      <th>Edit</th>
-      
-    </tr>
-  </thead>
-  <tbody>
-    <%@beatroutes.each do |beatroute|%>
-      <tr>
-        <td><%=beatroute.retailer_code %></td>
-        <td><%=beatroute.retailer_name %></td>
-        <td><%=beatroute.rsp_name %></td>
-        <td><%=beatroute.distributor_name %></td>
-        <td><%=beatroute.tsm_name %></td>
-        <td><%=beatroute.created_at.strftime("%b %d, %Y") %></td>
-        <td>
-          <%= link_to "Stock", "/beatroutes/show?bid=#{beatroute.id}&&type=stock",:class => "index-link" %>
-        </td>
-         <td>
-          <%= link_to "Sales", "/beatroutes/show?bid=#{beatroute.id}&&type=sales",:class => "index-link" %>
-        </td>
-         <td>
-          <%= link_to "Attendance", "/beatroutes/show?bid=#{beatroute.id}&&type=attendance",:class => "index-link" %>
-        </td>
-         <td>
-          <%= link_to "Other", "/beatroutes/show?bid=#{beatroute.id}&&type=other",:class => "index-link" %>
-        </td>
-        <td><%=link_to "Edit",[:edit,beatroute],:class => "index-link" %></td>
-         
-      </tr>
-    <%end%>
-  </tbody>
- </table> 
+<div id="nav-col-submenu"></div>
+  </div>
+
+<div id="content-wrapper">
+   <%= render 'shared/notice_messages'%>
+<div class="row">
+<div class="col-lg-12">
+  <div class="add_new_notfcn">
+    <h4><i class="fa fa-plus-square fa-lg"></i><span> <% if can? :manage, Beatroute %>
+      <%= link_to "New Record", new_beatroute_path%>
+      <% end %></span></h4>
+  </div>
+</div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+  <div class="main-box clearfix">
+  <div class="clearfix">
+    <div class="common_page notification_page">
+    <div class="hdr">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="txt">Beatroute</div>
+      </div>
+    </div>
+    </div>  
+
+  <% @beatroutes.each do |beatroute| %>
+    <div class="ntifctn_blk">
+      <div class="row">
+        <div class="col-md-10">
+          <p ><%=beatroute.retailer_code %> <span class="blue"> <%=beatroute.retailer_name %></span></p>
+          <p> <%= beatroute.city%></p>
+        </div>
+
+        <div class="col-md-2">
+          <ul class="list-inline list-unstyled edt_del ">
+            <li class="blue"><i class="fa fa-pencil"></i><span>
+               <%=link_to "Edit",[:edit,beatroute] %>
+            </span></li>
+             <li class="blue">
+                                  <i class="fa fa-trash-o"></i>
+                                  <span>
+                                  <%= link_to "Show", [beatroute] %>
+                                  </span>
+                                </li>
+
+           
+          </ul>
+        </div>
+      </div>
+    </div>
+  <%end%>
+
+    <%if @beatroutes.length > 1%>
+      <%=will_paginate @beatroutes%>
+  <%end%>
+
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $('#beatroute').attr("class",'active') 
+</script> 

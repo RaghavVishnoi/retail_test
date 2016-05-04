@@ -1,0 +1,203 @@
+<div id="nav-col-submenu"></div>
+</div>
+<div id="content-wrapper">
+<div class="row">
+<div class="col-lg-12">
+<div class="main-box-body clearfix">
+<ul class="list-inline list-unstyled" id="myTabradio">
+	    <li>
+	        <a href="/requests?q[request_type]=<%=params[:q][:request_type]%>&q[status]=cmo_pending,approved,declined,cmo_declined,pending&<%="q[uid]" if params[:q][:uid] != nil%>=<%=params[:q][:uid]%>&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=params[:state]%>">
+	        	
+	            <div class="radio_blk">
+	                <label for="aa1">
+	                    <input type="radio" id="" value="all" <%='checked=true' if params[:q][:status] != 'cmo_pending' && params[:q][:status] != 'pending' && params[:q][:status] != 'approved' && params[:q][:status] != 'cmo_declined' && params[:q][:status] != 'declined'%> />
+	                    
+	                    <span class="cmmn_cls">All</span>
+	                  
+	                </label>
+	           </div>
+	            
+	        </a>
+	    </li>
+	    <li>
+	        <a href="/requests?q[request_type]=<%=params[:q][:request_type]%>&q[status]=approved&<%="q[uid]" if params[:q][:uid] != nil%>=<%=params[:q][:uid]%>&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=params[:state]%>">
+	        	
+	             <div class="radio_blk">
+	                <label>
+	                    <input type="radio" id="" value="approved" <%='checked=true' if params[:q][:status] == 'approved' %> />
+	                  
+	                    <span class="cmmn_cls">Approved</span>
+	                    
+	                </label>
+	           	</div>
+	           
+	        </a>
+	    </li>
+	    <li>
+	        <a href="/requests?q[request_type]=<%=params[:q][:request_type]%>&q[status]=declined&<%="q[uid]" if params[:q][:uid] != nil%>=<%=params[:q][:uid]%>&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=params[:state]%>">
+	        	
+	            <div class="radio_blk">
+	                <label>
+	                    <input type="radio" id="" value="declined" <%='checked=true' if params[:q][:status] == 'declined' %>/>
+	                  
+	                    <span class="cmmn_cls">Declined</span>
+	                   
+	                </label>
+	            </div>
+	           
+	        </a>
+	    </li>
+	    <li>
+	        <a href="/requests?q[request_type]=<%=params[:q][:request_type]%>&q[status]=pending&<%="q[uid]" if params[:q][:uid] != nil%>=<%=params[:q][:uid]%>&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=params[:state]%>">
+	            <div  class="radio_blk">
+	                <label>
+	                    <input type="radio" id="" value="pending" <%='checked=true' if params[:q][:status] == 'pending' %>/>
+	                   
+	                    <span class="cmmn_cls">Pending</span>
+	                    
+	                </label>
+	            </div>
+	        </a>
+	    </li>
+	    <li>
+	        <a href="/requests?q[request_type]=<%=params[:q][:request_type]%>&q[status]=cmo_pending&<%="q[uid]" if params[:q][:uid] != nil%>=<%=params[:q][:uid]%>&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=params[:state]%>">
+	            <div class="radio_blk">
+	                <label>
+	                    <input type="radio" id="" value="cmopending" <%='checked=true' if params[:q][:status] == 'cmo_pending' %>/>
+	                   
+	                    <span class="cmmn_cls">CMO Pending</span>
+	                    
+	                </label>
+	            </div>
+	        </a>
+	    </li>
+	    <li>
+	        <a href="/requests?q[request_type]=<%=params[:q][:request_type]%>&q[status]=cmo_declined&<%="q[uid]" if params[:q][:uid] != nil%>]=<%=params[:q][:uid]%>&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=params[:state]%>">
+	            <div class="radio_blk">
+	                <label>
+	                    <input type="radio" id="" value="cmodeclined" <%='checked=true' if params[:q][:status] == 'cmo_declined' %>/>
+	                   
+	                    <span class="cmmn_cls">CMO Declined</span>
+	                  
+	                </label>
+	            </div>
+	        </a>
+	    </li>
+	</ul>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-lg-12">
+<div class="main-box clearfix">
+<div class="clearfix">
+	<div class="common_page gsb1">
+		<div class="hdr">
+	   		<div class="row">
+	    		<div class="col-md-2">
+					<div class="txt">
+						<%= if params[:q][:request_type] == '[0,1,2,3]' then 'All' else
+						REQ_TYPE[params[:q][:request_type].to_i].upcase end%>
+					</div>
+				</div>
+				<div class="col-md-3">
+					
+					<%= select_tag :state_request, options_for_select(['All']+State.permit_state(current_user)),:class => 'form-control custm_select',:required => "required",:onchange => "state_request()"%>
+					
+				</div>
+				<div class="col-md-5 col-md-offset-1">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+								<label class="col-md-3">From</label>
+								<div class="col-md-8">
+								<%= date_field_tag("date_from","",:class => "form-control") %> 		
+								</div>
+							</div>
+						</div>
+					<div class="col-md-6">
+						<div class="row">
+							<label class="col-md-2">To</label>
+							<div class="col-md-9">
+								<%= date_field_tag("date_to","",:class => "form-control") %> 		
+							</div>
+						</div>
+					</div>
+				</div>
+
+				</div>
+				<div class="col-md-1" style="padding:0px;">
+						<%= button_tag class: 'request_search_button' do %>
+					<i class="fa fa-search search-icon"></i>
+					<% end %>
+				</div>
+			</div>	
+			<div class="row" style="margin-top:8px;">
+				<div class="">
+					<label class="col-md-offset-5 col-md-4"></label>
+					<div class="col-md-3">	
+						<div class="col-md-8 custm_dpdn">
+						<%= select_tag :state_request, options_for_select(Retailer.state_retailers(params[:state])),:class => 'form-control custm_select',prompt: 'Select shop',:onchange => "state_retailer()",:id => "state_retailer" %>
+						</div>				
+					</div>
+				</div>									
+			</div>
+	</div>
+
+
+
+<div id='content' class="tab-content">
+<%@requests.each do |request|%>
+  <%audit = Request.is_audit(request.retailer_code)%>
+	<div class="tab-pane active" id="all">
+		<%= link_to "/requests/#{request.id}/edit?q[request_type]=#{REQ_TYPE.index(request.request_type)}" do %>
+		<div class="row bdr_bttm">
+			<div class="col-md-1">
+				<div class="gsb1_img_blk">
+					<% request.images.first(1).each do |image| %>
+	                  <%= image_tag image.image_url %>
+             		<% end %>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="txt_area">
+					<ul class="list-inline list-unstyled">
+						<li><%=request.retailer_code%></li>
+						<li class="blue"><%=UserState.user(request.state_id,'rrm').join(',')%></li>
+						<li><%=if request.status == 'cmo_pending' then State.find(request.state_id).name else RequestActivity.action_user(request.id,'cmo_approved,cmo_declined') end%></li>
+
+					</ul>
+					<h5><b><%=RequestActivity.action_user(request.id,'cmo_approved,cmo_declined')+'  -' if request.status != 'cmo_pending'%>   </b><%=request.comment_by_cmo%></h5>
+					<h5><b><%=RequestActivity.action_user(request.id,'approved,declined')+'  -' if request.status != 'pending' && request.status != 'cmo_pending' && request.status != 'cmo_declined' %>   </b><%=request.comment_by_approver%></h5>
+					<h5>
+						<b>Is audited? - </b><%=audit[:result]%>
+					</h5>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="date_cmopendng">
+					<h5><b>Generated On -</b> <%=request.created_at.strftime("%b %d, %Y")%></h5>
+					<h5><b>Current Status -</b> <%=request.status.capitalize%><%=%></h5>
+					<h5><b><%=if request.status == 'approved' || request.status == 'pending' || request.status == 'declined' then "Approved by CMO -" elsif request.status == 'cmo_declined' then "Declined by CMO -" end%> </b><%=if request.status == 'approved' || request.status == 'pending' || request.status == 'declined' then "#{RequestActivity.find_by(request_id: request.id,request_status: 'cmo_approved').activity_date.to_date.strftime('%b %d,%Y') if RequestActivity.find_by(request_id: request.id,request_status: 'cmo_approved').activity_date != nil}" elsif  request.status == 'cmo_declined' then "#{RequestActivity.find_by(request_id: request.id,request_status: 'cmo_declined').activity_date.to_date.strftime('%b %d,%Y') if RequestActivity.find_by(request_id: request.id,request_status: 'cmo_declined').activity_date != nil}" end%></h5>
+					<h5><b><%="Last audit - " if audit[:result] == 'Yes'%></b><%=audit[:audit_date] if audit[:result] == 'Yes'%></h5>
+				</div>
+			</div>
+		</div>
+	<%end%>	
+	</div>
+	<%end%>
+</div>
+							
+<div class="response-pagination clearfix">
+      <%= will_paginate @requests %>
+</div>
+								
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<%=render partial: 'page_js/request_index'%>
+<%=render partial: 'page_js/menubar'%>

@@ -1,0 +1,38 @@
+<a href="/rrms/"><%= image_tag 'back.png',:title => "Back",:class => "show-back-button" %></a>
+<div class="super_div">
+	<div class="approv_cont clearfix">
+     
+    <div class="appr_info">
+        <div>RRM Id</div>
+        <div><%= @rrm.id %></div>
+      </div>
+
+      <div class="appr_retail">
+        <div>RRM Name</div>
+        <div><%= @rrm.name%></div>
+      </div>
+
+      <div class="appr_desc">
+        <div>Designation</div>
+        <div><%= @rrm.designation %></div>
+      </div>
+
+</div>
+
+<div class="approv_cont clearfix">
+    <div class="appr_info">
+        <div>Location</div>
+        <div><%=@rrm.location%></div>
+      </div>
+
+      <div class="appr_retail">
+        <div>Email</div>
+        <div><%= @rrm.email %></div>
+      </div>
+
+      <div class="appr_desc">
+        <div>Contact Number</div>
+        <div><%=@rrm.phone%></div>
+      </div>
+  </div>
+</div>

@@ -2,7 +2,9 @@
 
 	before_action :set_user, :only => [:edit, :update, :destroy]
   skip_before_action :authenticate_user, :only => [:create, :new]
-	PER_PAGE = 100
+  authorize_resource
+  PER_PAGE = 50
+
 
   def index
       if params[:param] == '' || params[:param] == nil
@@ -21,22 +23,10 @@
     end
 
     def new
-
-        if params[:commit] == 'filter'
-           @request = VendorRequest.filter(params[:request_type],params[:filter_type],params[:param])
-           if @request != nil && @request != ''
-            @request = @request.paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-           else
-            redirect_to new_vendor_request_path, :notice => 'No record found'
-           end 
-        else
-          request=Request.arel_table
-          assigned_request = VendorRequest.get_unassigned_request
-          @request1 = Request.where(Request.arel_table[:id].not_in(assigned_request))
-           @request = @request1.where(:status => 'approved').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-        end
-       @vendor_request = VendorRequest.new
-      end
+      @vendor_request = VendorRequest.new
+      @vrequests = VendorRequest.where('status != ?','declined').pluck(:request_id)
+      @requests = VendorRequest.assignments(@vrequests,params[:type]).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+    end
 
     def create
         @redirected_url = request.referer
@@ -44,7 +34,7 @@
          if @redirected_url.include? "/requests/"   
                @vendor_request = VendorRequest.new vendor_request_param
             if @vendor_request.save 
-               path = @redirected_url.split("?")[0]
+               path = @redirected_url.split("&alert")[0]
                redirect_to path
                 
             else
@@ -60,7 +50,7 @@
                  end
                     vendor_email = VendorRequest.vendor_email(params[:vendor_request][:vendor_id]) 
                     VendorMailer.delay.vendor_assignment(vendor_email,@request_id)
-                    redirect_to vendor_requests_path, notice: "Request assigned successfully"
+                    redirect_to vendor_requests_path, notice: "Request assigned successfully!"
             else
                     @vendor_request = VendorRequest.new vendor_request_param
                     if @vendor_request.save
@@ -76,7 +66,7 @@
     end
 
     def show
-        @vendor_requests = VendorRequest.find(params[:id])
+        @vendor_request = VendorRequest.find(params[:id])
     end
 
     def update 

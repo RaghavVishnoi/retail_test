@@ -1,88 +1,187 @@
- 
-<% if can? :manage, User %>
- <%= link_to "New User", new_user_path, :id => 'new-button' %>
-<%end%> 
-<%if request.params.include? 'param' %>
- <%= link_to "Clear", users_path ,:class => 'show-all-user'%>
-<%end%><div>
-  <%=form_tag @user ,:method => 'get' do |f| %>  
-  <div id="user-search-div" class="form-field">
-     <div class="user-search-field">
-       
-       <%= text_field_tag :param, @search, :id => "retailer-search",:required => "required",:placeholder => "Enter email id" %>
-    </div>
-   <div>
-       <%= button_tag(type: 'submit',value: '',:class=>"hide-button") do %>
-         <i ><%= image_tag 'search.png' ,:class => "button_with_image_save"%></i> 
-       <% end %>
-   </div>
-   <div class="error" id="message"></div>
-         
+<div id="nav-col-submenu"></div>
   </div>
-  <%end%>
-</div>
-<div class="user-category">
- <%=form_tag users_filter_path  do |f| %> 
-  <label>All</label>
-  <%if @participants.include? 'All'%>
-    <%= check_box_tag 'All', '[cmo,vendor,requester]',:style => "margin-left:.3%",:id => "All"%>
-  <%else%>
-    <%= check_box_tag 'All', '[cmo,vendor,requester]',checked = false,:style => "margin-left:.3%",:id => "All"%>
-  <%end%>
-  <label>CMO</label>
-  <%if @participants.include? 'cmo'%>
-    <%= check_box_tag 'CMO', 'cmo',:style => "margin-left:.3%",:id => "cmo"%>
-  <%else%>
-    <%= check_box_tag 'CMO', 'cmo',checked = false,:style => "margin-left:.3%",:id => "cmo"%>
-  <%end%>
-  <label>Vendor</label>
-  <%if @participants.include? 'vendor'%>
-    <%= check_box_tag 'Vendor', 'vendor', :style => "margin-left:.3%",:id => "vendor1"%>
-  <%else%>
-    <%= check_box_tag 'Vendor', 'vendor',checked = false,:style => "margin-left:.3%",:id => "vendor1"%>
-  <%end%>
-  <label>Requester</label>
-   <%if @participants.include? 'requester'%>
-    <%= check_box_tag 'Requester', 'requester',:style => "margin-left:.3%",:id => "requester"%>
-   <%else%>
-    <%= check_box_tag 'Requester', 'requester',checked = false,:style => "margin-left:.3%",:id => "requester"%>
-   <%end%>
-    <%=submit_tag 'Get Users',:class => "user-button",:id => "approver_user_submit"%>
-  <%end%>  
-</div>
-<table class="ui table">
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Name</th>
-      <th>Type</th>
-      <% if can? :manage, User %>
-       <th>Edit</th>
-      <%end%>
-       
-       
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td>
-          <%= user.email %>
-        </td>
-        <td>
-          <%= user.name %>
-        </td>
-        <td>
-          <% @roles = User.user_roles(user.id)%>
-          <%= @roles.join(',') %>
-        </td>
-        <% if can? :manage, User %>
-        <td>
-          <%= link_to "Edit", [:edit, user] %>
-        </td>
-        <%end%>
-         
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+ 
+<div id="content-wrapper">
+   <%= render 'shared/notice_messages'%>
+                
+  <div class="row">
+     <div class="col-lg-12">
+        <div class="main-box-body clearfix">
+            <div class="row">
+            <% if can? :manage, CMO %> 
+            <div class="col-md-3">
+                <div class="add_new_notfcn">
+                  <h4><i class="fa fa-plus-square fa-lg"></i>
+                    <span>
+          <%= link_to "Add CMO","/users/new?user=cmo" %>
+             </span>
+                  </h4>
+                </div>
+              </div>
+              <% end %>
+              
+              <div class="col-md-3">
+                <div class="add_new_notfcn">
+                  <h4><i class="fa fa-plus-square fa-lg"></i><span>
+      <%= link_to "Add RRM","/users/new?user=rrm" %>
+            </span></h4>
+                </div>
+              </div>
+              
+            
+            <div class="col-md-3">
+                <div class="add_new_notfcn">
+                  <h4><i class="fa fa-plus-square fa-lg"></i><span>
+<%= link_to "Add Auditor","/users/new?user=auditor" %>
+                  </span></h4>
+                </div>
+              </div>
+            
+            <div class="col-md-3">
+                <div class="add_new_notfcn">
+                  <h4><i class="fa fa-plus-square fa-lg"></i><span>
+<%= link_to "Add Requester","/users/new?user=requester" %>
+                  </span></h4>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+        <div class="main-box clearfix">
+          <div class="clearfix">
+              <div class="common_page user">
+              <div class="user_tab">
+              <div class="row">
+                <div class="col-md-2">
+                  <h4>User</h4>
+                </div>
+                <div class="col-md-6">
+                <ul class="list-inline list-unstyled" id="myTab">
+
+              <%= collection_check_boxes( 'search', '',User.permit_role(User.user_role(current_user.id)),:to_s,:to_s,{checked: @search},:class=> 'search') if User.user_role(current_user.id).name == 'approver' || 'superadmin' %> 
+                </ul>
+
+                </div>
+                
+                <div class="col-md-4">
+
+                  <%=form_tag @user ,:method => 'get' do |f| %>  
+                    <div id="user-search-div" class="form-field">
+                       <div class="user-search-field">
+                         <%= text_field_tag :email, params[:email], :id => "retailer-search",:required => "required",:placeholder => "Enter email id",:class => 'search_email' %>
+                      </div>
+                      <div>
+                        <% if params[:email] == nil %>
+                           <%= button_tag(type: 'submit',value: 'search',:class=>"hide-button") do %>
+                             <i class="fa fa-search search-icon"></i> 
+                           <% end %>
+
+                        <% else %>
+
+                            <%= button_tag(type: 'submit',value: 'search',:class=>"clear-button") do %>
+                             <a href="/users"><i class="fa fa-times-circle-o"></i></a> 
+                            <% end %>
+                        <% end %>
+                      </div> 
+                    <div class="error" id="message"></div>
+               
+                  </div>
+      <%end%>   
+
+                </div>
+              </div>
+              </div>
+
+                <div id='content' class="tab-content" >
+               <% @users.each do |user| %>
+              
+                    <div class="tab-pane active" id="all">
+                      <div class="row">
+                          <div class="col-md-7">
+
+                            <p> <span class="blue">  <%= user.name %> </span>
+                             
+                              <span class="role_of_user"> <% @roles = User.user_roles(user.id)%>
+                         <%= @roles.join(',') %>
+                       </span> 
+
+                       </p>
+                            <p><i class="fa fa-envelope" aria-hidden="true"></i>
+                              <%= user.email %> | <i class="<%='fa fa-phone' if user.phone != nil%>" aria-hidden="true"></i>
+                            <%= user.phone 
+                             %></p>
+                          </div>
+
+                          <div class="col-md-5">
+                              <ul class="list-inline list-unstyled">
+                              <li class="blue"><i class="fa fa-lock"></i><span>
+        
+              <a href="/users/reset_password?token=<%=user.reset_password_token%>">Reset Password</a>
+            </span></li>
+                                <li class="blue">
+                                  <i class="fa fa-pencil"></i>
+                                  
+                                  <% if can? :manage, User %>
+                                  <span>
+                                    <%= link_to "Edit", [:edit, user] %>
+                                  </span>
+                                  <%end%>
+
+                                </li>
+                              <li class="blue">
+                              <span>
+                                <%= link_to "/users/change_status?id=#{user.id.to_s}",data: { confirm: 'Are you sure?' }  do %>
+                                  <% if user.status == "Active" %>
+                                    <i class="fa fa-eye"></i> Status Change
+                                  <% else %>
+                                   <i class="fa fa-eye-slash"></i> Status Change 
+                                  <% end %>
+                                <% end %>
+                              </span>
+                            </li>
+
+                                  <li class="blue">
+                                  <i class="fa fa-hand-o-right"></i>
+
+                                  <span>
+                                  <%= link_to "Show",user_path(user.id) %>
+
+                                  </span>
+                                </li>
+                                <p>
+                                  <li class="blue">
+                                  <span id="user_status">
+                                    <label class=' <%=user.status == 'Active' ? "user-of-status" : "user-of-status1" %>'>
+                                      <%= user.status %>
+                                     
+                                      </label>
+                                  </span>
+                                </li>
+                              </p>
+                             
+
+                              </ul>
+                          </div>
+                        </div>
+                    </div>
+
+              <% end %>
+              <%= will_paginate @users %>
+                </div>
+
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+   
+        </div>
+
+  <%= render 'page_js/user_search'%>
+<script type="text/javascript">
+  $('#user').attr("class",'active')
+</script>   

@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   attr_accessor :skip_password_validation, :password_required
   attr_writer :shift_start_time, :shift_end_time
+  # attr_accessor :phone
+
+  after_create :create_user_data
 
   USER_TYPE = ['All','CMO','APPROVER','REQUESTER']
 
@@ -27,13 +30,26 @@ class User < ActiveRecord::Base
   has_many :customers, :through => :customers_users
   has_many :cmos
   has_many :users
-
+  
+  has_many :user_data
+  has_many :user_states, :as => :user, :dependent => :destroy
+  has_many :states, :through => :user_states
+ 
   validates_confirmation_of :password, :if => ->{ password.present? }
   validates :email, :presence => true, :uniqueness => true
   validates :name, :presence => true
-  validates :state, :presence => true
+  validate :state
   validates :reset_password_token, :uniqueness => true, :allow_nil => true
   validates :password, :presence => true, :unless => :password_not_required?
+
+  # validates_confirmation_of :password, :if => ->{ password.present? }
+  # validates :email, :presence => true, :uniqueness => true
+  # validates :name, :presence => true
+  # validate  :state
+  # validates :reset_password_token, :uniqueness => true, :allow_nil => true
+  # validates :password, :presence => true, :unless => :password_not_required?
+  # validates :password_confirmation,:presence => true
+  # validates :password,:presence=> true
 
   before_validation :set_shift_time_in_seconds
   before_save :ensure_auth_token
@@ -97,42 +113,58 @@ class User < ActiveRecord::Base
       @role = @associated_roles.role.name 
     end
 
-    def self.approver_users(role)
-      @role = Role.where(:name => ['vendor','cmo','requester'])
-      @associated_roles = AssociatedRole.where(:role_id => @role)
-      @object_id = []
-      @associated_roles.each do |associated_roles|
-        @object_id = @object_id.push(associated_roles.object_id)
-      end
-      @users = User.where(:id => @object_id)
-   end
+    def self.list_users(id,params)
+        search_role = params[:search].split(',') if params[:search] != nil
+        search_email = params[:email]
+        if search_role != nil
+          search_roles(search_role)
+        elsif search_email != nil
+          @permit_roles = permit_role(user_role(id)) 
+          user = permit_users(@permit_roles)
+          user.where("email = ?", search_email.strip)
+        else
+          @permit_roles = permit_role(user_role(id)) 
+          permit_users(@permit_roles)  
+        end                      
+    end
 
-   def self.find_users(role)
-      @role = Role.where(:name => role)
-      @associated_roles = AssociatedRole.where(:role_id => @role)
-      @object_id = []
-      @associated_roles.each do |associated_roles|
-        @object_id = @object_id.push(associated_roles.object_id)
-      end
-      @users = User.where(:id => @object_id)
-   end
-
-    def self.search(id,roles)
-      if roles.name == 'superadmin'
-        @users = User.where(:email => id)
-      else
-        users = User.where(:email => id)
-      end
-        associated_roles = AssociatedRole.find_by(:object_id => users)
-        if associated_roles != nil && associated_roles != ''
-        role = associated_roles.role
-          if role.name == 'cmo' || role.name == 'vendor' || role.name == 'requester'
-            user = User.where(:email => id)
+    def self.search_roles(search_role)
+        case search_role
+          when nil,''
+            @permit_roles = permit_role(user_role(id)) 
           else
-            user = ''
+            @permit_roles = search_role          
           end
+          permit_users(@permit_roles)      
+    end
+
+    def self.permit_users(permit_roles)
+         roles = Role.where(name: permit_roles)
+          object_id = []
+          roles.each do |role|
+            object_id.push(AssociatedRole.where(role_id: role.id).pluck(:object_id))
+          end
+          User.where(id: object_id.flatten)       
+    end
+
+    def self.find_users(role)
+        @role = Role.where(:name => role)
+        @associated_roles = AssociatedRole.where(:role_id => @role)
+        @object_id = []
+        @associated_roles.each do |associated_roles|
+          @object_id = @object_id.push(associated_roles.object_id)
         end
-      user
+        @users = User.where(:id => @object_id)
+    end
+
+    def self.search(id,role)
+      @user = self.where(email: id)
+          if @user != nil
+            roles = @user[0].roles[0]
+            if permit_role(role).include? roles.name
+              @user
+            end
+          end        
     end
 
     def send_invite_mail
@@ -149,18 +181,58 @@ class User < ActiveRecord::Base
     end
 
     def self.user_roles(id)
-      user = User.find_by(:id => id)
+      user = User.find_by(:id => id)           
       associated_roles = AssociatedRole.where(:object_id => id) 
       role = []
         associated_roles.each do |associated_role|
           role.push(associated_role.role.name)   
         end
-        role
+         role
     end
 
     def self.user_role(id)
       user = User.find_by(:id => id)
-      associated_roles = AssociatedRole.find_by(:object_id => id)
-      role = associated_roles.role
+      associated_roles = AssociatedRole.where(:object_id => id).pluck(:role_id)
+      role = Role.where(id: associated_roles).order('name desc').first
     end
+
+
+    def self.delete_at_multi(role,set)
+      @role = role
+      roles = []
+      set.each do |i|
+        roles.push(@role[i])
+      end
+     @role - roles
+    end
+
+    def self.permit_role(role)
+      roles = Role.all.pluck(:name) 
+      case role.name
+      when 'superadmin'
+        delete_at_multi(roles,[0,2,3,4])
+      when 'approver'
+        delete_at_multi(roles,[0,1,2,3,4])
+      when 'rrm'
+        delete_at_multi(roles,[0,1,2,3,4,8])
+      when 'cmo'
+        delete_at_multi(roles,[0,1,2,3,4,5,8])
+      end             
+    end
+
+    def self.acceptable_role(role)
+      @role = permit_role(role)
+      if @role != nil
+        Role.where(name: @role).pluck(:name,:id) 
+      else
+        ""
+      end
+    end
+
+    private
+      def create_user_data
+        self.role_ids.compact.each do |role_id|
+              UserData.create!(name: self.name,location: State.where(id: self.state_ids).pluck(:name).join(','),designation: Role.find(role_id).name,email: self.email ,status: self.status,phone: self.phone,user_id: self.id)
+        end
+      end
   end  

@@ -3,8 +3,7 @@ class ImagesController < ApplicationController
   skip_before_action :authenticate_user
   
   def new
-    @image = Image.new
-    
+    @image = Image.new   
   end
   
   def create

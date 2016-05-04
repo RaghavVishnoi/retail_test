@@ -1,0 +1,49 @@
+<div class="row">
+	<div class="col-md-5">
+		Is it main signage?
+	</div>
+	<div class="col-md-4">
+		<div class="blue"><%=if @request.is_main_signage == true then 'Yes' else 'No' end%></div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-5">
+		Is gionee sis installed in shop?
+	</div>
+	<div class="col-md-4">
+		<div class="blue"><%=if @request.is_sis_installed == true then 'Yes' else 'No' end%></div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-5">
+		Type of GSB requested?
+	</div>
+	<div class="col-md-4">
+		<div class="blue">
+			<%= @request.type_of_gsb_requested %>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-5">
+		Width
+	</div>
+	<div class="col-md-4">
+		<div class="blue">
+			<%= @request.width %>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-5">Height
+	</div>
+	<div class="col-md-4">
+		<div class="blue">
+			<%= @request.height %>
+		</div>
+	</div>
+</div>

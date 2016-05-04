@@ -1,10 +1,11 @@
 <% if errors.any? %>
-  <div class="error-messages-container">
-    <h4>Please fix following errors</h4>
-    <ul>
+  <div class="alert alert-danger fade in error-messages-container" style="text-align:left;">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+    <strong>Please fix following errors</strong><br/>
+    
       <% errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <%= msg %>
       <% end %>
-    </ul>
+    
   </div>
 <% end %>

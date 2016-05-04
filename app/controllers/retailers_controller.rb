@@ -5,18 +5,10 @@ class RetailersController < ApplicationController
     
     PER_PAGE = 100
     
-
+    
 	def index 
-        if params[:param] == nil || params[:param] == ''
-		  @retailer = Retailer.all.paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-        else
-          @retailer = Retailer.search(params[:param]).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-          if @retailer.length < 1
-            redirect_to retailers_path, notice: "Retailer not found"
-          else
-            @search = params[:param]
-          end 
-        end
+ 		  @retailer = Retailer.select(params).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+        
 	end
 
 	def new 

@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="col-md-5">
+		Is gionee gsb present?
+	</div>
+	<div class="col-md-4">
+		<div class="blue"><%=if @request.is_gionee_gsb_present == true then 'Yes' else 'No' end%></div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-5">
+		Type of SIS required
+	</div>
+	<div class="col-md-4">
+		<div class="blue"><%=@request.type_of_sis_required.tr("?","'") if @request.type_of_sis_required.include? '?'%></div>
+	</div>
+</div>
+
+ 
+
+ 
+
+ 

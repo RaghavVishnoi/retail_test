@@ -1,38 +1,85 @@
-<a href="/vendorlists/"><%= image_tag 'back.png',:title => "Back",:class => "show-back-button" %></a>
-<div class="super_div">
-	<div class="approv_cont clearfix">
-     
-    <div class="appr_info">
-        <div>Vendor Id</div>
-        <div><%= @vendor.id %></div>
-      </div>
-
-      <div class="appr_retail">
-        <div>Vendor Name</div>
-        <div><%= @vendor.vendor_name %></div>
-      </div>
-
-      <div class="appr_desc">
-        <div>Region</div>
-        <div><%= @vendor.region%></div>
-      </div>
-
+<div id="nav-col-submenu"></div>
 </div>
 
-<div class="approv_cont clearfix">
-    <div class="appr_info">
-        <div>State</div>
-        <div><%= @vendor.state %></div>
-      </div>
+<div id="content-wrapper">
 
-      <div class="appr_retail">
-        <div>Status</div>
-        <div><%= @vendor.status %></div>
-      </div>
+<div class="row">
+<div class="col-lg-12">
+<div class="main-box clearfix">
+<div class="clearfix">
+  <div class="common_page ">
+    <h2>Vendor Details</h2>
+    <div class="main-box-body clearfix">
+      <div class="tochimobie_blk">
+        <div class="row">
+          <div class="col-md-6 result">
+          <div class="cmmn_blk">
+            <div class="row">
+              <div class="col-md-3">
+                <label>Vendor Id</label>
+              </div>
+              <div class="col-md-9"><div class="blue"><%= @vendor.id %></div></div> 
+            </div>
+            </div>
+            <div class="cmmn_blk">
+            <div class="row">
+              <div class="col-md-3">
+                <label>Vendor Name</label>
+              </div>
+              <div class="col-md-9"><%= @vendor.vendor_name %></div> 
+            </div>
+            </div>
+            <div class="cmmn_blk">
+            <div class="row">
+              <div class="col-md-3">
+                <label>Region</label>
+              </div>
+              <div class="col-md-9"><%= @vendor.region%></div>  
+            </div>
+            </div>
+            
+          </div>
 
-      <div class="appr_desc">
-        <div>Contact Person</div>
-        <div><%= @vendor.contact_person %></div>
+            <div class="col-md-6 result">
+            <div class="cmmn_blk">
+            <div class="row">
+              <div class="col-md-3">
+                <label>State</label>
+              </div>
+              <div class="col-md-9"><%= @vendor.state %></div>  
+            </div>
+            </div>
+            <div class="cmmn_blk">
+            <div class="row">
+              <div class="col-md-3">
+                <label>Status</label>
+              </div>
+              <div class="col-md-9"><%= @vendor.status %></div> 
+            </div>
+            </div>
+            <div class="cmmn_blk">
+            <div class="row">
+              <div class="col-md-3">
+                <label>Contact Person</label>
+              </div>
+              <div class="col-md-9"><%= @vendor.contact_person %></div> 
+            </div>
+            </div>
+           
+          </div>
+
+        </div>
       </div>
+    </div>
+
+          
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+          
+    
+
+  

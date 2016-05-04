@@ -1,0 +1,39 @@
+<section class="comments_sectn">
+	<div class="row">	
+		<div class="col-lg-12">
+			<div class="main-box clearfix">
+				<div class="clearfix">
+					<div class="common_page gsb_page">
+						<h2>Action Comments</h2>
+						<div class="comments_blk">
+							<%if @request.status != 'cmo_pending'%>
+							<div class="row">
+								<div class="col-md-5">
+<b><%=if @request.status != 'cmo_pending' && @request.request_type != 'visitor' then RequestActivity.action_user(@request.id,'cmo_approved,cmo_declined')+'  -' end%></b>
+								</div>
+								<div class="col-md-4">
+									<div>
+										<%=@request.comment_by_cmo%>
+									</div>
+								</div>
+							</div>
+							<%end%>
+							<%if @request.status != 'pending' && @request.status != 'cmo_pending' && @request.status != 'cmo_declined'%>
+							<div class="row">
+								<div class="col-md-5">
+									<b><%=RequestActivity.action_user(@request.id,'approved,declined')+'  -' if @request.status != 'pending' && @request.status != 'cmo_pending' && @request.status != 'cmo_declined' && @request.request_type != 'visitor'%></b>
+								</div>
+								<div class="col-md-4">
+									<div>
+										<%=@request.comment_by_approver%>
+									</div>
+								</div>
+							</div>
+							<%end%>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>	

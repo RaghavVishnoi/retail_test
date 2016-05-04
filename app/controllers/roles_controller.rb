@@ -1,10 +1,11 @@
 class RolesController < ApplicationController
 
+  PER_PAGE = 20
   before_action :find_role, :only => [:edit, :update, :destroy]
   authorize_resource
 
   def index
-    @roles = Role.all
+    @roles = Role.all.paginate(:per_page => PER_PAGE,:page => (params[:page] || 1))
   end
 
   def new

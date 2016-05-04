@@ -10,6 +10,7 @@
             @value = params[:state]
          end%>
        <%= text_field_tag "id",'', :id => "search",:required => "required",:placeholder => "Enter request id/retailer code/state",:value => @value%>
+
        <%=hidden_field_tag "q",params[:q]%>
     </div>
    <div>

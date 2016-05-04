@@ -1,38 +1,61 @@
- 
-<% if can? :manage, Notification %>
- <%= link_to "Send New Notification", new_notification_path, :id => 'new-button' %>
-<%end%> 
-
-<table class="ui table">
-  <thead>
-    <tr>
-      <th>Message</th>
-      <th>State</th>
-      <th>Send Date</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @notifications.each do |notification| %>
-      <tr>
-        <td>
-          <%=notification.message%>
-        </td>
-        <td>
-          <%=notification.state%>
-        </td>
-        <td>
-          <%=notification.send_date.strftime("%b %d, %Y")%>
-        </td>
-        <td>
-          <%=notification.status%>
-        </td>
-      </tr>
-    <%end %>
-  </tbody>
-</table>
-<div class="response-pagination clearfix">
-  <%if @notifications.length > 1%>
-      <%=will_paginate @notifications%>
-  <%end%>
+<div id="nav-col-submenu"></div>
 </div>
+
+<div id="content-wrapper">
+<div class="row">
+<div class="col-lg-12">
+	<div class="add_new_notfcn">
+		<h4><i class="fa fa-plus-square fa-lg"></i><span>
+			 <%= link_to "Send New Notification", new_notification_path %>
+			
+		</span>
+		</h4>
+	</div>
+</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+	<div class="main-box clearfix">
+	<div class="clearfix">
+		<div class="common_page notification_page">
+		<div class="hdr">
+		<div class="row">
+			<div class="col-md-5">
+				<div class="txt">Notifications</div>
+			</div>
+		</div>
+		</div>	
+		 <% @notifications.each do |notification| %>
+		<div class="ntifctn_blk">
+			<div class="row">
+				<div class="col-md-10">
+					<p class="blue"><%=notification.message%></p>
+					<h4> <%=notification.state%></h4>
+				</div>
+
+				<div class="col-md-2">
+					<p><%=notification.send_date.strftime("%b %d, %Y")%></p>
+					<h5 class="<%=if notification.status == 'success' then 'green' else 'red' end%>"> <%=notification.status%></h5>
+				</div>
+			</div>
+			</div>
+			<% end %>
+				
+
+			</div>
+			 <%if @notifications.length > 1%>
+			      <%=will_paginate @notifications%>
+			  <%end%>
+		</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+  $('#notification').attr("class",'active') 
+</script>	
+					
+				
+		
+
+	

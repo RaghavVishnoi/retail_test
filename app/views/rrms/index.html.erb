@@ -1,0 +1,78 @@
+<% if can? :manage, RRM %>
+ <%= link_to "New RRM", new_rrm_path, :id => 'new-button' %>
+<%end%> 
+<%if request.params.include? 'param' %>
+ <%= link_to "Clear", rrms_path ,:class => 'show-all-user'%>
+<%end%>
+<div>
+  <%=form_tag RRM.new ,:method => 'get' do |f| %>  
+  <div id="user-search-div" class="form-field">
+     <div class="user-search-field">
+       
+       <%= text_field_tag :param, @search, :id => "retailer-search",:required => "required",:placeholder => "Enter RRM name" %>
+    </div>
+   <div>
+       <%= button_tag(type: 'submit',value: '',:class=>"hide-button") do %>
+         <i ><%= image_tag 'search.png' ,:class => "button_with_image_save"%></i> 
+       <% end %>
+   </div>
+   <div class="error" id="message"></div>
+         
+  </div>
+  <%end%>
+</div>
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>RRM Name</th>
+      <th>Designation</th>
+      <th>Location</th>
+      <th>Email</th>
+      <th>Status</th>
+      <% if can? :manage, CMO %>
+      <th>Edit</th>
+      <% end %>
+       <th>Show</th>
+    
+    </tr>
+  </thead>
+  <tbody>
+    <% @rrm.each do |rrm| %>
+      <tr>
+        <td>
+          <%=rrm.id%>
+        </td>
+        <td>
+          <%=rrm.name%>
+        </td>
+        <td>
+          <%=rrm.designation%>
+        </td>
+        <td>
+          <%=rrm.location%>
+        </td>
+        <td>
+          <%=rrm.email%>
+        </td>
+        <td>
+          <%=rrm.status%>
+        </td>
+        <% if can? :manage, RRM %>
+        <td>
+          <%= link_to "Edit", [:edit, rrm] %>
+        </td>
+        <% end %>
+        <td>
+          <%= link_to "Show", [rrm] %>
+        </td>
+      </tr>
+    <%end %>
+  </tbody>
+</table>
+<div class="response-pagination clearfix">
+   <%if @rrm.length > 1%>
+      <%=will_paginate @rrm%>
+  <%end%>
+</div>  
+    

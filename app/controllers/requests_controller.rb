@@ -17,27 +17,9 @@ class RequestsController < ApplicationController
     render :json => @retailer
   end
 
-    def index
-      role = User.user_roles(session[:user_id])
-      if role.include?(Cmo)
-        if params[:type] == 'RetailerCode' 
-            @requests = Request.with_cmo_retailer_query(params[:q],current_user.id,params[:retailer_code]).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-        elsif params[:type] == 'State'
-            @requests = Request.with_state_query(params[:q],params[:state],current_user).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-        else
-            @requests = Request.with_cmo_query(params[:q],current_user.id).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-          end   
-      elsif role.include?(SUPERCMO) && params[:commit] == 'Search'
-            @requests = Request.with_supercmo_query(params[:q][:status],params[:q][:request_type],params[:cmo]).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-      else
-          if params[:type] == 'RetailerCode' 
-            @requests = Request.with_retailer_query(params[:q],params[:retailer_code]).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-          elsif params[:type] == 'State'
-            @requests = Request.with_state_query(params[:q],params[:state],current_user).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-          else
-            @requests = Request.with_query(params[:q]).includes(:images).order('updated_at asc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-          end
-      end      
+  def index
+      session[:prev_url] = request.fullpath
+      @requests = Request.find_requests(current_user,params).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))        
   end
 
   def new
@@ -50,12 +32,15 @@ class RequestsController < ApplicationController
 
 
   def create
-    @request = Request.new request_params
-    if @request.save
+      @request = Request.new request_params
+    if @request.save      
       if params[:request][:request_type] == 'visitor'
         @requests = Request.last 
         @requests.status = 'approved'
         @requests.save
+        @request_activity = RequestActivity.create_activity(0,@request.id,'approved','RRM','',Time.now)
+      else
+        @request_activity = RequestActivity.create_activity(0,@request.id,'cmo_pending','CMO','',Time.now)
       end
       respond_to do |format|
         format.html { redirect_to new_request_path, :notice => "Your Request has been submitted" }
@@ -71,18 +56,17 @@ class RequestsController < ApplicationController
 
 
   def edit
-    @prev_url = request.referer
+    @request = Request.find(params[:id])
   end
 
 
    def update
-    prev_url = params[:prev_url]
-    id = session[:user_id] 
+     id = current_user.id
     @role = User.user_roles(id)
     comment = params[:comment]
     comment = comment.strip
     date = Time.now.to_date
-    if  @role.include?('approver') ||  @role.include?('superadmin')   &&  params[:status] == "pending"
+    if  (@role.include?('rrm') || @role.include?('approver') ||  @role.include?('superadmin'))   &&  params[:status] == "pending"
           date = Time.now.to_date
           @request.approver_approve_date = date
        if params[:commit] == APPROVE
@@ -93,7 +77,8 @@ class RequestsController < ApplicationController
           @request.comment_by_approver = comment
          end
          @request.approve
-         redirect_to request.path+'/edit?alert=true'
+         @request_activity = RequestActivity.create_activity(current_user.id,@request.id,'approved',if @role.include?('approver') then 'HO' else 'RRM' end,@request.comment_by_approver,Time.now)
+         redirect_to request.path+'/edit?q[request_type]='+@request.request_type+'&alert=true'
        elsif params[:commit] == DECLINE
          @request.declined_by_user_id = current_user.id
          if comment == ''
@@ -102,13 +87,14 @@ class RequestsController < ApplicationController
           @request.comment_by_approver = comment
          end
          @request.decline
-         redirect_to prev_url
+          @request_activity = RequestActivity.create_activity(current_user.id,@request.id,@request.status,if @role.include?('approver') then 'HO' else 'RRM' end,@request.comment_by_approver,Time.now)
+         redirect_to request.path+'/edit?q[request_type]='+@request.request_type
        end
         
 
     end
 
-    if  @role.include?('cmo') ||  @role.include?('superadmin')  &&  params[:status] == "cmo_pending"
+    if  (@role.include?('cmo') ||  @role.include?('superadmin') ||  @role.include?('approver'))  &&  params[:status] == "cmo_pending"
        @request.cmo_approve_date = date
        if params[:commit] == APPROVE
          if comment == ''
@@ -116,21 +102,21 @@ class RequestsController < ApplicationController
          else
            @request.comment_by_cmo = comment
          end
-         @request.cmo_approve
+          @request.cmo_approve
+          @request_activity = RequestActivity.create_activity(current_user.id,@request.id,'cmo_approved',if @role.include?('approver') then 'HO' else 'CMO' end,@request.comment_by_cmo,Time.now)
+          @request_activity = RequestActivity.create_activity(current_user.id,@request.id,'pending',if @role.include?('approver') then 'HO' else 'CMO' end,@request.comment_by_cmo,Time.now)
+          redirect_to request.path+'/edit?q[request_type]='+@request.request_type
        elsif params[:commit] == DECLINE
-         if comment == ''
-           @request.comment_by_cmo = 'Not Suitable'
-         else
-           @request.comment_by_cmo = comment
-         end
-         @request.cmo_decline
+           if comment == ''
+              @request.comment_by_cmo = 'Not Suitable'
+           else
+              @request.comment_by_cmo = comment
+           end
+          @request.cmo_decline
+          @request_activity = RequestActivity.create_activity(current_user.id,@request.id,'cmo_declined',if @role.include?('approver') then 'HO' else 'CMO' end,@request.comment_by_cmo,Time.now) 
+          redirect_to request.path+'/edit?q[request_type]='+@request.request_type
        end
-       if @request.errors.present?
-          render :edit
-       else
-      redirect_to prev_url
-       end
-
+        
     end
    
   end
@@ -159,7 +145,7 @@ class RequestsController < ApplicationController
   def view
        role = User.user_roles(current_user.id) 
       begin
-         if role == 'cmo' && cmo_id != @request.cmo_id
+         if role == CMO && cmo_id != @request.cmo_id
                redirect_to :back, :flash => { :notice => "Sorry! You can't access this request" }
          else
                redirect_to requests_search(role,params[:type],params[:id],$request_type.to_s,current_user)
@@ -198,7 +184,7 @@ class RequestsController < ApplicationController
   private
 
   def request_params
-    params.require(:request).permit(:retailer_code, :rsp_name, :is_rsp, :rsp_not_present_reason, :rsp_mobile_number, :rsp_app_user_id,:other_name,:other_phone,:other_address,:lfr_name,:lfr_phone,:lfr_app_user_id,:state, :city, :shop_name, :shop_address, :shop_owner_name, :shop_owner_phone, :is_main_signage, :is_sis_installed, :space_available, :width, :height, :type_of_sis_required, :type_of_gsb_requested, :is_gsb_installed_outside, :avg_store_monthly_sales, :avg_gionee_monthly_sales, :cmo_id, :request_type, :remarks, :is_gionee_gsb_present,:maintenance_requestor,:maintenance_requestor_mobile_number,:type_of_issue,:type_of_problem, :image_ids_string,:shop_visit_date,:shop_visit_done_by,:visitor_contact_number,:is_clipon_present,:is_countertop_present,:is_leaflets_available,:no_of_peace_in_stock,:is_wall_poster_in_shop,:is_dangler_in_shop,:rsp_assigned_in_store,:rsp_present_in_shop,:rsp_in_gionee_tshirt,:rsp_well_groomed,:rsp_selling_skills,:gsb_type_installed,:location_of_gsb,:gsb_cleanliness,:installation_quality,:is_gsb_light_woring,:is_gsb_light_throw_is_good,:gsb_structured_damage,:gsb_other_problem,:gsb_retailer_feedback,:is_sis_present,:is_sis_placed_properly,:is_sis_condition_good,:is_sis_cleaned_daily,:is_sis_damaged,:is_standee_present,:store_selling_gionee,:sis_structured_flaws,:sis_security_alarm_working,:sis_security_device_charging,:sis_demo_phones_installed,:spec_card_demo_phone_match,:backwall_light_working_properly,:is_counter_lights_working,:is_clip_on_lights,:dealer_switch_on_sis_lights,:updated_gionee_creative,:sis_any_problem,:sis_retailer_feedback,:is_good_visibility_in_store,:lit_in_store,:has_a_relevant_visual,:overall_rating,:is_clipon_not_working_properly,:overall_comments,:is_audit_done,:store_open,:store_renovation,:store_shifted,:not_allowed_in_store,:user_id, :image_ids => [], :properties => [:field_id, :value, :values => []])
+    params.require(:request).permit(:retailer_code, :rsp_name, :is_rsp,:state_id, :rsp_not_present_reason, :rsp_mobile_number, :rsp_app_user_id,:other_name,:other_phone,:other_address,:lfr_name,:lfr_phone,:lfr_app_user_id,:state, :city, :shop_name, :shop_address, :shop_owner_name, :shop_owner_phone, :is_main_signage, :is_sis_installed, :space_available, :width, :height, :type_of_sis_required, :type_of_gsb_requested, :is_gsb_installed_outside, :avg_store_monthly_sales, :avg_gionee_monthly_sales, :cmo_id, :request_type, :remarks, :is_gionee_gsb_present,:maintenance_requestor,:maintenance_requestor_mobile_number,:type_of_issue,:type_of_problem, :image_ids_string,:shop_visit_date,:shop_visit_done_by,:visitor_contact_number,:is_clipon_present,:is_countertop_present,:is_leaflets_available,:no_of_peace_in_stock,:is_wall_poster_in_shop,:is_dangler_in_shop,:rsp_assigned_in_store,:rsp_present_in_shop,:rsp_in_gionee_tshirt,:rsp_well_groomed,:rsp_selling_skills,:gsb_type_installed,:location_of_gsb,:gsb_cleanliness,:installation_quality,:is_gsb_light_woring,:is_gsb_light_throw_is_good,:gsb_structured_damage,:gsb_other_problem,:gsb_retailer_feedback,:is_sis_present,:is_sis_placed_properly,:is_sis_condition_good,:is_sis_cleaned_daily,:is_sis_damaged,:is_standee_present,:store_selling_gionee,:sis_structured_flaws,:sis_security_alarm_working,:sis_security_device_charging,:sis_demo_phones_installed,:spec_card_demo_phone_match,:backwall_light_working_properly,:is_counter_lights_working,:is_clip_on_lights,:dealer_switch_on_sis_lights,:updated_gionee_creative,:sis_any_problem,:sis_retailer_feedback,:is_good_visibility_in_store,:lit_in_store,:has_a_relevant_visual,:overall_rating,:is_clipon_not_working_properly,:overall_comments,:is_audit_done,:store_open,:store_renovation,:store_shifted,:not_allowed_in_store,:user_id, :image_ids => [], :properties => [:field_id, :value, :values => []])
   end
 
   def find_request
