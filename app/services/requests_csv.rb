@@ -46,7 +46,8 @@ class RequestsCsv
   end
 
   def write_file text
-    file.puts text
+    puts "text #{text}"
+     file.puts text
   end
 
   def branding_details_header
@@ -58,7 +59,7 @@ class RequestsCsv
   end
 
   def header
-      if @request_type == 'All' || @request_type == '' || @request_type == nil
+      if @request_type == 'All' || @request_type == 'all' || @request_type == '' || @request_type == nil
       [ 'Id','status', 'Request type', 'RSP Present in Shop?', 'Reason', 'CMO Name', 'Retailer Code', 'RSP Name', 'RSP Mobile number', 'RSP sales tag app user ID', 
         'City', 'state', 'Shop Name', 'Shop Address', 'Shop Owner Name', 'Shop Owner Phone', 'Avg. Store Monthly Sales',
         'Avg. Gionee Monthly Sales', 'Space Available in Store', 'Gionee GSB Present?', 'Type of SIS required?',
@@ -99,11 +100,11 @@ class RequestsCsv
 
 
   def create_csv_file
-   if @request_type == 'All' || @request_type == '' || @request_type == nil
-      write_file header       
-         Request.where(state_id: @states).between_time(from_date, till_date).find_each(batch_size: 100) do |request|
-           write_file to_csv(request)
-         end      
+   if @request_type == 'All' || @request_type == 'all' || @request_type == '' || @request_type == nil
+       write_file header 
+        Request.where(:created_at => from_date..till_date,state_id: @states).find_each(batch_size: 100) do |request|
+            write_file to_csv(request)
+        end      
    else
       write_file header
       request_type = request_type_backend(@request_type)
@@ -157,7 +158,7 @@ class RequestsCsv
 
 
       
-      if @request_type == 'All' || @request_type == '' || @request_type == nil
+      if @request_type == 'All' || @request_type == 'all' || @request_type == '' || @request_type == nil
         [ request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, if request.status != 'cmo_pending' then request_cmo(request.id) else State.find(request.state_id).name+"'s CMOs" end, request.retailer_code, request.rsp_name,
         request.rsp_mobile_number, request.rsp_app_user_id,@retailer_city, @retailer_state, @shop_name, @shop_address,
         @shop_owner_name, @shop_owner_phone, monthly_sales_str(request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES), monthly_sales_str(request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES),
