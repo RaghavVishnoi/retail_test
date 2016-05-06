@@ -7,7 +7,28 @@
         <div class="clearfix">
           <div class="common_page gsb_page">
             <h2>RSP/LFR/Other details</h2>
-
+             <div class="comments_blk">  
+               <div class="row">
+                  <div class="col-md-5">
+                    Is RSP?
+                  </div>
+                  <div class="col-md-4">
+                    <div class="blue">
+                      <%=to_bool(@request.is_rsp)%>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-5">
+                   Reason
+                  </div>
+                  <div class="col-md-4">
+                    <div class="blue">
+                      <%=@request.rsp_not_present_reason%>
+                    </div>
+                  </div>
+                </div>
+              </div>
           <%if(@request.is_rsp == true)%>
             <div class="comments_blk">  
              <div class="row">
