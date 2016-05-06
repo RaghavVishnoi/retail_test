@@ -313,3 +313,12 @@
 .div-left{float:left;}
 .back-icon{font-size:40px;color:#272d33}
 .loader{width:50px;height:50px;position:absolute;z-index: 10;margin-left:35%;margin-top: 20%;}
+.cong p{margin-bottom: 0px !important}
+.bgColorPending{background-color:#FF9999;}
+.bgColorDone{background-color:#33FF99;}
+.img_open{display: none;position: fixed;z-index: 999;left: 0;right: 0;top: 0;
+bottom: 0px;background: rgba(11, 11, 11, 0.83);}
+.img_open .img_blk { left: 0; margin: 0 auto; max-width: 550px;  position: absolute;
+    right: 0; top: 10%; width: 100%;height: 550px;overflow: hidden;}
+.img_open .img_blk img{width: 100%;} 
+.cross_btn i{position: absolute;right: 0;top:0px;font-size: 18px;}

@@ -88,7 +88,7 @@ class RequestsController < ApplicationController
          end
          @request.decline
           @request_activity = RequestActivity.create_activity(current_user.id,@request.id,@request.status,if @role.include?('approver') then 'HO' else 'RRM' end,@request.comment_by_approver,Time.now)
-         redirect_to request.path+'/edit?q[request_type]='+@request.request_type
+         redirect_to session[:prev_url]
        end
         
 

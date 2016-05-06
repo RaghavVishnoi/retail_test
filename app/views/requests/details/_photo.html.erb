@@ -15,7 +15,7 @@
 								<div class="comments_img_blk">
 									<ul class="list-inline list-unstyled">
 										<% @request.images.first(3).each do |image| %>
-		  							<li><%= image_tag image.image_url %>
+		  							<li><%= image_tag image.image_url,:class => 'img'%>
 		  								<% if image.lat? && image.long? %>
 		  								<span style="background-color:#F37022;">
 											<%= link_to "Click to open Maps", "http://maps.google.com/maps?q=#{[image.lat, image.long].join(',')}", :target => "_blank" %>
@@ -34,3 +34,26 @@
 						</div>
 					</div>
 				</section>
+
+<script>
+ 		$('.img').click(function(){
+ 			 $('.img_open').css("display","block");
+			 imgSrc = $(this).attr('src');
+			 $('.add-img').attr("src",imgSrc);
+			 $('.img_open').click(function(){
+				$('.img_open').hide();
+			
+
+		});
+
+		});
+ 
+</script>
+
+<div class="img_open">
+	<div class="img_blk">
+		
+		<img class="add-img"/>
+	</div>
+</div>
+ 
