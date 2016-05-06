@@ -21,7 +21,7 @@
 							<%if @request.status != 'pending' && @request.status != 'cmo_pending' && @request.status != 'cmo_declined'%>
 							<div class="row">
 								<div class="col-md-5">
-									<b><%=RequestActivity.action_user(@request.id,'approved,declined')+'  -' if @request.status != 'pending' && @request.status != 'cmo_pending' && @request.status != 'cmo_declined' && @request.request_type != 'visitor'%></b>
+									<b>Comment by HO/RRM</b>
 								</div>
 								<div class="col-md-4">
 									<div>
