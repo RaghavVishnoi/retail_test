@@ -75,4 +75,13 @@ module ApplicationHelper
     RequestActivity.action_user(request_id,'cmo_approved,cmo_declined')
   end
 
+  def to_bool(result)
+    case result
+    when true
+      'Yes'
+    when false
+      'No'
+    end
+  end
+
 end
