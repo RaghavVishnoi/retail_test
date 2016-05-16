@@ -7,7 +7,7 @@ class RetailersController < ApplicationController
     
     
 	def index 
- 		  @retailer = Retailer.select(params).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+ 		  @retailer = Retailer.select(params,current_user).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
         
 	end
 

@@ -1,5 +1,7 @@
 class Retailer < ActiveRecord::Base
 	 
+	 
+
 	validates :retailer_code, :presence => true, :uniqueness => {:message => "Retailer code can't be duplicate"}
 	validates :retailer_name,:address,:state,:city,:status, :presence => {:message => "Some Values are required"}
     validate :mobile_number
@@ -116,10 +118,10 @@ def self.retailer_data(code,type)
 	end
 end
 
-def self.select(params)
+def self.select(params,current_user)
 	case params[:state]
 	when nil,'','All'
-		Retailer.all
+		Retailer.all.where(state: State.states_name(current_user))
 	else
 		case params[:city]
 		when nil,'','All'
@@ -144,8 +146,9 @@ def self.city_retailer(city)
 	end
 end
 
+def self.permit_retailers(current_user)
 
+	Retailer.where(state: current_user.states.pluck(:name))	 
+end
 
-  
-	 
 end
