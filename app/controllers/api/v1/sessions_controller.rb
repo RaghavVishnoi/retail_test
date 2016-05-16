@@ -8,22 +8,21 @@
         def index
           begin
            @user = User.find_by(:auth_token => params[:session][:auth_token])
+           
            render :json => {:result => true,:user => @user}
           rescue
-           render :json => {:result => false,:message => 'Internal Error'} 
+           render :json => {:result => false,:message => ERROR_501} 
          end
         end
    
         
-    		def create
-             
+    		def create             
              @user = User.with_password.with_email(params[:session][:email]).first if params[:session][:email]
              if @user == nil || @user == ''
-              render :json => { :result => false, :message => 'Username does not match'}
+              render :json => { :result => false, :message => EMAIL_MATCH_ERROR}
              else
               @role = User.user_role(@user.id)
-             
-               if (@role.name == 'requester' && params[:request][:app_id] == '1' && @user.status == 'Active') || (@role.name == 'vendor' && params[:request][:app_id] == '2' && @user.status == 'Active')
+               if (REQUESTER_ROLES.include?(@role.name) && params[:request][:app_id] == '1' && @user.status == 'Active') || (@role.name == 'vendor' && params[:request][:app_id] == '2' && @user.status == 'Active')
                 
                  if @user && @user.authenticate(params[:session][:password])
                    sign_in @user
@@ -31,15 +30,15 @@
                     vendor = Vendorlist.find_by(:email => @user.email)
                     render :json => { :result => true, :user => @user, :vendor_id => vendor.id}
                    else
-                    render :json => { :result => true, :user => @user}
+                    render :json => { :result => true, :user => @user, :role => @role.name}
                    end
 
                    
     		         else
-    		           render :json => { :result => false, :message => 'password does not match'}
+    		           render :json => { :result => false, :message => PASSWORD_MATCH_ERROR}
     		         end
               else
-                   render :json => { :result => false, :message => 'password does not match'}
+                   render :json => { :result => false, :message => PASSWORD_MATCH_ERROR}
               end
             end
         end
@@ -51,7 +50,7 @@
             @user = User.find_by(:email => email)
             @role = User.user_role(@user.id)
             if @user == nil || @user == ''
-              render :json => { :result => false, :message => 'Email Id does not exist'}
+              render :json => { :result => false, :message => EMAIL_MATCH_ERROR}
             else
               generated_password = Devise.friendly_token.first(8)
               @user.update_attributes(:name => @user.name,:email => @user.email,:status => @user.status, :password => generated_password,:password_confirmation => generated_password)
@@ -59,7 +58,7 @@
               render :json => { :result => true,:message => 'Your password id sent to #{@user.email}'}
             end
            rescue
-              render :json => { :result => false,:message => 'email id does not exist!'}
+              render :json => { :result => false,:message => EMAIL_MATCH_ERROR}
            end 
 
         end
@@ -84,7 +83,7 @@
                  render :json => { :result => false, :message => 'Please login again'}
             end
           rescue
-            render :json => { :result => false, :message => 'Internal Error'}
+            render :json => { :result => false, :message => ERROR_501}
           end  
 
         end
