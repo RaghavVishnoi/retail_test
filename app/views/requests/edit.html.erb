@@ -52,7 +52,7 @@
 			<div class="col-lg-12">
 				<div class="common_page gsb_page">
 					<div class="clearfix"></div>
-        <a href="<%=session[:prev_url]%>">  
+        <a href="<%=session[:prev_url]%>" id="back-button">  
           <i class="fa fa-arrow-circle-left back-icon" aria-hidden="true" ></i></a>
 						<div class="row">
 									
@@ -111,11 +111,11 @@
 <%=render partial: 'page_js/menubar'%>
 <script>
  	$("#request-close").click(function(){
- 		url = window.location.href.split("&alert")[0]
+    url = $("#back-button").attr("href");
 		location.href = url;
 	});
 	$("#request-popup-close").click(function(){
- 		url = window.location.href.split("&alert")[0]
+ 		url = $("#back-button").attr("href");
 		location.href = url;
 	});
 	$("#popup-button").click(function(){

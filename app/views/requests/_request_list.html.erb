@@ -5,6 +5,7 @@
 <div class="col-lg-12">
 <div class="main-box-body clearfix">
 <ul class="list-inline list-unstyled" id="myTabradio">
+	<%if can?('manage',User)%>
 	    <li>
 	        <a href="/requests?q[request_type]=<%=params[:q][:request_type]%>&q[status]=cmo_pending,approved,declined,cmo_declined,pending&<%="q[uid]" if params[:q][:uid] != nil%>=<%=params[:q][:uid]%>&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=params[:state]%>">
 	        	
@@ -19,6 +20,7 @@
 	            
 	        </a>
 	    </li>
+
 	    <li>
 	        <a href="/requests?q[request_type]=<%=params[:q][:request_type]%>&q[status]=approved&<%="q[uid]" if params[:q][:uid] != nil%>=<%=params[:q][:uid]%>&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=params[:state]%>">
 	        	
@@ -33,6 +35,7 @@
 	           
 	        </a>
 	    </li>
+
 	    <li>
 	        <a href="/requests?q[request_type]=<%=params[:q][:request_type]%>&q[status]=declined&<%="q[uid]" if params[:q][:uid] != nil%>=<%=params[:q][:uid]%>&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=params[:state]%>">
 	        	
@@ -47,6 +50,8 @@
 	           
 	        </a>
 	    </li>
+	    <%end%>
+	    <%if can?('manage',User)%>
 	    <li>
 	        <a href="/requests?q[request_type]=<%=params[:q][:request_type]%>&q[status]=pending&<%="q[uid]" if params[:q][:uid] != nil%>=<%=params[:q][:uid]%>&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=params[:state]%>">
 	            <div  class="radio_blk">
@@ -59,6 +64,20 @@
 	            </div>
 	        </a>
 	    </li>
+	    <%else%>
+	    <li>
+	        <a href="/requests?q[request_type]=<%=params[:q][:request_type]%>&q[status]=pending&<%="q[uid]" if params[:q][:uid] != nil%>=<%=params[:q][:uid]%>&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=params[:state]%>">
+	            <div  class="radio_blk">
+	                <label>
+	                    <input type="radio" id="" value="pending" <%='checked=true' if params[:q][:status] == 'pending' %>/>
+	                   
+	                    <span class="cmmn_cls">CMO Approved</span>
+	                    
+	                </label>
+	            </div>
+	        </a>
+	    </li>	
+	    <%end%>
 	    <li>
 	        <a href="/requests?q[request_type]=<%=params[:q][:request_type]%>&q[status]=cmo_pending&<%="q[uid]" if params[:q][:uid] != nil%>=<%=params[:q][:uid]%>&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=params[:state]%>">
 	            <div class="radio_blk">
