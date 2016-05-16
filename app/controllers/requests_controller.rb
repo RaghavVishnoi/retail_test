@@ -32,7 +32,15 @@ class RequestsController < ApplicationController
 
 
   def create
+      rparams = request_params
+      if ["Faridabad","Gurgaon"].include?(request_params[:city])      
+        rparams[:state_id] = 10
+        request_params = rparams
+      else
+        request_params = rparams
+      end
       @request = Request.new request_params
+
     if @request.save      
       if params[:request][:request_type] == 'visitor'
         @requests = Request.last 
