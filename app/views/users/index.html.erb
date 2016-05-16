@@ -8,42 +8,78 @@
      <div class="col-lg-12">
         <div class="main-box-body clearfix">
             <div class="row">
-            <% if can? :manage, CMO %> 
-            <div class="col-md-3">
-                <div class="add_new_notfcn">
-                  <h4><i class="fa fa-plus-square fa-lg"></i>
-                    <span>
-          <%= link_to "Add CMO","/users/new?user=cmo" %>
-             </span>
-                  </h4>
-                </div>
-              </div>
-              <% end %>
-              
+
+            
+            <%if User.permit_role(User.user_role(current_user.id)).include? 'rrm'%>     
               <div class="col-md-3">
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i><span>
-      <%= link_to "Add RRM","/users/new?user=rrm" %>
-            </span></h4>
+                  <%= link_to "Add RRM","/users/new?user=rrm" %>
+                  </span></h4>
                 </div>
               </div>
+            <%end%>  
+
+            <%if User.permit_role(User.user_role(current_user.id)).include? 'cmo'%>  
+              <div class="col-md-3">
+                <div class="add_new_notfcn">
+                  <h4><i class="fa fa-plus-square fa-lg"></i>
+                    <span>
+                       <%= link_to "Add CMO","/users/new?user=cmo" %>
+                     </span>
+                  </h4>
+                </div>
+              </div>
+            <%end%>
+
+            <%if User.permit_role(User.user_role(current_user.id)).include? 'vmqa'%>  
+              <div class="col-md-3">
+                <div class="add_new_notfcn">
+                  <h4><i class="fa fa-plus-square fa-lg"></i>
+                    <span>
+                       <%= link_to "Add VMQA","/users/new?user=vmqa" %>
+                     </span>
+                  </h4>
+                </div>
+              </div>
+            <%end%> 
+
+            <%if User.permit_role(User.user_role(current_user.id)).include? 'supervisor'%>  
+              <div class="col-md-3">
+                <div class="add_new_notfcn">
+                  <h4><i class="fa fa-plus-square fa-lg"></i>
+                    <span>
+                       <%= link_to "Add Supervisor","/users/new?user=supervisor" %>
+                     </span>
+                  </h4>
+                </div>
+              </div>
+            <%end%>     
+               
               
-            
-            <div class="col-md-3">
+            <%if User.permit_role(User.user_role(current_user.id)).include? 'auditor'%>
+              <div class="col-md-3">
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i><span>
-<%= link_to "Add Auditor","/users/new?user=auditor" %>
+                  <%= link_to "Add Auditor","/users/new?user=auditor" %>
                   </span></h4>
                 </div>
               </div>
-            
-            <div class="col-md-3">
+            <%end%>
+              
+            <%if User.permit_role(User.user_role(current_user.id)).include? 'requester'%>
+              <div class="col-md-3">
                 <div class="add_new_notfcn">
-                  <h4><i class="fa fa-plus-square fa-lg"></i><span>
-<%= link_to "Add Requester","/users/new?user=requester" %>
-                  </span></h4>
+                  <h4><i class="fa fa-plus-square fa-lg"></i>
+                    <span>
+                      <%= link_to "Add Requester","/users/new?user=requester" %>
+                    </span></h4>
                 </div>
               </div>
+            <%end%>  
+
+
+
             </div>
             </div>
           </div>
@@ -56,10 +92,10 @@
               <div class="common_page user">
               <div class="user_tab">
               <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-1">
                   <h4>User</h4>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                 <ul class="list-inline list-unstyled" id="myTab">
 
               <%= collection_check_boxes( 'search', '',User.permit_role(User.user_role(current_user.id)),:to_s,:to_s,{checked: @search},:class=> 'search') if User.user_role(current_user.id).name == 'approver' || 'superadmin' %> 
@@ -126,14 +162,23 @@
                                   <i class="fa fa-pencil"></i>
                                   
                                   <% if can? :manage, User %>
-                                  <span>
-                                    <%= link_to "Edit", [:edit, user] %>
-                                  </span>
+                                    <span>
+                                      <%= link_to "Edit", [:edit, user] %>
+                                    </span>
                                   <%end%>
 
                                 </li>
                               <li class="blue">
                               <span>
+                                <%if User.permit_role(User.user_role(current_user.id)).include? 'vmqa'%>
+                                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+
+
+                                  <span>
+                                  <%= link_to "Assignments",shop_assignments_path %>
+
+                                  </span>
+                                <%else%>
                                 <%= link_to "/users/change_status?id=#{user.id.to_s}",data: { confirm: 'Are you sure?' }  do %>
                                   <% if user.status == "Active" %>
                                     <i class="fa fa-eye"></i> Status Change
@@ -141,6 +186,7 @@
                                    <i class="fa fa-eye-slash"></i> Status Change 
                                   <% end %>
                                 <% end %>
+                                <%end%>
                               </span>
                             </li>
 
