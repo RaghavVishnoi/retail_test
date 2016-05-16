@@ -256,7 +256,15 @@ REQUESTS_STATUS = {
     ["Inactive","Inactive"]
   ]
 
+REQUESTER_ROLES = ['approver','superadmin','rrm','cmo','requester','auditor']  
 
+ERROR_501 = "Internal Server Error!"
+EMAIL_MATCH_ERROR = "Username does not match!"
+PASSWORD_MATCH_ERROR = "Password does not match!"
 
+ASSIGNMENT_STATUS = ["pending","audited"]
+
+VENDOR_STAGES = ['accepted','shop_visit','estimate_shared','po_received','in_production','in_transit','installation_complete','bill_received']
+  
 
   
