@@ -22,9 +22,16 @@ class RequestMailer < ActionMailer::Base
     mail(to: to, subject: subject)
   end
 
-  def csv_mail(emails, file_name)
+  def csv_mail(email, file_name,subject)
     @file_name = file_name
-    mail(to: emails[0], subject: 'CSV link',cc:emails.drop(1))
+    case email
+    when 'approver@gionee.com'
+      email = 'akash@gionee.co.in'
+    when 'superadmin@fosem.com'
+      email = 'raghav.singh@lptpl.com'
+    end
+
+    mail(to: email, subject: subject)
   end
  
 end
