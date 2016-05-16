@@ -27,9 +27,11 @@ class Document < ActiveRecord::Base
    def self.get_level(role,type,object)
    		 case role.name
    		   when 'superadmin'
-   		   	get_repository(['1','2','3','4'],type,object)
+   		   	get_repository(['1','2','3','4','5'],type,object)
    		   when 'approver'
-   		   	get_repository(['1','2','3'],type,object)
+   		   	get_repository(['1','2','3','4'],type,object)
+         when 'rrm'
+          get_repository(['1','2','3'],type,object)
    		   when 'cmo'
             get_repository(['1','2'],type,object)
    		   when 'requester'

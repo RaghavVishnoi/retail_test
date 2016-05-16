@@ -8,21 +8,22 @@ module RepositoriesHelper
 	end
 
 	def get_role
-		Role.find(get_associated_role.role_id)
+		User.user_roles(get_user)
 	end
 
 	def get_level
-		case get_role.name
-            when 'superadmin'
-            	['1','2','3','4']
-	        when 'approver'
-	        	['1','2','3']
-	        when 'cmo'
-	        	['1','2']
-	        when 'requester'
-	        	'1'
-	        	
-        end
+		role = get_role
+		if role.include?('superadmin')
+			['1','2','3','4','5']
+		elsif role.include?('approver')
+			['1','2','3','4']
+		elsif role.include?('rrm')
+			['1','2','3']
+		elsif role.include?('cmo')
+			['1','2']
+		elsif role.include?('requester')
+			'1'
+		end
 	end
 
 	def get_repository
