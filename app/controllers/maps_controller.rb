@@ -6,7 +6,7 @@ skip_before_action :verify_authenticity_token
 	def map_data
  
 		session[:prev_url] = request.fullpath.split('map_data')[0]
-     	@map = Map.image_data(params)
+     	@map = Map.image_data(params,current_user)
     	render :json => @map
  
     end
