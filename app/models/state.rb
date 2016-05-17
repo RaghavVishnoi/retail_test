@@ -22,7 +22,7 @@ class State < ActiveRecord::Base
 	end
 
 	def self.states(user)
- 		if ['superadmin','approver','vmqa'].include? User.get_role(user.id)
+ 		if ['superadmin','approver','vmqa','downloader'].include? User.get_role(user.id)
   			State.all.pluck(:id)
 		else
 			state_id = user.user_states.pluck(:state_id)

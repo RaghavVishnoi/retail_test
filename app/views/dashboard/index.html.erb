@@ -6,6 +6,15 @@
 	<%=render 'dashboard/cmo'%>
 <%elsif User.user_roles(current_user.id).include? 'vendor'%>	
 	<%=render 'dashboard/vendor'%>
+<%elsif User.user_roles(current_user.id).include? 'vmqa'%>	
+	<%=render 'dashboard/vmqa'%>
+<%elsif User.user_roles(current_user.id).include? 'supervisor'%>	
+	<%=render 'dashboard/supervisor'%>	
+<%elsif User.user_roles(current_user.id).include? 'downloader'%>	
+	
+	 <script>location.href = '/downloads'</script>
+
+	 
 <%else%>
 	<%if User.user_roles(current_user.id).include? 'approver'%>
 	<div class="div-left">
