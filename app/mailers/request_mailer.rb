@@ -26,7 +26,7 @@ class RequestMailer < ActionMailer::Base
     @file_name = file_name
     case email
     when 'approver@gionee.com'
-      email = ['akash@gionee.co.in','dinesh.upadhyay@theradicles.com']
+      email = ['akash@gionee.co.in','dinesh.upadhyay@theradicles.com','jaipal.singh@gionee.co.in']
     when 'superadmin@fosem.com'
       email = 'raghav.singh@lptpl.com'
     end
