@@ -106,8 +106,8 @@ module RequestsHelper
 	end
 
 	def shop_data(state,start_date,end_date)
-		sql = "select temp1.*,temp2.*,im.lat,im.long from 
-		(select rs.retailer_name,rs.state,rs.city,rs.counter_size, rs.retailer_code rsrc from retailers rs where state='#{state}'
+		sql = "select temp1.*,temp2.*,im.lat,im.long,im.image,im.id from 
+		(select rs.retailer_name,rs.state,rs.city,rs.counter_size,rs.address, rs.retailer_code rsrc from retailers rs where state='#{state}'
 		 AND status='Active') as temp1 left outer join (select rq.id,rq.request_type,
 		 rq.status,rq.created_at,rq.cmo_approve_date,approver_approve_date,rq.avg_store_monthly_sales,rq.retailer_code rqrc from requests rq where 
 		 rq.created_at BETWEEN '#{start_date}' AND '#{end_date}' AND
@@ -118,28 +118,30 @@ module RequestsHelper
 					results = {}
 					@result.each do |result|
 						shop_data = {}
-						if results.has_key?(result[4])
-							values = results[result[4]]
+						if results.has_key?(result[5])
+							values = results[result[5]]
 							value = values[:request]
 							req = {}
-							if result[5] != nil 
-								req[:id] = result[5]
-								req[:request_type] = REQUEST_TYPE[result[6].to_i]
-								req[:created_at] = result[8]
-								req[:cmo_approve_date] = result[9]
-								req[:approver_approve_date] = result[10]
-								req[:status] = result[7]
+							if result[6] != nil 
+								req[:id] = result[6]
+								req[:request_type] = REQUEST_TYPE[result[7].to_i]
+								req[:created_at] = result[9]
+								req[:cmo_approve_date] = result[10]
+								req[:approver_approve_date] = result[11]
+								req[:status] = result[8]
 								value.push(req)
 								values[:request] = value
-								values[:lat] = result[13]
-								values[:long] = result[14]
-								values[:sales_volume] = result[11]
-								if result[6] == 4
-									values[:shop_visit_date] = result[8]
+								values[:lat] = result[14]
+								values[:long] = result[15]
+								image_url = "http://requesterapp.gionee.co.in/uploads/image/image"+"/"+result[17].to_s+"/"+result[16].to_s
+								values[:image_url] = image_url
+								values[:sales_volume] = result[12]
+								if result[7] == 4
+									values[:shop_visit_date] = result[9]
 								end
-								results[result[4]] = values
+								results[result[5]] = values
 							else
-								results[result[4]] = values								
+								results[result[5]] = values								
 							end
 
 						else
@@ -148,21 +150,24 @@ module RequestsHelper
 							shop_data[:shop_name] = result[0]
 							shop_data[:city] = result[2]
 							shop_data[:state] = result[1]
-							shop_data[:retailer_code] = result[4]
+							shop_data[:retailer_code] = result[5]
 							shop_data[:counter_size] = result[3]
-							results[result[4]] = shop_data
-							if result[5] != nil
-								request[:id] = result[5]
-								request[:request_type] = REQUEST_TYPE[result[6].to_i]
-								request[:created_at] = result[8]
-								request[:cmo_approve_date] = result[9]
-								request[:sales_volume] = result[10]
-								request[:status] = result[7]
-								shop_data[:lat] = result[13]
-								shop_data[:long] = result[14]
-								shop_data[:avg_gionee_monthly_sales] = result[11]
-								if result[6] == 4
-									shop_data[:shop_visit_date] = result[8]
+							shop_data[:address] = result[4]
+							results[result[5]] = shop_data
+							if result[6] != nil
+								request[:id] = result[6]
+								request[:request_type] = REQUEST_TYPE[result[7].to_i]
+								request[:created_at] = result[9]
+								request[:cmo_approve_date] = result[10]
+								request[:sales_volume] = result[11]
+								request[:status] = result[8]
+								shop_data[:lat] = result[14]
+								shop_data[:long] = result[15]
+								image_url = "http://requesterapp.gionee.co.in/uploads/image/image"+"/"+result[17].to_s+"/"+result[16].to_s
+								shop_data[:image_url] = image_url
+								shop_data[:avg_gionee_monthly_sales] = result[12]
+								if result[7] == 4
+									shop_data[:shop_visit_date] = result[9]
 								else
 									shop_data[:shop_visit_date] = 'No Record'
 								end
