@@ -1,3 +1,4 @@
+VERSION = 9
 AVG_GIONEE_MONTHLY_SALES = [
   ["0-50 Thousand", "0"], 
   ["50 Thousand - 1 Lac", "50000"], 
@@ -265,6 +266,7 @@ PASSWORD_MATCH_ERROR = "Password does not match!"
 ASSIGNMENT_STATUS = ["pending","audited"]
 
 VENDOR_STAGES = ['accepted','shop_visit','estimate_shared','po_received','in_production','in_transit','installation_complete','bill_received']
-  
+AUDITOR = "auditor"  
+VENDOR = "vendor"
 
   
