@@ -20,23 +20,41 @@
 	<div class="common_page gsb1">
 		<div class="hdr">
 			<div class="row">
-	    		<div class="col-md-2">
+	    		<div class="col-md-3">
 					 Retailers					
 				</div> 
-				<div class="col-md-3 ">
-					 
-					
-					 
-				</div>
-			 
-				<div class="col-md-3">
+				 
+				<div class="col-md-2">
 					<%= select_tag :state_shops, options_for_select(['All']+State.state_with_name(current_user),params[:state]),:class => 'form-control custm_select',:required => "required",:onchange => "state() "%>
 					
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					 <%= select_tag :city_shops, options_for_select(['All']+Retailer.where(state: params[:state]).pluck(:city).uniq,params[:city]),:class => 'form-control custm_select',:required => "required",:onchange => "city() "  %>
 					
 				</div>
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-3">
+            <%=form_tag '/shop_assignments/new' ,:method => 'get' do |f| %>  
+                    <div id="user-search-div" class="form-field">
+                       <div class="user-search-field">
+                         <%= text_field_tag :retailer_code, params[:retailer_code], :id => "retailer-search",:required => "required",:placeholder => "Enter retailer code",:class => 'search_email' %>
+                      </div>
+                      <div>
+                        <% if params[:retailer_code] == nil %>
+                           <%= button_tag(type: 'submit',value: 'search',:class=>"hide-button") do %>
+                             <i class="fa fa-search search-icon"></i> 
+                           <% end %>
+
+                        <% else %>
+                            
+                             <a href="/retailers" class="clear-button"><i class="fa fa-times-circle-o"></i></a> 
+                           
+                        <% end %>
+                        <%end%>
+        </div>
+      </div></div>
 				
 				<div class="col-md-1 ch_bttn" style="padding:0px;">
 						<input type='checkbox' name='thing' value='valuable' id="selectAll"/><label for="selectAll">All</label> 

@@ -12,6 +12,9 @@ class ShopAssignmentsController < ApplicationController
 	def new
 		session[:prev_url] = request.fullpath
 		@assignments = ShopAssignment.available_assignment(current_user,params[:state],params[:city]).paginate(:per_page => PERPAGE,:page => (params[:page] || 1))
+		if params[:button] == 'search'
+			@assignments = @assignments.where(retailer_code: params[:retailer_code])
+		end
 		@shop_assignment = ShopAssignment.new
 	end
 
