@@ -6,10 +6,14 @@ class RetailersController < ApplicationController
     PER_PAGE = 100
     
     
-	def index 
-        session[:prev_url] = request.fullpath
- 		@retailer = Retailer.select(params,current_user).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))       
-	end
+	def index
+        if params[:button] != 'search' 
+            session[:prev_url] = request.fullpath
+     		@retailer = Retailer.select(params,current_user).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))       
+	    else
+            @retailer = Retailer.search(params[:retailer_code])
+        end
+    end
 
 	def new 
 		@retailer = Retailer.new
@@ -32,20 +36,6 @@ class RetailersController < ApplicationController
     def file_insert
         @file = ReadFile.file_insert(params[:new_array],params[:update_array])
         redirect_to retailers_path, :notice => "File upload in process,you'll get mail once done"
-    end
-
-
-    def search
-        
-        @retailer = Retailer.search(params[:id])
-
-        if @retailer == ''
-
-            redirect_to retailers_path, notice: "Retailer not found"
-        else
-            redirect_to retailers_path
-        end
-
     end
 
     def show
