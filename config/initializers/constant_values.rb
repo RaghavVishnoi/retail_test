@@ -1,4 +1,4 @@
-VERSION = 11
+VERSION = 10
 AVG_GIONEE_MONTHLY_SALES = [
   ["0-50 Thousand", "0"], 
   ["50 Thousand - 1 Lac", "50000"], 
