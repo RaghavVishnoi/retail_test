@@ -1,0 +1,213 @@
+
+ 
+<div id ="date_field">
+<label><b>From</b></label> 
+<%= date_field_tag("date_from", "") %>
+<label><b>To</b></label>
+<%= date_field_tag("date_to", "") %>
+<%= button_tag class: 'search_button' do %>
+<i class="fa fa-search search-icon"></i>
+<% end %>
+</div>
+<div class="row">
+<div class="col-lg-12">
+<div class="row">
+<div class="col-md-12 col-sm-6">
+<div class="main-box clearfix">
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" style="color: #fff;">
+     	 Supervisor -  <%=current_user.name%>
+        </a>
+      </h4>
+    </div>
+     
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel_body">
+
+        
+       	<div class="table-responsive">
+			<table class="table table-border">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Total</th>
+						<th>Pending</th>
+						<th>Audited</th>
+ 					</tr>
+				</thead>
+				<tbody>
+				<%@response.each do |child|%>
+					<tr>
+						<td class="blue">
+							<a href="/user_audits/<%=child.id%>?from=<%=params[:from]%>&to=<%=params[:to]%>">
+							<%=child.name%>
+							</a>
+						</td>
+						
+						<td class="blue tot click"><%=ShopAssignment.assignment_count(params[:from],params[:to],child.id,['pending','audited'])%>
+							<%=hidden_field_tag 'user_id',child.id,:class => 'user'%>
+						</td>
+						<td class="blue pen click"><%=ShopAssignment.assignment_count(params[:from],params[:to],child.id,['pending'])%>
+							<%=hidden_field_tag 'user_id',child.id,:class => 'user'%>
+						</td>
+						<td class="blue aud click"><%=ShopAssignment.assignment_count(params[:from],params[:to],child.id,['audited'])%>
+							<%=hidden_field_tag 'user_id',child.id,:class => 'user'%>
+						</td>
+						
+
+					</tr>
+				<%end%>	 	
+					<tr>
+						<td>
+							
+							Total
+						 
+						</td>
+						<td class="blue tot click"><%=ShopAssignment.assignment_count(params[:from],params[:to],UserParent.children(current_user.id,'auditor').pluck(:id),['pending','audited'])%>
+						</td>
+						<td class="blue pen click"> <%=ShopAssignment.assignment_count(params[:from],params[:to],UserParent.children(current_user.id,'auditor').pluck(:id),['pending'])%>
+						</td>
+						<td class="blue aud click"><%=ShopAssignment.assignment_count(params[:from],params[:to],UserParent.children(current_user.id,'auditor').pluck(:id),['audited'])%> </td>
+						 
+					</tr>						
+				</tbody>
+			</table>
+		</div>
+    </div>
+     
+</div>
+</div>
+</div>
+
+</div>
+<section class="comments_sectn">
+<div class="row">	
+<div class="col-lg-12">
+<div class="main-box clearfix">
+<div class="clearfix">
+	<div class="common_page gsb_page">
+	<h2 class="asgnd_shop_blk"><div class="assgn_shop">Assigned Shops</div>
+		 				<div class="shop-search">
+                         <%= text_field_tag :email, params[:email], :id => "retailer-search",:required => "required",:placeholder => "Enter retailer code",:class => 'user-search-field' %>
+                      	</div>
+                      	<div>
+              
+                            
+                             <i class="fa fa-search search-icon" id = 'search'></i> 
+ 
+                             
+                             <i class="fa fa-times-circle-o" id = "clear"></i>
+                            
+                      	</div> 
+	</h2>
+	<div class="comments_blk retailer">
+		 
+	</div>
+		</div>
+	</div>
+	</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>		
+</div>
+<script type="text/javascript">
+$('#dashboard').attr("class",'active')
+$('.tot').click(function(){
+	$('.pend').attr("style","display:block !important;")
+	$('.done').attr("style","display:block !important;")
+});
+$('.pen').click(function(){
+	$('.done').attr("style","display:none !important;")
+ 	$('.pend').attr("style","display:block !important;")
+});
+$('.aud').click(function(){
+	$('.pend').attr("style","display:none !important;")
+	$('.done').attr("style","display:block !important;")
+});
+ 
+/*********************** Ajax call ***********************/
+$('.click').click(function(){
+	var from =  $("#date_from").val()
+	var to = $("#date_to").val()
+	var user_id = $(this).find('input[type="hidden"]').val();
+ 	var status;
+	if($(this).is( ".tot" )){
+		status = 'pending,audited'
+	}else if($(this).is( ".pen" )){
+		status = 'pending'
+	}else if($(this).is( ".aud" )){
+		status = 'audited'
+	}else if($(this).is( ".int" )){
+		status = 'interrupted'
+	}
+
+
+
+	$.ajax({
+		url: '/shop_assignments/search' ,
+		type:'POST',
+		data:{from: from,
+			to: to,
+			status: status,
+			user_id: user_id,
+
+		},
+		dataType:'text',
+
+		complete: function (){
+
+		},
+		success:function (data, textStatus, xhr){
+			$('.comments_blk').html("");
+			var result = JSON.parse(data);
+			objects = result['shop_assignments']
+			console.log(objects)
+			for(var i=0;i<objects.length;i++){
+				var clrClass;
+				if(objects[i]['status'] == 'pending'){
+					clrClass = "hdr bgColorPending pending"
+				}else{
+					clrClass = "hdr bgColorDone audited"
+				}
+	 			var htm = '<div class="'+clrClass+' '+objects[i]['shop']['retailer_code']+'">'+
+		 		'<div class="row"><div class="col-md-8 cong">'+
+		 		'<p><span class="blue">'+objects[i]['shop']['retailer_code']+'</span> - '+objects[i]['shop']['retailer_name']+'</p><p>'+objects[i]['shop']['contact_person']+' -  <span class="gray">'+objects[i]['shop']['mobile_number']+'</span></p><p>'+objects[i]['shop']['city']+','+objects[i]['shop']['state']+'</p></div><div class="col-md-4"><p>Assigned On: <span class="blue">'+objects[i]['created_at']+'</span></p>'+'<p>Audited On: <span class="blue">'+objects[i]['audited_on']+'</span> </p></div></div></div>'
+	            $('.comments_blk').append(htm);
+	            $("#search").click(function(){
+				var retailer = $("#retailer-search").val();
+				if(retailer == null || retailer == ''){
+					alert("Please enter retailer code!")
+					}else{
+						$('.pending').attr("style","display:none !important;");
+						$('.audited').attr("style","display:none !important;");
+						$('.'+retailer).attr("style","display:block !important;");
+						$('#clear').attr("style","display: block !important;margin-left:92% !important");
+						$('#search').attr("style","display: none !important")
+					}
+				});
+				$("#clear").click(function(){
+					$('.pending').attr("style","display:block !important;");
+					$('.audited').attr("style","display:block !important;");
+					$('#clear').attr("style","display: none !important");
+					$('#search').attr("style","display: block !important;margin-left:92% !important")
+				});
+	        }
+		},
+		error: function(err){
+			alert('internal server error!')
+		}
+	}); 
+	
+});
+
+
+
+</script>		
+

@@ -1,6 +1,6 @@
 class State < ActiveRecord::Base
 
-	belongs_to :user_state
+	has_many :user_state
 	has_many :requests
 
 	def self.permit_state(user)

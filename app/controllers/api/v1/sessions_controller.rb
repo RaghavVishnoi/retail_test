@@ -21,16 +21,17 @@
              if @user == nil || @user == ''
               render :json => { :result => false, :message => EMAIL_MATCH_ERROR}
              else
+              @roles = User.user_roles(@user.id)
               @role = User.user_role(@user.id)
-               if (REQUESTER_ROLES.include?(@role.name) && params[:request][:app_id] == '1' && @user.status == 'Active') || (@role.name == 'vendor' && params[:request][:app_id] == '2' && @user.status == 'Active')
+               if (REQUESTER_ROLES.any?{|role| @roles.include?(role)} && params[:request][:app_id] == '1' && @user.status == 'Active') || (@role.name == 'vendor' && params[:request][:app_id] == '2' && @user.status == 'Active')
                 
                  if @user && @user.authenticate(params[:session][:password])
                    sign_in @user
-                   if @role.name == 'vendor'
+                   if @role.name == VENDOR
                     vendor = Vendorlist.find_by(:email => @user.email)
                     render :json => { :result => true, :user => @user, :vendor_id => vendor.id}
                    else
-                    render :json => { :result => true, :user => @user, :role => @role.name}
+                    render :json => { :result => true, :user => @user, :role => if @roles.include?(AUDITOR) then AUDITOR else @role.name end}
                    end
 
                    

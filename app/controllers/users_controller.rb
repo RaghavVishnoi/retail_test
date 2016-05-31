@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   PER_PAGE = 20
 
   def index
-    @users = User.list_users(current_user.id,params).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+    @users = User.list_users(params,current_user).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
     @search = params[:search].split(',') if params[:search].present?
   end
   
@@ -25,12 +25,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
   end
 
   def update
     @role = User.user_role(current_user.id)
     if @user.update_attributes user_params
-      redirect_to users_path, notice: "Updated successfully"
+      redirect_to users_path, notice: "Record updated successfully"
     else
       render :edit
     end
@@ -84,7 +85,7 @@ class UsersController < ApplicationController
   private
     def user_params
       if current_ability.can? :create, User
-        params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation,{:state_ids => []}, :department_ids,:status,{:role_ids => []}, :region_ids => [], :business_unit_ids => [], :job_title_ids => [], :weekly_off_ids => []).merge(:skip_password_validation => true)
+        params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation,{:state_ids => []},:supervisor_id, :department_ids,:status,{:role_ids => []}, :region_ids => [], :business_unit_ids => [], :job_title_ids => [], :weekly_off_ids => []).merge(:skip_password_validation => true)
       else
         params.require(:user).permit(:name,  :phone,:email,:status, :password, :password_confirmation,:state)
       end

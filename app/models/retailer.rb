@@ -147,8 +147,11 @@ def self.city_retailer(city)
 end
 
 def self.permit_retailers(current_user)
-
-	Retailer.where(state: current_user.states.pluck(:name))	 
+    if current_user.roles.pluck(:name).include?('vmqa')
+    	Retailer.all
+    else
+	   Retailer.where(state: current_user.states.pluck(:name))	 
+    end
 end
 
 end

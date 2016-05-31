@@ -1,0 +1,132 @@
+<div id="nav-col-submenu"></div>
+  </div>
+ 
+<div id="content-wrapper">
+   <%= render 'shared/notice_messages'%>
+                
+  <div class="row">
+     <div class="col-lg-12">
+        <div class="main-box-body clearfix">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="add_new_notfcn">
+                  <h4><i class="fa fa-plus-square fa-lg"></i><span>
+                  <%= link_to "New Assignment",'/shop_assignments/new'%>
+                  </span></h4>
+                </div>
+              </div>
+            </div>  
+            <div class="main-box clearfix">
+            <div class="clearfix">
+              <div class="common_page user">
+              <div class="user_tab">
+              <div class="row">
+                <div class="col-md-2">
+                  <h4>Assignments</h4>
+                </div>
+               
+                <div class="col-md-3 mr_btm1">
+                  <%=if User.user_role(current_user).name != 'supervisor' then select_tag :supervisor, options_for_select(['Select Supervisor']+User.users_data_with_token('supervisor'),params[:sId]),:class => 'form-control custm_select',:required => "required",:onchange => "supervisor()",:id => 'supervisor' else select_tag :supervisor, options_for_select([[current_user.name,current_user.auth_token]]),:class => 'form-control custm_select',:required => "required",:onchange => "supervisor()",:id => 'supervisor' end%>
+
+                </div>
+                 <div class="col-md-3">
+                  <%=if User.user_role(current_user).name != 'supervisor' then select_tag :supervisor, options_for_select(['Select Auditor']+UserParent.children(User.find_by('auth_token = ?',if params[:sId] != nil then params[:sId] else nil end),'auditor').pluck(:name,:auth_token),params[:aId]),:class => 'form-control custm_select',:required => "required",:onchange => "auditor()",:id => 'auditor' else select_tag :supervisor, options_for_select(UserParent.children(current_user.id,'auditor').pluck(:name,:auth_token),params[:aId]),:class => 'form-control custm_select',:required => "required",:onchange => "auditor()",:id => 'auditor' end%>
+                </div>
+                 <div class="col-md-3 mr_btm1">
+                  <%= select_tag :state_request, options_for_select(['Select Status']+ASSIGNMENT_STATUS,params[:status]),:class => 'form-control custm_select',:required => "required",:onchange => "status()",:id => "status" %>
+
+                </div>
+              </div>
+              </div>
+            
+                 
+                <div id='content' class="tab-content">
+                
+                <%@shop_assignments.each do |assignment|%>
+                    <div class="tab-pane active <%=if assignment.status == 'pending' then "bgColorPending" else "bgColorDone" end%>" id="all">
+                      <div class="row">
+                      <div class="col-md-9 cong">
+                        <p><span class="blue"><%=assignment.retailer.retailer_code%></span> - <%=assignment.retailer.retailer_name%> </p>
+                        <p><%=assignment.retailer.contact_person%> -  <span class="gray"><%=assignment.retailer.mobile_number%></span></p>
+                        <p><%=assignment.retailer.city%>,<%=assignment.retailer.state%></p>
+                        <p>Supervisor: <span class="blue"><%=UserParent.user_parent(assignment.user_id,'auditor').pluck(:name).join(',')%></span></p>
+                        <p>Auditor: <span class="blue"><%=User.find(assignment.user_id).name%></span></p>
+                      </div>
+
+                      <div class="col-md-3 ">
+                        
+                        <ul class="list-inline list-unstyled">
+                         <%if assignment.status != "audited"%>
+                          <li class="blue"><i class="fa fa-pencil"></i><span><a href="/shop_assignments/<%=assignment.id%>/edit"  class="blue">Edit</a></span></li>
+                           
+                          <%else%>
+                          <li class="blue"><i class="fa fa-hand-o-right"></i><span><a href="/requests/<%=assignment.request_id%>/edit?q[request_type]=4"  class="blue">Show</a></span></li>
+                          <%end%>
+                        </ul>
+
+                        <ul class="list-inline list-unstyled">
+                         
+                          <li>Assigned On: <span class="blue"><%=assignment.assign_date.strftime("%d %b,%Y")%></span></li>
+                           
+                        </ul>
+                        <ul class="list-inline list-unstyled">
+                         
+                          <li><span>Audited On: <span class="blue"><%=if assignment.status == 'pending' then "N/A" else assignment.request.created_at.strftime("%d %b,%Y") end%></span></li>
+                           
+                        </ul>
+                      </div>
+                    </div>
+                   </div>
+                  <%end%>  
+                
+
+
+                </div>
+              <%=will_paginate @shop_assignments%>
+
+                
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+<script type="text/javascript">
+  $('#assignments').attr("class",'active')
+  function supervisor(){
+    var supervisor_id = $( "select#supervisor option:selected").val();
+    if(supervisor_id == 'Select Supervisor' || supervisor_id == null){
+      location.href='/shop_assignments'
+    }else{
+      var status = getUrlVars()["status"]; 
+      var aId = getUrlVars()["aId"];     
+      location.href='?sId='+supervisor_id+'&aId='+aId+'&status='+status     
+    }
+    
+  }
+
+  function auditor(){
+    var auditor_id = $( "select#auditor option:selected").val();
+    if(auditor_id == 'Select Auditor' || auditor_id == null){
+      location.href='/shop_assignments'
+    }else{
+      var status = getUrlVars()["status"];
+      var sId = $( "select#supervisor option:selected").val();
+      location.href='?sId='+sId+'&aId='+auditor_id+'&status='+status
+       
+    }
+    
+  }
+
+  function status(){
+    var status = $( "select#status option:selected").val();
+    if(status == null || status == 'Select Status'){
+      location.href='/shop_assignments'
+    }else{
+      var sId = $( "select#supervisor option:selected").val();
+      var aId = getUrlVars()["aId"];
+      location.href='?sId='+sId+'&aId='+aId+'&status='+status
+      
+    }
+    
+  }
+</script>       

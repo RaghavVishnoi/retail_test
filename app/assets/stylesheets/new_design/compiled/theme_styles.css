@@ -1139,11 +1139,11 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
   border-color: #1c5c87; }
 
 .btn-success {
-  background-color: #FC9D21;
+  background-color: #F37022;
   border-color: #FC971B; }
 
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
-  background-color: #689f38; }
+  background-color: #F37022; }
 
 .btn-danger {
   background-color: #e84e40;
@@ -2487,7 +2487,7 @@ input[type="radio"] {
     margin-bottom: 0; }
 
 #login-logo {
-  background: none repeat scroll 0 0 #34495e;
+  background: none repeat scroll 0 0 #F37022;
   color: #fff;
   display: block;
   font-size: 2em;

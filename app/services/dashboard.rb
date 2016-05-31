@@ -1,8 +1,7 @@
 class Dashboard
 	
-
 	def self.data(current_user,params)
- 		if params[:v] == 'rrm' 
+  		if params[:v] == 'rrm' 
  			users = User.where(status: 'Active',id: AssociatedRole.where(role_id: Role.find_by(name: 'rrm').id).pluck(:object_id))
  			@response = []
  			users.each do |user|
@@ -14,6 +13,18 @@ class Dashboard
  				@response.push(data)
   			end
  			@response
+ 		elsif User.user_roles(current_user).include?('vmqa')
+ 			users = User.where(status: 'Active',id: AssociatedRole.where(role_id: Role.find_by(name: 'supervisor').id).pluck(:object_id))
+ 			@response = []
+ 			users.each do |user|
+ 				response = {}
+ 				response[:supervisor] = user
+ 				response[:auditor] = UserParent.children(user.id,'auditor')
+ 				@response.push(response) 
+ 			end
+ 			@response
+ 		elsif User.user_roles(current_user).include?('supervisor')
+ 			UserParent.children(current_user.id,'auditor')
 		else
 				permit_state = State.permit_state(current_user)
 			  	@response = []
@@ -44,7 +55,6 @@ class Dashboard
 		 			  			user_data = UserData.find_by(user_id: user_id,status: 'Active')
  		 			  			if roles.include? 'rrm' 
 		 			  				if user_data != nil
-		 			  					puts "enter user_data.user"
 					  					rrm.push(user_data.user)
 					  				end
 					  			end

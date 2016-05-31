@@ -23,6 +23,7 @@ User:
   permissions:
     "manage, User": "Create Users"
     "approver, User": "Create Approver Users"
+    "vmqa, User": "VMQA Users"
 
 Request:
   group_name: "Requests"
@@ -88,7 +89,7 @@ Downloads:
   group_name: "Downloads"
   permissions:
     "manage, Download": "Download Records"
-
+ 
 BeatRoute:
   group_name: "Beatroutes"
   permissions:
@@ -108,3 +109,13 @@ RRM:
   group_name: "RRM"
   permissions:
     "manage, RRM": "RRM"
+
+ShopAssignment:
+  group_name: "ShopAssignment"
+  permissions:
+    "manage, ShopAssignment": "ShopAssignment"
+
+UserAudit:
+  group_name: "UserAudit"
+  permissions:
+    "manage, UserAudit": "UserAudit"

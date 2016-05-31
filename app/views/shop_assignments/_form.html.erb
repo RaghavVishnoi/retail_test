@@ -1,0 +1,186 @@
+ 
+<div id="nav-col-submenu"></div>
+</div>
+<div id="content-wrapper">
+
+<div class="row">
+
+<div class="main-box-body common_page clearfix">
+  <div class="col-md-3 assmt_new_sel">
+  	<%=if User.user_role(current_user).name != 'supervisor' then select_tag :auditor, options_for_select(['Select Auditor']+User.users_data('auditor'),if params[:user] != nil then params[:user].to_i(2) end),:class => 'form-control custm_select',:required => "required",:id => 'user' else select_tag :auditor, options_for_select(UserParent.children(current_user.id,'auditor').pluck(:name,:id),if params[:user] != nil then params[:user].to_i(2) end),:class => 'form-control custm_select',:required => "required",:id => 'user' end%>
+  </div>
+</div>
+
+</div>
+<div class="row">
+<div class="col-lg-12">
+ 
+<div class="main-box clearfix">
+<div class="clearfix">
+	<div class="common_page gsb1">
+		<div class="hdr">
+			<div class="row">
+	    		<div class="col-md-2">
+					 Retailers					
+				</div> 
+				<div class="col-md-3 ">
+					 
+					
+					 
+				</div>
+			 
+				<div class="col-md-3">
+					<%= select_tag :state_shops, options_for_select(['All']+State.state_with_name(current_user),params[:state]),:class => 'form-control custm_select',:required => "required",:onchange => "state() "%>
+					
+				</div>
+				<div class="col-md-3">
+					 <%= select_tag :city_shops, options_for_select(['All']+Retailer.where(state: params[:state]).pluck(:city).uniq,params[:city]),:class => 'form-control custm_select',:required => "required",:onchange => "city() "  %>
+					
+				</div>
+				
+				<div class="col-md-1 ch_bttn" style="padding:0px;">
+						<input type='checkbox' name='thing' value='valuable' id="selectAll"/><label for="selectAll">All</label> 
+				</div>
+			</div>	
+	   		 
+			 
+	</div>
+
+
+
+<div id='content' class="tab-content">
+	<%@assignments.each do |assignment|%>
+		 <div class="tab-pane active " id="all">
+		 	<div class="hdr">
+                      <div class="row">
+                      <div class="col-md-10 cong">
+                        <p><span class="blue"><%=assignment.retailer_code%></span> - <%=assignment.retailer_name%> </p>
+                        <p><%=assignment.contact_person%> -  <span class="gray"><%=assignment.mobile_number%></span></p>
+                        <p><%=assignment.city%>,<%=assignment.state%></p>
+                         
+                      </div>
+                      <div class="col-md-1">
+                        <ul class="list-inline list-unstyled">
+                        <li class="blue ch_bttn add"><a href="/retailers/<%=assignment.id%>" class="blue">View</a></li>
+                           
+                        </ul>
+                      </div>
+                      <div class="col-md-1">
+                        <ul class="list-inline list-unstyled">
+                        <li class="blue ch_bttn add"><input type='checkbox' name='thing' value='<%=assignment.id%>' id="add<%=assignment.id%>" class="chbx"/><label for="add<%=assignment.id%>">Add</label> </li>
+                           
+                        </ul>
+                        <p style="margin-left:23%;"><%=assignment.status%></p>
+                      </div>
+                    </div>
+                </div>
+                   </div>
+						 
+					 
+
+	<%end%>
+  <%=will_paginate @assignments%>
+ 			<div class="col-md-1">
+              <%= submit_tag "Assign",:class => "btn btn-success " ,:id => "submit-assignment"%>      
+      </div>
+</div>
+  
+    
+ 
+							
+		<div class="response-pagination clearfix">
+		        
+		</div>
+								
+</div>
+</div>
+</div>
+ 
+</div>
+</div>
+<script type="text/javascript">
+    var value = []
+      $('#selectAll').click(function() {
+       
+      if(this.checked == true){
+         $(':checkbox').each(function(i){
+          value[i] = $(this).val();
+              
+         });
+      value = value.splice(1,value.length);
+      $('#request_id').val(value);
+      } 
+   if (this.checked) {
+       
+       $(':checkbox').each(function() {
+           this.checked = true;                        
+       });
+   } else {
+      $(':checkbox').each(function() {
+           this.checked = false; 
+           value = []
+           $('#request_id').val('');                      
+       });
+   } 
+
+});
+
+  $('.chbx').click(function(){
+    val = this.value
+    if(this.checked){
+         value.push(val)
+    }else{
+      value.splice(value.indexOf(val),1)
+      $('#selectAll').prop('checked', false);
+    };
+ 
+  });    
+   
+
+
+  $("#submit-assignment").click(function(){
+
+    var user_id = $( "select#user option:selected").val();
+     if(user_id == 'Select Auditor' || user_id == null || value.length == 0 || user_id == 0){
+      alert("Please select shop with an auditor!")
+    }else{
+      $.ajax({
+        url: "/shop_assignments",
+        type: "POST",
+        data: {
+              shop_assignment : {
+              user_id : user_id,
+              retailer_id : value
+            }
+        },
+        dataType: 'text',
+
+        complete: function(){
+
+        },
+        success: function(data){
+         alert("Successfully assigned!")
+         location.reload()
+        },
+        error: function(){
+          alert("Please try again!")
+        }
+       });
+    }
+       
+   }); 
+    
+  function state(){
+    auditor = $('select#user option:selected').val();
+    auditor = parseInt(auditor).toString(2);
+    state = $('#state_shops option:selected').text();
+    location.href = "?state="+state+"&user="+auditor
+  }
+  function city(){
+    auditor = $('select#user option:selected').val();
+    auditor = parseInt(auditor).toString(2);
+    city = $('#city_shops option:selected').text();
+    location.href = "?state=<%=params[:state]%>&user="+auditor+"&city="+city 
+  }
+   
+</script>

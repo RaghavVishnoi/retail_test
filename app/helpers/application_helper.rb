@@ -84,4 +84,20 @@ module ApplicationHelper
     end
   end
 
+  def date(from,to)
+    time = []
+    if from == nil || from.length == 0 || to == nil || to.length == 0
+      from = (Time.now.to_date - 1.month).beginning_of_day
+      to = (Time.now.to_date).end_of_day
+      time.push(from)
+      time.push(to)
+     else
+      time.push(from)
+      time.push(to)
+     end
+     time
+  end
+
+  
+
 end

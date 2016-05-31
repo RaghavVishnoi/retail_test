@@ -11,7 +11,7 @@
     <div class="main-box clearfix">
     <div class="clearfix">
       <div class="user_page">
-      <h2>Add New Cmo</h2>
+      <h2><%=type.camelize%> <%=params[:user].camelize if params[:id] == nil%></h2>
       
         <%= form_for @user do |f| %>
           <div class="row">
@@ -51,12 +51,12 @@
                 <div class="col-md-9">
   
 
-  <%= f.select :status, RETAILER_STATUS,{:prompt => "Select user status"},:class => 'form-control custm_select',:required => "required" %>
+                <%= f.select :status, RETAILER_STATUS,{:prompt => "Select user status"},:class => 'form-control custm_select',:required => "required" %>
                 </div>
               </div>
             </div>
          </div>
-
+          <%if action != 'edit'%>
            <div class="row">
             <div class="col-md-6">
               <div class="form-group clearfix">
@@ -71,31 +71,44 @@
               <div class="form-group clearfix">
                 <label class="col-md-4">Password confirmation</label>
                 <div class="col-md-9">
-<%= f.password_field :password_confirmation,:placeholder => "Confirm new password",:required => "required",class: "form-control",placeholder: "confirm password",:autocomplete => :off %>
+                    <%= f.password_field :password_confirmation,:placeholder => "Confirm new password",:required => "required",class: "form-control",placeholder: "confirm password",:autocomplete => :off %>
                 </div>
               </div>
             </div>
           </div>
-
+          <%end%>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group clearfix">
                 <label class="col-md-3">Role</label>
                 <div class="col-md-9">
-<%= f.select :role_ids, User.acceptable_role(User.user_role(current_user.id)).select {|arr| arr[0].capitalize!},{:prompt => "Select user role"},:class => 'form-control custm_select',:required => "required",:multiple => true %>
+                  <%= f.select :role_ids, User.acceptable_role(User.user_role(current_user.id)).select {|arr| arr[0].capitalize!},{:prompt => "Select user role"},:class => 'form-control custm_select',:required => "required",:multiple => true %>
                   
                 </div>
               </div>
             </div>
-         
-                <div class="col-md-6">
-              <div class="form-group clearfix">
-                <label class="col-md-3">State</label>
-                <div class="col-md-9">
- <%= f.select :state_ids, State.permit_state(current_user),{:prompt => "Select state"},:required => "required" ,:class => 'form-control custm_select',  :multiple => true,:id=>'state_ids_'  %>
+            
+            
+              <div class="col-md-6">
+                <div class="form-group clearfix">
+                  <label class="col-md-3">State</label>
+                  <div class="col-md-9">
+                    <%= f.select :state_ids, State.permit_state(current_user),{:prompt => "Select state"},:required => "required" ,:class => 'form-control custm_select',  :multiple => true,:id=>'state_ids_'  %>
+                  </div>
                 </div>
-              </div>
             </div>
+            <%if @user.roles.pluck(:name).include?('auditor') || params[:user] == 'auditor'%>
+             <div class="col-md-6">
+                <div class="form-group clearfix">
+                  <label class="col-md-3">Supervisor</label>
+                  <div class="col-md-9">
+                    <%=if User.user_role(current_user).name != 'supervisor' then f.select :supervisor_id, options_for_select(['Select Supervisor']+User.users_data('supervisor'),UserParent.user_parent_id(@user.id,'auditor')),:class => 'form-control custm_select',:required => "required",:onchange => "state_request()" else f.select :supervisor_id, options_for_select([[current_user.name,current_user.id]]),:class => 'form-control custm_select',:required => "required",:onchange => "state_request()" end%>
+                  </div>
+                </div>
+            </div>
+            <%end%>
+
+
           </div>
          
             <!-- <div class="col-md-12">
@@ -106,8 +119,12 @@
                 </label>
               </div>  
             </div> -->
-            <div class="col-md-12">
+            <div class="col-md-1">
                <%= f.submit "Submit",:class => "btn btn-success rrm_frm_btn" %>
+              
+            </div>
+            <div class="col-md-2">
+               <%= link_to "Cancel",users_path,:class => "btn btn-danger ",data: { confirm: 'Are you sure?'} %>
               
             </div>
           </div>

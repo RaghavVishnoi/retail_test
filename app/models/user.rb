@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
-  attr_accessor :skip_password_validation, :password_required
+  attr_accessor :skip_password_validation, :password_required,:supervisor_id
   attr_writer :shift_start_time, :shift_end_time
   # attr_accessor :phone
 
   after_create :create_user_data
+  after_update :user_parents
+  before_update :is_auditor?
 
   USER_TYPE = ['All','CMO','APPROVER','REQUESTER']
 
@@ -30,6 +32,8 @@ class User < ActiveRecord::Base
   has_many :customers, :through => :customers_users
   has_many :cmos
   has_many :users
+  has_many :user_parents
+  has_many :shop_assignments
   
   has_many :user_data
   has_many :user_states, :as => :user, :dependent => :destroy
@@ -38,19 +42,16 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :if => ->{ password.present? }
   validates :email, :presence => true, :uniqueness => true
   validates :name, :presence => true
-  validate :state
+  validate  :state
   validates :reset_password_token, :uniqueness => true, :allow_nil => true
   validates :password, :presence => true, :unless => :password_not_required?
+  validate  :supervisor_id,:if => :is_auditor?
+  validates :phone,   :presence => {:message => 'Wrong Format!'},
+                     :numericality => true,
+                     :length => { :minimum => 10, :maximum => 15 }
 
-  # validates_confirmation_of :password, :if => ->{ password.present? }
-  # validates :email, :presence => true, :uniqueness => true
-  # validates :name, :presence => true
-  # validate  :state
-  # validates :reset_password_token, :uniqueness => true, :allow_nil => true
-  # validates :password, :presence => true, :unless => :password_not_required?
-  # validates :password_confirmation,:presence => true
-  # validates :password,:presence=> true
-
+  validates :state_ids, presence: true
+  validates :role_ids, presence: true
   before_validation :set_shift_time_in_seconds
   before_save :ensure_auth_token
   before_create :set_reset_password_token
@@ -66,6 +67,9 @@ class User < ActiveRecord::Base
       []
     end
   end
+
+  
+
 
   def personalized_message
     "Hi #{name}"
@@ -94,6 +98,12 @@ class User < ActiveRecord::Base
       !password_required && (skip_password_validation || password_digest?)
     end
 
+    def is_auditor?
+        if Role.where(id: role_ids).pluck(:name).include?('auditor') && supervisor_id != nil
+           errors.add(:error!, 'Please select a supervisor!') if supervisor_id.to_i == 0
+        end
+    end
+
     def ensure_auth_token
       if auth_token.blank?
         self.auth_token = generate_token(:auth_token)
@@ -107,24 +117,26 @@ class User < ActiveRecord::Base
       end
     end
 
+
     def self.get_role(id)
       @user = User.find_by(:id => id)
       @associated_roles = AssociatedRole.find_by(:object_id => id)
       @role = @associated_roles.role.name 
     end
 
-    def self.list_users(id,params)
+    def self.list_users(params,current_user)
         search_role = params[:search].split(',') if params[:search] != nil
         search_email = params[:email]
+        user_ids = UserState.where(state_id: State.states(current_user)).pluck(:user_id) - [current_user.id]
         if search_role != nil
-          search_roles(search_role)
+          search_roles(search_role).where(id: user_ids)
         elsif search_email != nil
-          @permit_roles = permit_role(user_role(id)) 
+          @permit_roles = permit_role(user_role(current_user.id)) 
           user = permit_users(@permit_roles)
-          user.where("email = ?", search_email.strip)
+          user.where("email = ?", search_email.strip).where(id: user_ids)
         else
-          @permit_roles = permit_role(user_role(id)) 
-          permit_users(@permit_roles)  
+          @permit_roles = permit_role(user_role(current_user))           
+          permit_users(@permit_roles).where(id: user_ids)  
         end                      
     end
 
@@ -135,7 +147,7 @@ class User < ActiveRecord::Base
           else
             @permit_roles = search_role          
           end
-          permit_users(@permit_roles)      
+           permit_users(@permit_roles)      
     end
 
     def self.permit_users(permit_roles)
@@ -156,6 +168,18 @@ class User < ActiveRecord::Base
         end
         @users = User.where(:id => @object_id)
     end
+
+    def self.users_data(role)
+      users = find_users(role)
+      users.map{|user| ["#{user.name}-#{user.states.pluck(:name).join(',')}",user.id]}
+    end
+
+    def self.users_data_with_token(role)
+      users = find_users(role)
+      users.map{|user| ["#{user.name}-#{user.states.pluck(:name).join(',')}",user.auth_token]}
+    end
+
+
 
     def self.search(id,role)
       @user = self.where(email: id)
@@ -212,11 +236,17 @@ class User < ActiveRecord::Base
       when 'superadmin'
         delete_at_multi(roles,[0,2,3,4])
       when 'approver'
-        delete_at_multi(roles,[0,1,2,3,4])
+        delete_at_multi(roles,[0,1,2,3,4,9,10,11])
       when 'rrm'
-        delete_at_multi(roles,[0,1,2,3,4,8])
+        delete_at_multi(roles,[0,1,2,3,4,8,9,10,11])
       when 'cmo'
-        delete_at_multi(roles,[0,1,2,3,4,5,8])
+        delete_at_multi(roles,[0,1,2,3,4,5,8,9,10,11])
+      when 'vmqa'
+        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,12])
+      when 'supervisor'
+        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,12])
+      when 'auditor'
+        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,11])
       end             
     end
 
@@ -232,7 +262,21 @@ class User < ActiveRecord::Base
     private
       def create_user_data
         self.role_ids.compact.each do |role_id|
-              UserData.create!(name: self.name,location: State.where(id: self.state_ids).pluck(:name).join(','),designation: Role.find(role_id).name,email: self.email ,status: self.status,phone: self.phone,user_id: self.id)
+          UserData.create!(name: self.name,location: State.where(id: self.state_ids).pluck(:name).join(','),designation: Role.find(role_id).name,email: self.email ,status: self.status,phone: self.phone,user_id: self.id)
+        end
+        if Role.where(id: self.role_ids).pluck(:name).include?('auditor')
+          UserParent.create(parent_id: self.supervisor_id,user_id: self.id,role: 'auditor')
         end
       end
+
+      def user_parents
+        if User.find(id).roles.pluck(:name).include?('auditor')
+           parent =  UserParent.find_by(user_id: self.id,role: 'auditor')
+            if parent != nil
+              parent.update(parent_id: self.supervisor_id)
+            end
+        end
+      end
+
+
   end  

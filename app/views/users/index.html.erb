@@ -118,9 +118,9 @@
 
                         <% else %>
 
-                            <%= button_tag(type: 'submit',value: 'search',:class=>"clear-button") do %>
-                             <a href="/users"><i class="fa fa-times-circle-o"></i></a> 
-                            <% end %>
+                            
+                             <a href="/users" class="clear-button"><i class="fa fa-times-circle-o"></i></a> 
+                           
                         <% end %>
                       </div> 
                     <div class="error" id="message"></div>
@@ -163,7 +163,12 @@
                                   
                                   <% if can? :manage, User %>
                                     <span>
-                                      <%= link_to "Edit", [:edit, user] %>
+                                      <%if  User.user_roles(user.id).include? 'auditor'%>
+                                       <%= link_to "Edit",edit_user_path(id=user.id,user: "auditor") %>
+                                      <%else%>
+                                        <%= link_to "Edit", [:edit,user]%>
+                                      <%end%>
+                                     
                                     </span>
                                   <%end%>
 

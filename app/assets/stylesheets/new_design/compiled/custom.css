@@ -230,6 +230,7 @@
     background: none;
    cursor: pointer;
    border: none;
+   margin-left:10px;
   }
 
 .main-box.reset_pwd{background: transparent;}
@@ -314,11 +315,70 @@
 .back-icon{font-size:40px;color:#272d33}
 .loader{width:50px;height:50px;position:absolute;z-index: 10;margin-left:35%;margin-top: 20%;}
 .cong p{margin-bottom: 0px !important}
-.bgColorPending{background-color:#FF9999;}
-.bgColorDone{background-color:#33FF99;}
+.bgColorPending{background-color:#fdcdcd;}
+.bgColorDone{background-color:#cbfce4;}
 .img_open{display: none;position: fixed;z-index: 999;left: 0;right: 0;top: 0;
 bottom: 0px;background: rgba(11, 11, 11, 0.83);}
 .img_open .img_blk { left: 0; margin: 0 auto; max-width: 550px;  position: absolute;
     right: 0; top: 10%; width: 100%;height: 550px;overflow: hidden;}
 .img_open .img_blk img{width: 100%;} 
 .cross_btn i{position: absolute;right: 0;top:0px;font-size: 18px;}
+.assmt_new_sel{margin-bottom: 12px;}
+.ch_bttn input[type=checkbox] {
+display:none;
+}
+ 
+.ch_bttn input[type=checkbox] + label
+{
+  background: #fff;
+  height: 30px;
+  width: 53px;
+  display: inline-block;
+  padding: 0 0 0 0px;
+  text-align: center;
+  padding-top: 3px;
+  border: 2px solid #03BED5;
+}
+.ch_bttn input[type=checkbox]:checked + label
+{
+background: #03BED5;
+ height: 30px;
+  width: 53px;
+display:inline-block;
+ padding-top: 3px;
+ text-align: center;
+ border: 2px solid transparent;
+ color: #fff;
+}
+
+.lg_button{width:100%;height: 121px;margin-bottom: 10px;border-radius: 5px;}
+.lg_button.all{background-color: #1bb7da;color:#fff !important;}
+.lg_button.pending{background-color: #d03f3f;color:#fff !important;}
+.lg_button.audited{background-color: #3fd08a;color:#fff !important;}
+.lg_button.interrupted{background-color: #f8b84c;color:#fff !important;}
+.shop-search{width:120px;}
+h2.asgnd_shop_blk {padding-bottom: 1.5% !important;}
+.asgnd_shop_blk .assgn_shop{width:75%;float: left;}
+.asgnd_shop_blk .shop-search{width: 15%;float: left;}
+.mr_btm1{margin-bottom: 1%;}
+.comments_blk .pend{display: none !important;}
+.comments_blk .done{display: none !important;}
+.tot{cursor: pointer;}
+.pen{cursor: pointer;}
+.aud{cursor: pointer;}
+.int{cursor: pointer;}
+/*.theme-red a:hover, .theme-red a:focus, .theme-red .widget-users li > .details > .name > a:hover, .theme-red .widget-todo .actions > a:hover {color: #000 !important;}*/
+#clear{display: none;cursor: pointer;margin-top: 12px;margin-left: 1% !important }
+#search{margin-top: 12px;margin-left: 1% !important}
+#update-button{
+    height: 40px;
+    margin-bottom: 5px;
+    width: 35%;
+ }
+ #inupdate-button{
+    height: 40px;
+    margin-bottom: 5px;
+    width: 35%;
+ }
+ .common_page.gsb1 input.form-control{padding: 7px 2px;}
+ .help-icon{width:50%;}
