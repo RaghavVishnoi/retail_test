@@ -274,6 +274,8 @@ class User < ActiveRecord::Base
            parent =  UserParent.find_by(user_id: self.id,role: 'auditor')
             if parent != nil
               parent.update(parent_id: self.supervisor_id)
+            else
+              UserParent.create!(user_id: self.id,role: 'auditor',parent_id: self.supervisor_id)
             end
         end
       end
