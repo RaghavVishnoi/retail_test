@@ -4,60 +4,41 @@ class VendorAssignmentsController < ApplicationController
 	PER_PAGE = 10
 
 	def index
-		if params[:param] == nil || params[:param] == ''
-			@assignments = VendorAssignment.assignments(session[:user_id],params[:q][:status]).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-		else
-		 	@search = params[:param]
-		    @assignments = VendorAssignment.get_search_result(params[:param],params[:q][:status],session[:user_id])		
-		      
-          if @assignments == nil || @assignments == ''
-		  	@assignments = VendorAssignment.assignments(session[:user_id],params[:q][:status]).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-		    redirect_to vendor_assignments_path(:q => {:status => params[:q][:status]}), :notice => 'No record found'
-		  end 	
-		end  
+      session[:prev_url] = request.fullpath
+      @assignments = VendorAssignment.request_assignments(params,current_user).paginate(:per_page => PER_PAGE,:page => (params[:page] || 1))
 	end
 
 	def edit
-        id = params[:id].split('/')
-        VendorAssignment.update_status(id,params[:status])
-		redirect_to vendor_assignments_path(:q => {:status => 'waiting'})
-	end
+      @assignment = vendor_assignment.update(current_stage: params[:status].capitalize)
+      if @assignment
+        VendorStage.create!(stage_name: params[:status],request_assignment_id: params[:id],update_date: Time.now)
+        redirect_to session[:prev_url]  
+      else
+        redirect_to session[:prev_url]  
+      end
+    end
 
 
     def status
-        @assignment = VendorAssignment.find(params[:id])
-        @average = 0;
-
-        case @assignment.vendor_response
-        when 'Accepted'	
-        	@average = 12;
-        when 'ShopVisit'
-        	@average = 24;
-        when 'EstimateShared'	
-        	@average = 36;
-        when 'PoReceived'	
-        	@average = 48;
-        when 'InProduction'	
-        	@average = 60;
-        when 'InTransit'	
-        	@average = 72;
-        when 'InstallationComplete'	
-        	@average = 84;
-        when 'BillReceived'	
-        	@average = 99;
+        @stage = VendorAssignment.update_status(params)
+        if @stage.save
+            respond_to do |format|
+              format.html {redirect_to session[:prev_url]}
+              format.json {render :json => {result: true}}
+            end           
+        else
+            redirect_to session[:prev_url],notice: @stage.errors.full_messages
         end
     end
 
     def show
-    	if params[:id] != nil && params[:id] != '' && params[:id] != 'status' 
-    	   @assignment = VendorAssignment.find(params[:id])
-    	else
-    	   url = request.original_url
-    	   puts "here is url #{url}"
-    	   id = url.split('=')[1]
-    	   redirect_to vendor_assignment_path(id)
-        end
+        @assignment = vendor_assignment
     end
+
+    private
+        def vendor_assignment
+            RequestAssignment.find(params[:id])
+        end
 
 
 end

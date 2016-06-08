@@ -1,16 +1,9 @@
 class VendorAssignment < ActiveRecord::Base
 
-	self.table_name = "vendor_requests"
-	has_many :vendor_stages
-
-	def self.assignments(user_id,status)
-		@users = User.find_by(:id => user_id)
-    	if @users != nil && @users != ''
-    	   @vendor = Vendorlist.where(:email => @users.email)
-    	   if @vendor != nil && @vendor != ''
-    	   	  VendorAssignment.where(:vendor_id => @vendor,:status => status.camelize) 
-    	   end
-    	end   
+	def self.assignments(params,current_user)
+		start_date = if params[:from] != '' && params[:from] != nil then params[:from].to_date else (Time.now - 1.month).to_date end
+    	end_date = if params[:to] != '' && params[:to] != nil then params[:to].to_date else Time.now.to_date end
+		VendorAssignment.where(vendor_id: current_user.id,status: params[:q][:status].split(',').map(&:capitalize),assigned_date: start_date.beginning_of_day..end_date.end_of_day)   
 	end
 
 	def self.get_request_detail(vendor_assignment)
@@ -32,41 +25,26 @@ class VendorAssignment < ActiveRecord::Base
 		end
 		assignment_id
 	end
+ 
 
-	def self.get_search_result(param,status,user_id)
-		@users = User.find_by(:id => user_id)
-    	if @users != nil && @users != ''
-    	   @vendor = Vendorlist.where(:email => @users.email)
-    	   if @vendor != nil && @vendor != ''
-    	   	  @retailer = Retailer.where("retailer_code = ? OR state = ? OR city = ?", param,param,param).pluck(:retailer_code) 
-    	   	  puts "here is status #{@retailer}"
-    	   	  if @retailer.length == 0
-    	   	  	    
-    	   	  else
-    	   	  	  @request = Request.where(:retailer_code => @retailer).pluck(:id)
-	    	   	  @vendor_assignment = VendorAssignment.where(:vendor_id => @vendor,:status => status.camelize,:request_id => @request) 
-    	   	 	  	
-    	   	  end
-    	   end
-    	end   
+	##############################
+	def self.request_assignments(params,current_user)
+		start_date = if params[:from] != '' && params[:from] != nil then params[:from].to_date else (Time.now - 1.month).to_date end
+    	end_date = if params[:to] != '' && params[:to] != nil then params[:to].to_date else Time.now.to_date end
+		RequestAssignment.where(user_id: current_user.id,assign_date: start_date.beginning_of_day..end_date.end_of_day)
 	end
 
-	def self.update_status(id,status)
-		date = Date.today
-		id.each do |req_id|
-			@assignment = VendorAssignment.find_by(:id => req_id)
-			@assignment.vendor_response = status.camelize
-			if status == 'accepted'
-				@assignment.status = 'Accepted'
-			elsif status == 'bill_received'
-				@assignment.status = 'Finished'
-			elsif status == 'rejected'	
-				@assignment.status = 'Rejected'		
-			end
-			@assignment.save
-		end	
-		@stages = VendorStage.new(:stage_name => status,:update_date => date,:vendor_request_id => @assignment.id)
-		@stages.save
+	def self.update_status(params)
+		case params[:status]
+		when 'po_receive'
+			RequestAssignment.find(params[:id]).update(po_number: params[:po_number])
+			VendorStage.new(stage_name: params[:status],request_assignment_id: params[:id],update_date: Time.parse(params[:date])).save
+			VendorStage.new(stage_name: 'started',request_assignment_id: params[:id],update_date: Time.now)
+		else
+			VendorStage.new(stage_name: params[:status],request_assignment_id: params[:id],update_date: Time.now)
+		end
 	end
+
+	 
 
 end

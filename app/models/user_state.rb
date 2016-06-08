@@ -7,8 +7,11 @@ class UserState < ActiveRecord::Base
 		rrm = []
 		user_ids.each do |user_id|
 			user = UserData.find_by(user_id: user_id,status: 'Active')
-			if AssociatedRole.find_by(object_id: user_id).role.name == role && user != nil && user.status == 'Active'
-				rrm.push(user.name)
+			associated_roles = AssociatedRole.find_by(object_id: user_id)
+			if associated_roles != nil
+				if associated_roles.role.name == role && user != nil && user.status == 'Active'
+					rrm.push(user.name)
+				end
 			end
 		end
  		rrm

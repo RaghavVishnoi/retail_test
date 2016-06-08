@@ -19,6 +19,12 @@
     if($('#search__requester').is(":checked")){
             search.push('requester');
     }
+    if($('#search__supervisor').is(":checked")){
+            search.push('supervisor');
+    }
+    if($('#search__auditor').is(":checked")){
+            search.push('auditor');
+    }
     $('#search__cmo').change(function() {
         if($(this).is(":checked")){
             search.push('cmo');
@@ -72,6 +78,34 @@
         }
         if(!$(this).is(":checked")) {
            search.splice(search.indexOf('requester'),1);
+            if(search.length != 0){
+              location.href = '/users?search='+search 
+            }else{
+              location.href = '/users'
+            }
+        }     
+    });
+    $('#search__supervisor').change(function() {
+        if($(this).is(":checked")) {
+            search.push('supervisor');
+            location.href = '/users?search='+search 
+        }
+        if(!$(this).is(":checked")) {
+           search.splice(search.indexOf('supervisor'),1);
+            if(search.length != 0){
+              location.href = '/users?search='+search 
+            }else{
+              location.href = '/users'
+            }
+        }     
+    });
+    $('#search__auditor').change(function() {
+        if($(this).is(":checked")) {
+            search.push('auditor');
+            location.href = '/users?search='+search 
+        }
+        if(!$(this).is(":checked")) {
+           search.splice(search.indexOf('auditor'),1);
             if(search.length != 0){
               location.href = '/users?search='+search 
             }else{

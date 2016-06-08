@@ -10,16 +10,12 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.html { redirect_to users_sign_in_url, alert: "Access denied!" }
-      format.json { render :json => { :result => true, :errors => { :messages => ["Access denied!"] } } }
+      format.json { render :json => { :result => true,:messages => "Access denied!" } }
     end
   end
 
   # before_action :log_requests, :if => 'Rails.env.staging?'
   before_action :authenticate_user
-
-  
-
-
 
   private
     def add_allow_credentials_headers                                                                                                                                                                                                                                                        
@@ -38,7 +34,7 @@ class ApplicationController < ActionController::Base
           format.json { render :json => { :result => false, :errors => { :messages => ["User not found"] } } }
         end
       end
-    end
+     end
 
     def find_user
       if params[:auth_token]

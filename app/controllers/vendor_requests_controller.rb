@@ -1,89 +1,81 @@
  class VendorRequestsController < ApplicationController
 
-	before_action :set_user, :only => [:edit, :update, :destroy]
+	before_action :set_user, :only => [:edit, :update, :destroy,:show]
   skip_before_action :authenticate_user, :only => [:create, :new]
-  authorize_resource
+  authorize_resource :except => [:create]
   PER_PAGE = 50
 
 
-  def index
-      if params[:param] == '' || params[:param] == nil
-         @vendor_request = VendorRequest.all.paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-         if @vendor_request == nil
-               redirect_to new_vendor_request_path, :notice => "No record found"
+    def index
+      session[:prev_url] = request.fullpath
+      @vendor_requests = VendorRequest.vendor_requests(current_user).paginate(:per_page => PER_PAGE,page: (params[:page] || 1))  
+    end
+
+    
+    def create
+      @vendor_request = VendorRequest.new vendor_request_params
+      if @vendor_request.save
+        respond_to do |format|
+          format.html
+          format.json { render :json => {result: true,object: @vendor_request}}
         end
       else
-            
-          @vendor_request = VendorRequest.search(params[:type],params[:param]).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-		      puts "here is vendor request #{@vendor_request}"
-          if @vendor_request == nil || @vendor_request == ''
-                redirect_to new_vendor_request_path, :notice => "No record found"
-          end
+        respond_to do |format|
+          format.html 
+          format.json { render :json => {result: true,message: @vendor_request.errors.full_messages}}
+        end
       end
     end
 
-    def new
-      @vendor_request = VendorRequest.new
-      @vrequests = VendorRequest.where('status != ?','declined').pluck(:request_id)
-      @requests = VendorRequest.assignments(@vrequests,params[:type]).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-    end
-
-    def create
-        @redirected_url = request.referer
-        
-         if @redirected_url.include? "/requests/"   
-               @vendor_request = VendorRequest.new vendor_request_param
-            if @vendor_request.save 
-               path = @redirected_url.split("&alert")[0]
-               redirect_to path
-                
-            else
-                redirect_to request.referer, notice: "Try again with right vendor"
-            end 
-         else
-            if params[:vendor_request][:request_id].include? ","
-               
-               @request_id = params[:vendor_request][:request_id].split(",")  
-                 
-                 @request_id.each do |request_id|
-                    @vendor_request = VendorRequest.array_insert(request_id,params[:vendor_request][:vendor_id],params[:vendor_request][:vendor_response],params[:vendor_request][:vendor_response_date],params[:vendor_request][:assigned_date],params[:vendor_request][:status])
-                 end
-                    vendor_email = VendorRequest.vendor_email(params[:vendor_request][:vendor_id]) 
-                    VendorMailer.delay.vendor_assignment(vendor_email,@request_id)
-                    redirect_to vendor_requests_path, notice: "Request assigned successfully!"
-            else
-                    @vendor_request = VendorRequest.new vendor_request_param
-                    if @vendor_request.save
-                       vendor_email = VendorRequest.vendor_email(params[:vendor_request][:vendor_id]) 
-                       VendorMailer.delay.vendor_assignment(vendor_email,@vendor_request.request_id)
-                       redirect_to vendor_requests_path, notice: "Request assigned successfully"
-                       
-                    else
-                        redirect_to new_vendor_request_path, notice: "Some fields are required"
-                    end 
-            end
-         end
-    end
-
-    def show
-        @vendor_request = VendorRequest.find(params[:id])
-    end
-
     def update 
-    	if @vendor_request.update_attributes vendor_request_param
-    	  redirect_to vendor_requests_path, notice: "Request updated successfully"
-	    else
-	      redirect_to :edit		
-	    end
+      if current_user.roles.pluck(:name).any?{|role| CMO_ROLE_AUTH.include?(role)}
+      	if params[:commit] == APPROVE
+           if params[:comment] == ''
+            @vendor_request.cmo_comment = 'ok'
+           else
+            @vendor_request.cmo_comment = params[:comment]
+           end
+           @vendor_request.cmo_approve
+        else
+           if params[:comment] == ''
+            @vendor_request.cmo_comment = 'Not Suitable'
+           else
+            @vendor_request.cmo_comment = params[:comment]
+           end
+           @vendor_request.cmo_decline
+        end 
+        @vendor_request.cmo_response_date = Time.now
+        VendorRequest.add_activity(params,current_user,@vendor_request)   
+      elsif current_user.roles.pluck(:name).any?{|role| RRM_ROLE_AUTH.include?(role)}
+        if params[:commit] == APPROVE
+           if params[:comment] == ''
+            @vendor_request.rrm_comment = 'ok'
+           else
+            @vendor_request.rrm_comment = params[:comment]
+           end
+           @vendor_request.approve
+        else
+           if params[:comment] == ''
+            @vendor_request.rrm_comment = 'Not Suitable'
+           else
+            @vendor_request.rrm_comment = params[:comment]
+           end
+           @vendor_request.decline
+       end
+        @vendor_request.rrm_response_date = Time.now
+        VendorRequest.add_activity(params,current_user,@vendor_request)   
+       else
+        redirect_to :edit
+      end 
+      redirect_to edit_vendor_request_path
     end
 
     def destroy
-    	@vendor_request.destroy
-      redirect_to vendor_requests_path, notice: "Request unassign successfully"
+    	 
     end
 
-    def vendor_request_param
-    	params.require(:vendor_request).permit(:request_id,:vendor_id,:vendor_response,:vendor_response_date,:assigned_date,:status)
+    def vendor_request_params
+    	params.require(:vendor_request).permit(:request_assignment_id,:installation_of,:installation_report,:installed_on,:status,:cmo_comment,:cmo_response_date,:rrm_comment,:rrm_response_date)
     end
 
     def set_user
@@ -93,8 +85,6 @@
       end
     end
 
-    def list
-
-    end
+   
 
 end

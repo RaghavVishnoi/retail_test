@@ -1,1 +1,17 @@
-<%= render :partial => 'form', :locals => { :form_title => "Edit User",:type => "edit"  } %>
+<%if ['cmo','vmqa','supervisor'].any?{|role| Role.role_name(@user.role_ids).include?(role)}%>
+	<%= render :partial => 'cmo', :locals => { :type => "Edit User",action: 'edit'} %>
+<% elsif Role.role_name(@user.role_ids).include?('rrm')%>
+	<%= render :partial => 'rrm', :locals =>{:type => "Edit RRM",action: 'edit'} %>
+<% elsif Role.role_name(@user.role_ids).include?('auditor')%>
+	<%= render :partial => 'auditor', :locals =>{:type => "Edit Auditor",action: 'new'} %>
+<% elsif Role.role_name(@user.role_ids).include?('requester')%>
+	<%= render :partial => 'requester', :locals =>{:type => "Edit Requestor",action: 'new'} %>
+<% elsif Role.role_name(@user.role_ids).include?('vendor')%>
+	<%= render :partial => 'vendor', :locals =>{:type => "Edit Vendor",action: 'new'} %>	
+<% else %>
+	<%= render :partial => 'form', :locals =>{:type => "Edit",action: 'edit'} %>
+<% end %>
+<script type="text/javascript">
+  $('#user').attr("class",'active')
+</script>   
+

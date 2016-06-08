@@ -2,128 +2,138 @@
   </div>
  
 <div id="content-wrapper">
-	<div class="row mr_btm">
+   <%= render 'shared/notice_messages'%>              
+  <div class="row">
      <div class="col-lg-12">
         <div class="main-box-body clearfix">
-            <div class="row">
-     
-            <div class="col-md-3">
-                <div class="add_new_notfcn">
-                  <h4><i class="fa fa-plus-square fa-lg"></i>
-                    <span>
-          <%= link_to "New Assignment","/vendor_requests/new" %>
-             </span>
-                  </h4>
-                </div>
-              </div>           
-          </div>
-        </div>
-      </div>
-    </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="main-box clearfix">
-          <div class="clearfix">
+              
+            <div class="main-box clearfix">
+            <div class="clearfix">
               <div class="common_page user">
               <div class="user_tab">
               <div class="row">
                 <div class="col-md-2">
                   <h4>Assignments</h4>
                 </div>
-                <div class="col-md-6">
-                <ul class="list-inline list-unstyled" id="myTab">
-
                
-                </ul>
-
-                </div>
-                
-                <div class="col-md-4">
-
-                  <%=form_tag '/vendor_request/search' ,:method => 'get' do |f| %>  
-                    <div id="user-search-div" class="form-field">
-                       <div class="user-search-field">
-                         <%= text_field_tag :email, params[:email], :id => "retailer-search",:required => "required",:placeholder => "Request Id",:class => 'search_email' %>
-                      </div>
-                      <div>
-                        <% if params[:email] == nil %>
-                         <%= button_tag(type: 'submit',value: 'search',:class=>"hide-button") do %>
-                           <i class="fa fa-search search-icon"></i> 
-                         <% end %>
-
-                        <% else %>
-
-                            <%= button_tag(type: 'submit',value: 'search',:class=>"clear-button") do %>
-                           <a href="/users"><i class="fa fa-times-circle-o"></i></a> 
-                        <% end %>
-                          <% end %>
-                      </div> 
-                    <div class="error" id="message"></div>
                
-                  </div>
-      <%end%>   
-
-                </div>
-              </div>
-              </div>
-
-                <div id='content' class="tab-content" >
-               <% @vendor_request.each do |vendor_request| %>
                  
-                    <div class="tab-pane active" id="all">
-                    	
-                      <div class="row">
-                      	   
-                          <div class="col-md-8">
-                            <div class="parent">
-                            	<ul class="list-unstyled">
-                            		<li> Request Id</li>
-                            		<li>
-                            	<a href="/requests/<%=vendor_request.request_id%>/edit?q[request_type]=<%=Request.find(vendor_request.request_id).request_type%>"  class="blue"><%=vendor_request.request_id%>
-                            			</a>	
-                            		</li>
-                            	</ul>
-                            	<ul class="list-unstyled">
-                            		<li> Vendor Name</li>
-                            		<li class="blue"><%=Vendorlist.find(vendor_request.vendor_id).vendor_name%></li>
-                            	</ul>
-                            </div>                           
-                          </div>
-
-                          <div class="col-md-3">
-
-                          	<ul class="list-unstyled">
-	                    		<li>Assigned  Date</li>
-	                    		<li class="blue"><%=vendor_request.assigned_date.strftime("%d %b,%Y")%></li>
-                            	</ul>
-                            	<ul class="list-unstyled">
-	                    		<li>Current Status</li>
-	                    		<li class="blue"><%=vendor_request.vendor_response%></li>
-                            	</ul>
-                               
-                        </div>
-                        <a href="/vendor_requests/<%=vendor_request.id%>">
-                        	<div class="col-md-1 arrow_circl_rgt">
-                        	<i aria-hidden="true" class="fa fa-arrow-circle-right"></i>
-							</div>
-						</a>
-                        
-                </div>
-                   
-                </div>
-            
-
-              <% end %>
-                <%= will_paginate @vendor_request %>
+                  
               </div>
+              </div>
+            
+                 
+                <div id='content' class="tab-content">
+                <div class="row">
+<div class="col-lg-12">
+<div class="main-box no-header clearfix">
+  <div class="main-box-body clearfix">
+    <div class="table-responsive">
+      <table class="table user-list table-hover">
+        <thead>
+          <tr>
+            <th><span>Request Id</span></th>
+            <th><span>Request Type</span></th>
+             <th class="text-center"><span>RT Code</span></th>
+            <th><span>Shop Name</span></th>
+            <th class="text-center"><span>City</span></th>
+            <th><span>Vendor<span></th>
+            <th><span>Status</span></th>
+            <th><span>Created On</span></th>
+            <th><span>Action</span></th>                  
+          </tr>
+        </thead>
+       
+          
+         
+      
+        
+    <%@vendor_requests.each do |vendor_request|%>
+         <tbody>          
+          <tr>
+            <td>              
+             <%=vendor_request.request_assignment.request.id%>         
+            </td>
+            <td>
+               <%=vendor_request.request_assignment.request.request_type.camelize%>
+            </td>
+            <td>
+              <%=vendor_request.request_assignment.request.retailer_code%>
+            </td>
+            <td>
+              <%=Retailer.retailer_data(vendor_request.request_assignment.request.retailer_code,'name')%>
+            </td>
+            <td>
+              <%=Retailer.retailer_data(vendor_request.request_assignment.request.retailer_code,'city')%>
+            </td>
+            <td>
+              <%=vendor_request.request_assignment.user.name%>
+            </td>
+            <td>
+              <%=vendor_request.status.camelize%>
+            </td>
+            <td class="text-center">
+             <span class="label label-default"><%=vendor_request.installed_on.strftime("%d %b,%Y")%></span>
+            </td>
+            
+            <td>
+            <a href="/vendor_requests/<%=vendor_request.id%>/edit" class="table-link">
+                <span class="fa-stack">
+                  <i class="fa fa-square fa-stack-2x site-color"></i>
+                  <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            
+            </td>
+          </tr>
+          <tr>
+            <%RequestDocument.where(request_document_id: vendor_request.request_assignment.id).each do |document|%>
+            <td>
+             <%=image_tag RequestDocumentSerializer.new(document, :root => false).request_document_url,style: 'height:50px;width:50px;',:class => 'img'%>
+            
+          </td>
+          <%end%>
+          </tr>
+           </tbody>
+                  <%end%>  
+           
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</div>    
 
-	   		</div>
-	 	</div>
-	</div>
-</div>
-</div>
-</div>
 
-<script type="text/javascript">
+                </div>
+              <%=will_paginate @vendor_requests%>
+
+                
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+       <div class="img_open">
+        <div class="img_blk">
+          
+          <img class="add-img"/>
+        </div>
+      </div>
+ 
+<script>
+    $('.img').click(function(){
+       $('.img_open').css("display","block");
+       imgSrc = $(this).attr('src');
+       $('.add-img').attr("src",imgSrc);
+       $('.img_open').click(function(){
+        $('.img_open').hide();
+      
+
+    });
+
+    });
+ 
   $('#vendor').attr("class",'active')
-</script>   
+  $('#v_requests a').attr("style","color:#F37022 !important") 
+</script>

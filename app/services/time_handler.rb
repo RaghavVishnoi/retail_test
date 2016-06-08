@@ -25,4 +25,6 @@ class TimeHandler
   def self.select_zones
     ActiveSupport::TimeZone.all.map { |zone| [zone.name, zone.name] }
   end
+
+  
 end

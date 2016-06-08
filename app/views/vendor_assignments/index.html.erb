@@ -9,11 +9,11 @@
 		<div class="hdr">
 	   		<div class="row">
 	    		<div class="col-md-2">
-					<div class="txt">Vendor Tasks
+					<div class="txt">Assignments
 					</div>
 				</div>
 				<div class="col-md-3">
-					<%= select_tag :state_request, options_for_select(['All']+State.permit_state(current_user)),:class => 'form-control custm_select',:required => "required",:onchange => "state_request()" %>
+					 
 					
 				</div>
 				<div class="col-md-5 col-md-offset-1">
@@ -37,48 +37,135 @@
 				</div>
 
 				</div>
-				 
+				 <div class="col-md-1" style="padding:0px;">
+						<%= button_tag class: 'request_search_button' do %>
+					<i class="fa fa-search search-icon"></i>
+					<% end %>
+				</div>
 			</div>	
 			 
 	</div>
 
+<%=render partial: "request_documents/document"%>
 
 <div id='content' class="tab-content">
-	
-<%@assignments.each do |assignment|%>
+	<div class="row">
+<div class="col-lg-12">
+<div class="main-box no-header clearfix">
+  <div class="main-box-body clearfix">
+    <div class="table-responsive">
+      <table class="table user-list table-hover">
+        <thead>
+          <tr>
+            <th><span>Request Id</span></th>
+            <th><span>Request Type</span></th>
+             <th class="text-center"><span>RT Code</span></th>
+            <th><span>Shop Name</span></th>
+            <th><span>RRM<span></th>
+            <th><span>Status</span></th>
+            <th><span>Assigned On</span></th>
+            <th><span>Details</span></th>       
+          </tr>
+        </thead>
+        
+         
+      
+        
+    <%@assignments.each do |assignment|%>
+         <tbody>
+                  
+          <tr>
+            <td>              
+              <%=assignment.request_id%> 
 
-	<div class="tab-pane active" id="all">
-		<%= link_to "/requests/#{request.id}/edit?q[request_type]=4" do %>
-		<div class="row bdr_bttm">
-			 
-			<div class="col-md-8">
-				<div class="txt_area">
-					<ul class="list-inline list-unstyled">
-						<li>supervisor</li>
+            </td>
+            <td>
+              <%=assignment.request.request_type.upcase if assignment.request.request_type != nil%>  
+            </td>
+            <td>
+              <%=assignment.request.retailer_code.upcase%>  
+            </td>
+            <td>
+              <%=Retailer.retailer_data(assignment.request.retailer_code,"name")%>  
+            </td>
+            
+            <td>
+               <%=Retailer.retailer_data(assignment.request.retailer_code,"state")%> 
+            </td>
+            <td>
+             <%req = assignment.request.request_activities.find_by(request_id: assignment.request_id,request_status: 'approved',user_type: ['RRM','HO']);
+
+             %>
+             <%=req.user.name if req != nil%>
+            </td>
+             
+            <td>
+              <%=assignment.current_stage.upcase if assignment.current_stage != nil%>
+            </td>
+             <td class="text-center">
+              <span class="label label-default"><%=assignment.assign_date.strftime("%d %b,%Y") if assignment.assign_date != nil%></span>
+            </td>
+            <td>
+							<a href="/vendor_assignments/<%=assignment.id%>" class="table-link">
+								<span class="fa-stack">
+									<i class="fa fa-square fa-stack-2x site-color"></i>
+									<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+								</span>
+							</a>
 						 
-					</ul>
-					<ul class="list-inline list-unstyled">
-						<li>
-							 retailer name
-						</li>
-					</ul>
-					<ul class="list-inline list-unstyled">
-						<li>
-						 address
-					 	</li> 
-					</ul> 
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="date_cmopendng">
-					<h5><b>Audit Date -</b>  </h5>
-					<h5><b>Audit by -</b>  </h5>
-				</div>
-			</div>
-		</div>
-	<%end%>	
-	</div>
-	<%end%>
+							 
+						</td>
+            <%if assignment.status == PENDING && assignment.current_stage == PENDING%>
+            <td>
+              <a href="/vendor_assignments/<%=assignment.id%>/status?status=accepted" class="table-link">
+                <span class="fa-stack">
+                  <i class="fa fa-square fa-stack-2x site-color"></i>
+                  <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+          
+               
+            </td>
+            <td>
+              <a href="/vendor_assignments/<%=assignment.id%>/status?status=declined" class="table-link">
+                <span class="fa-stack">
+                  <i class="fa fa-square fa-stack-2x site-color"></i>
+                  <i class="fa fa-times fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>               
+            </td>
+            <%end%> 
+            <%if assignment.status == ACCEPTED && assignment.current_stage == ACCEPTED%>
+             <td>
+              <a class="table-link start">
+                 <%=hidden_field_tag :assignment_id,assignment.id%> 
+                <span class="fa-stack ">
+                  <i class="fa fa-square fa-stack-2x site-color"></i>
+                  <i class="fa fa fa-play fa-stack-1x fa-inverse"></i>
+                </span>
+              </a> 
+              <%=render :partial => "poreceive"%>              
+            </td>
+            <%end%>
+          </tr>
+          <tr>
+            <%RequestDocument.where(request_document_id: assignment.id).each do |document|%>
+            <td>
+             <%=image_tag RequestDocumentSerializer.new(document, :root => false).request_document_url,style: 'height:50px;width:50px;',:class => 'img'%>
+            
+          </td>
+          <%end%>
+          </tr>
+           </tbody>
+                  <%end%>  
+           
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</div>    	
+
 </div>
 							
 <div class="response-pagination clearfix">
@@ -90,6 +177,26 @@
 </div>
 </div>
 </div>
+<div class="img_open">
+        <div class="img_blk">
+          
+          <img class="add-img"/>
+        </div>
+      </div>
+<script>
+    $('.img').click(function(){
+       $('.img_open').css("display","block");
+       imgSrc = $(this).attr('src');
+       $('.add-img').attr("src",imgSrc);
+       $('.img_open').click(function(){
+        $('.img_open').hide();
+      
 
-<%=render partial: 'page_js/request_index'%>
-<%=render partial: 'page_js/menubar'%>
+    });
+
+    });
+ 
+  $('#dashboard').attr("class",'active')
+   
+</script>
+

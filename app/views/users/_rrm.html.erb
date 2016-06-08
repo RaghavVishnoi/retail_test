@@ -11,7 +11,7 @@
     <div class="main-box clearfix">
     <div class="clearfix">
       <div class="user_page">
-      <h2>Add New Rrm</h2>
+      <h2><%=type%></h2>
       
         <%= form_for @user do |f| %>
           <div class="row">
@@ -98,14 +98,7 @@
             </div>
           </div>
          
-            <!-- <div class="col-md-12">
-              <div class="checkbox-nice">
-                <input type="checkbox" id="remember-me2" checked="checked">
-                <label for="remember-me2">
-                  Do you want send your password on email when submit ?
-                </label>
-              </div>  
-            </div> -->
+            
             <div class="col-md-12">
                <%= f.submit "Submit",:class => "btn btn-success rrm_frm_btn" %>
               

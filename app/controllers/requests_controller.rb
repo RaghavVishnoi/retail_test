@@ -52,7 +52,7 @@ class RequestsController < ApplicationController
       end
       respond_to do |format|
         format.html { redirect_to new_request_path, :notice => "Your Request has been submitted" }
-        format.json { render :json => { :result => true,:data => {request_id: @request.id} } }
+        format.json { render :json => { :result => true,:data => {request_id: @request.id,request_type: @request.request_type.camelize} } }
       end
     else
       respond_to do |format|

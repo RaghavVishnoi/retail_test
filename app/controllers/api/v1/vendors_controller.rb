@@ -1,96 +1,20 @@
 module Api
   module V1
     class VendorsController < BaseController
-    	skip_authorize_resource
-    	skip_before_action :authenticate_user 
     	
-    	def assign_request
-    		token = params[:session][:token]
-    		@users = User.find_by(:auth_token => token)
-    		if @users != nil && @users != ''
-    			@vendor = Vendorlist.where(:email => @users.email)
-    			if @vendor != nil && @vendor != ''
-	    			   waiting_request_id = VendorRequest.where(:vendor_id => @vendor,:status => 'Waiting').pluck(:request_id)
-	    			   @waiting_request = Request.where(:id => waiting_request_id) 
-
-	    			   accepted_request_id = VendorRequest.where(:vendor_id => @vendor,:status => 'Accepted').pluck(:request_id)
-	    			   @accepted_request = Request.where(:id => accepted_request_id) 
-
-	    			   finished_request_id = VendorRequest.where(:vendor_id => @vendor,:status => 'Finished').pluck(:request_id)
-	    			   @finished_request = Request.where(:id => finished_request_id) 
-	    			 
-	    			   vendor_request_map = {}
-	    			   vendor_waiting_request_map = []
-	    			   vendor_accepted_request_map = []
-	    			   vendor_finished_request_map = []
-	    			   map = {}
-				       map[:request] = 'New Request'
-				       map[:request_id] = ''
-	    			   vendor_waiting_request_map.push(map)
-	    			   @waiting_request.each_with_index do |waiting_request,index|
-		    			   	retailer_code = Request.where(:id => waiting_request.id).pluck(:retailer_code)
-		    			    retailers = Retailer.where(:retailer_code => retailer_code)
-		    			    retailers.each do |retailer|
-			    			    if retailer != nil || retailer == ''
-				    			   	detail = retailer.retailer_code+'-'+retailer.retailer_name+'-'+retailer.city+","+retailer.state
-				    			    map = {}
-				    			    map[:request] = detail
-				    			    map[:request_id] = waiting_request.id
-				    			    vendor_waiting_request_map.push(map)
-				    			end
-			    		    end
-	    			   end
-	    			   vendor_request_map[:new] = vendor_waiting_request_map
-	    			   map = {}
-				       map[:request] = 'Accepted Request'
-				       map[:request_id] = ''
-	    			   vendor_accepted_request_map.push(map)
-	    			   @accepted_request.each_with_index do |accepted_request,index|
-
-		    			   	retailer_code = Request.where(:id => accepted_request.id).pluck(:retailer_code)
-		    			    retailers = Retailer.where(:retailer_code => retailer_code)
-		    			    puts "here is accepted_request #{retailer_code}"
-
-		    			    retailers.each do |retailer|
-
-			    			    if retailer != nil || retailer == ''
-				    			   	detail = retailer.retailer_code+'-'+retailer.retailer_name+'-'+retailer.city+","+retailer.state
-				    			    map = {}
-				    			    map[:request] = detail
-				    			    map[:request_id] = accepted_request.id
-
-				    			   	vendor_accepted_request_map.push(map)
-				    			end
-			    		    end
-	    			   end
-	    			   vendor_request_map[:accept] = vendor_accepted_request_map
-	    			   map = {}
-				       map[:request] = 'Finished Request'
-				       map[:request_id] = ''
-	    			   vendor_finished_request_map.push(map)
-	    			   @finished_request.each_with_index do |finished_request,index|
-		    			   	retailer_code = Request.where(:id => finished_request.id).pluck(:retailer_code)
-		    			    @retailers = Retailer.where(:retailer_code => retailer_code)
-		    			    @retailers.each do |retailers|
-			    			    if retailers != nil || retailers == ''
-				    			   	detail = retailers.retailer_code+'-'+retailers.retailer_name+'-'+retailers.city+","+retailers.state
-				    			    map = {}
-				    			    map[:request] = detail
-				    			    map[:request_id] = finished_request.id
-				    			   	vendor_finished_request_map.push(map)
-				    			end
-			    		    end
-	    			   end
-	    			   vendor_request_map[:finish] = vendor_finished_request_map
-	    			   render :json => {:result => true, :retailers => vendor_request_map}		
-    			else
-    			   render :json => {:result => false, :message => 'No vendor exist with this email'}	
-    			end
-    		else
-    			render :json => { :result => false, :message => 'User not exist'}
-    		end
-
+      skip_authorize_resource
+    	#skip_before_action :authenticate_user 
+    	
+    	def assignments
+        assignments = RequestAssignment.where('upload_bill != 2 AND user_id = ?',current_user.id)
+        render :json => {result: true,object: assignments.select(:id,:request_id)}
     	end
+
+      def shopInfo
+        request = Request.find(params[:request_id])
+        @shopData = Retailer.find_by(retailer_code: request.retailer_code)
+        render :shop_info
+      end
 
 
   def get_request

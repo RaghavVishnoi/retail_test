@@ -1,123 +1,221 @@
-<%@request = VendorAssignment.get_request_detail(@assignment)
-   @retailer = VendorAssignment.get_retailer_detail(@request.retailer_code)
-   @cmo = VendorAssignment.get_cmo_detail(@request.cmo_id)%>
-<a href="/vendor_assignments?q[status]=waiting"><%= image_tag 'back.png',:title => "Back",:class => "show-back-button" %></a>
-    
-<div class="super_div">
+<div id="nav-col-submenu"></div>
+</div>
+<div id="content-wrapper">
+<div class="row">
+	<div class="col-lg-12">
+		<div class="common_page gsb_page">
+			<div class="clearfix"></div>
+					 <a href="<%=session[:prev_url]%>" id="back-button">  
+ 					 <i class="fa fa-arrow-circle-left back-icon" aria-hidden="true" ></i></a>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="gsb_blk">
+				<h2>
+					Assignment Detail
+				</h2>
+				<div class="row">
+					<div class="col-md-8">
+					 <b><%=@assignment.request_id%></b>
+					</div>
+					<div class="col-md-4">
+						<div class="blue">
+						 <%=@assignment.request.request_type.camelize.upcase%>
+						</div>
+					</div>	
+					 
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+					<b>RRM</b>
+					</div>
+					<div class="col-md-4">
+						<div class="blue">
+						   
+						</div>
+					</div>
+					 
+				</div>
 
-  <% if @assignment.status != 'Waiting'%>
-    <div class="approv_cont clearfix">
-	  <div class="appr_info">
-	    <div></div>
-	    <div></div>
-	  </div>
+				
+				<div class="row mr_btm" >
+					<div class="col-md-4">
+					<b>Status</b>
+					</div>
+					<div class="col-md-4">
+						 
+						
+					</div>	
+					<div class="col-md-4">
+						<div class="blue">
+						 <%=if @assignment.status == 'Accepted' then "In Progress" else @assignment.status end%>
+						</div>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-md-4">
+						<b>Current Stage</b>
+					</div>
+					<div class="col-md-4">
+						 
+						
+					</div>	
+					<div class="col-md-4">
+						<div class="blue">
+						 <%=@assignment.current_stage%>
+						</div>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-md-4">
+						<b>Assigned On</b>
+					</div>
+					<div class="col-md-4">
+						 
+						
+					</div>	
+					<div class="col-md-4">
+						<div class="blue">
+						 <%=@assignment.assign_date.strftime("%d %b,%Y")%>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
 
-	  <div class="appr_retail">
-	    <div></div>
-	    <div></div>
-	  </div>
 
-	  <div class="appr_desc">
-	    <div></div>
-	    <div>
-	    <%=form_for VendorAssignment.new, :url => {:controller => "vendor_assignments", :action => "status", :id => @assignment.id}	do %>
-	    	<%= button_tag(type: 'submit',value: '',:id => 'status-button') do %>
-                <div>
-                  <span><i><%= image_tag 'update_status.png',:id => 'status-img'%></i></span>
-                              
-                </div>
-            <% end %>
-        <%end%>    
-	    </div>
-	  </div>
+		<div class="col-md-6">
+			<div class="gsb_blk">
+				<h2>
+					Shop Detail
+				</h2>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="blue">
+							 <%=@assignment.request.retailer_code%>	
+						</div>
+					</div>
+					<div class="col-md-4">
+						<%=@assignment.request.shop_name%>
+					</div>
+					<div class="col-md-4">
+						<%=@assignment.request.shop_owner_name%>
+					</div>
 
-	 </div>
-   <%end%>
+					 
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="blue">
+							 
+						</div>
+					</div>
+					<div class="col-md-4">
+						 
+					</div>
+					<div class="col-md-4">
+						<div class="green">
+							<%=@assignment.request.shop_owner_phone%>
+						</div>
+					</div>
 
-	<div class="approv_cont clearfix">
-	  <div class="appr_info">
-	    <div>Retailer Code</div>
-	    <div><%=@retailer.retailer_code %></div>
-	  </div>
+					 
+				</div>
 
-	  <div class="appr_retail">
-	    <div>State</div>
-	    <div><%=@retailer.state %></div>
-	  </div>
+				<div class="row">
+					<div class="col-md-10">
+					  <%=@assignment.request.shop_address%>
+					</div>
+					<div class="col-md-2">
+						 
+					</div>	
+					 
+				</div>
+				<div class="row">
+					<div class="col-md-10">
+					  <%=@assignment.request.city+","+@assignment.request.state%>
+					</div>
+					<div class="col-md-2">
+						 
+					</div>	
+					 
+				</div>
+				 
+				
+			</div>
+		</div>	
+	</div>	
+</div>	
+</div>		
+</div>
 
-	  <div class="appr_desc">
-	    <div>Request Id</div>
-	    <div><%=@request.id %></div>
-	  </div>
 
+<section class="comments_sectn">
+	<div class="row">	
+		<div class="col-lg-12">
+			<div class="main-box clearfix">
+				<div class="clearfix">
+					<div class="common_page gsb_page">
+
+						<h2>Vendor Action</h2>
+						<div class="comments_blk">
+
+						<%VENDOR_STAGES.each do |stage|%>
+							 
+							<div class="row mr_btm1">
+								<div class="col-md-4">
+ 									<b><%=stage.camelize%></b>
+								</div>
+								<div class="col-md-4">
+									<div>
+			<%updated_stage = @assignment.vendor_stages.find_by(stage_name: stage)
+			if updated_stage != nil
+			%>
+										<%=@assignment.vendor_stages.find_by(stage_name: stage).update_date.strftime("%d %b,%Y")%>
+										&nbsp;&nbsp;&nbsp;
+										<%=@assignment.po_number.split(',').map{|pn| pn.to_i} if stage == "po_receive"%>
+										<%else%>
+										*****************
+										<%end%>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div>
+							<%if updated_stage != nil%>
+								<%= image_tag 'update_inactive.png',:style => "width:35%;height:40px"%>
+							<%elsif stage == "po_receive"%>
+
+								<div>
+				                  <span class="start"><i><%= image_tag 'update.png' ,:id => 'update-button'%>
+
+				                  </i>
+				                 <%=hidden_field_tag :assignment_id,@assignment.id%>  	
+				              </span>
+				           
+                 
+				                </div>
+							<%else%>
+							<div>
+			 			    	<%= link_to edit_vendor_assignment_path(@assignment.id,:status => stage) do %>
+				                <div>
+				                  <span><i><%= image_tag 'update.png' ,:id => 'update-button'%></i></span>
+				                              
+				                </div>
+			           			 <% end %>
+						    </div>
+						    <%end%>
+							</div>
+								</div>
+							</div>
+							<%end%>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+</section>	
+<%=render :partial => "poreceive"%>
 
-	<div class="approv_cont clearfix">
-	  <div class="appr_info">
-	      <div>Retailer Name</div>
-	      <div><%=@retailer.contact_person %></div>
-	    </div>
-
-	    <div class="appr_retail">
-	      <div>City</div>
-	      <div><%=@retailer.city %></div>
-	    </div>
-
-	    <div class="appr_desc">
-	      <div>Request Type</div>
-	      <div><%=@request.request_type %></div>
-	    </div>
-    </div>
-
-    <div class="approv_cont clearfix">
-	  <div class="appr_info">
-	      <div>Retailer Mobile Number</div>
-	      <div><%=@retailer.mobile_number %></div>
-	    </div>
-
-	    <div class="appr_retail">
-	      <div></div>
-	      <div></div>
-	    </div>
-
-	    <div class="appr_desc">
-	      <div>Request Status</div>
-	      <div><%=@assignment.status %></div>
-	    </div>
-    </div>
-
-    <div class="approv_cont clearfix">
-	  <div class="appr_info">
-	      <div>Shop Name</div>
-	      <div><%=@retailer.retailer_name %></div>
-	    </div>
-
-	    <div class="appr_retail">
-	      <div></div>
-	      <div></div>
-	    </div>
-
-	    <div class="appr_desc">
-	      <div>Vendor Progress</div>
-	      <div><%=@assignment.vendor_response %></div>
-	    </div>
-    </div>
-
-    <div class="approv_cont clearfix">
-	  <div class="appr_info">
-	      <div>CMO Name</div>
-	      <div><%=@cmo.name%> - <%=@cmo.location%></div>
-	    </div>
-
-	    <div class="appr_retail">
-	      <div></div>
-	      <div></div>
-	    </div>
-
-	    <div class="appr_desc">
-	      <div>Assigned Date</div>
-	      <div><%=@assignment.assigned_date %></div>
-	    </div>
-    </div>
-    
-</div>    
+</div>	
+</div>	
+	

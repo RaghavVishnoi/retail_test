@@ -32,6 +32,9 @@ module Api
             render :json => {:result => false, :retailer_list => "No retailer code match"}
           end
         end
+
+        
+
   end
  end
 end

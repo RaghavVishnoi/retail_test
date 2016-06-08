@@ -1,3 +1,4 @@
+VERSION = 9
 AVG_GIONEE_MONTHLY_SALES = [
   ["0-50 Thousand", "0"], 
   ["50 Thousand - 1 Lac", "50000"], 
@@ -239,6 +240,11 @@ Cmo = "cmo"
 SUPERCMO = "supercmo"
 APPROVER = "approver"
 RRMS = "rrm"
+AUDITOR = "auditor"  
+VENDOR = "vendor"
+REQUESTER = "requester"
+VMQA = "vmqa"
+SUPERVISOR = "supervisor"
 
 
 REQUESTS_STATUS = {
@@ -264,7 +270,17 @@ PASSWORD_MATCH_ERROR = "Password does not match!"
 
 ASSIGNMENT_STATUS = ["pending","audited"]
 
-VENDOR_STAGES = ['accepted','shop_visit','estimate_shared','po_received','in_production','in_transit','installation_complete','bill_received']
-  
+VENDOR_STAGES = ['accepted','po_receive','started','in_production','in_transit','installation_complete','bill_received']
+ACCEPTED = "accepted"
+PENDING = "pending"
+CMO_PENDING = "cmo_pending"
+CMO_ROLE_AUTH = ["cmo","approver"]
+RRM_ROLE_AUTH = ["rrm","approver"]
+CMO_APPROVED = "cmo_approved"
+APPROVED = "approved"
+DECLINED = "declined"
+PRIORITY = ['High','Normal','Low']
+ 
+
 
   

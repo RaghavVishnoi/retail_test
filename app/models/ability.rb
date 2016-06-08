@@ -52,10 +52,11 @@ class Ability
     #     obj.accessible_by?(user)
     #   end
     # end
-
-    user.permissions.each do |permission|
-      subject_class = (permission.subject_class == "all" ? :all : permission.subject_class.constantize)
+    
+    user.permissions.each do |permission|     
+      subject_class = (permission.subject_class == "all" ? :all : permission.subject_class.constantize)      
       can permission.action.to_sym, subject_class
+
     end
 
     can [:edit, :update], User do |obj|

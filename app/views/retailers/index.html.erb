@@ -18,13 +18,13 @@
 	</div>
 
 <div id="content-wrapper">
-<div class="row">
+<!-- <div class="row">
 <div class="col-lg-12">
 	<div class="add_new_notfcn">
 		<h4><i class="fa fa-plus-square fa-lg"></i><span> <%= link_to "New Retailer", new_retailer_path %></span></h4>
 	</div>
 </div>
-</div>
+</div> -->
 
 <div class="row">
 	<div class="col-lg-12">
@@ -38,7 +38,7 @@
 			</div>
 			<div class="col-md-6">
 				<div class="col-md-3">
-					<%= select_tag :state_shops, options_for_select(['All']+State.state_with_name(current_user)),:class => 'form-control custm_select',:required => "required",:onchange => "state() " %>
+					<%= select_tag :state_shops, options_for_select(['All']+State.state_with_name(current_user),params[:state]),:class => 'form-control custm_select',:required => "required",:onchange => "state() " %>
 					 
 				</div>
 				<div class="col-md-3">
@@ -49,10 +49,6 @@
 					<%= select_tag :shop, options_for_select(['All']+Retailer.city_retailer(params[:city]),params[:shop]),:class => 'form-control custm_select',:required => "required",:onchange => "shop()" %>
 					 
 				</div>
-
-
-				 
-
 
 		</div>
 		</div>
@@ -70,7 +66,7 @@
 					<ul class="list-inline list-unstyled edt_del">
 						 
 						 <li class="blue">
-                                  <i class="fa fa-trash-o"></i>
+                                  <i class="fa fa-hand-o-right"></i>
                                   <span>
                                   <%= link_to "Show", [retailer] %>
 

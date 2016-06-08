@@ -36,9 +36,10 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
 
+gem 'time_diff', '~> 0.3.0'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-#gem 'mysql2'
+gem 'mysql2'
 gem 'pry', :group => :development
 gem 'will_paginate'
 gem 'geocoder'
@@ -49,8 +50,8 @@ gem 'capistrano'
 gem 'rvm1-capistrano3', require: false
 gem 'capistrano-bundler'
 gem 'fog'
-#gem 'pg'
-gem 'mysql2'
+gem 'pg'
+#gem 'mysql2'
 gem 'aws-sdk'
 gem 'delayed_job_active_record'
 # gem 'activerecord4-redshift-adapter', github: 'aamine/activerecord4-redshift-adapter'

@@ -5,7 +5,7 @@ $(document).ready(function(){
             location.href = "/dashboard?from="+$("#date_from").val()+"&to="+$("#date_to").val(); 
         }else{
         var vType =  getUrlVars()["v"]; 
-        if(vType.length != 0){
+        if(vType != null && vType != 'undefined'){
             location.href = "/dashboard?v="+vType+"&from="+$("#date_from").val()+"&to="+$("#date_to").val();
         }else{
             location.href = "/dashboard?from="+$("#date_from").val()+"&to="+$("#date_to").val(); 
@@ -30,8 +30,7 @@ var toVar = getUrlVars()["to"];
              $("#date_from").val(from);
              $("#date_to").val(to);            
         }else{
-            console.log(current_date())
-        	 $("#date_from").val(previous_date(30*86400000));
+         	 $("#date_from").val(previous_date(30*86400000));
              $("#date_to").val(current_date());
         }
 

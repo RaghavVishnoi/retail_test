@@ -1,40 +1,321 @@
-<a href="/vendor_requests/"><%= image_tag 'back.png',:title => "Back",:class => "vendor_back_button" %></a>
-<%= form_for @vendor_request, :html => { :class => 'user-form' } do |f| %>
+<div id="nav-col-submenu"></div>
+</div>
+<div id="content-wrapper">
+<div class="row">
+  <div class="col-lg-12">
+    <div class="common_page gsb_page">
+      <div class="clearfix"></div>
+           <a href="<%=session[:prev_url]%>" id="back-button">  
+           <i class="fa fa-arrow-circle-left back-icon" aria-hidden="true" ></i></a>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="gsb_blk">
+        <h2>
+          Assignment Detail
+        </h2>
+        <div class="row">
+          <div class="col-md-8">
+           <b><%=@vendor_request.request_assignment.request_id%></b>
+          </div>
+          <div class="col-md-4">
+            <div class="blue">
+             <%=@vendor_request.request_assignment.request.request_type.camelize.upcase%>
+            </div>
+          </div>  
+           
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+          <b>Vendor</b>
+          </div>
+          <div class="col-md-4">
+            <div class="blue">
+               <%=@vendor_request.request_assignment.user.name%>
+            </div>
+          </div>
+           
+        </div>
+
+        
+        <div class="row mr_btm" >
+          <div class="col-md-4">
+          <b>Status</b>
+          </div>
+          <div class="col-md-4">
+             
+            
+          </div>  
+          <div class="col-md-4">
+            <div class="blue">
+             <%=@vendor_request.status.camelize%>
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-4">
+            <b>Installed Date</b>
+          </div>
+          <div class="col-md-4">
+             
+            
+          </div>  
+          <div class="col-md-4">
+            <div class="blue">
+             <%=@vendor_request.installed_on.strftime("%d %b,%Y")%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+
+
+    <div class="col-md-6">
+      <div class="gsb_blk">
+        <h2>
+          Shop Detail
+        </h2>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="blue">
+               <%=@vendor_request.request_assignment.request.retailer_code%>  
+            </div>
+          </div>
+          <div class="col-md-4">
+            <%=Retailer.retailer_data(@vendor_request.request_assignment.request.retailer_code,'name')%>
+          </div>
+          <div class="col-md-4">
+            <%=Retailer.retailer_data(@vendor_request.request_assignment.request.retailer_code,'contact_person')%>
+          </div>
+
+           
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="blue">
+               
+            </div>
+          </div>
+          <div class="col-md-4">
+             
+          </div>
+          <div class="col-md-4">
+            <div class="green">
+              <%=Retailer.retailer_data(@vendor_request.request_assignment.request.retailer_code,'phone')%>
+            </div>
+          </div>
+
+           
+        </div>
+
+        <div class="row">
+          <div class="col-md-10">
+            <%=Retailer.retailer_data(@vendor_request.request_assignment.request.retailer_code,'address')%>
+          </div>
+          <div class="col-md-2">
+             
+          </div>  
+           
+        </div>
+        <div class="row">
+          <div class="col-md-10">
+            <%=Retailer.retailer_data(@vendor_request.request_assignment.request.retailer_code,'city')+","+Retailer.retailer_data(@vendor_request.request_assignment.request.retailer_code,'state')%>
+          </div>
+          <div class="col-md-2">
+             
+          </div>  
+           
+        </div>
+         
+        
+      </div>
+    </div>  
+  </div>  
+</div>  
+</div>    
+</div>
+
+<section class="comments_sectn">
+  <div class="row"> 
+    <div class="col-lg-12">
+      <div class="main-box clearfix">
+        <div class="clearfix">
+          <div class="common_page gsb_page">
+            <h2>Installation Details</h2>
+            <div class="comments_blk">
+              <div class="row"> 
+                <div class="col-lg-12">
+                  <ul class="list-group">
+                    <%@vendor_request.request_assignment.vendor_stages.each_with_index do |stage,index|%>
+                            <li class="list-group-item">
+                              <span class="badge">
+                                <%if index == 0%>
+                                  <%=((stage.update_date - @vendor_request.request_assignment.assign_date)/(60*60)).to_i.to_s + " Hours"%>
+                                <%else%>
+                                  <%=VendorStage.date_difference(@vendor_request.request_assignment.vendor_stages.pluck(:stage_name),index-1)%>
+                                <%end%>
+                              </span>
+                               <span style="display:inline-block;width:15%;"> <%=stage.stage_name.camelize%> On
+                               </span>
+                              <span style="margin-left:20%;"><b><%=stage.update_date.strftime("%d %b,%Y")%></b></span>
+                            </li>
+                          <%end%>       
+                        </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 
+
+<section class="comments_sectn">
+  <div class="row"> 
+    <div class="col-lg-12">
+      <div class="main-box clearfix">
+        <div class="clearfix">
+          <div class="common_page gsb_page">
+            <h2>Vendor Intallation Image</h2>
+            <div class="comments_blk">
+              <div class="main-box-body">
+                      <div id="gallery-photos-lightbox">
+                        <ul class="clearfix gallery-photos">
+                          <%RequestDocument.where(request_document_id: @vendor_request.request_assignment.id).each do |document|%>
+                          <li class="col-md-3 col-sm-3 col-xs-6">
+                             <%=image_tag RequestDocumentSerializer.new(document, :root => false).request_document_url,style: 'height:200px;width:200px;margin-right:10px;',:class => 'img'%>
+                          </li>
+                          <%end%>
+                        </ul>
+                      </div>
+                    </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 
+
+<section class="comments_sectn">
+  <div class="row"> 
+    <div class="col-lg-12">
+      <div class="main-box clearfix">
+        <div class="clearfix">
+          <div class="common_page gsb_page">
+            <% if can?(:approve , Request) || can?(:cmo , Request)%>
+            <%if @vendor_request.cmo_pending?%>
+            <h2>CMO Action</h2>
+            <div class="comments_blk">
+                <%= form_for @vendor_request do %>
+ 
+            
+              <div class="row ">
+                <div class="col-md-12">
+                  <%= hidden_field_tag "status","cmo_pending" %>
+                  <%= text_area_tag('comment',nil, class: 'form-control',:placeholder => "Enter your comment here",:rows => "5") %> 
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <%= submit_tag "Approve", :class => "btn btn-success pull-left button-pair"%>
+
+                  <%= submit_tag "Decline", :class => "btn btn-success pull-left", style: "margin-top: 20px;background-color:red"%>
+                </div>
+              <%end%>
+            </div>
+          </div>
+          <%end%>
+            <%if @vendor_request.cmo_comment != nil%>
+              <h2>CMO Action</h2>
+              <div class="comments_blk">
+             
+                <div class="row ">
+                  <div class="col-md-12">
+                    <%=@vendor_request.cmo_comment%>
+                     
+                  </div>
+                </div>
+                 
+            </div>
+            <%end%>
+          <%end%>
+          <% if can?(:approve , Request) || can?(:rrm , Request)%>
+          <%if @vendor_request.pending?%>
+            <h2>CMO Action</h2>
+              <div class="comments_blk">
+             
+                <div class="row ">
+                  <div class="col-md-12">
+                    <%=@vendor_request.cmo_comment%>
+                     
+                  </div>
+            </div>
+                 
+            </div>
+            <h2>RRM Action</h2>
+            <div class="comments_blk">
+              <%= form_for @vendor_request do %>            
+              <div class="row ">
+                <div class="col-md-12">
+                  <%= hidden_field_tag "status","pending" %>
+                  <%= text_area_tag('comment',nil, class: 'form-control',:placeholder => "Enter your comment here",:rows => "5") %> 
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <%= submit_tag "Approve", :class => "btn btn-success pull-left button-pair"%>
+
+                  <%= submit_tag "Decline", :class => "btn btn-success pull-left", style: "margin-top: 20px;background-color:red"%>
+                </div> 
+              <%end%>
+            </div>
+          </div>
+        <%end%>
+        <%if @vendor_request.rrm_comment != nil && @vendor_request.status != PENDING%>
+              <h2>RRM Action</h2>
+              <div class="comments_blk">
+             
+                <div class="row ">
+                  <div class="col-md-12">
+                    <%=@vendor_request.rrm_comment%>
+                     
+                  </div>
+                </div>
+                 
+            </div>
+            <%end%>
+        <%end%>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>  
+
+
+
+</div>  
+</div> 
+<div class="img_open">
+        <div class="img_blk">
+          
+          <img class="add-img"/>
+        </div>
+      </div>
+ 
+<script>
+    $('.img').click(function(){
+       $('.img_open').css("display","block");
+       imgSrc = $(this).attr('src');
+       $('.add-img').attr("src",imgSrc);
+       $('.img_open').click(function(){
+        $('.img_open').hide();
+      
+
+    });
+
+    });
+$('#vendor').attr("class",'active')
+    $('#v_requests a').attr("style","color:#F37022 !important") 
+</script> 
   
-  <h4 id="form-title">Edit Assignment</h4>
-
-  <%= render :partial => "shared/error_messages", :locals => { :errors => @vendor_request.errors } %>
-  
-  <div class="form-field">
-    Vendor Id
-    <%=f.select :vendor_id,  Vendorlist.display_names , { :prompt => "select vendor" },:id => "vendor-request",:required => "required" %>
-  </div>
-
-  <div class="form-field">
-   Request Id
-    <%= f.text_field :request_id,:readonly => true %>
-  </div>
-
-  <div class="form-field">
-   Assigned date
-    <%= f.text_field :assigned_date %>
-  </div>
-
-  <div class="form-field">
-   Vendor Response
-    <%= f.text_field :vendor_response %>
-  </div>
-
-  <div class="form-field">
-   Vendor Response Date
-    <%= f.text_field :vendor_response_date %>
-  </div>
-
-  <div class="form-field">
-   Request Status
-    <%= f.text_field :status %>
-  </div>
-
-  
-   <%= f.submit :value => "Update Assignment" %>
-<% end %>

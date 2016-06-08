@@ -6,14 +6,7 @@ class VendorTasksController < ApplicationController
     PER_PAGE = 10
 
 	 def index
-	 	 id = session[:user_id]
-	 	 @user = User.find_by(:id => id)
-         @associated_roles = AssociatedRole.find_by(:object_id => id)
-         @role = @associated_roles.role  
-         if @role.name == 'cmo'
-	 	       @requests =  VendorTask.request_list(@user.email)
-	 	     end
-	 	    @vendor_task = VendorTask.with_query(params[:q]).includes(:images).order('updated_at desc').paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+	 	 
 	 end
 
 	def new

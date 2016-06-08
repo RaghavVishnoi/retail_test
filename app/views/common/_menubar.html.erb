@@ -4,9 +4,9 @@
 								
 								<div class="user-box">
 									<span class="name">
-										<a href="" class="dropdown-toggle" data-toggle="dropdown">
-											<%=current_user.name.titleize%>											
-										</a>
+										<span class="dropdown-toggle" data-toggle="dropdown">
+											<%=current_user.name.upcase%>											
+										</span>
 											
 									</span>
 									
@@ -78,7 +78,7 @@
 					</a>
 				</li>
 				<%end%>
-				<% if can? :manage, User %>
+				<% if can? :manage, Download %>
 				<li id="reports">
 					<a href="" class="dropdown-toggle">
 						<i class="fa fa-copy"></i>
@@ -106,7 +106,7 @@
 				<% end %>
 				<% if can? :manage, Notification %>
 				<li id="notification">
-					<a href="notification.html" class="dropdown-toggle" >
+					<a href="" class="dropdown-toggle" >
 						<i class="fa fa-bell" aria-hidden="true"></i>
 						<span>Notification</span>
 					</a>
@@ -123,22 +123,17 @@
 					</a>
 				</li>
 				<% end %>
-				<% if can? :manage, Vendorlist %>
-						<li id="vendor">
+				<% if can? :manage, VendorRequest %>
+				<li id="vendor">
 					<a  class="dropdown-toggle" >
 						<i class="fa fa-male" aria-hidden="true"></i>
 						<span>Vendor</span>
 						<i class="fa fa-angle-right drop-icon"></i>
 					</a>
 					<ul class="submenu">
-						<li id="list">
+						<li id="v_requests">
 							<a href="">
-								List
-							</a>
-						</li>
-						<li id="assignment">
-							<a href="">
-								Assignment
+								Requests
 							</a>
 						</li>
 					</ul>
@@ -180,6 +175,26 @@
 						<span>Role</span>
 					</a>
 				</li>
+				<%end%>
+				<% if can? :manage, ShopAssignment %>
+				<li id="assignments">
+					<a href="" class="dropdown-toggle" >
+						<i class="fa fa-file-text-o" aria-hidden="true"></i>
+
+
+						<span>Assignments</span>
+					</a>
+				</li>
+				<%end%>
+				<%if ['approver','rrm'].include?(User.user_role(current_user.id).name) %>  
+					<li id="vmqa">
+						<a href="" class="dropdown-toggle" >
+							<i class="fa fa-camera-retro" aria-hidden="true"></i>
+
+
+							<span>VMQA</span>
+						</a>
+					</li>
 				<%end%>
 			</ul>
 		</div>
@@ -225,11 +240,8 @@
  		location.href = '/users'
 	});
 
-	$('#list').click(function(){
- 		location.href = '/vendorlists'
-	});
 	$('#assignment').click(function(){
- 		location.href = '/vendor_requests'
+ 		location.href = '/request_assignments'
 	});
 
 	$('#beatroute').click(function(){
@@ -244,4 +256,14 @@
 	$('#role').click(function(){
  		location.href = '/roles'
 	});
+	$('#assignments').click(function(){
+ 		location.href = '/shop_assignments'
+	});
+	$('#vmqa').click(function(){
+ 		location.href = '/user_audits'
+	});
+	$('#v_requests').click(function(){
+ 		location.href = '/vendor_requests'
+	});
+	
  </script>

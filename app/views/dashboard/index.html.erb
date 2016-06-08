@@ -6,6 +6,8 @@
 	<%=render 'dashboard/cmo'%>
 <%elsif User.user_roles(current_user.id).include? 'vendor'%>	
 	<%=render 'dashboard/vendor'%>
+<%elsif User.user_roles(current_user.id).include? 'vendor allocator'%>
+	<%=render 'dashboard/vendor_allocator'%>
 <%elsif User.user_roles(current_user.id).include? 'vmqa'%>	
 	<%=render 'dashboard/vmqa'%>
 <%elsif User.user_roles(current_user.id).include? 'supervisor'%>	

@@ -1,6 +1,6 @@
 
 # config valid only for current version of Capistrano
-lock '3.3.3'
+lock '3.5.0'
 
 set :application, 'fosem-staging'
 set :repo_url, 'ssh://xp-dev.com/LPTPL_GIONEE_REQUESTER_WEB'

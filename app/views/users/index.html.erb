@@ -14,7 +14,7 @@
               <div class="col-md-3">
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i><span>
-                  <%= link_to "Add RRM","/users/new?user=rrm" %>
+                  <%= link_to "Add RRM","/users/new?tId=#{RRMS.unpack("B*")[0]}" %>
                   </span></h4>
                 </div>
               </div>
@@ -25,7 +25,7 @@
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i>
                     <span>
-                       <%= link_to "Add CMO","/users/new?user=cmo" %>
+                       <%= link_to "Add CMO","/users/new?tId=#{Cmo.unpack("B*")[0]}" %>
                      </span>
                   </h4>
                 </div>
@@ -37,7 +37,7 @@
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i>
                     <span>
-                       <%= link_to "Add VMQA","/users/new?user=vmqa" %>
+                       <%= link_to "Add VMQA","/users/new?tId=#{VMQA.unpack("B*")[0]}" %>
                      </span>
                   </h4>
                 </div>
@@ -49,7 +49,7 @@
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i>
                     <span>
-                       <%= link_to "Add Supervisor","/users/new?user=supervisor" %>
+                       <%= link_to "Add Supervisor","/users/new?tId=#{SUPERVISOR.unpack("B*")[0]}" %>
                      </span>
                   </h4>
                 </div>
@@ -61,7 +61,7 @@
               <div class="col-md-3">
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i><span>
-                  <%= link_to "Add Auditor","/users/new?user=auditor" %>
+                  <%= link_to "Add Auditor","/users/new?tId=#{AUDITOR.unpack("B*")[0]}" %>
                   </span></h4>
                 </div>
               </div>
@@ -72,11 +72,22 @@
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i>
                     <span>
-                      <%= link_to "Add Requester","/users/new?user=requester" %>
+                      <%= link_to "Add Requester","/users/new?tId=#{REQUESTER.unpack("B*")[0]}" %>
                     </span></h4>
                 </div>
               </div>
-            <%end%>  
+            <%end%>
+
+            <%if User.permit_role(User.user_role(current_user.id)).include? 'vendor'%>
+              <div class="col-md-3">
+                <div class="add_new_notfcn">
+                  <h4><i class="fa fa-plus-square fa-lg"></i>
+                    <span>
+                      <%= link_to "Add Vendor","/users/new?tId=#{VENDOR.unpack("B*")[0]}" %>
+                    </span></h4>
+                </div>
+              </div>
+            <%end%>    
 
 
 
@@ -117,10 +128,9 @@
                            <% end %>
 
                         <% else %>
-
-                            <%= button_tag(type: 'submit',value: 'search',:class=>"clear-button") do %>
-                             <a href="/users"><i class="fa fa-times-circle-o"></i></a> 
-                            <% end %>
+                            
+                             <a href="/users" class="clear-button"><i class="fa fa-times-circle-o"></i></a> 
+                           
                         <% end %>
                       </div> 
                     <div class="error" id="message"></div>
@@ -163,7 +173,12 @@
                                   
                                   <% if can? :manage, User %>
                                     <span>
-                                      <%= link_to "Edit", [:edit, user] %>
+                                      <%if  User.user_roles(user.id).include? 'auditor'%>
+                                       <%= link_to "Edit",edit_user_path(id=user.id,user: "auditor") %>
+                                      <%else%>
+                                        <%= link_to "Edit", [:edit,user]%>
+                                      <%end%>
+                                     
                                     </span>
                                   <%end%>
 

@@ -1,14 +1,14 @@
 class RetailersController < ApplicationController
   include RetailersHelper
-	  before_action :set_retailer, :only => [:edit, :update, :destroy,:upload_data]
-    authorize_resource :only => [:create,:new]
-    
+
+	before_action :set_retailer, :only => [:edit, :update, :destroy,:upload_data]
+    authorize_resource :only => [:create,:new]  
     PER_PAGE = 100
     
     
 	def index 
- 		  @retailer = Retailer.select(params,current_user).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
-        
+        session[:prev_url] = request.fullpath
+ 		@retailer = Retailer.select(params,current_user).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))       
 	end
 
 	def new 

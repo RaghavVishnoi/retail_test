@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  get 'api/v1'
-
-  get 'api/citylists'
   
+
+  get 'api/v1'
+  get 'api/citylists' 
   root 'dashboard#index'
   get '/dashboard' => 'dashboard#index'
   get '/users/sign_in' => "sessions#new"
@@ -110,6 +110,8 @@ Rails.application.routes.draw do
 
   resources :rrms
 
+  resources :request_documents, :only => [:new,:create]
+
   get '/passwords/edit' => "passwords#edit"
   put '/passwords' => "passwords#update"
   get '/passwords/new' => "passwords#new"
@@ -135,8 +137,8 @@ Rails.application.routes.draw do
       post 'sessions/edit'
       post 'sessions/change_password'
       get 'sessions/change_password'
-      post 'vendors/assign_request'
-      get 'vendors/assign_request'
+      get 'vendors/assignments'
+      get 'vendors/shopInfo'
       post 'vendors/get_request'
       get 'vendors/get_request'
       post 'vendors/get_request_status'
@@ -154,24 +156,24 @@ Rails.application.routes.draw do
       get '/repository/tag' => 'repository#tag_name'
       get '/repository/uploader' => 'repository#uploaded_by'
       get '/repository/search' => 'repository#search'
-      
-      
+            
       resources :attendances, :only => [:create]
       resources :citylists, :only =>[:index]
       resources :radiofields, :only =>[:index]
       resources :visitors, :only =>[:index]
       resources :retailerlists, :only =>[:index]
+      resources :shop_assignments, :only => [:index,:create]
+      post '/shop_assignments/:id/audited' => "shop_assignments#audited"
+     
+      resources :version, :only => [:index]
         
     end
   end
 
-   
- 
-
   scope '/api/v1/', :as => 'api_v1', :defaults => { :format => :json }, :constraints => { :format => :json } do
    
     resources :categories, :item_regions, :cities, :collections, :sizes, :alcohol_percents, :images, :warehouses, :except => [:show]
-    #resources :screens, :only => [:index, :show]
+    resources :screens, :only => [:index, :show]
     resources :items, :except => [:show] do
     resources :inventories, :except => [:show]
     end
@@ -193,7 +195,7 @@ Rails.application.routes.draw do
       get :autocomplete_retailer_code, :on => :collection
     end
     resources :dropdown_values, :only => [:index]
-     
+
   end
 
   post '/cmos/file_upload' 
@@ -209,8 +211,7 @@ Rails.application.routes.draw do
   post '/retailers/file_upload'
   post '/retailers/file_insert'
   
-  post '/vendor_assignments/status'
-  get '/vendor_assignments/status'
+  get "vendor_assignments/:id/status" => "vendor_assignments#status"
 
   post '/downloads' => 'downloads#create'
   get '/downloads' => 'downloads#index'
@@ -240,13 +241,11 @@ Rails.application.routes.draw do
       post 'requests/shop_branding'
       post 'requests/shop_list'
       post 'requests/request_data'
-      get 'requests/shop_info'
-      
+      get 'requests/shop_info'   
     end
   end 
    
   resources :user_data, :only =>[:new,:create,:index]
-   
 
   namespace :api, :defaults => {:format => :json},:constraints => {:format => :json} do
     namespace :gstar do
@@ -255,6 +254,12 @@ Rails.application.routes.draw do
       get '/shops/shopList'
     end
   end 
+
+  namespace :api,:defaults => {format: :json},constraints: {format: :json} do
+    namespace :gquestion do
+      resources :retailers , only: [:index]
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -319,6 +324,10 @@ Rails.application.routes.draw do
 
   get '/retailers/filter' => "retailers#index"
    resources :users,:only => [:show,:index]
-
+   resources :shop_assignments
+   resources :user_audits
+   post '/shop_assignments/search'
+   resources :request_assignments
+   post '/request_assignments/userInfo'
 
 end

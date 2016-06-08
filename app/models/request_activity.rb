@@ -46,6 +46,8 @@ class RequestActivity < ActiveRecord::Base
   		user = RequestActivity.find_by(request_id: request_id,request_status: status)
   		if user != nil && user.user_id != 0
 			User.find(user.user_id).name
+		else
+			""
 		end
 	end
 

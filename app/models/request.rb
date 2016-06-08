@@ -14,6 +14,8 @@ class Request < ActiveRecord::Base
   has_many :retailers
   belongs_to :user
   has_many :request_activities
+  has_many :shop_assignments
+  has_one :request_assignment
    
   state_machine :status, :initial => :cmo_pending do
     event :cmo_approve do

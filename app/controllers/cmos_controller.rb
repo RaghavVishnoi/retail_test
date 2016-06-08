@@ -2,6 +2,7 @@ class CmosController < ApplicationController
 
 	before_action :set_user, :only => [:edit, :update, :destroy]
     skip_before_action :authenticate_user, :only => [:create, :new]
+    authorize_resource
 	PER_PAGE = 15
 
 
@@ -24,7 +25,7 @@ class CmosController < ApplicationController
 	end
 
 	def create
-		@cmo = CMO.new cmo_params
+		@cmo = CMO.new cmo_params        
 		if @cmo.save
 			redirect_to cmos_path, notice: "CMO created successfully"
 		else
