@@ -1,0 +1,39 @@
+<section class="comments_sectn">
+  <div class="row"> 
+    <div class="col-lg-12">
+      <div class="main-box clearfix">
+        <div class="clearfix">
+          <div class="common_page gsb_page">
+            <h2>Installation Details</h2>
+            <div class="comments_blk">
+              <div class="row"> 
+                <div class="col-lg-12">
+                  <ul class="list-group">
+                    <%@request.request_assignment.vendor_stages.each_with_index do |stage,index|%>
+                            <li class="list-group-item">
+                              <span class="badge">
+                                <%if index == 0%>
+                                  <%=((stage.update_date - @request.request_assignment.assign_date)/(60*60)).to_i.to_s + " Hours"%>
+                                <%else%>
+                                  <%=VendorStage.date_difference(@request.request_assignment.vendor_stages.pluck(:stage_name),index-1)%>
+                                <%end%>
+                              </span>
+                               <span style="display:inline-block;width:15%;"> <%=stage.stage_name.camelize%> On
+                               </span>
+                              <span style="margin-left:20%;"><b><%=stage.update_date.strftime("%d %b,%Y")%></b></span>
+                            </li>
+                          <%end%>       
+                        </ul>
+                         <%if @request.request_assignment.vendor_stages.length == 0%>
+		                  <b>Waiting ...</b>      
+		                  <%end%>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

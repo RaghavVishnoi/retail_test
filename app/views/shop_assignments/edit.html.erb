@@ -1,0 +1,106 @@
+ 
+<div id="nav-col-submenu"></div>
+</div>
+<div id="content-wrapper">
+
+<div class="row">
+
+<div class="main-box-body common_page clearfix">
+  <div class="col-md-3 assmt_new_sel">
+  	<%=if User.user_role(current_user).name != 'supervisor' then select_tag :auditor, options_for_select(['Select Auditor']+User.users_data('auditor'),@assignment.user_id),:class => 'form-control custm_select',:required => "required",:id => 'user' else select_tag :auditor, options_for_select(UserParent.children(current_user.id,'auditor').pluck(:name,:id),params[:aId]),:class => 'form-control custm_select',:required => "required",:id => 'user' end%>
+  </div>
+</div>
+
+</div>
+<div class="row">
+<div class="col-lg-12">
+ 
+<div class="main-box clearfix">
+<div class="clearfix">
+	<div class="common_page gsb1">
+		<div class="hdr">
+			<div class="row">
+	    		<div class="col-md-2">
+					 Retailers					
+				</div> 				 
+			</div>				 
+		</div>
+
+
+
+<div id='content' class="tab-content">
+	 
+		 <div class="tab-pane active " id="all">
+		 	<div class="hdr">
+                      <div class="row">
+                      <div class="col-md-10 cong">
+                        <p><span class="blue"><%=@assignment.retailer.retailer_code%></span> - <%=@assignment.retailer.retailer_name%> </p>
+                        <p><%=@assignment.retailer.contact_person%> -  <span class="gray"><%=@assignment.retailer.mobile_number%></span></p>
+                        <p><%=@assignment.retailer.city%>,<%=@assignment.retailer.state%></p>
+                         
+                      </div>
+                      
+                     
+                    </div>
+                </div>
+                   </div>
+						 
+					 
+
+ 
+   
+ 			<div class="col-md-1">
+              <%= submit_tag "Update Asignment",:class => "btn btn-success " ,:id => "update-assignment"%>      
+      		</div>
+</div>
+  
+    
+ 
+							
+		 
+								
+</div>
+</div>
+</div>
+ 
+</div>
+</div>
+<script type="text/javascript">   
+  $("#update-assignment").click(function(){
+
+    var user_id = $( "select#user option:selected").val();
+     if(user_id == 'Select Supervisor'){
+      alert("Please select shop with a supervisor!")
+    }else{
+      $.ajax({
+        url: "/shop_assignments/<%=@assignment.id%>",
+        type: "PATCH",
+        data: {
+              shop_assignment : {
+              user_id : user_id,
+              retailer_id : "<%=@assignment.retailer.retailer_code%>"
+            }
+        },
+        dataType: 'text',
+
+        complete: function(){
+
+        },
+        success: function(data){
+          result = JSON.parse(data)
+          if(result['result'] == true){
+            location.href='/shop_assignments'
+          }else{
+            location.reload()
+          }
+         
+        },
+        error: function(){
+          alert("Please try again!")
+        }
+       });
+    }
+       
+   }); 
+    
+  </script>

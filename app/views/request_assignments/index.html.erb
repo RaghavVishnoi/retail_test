@@ -1,0 +1,116 @@
+<div id="nav-col-submenu"></div>
+  </div>
+ 
+<div id="content-wrapper">
+   <%= render 'shared/notice_messages'%>
+                
+  <div class="row">
+     <div class="col-lg-12">
+        <div class="main-box-body clearfix">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="add_new_notfcn">
+                  <h4><i class="fa fa-plus-square fa-lg"></i><span>
+                  <%= link_to "New Assignment",'/request_assignments/new'%>
+                  </span></h4>
+                </div>
+              </div>
+            </div>  
+            <div class="main-box clearfix">
+            <div class="clearfix">
+              <div class="common_page user">
+              <div class="user_tab">
+              <div class="row">
+                <div class="col-md-2">
+                  <h4>Assignments</h4>
+                </div>
+               
+               
+                 
+                  
+              </div>
+              </div>
+            
+                 
+                <div id='content' class="tab-content">
+                <div class="row">
+<div class="col-lg-12">
+<div class="main-box no-header clearfix">
+  <div class="main-box-body clearfix">
+    <div class="table-responsive">
+      <table class="table user-list table-hover">
+        <thead>
+          <tr>
+            <th><span>Request Id</span></th>
+            <th><span>Request Type</span></th>
+             <th class="text-center"><span>RT Code</span></th>
+            <th><span>Shop Name</span></th>
+            <th class="text-center"><span>City</span></th>
+            <th><span>State</span></th>
+            <th><span>RRM<span></th>
+            <th><span>Vendor<span></th>
+             <th><span>Status</span></th>
+            <th><span>Assigned On</span></th>
+                   
+          </tr>
+        </thead>
+        <tbody>
+          
+         
+      
+        
+    <%@request_assignments.each do |assignment|%>
+                  
+          <tr>
+            <td>              
+              <%=assignment.request_id%>              
+            </td>
+            <td>
+              <%=assignment.request.request_type.upcase if assignment.request.request_type != nil%>  
+            </td>
+            <td>
+              <%=assignment.request.retailer_code.upcase%>  
+            </td>
+            <td>
+              <%=Retailer.retailer_data(assignment.request.retailer_code,"name")%>  
+            </td>
+            <td>
+               <%=Retailer.retailer_data(assignment.request.retailer_code,"city")%>  
+            </td>
+            <td>
+               <%=Retailer.retailer_data(assignment.request.retailer_code,"state")%> 
+            </td>
+            <td>
+             <%req = assignment.request.request_activities.find_by(request_id: assignment.request_id,request_status: 'approved',user_type: ['RRM','HO']);
+
+             %>
+             <%=req.user.name if req != nil%>
+            </td>
+            <td><%=assignment.user.name%></td>
+            <td>
+              <%=assignment.current_stage.upcase if assignment.current_stage != nil%>
+            </td>
+             <td class="text-center">
+              <span class="label label-default"><%=assignment.assign_date.strftime("%d %b,%Y") if assignment.assign_date != nil%></span>
+            </td>
+          </tr>
+                  <%end%>  
+            </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</div>    
+
+
+                </div>
+              <%=will_paginate @request_assignments%>
+
+                
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+       

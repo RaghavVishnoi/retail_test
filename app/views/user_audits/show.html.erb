@@ -1,0 +1,209 @@
+<div id="nav-col-submenu"></div>
+</div>
+<div id="content-wrapper">
+<div class="row">
+<div class="col-lg-12">
+	<div class="common_page gsb_page">
+		<div class="clearfix"></div>
+		<a href="<%=session[:prev_url]%>" id="back-button">  
+          <i class="fa fa-arrow-circle-left back-icon" aria-hidden="true" ></i></a>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="gsb_blk">
+						<h2>Auditor Details</h2>
+						<div class="row">
+							<div class="col-md-4 blue">
+								<%=@user.name%>
+							</div>
+							<div class="col-md-4">
+								 
+							</div>
+							<div class="col-md-4 gray"><%=@user.phone%></div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4 gray"><%=@user.email%></div>
+							<div class="col-md-4">
+								 
+							</div>
+						</div>
+
+						 
+						<div class="row">
+							<div class="col-md-4"><%=@user.states.pluck(:name).join(',')%></div>
+							<div class="col-md-4"></div>
+						</div>
+						
+						 
+
+						<h2>Supervisor Details</h2>
+						<div class="row">
+							<div class="col-md-4 blue">
+								<%=@parent.pluck(:name).join(',')%>
+							</div>
+							<div class="col-md-4">
+								 
+							</div>
+							<div class="col-md-4 gray"><%=@parent.pluck(:phone).join(',')%></div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4 gray"><%=@parent.pluck(:email).join(',')%></div>
+							<div class="col-md-4">
+								 
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4"><%=@parent.first.states.pluck(:name).join(',')%></div>
+							<div class="col-md-4"></div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">&nbsp;</div>
+							<div class="col-md-4"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="shop_detals">
+						<h2>Assignments Count</h2>
+						<div class="row">
+							<div class="col-md-6">
+								<button class="lg_button cong all tot">
+									<p><b>Total</b></p>
+									<p><b><%=@assignments.count%></b></p>
+								</button>
+ 							</div>
+							<div class="col-md-6">
+ 								<button class="lg_button cong pending pen">
+ 									<p><b>Pending</b></p>
+									<p><b><%=@assignments.where(status: 'pending').count%></b></p>
+ 								</button>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<button class="lg_button cong audited aud">
+									<p><b>Audited</b></p>
+									<p><b><%=@assignments.where(status: 'audited').count%></b></p>
+								</button>
+							</div>							 
+						</div>
+
+						 
+						 
+						
+					  
+					</div>
+				</div>
+			</div>
+		</div>
+	
+</div>
+</div>
+
+<section class="comments_sectn">
+<div class="row">	
+<div class="col-lg-12">
+<div class="main-box clearfix">
+<div class="clearfix">
+	<div class="common_page gsb_page">
+	<h2 class="asgnd_shop_blk">
+		<div class="assgn_shop">Assigned Shops</div>
+		 				<div class="shop-search">
+                         <%= text_field_tag :email, params[:email], :id => "retailer-search",:required => "required",:placeholder => "Enter retailer code",:class => 'user-search-field' %>
+                      	</div>
+                      	<div>
+                        <% if params[:email] == nil %>
+                           <%= button_tag(type: 'submit',value: 'search',:class=>"hide-button",:id => "search") do %>
+                             <i class="fa fa-search search-icon"></i> 
+                           <% end %>
+
+                        <% else %>
+
+                            <%= button_tag(type: 'submit',value: 'search',:class=>"clear-button") do %>
+                             <a href="/users"><i class="fa fa-times-circle-o"></i></a> 
+                            <% end %>
+                        <% end %>
+                      	</div> 
+	</h2>
+	<div class="comments_blk retailer">
+	<%@assignments.each do |assignment|%>
+	<a href="">
+ 		<div class="hdr   <%=if assignment.status == 'pending' then "bgColorPending pend" else "bgColorDone done" end%> <%=assignment.retailer.retailer_code%>">
+ 	 		<div class="row">
+              <div class="col-md-8 cong">
+                <p><span class="blue"><%=assignment.retailer.retailer_code%></span> - <%=assignment.retailer.retailer_name%></p>
+                <p><%=assignment.retailer.contact_person%> -  <span class="gray"><%=assignment.retailer.mobile_number%></span></p>
+                <p><%=assignment.retailer.city%>,<%=assignment.retailer.state%></p>
+                 
+              </div>
+              <div class="col-md-4">
+                 <p>Assigned On: <span class="blue"><%=assignment.assign_date.strftime("%d %b,%Y")%></span></p>
+                 <p>Audited On: <span class="blue"><%=if assignment.request == nil then "N/A" else assignment.request.created_at.strftime("%d %b,%Y")  end%> </span> </p>
+              </div>             
+            </div>
+            </div>
+          </a>
+      
+         <%end%>
+        
+	</div>
+
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<script type="text/javascript">
+$('.tot').click(function(){
+	$('.pend').attr("style","display:block !important;");
+	$('.done').attr("style","display:block !important;");
+	$("#search").click(function(){
+		var retailer = $("#retailer-search").val();
+		if(retailer == null || retailer == ''){
+			alert("Please enter retailer code!")
+		}else{
+			$('.pend').attr("style","display:none !important;");
+			$('.done').attr("style","display:none !important;");
+			$('.'+retailer).attr("style","display:block !important;");
+		}
+	});
+});
+$('.pen').click(function(){
+	$('.done').attr("style","display:none !important;");
+ 	$('.pend').attr("style","display:block !important;");
+ 	$("#search").click(function(){
+		var retailer = $("#retailer-search").val();
+		if(retailer == null || retailer == ''){
+			alert("Please enter retailer code!")
+		}else{
+			$('.pend').attr("style","display:none !important;");
+			$('.done').attr("style","display:none !important;");
+			$('.'+retailer).attr("style","display:block !important;");
+		}
+	});
+});
+$('.aud').click(function(){
+	$('.pend').attr("style","display:none !important;");
+	$('.done').attr("style","display:block !important;");
+	$("#search").click(function(){
+		var retailer = $("#retailer-search").val();
+		if(retailer == null || retailer == ''){
+			alert("Please enter retailer code!")
+		}else{
+			$('.pend').attr("style","display:none !important;");
+			$('.done').attr("style","display:none !important;");
+			$('.'+retailer).attr("style","display:block !important;");
+		}
+	});
+});
+
+$('#dashboard').attr("class",'active')
+</script>

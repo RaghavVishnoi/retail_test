@@ -1,0 +1,283 @@
+<div id="nav-col-submenu"></div>
+</div>
+<div id="content-wrapper">
+          <div class="row" style="opacity: 1;">
+            <div class="col-lg-12">
+              
+              <div class="row">
+                <div class="col-lg-12">
+                   
+                  
+                  <h1>Add Assignments</h1>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="main-box clearfix" style="min-height: 1100px;">
+                    <div class="tabs-wrapper tabs-no-header">
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab-home" data-toggle="tab">Assigned by RRM</a></li>
+                        <li class=""><a href="#tab-accounts" data-toggle="tab">Unassigned</a></li>
+                        
+                      </ul>
+                      
+                      <div class="tab-content">
+                        <div class="tab-pane fade active in" id="tab-home">
+                          
+                          <div class="row">
+<div class="col-lg-12">
+<div class="main-box no-header clearfix">
+  <div class="main-box-body clearfix">
+    <div class="table-responsive">
+      <table class="table user-list table-hover">
+        <thead>
+          <tr>
+            <th><span>Request Id</span></th>
+            <th><span>Request Type</span></th>
+             <th class="text-center"><span>RT Code</span></th>
+            <th><span>Shop Name</span></th>
+            <th class="text-center"><span>City</span></th>
+            <th><span>State</span></th>
+            <th><span>RRM<span></th>
+             <th class="text-center"><span>Created On</span></th>
+            <th><span>Assigned On</span></th>             
+            <th>
+              <ul class="list-inline list-unstyled">
+                <li class="blue ch_bttn"><input type='checkbox' name='thing' value='valuable' id="selectAll"/><label for="selectAll">All</label>  </li>
+              </ul>
+           </th>
+          </tr>
+        </thead>
+        <tbody>
+        <%@requests.each do |request|%>
+          <tr>
+            <td>              
+              <%=request.id%>              
+            </td>
+            <td>
+              <%=request.request_type.upcase if request.request_type != nil%>  
+            </td>
+            <td>
+              <%=request.retailer_code.upcase%>  
+            </td>
+            <td>
+              <%=Retailer.retailer_data(request.retailer_code,"name")%>  
+            </td>
+            <td>
+               <%=Retailer.retailer_data(request.retailer_code,"city")%>  
+            </td>
+            <td>
+               <%=Retailer.retailer_data(request.retailer_code,"state")%> 
+            </td>
+            <td>
+             Akath
+            </td>
+            <td class="text-center">
+              <span class="label label-default">20-01-2016</span>
+            </td>
+             <td class="text-center">
+              <span class="label label-default">20-01-2016</span>
+            </td>
+             
+            <td style="width: 5%;">
+              <ul class="list-inline list-unstyled">
+                        <li class="blue ch_bttn add"><input type='checkbox' name='thing' value='<%=request.id%>' id="add<%=request.id%>" class="chbx"/><label for="add<%=request.id%>">Add</label> </li>
+                           
+                        </ul>
+              
+            </td>
+          </tr>
+        <%end%>
+
+        </tbody>
+      </table>
+    </div>    
+  </div>
+
+</div>
+ <%=will_paginate @requests%>   
+</div>
+</div>
+
+                        </div>
+                        
+                        
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+           
+        </div>
+
+<!--  
+<div id="nav-col-submenu"></div>
+</div>
+<div id="content-wrapper">
+<div class="row">
+<div class="col-lg-12">
+ 
+<div class="main-box clearfix">
+<div class="clearfix">
+  <div class="common_page gsb1">
+    <div class="hdr">
+      <div class="row">
+          <div class="col-md-2">
+           Assignments          
+        </div> 
+        <div class="col-md-3 ">
+           
+          
+           
+        </div>
+       <div class="col-md-3">
+          <%= select_tag :state_shops, options_for_select(['All']+State.state_with_name(current_user),params[:state]),:class => 'form-control custm_select',:required => "required",:onchange => "state() "%>
+          
+        </div>
+        <div class="col-md-3">
+           <%= select_tag :city_shops, options_for_select(['All']+Retailer.where(state: params[:state]).pluck(:city).uniq,params[:city]),:class => 'form-control custm_select',:required => "required",:onchange => "city() "  %>
+          
+        </div>
+         
+        
+        <div class="col-md-1 ch_bttn" style="padding:0px;">
+            <input type='checkbox' name='thing' value='valuable' id="selectAll"/><label for="selectAll">All</label> 
+        </div>
+      </div>  
+         
+       
+  </div>
+ 
+
+
+<div id='content' class="tab-content">
+  <%@requests.each do |request|%>
+     <div class="tab-pane active " id="all">
+      <div class="hdr">
+                      <div class="row">
+                      <div class="col-md-10 cong">
+                        <p><span class="blue"><%=request.id%></span> - <%=request.retailer_code%> </p>
+                        <p><%=request.request_type%></p>
+                        <p><%=Retailer.retailer_data(request.retailer_code,'city')%>,<%=Retailer.retailer_data(request.retailer_code,'state')%></p>
+                         
+                      </div>
+                      <div class="col-md-1">
+                        <ul class="list-inline list-unstyled">
+                        <li class="blue ch_bttn add"><a href="/requests/<%=request.id%>/edit?q[request_type]=<%=request.request_type%>" class="blue">View</a></li>
+                           
+                        </ul>
+                      </div>
+                      <div class="col-md-1">
+                        <ul class="list-inline list-unstyled">
+                        <li class="blue ch_bttn add"><input type='checkbox' name='thing' value='<%=request.id%>' id="add<%=request.id%>" class="chbx"/><label for="add<%=request.id%>">Add</label> </li>
+                           
+                        </ul>
+                        <p style="margin-left:23%;"><%=request.status%></p>
+                      </div>
+                    </div>
+                </div>
+                   </div>
+             
+           
+
+  <%end%>
+  <%=will_paginate @requests%>
+      <div class="col-md-1">
+              <%= submit_tag "Assign",:class => "btn btn-success " ,:id => "submit-assignment"%>      
+      </div>
+</div>
+  
+    
+ 
+              
+    <div class="response-pagination clearfix">
+            
+    </div>
+                
+</div>
+</div>
+</div>
+ 
+</div>
+</div>
+<script type="text/javascript">
+    var value = []
+      $('#selectAll').click(function() {
+       
+      if(this.checked == true){
+         $(':checkbox').each(function(i){
+          value[i] = $(this).val();
+              
+         });
+      value = value.splice(1,value.length);
+      $('#request_id').val(value);
+      } 
+   if (this.checked) {
+       
+       $(':checkbox').each(function() {
+           this.checked = true;                        
+       });
+   } else {
+      $(':checkbox').each(function() {
+           this.checked = false; 
+           value = []
+           $('#request_id').val('');                      
+       });
+   } 
+
+});
+
+  $('.chbx').click(function(){
+    val = this.value
+    if(this.checked){
+         value.push(val)
+    }else{
+      value.splice(value.indexOf(val),1)
+      $('#selectAll').prop('checked', false);
+    };
+ 
+  });    
+   
+
+
+  $("#submit-assignment").click(function(){
+
+    var user_id = $( "select#user option:selected").val();
+     if(user_id == 'Select Auditor' || user_id == null || value.length == 0 || user_id == 0){
+      alert("Please select shop with an auditor!")
+    }else{
+      $.ajax({
+        url: "/shop_assignments",
+        type: "POST",
+        data: {
+              shop_assignment : {
+              user_id : user_id,
+              retailer_id : value
+            }
+        },
+        dataType: 'text',
+
+        complete: function(){
+
+        },
+        success: function(data){
+         alert("Successfully assigned!")
+         location.reload()
+        },
+        error: function(){
+          alert("Please try again!")
+        }
+       });
+    }
+       
+   }); 
+    
+   
+   
+</script>
+ -->

@@ -1,0 +1,135 @@
+
+<%if params[:alert] == 'true'%>
+  <div id="popup-request">
+    <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
+      <tr>
+        <td class="popup_title">Confirmation message</td>
+        <td class="popup_title align_right">
+            <a href="javascript:void(0);" id="request-popup-close">Close</a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" id="popup-assign-message">Assign request to vendor</td>
+      </tr>   
+    </table>
+    <%= button_tag "Yes",:value => "Yes", :class => "popup_button", :id => 'popup-button'%> 
+
+    <%= button_tag "No",:value => "No", :class => "popup_button", :id => 'request-close'%>
+  </div> 
+<%end%>
+<div id="popup-request-assignment">
+    <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
+            <tr >
+                <td class="popup_title">Assign Request</td>
+                <td class="popup_title align_right">
+                    <a href="javascript:void(0);" id="btnClose-assignment">Close</a>
+                </td>
+                
+              </tr> 
+              <tr><td>&nbsp;</td></tr>
+              <tr class="cellSpan">
+              	<td>
+              		<span class="vpopup-title">Choose a vendor</span>
+              	</td>
+              </tr>
+                <tr>
+                  <td colspan="2"><%=select_tag :vendor_id,options_for_select(User.users_data('vendor')),:prompt => '--------select vendor--------',:id => "popup-select",:required => "required"%></td>
+                </tr> 
+                <tr><td>&nbsp;</td></tr>
+                 <tr>
+                  <td colspan="2"><%=select_tag :priority,options_for_select(PRIORITY),:prompt => '--------select priority--------',:id => "popup-select",:required => "required",:class => 'priority'%></td>
+                </tr> 
+                <tr><td>&nbsp;</td></tr>
+                <tr class="cellSpan"><td><span class="vlabel">Grade : <label class="grade"></label></span></td></tr>
+                <tr class="cellSpan"><td><span class="vlabel">Pending : <label class="pending"></label></span></td></tr>
+                <tr class="cellSpan"><td><span class="vlabel">In-Process : <label class="in_process"></label></span></td></tr>
+                <tr class="cellSpan"><td><input type="button" class="popup_button_assignment" value="Assign" id="assignment"/></td></tr>
+                <%=hidden_field_tag :request_id,params[:id]%>
+                <%=hidden_field_tag :assigned_by,current_user.id%>
+           </table>
+ </div> 
+ <script>
+ 	$("#request-close").click(function(){
+    url = $("#back-button").attr("href");
+		location.href = url;
+	});
+  $("#btnClose-assignment").click(function(){
+    url = $("#back-button").attr("href");
+    location.href = url;
+  });
+
+	$("#request-popup-close").click(function(){
+ 		url = $("#back-button").attr("href");
+		location.href = url;
+	});
+	$("#popup-button").click(function(){
+ 		$(this).attr("style","display:none");
+ 		$('#popup-request-assignment').attr("style","display:block");
+	});
+	$("#popup-select").change(function(){
+		var userId = $("select#popup-select option:selected").val();
+		$.ajax({
+			url : "/request_assignments/userInfo",
+			type : "POST",
+			data : {user_id : userId},
+			dataType : "text",
+			complete: function(){
+
+			},
+			success: function(data,xhr){
+        data = JSON.parse(data);
+        result = data['object']
+        grade = data['grade']
+        pending = result['pending']
+        in_process = result['in_process']
+        $('.grade').text(grade)
+        $('.pending').text(pending)
+        $('.in_process').text(in_process)
+			},
+			error: function(){
+
+			}
+		});
+  });
+    $(".popup_button_assignment").click(function(){
+      request_id = $('#request_id').val();
+      assigned_by = $('#assigned_by').val();
+      vendor_id = $("select#popup-select option:selected").val();
+      priority = $("select.priority option:selected").val();
+      if(vendor_id == null || vendor_id == "" || vendor_id == 'undefined'){
+        alert("Please choose a vendor!")
+      }else if(priority == null || priority == "" || priority == 'undefined'){
+        alert("Please select a priority!")
+      }else{
+        $.ajax({
+        url : "/request_assignments",
+        type : "POST",
+        data : {
+          request_assignment : {
+            user_id : vendor_id,
+            request_id : request_id,
+            user_type : 'vendor',
+            assigned_by : assigned_by,
+            admin_type : 'rrm',
+            priority : priority
+          },
+        },
+        dataType : "json",
+        complete: function(){
+
+        },
+        success: function(data,xhr){
+          url = $("#back-button").attr("href");
+          location.href = url;
+        },
+        error: function(){
+
+        }
+
+      });
+    }
+  });
+
+
+ 	
+</script>

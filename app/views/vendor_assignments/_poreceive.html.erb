@@ -1,0 +1,88 @@
+<div class="top in editable-container editable-popup poreceive" role="tooltip" id="popover215110" style="top: 14px; left: 254px;">
+	<div class="arrow"></div>
+	<h3 class="popover-title">Enter PO Details</h3>
+	<div class="popover-content"> 
+		<div>
+			<div class="editableform-loading" style="display: none;"></div>
+			<form class="form-inline editableform" style="">
+				<div class="control-group form-group">
+					<div>
+						<div class="row">
+							<div class="col-md-6">
+							<label><b>Enter PO Number</b></label>
+							</div>
+							<div class="col-md-6">
+							<div class="editable-input mr_btm1" style="position: relative;">
+								<input type="text" class="form-control input-sm ponumber" style="padding-right: 24px;">
+								 
+							</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label><b>Choose PO Receive Date</b></label>
+							</div>
+							<div class="col-md-6">
+							<div class="editable-input mr_btm1" style="position: relative;">
+								<input type="date" class="form-control input-sm poinput" style="padding-right: 24px;">
+								 
+							</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+							</div>
+							<div class="col-md-6">
+							<div class="editable-buttons">
+								<button type="button" class="btn btn-primary posubmit">
+									<i class="glyphicon glyphicon-ok"></i>
+								</button>
+								<button type="button" class="btn btn-default pocancel">
+									<i class="glyphicon glyphicon-remove pocancel"></i>
+								</button>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div class="editable-error-block help-block" style="display: none;"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+    var assignment_id;
+	$(".start").click(function(){
+ 		$(".poreceive").attr("style","display: block");
+ 		assignment_id = $(this).children('input[type=hidden]').val();
+	 });
+	 $(".pocancel").click(function(){
+	 	$(".poreceive").attr("style","display: none !important");
+	 });
+	 $(".posubmit").click(function(){
+	 	po_date = $(".poinput").val();
+	 	po_number = $(".ponumber").val();
+
+	 	if(po_date == null || po_date == 'undefined'){
+	 		alert("please add a date!");
+	 	}else{
+	 		$.ajax({
+	 			url : "/vendor_assignments/"+assignment_id+"/status?status=po_receive&date="+po_date+"&po_number="+po_number,
+	 			type : "GET",
+	 			data : {},
+	 			dataType : "json",
+
+	 			complete: function(){
+
+	 			},
+	 			success: function(data,xhr){
+	 				location.reload();
+	 			},
+	 			error: function(){
+
+	 			}
+	 		})
+	 	}
+	 });
+</script>
+	 

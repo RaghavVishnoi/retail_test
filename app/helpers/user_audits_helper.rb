@@ -1,0 +1,2 @@
+module UserAuditsHelper
+end
