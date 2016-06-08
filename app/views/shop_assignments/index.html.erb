@@ -46,11 +46,14 @@
                     <div class="tab-pane active <%=if assignment.status == 'pending' then "bgColorPending" else "bgColorDone" end%>" id="all">
                       <div class="row">
                       <div class="col-md-9 cong">
+                        <%if assignment.retailer != nil%>
                         <p><span class="blue"><%=assignment.retailer.retailer_code%></span> - <%=assignment.retailer.retailer_name%> </p>
                         <p><%=assignment.retailer.contact_person%> -  <span class="gray"><%=assignment.retailer.mobile_number%></span></p>
                         <p><%=assignment.retailer.city%>,<%=assignment.retailer.state%></p>
+                         <%end%>
                         <p>Supervisor: <span class="blue"><%=UserParent.user_parent(assignment.user_id,'auditor').pluck(:name).join(',')%></span></p>
                         <p>Auditor: <span class="blue"><%=User.find(assignment.user_id).name%></span></p>
+
                       </div>
 
                       <div class="col-md-3 ">
