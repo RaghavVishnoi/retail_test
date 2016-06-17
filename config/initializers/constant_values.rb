@@ -1,4 +1,4 @@
-VERSION = 10
+VERSION = 11
 AVG_GIONEE_MONTHLY_SALES = [
   ["0-50 Thousand", "0"], 
   ["50 Thousand - 1 Lac", "50000"], 
@@ -227,6 +227,7 @@ REQ_TYPE = ['gsb','sis','in_shop','maintenance','audit']
 TYPE = [0,1,2,3,4]
 STAT = ['pending','approved','declined','cmo_pending','cmo_declined']   
 ZED_SALES_URL = ['http://api.zed-axis.in/Service.svc/GetAllRetailerList?strUID=techBirdsSales&strPwd=ch3FSE212!$cGH2&strReqKey=GioneeSalestechBirds']
+#ZED_SALES_URL = ['http://qa.zed-axis.com/zedaxisapi/service.svc/GetAllRetailerList?strUID=admin&strPwd=checkwcf&strReqKey=ZedSalesGioneeV2']
 ZED_SALES_PARAMS = ['BeginTime','EndTime']
 DEFAULT_EMAILS = ['akash@gionee.co.in']
 CSV_EMAILS = ['akash@gionee.co.in','Nikhil.kaura@gionee.co.in','mahesh.bora@gionee.co.in','jaipal.singh@gionee.co.in','dinesh.upadhyay@theradicles.com','saurabh.khurana@gionee.co.in','raghav.singh@lptpl.com']
