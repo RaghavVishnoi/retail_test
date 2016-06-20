@@ -10,7 +10,7 @@ class RequestMailer < ActionMailer::Base
 
   def status_mail(request_id)
     @request = Request.find request_id
-    to = [@request.cmo.email, DEFAULT_EMAILS].flatten.compact
+    to = DEFAULT_EMAILS
     subject = "Request Id - #{request_id} has been #{@request.status}."
     mail(to: to, subject: subject)
   end
