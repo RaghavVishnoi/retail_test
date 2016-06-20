@@ -65,7 +65,7 @@ class RequestsCsv
         'Avg. Gionee Monthly Sales', 'Space Available in Store', 'Gionee GSB Present?', 'Type of SIS required?',
         'Is Gionee SIS installed in shop?', 'Is it main signage?', 'GSB installed outside?', 'Width', 'Height',
         'Type of GSB Requested?', 'Shop Requirements', branding_details_header, 'Remarks', 'Approver Comment','CMO Comment','Submitted date','Type of Issue','Type of Problem',
-        'Shop Visit Date','Shop Visit Done By','Is Standee Present','Visitor Contact Number','Store Selling Gionee','Is Clipon Present','Is Countertop Present','Is Leaflets Available','Number of peace in stock',
+        'Shop Visit Date','Shop Visit Done By','Is Standee Present','Visitor Contact Number','Is Audit Done','Store Closed','Store Renovation','Store Shifted','Not Allowed By Shop Owner','Store Selling Gionee','Is Clipon Present','Is Countertop Present','Is Leaflets Available','Number of peace in stock',
         'Is wallposter in shop','Is dangler in shop','RSP assigned in store','RSP present in shop','RSP in gionee t-shirt','RSP well groomed','RSP selling skills','GSB type installed',
         'Location of GSB','GSB cleanliness','Installation quality','Is GSB light working','IS GSB light throw is good','GSB structured damaged','GSB other problem','GSB retailer feedback',
         'Is SIS present','Is SIS placed properly','Is SIS condition good','Is SIS cleaned daily','Is SIS damaged','SIS structured flaws','SIS security alarm working','SIS security device chargin',
@@ -86,7 +86,7 @@ class RequestsCsv
       ].flatten.join(',')
      elsif @request_type == 'audit'
       [ 'Id','status', 'Request type', 'RSP Present in Shop?', 'Reason', 'CMO Name', 'Retailer Code','State','City','Shop Address','Lat','Long','Remarks', 'Approver Comment','CMO Comment','Submitted date','Shop Visit Date',
-        'Shop Visit Done By','Is Standee Present','Visitor Contact Number','Store Selling Gionee','Is Clipon Present','Is Countertop Present','Is Leaflets Available','Number of peace in stock',
+        'Shop Visit Done By','Is Standee Present','Visitor Contact Number','Is Audit Done','Store Closed','Store Renovation','Store Shifted','Not Allowed By Shop Owner','Store Selling Gionee','Is Clipon Present','Is Countertop Present','Is Leaflets Available','Number of peace in stock',
         'Is wallposter in shop','Is dangler in shop','RSP assigned in store','RSP present in shop','RSP in gionee t-shirt','RSP well groomed','RSP selling skills','GSB type installed',
         'Location of GSB','GSB cleanliness','Installation quality','Is GSB light working','IS GSB light throw is good','GSB structured damaged','GSB other problem','GSB retailer feedback',
         'Is SIS present','Is SIS placed properly','Is SIS condition good','Is SIS cleaned daily','Is SIS damaged','SIS structured flaws','SIS security alarm working','SIS security device chargin',
@@ -174,7 +174,7 @@ class RequestsCsv
         request.space_available, request.is_gionee_gsb_present, request.type_of_sis_required, request.is_sis_installed, request.is_main_signage,
         request.is_gsb_installed_outside, request.width, request.height, request.type_of_gsb_requested, field_values_str(request.shop_requirements),
         branding_details_csv(request), request.remarks, request.comment_by_approver,request.comment_by_cmo,  request.created_at.strftime("%b %d, %Y"),request.type_of_issue,request.type_of_problem,
-        request.shop_visit_date,request.shop_visit_done_by,request.is_standee_present,request.visitor_contact_number,request.store_selling_gionee,request.is_clipon_present,request.is_countertop_present,request.is_leaflets_available,
+        request.shop_visit_date,request.shop_visit_done_by,request.is_standee_present,request.visitor_contact_number,request.is_audit_done,request.store_open,request.store_renovation,request.store_shifted,request.not_allowed_in_store,request.store_selling_gionee,request.is_clipon_present,request.is_countertop_present,request.is_leaflets_available,
         request.no_of_peace_in_stock,request.is_wall_poster_in_shop,request.is_dangler_in_shop,request.rsp_assigned_in_store,request.rsp_present_in_shop,request.rsp_in_gionee_tshirt,request.rsp_well_groomed,request.rsp_selling_skills,request.gsb_type_installed,request.location_of_gsb,
         request.gsb_cleanliness,request.installation_quality,request.is_gsb_light_woring,request.is_gsb_light_throw_is_good,request.gsb_structured_damage,request.gsb_other_problem,request.gsb_retailer_feedback,request.is_sis_present,request.is_sis_placed_properly,request.is_sis_condition_good,
         request.is_sis_cleaned_daily,request.is_sis_damaged,request.sis_structured_flaws,request.sis_security_alarm_working,request.sis_security_device_charging,request.sis_demo_phones_installed,request.spec_card_demo_phone_match,request.backwall_light_working_properly,
@@ -199,7 +199,7 @@ class RequestsCsv
 
        elsif @request_type == 'audit'
        [ request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, if request.status != 'cmo_pending' then request_cmo(request.id) else State.find(request.state_id).name+"'s CMOs" end, request.retailer_code,@retailer_state,@retailer_city,@shop_address ,@lat,@long,request.remarks, request.comment_by_approver, request.comment_by_cmo, 
-         request.created_at.strftime("%b %d, %Y"),request.shop_visit_date,request.shop_visit_done_by,request.is_standee_present,request.visitor_contact_number,request.store_selling_gionee,request.is_clipon_present,request.is_countertop_present,request.is_leaflets_available,
+         request.created_at.strftime("%b %d, %Y"),request.shop_visit_date,request.shop_visit_done_by,request.is_standee_present,request.visitor_contact_number,request.is_audit_done,request.store_open,request.store_renovation,request.store_shifted,request.not_allowed_in_store,request.store_selling_gionee,request.is_clipon_present,request.is_countertop_present,request.is_leaflets_available,
          request.no_of_peace_in_stock,request.is_wall_poster_in_shop,request.is_dangler_in_shop,request.rsp_assigned_in_store,request.rsp_present_in_shop,request.rsp_in_gionee_tshirt,request.rsp_well_groomed,request.rsp_selling_skills,request.gsb_type_installed,request.location_of_gsb,
          request.gsb_cleanliness,request.installation_quality,request.is_gsb_light_woring,request.is_gsb_light_throw_is_good,request.gsb_structured_damage,request.gsb_other_problem,request.gsb_retailer_feedback,request.is_sis_present,request.is_sis_placed_properly,request.is_sis_condition_good,
          request.is_sis_cleaned_daily,request.is_sis_damaged,request.sis_structured_flaws,request.sis_security_alarm_working,request.sis_security_device_charging,request.sis_demo_phones_installed,request.spec_card_demo_phone_match,request.backwall_light_working_properly,
