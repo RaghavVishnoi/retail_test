@@ -262,7 +262,7 @@ class User < ActiveRecord::Base
     private
       def create_user_data
         self.role_ids.compact.each do |role_id|
-          UserData.create!(name: self.name,location: State.where(id: self.state_ids).pluck(:name).join(','),designation: Role.find(role_id).name,email: self.email ,status: self.status,phone: self.phone,user_id: self.id)
+          UserData.create!(name: self.name,designation: Role.find(role_id).name,email: self.email ,status: self.status,phone: self.phone,user_id: self.id)
         end
         if Role.where(id: self.role_ids).pluck(:name).include?('auditor')
           UserParent.create(parent_id: self.supervisor_id,user_id: self.id,role: 'auditor')
