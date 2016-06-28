@@ -121,7 +121,7 @@ def self.change_status(status,request_id)
 end
 
  def notify_cmo
-    RequestMailer.delay.status_mail(id)
+    #RequestMailer.delay.status_mail(id)
  end
 
 
