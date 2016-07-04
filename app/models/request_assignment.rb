@@ -58,13 +58,13 @@ class RequestAssignment < ActiveRecord::Base
 		request_type = if params[:request_type] == nil then [0,1,2,3] else params[:request_type] end
 		if params[:states] == '0' || params[:states] == nil
  			if params[:is_rrm] == 'true' || params[:is_rrm] == nil
-				Request.where.not(id: self.where('status IN (?) AND (is_valc = true OR is_rrm = false)',['cmo_pending','pending','cmo_declined','declined']).pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to])).joins(:request_assignment)
+				Request.where.not(id: self.where('status != ? AND (is_valc = true OR is_rrm = false)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved').joins(:request_assignment)
 			else
- 				Request.where.not(id: self.where('status IN (?) AND (is_valc = true OR is_rrm = true)',['cmo_pending','pending','cmo_declined','declined']).pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]))
+ 				Request.where.not(id: self.where('status != ? AND (is_valc = true OR is_rrm = true)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved')
 			end
 			
 		else
-			Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),state_id: params[:states])
+			Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),state_id: params[:states],status: 'approved')
 		end
 	end
 

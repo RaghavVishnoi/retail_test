@@ -541,3 +541,4 @@ select.multi-select option.selected{background:red;}
 .gsb_assigned{cursor: pointer;}
 .maintenance_assigned{cursor: pointer;}
  .help-icon{width:50%;}
+.cursor{cursor: pointer;} 

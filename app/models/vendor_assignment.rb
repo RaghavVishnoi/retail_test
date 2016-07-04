@@ -31,7 +31,7 @@ class VendorAssignment < ActiveRecord::Base
 	def self.request_assignments(params,current_user)
 		start_date = if params[:from] != '' && params[:from] != nil then params[:from].to_date else (Time.now - 1.month).to_date end
     	end_date = if params[:to] != '' && params[:to] != nil then params[:to].to_date else Time.now.to_date end
-		RequestAssignment.where(user_id: current_user.id,assign_date: start_date.beginning_of_day..end_date.end_of_day)
+		RequestAssignment.where(user_id: current_user.id,assign_date: start_date.beginning_of_day..end_date.end_of_day).joins(:request).where("request_type = ?",params[:q][:request_type])
 	end
 
 	def self.update_status(params)

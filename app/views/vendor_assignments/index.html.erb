@@ -137,7 +137,7 @@
             <%end%> 
             <%if assignment.status == ACCEPTED && assignment.current_stage == ACCEPTED%>
              <td>
-              <a class="table-link start">
+              <a class="table-link start cursor">
                  <%=hidden_field_tag :assignment_id,assignment.id%> 
                 <span class="fa-stack ">
                   <i class="fa fa-square fa-stack-2x site-color"></i>
