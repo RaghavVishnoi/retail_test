@@ -126,7 +126,7 @@ class RequestAssignment < ActiveRecord::Base
 
 	 def self.valc_pending_requests_counts(start_date,end_date,request_type,state_ids)
  	 	if state_ids.include?(0)
-	 		Request.where.not(id: self.where('status != ? AND is_valc = 1','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(start_date)..end_date(end_date)).count
+	 		Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(start_date)..end_date(end_date)).count
 	 	else
 	 		Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(start_date)..end_date(end_date),state_id: state_ids).count
 	 	end
