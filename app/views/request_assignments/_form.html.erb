@@ -17,8 +17,8 @@
                   <div class="main-box clearfix" style="min-height: 1100px;">
                     <div class="tabs-wrapper tabs-no-header">
                       <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab-home" data-toggle="tab">Assigned by RRM</a></li>
-                        <li class=""><a href="#tab-accounts" data-toggle="tab">Unassigned</a></li>
+                        <li class="<%='active' if params[:is_rrm]=='true' || params[:is_rrm] == nil%>"><a href="#tab-home" data-toggle="tab" id= "assigned">Assigned by RRM</a></li>
+                        <li class="<%='active' if params[:is_rrm]=='false'%>"><a href="#tab-accounts" data-toggle="tab" id= "unassigned">Unassigned</a></li>
                         
                       </ul>
                       
@@ -30,6 +30,19 @@
 <div class="main-box no-header clearfix">
   <div class="main-box-body clearfix">
     <div class="table-responsive">
+      <%if params[:is_rrm] == 'false'%>
+        <table>
+          <tr><td>
+            <%=select_tag :vendor_id,options_for_select(User.users_data('vendor')),:prompt => '--------select vendor--------',:class => "vendor-assignment",:required => "required"%>
+          </td>
+          <td width="2%"></td>
+          <td width="200px;">
+            <%=select_tag :priority,options_for_select(PRIORITY),:prompt => '--------select priority--------',:required => "required",:class => 'priority'%>
+          </td>
+          <%=hidden_field_tag :assigned_by,current_user.id%>
+        </tr>
+        </table>
+      <%end%>
       <table class="table user-list table-hover">
         <thead>
           <tr>
@@ -41,12 +54,22 @@
             <th><span>State</span></th>
             <th><span>RRM<span></th>
              <th class="text-center"><span>Created On</span></th>
-            <th><span>Assigned On</span></th>             
+             <%if params[:is_rrm] != 'false'%>
+                <th><span>Assigned On</span></th>
+             <%end%>   
+             <%if params[:is_rrm] == 'false'%>         
             <th>
               <ul class="list-inline list-unstyled">
                 <li class="blue ch_bttn"><input type='checkbox' name='thing' value='valuable' id="selectAll"/><label for="selectAll">All</label>  </li>
               </ul>
            </th>
+           <%else%>
+           <th>
+            <ul class="list-inline list-unstyled">
+                <li class="blue" style="width:100px;"></li>
+              </ul>
+           </th>
+           <%end%>
           </tr>
         </thead>
         <tbody>
@@ -74,18 +97,35 @@
              Akath
             </td>
             <td class="text-center">
-              <span class="label label-default">20-01-2016</span>
+              <span class="label label-default"><%=request.created_at.strftime("%d %b,%Y")%></span>
             </td>
+             <%if params[:is_rrm] != 'false'%>
              <td class="text-center">
-              <span class="label label-default">20-01-2016</span>
+              <span class="label label-default"><%=request.request_assignment.assign_date.strftime("%d %b,%Y")%></span>
             </td>
-             
+            <%end%> 
             <td style="width: 5%;">
-              <ul class="list-inline list-unstyled">
-                        <li class="blue ch_bttn add"><input type='checkbox' name='thing' value='<%=request.id%>' id="add<%=request.id%>" class="chbx"/><label for="add<%=request.id%>">Add</label> </li>
-                           
-                        </ul>
-              
+              <%if params[:is_rrm] == 'false'%>
+                  <ul class="list-inline list-unstyled">
+                    <li class="blue ch_bttn add"><input type='checkbox' name='thing' value='<%=request.id%>' id="add<%=request.id%>" class="chbx"/><label for="add<%=request.id%>">Add</label> </li>
+                  </ul>
+                 <%else%>
+                   <ul class="list-inline list-unstyled">
+                    <a href="/request_assignments/<%=request.request_assignment.id%>/edit">  
+                      <li class="fa-stack">
+                        <i class="fa fa-square fa-stack-2x site-color"></i>
+                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                      </li>
+                    </a>
+
+                   <a href="/request_assignments/<%=request.request_assignment.id%>/approve">  
+                     <li class="fa-stack">
+                        <i class="fa fa-square fa-stack-2x site-color"></i>
+                        <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+                     </li>
+                   </a>
+                  </ul> 
+                <%end%>               
             </td>
           </tr>
         <%end%>
@@ -96,8 +136,12 @@
   </div>
 
 </div>
+ <div class="col-md-1">
+              <%= submit_tag "Assign",:class => "btn btn-success " ,:id => "submit-assignment"%>      
+      </div>
  <%=will_paginate @requests%>   
 </div>
+     
 </div>
 
                         </div>
@@ -115,96 +159,6 @@
            
         </div>
 
-<!--  
-<div id="nav-col-submenu"></div>
-</div>
-<div id="content-wrapper">
-<div class="row">
-<div class="col-lg-12">
- 
-<div class="main-box clearfix">
-<div class="clearfix">
-  <div class="common_page gsb1">
-    <div class="hdr">
-      <div class="row">
-          <div class="col-md-2">
-           Assignments          
-        </div> 
-        <div class="col-md-3 ">
-           
-          
-           
-        </div>
-       <div class="col-md-3">
-          <%= select_tag :state_shops, options_for_select(['All']+State.state_with_name(current_user),params[:state]),:class => 'form-control custm_select',:required => "required",:onchange => "state() "%>
-          
-        </div>
-        <div class="col-md-3">
-           <%= select_tag :city_shops, options_for_select(['All']+Retailer.where(state: params[:state]).pluck(:city).uniq,params[:city]),:class => 'form-control custm_select',:required => "required",:onchange => "city() "  %>
-          
-        </div>
-         
-        
-        <div class="col-md-1 ch_bttn" style="padding:0px;">
-            <input type='checkbox' name='thing' value='valuable' id="selectAll"/><label for="selectAll">All</label> 
-        </div>
-      </div>  
-         
-       
-  </div>
- 
-
-
-<div id='content' class="tab-content">
-  <%@requests.each do |request|%>
-     <div class="tab-pane active " id="all">
-      <div class="hdr">
-                      <div class="row">
-                      <div class="col-md-10 cong">
-                        <p><span class="blue"><%=request.id%></span> - <%=request.retailer_code%> </p>
-                        <p><%=request.request_type%></p>
-                        <p><%=Retailer.retailer_data(request.retailer_code,'city')%>,<%=Retailer.retailer_data(request.retailer_code,'state')%></p>
-                         
-                      </div>
-                      <div class="col-md-1">
-                        <ul class="list-inline list-unstyled">
-                        <li class="blue ch_bttn add"><a href="/requests/<%=request.id%>/edit?q[request_type]=<%=request.request_type%>" class="blue">View</a></li>
-                           
-                        </ul>
-                      </div>
-                      <div class="col-md-1">
-                        <ul class="list-inline list-unstyled">
-                        <li class="blue ch_bttn add"><input type='checkbox' name='thing' value='<%=request.id%>' id="add<%=request.id%>" class="chbx"/><label for="add<%=request.id%>">Add</label> </li>
-                           
-                        </ul>
-                        <p style="margin-left:23%;"><%=request.status%></p>
-                      </div>
-                    </div>
-                </div>
-                   </div>
-             
-           
-
-  <%end%>
-  <%=will_paginate @requests%>
-      <div class="col-md-1">
-              <%= submit_tag "Assign",:class => "btn btn-success " ,:id => "submit-assignment"%>      
-      </div>
-</div>
-  
-    
- 
-              
-    <div class="response-pagination clearfix">
-            
-    </div>
-                
-</div>
-</div>
-</div>
- 
-</div>
-</div>
 <script type="text/javascript">
     var value = []
       $('#selectAll').click(function() {
@@ -247,17 +201,29 @@
 
   $("#submit-assignment").click(function(){
 
-    var user_id = $( "select#user option:selected").val();
-     if(user_id == 'Select Auditor' || user_id == null || value.length == 0 || user_id == 0){
-      alert("Please select shop with an auditor!")
-    }else{
+    var vendor_id = $( "select#vendor_id option:selected").val();
+    var assigned_by = $("#assigned_by").val();
+    var priority = $("select#priority option:selected").val();
+     if(vendor_id == 'undefined' || vendor_id == null || vendor_id == ""){
+      alert("Please select a vendor!")
+    }else if(priority == null || priority == 'undefined' || priority == ""){
+      alert("Please select priority for selected request")
+
+    }else if(value.length == 0){
+      alert("Please select a request to assign!")
+    }
+    else{
       $.ajax({
-        url: "/shop_assignments",
+        url: "/request_assignments/mass_assignment",
         type: "POST",
         data: {
-              shop_assignment : {
-              user_id : user_id,
-              retailer_id : value
+              request_assignment : {
+              user_id : vendor_id,
+              request_id : value,
+              user_type : 'vendor',
+              assigned_by : assigned_by,
+              admin_type : 'vendor_allocator',
+              priority : priority          
             }
         },
         dataType: 'text',
@@ -280,4 +246,37 @@
    
    
 </script>
- -->
+ 
+ <script>
+  $("#unassigned").click(function(){
+      var from = getUrlVars()["from"]; 
+      var to = getUrlVars()["to"]; 
+      var request_type = getUrlVars()["request_type"];var states = getUrlVars()["states"]; 
+
+      if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
+        if(request_type == null || request_type == 'undefined' || states == null || states == 'undefined'){
+          location.href="/request_assignments/new?is_rrm=false"
+        }else{
+          location.href="/request_assignments/new?states="+states+"&request_type="+request_type+"&is_rrm=false"
+        }
+         
+      }else{
+        location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type="+request_type+"&is_rrm=false"  
+      }
+  });
+  $("#assigned").click(function(){
+      var from = getUrlVars()["from"]; 
+      var to = getUrlVars()["to"]; 
+      var request_type = getUrlVars()["request_type"];var states = getUrlVars()["states"]; 
+
+      if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
+        location.href="/request_assignments/new?states="+states+"&request_type=1&is_rrm=true" 
+      }
+      if(request_type == null || request_type == 'undefined' || states == null || states == 'undefined'){
+          location.href="/request_assignments/new?is_rrm=true"
+        }
+      else{
+        location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=1&is_rrm=true"  
+      }
+  });
+ </script>

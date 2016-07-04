@@ -327,7 +327,17 @@ Rails.application.routes.draw do
    resources :shop_assignments
    resources :user_audits
    post '/shop_assignments/search'
+   resources :request_assignments do
+      collection do
+        get :counts
+        post :mass_assignment
+      end
+   end
+   get '/request_assignments/:id/approve' => "request_assignments#approve"
    resources :request_assignments
    post '/request_assignments/userInfo'
+
+   
+   #get 'request_assignments/statusCount' => 'request_assignments#counts'
 
 end

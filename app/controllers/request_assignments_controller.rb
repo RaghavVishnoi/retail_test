@@ -2,7 +2,7 @@ class RequestAssignmentsController < ApplicationController
   
   before_action :set_request_assignment, only: [:show, :edit, :update, :destroy]
   skip_before_filter :authenticate_user
-  skip_before_action :verify_authenticity_token, only: [:create,:userInfo]
+  skip_before_action :verify_authenticity_token, only: [:create,:userInfo,:mass_assignment,:update]
   respond_to :html
 
   PER_PAGE = 50
@@ -18,10 +18,11 @@ class RequestAssignmentsController < ApplicationController
 
   def new
     session[:prev_url] = request.fullpath
-    @requests = RequestAssignment.unassigned_requests.paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
+    @requests = RequestAssignment.unassigned_requests(params).paginate(:per_page => PER_PAGE, :page => (params[:page] || 1))
   end
 
   def edit
+    @request_assignment = RequestAssignment.find(params[:id])
   end
 
   def create
@@ -45,8 +46,8 @@ class RequestAssignmentsController < ApplicationController
    end
 
   def update
-    @request_assignment.update(request_assignment_params)
-    respond_with(@request_assignment)
+    @request_assignment = RequestAssignment.where(id: params[:request_assignment][:assignment_id]).update_all(user_id: params[:request_assignment][:vendor_id],priority: params[:request_assignment][:priority])
+    render :json => @request_assignment
   end
 
   def destroy
@@ -58,6 +59,21 @@ class RequestAssignmentsController < ApplicationController
     user_id = params[:user_id]
     data = RequestAssignment.user_info(user_id)
     render :json => {result: true,object: data}
+  end
+
+  def counts
+    @counts = RequestAssignment.valc_assignment_count(params[:start_date],params[:end_date],params[:states])
+    render :json => @counts
+  end
+
+  def mass_assignment
+    request_assignment = RequestAssignment.mass_assignment(params[:request_assignment])
+    render :json => request_assignment
+  end
+
+  def approve
+    request_assignment = RequestAssignment.find(params[:id]).update(:is_valc => true)
+    redirect_to new_request_assignment_path(:is_rrm => true)
   end
 
   private

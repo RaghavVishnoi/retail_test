@@ -280,6 +280,7 @@ CMO_APPROVED = "cmo_approved"
 APPROVED = "approved"
 DECLINED = "declined"
 PRIORITY = ['High','Normal','Low']
+ASSIGN_REQUEST_TYPE = [0,1,2,3]
  
 
 

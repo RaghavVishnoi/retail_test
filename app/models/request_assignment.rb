@@ -18,9 +18,41 @@ class RequestAssignment < ActiveRecord::Base
 	validates :user_type, presence: true
 
 
+	def self.mass_assignment(params)
+		params[:request_id].each do |request|
+			if self.exists?(request_id: request)
+				assignment = self.find_by(request_id: request)
+				@assignment = assignment.update_attributes(user_id: params[:user_id],request_id: request,user_type: params[:user_type],assigned_by: params[:assigned_by],admin_type: params[:admin_type],priority: params[:priority],assign_date: Time.now,current_stage: 'pending',status: 'pending',is_rrm: assignment.is_rrm,is_valc: true)
+			else
+				@assignment = self.new(user_id: params[:user_id],request_id: request,user_type: params[:user_type],assigned_by: params[:assigned_by],admin_type: params[:admin_type],priority: params[:priority],assign_date: Time.now,current_stage: 'pending',status: 'pending')
+				if @assignment.save!
+					user = User.find(params[:assigned_by])
+		 			message = "#{user.name} has assigned a request to #{User.find(params[:user_id]).name}"
+					if user.roles.pluck(:name).include?('rrm')
+						RequestAssignmentActivity.create!(user_type: 'rrm',status: 'pending',request_assignment_id: @assignment.id,message: message,user_id: params[:assigned_by])
+					elsif user.roles.pluck(:name).include?('vendor allocator')
+						RequestAssignmentActivity.create!(user_type: 'vendor allocator',status: 'pending',request_assignment_id: @assignment.id,message: message,user_id: params[:assigned_by])
+					elsif user.roles.pluck(:name).include?('approver')
+						RequestAssignmentActivity.create!(user_type: 'HO',status: 'pending',request_assignment_id: @assignment.id,message: message,user_id: params[:assigned_by])
+					end
+				end
+			end
+		end
 
-	def self.unassigned_requests
-		Request.where.not(id: assigned_request.pluck(:request_id))
+	end
+
+	def self.unassigned_requests(params)
+		request_type = if params[:request_type] == nil then [0,1,2,3] else params[:request_type] end
+		if params[:states] == '0' || params[:states] == nil
+ 			if params[:is_rrm] == 'true' || params[:is_rrm] == nil
+				Request.where.not(id: self.where('status != ? AND (is_valc = true OR is_rrm = false)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to])).joins(:request_assignment)
+			else
+ 				Request.where.not(id: self.where('status != ? AND (is_valc = true OR is_rrm = true)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]))
+			end
+			
+		else
+			Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(start_date)..end_date(end_date),state_id: params[:states])
+		end
 	end
 
 	def self.assigned_request
@@ -79,6 +111,51 @@ class RequestAssignment < ActiveRecord::Base
 	 	"#{retailer_code} - #{retailer.retailer_name}"
 	 end
 
+	 def self.valc_pending_requests_counts(start_date,end_date,request_type,state_ids)
+ 	 	if state_ids.include?(0)
+	 		Request.where.not(id: self.where('status != ? AND is_valc = 1','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(start_date)..end_date(end_date)).count
+	 	else
+	 		Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(start_date)..end_date(end_date),state_id: state_ids).count
+	 	end
+	 	
+	 end
+
+	 def self.valc_assigned_requests_counts(start_date,end_date,request_type,state_ids)	 	if state_ids.include?(0)
+	 		RequestAssignment.where(is_valc: 1,assign_date: start_date(start_date)..end_date(end_date)).joins(:request).where('request_type = ?',request_type).count
+	 	else
+	 		RequestAssignment.where(is_valc: true,assign_date: start_date(start_date)..end_date(end_date)).joins(:request).where('request_type = ? AND state_id IN (?)',request_type,state_ids).count
+	 	end
+	 	
+	 end
+
+	 def self.valc_assignment_count(start_date,end_date,states)
+	 	object = []
+	 	ASSIGN_REQUEST_TYPE.each do |request_type|
+	 		count = {};request = [];req = {}
+	 		req[:pending] = valc_pending_requests_counts(start_date,end_date,request_type,states.map(&:to_i))
+	 		req[:assigned] = valc_assigned_requests_counts(start_date,end_date,request_type,states.map(&:to_i))
+	 		request.push(req)
+	 		count[REQ_TYPE[request_type]] = request
+	 		object.push(count)
+	 	end
+	 	object
+	 end
+
+	 def self.start_date(start_date)
+		if start_date == nil
+			(Time.now - 1.month)
+		else	
+			start_date.to_date.beginning_of_day
+		end
+	end
+
+	def self.end_date(end_date)
+		if end_date == nil
+			Time.now
+		else	
+			end_date.to_date.end_of_day
+		end
+	end
 
 	private
 		def add_request_assignment_activity
@@ -94,13 +171,13 @@ class RequestAssignment < ActiveRecord::Base
 		end
 
 		def add_admin_type
-			puts "ssssss #{self.admin_type}"
-			if self.admin_type == RRMS
-				puts "inininin"
-				self.is_rrm ||= true
+ 			if self.admin_type == RRMS
+ 				self.is_rrm ||= true
 			else
 				self.is_valc ||= true
 			end
 		end
+
+		
 
 end
