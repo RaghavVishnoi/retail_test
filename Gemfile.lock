@@ -291,7 +291,6 @@ GEM
     multi_json (1.11.3)
     multi_xml (0.5.5)
     murmurhash3 (0.1.6)
-    mysql2 (0.3.17)
     net-http-persistent (2.9.4)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -478,7 +477,6 @@ DEPENDENCIES
   jquery-ui-rails
   less-rails
   letter_opener
-  mysql2
   pg
   pry
   rack
