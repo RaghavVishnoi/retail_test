@@ -267,16 +267,23 @@
   $("#assigned").click(function(){
       var from = getUrlVars()["from"]; 
       var to = getUrlVars()["to"]; 
-      var request_type = getUrlVars()["request_type"];var states = getUrlVars()["states"]; 
+      var request_type = getUrlVars()["request_type"];
+      var states = getUrlVars()["states"]; 
 
       if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
-        location.href="/request_assignments/new?states="+states+"&request_type=1&is_rrm=true" 
-      }
-      if(request_type == null || request_type == 'undefined' || states == null || states == 'undefined'){
+        if(request_type == null || request_type == 'undefined' || states == null || states == 'undefined'){
           location.href="/request_assignments/new?is_rrm=true"
+        }else{
+          location.href="/request_assignments/new?states="+states+"&request_type="+request_type+"&is_rrm=true" 
         }
+      }     
       else{
-        location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=1&is_rrm=true"  
+        if(request_type == null || request_type == 'undefined' || states == null || states == 'undefined'){
+          location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&is_rrm=true" 
+        }else{
+          location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type="+request_type+"&is_rrm=true" 
+        }
+         
       }
   });
  </script>
