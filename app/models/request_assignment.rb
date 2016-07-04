@@ -18,6 +18,19 @@ class RequestAssignment < ActiveRecord::Base
 	validates :user_type, presence: true
 
 
+	def self.assignment(params)
+		if params[:is_valc] == '1'
+			if params[:states].split(',').include?('0')
+		 		RequestAssignment.where(is_valc: 1,assign_date: start_date(params[:from])..end_date(params[:to])).joins(:request).where('request_type = ?',params[:request_type])
+		 	else
+		 		RequestAssignment.where(is_valc: 1,assign_date: start_date(params[:from])..end_date(params[:to])).joins(:request).where('request_type = ? AND state_id IN (?)',params[:request_type],params[:states].split(','))
+		 	end
+		else
+			self.all
+		end
+	end
+
+
 	def self.mass_assignment(params)
 		params[:request_id].each do |request|
 			if self.exists?(request_id: request)
@@ -51,7 +64,7 @@ class RequestAssignment < ActiveRecord::Base
 			end
 			
 		else
-			Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(start_date)..end_date(end_date),state_id: params[:states])
+			Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),state_id: params[:states])
 		end
 	end
 
@@ -120,7 +133,8 @@ class RequestAssignment < ActiveRecord::Base
 	 	
 	 end
 
-	 def self.valc_assigned_requests_counts(start_date,end_date,request_type,state_ids)	 	if state_ids.include?(0)
+	 def self.valc_assigned_requests_counts(start_date,end_date,request_type,state_ids)	 	
+	 	if state_ids.include?(0)
 	 		RequestAssignment.where(is_valc: 1,assign_date: start_date(start_date)..end_date(end_date)).joins(:request).where('request_type = ?',request_type).count
 	 	else
 	 		RequestAssignment.where(is_valc: true,assign_date: start_date(start_date)..end_date(end_date)).joins(:request).where('request_type = ? AND state_id IN (?)',request_type,state_ids).count

@@ -532,3 +532,12 @@ h2.asgnd_shop_blk {padding-bottom: 1.5% !important;}
 select.multi-select{height:150px; font-size:15px; padding:5px 0;}
 select.multi-select option{border-bottom:solid 1px #ebebeb; padding:5px 5px; transition: background 0.5s ease;}
 select.multi-select option.selected{background:red;}
+
+.sis_pending{cursor: pointer;}
+.gsb_pending{cursor: pointer;}
+.in_shop_pending{cursor: pointer;}
+.maintenance_pending{cursor: pointer;}
+.sis_assigned{cursor: pointer;}
+.in_shop_assigned{cursor: pointer;}
+.gsb_assigned{cursor: pointer;}
+.maintenance_assigned{cursor: pointer;}

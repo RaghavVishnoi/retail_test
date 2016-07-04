@@ -8,7 +8,7 @@ class RequestAssignmentsController < ApplicationController
   PER_PAGE = 50
 
   def index
-    @request_assignments = RequestAssignment.all.paginate(:per_page => PER_PAGE,:page => (params[:page] || 1))
+    @request_assignments = RequestAssignment.assignment(params).paginate(:per_page => PER_PAGE,:page => (params[:page] || 1))
     respond_with(@request_assignments)
   end
 

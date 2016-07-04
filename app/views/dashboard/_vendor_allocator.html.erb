@@ -111,6 +111,104 @@
         }
        
       });
+      $(".gsb_pending").click(function(){
+        var states = []
+        $('#valc_states  option:selected').each(function() {
+              states.push($(this).val())
+        });
+        var from = getUrlVars()["from"]; 
+        var to = getUrlVars()["to"];
+        if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
+           location.href="/request_assignments/new?states="+states+"&request_type=0&is_rrm=true"  
+        }else{
+           location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=0&is_rrm=true"  
+        }
+       
+      });
+      $(".in_shop_pending").click(function(){
+        var states = []
+        $('#valc_states  option:selected').each(function() {
+              states.push($(this).val())
+        });
+        var from = getUrlVars()["from"]; 
+        var to = getUrlVars()["to"];
+        if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
+           location.href="/request_assignments/new?states="+states+"&request_type=2&is_rrm=true"  
+        }else{
+           location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=2&is_rrm=true"  
+        }
+       
+      });
+      $(".maintenance_pending").click(function(){
+        var states = []
+        $('#valc_states  option:selected').each(function() {
+              states.push($(this).val())
+        });
+        var from = getUrlVars()["from"]; 
+        var to = getUrlVars()["to"];
+        if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
+           location.href="/request_assignments/new?states="+states+"&request_type=3&is_rrm=true"  
+        }else{
+           location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=3&is_rrm=true"  
+        }
+       
+      });
+      $(".sis_assigned").click(function(){
+        var states = []
+        $('#valc_states  option:selected').each(function() {
+              states.push($(this).val())
+        });
+        var from = getUrlVars()["from"]; 
+        var to = getUrlVars()["to"];
+        if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
+           location.href="/request_assignments?states="+states+"&request_type=1&is_valc=1"  
+        }else{
+           location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=1&is_valc=1"  
+        }
+       
+      });
+      $(".gsb_assigned").click(function(){
+        var states = []
+        $('#valc_states  option:selected').each(function() {
+              states.push($(this).val())
+        });
+        var from = getUrlVars()["from"]; 
+        var to = getUrlVars()["to"];
+        if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
+           location.href="/request_assignments?states="+states+"&request_type=0&is_valc=1"  
+        }else{
+           location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=0&is_valc=1"  
+        }
+       
+      });
+      $(".in_shop_assigned").click(function(){
+        var states = []
+        $('#valc_states  option:selected').each(function() {
+              states.push($(this).val())
+        });
+        var from = getUrlVars()["from"]; 
+        var to = getUrlVars()["to"];
+        if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
+           location.href="/request_assignments?states="+states+"&request_type=2&is_valc=1"  
+        }else{
+           location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=2&is_valc=1"  
+        }
+       
+      });
+      $(".maintenance_assigned").click(function(){
+        var states = []
+        $('#valc_states  option:selected').each(function() {
+              states.push($(this).val())
+        });
+        var from = getUrlVars()["from"]; 
+        var to = getUrlVars()["to"];
+        if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
+           location.href="/request_assignments?states="+states+"&request_type=3&is_valc=1"  
+        }else{
+           location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=3&is_valc=1"  
+        }
+       
+      });
 </script>
 
  
