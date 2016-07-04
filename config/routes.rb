@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
 
   get 'api/v1'
   get 'api/citylists' 

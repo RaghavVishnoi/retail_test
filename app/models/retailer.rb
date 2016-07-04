@@ -8,7 +8,7 @@ class Retailer < ActiveRecord::Base
 
 
 def self.search(id)
-    @retailer = Retailer.where("retailer_code = ? OR state = ? OR city = ?", id,id,id) 
+    where("retailer_code = ?", id) 
 end
 
 def self.new_retailers(upload)

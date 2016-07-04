@@ -10,6 +10,7 @@
 	<%= render :partial => 'vendor', :locals =>{:type => "Edit Vendor",action: 'new'} %>	
 <% else %>
 	<%= render :partial => 'form', :locals =>{:type => "Edit",action: 'edit'} %>
+
 <% end %>
 <script type="text/javascript">
   $('#user').attr("class",'active')

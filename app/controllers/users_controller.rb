@@ -28,6 +28,15 @@ class UsersController < ApplicationController
 
   end
 
+  def update
+    @role = User.user_role(current_user.id)
+    if @user.update_attributes user_params
+      redirect_to users_path, notice: "Record updated successfully"
+    else
+      render :edit
+    end
+  end
+
   
   def create
      @role = User.user_role(current_user.id)

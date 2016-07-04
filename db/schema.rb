@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608120700) do
+ActiveRecord::Schema.define(version: 20160629080401) do
 
   create_table "GioneeRetailer", id: false, force: true do |t|
     t.text "Code",     null: false

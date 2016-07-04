@@ -1,18 +1,16 @@
-<% if ['cmo','vmqa','supervisor'].include? [params[:tId]].pack("B*")%>
-	<%= render :partial => 'cmo', :locals =>{:type => "New",action: 'new'} %>
 
-<% elsif [params[:tId]].pack("B*") == 'rrm'%>
-	<%= render :partial => 'rrm', :locals =>{:type => "New RRM",action: 'new'} %>
-
-<% elsif [params[:tId]].pack("B*") == 'auditor'%>
-	<%= render :partial => 'auditor', :locals =>{:type => "New Auditor",action: 'new'} %>
-
-<% elsif [params[:tId]].pack("B*") == 'requester'%>
-	<%= render :partial => 'requester', :locals =>{:type => "New Requester",action: 'new'} %>
+<% if ['cmo','vmqa','supervisor','auditor'].include? params[:user]%>
+	<%= render :partial => 'cmo', :locals =>{:type => "new",action: 'new'} %>
+<% elsif params[:user] == 'rrm'%>
+	<%= render :partial => 'rrm', :locals =>{:type => "new",action: 'new'} %>
+<% elsif params[:user] == 'auditor'%>
+	<%= render :partial => 'auditor', :locals =>{:type => "new",action: 'new'} %>
+<% elsif params[:user] == 'requester'%>
+	<%= render :partial => 'requester', :locals =>{:type => "new",action: 'new'} %>
 <% elsif [params[:tId]].pack("B*") == 'vendor'%>
 	<%= render :partial => 'vendor', :locals =>{:type => "New Vendor",action: 'new'} %>
 <% else %>
-	<%= render :partial => 'form', :locals =>{:type => "New User",action: 'new'} %>
+	<%= render :partial => 'form', :locals =>{:type => "new",action: 'new'} %>
 <% end %>
 <script type="text/javascript">
   $('#user').attr("class",'active')

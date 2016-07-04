@@ -338,19 +338,18 @@ display:none;
   text-align: center;
   padding-top: 3px;
   border: 2px solid #03BED5;
-  font-size: 19px;
+
 }
 .ch_bttn input[type=checkbox]:checked + label
 {
-  background: #03BED5;
-  height: 30px;
+background: #03BED5;
+ height: 30px;
   width: 53px;
-  display:inline-block;
-  padding-top: 3px;
-  text-align: center;
-  border: 2px solid transparent;
-  color: #fff;
-  font-size: 19px;
+display:inline-block;
+ padding-top: 3px;
+ text-align: center;
+ border: 2px solid transparent;
+ color: #fff;
 }
 
 .lg_button{width:100%;height: 121px;margin-bottom: 10px;border-radius: 5px;}
@@ -541,3 +540,4 @@ select.multi-select option.selected{background:red;}
 .in_shop_assigned{cursor: pointer;}
 .gsb_assigned{cursor: pointer;}
 .maintenance_assigned{cursor: pointer;}
+ .help-icon{width:50%;}

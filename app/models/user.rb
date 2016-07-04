@@ -49,10 +49,15 @@ class User < ActiveRecord::Base
   # validates :phone,   :presence => {:message => 'Wrong Format!'},
   #                    :numericality => true,
   #                    :length => { :minimum => 10, :maximum => 15 }
-  validate :phone
 
   #validates :state_ids, presence: true
   #validates :role_ids, presence: true
+  validates :phone,   :presence => {:message => 'Wrong Format!'},
+                     :numericality => true,
+                     :length => { :minimum => 10, :maximum => 15 }
+
+  validates :state_ids, presence: true
+  validates :role_ids, presence: true
   before_validation :set_shift_time_in_seconds
   before_save :ensure_auth_token
   before_create :set_reset_password_token
@@ -239,15 +244,15 @@ class User < ActiveRecord::Base
       when 'approver'
         delete_at_multi(roles,[0,1,2,3,4,9,10,11])
       when 'rrm'
-        delete_at_multi(roles,[0,1,2,3,4,8,9,10,11])
+        delete_at_multi(roles,[0,1,2,3,4,8,9,10,11,13,14])
       when 'cmo'
-        delete_at_multi(roles,[0,1,2,3,4,5,8,9,10,11])
+        delete_at_multi(roles,[0,1,2,3,4,5,8,9,10,11,13,14])
       when 'vmqa'
-        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,12])
+        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,12,13,14])
       when 'supervisor'
-        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,12])
+        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,12,13,14])
       when 'auditor'
-        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,11])
+        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,11,13,14])
       end             
     end
 
@@ -264,7 +269,7 @@ class User < ActiveRecord::Base
     private
       def create_user_data
         self.role_ids.compact.each do |role_id|
-          UserData.create!(name: self.name,location: State.where(id: self.state_ids).pluck(:name).join(','),designation: Role.find(role_id).name,email: self.email ,status: self.status,phone: self.phone,user_id: self.id)
+          UserData.create!(name: self.name,designation: Role.find(role_id).name,email: self.email ,status: self.status,phone: self.phone,user_id: self.id)
         end
         if Role.where(id: self.role_ids).pluck(:name).include?('auditor')
           UserParent.create(parent_id: self.supervisor_id,user_id: self.id,role: 'auditor')
@@ -276,6 +281,8 @@ class User < ActiveRecord::Base
            parent =  UserParent.find_by(user_id: self.id,role: 'auditor')
             if parent != nil
               parent.update(parent_id: self.supervisor_id)
+            else
+              UserParent.create!(user_id: self.id,role: 'auditor',parent_id: self.supervisor_id)
             end
         end
       end
