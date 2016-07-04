@@ -1,0 +1,14 @@
+/usr/share/rvm/rubies/ruby-2.1.2/bin/ruby extconf.rb
+checking for assert.h... yes
+checking for gcc.h in ./../fast_xs... yes
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling fast_xs_extra.c
+linking shared-object fast_xs_extra.so
+
+make "DESTDIR=" install
+/usr/bin/install -m 0755 fast_xs_extra.so ./.gem.20160704-7074-1pllfnf
+installing default fast_xs_extra libraries

@@ -1,0 +1,12 @@
+/usr/share/rvm/rubies/ruby-2.1.2/bin/ruby extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling murmur3.c
+linking shared-object native.so
+
+make "DESTDIR=" install
+/usr/bin/install -m 0755 native.so ./.gem.20160704-7074-oqsufj
+installing default native libraries

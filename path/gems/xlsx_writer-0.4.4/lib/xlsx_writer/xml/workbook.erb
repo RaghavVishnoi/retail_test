@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <workbookPr date1904="0" />
+  <bookViews>
+    <workbookView xWindow="0" yWindow="0" windowWidth="22667" windowHeight="17000" tabRatio="500"/>
+  </bookViews>
+  <sheets>
+  <% document.sheets.each do |sheet| %>
+    <sheet name="<%= sheet.name %>" sheetId="<%= sheet.ndx %>" r:id="<%= sheet.rid %>"/>
+  <% end %>
+  </sheets>
+  <definedNames>
+  <% document.sheets.each do |sheet| %>
+    <% sheet.autofilters.each do |autofilter| %>
+    <definedName name="_xlnm._FilterDatabase" localSheetId="<%= sheet.local_id %>" hidden="1"><%= autofilter.defined_name %></definedName>
+    <% end %>
+  <% end %>
+  </definedNames>
+</workbook>

@@ -87,19 +87,19 @@ class RequestAssignment < ActiveRecord::Base
     	end_date = if to != '' && to != nil then (Time.parse(to) + 1.day) else Time.now.to_date + 1 end
 	 	case status
 	 	when 0
-	 		count = self.where(user_id: user_id,current_stage: 'pending',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'pending',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
 	 	when 1
-	 		count = self.where(user_id: user_id,current_stage: 'accepted',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'accepted',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
 	 	when 2
-	 		count = self.where(user_id: user_id,current_stage: 'started',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'started',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
 	 	when 3
-	 		count = self.where(user_id: user_id,current_stage: 'in_transit',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'in_transit',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
 	 	when 4
-	 		count = self.where(user_id: user_id,current_stage: 'in_production',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'in_production',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
 	 	when 5
-	 		count = self.where(user_id: user_id,current_stage: 'installed',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'installed',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
 	 	when 6
-	 		count = self.where(user_id: user_id,current_stage: 'declined',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'declined',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
 	 	
 	 	end
 	 	count

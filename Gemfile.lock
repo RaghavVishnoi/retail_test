@@ -505,8 +505,5 @@ DEPENDENCIES
   will_paginate
   xlsx_writer
 
-RUBY VERSION
-   ruby 2.1.2p95
-
 BUNDLED WITH
    1.12.1

@@ -651,6 +651,8 @@ ActiveRecord::Schema.define(version: 20160608120700) do
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "location_code"
+    t.string   "salesman_id"
   end
 
   add_index "retailers", ["retailer_code"], name: "index2", using: :btree
