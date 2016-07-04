@@ -50,7 +50,7 @@ gem 'rvm1-capistrano3', require: false
 gem 'capistrano-bundler'
 gem 'fog'
 gem 'pg'
-gem 'mysql2'
+#gem 'mysql2'
 gem 'aws-sdk'
 gem 'delayed_job_active_record'
 # gem 'activerecord4-redshift-adapter', github: 'aamine/activerecord4-redshift-adapter'
