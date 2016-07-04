@@ -21,9 +21,9 @@ class RequestAssignment < ActiveRecord::Base
 	def self.assignment(params)
 		if params[:is_valc] == '1'
 			if params[:states].split(',').include?('0')
-		 		RequestAssignment.where(is_valc: 1,assign_date: start_date(params[:from])..end_date(params[:to])).joins(:request).where('request_type = ?',params[:request_type])
+		 		RequestAssignment.where(is_valc: true,assign_date: start_date(params[:from])..end_date(params[:to])).joins(:request).where('request_type = ?',params[:request_type])
 		 	else
-		 		RequestAssignment.where(is_valc: 1,assign_date: start_date(params[:from])..end_date(params[:to])).joins(:request).where('request_type = ? AND state_id IN (?)',params[:request_type],params[:states].split(','))
+		 		RequestAssignment.where(is_valc: true,assign_date: start_date(params[:from])..end_date(params[:to])).joins(:request).where('request_type = ? AND state_id IN (?)',params[:request_type],params[:states].split(','))
 		 	end
 		else
 			self.all
@@ -87,19 +87,19 @@ class RequestAssignment < ActiveRecord::Base
     	end_date = if to != '' && to != nil then (Time.parse(to) + 1.day) else Time.now.to_date + 1 end
 	 	case status
 	 	when 0
-	 		count = self.where(user_id: user_id,current_stage: 'pending',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'pending',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: true).joins(:request).where('request_type = ?',request_type).count
 	 	when 1
-	 		count = self.where(user_id: user_id,current_stage: 'accepted',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'accepted',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: true).joins(:request).where('request_type = ?',request_type).count
 	 	when 2
-	 		count = self.where(user_id: user_id,current_stage: 'started',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'started',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: true).joins(:request).where('request_type = ?',request_type).count
 	 	when 3
-	 		count = self.where(user_id: user_id,current_stage: 'in_transit',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'in_transit',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: true).joins(:request).where('request_type = ?',request_type).count
 	 	when 4
-	 		count = self.where(user_id: user_id,current_stage: 'in_production',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'in_production',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: true).joins(:request).where('request_type = ?',request_type).count
 	 	when 5
-	 		count = self.where(user_id: user_id,current_stage: 'installed',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'installed',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: true).joins(:request).where('request_type = ?',request_type).count
 	 	when 6
-	 		count = self.where(user_id: user_id,current_stage: 'declined',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: 1).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: 'declined',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: true).joins(:request).where('request_type = ?',request_type).count
 	 	
 	 	end
 	 	count
@@ -135,7 +135,7 @@ class RequestAssignment < ActiveRecord::Base
 
 	 def self.valc_assigned_requests_counts(start_date,end_date,request_type,state_ids)	 	
 	 	if state_ids.include?(0)
-	 		RequestAssignment.where(is_valc: 1,assign_date: start_date(start_date)..end_date(end_date)).joins(:request).where('request_type = ?',request_type).count
+	 		RequestAssignment.where(is_valc: true,assign_date: start_date(start_date)..end_date(end_date)).joins(:request).where('request_type = ?',request_type).count
 	 	else
 	 		RequestAssignment.where(is_valc: true,assign_date: start_date(start_date)..end_date(end_date)).joins(:request).where('request_type = ? AND state_id IN (?)',request_type,state_ids).count
 	 	end
