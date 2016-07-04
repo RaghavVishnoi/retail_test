@@ -244,15 +244,15 @@ class User < ActiveRecord::Base
       when 'approver'
         delete_at_multi(roles,[0,1,2,3,4,9,10,11])
       when 'rrm'
-        delete_at_multi(roles,[0,1,2,3,4,8,9,10,11,13,14])
+        delete_at_multi(roles,[0,1,2,3,4,8,9,10,11,12,13])
       when 'cmo'
-        delete_at_multi(roles,[0,1,2,3,4,5,8,9,10,11,13,14])
+        delete_at_multi(roles,[0,1,2,3,4,5,8,9,10,11,12,13])
       when 'vmqa'
-        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,12,13,14])
+        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,12,13])
       when 'supervisor'
-        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,12,13,14])
+        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,12,13])
       when 'auditor'
-        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,11,13,14])
+        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,11,13])
       end             
     end
 
