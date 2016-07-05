@@ -1,6 +1,17 @@
 <div id="nav-col-submenu"></div>
 </div>
 <div id="content-wrapper">
+
+<div id ="date_field">
+<label><b>From</b></label> 
+<%= date_field_tag("date_from", "") %>
+<label><b>To</b></label>
+<%= date_field_tag("date_to", "") %>
+<%= button_tag class: 'search_button' do %>
+<i class="fa fa-search search-icon"></i>
+<% end %>
+</div>
+
 <div class="row">
 <div class="col-lg-12">
 <div class="main-box clearfix">
@@ -12,36 +23,19 @@
 					<div class="txt">Assignments
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-4">
 					 
 					
 				</div>
-				<div class="col-md-5 col-md-offset-1">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="row">
-							<label class="col-md-3">From</label>
-							<div class="col-md-8">
-								<%= date_field_tag("date_from","",:class => "form-control") %> 		
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="row">
-							<label class="col-md-2">To</label>
-							<div class="col-md-9">
-								<%= date_field_tag("date_to","",:class => "form-control") %> 		
-							</div>
-						</div>
-					</div>
-				</div>
-
-				</div>
-				 <div class="col-md-1" style="padding:0px;">
-						<%= button_tag class: 'request_search_button' do %>
-					<i class="fa fa-search search-icon"></i>
-					<% end %>
-				</div>
+        <div class="col-md-3">
+           <%= select_tag :request_type, options_for_select(VENDOR_REQUEST_TYPE),:class => 'form-control custm_select',:required => "required",:onchange => "requestType()",:prompt => "---------Request Type--------" %>
+          
+        </div>
+         <div class="col-md-3">
+           <%= select_tag :status, options_for_select(VENDOR_STAGES.map{|stage| [stage.camelize]}),:class => 'form-control custm_select',:required => "required",:onchange => "status()",:prompt => "---------Select Status--------" %>
+          
+        </div>
+				
 			</div>	
 			 
 	</div>
@@ -198,8 +192,49 @@
     });
 
     });
- 
-  $('#dashboard').attr("class",'active')
+<%if params[:type] == nil%> 
+$('#dashboard').attr("class",'active')
+<%elsif params[:type] == 'current'%>
+$('#vendorPending').attr("class",'active')
+<%else%>
+$('#vendorClosed').attr("class",'active')
+<%end%>
    
+function requestType(){
+  var type = $('#request_type option:selected').val();
+  var url = location.href
+  var isRequestType = getUrlVars()["q[request_type]"]; 
+  if(isRequestType != null && isRequestType.length != 0){
+    url1 = url.split("q[request_type]")[0]
+    url2 = url.split("q[request_type]")[1].split("&")[1]
+    if(url2 == '' || url2 == undefined || url2 == null){
+      location.href=url1+"q[request_type]="+type
+    }else{
+       location.href=url1+"q[request_type]="+type+"&"+url2 
+    }
+    
+  }else{
+    location.href=url+'&q[request_type]='+type
+  }
+}   
+
+function status(){
+  var status = $('#status option:selected').val();
+  var url = location.href
+  var isRequestType = getUrlVars()["q[status]"]; 
+  if(isRequestType != null && isRequestType.length != 0){
+    url1 = url.split("q[status]")[0]
+    url2 = url.split("q[status]")[1].split("&")[1]
+    if(url2 == '' || url2 == undefined || url2 == null){
+      location.href=url1+"q[status]="+status
+    }else{
+       location.href=url1+"q[status]="+status+"&"+url2 
+    }
+    
+  }else{
+    location.href=url+'&q[status]='+status
+  }
+}   
+
 </script>
 

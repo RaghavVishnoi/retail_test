@@ -24,14 +24,14 @@ class RequestActivity < ActiveRecord::Base
 	def self.date_range(params)
 		date = []
 		case params[:from] 
-			when nil
+			when nil,''
 				date.push(Time.now - 1.month)
 			else
 				date.push(params[:from])
 		end
 
 		case params[:to]
-			when nil
+			when nil,''
 				date.push(Time.now)
 			else
 				date.push(params[:to])

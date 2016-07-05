@@ -282,7 +282,13 @@ APPROVED = "approved"
 DECLINED = "declined"
 PRIORITY = ['High','Normal','Low']
 ASSIGN_REQUEST_TYPE = [0,1,2,3]
- 
+VENDOR_REQUEST_TYPE = [
+  ["GSB",0],
+  ["SIS",1],
+  ["IN SHOP",2],
+  ["MAINTENANCE",3]
+]
+
 
 
 

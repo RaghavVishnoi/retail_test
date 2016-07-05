@@ -30,17 +30,25 @@ class VendorAssignment < ActiveRecord::Base
 	##############################
 	def self.request_assignments(params,current_user)
 		start_date = if params[:from] != '' && params[:from] != nil then params[:from].to_date else (Time.now - 1.month).to_date end
-    	end_date = if params[:to] != '' && params[:to] != nil then params[:to].to_date else Time.now.to_date end
-		if params[:q][:status] != nil
-			case params[:q][:status]
-			when 'installed'
-				RequestAssignment.where(user_id: current_user.id,assign_date: start_date.beginning_of_day..end_date.end_of_day,current_stage: ['installed','bill_received']).joins(:request).where("request_type = ?",params[:q][:request_type])
+	    end_date = if params[:to] != '' && params[:to] != nil then params[:to].to_date else Time.now.to_date end
+		request_type = if params[:q] != nil && params[:q][:request_type] != nil then [params[:q][:request_type]] else [0,1,2,3] end
+		status = if params[:q] != nil &&  params[:q][:status] != nil then params[:q][:status].tableize else VENDOR_STAGES end
+		if params[:type] == nil
+			if params[:q][:status] != nil
+				case params[:q][:status]
+				when 'installed'
+					RequestAssignment.where(user_id: current_user.id,assign_date: start_date.beginning_of_day..end_date.end_of_day,current_stage: ['installed','bill_received']).joins(:request).where("request_type = ?",params[:q][:request_type])
+				else
+					RequestAssignment.where(user_id: current_user.id,assign_date: start_date.beginning_of_day..end_date.end_of_day,current_stage: params[:q][:status]).joins(:request).where("request_type = ?",params[:q][:request_type])
+				end
 			else
-				RequestAssignment.where(user_id: current_user.id,assign_date: start_date.beginning_of_day..end_date.end_of_day,current_stage: params[:q][:status]).joins(:request).where("request_type = ?",params[:q][:request_type])
+				RequestAssignment.where(user_id: current_user.id,assign_date: start_date.beginning_of_day..end_date.end_of_day).joins(:request).where("request_type = ?",params[:q][:request_type])
 			end
-		else
-			RequestAssignment.where(user_id: current_user.id,assign_date: start_date.beginning_of_day..end_date.end_of_day).joins(:request).where("request_type = ?",params[:q][:request_type])
-		end
+		elsif params[:type] == 'current'
+			RequestAssignment.where(user_id: current_user.id,assign_date: start_date.beginning_of_day..end_date.end_of_day).joins(:request).where('is_fixed IN (?) AND request_type IN (?)',[0,1],request_type)
+		elsif params[:type] == 'closed'
+			RequestAssignment.where(user_id: current_user.id,assign_date: start_date.beginning_of_day..end_date.end_of_day).joins(:request).where('is_fixed = ?',2)
+		end	
 	end
 
 	def self.update_status(params)
