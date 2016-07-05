@@ -7,7 +7,11 @@ class VendorStage < ActiveRecord::Base
 
 
 	def self.date_difference(stages,prev_index)
-		days = (find_by(stage_name: stages[prev_index.to_i+1]).update_date - find_by(stage_name: stages[prev_index]).update_date)
+		if stages[prev_index] == 'po_receive'
+			days = (find_by(stage_name: stages[prev_index.to_i+1]).update_date - find_by(stage_name: 'accepted').update_date)
+		else
+			days = (find_by(stage_name: stages[prev_index.to_i+1]).update_date - find_by(stage_name: stages[prev_index]).update_date)
+		end		
 		time = (days/(24*60*60))
 		if time < 1.0
 			hours = (time*24)
