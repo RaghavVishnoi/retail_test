@@ -61,10 +61,12 @@
             <th><span>Request Type</span></th>
              <th class="text-center"><span>RT Code</span></th>
             <th><span>Shop Name</span></th>
+            <th><span>City</span></th>
+            <th><span>State</span></th>
             <th><span>RRM<span></th>
             <th><span>Status</span></th>
             <th><span>Assigned On</span></th>
-            <th><span>Details</span></th>       
+            <th><span></span></th>       
           </tr>
         </thead>
         
@@ -88,7 +90,9 @@
             <td>
               <%=Retailer.retailer_data(assignment.request.retailer_code,"name")%>  
             </td>
-            
+            <td>
+              <%=Retailer.retailer_data(assignment.request.retailer_code,"city")%> 
+            </td>
             <td>
                <%=Retailer.retailer_data(assignment.request.retailer_code,"state")%> 
             </td>
@@ -114,9 +118,9 @@
 							</a>
 						 
 							 
-						</td>
+						 
             <%if assignment.status == PENDING && assignment.current_stage == PENDING%>
-            <td>
+            
               <a href="/vendor_assignments/<%=assignment.id%>/status?status=accepted" class="table-link">
                 <span class="fa-stack">
                   <i class="fa fa-square fa-stack-2x site-color"></i>
@@ -125,18 +129,17 @@
               </a>
           
                
-            </td>
-            <td>
+             
               <a href="/vendor_assignments/<%=assignment.id%>/status?status=declined" class="table-link">
                 <span class="fa-stack">
                   <i class="fa fa-square fa-stack-2x site-color"></i>
                   <i class="fa fa-times fa-stack-1x fa-inverse"></i>
                 </span>
               </a>               
-            </td>
+             
             <%end%> 
             <%if assignment.status == ACCEPTED && assignment.current_stage == ACCEPTED%>
-             <td>
+              
               <a class="table-link start cursor">
                  <%=hidden_field_tag :assignment_id,assignment.id%> 
                 <span class="fa-stack ">
