@@ -57,7 +57,7 @@ class RequestAssignment < ActiveRecord::Base
 	def self.unassigned_requests(params)
 		request_type = if params[:request_type] == nil then [0,1,2,3] else params[:request_type] end
 		if params[:states] == '0' || params[:states] == nil
- 			if params[:is_rrm] == 'true' || params[:is_rrm] == nil
+ 			if params[:is_rrm] == 'true' || params[:is_rrm] == nil || params[:is_rrm] == true
 				Request.where.not(id: self.where('status != ? AND (is_valc = true OR is_rrm = false)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved').joins(:request_assignment)
 			else
  				Request.where.not(id: self.where('status != ? AND (is_valc = true OR is_rrm = true)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved')
@@ -126,9 +126,9 @@ class RequestAssignment < ActiveRecord::Base
 
 	 def self.valc_pending_requests_counts(start_date,end_date,request_type,state_ids)
  	 	if state_ids.include?(0)
-	 		Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(start_date)..end_date(end_date)).count
+	 		Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(start_date)..end_date(end_date),status: 'approved').count
 	 	else
-	 		Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(start_date)..end_date(end_date),state_id: state_ids).count
+	 		Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(start_date)..end_date(end_date),state_id: state_ids,status: 'approved').count
 	 	end
 	 	
 	 end

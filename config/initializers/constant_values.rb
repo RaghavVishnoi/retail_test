@@ -285,8 +285,5 @@ ASSIGN_REQUEST_TYPE = [0,1,2,3]
  
 
 
-VENDOR_STAGES = ['accepted','shop_visit','estimate_shared','po_received','in_production','in_transit','installation_complete','bill_received']
-AUDITOR = "auditor"  
-VENDOR = "vendor"
 
   
