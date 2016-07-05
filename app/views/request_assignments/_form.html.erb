@@ -136,9 +136,11 @@
   </div>
 
 </div>
+<%if params[:is_rrm] == 'false'%>
  <div class="col-md-1">
-              <%= submit_tag "Assign",:class => "btn btn-success " ,:id => "submit-assignment"%>      
-      </div>
+      <%= submit_tag "Assign",:class => "btn btn-success " ,:id => "submit-assignment"%>      
+</div>
+<%end%>
  <%=will_paginate @requests%>   
 </div>
      

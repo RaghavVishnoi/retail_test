@@ -1,0 +1,103 @@
+<%if @assignment.upload_bill == 1%>
+ 
+  <div class="bill_receive" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content popup_mdl_cntent">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Upload documents</h4>
+				</div>
+				<%=form_for :request_document,:url => url_for(:controller => 'request_documents', :action => 'create') do |f|%>
+				<div class="modal-body">
+					 
+					
+					<div class="row mr_btm1">
+						<div class="col-sm-2">
+							 
+						</div>
+						<div class="col-sm-3">
+							<div class="label_nme">
+								Shop
+							</div>
+						</div>
+						<div class="col-sm-offset-1 col-sm-5">
+							<div class="dropdown">
+					   			<%=f.select :request_document_id,RequestAssignment.display_shop(RequestAssignment.where(id: @assignment.id)),:id=>"type",class: 'btn btn-default dropdown-toggle',"data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"true"%>
+					   			<%=f.hidden_field :request_document_type,value: 'vendor'%>
+							</div>
+						</div>
+					</div>
+
+					<div class="row mr_btm1">
+						<div class="col-sm-2">
+							 
+						</div>
+						<div class="col-sm-3">
+							<div class="label_nme">
+								Installation of
+							</div>
+						</div>
+						<div class="col-sm-offset-1 col-sm-5">
+							<div class="dropdown">
+					   			<%=f.select :installation_of,INSTALLATION_OF,:id=>"type",class: 'btn btn-default dropdown-toggle',"data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"true"%>
+					   			<%=f.hidden_field :request_document_type,value: 'vendor'%>
+							</div>
+						</div>
+					</div>
+
+					<div class="row mr_btm1">
+						<div class="col-sm-2">
+							 
+						</div>
+						<div class="col-sm-3">
+							<div class="label_nme">
+								Installation Report
+							</div>
+						</div>
+						<div class="col-sm-offset-1 col-sm-5">
+							<div class="dropdown">
+					   			<%=f.select :installation_report,INSTALLATION_REPORT,:id=>"type",class: 'btn btn-default dropdown-toggle',"data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"true"%>
+					   			<%=f.hidden_field :request_document_type,value: 'vendor'%>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-2">
+							 
+						</div>
+						<div class="col-sm-3">
+							<div class="label_nme">
+								Upload bill copy
+							</div>
+						</div>
+						<div class="col-sm-offset-1 col-sm-5">
+							<div class="dropdown">
+					   			 <%=f.file_field :request_document,:required => "true"%>				   
+							</div>
+						</div>
+					</div>
+				
+				 
+
+				 
+
+					 
+
+					 
+				</div>
+				<div class="modal-footer">
+					<%=f.submit :Upload,class: 'btn btn-primary'%>
+					 
+				</div>
+				<%end%>	
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div>
+
+<%end%>  
+<script>
+	$(".close").click(function(){
+		$(".bill_receive").attr("style","display:none")
+	})
+</script>

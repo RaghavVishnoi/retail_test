@@ -49,6 +49,8 @@ class VendorAssignment < ActiveRecord::Base
 			RequestAssignment.find(params[:id]).update(po_number: params[:po_number])
 			VendorStage.new(stage_name: params[:status],request_assignment_id: params[:id],update_date: params[:date]).save
 			VendorStage.new(stage_name: 'started',request_assignment_id: params[:id],update_date: params[:update_date])
+		when 'bill_received'
+			VendorStage.new(stage_name: params[:status],request_assignment_id: params[:id],update_date: params[:update_date])
 		else
 			VendorStage.new(stage_name: params[:status],request_assignment_id: params[:id],update_date: params[:update_date])
 		end
