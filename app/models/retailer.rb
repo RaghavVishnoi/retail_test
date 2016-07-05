@@ -100,21 +100,25 @@ end
 
 def self.retailer_data(code,type)
 	@retailer = Retailer.find_by(retailer_code: code)
-	case type
-	when 'name'
-		@retailer.retailer_name if @retailer != nil
-	when 'address'
-		@retailer.address if @retailer != nil
-	when 'contact_person'
-		@retailer.contact_person if @retailer != nil
-	when 'phone'
-		@retailer.mobile_number if @retailer != nil
-	when 'city'
-		@retailer.city if @retailer != nil
-	when 'state'
-		@retailer.state if @retailer != nil		 
-	when 'pincode'
-		@retailer.pincode if @retailer != nil			
+	if @retailer != nil
+		case type
+		when 'name'
+			@retailer.retailer_name
+		when 'address'
+			@retailer.address
+		when 'contact_person'
+			@retailer.contact_person
+		when 'phone'
+			@retailer.mobile_number
+		when 'city'
+			@retailer.city
+		when 'state'
+			@retailer.state
+		when 'pincode'
+			@retailer.pincode		
+		end
+	else
+		""
 	end
 end
 
