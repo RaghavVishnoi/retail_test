@@ -101,7 +101,7 @@
             </td>
              <%if params[:is_rrm] != 'false'%>
              <td class="text-center">
-              <span class="label label-default"><%=request.request_assignment.assign_date.strftime("%d %b,%Y")%></span>
+              <span class="label label-default"><%=request.request_assignment.assign_date.strftime("%d %b,%Y") if request.request_assignment.assign_date != nil%></span>
             </td>
             <%end%> 
             <td style="width: 5%;">

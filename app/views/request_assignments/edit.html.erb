@@ -68,33 +68,37 @@
                   
           <tr>
             <td>              
-              qw       
+              <%=@request_assignment.request_id%>       
+            </td>
+             
+            <td>
+              <%=@request_assignment.request.request_type.upcase if @request_assignment.request.request_type != nil%>  
+            </td>
+          
+            <td>
+               <%=@request_assignment.request.retailer_code.upcase%>  
             </td>
             <td>
-            wd
+              <%=Retailer.retailer_data(@request_assignment.request.retailer_code,"name")%> 
             </td>
             <td>
-              sd
+               <%=Retailer.retailer_data(@request_assignment.request.retailer_code,"city")%>    
             </td>
             <td>
-              ss
+               <%=Retailer.retailer_data(@request_assignment.request.retailer_code,"state")%> 
             </td>
             <td>
-               asas  
+          <%req = @request_assignment.request.request_activities.find_by(request_id: @request_assignment.request_id,request_status: 'approved',user_type: ['RRM','HO']);
+
+             %>
+             <%=req.user.name if req != nil%>
             </td>
-            <td>
-              as
-            </td>
-            <td>
-          sas
-             sassa
-            </td>
-            <td>asas</td>
-            <td>
-              asas
+            <td><%=@request_assignment.user.name%></td>
+           <td>
+              <%=@request_assignment.current_stage.upcase if @request_assignment.current_stage != nil%>
             </td>
              <td class="text-center">
-              <span class="label label-default">asasas</span>
+              <span class="label label-default"><%=@request_assignment.assign_date.strftime("%d %b,%Y") if @request_assignment.assign_date != nil%></span>
             </td>
           </tr>
                  
