@@ -1,0 +1,83 @@
+<div class="top in editable-container editable-popup updateDate" role="tooltip" id="popover215110" style="top: 14px; left: 254px;">
+	<div class="arrow"></div>
+	<h3 class="popover-title">Enter Date</h3>
+	<div class="popover-content"> 
+		<div>
+			<div class="editableform-loading" style="display: none;"></div>
+			<form class="form-inline editableform" style="">
+				<div class="control-group form-group">
+					<div>
+						
+						<div class="row mr_btm1">
+							<div class="col-md-6">
+								<label><b>Choose Date</b></label>
+							</div>
+							<div class="col-md-6">
+							<div class="editable-input " style="position: relative;">
+								<input type="date" class="form-control input-sm  updateInput" style="padding-right: 24px;">
+								 
+							</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+							</div>
+							<div class="col-md-6">
+							<div class="editable-buttons">
+								<button type="button" class="btn btn-primary updatesubmit">
+									<i class="glyphicon glyphicon-ok"></i>
+								</button>
+								<button type="button" class="btn btn-default pocancel">
+									<i class="glyphicon glyphicon-remove pocancel"></i>
+								</button>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div class="editable-error-block help-block" style="display: none;"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+    var assignment_id;
+	$(".updateStatus").click(function(){
+ 		$(".updateDate").attr("style","display: block");
+ 		assignment_id = $('#update_assignment').val();
+	 });
+	 $(".pocancel").click(function(){
+	 	$(".updateDate").attr("style","display: none !important");
+	 });
+
+	 $(".updatesubmit").click(function(){
+	    var status = $('#stage_name').val();
+	 	var updateDate = $(".updateInput").val();
+			 if(updateDate == null || updateDate == '' || updateDate == 'undefined'){
+			 	alert("Please enter update date!")
+			 }else{
+
+		 		$.ajax({
+		 			url : "/vendor_assignments/"+assignment_id+"/status",
+		 			type : "POST",
+		 			data : {update_date: 	updateDate,
+		 				status: status
+		 			},
+		 			dataType : "json",
+
+		 			complete: function(){
+
+		 			},
+		 			success: function(data,xhr){
+		 				location.reload();
+		 			},
+		 			error: function(){
+
+		 			}
+		 		});
+		 	
+		
+		}
+	 });
+</script>
+	 

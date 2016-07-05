@@ -210,7 +210,8 @@ Rails.application.routes.draw do
   post '/retailers/file_upload'
   post '/retailers/file_insert'
   
-  get "vendor_assignments/:id/status" => "vendor_assignments#status"
+  post "vendor_assignments/:id/status" => "vendor_assignments#status"
+  post "vendor_assignments/:id/po" => "vendor_assignments#po_update"
 
   post '/downloads' => 'downloads#create'
   get '/downloads' => 'downloads#index'

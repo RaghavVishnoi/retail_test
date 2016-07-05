@@ -55,14 +55,42 @@ class VendorRequest < ActiveRecord::Base
 		end
 		RequestAssignmentActivity.create!(user_type: user_type,user_id: current_user.id,status: vRequest.status,message: message,request_assignment_id: vRequest.request_assignment_id)			
 	end
+
+	def self.request_status(status,role)
+		case role
+		when 'CMO'
+			case status
+			when 'cmo_pending'
+				'Pending'
+			when 'cmo_declined'
+				'Declined'
+			when 'pending','approved','declined'
+				'Approved'
+			end	
+		when 'RRM'
+			case status
+			when 'cmo_pending','cmo_declined'
+				'Pending'
+			when 'pending'
+				'Pending'
+			when 'approved'
+				'Approved'
+			when 'declined'
+				'Declined'
+			end	
+		end
+		
+	end
 	
 	private
 		def update_request
 			case self.status
 			when APPROVED
 				self.request_assignment.request.update(is_fixed: 2)
+				self.update(current_stage: 'closed')
 			when DECLINED
 				self.request_assignment.request.update(is_fixed: 3)
+				self.update(current_stage: 'declined')
 			end
 		end
 

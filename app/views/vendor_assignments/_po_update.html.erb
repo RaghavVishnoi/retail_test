@@ -1,0 +1,85 @@
+<div class="top in editable-container editable-popup updatePo" role="tooltip" id="popover215110" style="top: 14px; left: 254px;">
+	<div class="arrow"></div>
+	<h3 class="popover-title">Update PO Number</h3>
+	<div class="popover-content"> 
+		<div>
+			<div class="editableform-loading" style="display: none;"></div>
+			<form class="form-inline editableform" style="">
+				<div class="control-group form-group">
+					<div>
+						
+						<div class="row mr_btm1">
+							<div class="col-md-6">
+								<label><b>Enter Po Number</b></label>
+							</div>
+							<div class="col-md-6">
+							<div class="editable-input " style="position: relative;">
+								<input type="text" class="form-control input-sm updatePoInput" style="padding-right: 24px;">
+								 
+							</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+							</div>
+							<div class="col-md-6">
+							<div class="editable-buttons">
+								<button type="button" class="btn btn-primary updatePoSubmit">
+									<i class="glyphicon glyphicon-ok"></i>
+								</button>
+								<button type="button" class="btn btn-default pocancel">
+									<i class="glyphicon glyphicon-remove pocancel"></i>
+								</button>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div class="editable-error-block help-block" style="display: none;"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	function poUpdate(poNumber){
+		var assignment_id;
+ 		$(".updatePo").attr("style","display: block");
+ 		$(".updatePoInput").val(poNumber);
+ 		assignment_id = $('#update_assignment').val();
+	 $(".pocancel").click(function(){
+	 	$(".updatePo").attr("style","display: none !important");
+	 });
+
+	 $(".updatePoSubmit").click(function(){
+	    var poNumber = $(".updatePoInput").val();
+			 if(poNumber == null || poNumber == '' || poNumber == 'undefined'){
+			 	alert("Please enter update date!")
+			 }else{
+
+		 		$.ajax({
+		 			url : "/vendor_assignments/"+assignment_id+"/po",
+		 			type : "POST",
+		 			data : {
+		 				po_number: poNumber
+		 			},
+		 			dataType : "json",
+
+		 			complete: function(){
+
+		 			},
+		 			success: function(data,xhr){
+		 				location.reload();
+		 			},
+		 			error: function(){
+
+		 			}
+		 		});
+		 	
+		
+		}
+	 });
+	}
+    
+</script>
+	 
+ 

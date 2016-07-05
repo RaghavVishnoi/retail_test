@@ -501,6 +501,7 @@ h2.asgnd_shop_blk {padding-bottom: 1.5% !important;}
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   white-space: normal;
+  margin-top: 15%;
 } 
 
 .bill_receive{
@@ -542,3 +543,48 @@ select.multi-select option.selected{background:red;}
 .maintenance_assigned{cursor: pointer;}
  .help-icon{width:50%;}
 .cursor{cursor: pointer;} 
+.updateDate{position: absolute;
+  top: 0;
+  left: 30%;
+  z-index: 1060;
+  display: none;
+  width: 40%;
+  padding: 1px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: left;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  white-space: normal;
+  margin-top: 15%;}
+
+ .updatePo{
+  position: absolute;
+  top: 0;
+  left: 30%;
+  z-index: 1060;
+  display: none;
+  width: 40%;
+  padding: 1px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: left;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  white-space: normal;
+  margin-top: 15%;
+  }

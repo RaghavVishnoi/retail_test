@@ -14,71 +14,101 @@
 					Assignment Detail
 				</h2>
 				<div class="row">
-					<div class="col-md-8">
-					 <b><%=@assignment.request_id%></b>
+					<div class="col-md-5">
+					 <b>Request Id</b>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-7">
 						<div class="blue">
-						 <%=@assignment.request.request_type.camelize.upcase%>
+						<%=@assignment.request_id%>
 						</div>
 					</div>	
 					 
 				</div>
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-5">
+					<b>Request Type</b>
+					</div>
+					<div class="col-md-7">
+						<div class="blue">
+						   <%=@assignment.request.request_type.camelize.upcase%>
+						</div>
+					</div>
+					 
+				</div>
+				<div class="row">
+					<div class="col-md-5">
 					<b>RRM</b>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-7">
 						<div class="blue">
-						   
+						   <%req = @assignment.request.request_activities.find_by(request_id: @assignment.request_id,request_status: 'approved',user_type: ['RRM','HO']);
+
+             %>
+             <%=req.user.name if req != nil%>
 						</div>
 					</div>
 					 
 				</div>
 
 				
-				<div class="row mr_btm" >
-					<div class="col-md-4">
+				<div class="row" >
+					<div class="col-md-5">
 					<b>Status</b>
 					</div>
-					<div class="col-md-4">
-						 
-						
-					</div>	
-					<div class="col-md-4">
+					 
+					<div class="col-md-7">
 						<div class="blue">
 						 <%=if @assignment.status == 'Accepted' then "In Progress" else @assignment.status end%>
 						</div>
 					</div>
 				</div>
+				
 				<div class="row" >
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<b>Current Stage</b>
 					</div>
-					<div class="col-md-4">
-						 
-						
-					</div>	
-					<div class="col-md-4">
+					 
+					<div class="col-md-7">
 						<div class="blue">
 						 <%=@assignment.current_stage%>
 						</div>
 					</div>
 				</div>
 				<div class="row" >
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<b>Assigned On</b>
 					</div>
-					<div class="col-md-4">
-						 
-						
-					</div>	
-					<div class="col-md-4">
+					 
+					<div class="col-md-7">
 						<div class="blue">
 						 <%=@assignment.assign_date.strftime("%d %b,%Y")%>
 						</div>
 					</div>
 				</div>
+				<%if @assignment.vendor_request != nil%>
+				<div class="row" >
+					<div class="col-md-5">
+						<b>CMO Verify</b>
+					</div>
+					 	
+					<div class="col-md-7">
+						<div class="blue">
+						<%=VendorRequest.request_status(@assignment.vendor_request.status,'CMO')%>
+						</div>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-md-5">
+						<b>RRM Verify</b>
+					</div>
+					 
+					<div class="col-md-7">
+						<div class="blue">
+							<%=VendorRequest.request_status(@assignment.vendor_request.status,'RRM')%>
+						</div>
+					</div>
+				</div>
+				<%end%>
 			</div>
 		</div>	
 
@@ -89,56 +119,65 @@
 					Shop Detail
 				</h2>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-5">
+					 <b>Retailer Code</b>
+					</div>
+					<div class="col-md-7">
 						<div class="blue">
-							 <%=@assignment.request.retailer_code%>	
+						 <%=@assignment.request.retailer_code%>	
 						</div>
-					</div>
-					<div class="col-md-4">
-						<%=@assignment.request.shop_name%>
-					</div>
-					<div class="col-md-4">
-						<%=@assignment.request.shop_owner_name%>
-					</div>
-
+					</div>	
 					 
 				</div>
+				
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-5">
+					 <b>Retailer Name</b>
+					</div>
+					<div class="col-md-7">
 						<div class="blue">
-							 
+						 <%=Retailer.retailer_data(@assignment.request.retailer_code,'name')%>	
 						</div>
-					</div>
-					<div class="col-md-4">
-						 
-					</div>
-					<div class="col-md-4">
-						<div class="green">
-							<%=@assignment.request.shop_owner_phone%>
-						</div>
-					</div>
-
-					 
-				</div>
-
-				<div class="row">
-					<div class="col-md-10">
-					  <%=@assignment.request.shop_address%>
-					</div>
-					<div class="col-md-2">
-						 
 					</div>	
 					 
 				</div>
 				<div class="row">
-					<div class="col-md-10">
-					  <%=@assignment.request.city+","+@assignment.request.state%>
+					<div class="col-md-5">
+					 <b>Contact Person</b>
 					</div>
-					<div class="col-md-2">
-						 
+					<div class="col-md-7">
+						<div class="blue">
+						 <%=Retailer.retailer_data(@assignment.request.retailer_code,'contact_person')%>	
+						</div>
 					</div>	
 					 
 				</div>
+				<div class="row">
+					<div class="col-md-5">
+					 <b>Contact Number</b>
+					</div>
+					<div class="col-md-7">
+						<div class="blue">
+						 <%=Retailer.retailer_data(@assignment.request.retailer_code,'phone')%>	
+						</div>
+					</div>	
+					 
+				</div>
+					<div class="row">
+					<div class="col-md-5">
+					 <b>Address</b>
+					</div>
+					<div class="col-md-7">
+						<div class="blue">
+						 <%=Retailer.retailer_data(@assignment.request.retailer_code,'address')%>,<%=Retailer.retailer_data(@assignment.request.retailer_code,'city')%>,<%=Retailer.retailer_data(@assignment.request.retailer_code,'state')%>	
+						</div>
+					</div>	
+					 
+				</div>
+				 
+
+			 
+				 
 				 
 				
 			</div>
@@ -160,7 +199,7 @@
 						<div class="comments_blk">
 
 						<%VENDOR_STAGES.each do |stage|%>
-							 
+							  
 							<div class="row mr_btm1">
 								<div class="col-md-4">
  									<b><%=stage.camelize%></b>
@@ -170,52 +209,62 @@
 			<%updated_stage = @assignment.vendor_stages.find_by(stage_name: stage)
 			if updated_stage != nil
 			%>
-										<%=@assignment.vendor_stages.find_by(stage_name: stage).update_date.strftime("%d %b,%Y")%>
-										&nbsp;&nbsp;&nbsp;
-										<%=@assignment.po_number.split(',').map{|pn| pn.to_i} if stage == "po_receive"%>
-										<%else%>
-										*****************
-										<%end%>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div>
-							<%if updated_stage != nil%>
-								<%= image_tag 'update_inactive.png',:style => "width:35%;height:40px"%>
-							<%elsif stage == "po_receive"%>
+						<%=@assignment.vendor_stages.find_by(stage_name: stage).update_date.strftime("%d %b,%Y")%>
+						&nbsp;&nbsp;&nbsp;
+							<%if stage == "po_receive"%>
 
-								<div>
-				                  <span class="start"><i><%= image_tag 'update.png' ,:id => 'update-button'%>
-
-				                  </i>
-				                 <%=hidden_field_tag :assignment_id,@assignment.id%>  	
-				              </span>
-				           
-                 
-				                </div>
-							<%else%>
-							<div>
-			 			    	<%= link_to edit_vendor_assignment_path(@assignment.id,:status => stage) do %>
-				                <div>
-				                  <span><i><%= image_tag 'update.png' ,:id => 'update-button'%></i></span>
-				                              
-				                </div>
-			           			 <% end %>
-						    </div>
-						    <%end%>
-							</div>
-								</div>
-							</div>
+							<span onclick="poUpdate('<%=@assignment.po_number%>')" class="cursor">
+								<b><%=@assignment.po_number%></b></span>
 							<%end%>
-						</div>
+						<%else%>
+						<%=hidden_field_tag :stage_name,stage%>
+						*****************
+						<%end%>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div>
+			<%if updated_stage != nil%>
+				<%= image_tag 'update_inactive.png',:style => "width:35%;height:40px"%>
+			<%elsif stage == "po_receive"%>
+
+				<div>
+                  <span class="start"><i><%= image_tag 'update.png' ,:id => 'update-button'%>
+
+                  </i>
+                 <%=hidden_field_tag :assignment_id,@assignment.id%>  	
+              </span>
+           
+ 
+                </div>
+			<%else%>
+
+			<div>
+                <div>
+                  <span class="updateStatus"><i><%= image_tag 'update.png' ,:id => 'update-button'%></i></span>
+                              
+                </div>
+       			 
+		    </div>
+		    <%end%>
+			</div>
+				</div>
+			</div>
+			<%end%>
+		</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>	
+<%=hidden_field_tag :update_assignment,@assignment.id%> 
 <%=render :partial => "poreceive"%>
+<%=render :partial => "date_update"%>
+<%=render :partial => "po_update"%>
 
 </div>	
 </div>	
-	
+<script>
+	$('#dashboard').attr("class",'active')
+</script>	

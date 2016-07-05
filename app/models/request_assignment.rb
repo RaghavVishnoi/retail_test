@@ -9,6 +9,7 @@ class RequestAssignment < ActiveRecord::Base
 	belongs_to :request
 	has_many :request_documents, :as => :request_document, :dependent => :destroy
 	has_many :vendor_stages
+	has_one :vendor_request
 
 	validates :user_id, presence: true
 	validates :request_id, presence: true
@@ -97,10 +98,11 @@ class RequestAssignment < ActiveRecord::Base
 	 	when 4
 	 		count = self.where(user_id: user_id,current_stage: 'in_production',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: true).joins(:request).where('request_type = ?',request_type).count
 	 	when 5
-	 		count = self.where(user_id: user_id,current_stage: 'installed',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: true).joins(:request).where('request_type = ?',request_type).count
+	 		count = self.where(user_id: user_id,current_stage: ['installed','bill_received'],assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: true).joins(:request).where('request_type = ?',request_type).count
 	 	when 6
 	 		count = self.where(user_id: user_id,current_stage: 'declined',assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: true).joins(:request).where('request_type = ?',request_type).count
-	 	
+	 	when 7
+	 		count = self.where(user_id: user_id,assign_date: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day,is_valc: true).joins(:request).where('request_type = ? AND is_fixed = 2',request_type).count
 	 	end
 	 	count
 	 		 

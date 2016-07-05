@@ -35,6 +35,12 @@ class VendorAssignmentsController < ApplicationController
         @assignment = vendor_assignment
     end
 
+    def po_update
+      assignment = RequestAssignment.find(params[:id])
+      result = assignment.update(po_number: params[:po_number])
+      render :json => result
+    end
+
     private
         def vendor_assignment
             RequestAssignment.find(params[:id])

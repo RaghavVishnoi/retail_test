@@ -41,6 +41,7 @@
 						<th>In Production</th>
 						<th>Installed</th>
 						<th>Declined</th>
+						<th>Closed</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -51,13 +52,32 @@
 							GSB
 							</a>
 						</td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],0)%> </td>
-						<td> <%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],1)%></td>
-						<td> <%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],2)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],3)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],4)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],5)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],6)%></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=0&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=pending">
+							<%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],0)%></a> </td>
+						<td> 
+							<a href="/vendor_assignments?q[request_type]=0&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=accepted">
+								<%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],1)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=0&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=started">
+								<%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],2)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=0&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=in_transit">
+								<%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],3)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=0&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=in_production">
+								<%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],4)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=0&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=installed">
+								<%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],5)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=0&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=declined">
+							<%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],6)%>
+						</a>
+						</td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=0&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=closed">
+								<%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],7)%></a></td>
 					</tr>
 					<tr>
 						<td class="blue">
@@ -65,14 +85,32 @@
 								SIS
 							</a>
 						</td>		 
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],0)%> </td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],1)%> </td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],2)%> </td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],3)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],4)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],5)%>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=1&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=pending">
+							<%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],0)%></a> </td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=1&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=accepted">
+								<%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],1)%></a> </td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=1&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=started">
+							<%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],2)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=1&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=in_transit">
+							<%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],3)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=1&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=in_production">
+								<%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],4)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=1&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=installed">
+							<%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],5)%>
+						</a>
 						</td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],6)%></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=1&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=declined">
+							<%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],6)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=1&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=closed">
+								<%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],7)%><a></td>
 					</tr>
 					<tr>
 						<td class="blue">
@@ -80,26 +118,60 @@
 							In Shop
 							</a>	
 						</td>	
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],0)%> </td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],1)%> </td>
-						<td> <%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],2)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],3)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],4)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],5)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],6)%></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=2&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=pending">
+								<%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],0)%></a> </td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=2&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=accepted">
+								<%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],1)%> </a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=2&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=started">
+						 <%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],2)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=2&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=in_transit">
+								<%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],3)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=2&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=in_production">
+								<%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],4)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=2&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=installed">
+								<%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],5)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=2&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=declined">
+								<%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],6)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=2&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=closed">
+								<%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],7)%></a></td>
 					</tr>
 					<tr>
 						<td class="blue">
 							<a href="/vendor_assignments?q[request_type]=3&from=<%=params[:from]%>&to=<%=params[:to]%>">
 							Maintenance
 						</a>
-						</td><td><%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],0)%> </td>
-						<td> <%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],1)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],2)%> </td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],3)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],4)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],5)%></td>
-						<td><%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],6)%></td>
+						</td><td>
+						<a href="/vendor_assignments?q[request_type]=3&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=pending">
+							<%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],0)%></a> </td>
+						<td>
+						<a href="/vendor_assignments?q[request_type]=3&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=accepted">	
+						 <%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],1)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=3&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=started">
+								<%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],2)%></a> </td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=3&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=in_transit">
+								<%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],3)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=3&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=in_production">
+								<%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],4)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=3&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=installed">
+								<%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],5)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=3&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=declined">
+								<%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],6)%></a></td>
+						<td>
+							<a href="/vendor_assignments?q[request_type]=3&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=closed">
+								<%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],7)%></a></td>
 					</tr>	
 
 				</tbody>
