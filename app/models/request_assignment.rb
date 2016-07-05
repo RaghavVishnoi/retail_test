@@ -121,7 +121,7 @@ class RequestAssignment < ActiveRecord::Base
 
 	 def self.display(retailer_code)
 	 	retailer = Retailer.find_by(retailer_code: retailer_code)
-	 	"#{retailer_code} - #{retailer.retailer_name}"
+	 	"#{retailer_code} - #{retailer.retailer_name if retailer != nil}"
 	 end
 
 	 def self.valc_pending_requests_counts(start_date,end_date,request_type,state_ids)
