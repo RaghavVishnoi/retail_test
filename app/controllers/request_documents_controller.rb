@@ -1,6 +1,6 @@
 class RequestDocumentsController < ApplicationController
 
-	skip_authorize_resource
+	skip_authorize_resource :only => [:create]
 
 	def new
 		@request_document = RequestDocument.new
