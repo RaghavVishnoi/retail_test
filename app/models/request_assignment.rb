@@ -56,14 +56,14 @@ class RequestAssignment < ActiveRecord::Base
 		request_type = if params[:request_type] == nil then [0,1,2,3] else params[:request_type].split(',') end
 		if params[:states] == '0' || params[:states] == nil
  			if params[:is_rrm] == 'true' || params[:is_rrm] == nil || params[:is_rrm] == true
-				Request.where.not(id: self.where('is_valc = 1 OR is_rrm = 0').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved').joins(:request_assignment).where('current_stage != ?','declined')
+				Request.where.not(id: self.where('is_valc = true OR is_rrm = false').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved').joins(:request_assignment).where('current_stage != ?','declined')
 			else
- 				Request.where.not(id: self.where('status != ? AND (is_valc = 1 OR is_rrm = 1)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved')
+ 				Request.where.not(id: self.where('status != ? AND (is_valc = true OR is_rrm = true)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved')
 			end
 			
 		else
 			if params[:is_rrm] == 'true' || params[:is_rrm] == nil || params[:is_rrm] == true
-				Request.where.not(id: self.where('is_valc = 1 OR is_rrm = 0').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved',state_id: params[:states].split(',')).joins(:request_assignment).where('current_stage != ?','declined')
+				Request.where.not(id: self.where('is_valc = true OR is_rrm = false').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved',state_id: params[:states].split(',')).joins(:request_assignment).where('current_stage != ?','declined')
 			else
  				Request.where.not(id: self.where('status != ? AND (is_valc = 1 OR is_rrm = 1)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved',state_id: params[:states].split(','))
 			end		
