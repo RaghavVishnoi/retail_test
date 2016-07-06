@@ -203,7 +203,4 @@ class RequestAssignment < ActiveRecord::Base
 				self.is_valc ||= true
 			end
 		end
-
-		
-
 end

@@ -29,11 +29,10 @@ class VendorAssignment < ActiveRecord::Base
 
 	##############################
 	def self.request_assignments(params,current_user)
-		vendor_stages = VENDOR_STAGES
 		start_date = if params[:from] != '' && params[:from] != nil then params[:from].to_date else (Time.now - 1.month).to_date end
 	    end_date = if params[:to] != '' && params[:to] != nil then params[:to].to_date else Time.now.to_date end
 		request_type = if params[:q] != nil && params[:q][:request_type] != nil && params[:q][:request_type] != 'All' then [params[:q][:request_type]] else [0,1,2,3] end
-		status = if params[:q] != nil &&  params[:q][:status] != nil &&  params[:q][:status] != 'All' then params[:q][:status].underscore else vendor_stages.push('pending') end
+		status = if params[:q] != nil &&  params[:q][:status] != nil &&  params[:q][:status] != 'All' then params[:q][:status].underscore else VENDOR_STAGES+['pending'] end
 		if params[:type] == nil
 			if params[:q][:status] != nil
 				case params[:q][:status]
