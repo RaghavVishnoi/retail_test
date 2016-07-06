@@ -1,0 +1,25 @@
+<script>
+	function stopRequest(assignmentId){
+	  $.ajax({
+	    url: "/request_assignments/terminate",
+	    type: "POST",
+	    data:{requestAssignmentId: assignmentId},
+	    dataType: "text",
+
+	    complete: function(){
+
+	    },
+
+	    success: function(data){
+	      result = JSON.parse(data)
+	       location.reload()
+	      
+	    },
+
+	    error: function(){
+
+	    }
+	  });
+}
+
+</script>

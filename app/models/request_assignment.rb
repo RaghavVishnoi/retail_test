@@ -20,15 +20,12 @@ class RequestAssignment < ActiveRecord::Base
 
 
 	def self.assignment(params)
-		if params[:is_valc] == '1'
 			if params[:states].split(',').include?('0')
-		 		RequestAssignment.where(is_valc: true,assign_date: start_date(params[:from])..end_date(params[:to])).joins(:request).where('request_type = ?',params[:request_type])
+		 		RequestAssignment.where(is_valc: true,assign_date: start_date(params[:from])..end_date(params[:to])).joins(:request).where('request_type IN (?)',params[:request_type].split(','))
 		 	else
-		 		RequestAssignment.where(is_valc: true,assign_date: start_date(params[:from])..end_date(params[:to])).joins(:request).where('request_type = ? AND state_id IN (?)',params[:request_type],params[:states].split(','))
+		 		RequestAssignment.where(is_valc: true,assign_date: start_date(params[:from])..end_date(params[:to])).joins(:request).where('request_type IN (?) AND state_id IN (?)',params[:request_type].split(','),params[:states].split(','))
 		 	end
-		else
-			self.all
-		end
+		
 	end
 
 
@@ -56,16 +53,20 @@ class RequestAssignment < ActiveRecord::Base
 	end
 
 	def self.unassigned_requests(params)
-		request_type = if params[:request_type] == nil then [0,1,2,3] else params[:request_type] end
+		request_type = if params[:request_type] == nil then [0,1,2,3] else params[:request_type].split(',') end
 		if params[:states] == '0' || params[:states] == nil
  			if params[:is_rrm] == 'true' || params[:is_rrm] == nil || params[:is_rrm] == true
-				Request.where.not(id: self.where('status != ? AND (is_valc = true OR is_rrm = false)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved').joins(:request_assignment)
+				Request.where.not(id: self.where('is_valc = 1 OR is_rrm = 0').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved').joins(:request_assignment).where('current_stage != ?','declined')
 			else
- 				Request.where.not(id: self.where('status != ? AND (is_valc = true OR is_rrm = true)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved')
+ 				Request.where.not(id: self.where('status != ? AND (is_valc = 1 OR is_rrm = 1)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved')
 			end
 			
 		else
-			Request.where.not(id: self.where('status != ? AND is_valc = true','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),state_id: params[:states],status: 'approved')
+			if params[:is_rrm] == 'true' || params[:is_rrm] == nil || params[:is_rrm] == true
+				Request.where.not(id: self.where('is_valc = 1 OR is_rrm = 0').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved',state_id: params[:states].split(',')).joins(:request_assignment).where('current_stage != ?','declined')
+			else
+ 				Request.where.not(id: self.where('status != ? AND (is_valc = 1 OR is_rrm = 1)','declined').pluck(:request_id)).where(request_type: request_type,created_at: start_date(params[:from])..end_date(params[:to]),status: 'approved',state_id: params[:states].split(','))
+			end		
 		end
 	end
 
@@ -80,6 +81,7 @@ class RequestAssignment < ActiveRecord::Base
 		assignments = self.where(user_id: user_id,user_type: 'vendor')
 		data[:pending] = assignments.where(status: 'pending').count
 		data[:in_process] = assignments.where(status: 'started').count
+		data[:completed] = assignments.joins(:request).where("is_fixed = 2").count
 		data
 	end
 
@@ -158,7 +160,7 @@ class RequestAssignment < ActiveRecord::Base
 	 end
 
 	 def self.start_date(start_date)
-		if start_date == nil
+		if start_date == nil || start_date == ''
 			(Time.now - 1.month)
 		else	
 			start_date.to_date.beginning_of_day
@@ -166,11 +168,19 @@ class RequestAssignment < ActiveRecord::Base
 	end
 
 	def self.end_date(end_date)
-		if end_date == nil
+		if end_date == nil || end_date == ''
 			Time.now
 		else	
 			end_date.to_date.end_of_day
 		end
+	end
+
+	def self.canClose?(requestAssignmentId)
+		self.where(id: requestAssignmentId).pluck(:current_stage).any?{|stage| CLOSE_ALLOW_STATUS.include?(stage)}
+	end
+
+	def self.terminateRequest(requestAssignmentId)
+		self.where(id: requestAssignmentId).update_all(status: 'declined',current_stage: 'declined')
 	end
 
 	private

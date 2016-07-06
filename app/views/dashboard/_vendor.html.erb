@@ -76,7 +76,7 @@
 						</a>
 						</td>
 						<td>
-							<a href="/vendor_assignments?q[request_type]=0&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=closed">
+							<a href="/vendor_assignments?q[request_type]=0&from=<%=params[:from]%>&to=<%=params[:to]%>&type=closed">
 								<%=RequestAssignment.request_count_by_type(current_user.id,0,params[:form],params[:to],7)%></a></td>
 					</tr>
 					<tr>
@@ -109,7 +109,7 @@
 							<a href="/vendor_assignments?q[request_type]=1&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=declined">
 							<%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],6)%></a></td>
 						<td>
-							<a href="/vendor_assignments?q[request_type]=1&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=closed">
+							<a href="/vendor_assignments?q[request_type]=1&from=<%=params[:from]%>&to=<%=params[:to]%>&type=closed">
 								<%=RequestAssignment.request_count_by_type(current_user.id,1,params[:form],params[:to],7)%><a></td>
 					</tr>
 					<tr>
@@ -140,7 +140,7 @@
 							<a href="/vendor_assignments?q[request_type]=2&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=declined">
 								<%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],6)%></a></td>
 						<td>
-							<a href="/vendor_assignments?q[request_type]=2&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=closed">
+							<a href="/vendor_assignments?q[request_type]=2&from=<%=params[:from]%>&to=<%=params[:to]%>&type=closed">
 								<%=RequestAssignment.request_count_by_type(current_user.id,2,params[:form],params[:to],7)%></a></td>
 					</tr>
 					<tr>
@@ -170,7 +170,7 @@
 							<a href="/vendor_assignments?q[request_type]=3&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=declined">
 								<%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],6)%></a></td>
 						<td>
-							<a href="/vendor_assignments?q[request_type]=3&from=<%=params[:from]%>&to=<%=params[:to]%>&q[status]=closed">
+							<a href="/vendor_assignments?q[request_type]=3&from=<%=params[:from]%>&to=<%=params[:to]%>&type=closed">
 								<%=RequestAssignment.request_count_by_type(current_user.id,3,params[:form],params[:to],7)%></a></td>
 					</tr>	
 

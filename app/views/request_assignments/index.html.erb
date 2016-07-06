@@ -1,5 +1,5 @@
 <div id="nav-col-submenu"></div>
-  </div>
+</div>
  
 <div id="content-wrapper">
    <%= render 'shared/notice_messages'%>
@@ -7,12 +7,20 @@
   <div class="row">
      <div class="col-lg-12">
         <div class="main-box-body clearfix">
-            <div class="row">
+            <div class="row mr_btm1">
               <div class="col-md-3">
-                <div class="add_new_notfcn">
-                  <h4><i class="fa fa-plus-square fa-lg"></i><span>
-                  <%= link_to "New Assignment",'/request_assignments/new'%>
-                  </span></h4>
+               
+              </div>
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                <div>
+                  <label><b>From</b></label> 
+                  <%= date_field_tag("date_from", "") %>
+                  <label><b>To</b></label>
+                  <%= date_field_tag("date_to", "") %>
+                  <%= button_tag class: 'dateSearch' do %>
+                    <i class="fa fa-search search-icon"></i>
+                  <% end %>
                 </div>
               </div>
             </div>  
@@ -24,7 +32,14 @@
                 <div class="col-md-2">
                   <h4>Assignments</h4>
                 </div>
-               
+                <div class="col-md-5">
+                </div>
+                 <div class="col-md-2 mr_btm1">
+                <%= select_tag :states, options_for_select([['All States',0]]+State.all.pluck(:name,:id)),:class => 'form-control custm_select',:required => "required",:onchange => "states()",:prompt => "-------States-------" %>       
+              </div>
+              <div class="col-md-2">
+                <%= select_tag :request_type, options_for_select([['All Request Type','0,1,2,3']]+VENDOR_REQUEST_TYPE),:class => 'form-control custm_select',:required => "required",:onchange => "requestType()",:prompt => "---------Request Type--------" %>       
+              </div>
                
                  
                   
@@ -44,9 +59,8 @@
             <th><span>Request Id</span></th>
             <th><span>Request Type</span></th>
              <th class="text-center"><span>RT Code</span></th>
-            <th><span>Shop Name</span></th>
-            <th class="text-center"><span>City</span></th>
-            <th><span>State</span></th>
+            <th><span>Retailer Name</span></th>
+            <th>Priority</th>
             <th><span>RRM<span></th>
             <th><span>Vendor<span></th>
              <th><span>Status</span></th>
@@ -74,11 +88,9 @@
             <td>
               <%=Retailer.retailer_data(assignment.request.retailer_code,"name")%>  
             </td>
+             
             <td>
-               <%=Retailer.retailer_data(assignment.request.retailer_code,"city")%>  
-            </td>
-            <td>
-               <%=Retailer.retailer_data(assignment.request.retailer_code,"state")%> 
+               <%=assignment.priority%> 
             </td>
             <td>
              <%req = assignment.request.request_activities.find_by(request_id: assignment.request_id,request_status: 'approved',user_type: ['RRM','HO']);
@@ -114,5 +126,76 @@
             </div>
           </div>
 <script>
-  $('#request_assignments').attr("class","active")
+  $('#vendorAllocationStatus').attr("class","active")
+  $('#request_type').val(getUrlVars()["request_type"]);
+$('#states').val(getUrlVars()["states"]);
+function requestType(){
+  var type = $('#request_type option:selected').val();
+  var url = location.href
+  var isRequestType = getUrlVars()["request_type"]; 
+  if(isRequestType != null && isRequestType.length != 0){
+    url1 = url.split("request_type")[0]
+    url2 = url.split("request_type")[1].split("&")
+    var isFrom = getUrlVars()["from"];
+    if(isFrom != null && isFrom.length != 0){
+      url2 = url2[1]+"&"+url2[2]+"&"+url2[3]
+    }else{
+      url2 = url2[1]
+    }
+    if(url2 == '' || url2 == undefined || url2 == null){
+      location.href=url1+"request_type="+type
+    }else{
+       location.href=url1+"request_type="+type+"&"+url2 
+    }
+    
+  }else{
+    location.href=url+'&request_type='+type
+  }
+} 
+
+function states(){
+  var type = $('#states option:selected').val();
+  var url = location.href
+  var isRequestType = getUrlVars()["states"]; 
+  if(isRequestType != null && isRequestType.length != 0){
+    url1 = url.split("states")[0]
+    url2 = url.split("states")[1].split("&")
+    var isFrom = getUrlVars()["from"];
+    if(isFrom != null && isFrom.length != 0){
+      url2 = url2[1]+"&"+url2[2]+"&"+url2[3]
+    }else{
+      url2 = url2[1]
+    }
+    
+    if(url2 == '' || url2 == undefined || url2 == null){
+      location.href=url1+"states="+type
+    }else{
+       location.href=url1+"states="+type+"&"+url2 
+    }
+    
+  }else{
+    location.href=url+'&states='+type
+  }
+}   
+
+    $(".dateSearch").click(function(){
+        if(location.href.indexOf('?') === -1){
+            location.href = location.href+"?from="+$("#date_from").val()+"&to="+$("#date_to").val(); 
+        }else{
+            var from = $("#date_from").val();
+            var to = $("#date_to").val()
+            var url = location.href
+            var isFrom = getUrlVars()["from"];
+            var isTo = getUrlVars()["to"]; 
+
+              if(isFrom != null && isFrom.length != 0 && isTo != null && isTo.length != 0){
+                url1 = url.split("&from")[0]
+                location.href = url1+'&from='+from+"&to="+to
+                
+              }else{
+                location.href=url+'&from='+from+"&to="+to
+              
+              }
+      }  
+    });
 </script       

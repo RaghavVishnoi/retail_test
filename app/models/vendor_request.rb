@@ -87,10 +87,10 @@ class VendorRequest < ActiveRecord::Base
 			case self.status
 			when APPROVED
 				self.request_assignment.request.update(is_fixed: 2)
-				self.update(current_stage: 'closed')
+				self.request_assignment.update(current_stage: 'closed')
 			when DECLINED
 				self.request_assignment.request.update(is_fixed: 3)
-				self.update(current_stage: 'declined')
+				self.request_assignment.update(current_stage: 'declined')
 			end
 		end
 

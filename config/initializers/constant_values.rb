@@ -280,7 +280,7 @@ RRM_ROLE_AUTH = ["rrm","approver"]
 CMO_APPROVED = "cmo_approved"
 APPROVED = "approved"
 DECLINED = "declined"
-PRIORITY = ['High','Normal','Low']
+PRIORITY = ['High','Medium','Low']
 ASSIGN_REQUEST_TYPE = [0,1,2,3]
 VENDOR_REQUEST_TYPE = [
   ["GSB",0],
@@ -288,6 +288,8 @@ VENDOR_REQUEST_TYPE = [
   ["IN SHOP",2],
   ["MAINTENANCE",3]
 ]
+
+CLOSE_ALLOW_STATUS = ['accepted','po_receive','started']
 
 
 

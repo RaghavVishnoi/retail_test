@@ -210,7 +210,7 @@ Rails.application.routes.draw do
   post '/retailers/file_upload'
   post '/retailers/file_insert'
   
-  post "vendor_assignments/:id/status" => "vendor_assignments#status"
+  get "vendor_assignments/:id/status" => "vendor_assignments#status"
   post "vendor_assignments/:id/po" => "vendor_assignments#po_update"
 
   post '/downloads' => 'downloads#create'
@@ -336,7 +336,7 @@ Rails.application.routes.draw do
    get '/request_assignments/:id/approve' => "request_assignments#approve"
    resources :request_assignments
    post '/request_assignments/userInfo'
-
+   post '/request_assignments/terminate' => "request_assignments#terminate"
    
    #get 'request_assignments/statusCount' => 'request_assignments#counts'
 

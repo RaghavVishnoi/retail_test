@@ -199,20 +199,20 @@
 						<h2>Vendor Action</h2>
 						<div class="comments_blk">
 
-						<%VENDOR_STAGES.each do |stage|%>
+			<%VENDOR_STAGES.each do |stage|%>
 							  
-							<div class="row mr_btm1">
-								<div class="col-md-4">
- 									<b><%=stage.camelize%></b>
-								</div>
-								<div class="col-md-4">
-									<div>
+				<div class="row mr_btm1">
+					<div class="col-md-4">
+ 						<b><%=stage.camelize%></b>
+						</div>
+						<div class="col-md-4">
+						<div>
 			<%updated_stage = @assignment.vendor_stages.find_by(stage_name: stage)
 			if updated_stage != nil
 			%>
-						<%=@assignment.vendor_stages.find_by(stage_name: stage).update_date.strftime("%d %b,%Y")%>
+		<%=@assignment.vendor_stages.find_by(stage_name: stage).update_date.strftime("%d %b,%Y")%>
 						&nbsp;&nbsp;&nbsp;
-							<%if stage == "po_receive"%>
+			<%if stage == "po_receive"%>
 
 							<span onclick="poUpdate('<%=@assignment.po_number%>')" class="cursor">
 								<b><%=@assignment.po_number%></b></span>
@@ -227,6 +227,9 @@
 					<div>
 			<%if updated_stage != nil%>
 				<%= image_tag 'update_inactive.png',:style => "width:35%;height:40px"%>
+				<%if stage == 'accepted' && RequestAssignment.canClose?(@assignment.id)%>
+					<%= image_tag 'cancel.png',:style => "width:35%;height:40px",:onclick => "stopRequest(#{@assignment.id})"%>
+				<%end%>	
 			<%elsif stage == "po_receive"%>
 
 				<div>
@@ -238,7 +241,7 @@
            
  
                 </div>
-			<%else%>
+			<%elsif @assignment.status != 'declined'%>
 
 			<div>
                 <div>
@@ -248,6 +251,7 @@
        			 
 		    </div>
 		    <%end%>
+
 			</div>
 				</div>
 			</div>
@@ -263,7 +267,7 @@
 <%=render :partial => "poreceive"%>
 <%=render :partial => "date_update"%>
 <%=render :partial => "po_update"%>
-
+<%=render :partial => 'terminate'%>
 
 </div>	
 </div>	

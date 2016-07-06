@@ -12,16 +12,17 @@
 <table class="custom-table" cellspacing="0">
 
 <tr>
-<td align="center" height="40" valign="top"><div class="border-bottom">State</div>
+<!-- <td align="center" height="40" valign="top"><div class="border-bottom">State</div>
 
 <%=select_tag :valc_states,options_for_select([['All States',0]]+State.all.pluck(:name,:id),[0]),multiple: true,class: "form-control multi-select",:onchange => "state()"%>
 
 
 
-</td>
+</td> -->
 <td><table width="100%" border="0" class="tbl-second-lvl" cellspacing="0" cellpadding="0">
 	
   <tr>
+    <td>States</td>
     <td colspan="2" align="center">SIS</td>
     <td colspan="2">GSB </td>
     <td colspan="2">IN SHOP</td>
@@ -29,6 +30,7 @@
     </tr>
 
   <tr>
+    <td></td>
     <td>Pending</td>
     <td>Assigned</td>
    <td>Pending</td>
@@ -39,16 +41,29 @@
     <td>Assigned</td>
   </tr>
   <tr>
-    <td class="sis_pending"><%=RequestAssignment.valc_pending_requests_counts(params[:start_date],params[:end_date],1,[0])%></td>
-    <td class="sis_assigned"><%=RequestAssignment.valc_assigned_requests_counts(params[:start_date],params[:end_date],1,[0])%></td>
-    <td class="gsb_pending"><%=RequestAssignment.valc_pending_requests_counts(params[:start_date],params[:end_date],0,[0])%></td>
-    <td class="gsb_assigned"><%=RequestAssignment.valc_assigned_requests_counts(params[:start_date],params[:end_date],0,[0])%></td>
-    <td class="in_shop_pending"><%=RequestAssignment.valc_pending_requests_counts(params[:start_date],params[:end_date],2,[0])%></td>
-    <td class="in_shop_assigned"><%=RequestAssignment.valc_assigned_requests_counts(params[:start_date],params[:end_date],2,[0])%></td>
-    <td class="maintenance_pending"><%=RequestAssignment.valc_pending_requests_counts(params[:start_date],params[:end_date],3,[0])%></td>
-    <td class="maintenance_assigned"><%=RequestAssignment.valc_assigned_requests_counts(params[:start_date],params[:end_date],3,[0])%></td>
+    <td onclick="assignments(0)" class="cursor">All States</td>
+    <td class="sis_pending" onclick="sisPending(0)"><%=RequestAssignment.valc_pending_requests_counts(params[:start_date],params[:end_date],1,[0])%></td>
+    <td class="sis_assigned" onclick="sisAssigned(0)"><%=RequestAssignment.valc_assigned_requests_counts(params[:start_date],params[:end_date],1,[0])%></td>
+    <td class="gsb_pending" onclick="gsbPending(0)"><%=RequestAssignment.valc_pending_requests_counts(params[:start_date],params[:end_date],0,[0])%></td>
+    <td class="gsb_assigned" onclick="gsbAssigned(0)"><%=RequestAssignment.valc_assigned_requests_counts(params[:start_date],params[:end_date],0,[0])%></td>
+    <td class="in_shop_pending" onclick="inShopPending(0)"><%=RequestAssignment.valc_pending_requests_counts(params[:start_date],params[:end_date],2,[0])%></td>
+    <td class="in_shop_assigned" onclick="inShopAssigned(0)"><%=RequestAssignment.valc_assigned_requests_counts(params[:start_date],params[:end_date],2,[0])%></td>
+    <td class="maintenance_pending" onclick="maintenancePending(0)"><%=RequestAssignment.valc_pending_requests_counts(params[:start_date],params[:end_date],3,[0])%></td>
+    <td class="maintenance_assigned" onclick="maintenanceAssigned(0)"><%=RequestAssignment.valc_assigned_requests_counts(params[:start_date],params[:end_date],3,[0])%></td>
   </tr>
-   
+  <%State.all.each do |state|%>
+    <tr>
+     <td onclick="assignments('<%=state.id%>')" class="cursor"><%=state.name%></td>
+    <td class="sis_pending<%=state.id%> cursor" onclick="sisPending('<%=state.id%>')"><%=RequestAssignment.valc_pending_requests_counts(params[:start_date],params[:end_date],1,[state.id])%></td>
+    <td class="sis_assigned<%=state.id%> cursor" onclick="sisAssigned('<%=state.id%>')"><%=RequestAssignment.valc_assigned_requests_counts(params[:start_date],params[:end_date],1,[state.id])%></td>
+    <td class="gsb_pending<%=state.id%> cursor" onclick="gsbPending('<%=state.id%>')"><%=RequestAssignment.valc_pending_requests_counts(params[:start_date],params[:end_date],0,[state.id])%></td>
+    <td class="gsb_assigned<%=state.id%> cursor" onclick="gsbAssigned('<%=state.id%>')"><%=RequestAssignment.valc_assigned_requests_counts(params[:start_date],params[:end_date],0,[state.id])%></td>
+    <td class="in_shop_pending<%=state.id%> cursor" onclick="inShopPending('<%=state.id%>')"><%=RequestAssignment.valc_pending_requests_counts(params[:start_date],params[:end_date],2,[state.id])%></td>
+    <td class="in_shop_assigned<%=state.id%> cursor" onclick="inShopAssigned('<%=state.id%>')"><%=RequestAssignment.valc_assigned_requests_counts(params[:start_date],params[:end_date],2,[state.id])%></td>
+    <td class="maintenance_pending<%=state.id%> cursor" onclick="maintenancePending('<%=state.id%>')"><%=RequestAssignment.valc_pending_requests_counts(params[:start_date],params[:end_date],3,[state.id])%></td>
+    <td class="maintenance_assigned<%=state.id%> cursor" onclick="maintenanceAssigned('<%=state.id%>'')"><%=RequestAssignment.valc_assigned_requests_counts(params[:start_date],params[:end_date],3,[state.id])%></td>
+    </tr> 
+  <%end%>
   
   
   
@@ -59,11 +74,20 @@
 </div>
 </center>
 <script>
-   $("#valc_states").change(function(){
+   function assignments(stateId){
+    var states = []
+    states.push(stateId)
+    var from = getUrlVars()["from"]; 
+    var to = getUrlVars()["to"];
+    if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
+       location.href="/request_assignments/new?states="+states+"&request_type=0,1,2,3&is_rrm=true"  
+    }else{
+       location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=0,1,2,3&is_rrm=true"  
+    }
+   }
+   function assignmentCount(id){
       var states = []
-      $('#valc_states  option:selected').each(function() {
-            states.push($(this).val())
-      });
+      states.push(id)
       var from = getUrlVars()["from"]; 
       var to = getUrlVars()["to"];  
       $.ajax({
@@ -87,8 +111,8 @@
             reqType = request_assignment[type[i]]
             countAssigned = reqType[0]['assigned'] 
             countPending = reqType[0]['pending']
-            $("."+type[i]+"_pending").text(countPending);
-            $("."+type[i]+"_assigned").text(countAssigned);
+            $("."+type[i]+"_pending"+id).text(countPending);
+            $("."+type[i]+"_assigned"+id).text(countAssigned);
           }
          },
          error: function(){
@@ -96,12 +120,10 @@
          } 
       });
       
-    });
-      $(".sis_pending").click(function(){
+     }
+      function sisPending(stateId){
         var states = []
-        $('#valc_states  option:selected').each(function() {
-              states.push($(this).val())
-        });
+        states.push(stateId)
         var from = getUrlVars()["from"]; 
         var to = getUrlVars()["to"];
         if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
@@ -110,12 +132,10 @@
            location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=1&is_rrm=true"  
         }
        
-      });
-      $(".gsb_pending").click(function(){
+      };
+      function gsbPending(stateId){
         var states = []
-        $('#valc_states  option:selected').each(function() {
-              states.push($(this).val())
-        });
+        states.push(stateId)
         var from = getUrlVars()["from"]; 
         var to = getUrlVars()["to"];
         if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
@@ -124,12 +144,10 @@
            location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=0&is_rrm=true"  
         }
        
-      });
-      $(".in_shop_pending").click(function(){
+      };
+      function inShopPending(stateId){
         var states = []
-        $('#valc_states  option:selected').each(function() {
-              states.push($(this).val())
-        });
+        states.push(stateId)
         var from = getUrlVars()["from"]; 
         var to = getUrlVars()["to"];
         if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
@@ -138,12 +156,10 @@
            location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=2&is_rrm=true"  
         }
        
-      });
-      $(".maintenance_pending").click(function(){
+      };
+     function maintenancePending(stateId){
         var states = []
-        $('#valc_states  option:selected').each(function() {
-              states.push($(this).val())
-        });
+        states.push(stateId)
         var from = getUrlVars()["from"]; 
         var to = getUrlVars()["to"];
         if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
@@ -152,12 +168,10 @@
            location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=3&is_rrm=true"  
         }
        
-      });
-      $(".sis_assigned").click(function(){
+      };
+      function sisAssigned(stateId){
         var states = []
-        $('#valc_states  option:selected').each(function() {
-              states.push($(this).val())
-        });
+        states.push(stateId)
         var from = getUrlVars()["from"]; 
         var to = getUrlVars()["to"];
         if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
@@ -166,12 +180,10 @@
            location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=1&is_valc=1"  
         }
        
-      });
-      $(".gsb_assigned").click(function(){
+      };
+      function gsbAssigned(stateId){
         var states = []
-        $('#valc_states  option:selected').each(function() {
-              states.push($(this).val())
-        });
+        states.push(stateId)
         var from = getUrlVars()["from"]; 
         var to = getUrlVars()["to"];
         if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
@@ -180,12 +192,10 @@
            location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=0&is_valc=1"  
         }
        
-      });
-      $(".in_shop_assigned").click(function(){
+      };
+      function inShopAssigned(stateId){
         var states = []
-        $('#valc_states  option:selected').each(function() {
-              states.push($(this).val())
-        });
+        states.push(stateId)
         var from = getUrlVars()["from"]; 
         var to = getUrlVars()["to"];
         if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
@@ -194,12 +204,10 @@
            location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=2&is_valc=1"  
         }
        
-      });
-      $(".maintenance_assigned").click(function(){
+      };
+      function maintenanceAssigned(stateId){
         var states = []
-        $('#valc_states  option:selected').each(function() {
-              states.push($(this).val())
-        });
+        states.push(stateId)
         var from = getUrlVars()["from"]; 
         var to = getUrlVars()["to"];
         if(from == 'undefined' || from == null || to == 'undefined' || to == null) {
@@ -208,7 +216,7 @@
            location.href="/request_assignments/new?from="+from+"&to="+to+"&states="+states+"&request_type=3&is_valc=1"  
         }
        
-      });
+      };
 </script>
 
  

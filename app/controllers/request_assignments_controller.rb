@@ -2,7 +2,7 @@ class RequestAssignmentsController < ApplicationController
   
   before_action :set_request_assignment, only: [:show, :edit, :update, :destroy]
   skip_before_filter :authenticate_user
-  skip_before_action :verify_authenticity_token, only: [:create,:userInfo,:mass_assignment,:update]
+  skip_before_action :verify_authenticity_token, only: [:create,:userInfo,:mass_assignment,:update,:terminate]
   respond_to :html
 
   PER_PAGE = 50
@@ -74,6 +74,13 @@ class RequestAssignmentsController < ApplicationController
   def approve
     request_assignment = RequestAssignment.find(params[:id]).update(:is_valc => true)
     redirect_to new_request_assignment_path(:is_rrm => true)
+  end
+
+   
+
+  def terminate
+    result = RequestAssignment.terminateRequest(params[:requestAssignmentId])
+    render :json => result
   end
 
   private

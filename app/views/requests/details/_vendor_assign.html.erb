@@ -40,9 +40,9 @@
                   <td colspan="2"><%=select_tag :priority,options_for_select(PRIORITY),:prompt => '--------select priority--------',:id => "popup-select",:required => "required",:class => 'priority'%></td>
                 </tr> 
                 <tr><td>&nbsp;</td></tr>
-                <tr class="cellSpan"><td><span class="vlabel">Grade : <label class="grade"></label></span></td></tr>
+                <tr class="cellSpan"><td></td></tr>
                 <tr class="cellSpan"><td><span class="vlabel">Pending : <label class="pending"></label></span></td></tr>
-                <tr class="cellSpan"><td><span class="vlabel">In-Process : <label class="in_process"></label></span></td></tr>
+                <tr class="cellSpan"><td><span class="vlabel">Completed : <label class="in_process"></label></span></td></tr>
                 <tr class="cellSpan"><td><input type="button" class="popup_button_assignment" value="Assign" id="assignment"/></td></tr>
                 <%=hidden_field_tag :request_id,params[:id]%>
                 <%=hidden_field_tag :assigned_by,current_user.id%>
@@ -82,9 +82,9 @@
         grade = data['grade']
         pending = result['pending']
         in_process = result['in_process']
-        $('.grade').text(grade)
+        completed = result['completed']       
         $('.pending').text(pending)
-        $('.in_process').text(in_process)
+        $('.in_process').text(parseInt(in_process)+parseInt(completed))
 			},
 			error: function(){
 

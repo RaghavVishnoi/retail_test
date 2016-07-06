@@ -5,9 +5,7 @@
             <div class="col-lg-12">
               
               <div class="row">
-                <div class="col-lg-12">
-                   
-                  
+                <div class="col-lg-12">                  
                   <h1>Add Assignments</h1>
                 </div>
               </div>
@@ -22,34 +20,43 @@
                         
                       </ul>
                       
-                      <div class="tab-content">
-                        <div class="tab-pane fade active in" id="tab-home">
+<div class="tab-content">
+  <div class="tab-pane fade active in" id="tab-home">
                           
-                          <div class="row">
+<div class="row">
+<div class="col-lg-12">
+  <div class="col-md-2">
+    <%= select_tag :states, options_for_select([['All States',0]]+State.all.pluck(:name,:id)),:class => 'form-control custm_select',:required => "required",:onchange => "states()",:prompt => "-----------------States-------------------" %>       
+  </div>
+  <div class="col-md-2">
+    <%= select_tag :request_type, options_for_select([['All Request Type','0,1,2,3']]+VENDOR_REQUEST_TYPE),:class => 'form-control custm_select',:required => "required",:onchange => "requestType()",:prompt => "---------Request Type--------" %>       
+  </div>
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-6">
+    <div>
+      <label><b>From</b></label> 
+      <%= date_field_tag("date_from", "") %>
+      <label><b>To</b></label>
+      <%= date_field_tag("date_to", "") %>
+      <%= button_tag class: 'dateSearch' do %>
+        <i class="fa fa-search search-icon"></i>
+      <% end %>
+    </div>
+  </div>
+</div> 
 <div class="col-lg-12">
 <div class="main-box no-header clearfix">
   <div class="main-box-body clearfix">
     <div class="table-responsive">
-      <%if params[:is_rrm] == 'false'%>
-        <table>
-          <tr><td>
-            <%=select_tag :vendor_id,options_for_select(User.users_data('vendor')),:prompt => '--------select vendor--------',:class => "vendor-assignment",:required => "required"%>
-          </td>
-          <td width="2%"></td>
-          <td width="200px;">
-            <%=select_tag :priority,options_for_select(PRIORITY),:prompt => '--------select priority--------',:required => "required",:class => 'priority'%>
-          </td>
-          <%=hidden_field_tag :assigned_by,current_user.id%>
-        </tr>
-        </table>
-      <%end%>
+ 
       <table class="table user-list table-hover">
         <thead>
           <tr>
             <th><span>Request Id</span></th>
             <th><span>Request Type</span></th>
              <th class="text-center"><span>RT Code</span></th>
-            <th><span>Shop Name</span></th>
+            <th><span>Retailer Name</span></th>
             <th class="text-center"><span>City</span></th>
             <th><span>State</span></th>
             <th><span>RRM<span></th>
@@ -118,12 +125,20 @@
                       </li>
                     </a>
 
+                   
+
                    <a href="/request_assignments/<%=request.request_assignment.id%>/approve">  
                      <li class="fa-stack">
                         <i class="fa fa-square fa-stack-2x site-color"></i>
                         <i class="fa fa-check fa-stack-1x fa-inverse"></i>
                      </li>
                    </a>
+                    <a href="/request_assignments/<%=request.request_assignment.id%>/edit">  
+                      <li class="fa-stack" onclick="stopRequest(<%=request.request_assignment.id%>)">
+                        <i class="fa fa-square fa-stack-2x site-color"></i>
+                        <i class="fa fa-times fa-stack-1x fa-inverse"></i>
+                      </li>
+                    </a>
                   </ul> 
                 <%end%>               
             </td>
@@ -136,8 +151,33 @@
   </div>
 
 </div>
-<%if params[:is_rrm] == 'false'%>
- <div class="col-md-1">
+     <%if params[:is_rrm] == 'false'%>
+        <table class="mr_btm1">
+          <tr><td>
+            <%=select_tag :vendor_id,options_for_select(User.users_data('vendor')),:prompt => '  -----select vendor-----  ',:class => "vendor-assignment form-control custm_select",:required => "required",:id => "popup-select"%>
+          </td>
+          <td></td>
+          <td>
+            <%=select_tag :priority,options_for_select(PRIORITY),:prompt => '   -----select priority-----   ',:required => "required",:class => 'priority form-control custm_select'%>
+          </td>
+
+          <%=hidden_field_tag :assigned_by,current_user.id%>
+        </tr>
+        <tr>
+          <td>&nbsp;</td> <td></td> <td></td>
+        </tr>
+        <tr>
+          <td><b>Pending Assignments:</b> <span class="pendingValue">0</span></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><b>Completed Assignments:</b> <span class="completedValue">0</span></td>
+          <td></td>
+          <td></td>
+        </tr>
+        </table>
+       <div class="col-md-1">
       <%= submit_tag "Assign",:class => "btn btn-success " ,:id => "submit-assignment"%>      
 </div>
 <%end%>
@@ -160,7 +200,7 @@
           </div>
            
         </div>
-
+<%=render :partial => 'vendor_assignments/terminate'%>
 <script type="text/javascript">
     var value = []
       $('#selectAll').click(function() {
@@ -199,11 +239,9 @@
  
   });    
    
-
-
   $("#submit-assignment").click(function(){
 
-    var vendor_id = $( "select#vendor_id option:selected").val();
+    var vendor_id = $( "select#popup-select option:selected").val();
     var assigned_by = $("#assigned_by").val();
     var priority = $("select#priority option:selected").val();
      if(vendor_id == 'undefined' || vendor_id == null || vendor_id == ""){
@@ -244,12 +282,7 @@
     }
        
    }); 
-    
-   
-   
-</script>
- 
- <script>
+
   $("#unassigned").click(function(){
       var from = getUrlVars()["from"]; 
       var to = getUrlVars()["to"]; 
@@ -288,4 +321,69 @@
          
       }
   });
+$("#popup-select").change(function(){
+    var userId = $("select#popup-select option:selected").val();
+    $.ajax({
+      url : "/request_assignments/userInfo",
+      type : "POST",
+      data : {user_id : userId},
+      dataType : "text",
+      complete: function(){
+
+      },
+      success: function(data,xhr){
+        data = JSON.parse(data);
+        result = data['object']
+        pending = result['pending']
+        in_process = result['in_process']
+        completed = result['completed']
+        $('.pendingValue').text(parseInt(pending)+parseInt(in_process))
+        $('.completedValue').text(completed)
+      },
+      error: function(){
+
+      }
+    });
+  });
+
+$('#request_type').val(getUrlVars()["request_type"]);
+$('#states').val(getUrlVars()["states"]);
+function requestType(){
+  var type = $('#request_type option:selected').val();
+  var url = location.href
+  var isRequestType = getUrlVars()["request_type"]; 
+  if(isRequestType != null && isRequestType.length != 0){
+    url1 = url.split("request_type")[0]
+    url2 = url.split("request_type")[1].split("&")[1]
+    if(url2 == '' || url2 == undefined || url2 == null){
+      location.href=url1+"request_type="+type
+    }else{
+       location.href=url1+"request_type="+type+"&"+url2 
+    }
+    
+  }else{
+    location.href=url+'&request_type='+type
+  }
+} 
+
+function states(){
+  var type = $('#states option:selected').val();
+  var url = location.href
+  var isRequestType = getUrlVars()["states"]; 
+  if(isRequestType != null && isRequestType.length != 0){
+    url1 = url.split("states")[0]
+    url2 = url.split("states")[1].split("&")
+    url2 = url2[1]+"&"+url2[2]
+    if(url2 == '' || url2 == undefined || url2 == null){
+      location.href=url1+"states="+type
+    }else{
+       location.href=url1+"states="+type+"&"+url2 
+    }
+    
+  }else{
+    location.href=url+'&states='+type
+  }
+}   
+
+
  </script>

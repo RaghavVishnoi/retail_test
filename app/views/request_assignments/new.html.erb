@@ -1,6 +1,26 @@
  <%= render 'form' %>
  <script>
-  $('#request_assignments').attr("class","active")
+  $('#vendorAssignments').attr("class","active")
+    $(".dateSearch").click(function(){
+        if(location.href.indexOf('?') === -1){
+            location.href = location.href+"?from="+$("#date_from").val()+"&to="+$("#date_to").val(); 
+        }else{
+            var from = $("#date_from").val();
+            var to = $("#date_to").val()
+            var url = location.href
+            var isFrom = getUrlVars()["from"];
+            var isTo = getUrlVars()["to"]; 
+
+              if(isFrom != null && isFrom.length != 0 && isTo != null && isTo.length != 0){
+                url1 = url.split("&from")[0]
+                location.href = url1+'&from='+from+"&to="+to
+                
+              }else{
+                location.href=url+'&from='+from+"&to="+to
+              
+              }
+      }  
+    });
 </script       
 
 

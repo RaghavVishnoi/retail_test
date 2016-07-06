@@ -59,8 +59,8 @@
 
 		 		$.ajax({
 		 			url : "/vendor_assignments/"+assignment_id+"/status",
-		 			type : "POST",
-		 			data : {update_date: 	updateDate,
+		 			type : "GET",
+		 			data : {updateDate: 	updateDate,
 		 				status: status
 		 			},
 		 			dataType : "json",

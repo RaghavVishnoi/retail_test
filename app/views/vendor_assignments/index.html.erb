@@ -28,14 +28,22 @@
 					
 				</div>
         <div class="col-md-3">
-           <%= select_tag :request_type, options_for_select(VENDOR_REQUEST_TYPE),:class => 'form-control custm_select',:required => "required",:onchange => "requestType()",:prompt => "---------Request Type--------" %>
+           <%= select_tag :request_type, options_for_select(['All']+VENDOR_REQUEST_TYPE),:class => 'form-control custm_select',:required => "required",:onchange => "requestType()",:prompt => "---------Request Type--------" %>
           
         </div>
-         <div class="col-md-3">
-           <%= select_tag :status, options_for_select(VENDOR_STAGES.map{|stage| [stage.camelize]}),:class => 'form-control custm_select',:required => "required",:onchange => "status()",:prompt => "---------Select Status--------" %>
-          
+        <%if params[:type] != 'closed'%>
+           <div class="col-md-3">
+             <%= select_tag :status, options_for_select(['All']+[['Pending','pending']]+VENDOR_STAGES.map{|stage| [stage.camelize,stage]}),:class => 'form-control custm_select',:required => "required",:onchange => "status()",:prompt => "---------Select Status--------" %>
+            
+          </div>
+        <%else%> 
+        <div class="col-md-1">
+
         </div>
-				
+          <div class="col-md-2">
+             <%= image_tag 'export.png',:style => "width:75%;height:35px"%>
+          </div>
+				<%end%>
 			</div>	
 			 
 	</div>
@@ -53,9 +61,9 @@
           <tr>
             <th><span>Request Id</span></th>
             <th><span>Request Type</span></th>
+            <th><span>Priority</span></th>
              <th class="text-center"><span>RT Code</span></th>
             <th><span>Shop Name</span></th>
-            <th><span>City</span></th>
             <th><span>State</span></th>
             <th><span>RRM<span></th>
             <th><span>Status</span></th>
@@ -78,15 +86,14 @@
             <td>
               <%=assignment.request.request_type.upcase if assignment.request.request_type != nil%>  
             </td>
+            <td><%=assignment.priority%></td>
             <td>
               <%=assignment.request.retailer_code.upcase%>  
             </td>
             <td>
               <%=Retailer.retailer_data(assignment.request.retailer_code,"name")%>  
             </td>
-            <td>
-              <%=Retailer.retailer_data(assignment.request.retailer_code,"city")%> 
-            </td>
+            
             <td>
                <%=Retailer.retailer_data(assignment.request.retailer_code,"state")%> 
             </td>
@@ -104,7 +111,7 @@
               <span class="label label-default"><%=assignment.assign_date.strftime("%d %b,%Y") if assignment.assign_date != nil%></span>
             </td>
             <td>
-							<a href="/vendor_assignments/<%=assignment.id%>" class="table-link">
+							<a href="/vendor_assignments/<%=assignment.id%>" class="table-link" title="view details">
 								<span class="fa-stack">
 									<i class="fa fa-square fa-stack-2x site-color"></i>
 									<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
@@ -115,7 +122,7 @@
 						 
             <%if assignment.status == PENDING && assignment.current_stage == PENDING%>
             
-              <a href="/vendor_assignments/<%=assignment.id%>/status?status=accepted" class="table-link">
+              <a href="/vendor_assignments/<%=assignment.id%>/status?status=accepted" class="table-link" title="accept">
                 <span class="fa-stack">
                   <i class="fa fa-square fa-stack-2x site-color"></i>
                   <i class="fa fa-check fa-stack-1x fa-inverse"></i>
@@ -124,7 +131,7 @@
           
                
              
-              <a href="/vendor_assignments/<%=assignment.id%>/status?status=declined" class="table-link">
+              <a href="/vendor_assignments/<%=assignment.id%>/status?status=declined" class="table-link" title="reject">
                 <span class="fa-stack">
                   <i class="fa fa-square fa-stack-2x site-color"></i>
                   <i class="fa fa-times fa-stack-1x fa-inverse"></i>
@@ -134,25 +141,28 @@
             <%end%> 
             <%if assignment.status == ACCEPTED && assignment.current_stage == ACCEPTED%>
               
-              <a class="table-link start cursor">
+              <a class="table-link start cursor" title="start">
                  <%=hidden_field_tag :assignment_id,assignment.id%> 
                 <span class="fa-stack ">
                   <i class="fa fa-square fa-stack-2x site-color"></i>
                   <i class="fa fa fa-play fa-stack-1x fa-inverse"></i>
                 </span>
               </a> 
-              <%=render :partial => "poreceive"%>              
+
+              <%=render :partial => "poreceive"%>   
+              <%end%> 
+              <%if RequestAssignment.canClose?(assignment.id)%>  
+                <a class="table-link stop cursor" onclick="stopRequest(<%=assignment.id%>)" title="terminate">                
+                  <span class="fa-stack">
+                    <i class="fa fa-square fa-stack-2x site-color"></i>
+                    <i class="fa fa fa-stop fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a> 
+              <%end%>        
             </td>
-            <%end%>
+          
           </tr>
-          <tr>
-            <%RequestDocument.where(request_document_id: assignment.id).each do |document|%>
-            <td>
-             <%=image_tag RequestDocumentSerializer.new(document, :root => false).request_document_url,style: 'height:50px;width:50px;',:class => 'img'%>
-            
-          </td>
-          <%end%>
-          </tr>
+         
            </tbody>
                   <%end%>  
            
@@ -179,7 +189,8 @@
           
           <img class="add-img"/>
         </div>
-      </div>
+</div>
+<%=render :partial => 'terminate'%>
 <script>
     $('.img').click(function(){
        $('.img_open').css("display","block");
@@ -187,11 +198,11 @@
        $('.add-img').attr("src",imgSrc);
        $('.img_open').click(function(){
         $('.img_open').hide();
-      
+       });
 
     });
 
-    });
+
 <%if params[:type] == nil%> 
 $('#dashboard').attr("class",'active')
 <%elsif params[:type] == 'current'%>
@@ -199,7 +210,8 @@ $('#vendorPending').attr("class",'active')
 <%else%>
 $('#vendorClosed').attr("class",'active')
 <%end%>
-   
+$('#request_type').val(getUrlVars()["q[request_type]"]);
+$('#status').val(getUrlVars()["q[status]"]);     
 function requestType(){
   var type = $('#request_type option:selected').val();
   var url = location.href
@@ -235,6 +247,7 @@ function status(){
     location.href=url+'&q[status]='+status
   }
 }   
+
 
 </script>
 
