@@ -109,7 +109,7 @@ Rails.application.routes.draw do
 
   resources :rrms
 
-  resources :request_documents, :only => [:new,:create]
+  resources :request_documents, :only => [:new,:create,:edit,:update]
 
   get '/passwords/edit' => "passwords#edit"
   put '/passwords' => "passwords#update"
