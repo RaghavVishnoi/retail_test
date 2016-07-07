@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160704132756) do
+ActiveRecord::Schema.define(version: 20160608120700) do
 
   create_table "GioneeRetailer", id: false, force: true do |t|
     t.text "Code",     null: false
@@ -514,7 +514,7 @@ ActiveRecord::Schema.define(version: 20160704132756) do
 
   create_table "request_documents", force: true do |t|
     t.string   "request_document"
-    t.integer  "request_document_id"
+    t.string   "request_document_id"
     t.string   "request_document_type"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Request Id</Data></Cell>
+        <Cell><Data ss:Type="String">Request</Data></Cell>
+        <Cell><Data ss:Type="String">Priority</Data></Cell>
+        <Cell><Data ss:Type="String">RT Code</Data></Cell>
+        <Cell><Data ss:Type="String">Shop Name</Data></Cell>
+        <Cell><Data ss:Type="String">State</Data></Cell>
+        <Cell><Data ss:Type="String">RRM</Data></Cell>
+        <Cell><Data ss:Type="String">Status</Data></Cell>
+        <Cell><Data ss:Type="String">Assigned On</Data></Cell>
+      </Row>
+    <% @assignments.each do |assignment| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= assignment.request_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%=assignment.request.request_type.upcase if assignment.request.request_type != nil%></Data></Cell>
+        <Cell><Data ss:Type="String"><%=assignment.priority%></Data></Cell>
+        <Cell><Data ss:Type="String"><%=assignment.request.retailer_code.upcase%></Data></Cell>
+        <Cell><Data ss:Type="String"><%=Retailer.retailer_data(assignment.request.retailer_code,"name")%></Data></Cell>
+        <Cell><Data ss:Type="String"><%=Retailer.retailer_data(assignment.request.retailer_code,"state")%></Data></Cell>
+        <Cell><Data ss:Type="String"><%req = assignment.request.request_activities.find_by(request_id: assignment.request_id,request_status: 'approved',user_type: ['RRM','HO']); %><%=req.user.name if req != nil%></Data></Cell>
+        <Cell><Data ss:Type="String"><%=assignment.current_stage.upcase if assignment.current_stage != nil%></Data></Cell>
+        <Cell><Data ss:Type="String"><%=assignment.assign_date.strftime("%d %b,%Y") if assignment.assign_date != nil%></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

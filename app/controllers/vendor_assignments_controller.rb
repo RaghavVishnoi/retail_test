@@ -5,7 +5,15 @@ class VendorAssignmentsController < ApplicationController
 
 	def index
       session[:prev_url] = request.fullpath
-      @assignments = VendorAssignment.request_assignments(params,current_user).paginate(:per_page => PER_PAGE,:page => (params[:page] || 1))
+      if params["format"] == "xls"
+        @assignments = VendorAssignment.request_assignments(params,current_user)
+      else
+        @assignments = VendorAssignment.request_assignments(params,current_user).paginate(:per_page => PER_PAGE,:page => (params[:page] || 1))
+      end
+      respond_to do |format|
+        format.html
+        format.xls
+      end
 	end
 
 	def edit
