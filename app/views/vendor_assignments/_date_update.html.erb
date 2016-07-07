@@ -69,7 +69,12 @@
 
 		 			},
 		 			success: function(data,xhr){
-		 				location.reload();
+ 		 				if(data['result'] == true || data['result'] == 'true'){
+ 		 					alert(data['message'])
+ 		 					location.reload();
+ 		 				}else{
+ 		 					alert(data['message'])
+ 		 				}
 		 			},
 		 			error: function(){
 

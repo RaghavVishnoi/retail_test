@@ -290,8 +290,19 @@ VENDOR_REQUEST_TYPE = [
 ]
 
 CLOSE_ALLOW_STATUS = ['accepted','po_receive','started']
+PREV_STAGES = {
 
+  "accepted" => "pending",
+  "started" => "accepted",
+  "in_production" => "started",
+  "in_transit" => "in_production",
+  "installation_complete" => "in_production",
+  "bill_received" => "installation_complete"
 
+}
+DATE_ERRORS = ['Wrong date format!','Added date is less than last updated date!','Something went wrong please try again!']
+
+INITIAL_STATUS = ['accepted','declined']
 
 
   

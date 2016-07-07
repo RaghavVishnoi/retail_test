@@ -75,9 +75,7 @@
 	 	po_number = $(".ponumber").val();
 	 	start_date = $(".startinput").val();
         if(po_number == null || po_number == 'undefined' || po_number == ''){
-
         	alert("please add po number!");
-
 	 	}else if(po_date == null || po_date == 'undefined' || po_date == ''){
 	 		alert("please add a valid po date!");
 	 	}else if(start_date == null || start_date == 'undefined' || start_date == ''){
@@ -90,7 +88,7 @@
 	 			type : "GET",
 	 			data : {status: 'po_receive',
 	 				date: po_date,	
-	 				update_date: start_date,
+	 				updateDate: start_date,
 	 				po_number: po_number
 	 			},
 	 			dataType : "json",
@@ -99,8 +97,13 @@
 
 	 			},
 	 			success: function(data,xhr){
-	 				// result = JSON.parse(data);
-	 				location.reload();
+	 				if(data['result'] == true || data['result'] == 'true'){
+ 		 				alert(data['message'])
+ 		 				location.reload();
+ 		 			}else{
+ 		 				console.log(data)
+ 		 				alert(data['message'])
+ 		 			}
 	 			},
 	 			error: function(){
 

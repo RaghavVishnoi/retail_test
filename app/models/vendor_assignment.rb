@@ -66,8 +66,38 @@ class VendorAssignment < ActiveRecord::Base
 		end
 	end
 
-	def self.isValidDate(params)
+	def self.isValidDate?(params)
+		requestAssignment = RequestAssignment.find(params[:id])
+		if params[:status] == 'po_receive'
+			prevStage = 'accepted'
+		else
+			prevStage = PREV_STAGES[params[:status]]
+		end
+		prevDate = requestAssignment.vendor_stages.where(stage_name: prevStage).last.update_date
+		begin
+		  currentUpdateDate = Date.parse(params[:updateDate])
+		  if prevDate <= currentUpdateDate
+		  	@stage = VendorAssignment.update_status(params)
+        	if @stage.save
+        		3
+        	else
+        		2
+        	end
+		  else
+		  	1
+		  end	
+		rescue ArgumentError
+		   0
+		end	
+	end
 
+	def self.updateStatus(params)
+		@stage = VendorAssignment.update_status(params)
+        if @stage.save
+        	3
+        else
+        	2
+        end
 	end
 
 	 

@@ -20,15 +20,21 @@ class VendorAssignmentsController < ApplicationController
 
 
     def status
-        @stage = VendorAssignment.update_status(params)
-        if @stage.save
-            respond_to do |format|
-              format.html {redirect_to session[:prev_url]}
-              format.json {render :json => {result: true}}
-            end           
+      if INITIAL_STATUS.include?(params[:status])
+        result = VendorAssignment.updateStatus(params)
+        if result == 3
+          redirect_to session[:prev_url],notice: "Successfully accepted!"
         else
-            redirect_to session[:prev_url],notice: @stage.errors.full_messages
+          redirect_to session[:prev_url],notice: DATE_ERRORS[result]
         end
+      else
+        result = VendorAssignment.isValidDate?(params)
+        if result == 3
+          render :json => {result: true,message: 'Status successfully updated!'}
+        else
+          render :json => {result: false,message: DATE_ERRORS[result]}
+        end
+      end
     end
 
     def show

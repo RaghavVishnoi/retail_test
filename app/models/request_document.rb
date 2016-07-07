@@ -12,7 +12,7 @@ class RequestDocument < ActiveRecord::Base
   		vendor_request	=  VendorRequest.create!(request_assignment_id: params[:request_document_id],installation_of: params[:installation_of],installation_report: params[:installation_report],status: 'cmo_pending',installed_on: Time.now)
   		if vendor_request
   			request_assignment = RequestAssignment.find(params[:request_document_id])
-  			user = User.find(request_assignment)
+  			user = User.find(request_assignment.user_id)
   			message = "#{user.name} has submitted documents for installation"
   			RequestAssignmentActivity.create!(user_id: request_assignment.user_id,status: 'document_upload',user_type: 'vendor',request_assignment_id: request_assignment.id,message: message)
   		end

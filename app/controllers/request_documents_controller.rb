@@ -8,12 +8,12 @@ class RequestDocumentsController < ApplicationController
 
 	def create
 		@request_document = RequestDocument.new(request_document_params)
-		if @request_document.save!
+		if @request_document.save
 			update_doc_upload
 			send_request
 			redirect_to session[:prev_url]
 		else
-			redirect_to session[:prev_url],notice: @request_document.errors.full_messages
+			redirect_to session[:prev_url],notice: @request_document.errors.full_messages[0]
 		end
 	end
 
