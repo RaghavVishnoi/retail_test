@@ -7,7 +7,7 @@
 <%= date_field_tag("date_from", "") %>
 <label><b>To</b></label>
 <%= date_field_tag("date_to", "") %>
-<%= button_tag class: 'search_button' do %>
+<%= button_tag class: 'dateSearch' do %>
 <i class="fa fa-search search-icon"></i>
 <% end %>
 </div>
@@ -206,12 +206,18 @@ $('#vendorClosed').attr("class",'active')
 $('#request_type').val(getUrlVars()["q[request_type]"]);
 $('#status').val(getUrlVars()["q[status]"]);     
 function requestType(){
-  var type = $('#request_type option:selected').val();
+ var type = $('#request_type option:selected').val();
   var url = location.href
   var isRequestType = getUrlVars()["q[request_type]"]; 
   if(isRequestType != null && isRequestType.length != 0){
     url1 = url.split("q[request_type]")[0]
-    url2 = url.split("q[request_type]")[1].split("&")[1]
+    url2 = url.split("request_type")[1].split("&")
+    var isFrom = getUrlVars()["from"];
+    if(isFrom != null && isFrom.length != 0){
+      url2 = url2[1]+"&"+url2[2]+"&"+url2[3]
+    }else{
+      url2 = url2[1]
+    }
     if(url2 == '' || url2 == undefined || url2 == null){
       location.href=url1+"q[request_type]="+type
     }else{
@@ -224,23 +230,48 @@ function requestType(){
 }   
 
 function status(){
-  var status = $('#status option:selected').val();
+  var type = $('#status option:selected').val();
   var url = location.href
   var isRequestType = getUrlVars()["q[status]"]; 
   if(isRequestType != null && isRequestType.length != 0){
     url1 = url.split("q[status]")[0]
-    url2 = url.split("q[status]")[1].split("&")[1]
-    if(url2 == '' || url2 == undefined || url2 == null){
-      location.href=url1+"q[status]="+status
+    url2 = url.split("status")[1].split("&")
+    var isFrom = getUrlVars()["from"];
+    if(isFrom != null && isFrom.length != 0){
+      url2 = url2[1]+"&"+url2[2]+"&"+url2[3]
     }else{
-       location.href=url1+"q[status]="+status+"&"+url2 
+      url2 = url2[1]
+    }
+    if(url2 == '' || url2 == undefined || url2 == null){
+      location.href=url1+"q[status]="+type
+    }else{
+       location.href=url1+"q[status]="+type+"&"+url2 
     }
     
   }else{
-    location.href=url+'&q[status]='+status
+    location.href=url+'&q[status]='+type
   }
 }   
 
+$(".dateSearch").click(function(){
+        if(location.href.indexOf('?') === -1){
+            location.href = location.href+"?from="+$("#date_from").val()+"&to="+$("#date_to").val(); 
+        }else{
+            var from = $("#date_from").val();
+            var to = $("#date_to").val()
+            var url = location.href
+            var isFrom = getUrlVars()["from"];
+            var isTo = getUrlVars()["to"]; 
 
+              if(isFrom != null && isFrom.length != 0 && isTo != null && isTo.length != 0){
+                url1 = url.split("&from")[0]
+                location.href = url1+'&from='+from+"&to="+to
+                
+              }else{
+                location.href=url+'&from='+from+"&to="+to
+              
+              }
+      }  
+    });
 </script>
 

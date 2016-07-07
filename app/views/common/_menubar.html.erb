@@ -309,10 +309,10 @@ $('#request_assignments').click(function(){
 		location.href = '/request_assignments'
 });
 $('#vendorPending').click(function(){
-		location.href = '/vendor_assignments?type=current'
+		location.href = '/vendor_assignments?type=current&q[request_type]=All&q[status]=All'
 });
 $('#vendorClosed').click(function(){
-		location.href = '/vendor_assignments?type=closed'
+		location.href = '/vendor_assignments?type=closed&q[request_type]=All'
 });
 $('#vendorAssignments').click(function(){
 		location.href = '/request_assignments/new?states=0&request_type=0,1,2,3&is_rrm=true'
