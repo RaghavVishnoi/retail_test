@@ -32,11 +32,11 @@
     <div class="table-responsive">
          <table class="mr_btm1">
           <tr><td>
-            <%=select_tag :vendor_id,options_for_select(User.users_data('vendor'),@request_assignment.user_id),:prompt => '--------select vendor--------',:class => "vendor-assignment",:required => "required"%>
+            <%=select_tag :vendor_id,options_for_select(User.users_data('vendor'),@request_assignment.user_id),:prompt => '--------select vendor--------',:class => "vendor-assignment form-control custm_select",:required => "required"%>
           </td>
           <td width="2%"></td>
           <td width="200px;">
-            <%=select_tag :priority,options_for_select(PRIORITY,@request_assignment.priority),:prompt => '--------select priority--------',:required => "required",:class => 'priority'%>
+            <%=select_tag :priority,options_for_select(PRIORITY,@request_assignment.priority),:prompt => '--------select priority--------',:required => "required",:class => 'priority form-control custm_select'%>
           </td>
           <%=hidden_field_tag :assigned_by,current_user.id%>
         </tr>
@@ -68,7 +68,7 @@
                   
           <tr>
             <td>              
-              <%=@request_assignment.request_id%>       
+              <a href="/requests/<%=@request_assignment.request.id%>/edit?q[request_type]=<%=@request_assignment.request.request_type%>"> <%=@request_assignment.request_id%></a>       
             </td>
              
             <td>
@@ -164,5 +164,6 @@
     }
        
    }); 
+  $('#vendorAssignments').attr("class","active")
 </script>
        

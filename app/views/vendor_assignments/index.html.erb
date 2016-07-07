@@ -28,12 +28,12 @@
 					
 				</div>
         <div class="col-md-3">
-           <%= select_tag :request_type, options_for_select(['All']+VENDOR_REQUEST_TYPE),:class => 'form-control custm_select',:required => "required",:onchange => "requestType()",:prompt => "---------Request Type--------" %>
+           <%= select_tag :request_type, options_for_select([['All Request Type','All']]+VENDOR_REQUEST_TYPE),:class => 'form-control custm_select',:required => "required",:onchange => "requestType()",:prompt => "---------Request Type--------" %>
           
         </div>
         <%if params[:type] != 'closed'%>
            <div class="col-md-3">
-             <%= select_tag :status, options_for_select(['All']+[['Pending','pending']]+VENDOR_STAGES.map{|stage| [stage.camelize,stage]}),:class => 'form-control custm_select',:required => "required",:onchange => "status()",:prompt => "---------Select Status--------" %>
+             <%= select_tag :status, options_for_select([['All Status','All']]+[['Pending','pending']]+VENDOR_STAGES.map{|stage| [stage.camelize,stage]}),:class => 'form-control custm_select',:required => "required",:onchange => "status()",:prompt => "---------Select Status--------" %>
             
           </div>
         <%else%> 
@@ -67,6 +67,7 @@
             <th><span>State</span></th>
             <th><span>RRM<span></th>
             <th><span>Status</span></th>
+           <!--  <th><span>PO Number</span></th> -->
             <th><span>Assigned On</span></th>
             <th><span></span></th>       
           </tr>
@@ -107,6 +108,7 @@
             <td>
               <%=assignment.current_stage.upcase if assignment.current_stage != nil%>
             </td>
+            <!-- <td><%=assignment.po_number%></td> -->
              <td class="text-center">
               <span class="label label-default"><%=assignment.assign_date.strftime("%d %b,%Y") if assignment.assign_date != nil%></span>
             </td>

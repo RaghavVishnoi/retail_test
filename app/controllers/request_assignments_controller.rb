@@ -8,6 +8,7 @@ class RequestAssignmentsController < ApplicationController
   PER_PAGE = 50
 
   def index
+    session[:prev_url] = request.fullpath
     @request_assignments = RequestAssignment.assignment(params).paginate(:per_page => PER_PAGE,:page => (params[:page] || 1))
     respond_with(@request_assignments)
   end
@@ -22,6 +23,7 @@ class RequestAssignmentsController < ApplicationController
   end
 
   def edit
+    session[:prev_url] = request.fullpath
     @request_assignment = RequestAssignment.find(params[:id])
   end
 

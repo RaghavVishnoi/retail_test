@@ -563,7 +563,7 @@ select.multi-select option.selected{background:red;}
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   white-space: normal;
-  margin-top: 15%;}
+  margin-top: 25%;}
 
  .updatePo{
   position: absolute;

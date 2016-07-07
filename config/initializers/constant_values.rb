@@ -296,7 +296,7 @@ PREV_STAGES = {
   "started" => "accepted",
   "in_production" => "started",
   "in_transit" => "in_production",
-  "installation_complete" => "in_production",
+  "installation_complete" => "in_transit",
   "bill_received" => "installation_complete"
 
 }

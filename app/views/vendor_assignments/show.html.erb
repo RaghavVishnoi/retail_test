@@ -12,7 +12,7 @@
 						<div class="col-md-6">
 							<div class="gsb_blk">
 				<h2>
-					Assignment Detail
+					Assignment Details
 				</h2>
 				<div class="row">
 					<div class="col-md-5">
@@ -38,6 +38,17 @@
 				</div>
 				<div class="row">
 					<div class="col-md-5">
+					<b>Priority</b>
+					</div>
+					<div class="col-md-7">
+						<div class="blue">
+						   <%=@assignment.priority%>
+						</div>
+					</div>
+					 
+				</div>
+				<div class="row">
+					<div class="col-md-5">
 					<b>RRM</b>
 					</div>
 					<div class="col-md-7">
@@ -50,7 +61,17 @@
 					</div>
 					 
 				</div>
-
+				<div class="row">
+					<div class="col-md-5">
+					<b>Vendor Allocator</b>
+					</div>
+					<div class="col-md-7">
+						<div class="blue">
+						   <%=User.find_users('vendor allocator').pluck(:name).join(',')%>
+						</div>
+					</div>
+					 
+				</div>
 				
 				<div class="row" >
 					<div class="col-md-5">
@@ -98,7 +119,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row" >
+				<div class="row">
 					<div class="col-md-5">
 						<b>RRM Verify</b>
 					</div>
@@ -109,6 +130,7 @@
 						</div>
 					</div>
 				</div>
+				<br>
 				<%end%>
 			</div>
 		</div>	
@@ -117,7 +139,7 @@
 		<div class="col-md-6">
 			<div class="gsb_blk">
 				<h2>
-					Shop Detail
+					Shop Details
 				</h2>
 				<div class="row">
 					<div class="col-md-5">
@@ -175,8 +197,7 @@
 					</div>	
 					 
 				</div>
-				 
-
+ 
 			 
 				 
 				 

@@ -1570,9 +1570,9 @@ blockquote.pull-right:before {
   vertical-align: middle;
   border-top: 1px solid #e7ebee;
   padding: 12px 8px; }
-  .table tbody > tr > td:first-child {
+  /*.table tbody > tr > td:first-child {
     font-size: 1.125em;
-    font-weight: 300; }
+    font-weight: 300; }*/
 .table tbody > tr td .call-type {
   display: block;
   font-size: 0.75em;

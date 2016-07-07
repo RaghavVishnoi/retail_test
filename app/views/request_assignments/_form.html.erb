@@ -55,12 +55,12 @@
           <tr>
             <th><span>Request Id</span></th>
             <th><span>Request Type</span></th>
-             <th class="text-center"><span>RT Code</span></th>
+             <th><span>RT Code</span></th>
             <th><span>Retailer Name</span></th>
-            <th class="text-center"><span>City</span></th>
-            <th><span>State</span></th>
+            <th><span>Priority</span></th>
+            <th><span>Vendor</span></th>
             <th><span>RRM<span></th>
-             <th class="text-center"><span>Created On</span></th>
+             <th><span>Created On</span></th>
              <%if params[:is_rrm] != 'false'%>
                 <th><span>Assigned On</span></th>
              <%end%>   
@@ -83,7 +83,7 @@
         <%@requests.each do |request|%>
           <tr>
             <td>              
-              <%=request.id%>              
+              <a href="/requests/<%=request.id%>/edit?q[request_type]=<%=request.request_type%>"><%=request.id%></a>              
             </td>
             <td>
               <%=request.request_type.upcase if request.request_type != nil%>  
@@ -95,10 +95,10 @@
               <%=Retailer.retailer_data(request.retailer_code,"name")%>  
             </td>
             <td>
-               <%=Retailer.retailer_data(request.retailer_code,"city")%>  
+               <%=request.request_assignment.priority%>  
             </td>
             <td>
-               <%=Retailer.retailer_data(request.retailer_code,"state")%> 
+               <%=request.request_assignment.user.name%> 
             </td>
             <td>
              Akath
@@ -119,7 +119,7 @@
                  <%else%>
                    <ul class="list-inline list-unstyled">
                     <a href="/request_assignments/<%=request.request_assignment.id%>/edit">  
-                      <li class="fa-stack">
+                      <li class="fa-stack" title="Edit">
                         <i class="fa fa-square fa-stack-2x site-color"></i>
                         <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                       </li>
@@ -128,13 +128,13 @@
                    
 
                    <a href="/request_assignments/<%=request.request_assignment.id%>/approve">  
-                     <li class="fa-stack">
+                     <li class="fa-stack" title="Approve">
                         <i class="fa fa-square fa-stack-2x site-color"></i>
                         <i class="fa fa-check fa-stack-1x fa-inverse"></i>
                      </li>
                    </a>
                     <a href="/request_assignments/<%=request.request_assignment.id%>/edit">  
-                      <li class="fa-stack" onclick="stopRequest(<%=request.request_assignment.id%>)">
+                      <li class="fa-stack" onclick="stopRequest(<%=request.request_assignment.id%>)" title="Reject">
                         <i class="fa fa-square fa-stack-2x site-color"></i>
                         <i class="fa fa-times fa-stack-1x fa-inverse"></i>
                       </li>

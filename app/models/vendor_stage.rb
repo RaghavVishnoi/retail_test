@@ -6,14 +6,24 @@ class VendorStage < ActiveRecord::Base
 	after_save :update_assignment
 
 
-	def self.date_difference(stages,prev_index)
-		if stages[prev_index] == 'accepted'
-			days = (find_by(stage_name: stages[prev_index.to_i+1]).update_date - find_by(stage_name: 'accepted').update_date)			
-			time(days)
+	def self.date_difference(stage,assignment)
+		case stage
+		when 'accepted'
+			'0 Minutes'
+		when 'po_receive'
+			(Time.parse(assignment.vendor_stages.where(stage_name: 'po_receive').last.update_date.to_s).to_date - Time.parse(assignment.vendor_stages.where(stage_name: 'accepted').last.update_date.to_s).to_date).to_i.to_s+" Days"
+		when 'started'
+			(Time.parse(assignment.vendor_stages.where(stage_name: 'started').last.update_date.to_s).to_date - Time.parse(assignment.vendor_stages.where(stage_name: 'accepted').last.update_date.to_s).to_date).to_i.to_s+" Days"
 		else
-			days = (find_by(stage_name: stages[prev_index.to_i+1]).update_date - find_by(stage_name: stages[prev_index]).update_date)
-			time(days)
-		end		
+			(Time.parse(assignment.vendor_stages.where(stage_name: stage).last.update_date.to_s).to_date - Time.parse(assignment.vendor_stages.where(stage_name: PREV_STAGES[stage]).last.update_date.to_s).to_date).to_i.to_s+" Days"
+		end	
+		# if stages[prev_index] == 'accepted'
+		# 	days = (find_by(stage_name: stages[prev_index.to_i+1]).update_date - find_by(stage_name: 'accepted').update_date)			
+		# 	time(days)
+		# else
+		# 	days = (find_by(stage_name: stages[prev_index.to_i+1]).update_date - find_by(stage_name: stages[prev_index]).update_date)
+		# 	time(days)
+		# end		
 		
 	end
 
