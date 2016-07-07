@@ -41,7 +41,7 @@
 
         </div>
           <div class="col-md-2">
-             <%= link_to image_tag('export.png', :style => "width:75%;height:35px"),vendor_assignments_path(format: "xls", type: params["type"])%>
+             <%= link_to image_tag('export.png', :style => "width:75%;height:35px"),vendor_assignments_path(format: "xls", type: params["type"], q: params["q"], from: params["from"], to: params["to"])%>
           </div>
 				<%end%>
 			</div>	
