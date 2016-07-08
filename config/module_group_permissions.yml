@@ -125,3 +125,7 @@ RequestAssignment:
   permissions:
     "manage, RequestAssignment": "RequestAssignment"
 
+TatGroup:
+  group_name: "TatGroup"
+  permissions:
+    "manage, TatGroup": "TatGroup"

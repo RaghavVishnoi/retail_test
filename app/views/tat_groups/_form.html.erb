@@ -1,0 +1,62 @@
+ <div id="nav-col-submenu"></div>
+
+</div>
+
+
+<div id="content-wrapper">
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @tat_group.errors } %>
+
+  <div class="row">
+    <div class="col-lg-12">
+    <div class="main-box clearfix">
+    <div class="clearfix">
+      <div class="user_page">
+      <h2><%= form_title %></h2>
+      
+        <%= form_for @tat_group do |f| %>
+          
+          <div class="row">
+            <!-- left part of form end --> 
+           <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Module Name</label>
+                <div class="col-md-9">
+  
+                  <%= f.select :name,MODULES,{:prompt => 'Select Module'},:class => 'retailer_select',:required => "required" %>
+   
+                </div>
+              </div>
+            </div>
+               <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Duration</label>
+                <div class="col-md-9">
+  
+                  <%= f.select :duration,DURATION.map{|duration| [duration.to_s+" "+'Days',duration]},{:prompt => 'Select Duration'},:class => 'retailer_select',:required => "required" %>
+  
+                </div>
+              </div>
+            </div>
+         </div>
+          
+            
+            <div class="col-md-1">
+               <%= f.submit "Submit",:class => "btn btn-success rrm_frm_btn" %>
+              
+            </div>
+            <div class="col-md-2">
+               <%= link_to "Cancel",tat_groups_path,:class => "btn btn-danger ",data: { confirm: 'Are you sure?'} %>
+              
+            </div>
+          </div>
+        <% end %>
+      
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+      

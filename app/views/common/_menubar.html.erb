@@ -235,7 +235,16 @@
 					</a>
 				</li>
 			<%end%>
-			
+			<% if can? :manage, TatGroup %>
+			<li id="tat">
+				<a href="" class="dropdown-toggle" >
+					<i class="fa fa-file-text-o" aria-hidden="true"></i>
+
+
+					<span>TAT</span>
+				</a>
+			</li>
+			<%end%>
 		</ul>
 	</div>
 </div>
@@ -319,6 +328,9 @@ $('#vendorAssignments').click(function(){
 });
 $('#vendorAllocationStatus').click(function(){
 		location.href = '/request_assignments?states=0&request_type=0,1,2,3'
+});
+$('#tat').click(function(){
+		location.href = '/tat_groups'
 });
 
 </script>
