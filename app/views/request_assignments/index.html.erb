@@ -35,10 +35,10 @@
                 <div class="col-md-5">
                 </div>
                  <div class="col-md-2 mr_btm1">
-                <%= select_tag :states, options_for_select([['All States',0]]+State.all.pluck(:name,:id)),:class => 'form-control custm_select',:required => "required",:onchange => "states()",:prompt => "-------States-------" %>       
+                <%= select_tag :states, options_for_select([['All States',0]]+State.all.pluck(:name,:id)),:class => 'form-control custm_select',:required => "required",:onchange => "states()",:prompt => "States" %>       
               </div>
               <div class="col-md-2">
-                <%= select_tag :request_type, options_for_select([['All Request Type','0,1,2,3']]+VENDOR_REQUEST_TYPE),:class => 'form-control custm_select',:required => "required",:onchange => "requestType()",:prompt => "---------Request Type--------" %>       
+                <%= select_tag :request_type, options_for_select([['All Request Type','0,1,2,3']]+VENDOR_REQUEST_TYPE),:class => 'form-control custm_select',:required => "required",:onchange => "requestType()",:prompt => "-Request Type" %>       
               </div>
                
                  

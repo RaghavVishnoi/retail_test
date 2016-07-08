@@ -26,10 +26,10 @@
 <div class="row">
 <div class="col-lg-12">
   <div class="col-md-2">
-    <%= select_tag :states, options_for_select([['All States',0]]+State.all.pluck(:name,:id)),:class => 'form-control custm_select',:required => "required",:onchange => "states()",:prompt => "-----------------States-------------------" %>       
+    <%= select_tag :states, options_for_select([['All States',0]]+State.all.pluck(:name,:id)),:class => 'form-control custm_select',:required => "required",:onchange => "states()",:prompt => "States" %>       
   </div>
   <div class="col-md-2">
-    <%= select_tag :request_type, options_for_select([['All Request Type','0,1,2,3']]+VENDOR_REQUEST_TYPE),:class => 'form-control custm_select',:required => "required",:onchange => "requestType()",:prompt => "---------Request Type--------" %>       
+    <%= select_tag :request_type, options_for_select([['All Request Type','0,1,2,3']]+VENDOR_REQUEST_TYPE),:class => 'form-control custm_select',:required => "required",:onchange => "requestType()",:prompt => "Request Type" %>       
   </div>
   <div class="col-md-2">
   </div>
@@ -150,11 +150,11 @@
      <%if params[:is_rrm] == 'false'%>
         <table class="mr_btm1">
           <tr><td>
-            <%=select_tag :vendor_id,options_for_select(User.users_data('vendor')),:prompt => '  -----select vendor-----  ',:class => "vendor-assignment form-control custm_select",:required => "required",:id => "popup-select"%>
+            <%=select_tag :vendor_id,options_for_select(User.users_data('vendor')),:prompt => 'Select Vendor-----  ',:class => "vendor-assignment form-control custm_select",:required => "required",:id => "popup-select"%>
           </td>
           <td></td>
           <td>
-            <%=select_tag :priority,options_for_select(PRIORITY),:prompt => '   -----select priority-----   ',:required => "required",:class => 'priority form-control custm_select'%>
+            <%=select_tag :priority,options_for_select(PRIORITY),:prompt => 'Select Priority',:required => "required",:class => 'priority form-control custm_select'%>
           </td>
 
           <%=hidden_field_tag :assigned_by,current_user.id%>
