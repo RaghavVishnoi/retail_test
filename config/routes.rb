@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :tat_groups
+
   get 'api/v1'
   get 'api/citylists' 
   root 'dashboard#index'

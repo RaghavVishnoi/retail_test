@@ -1,7 +1,7 @@
 class RequestDocument < ActiveRecord::Base
 
 	attr_accessor :installation_of,:installation_report
-  after_save :notify_users
+    after_save :notify_users
 
 	mount_uploader :request_document, RequestDocumentUploader
  	#belongs_to :request_document, :polymorphic => true
