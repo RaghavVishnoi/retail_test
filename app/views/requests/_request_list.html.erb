@@ -165,13 +165,19 @@
 	</div>
 
 
-
-<div id='content' class="tab-content">
+<div id='content' class="tab-content ">
 <%@requests.each do |request|%>
+<%if Role.isCMO?(current_user) && request.status == 'cmo_pending' && TatGroup.isTatLimit?('Request Generate-CMO Response',request.created_at)%>
+	<%@tatBGClass = 'bgColorPending'%>
+<%elsif Role.isRRM?(current_user) && request.status == 'pending' && TatGroup.isTatLimit?('CMO Response-RRM Response',request.cmo_approve_date)%>
+		<%@tatBGClass = ''%>
+<%else%>
+		<%@tatBGClass = ''%>	
+<%end%>
   <%audit = Request.is_audit(request.retailer_code)%>
-	<div class="tab-pane active" id="all">
+	<div class="tab-pane active  bdr_bttm  <%=@tatBGClass%>" id="all">
 		<%= link_to "/requests/#{request.id}/edit?q[request_type]=#{REQ_TYPE.index(request.request_type)}" do %>
-		<div class="row bdr_bttm">
+		<div class="row">
 			<div class="col-md-1">
 				<div class="gsb1_img_blk">
 					<% request.images.first(1).each do |image| %>
@@ -192,6 +198,7 @@
 					<h5>
 						<b>Is audited? - </b><%=audit[:result]%>
 					</h5>
+
 				</div>
 			</div>
 			<div class="col-md-4">

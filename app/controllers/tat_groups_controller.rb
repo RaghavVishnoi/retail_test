@@ -25,7 +25,7 @@ class TatGroupsController < ApplicationController
   def create
     @tat_group = TatGroup.new(tat_group_params)
     @tat_group.save
-    respond_with(@tat_group)
+    redirect_to tat_groups_path
   end
 
   def update

@@ -18,4 +18,12 @@ class Role < ActiveRecord::Base
     if request != nil then request.user.name else 'No Record' end
   end
 
+  def self.isRRM?(current_user)
+    current_user.roles.pluck(:name).include?('rrm')
+  end
+
+  def self.isCMO?(current_user)
+    current_user.roles.pluck(:name).include?('cmo')
+  end
+
 end
