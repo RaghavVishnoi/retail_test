@@ -43,13 +43,15 @@ gem 'pry', :group => :development
 gem 'will_paginate'
 gem 'geocoder'
 gem 'countries'
+# gem "rmagick"
+gem "mini_magick"
 gem 'carrierwave', '0.10.0'
 gem 'faker'
 gem 'capistrano'
 gem 'rvm1-capistrano3', require: false
 gem 'capistrano-bundler'
 #gem 'fog'
-gem 'pg'
+# gem 'pg'
 gem 'mysql2'
 gem 'aws-sdk'
 gem 'delayed_job_active_record'
@@ -66,7 +68,7 @@ group :development, :test do
   gem 'rspec-activemodel-mocks'
   gem 'shoulda-matchers', require: false
   gem 'factory_girl_rails'
-  
+  gem 'byebug'
 end
 
 gem 'jquery-fileupload-rails'

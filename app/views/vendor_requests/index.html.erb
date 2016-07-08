@@ -89,8 +89,12 @@
           <tr>
             <%RequestDocument.where(request_document_id: vendor_request.request_assignment.id).each do |document|%>
             <td>
-             <%=image_tag RequestDocumentSerializer.new(document, :root => false).request_document_url,style: 'height:50px;width:50px;',:class => 'img'%>
-            
+            <% if MIME::Types.type_for(document.request_document.url).first.raw_media_type == "image" %>
+             <%#=image_tag RequestDocumentSerializer.new(document, :root => false).request_document_url,style: 'height:50px;width:50px;',:class => 'img'%>
+             <%= image_tag document.request_document.url%>
+            <% else %>
+              <%= link_to image_tag('doc.png'),document.request_document.url%>
+            <% end %>
           </td>
           <%end%>
           </tr>

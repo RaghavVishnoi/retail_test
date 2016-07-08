@@ -28,11 +28,16 @@ class VendorAssignmentsController < ApplicationController
 
 
     def status
+      
       if INITIAL_STATUS.include?(params[:status])
         result = VendorAssignment.updateStatus(params)
         if result == 3
           VendorAssignment.notifyUsers(params)
-          redirect_to session[:prev_url],notice: "Successfully accepted!"
+          respond_to do |format|
+            format.html {redirect_to session[:prev_url],notice: "Successfully accepted!"}
+            format.json {render :json => {result: true,message: 'Status successfully updated!'}}
+          end
+           
         else
           redirect_to session[:prev_url],notice: DATE_ERRORS[result]
         end

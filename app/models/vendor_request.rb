@@ -81,6 +81,18 @@ class VendorRequest < ActiveRecord::Base
 		end
 		
 	end
+
+	def self.isAssignentExists?(assignment)
+		if assignment.vendor_request != nil
+			if assignment.vendor_request.status != 'cmo_pending'
+				true
+			else
+				false
+			end
+		else
+			false
+		end
+	end
 	
 	private
 		def update_request

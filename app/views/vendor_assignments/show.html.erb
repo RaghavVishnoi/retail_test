@@ -1,7 +1,6 @@
 <div id="nav-col-submenu"></div>
 </div>
 <%=render partial: "bill_received"%>
-<%#=render partial: "upload_bill" , locals: {assignment: @assignment} %>
 <div id="content-wrapper">
 <div class="row">
 	<div class="col-lg-12">
@@ -245,12 +244,12 @@
 </div>
 <div class="col-md-4">
 <div>
-	<%if updated_stage != nil%>
+	<%if updated_stage != nil && @assignment.status != 'declined' %>
 		<%= image_tag 'update_inactive.png',:style => "width:35%;height:40px"%>
 		<%if stage == 'accepted' && RequestAssignment.canClose?(@assignment.id)%>
 			<%= image_tag 'cancel.png',:style => "width:35%;height:40px",:onclick => "stopRequest(#{@assignment.id})"%>
-				<%end%>	
-		<%elsif stage == "po_receive"%>
+		<%end%>	
+	<%elsif stage == "po_receive" && @assignment.status != 'declined'%>
 			<div>
                 <span class="start"><i><%= image_tag 'update.png' ,:id => 'update-button'%>
 
@@ -259,7 +258,7 @@
               </span>
             </div>
 
-		<%elsif @assignment.status != 'declined' && i == 0;i=i+1%>
+	<%elsif @assignment.status != 'declined' && i == 0;i=i+1%>
 
 			<div>
                 <div>
@@ -268,11 +267,24 @@
                 </div>
        			 
 		    </div>
- 		<%end%>
+ 	<%end%>
 </div>
 </div>
 </div>
 <%end%>
+	<!--Code to update document upload -->
+	<div class="row mr_btm1"> 
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+		<% if (@assignment.upload_bill == 2 || @assignment.current_stage == 'bill_received') && !VendorRequest.isAssignentExists?(@assignment)%>
+			<button type="button" class="btn btn-default uploadFile btn-group btn-group-lg" style="width: 100px;background-color: #f37022;border-color: #f37022;">Edit</button>
+		<% end %>
+		</div>
+		
+		<div class="col-md-4">
+		</div>
+	</div>
 </div>
 </div>
 </div>
@@ -290,4 +302,7 @@
 </div>	
 <script>
 	$('#dashboard').attr("class",'active')
+	$(".uploadFile").click(function(){
+		$(".bill_receive").attr("style","display:block")
+	})
 </script>	

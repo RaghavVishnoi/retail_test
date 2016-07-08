@@ -1,6 +1,4 @@
-<%if @assignment.upload_bill == 1%>
- 
-  <div class="bill_receive" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="bill_receive" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
 		<div class="modal-dialog">
 			<div class="modal-content popup_mdl_cntent">
 				<div class="modal-header">
@@ -10,6 +8,7 @@
 
 				</div>
 				<%=form_for :request_document,:url => url_for(:controller => 'request_documents', :action => 'create') do |f|%>
+				<%=f.hidden_field :request_document_type,value: 'RequestAssignment'%>
 				<div class="modal-body">
 					 
 					
@@ -25,7 +24,7 @@
 						<div class="col-sm-offset-1 col-sm-5">
 							<div class="dropdown">
 					   			<%=f.select :request_document_id,RequestAssignment.display_shop(RequestAssignment.where(id: @assignment.id)),:id=>"type",class: 'btn btn-default dropdown-toggle',"data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"true"%>
-					   			<%=f.hidden_field :request_document_type,value: 'vendor'%>
+					   			
 							</div>
 						</div>
 					</div>
@@ -41,8 +40,11 @@
 						</div>
 						<div class="col-sm-offset-1 col-sm-5">
 							<div class="dropdown">
+							<%if @assignment.vendor_request != nil %>
+					   			<%=f.select :installation_of,INSTALLATION_OF,:id=>"type",class: 'btn btn-default dropdown-toggle',"data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"true", :selected =>  @assignment.vendor_request.installation_of %>
+					   		<%else%>
 					   			<%=f.select :installation_of,INSTALLATION_OF,:id=>"type",class: 'btn btn-default dropdown-toggle',"data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"true"%>
-					   			<%=f.hidden_field :request_document_type,value: 'vendor'%>
+					   		<%end%>	
 							</div>
 						</div>
 					</div>
@@ -58,15 +60,24 @@
 						</div>
 						<div class="col-sm-offset-1 col-sm-5">
 							<div class="dropdown">
+							<% if @assignment.vendor_request != nil%>
+					   			<%=f.select :installation_report,INSTALLATION_REPORT,:id=>"type",class: 'btn btn-default dropdown-toggle',"data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"true", :selected =>  @assignment.vendor_request.installation_report%>
+					   		<%else%>
 					   			<%=f.select :installation_report,INSTALLATION_REPORT,:id=>"type",class: 'btn btn-default dropdown-toggle',"data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"true"%>
-					   			<%=f.hidden_field :request_document_type,value: 'vendor'%>
+					   		<%end%>	
 							</div>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-sm-2">
-							 
+							<% @assignment.request_documents.each do |rDocument|%>
+								<% if MIME::Types.type_for(rDocument.request_document.url).first.raw_media_type == "image" %>
+									 	<%= image_tag rDocument.request_document.thumb%>
+								<% else %>
+									<%= image_tag("doc.png") %>
+								<% end %>
+							<% end %>
 						</div>
 						<div class="col-sm-3">
 							<div class="label_nme">
@@ -96,8 +107,6 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div>
-
-<%end%>  
 <script>
 	$(".close").click(function(){
 		$(".bill_receive").attr("style","display:none")
