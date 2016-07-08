@@ -49,6 +49,7 @@ class RequestAssignmentsController < ApplicationController
 
   def update
     @request_assignment = RequestAssignment.where(id: params[:request_assignment][:assignment_id]).update_all(user_id: params[:request_assignment][:vendor_id],priority: params[:request_assignment][:priority])
+    VendorMailer.delay.vendorReplace(RequestAssignment.find(params[:request_assignment][:assignment_id]).request)
     render :json => @request_assignment
   end
 
@@ -70,11 +71,14 @@ class RequestAssignmentsController < ApplicationController
 
   def mass_assignment
     request_assignment = RequestAssignment.mass_assignment(params[:request_assignment])
+    RequestAssignment.sendNotification(params[:request_assignment])
+    
     render :json => request_assignment
   end
 
   def approve
     request_assignment = RequestAssignment.find(params[:id]).update(:is_valc => true)
+    VendorMailer.delay.vendorVerify(RequestAssignment.find(params[:id]).request)
     redirect_to new_request_assignment_path(:is_rrm => true)
   end
 

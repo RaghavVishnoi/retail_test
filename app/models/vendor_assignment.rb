@@ -62,8 +62,12 @@ class VendorAssignment < ActiveRecord::Base
 		when 'bill_received'
 			VendorStage.new(stage_name: params[:status],request_assignment_id: params[:id],update_date: update_date)
 		else
-			VendorStage.new(stage_name: params[:status],request_assignment_id: params[:id],update_date: update_date)
+			VendorStage.new(stage_name: params[:status],request_assignment_id: params[:id],update_date: update_date)		
 		end
+	end
+
+	def self.notifyUsers(params)	
+		VendorMailer.delay.vendorResponse(RequestAssignment.find(params[:id]).request,params[:status])
 	end
 
 	def self.isValidDate?(params)

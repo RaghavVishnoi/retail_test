@@ -1,29 +1,57 @@
 class VendorMailer < ActionMailer::Base
-  default from: "akash@gionee.co.in"
+  default from: "info@gionee.co.in"
 
-  def vendor_assignment(vendorlist,assigned_request_list)
-  	subject = "Assigned Requests"
-  	@requests = assigned_request_list
-  	request_type =  Request.where(:id => @requests).pluck(:request_type)
-	  @retailer_code = Request.where(:id => @requests).pluck(:retailer_code)
-    @retailers = Retailer.where(:retailer_code => @retailer_code)
-    @request_type = []
-    request_type.each do |type|
-    	if type == 0
-    		@request_type.push('GSB')
-    	elsif type == 1
-    		@request_type.push('SIS')
-    	elsif type == 2
-    		@request_type.push('In Shop')
-    	elsif type == 3
-    		@request_type.push('Maintenance')
-    	elsif type == 4
-    		@request_type.push('Audit')
-    	end
-    			
-    end
-	 
-  	mail(to: vendorlist.email,subject: subject )
+  def requestApproved(request)
+    @request = request
+    email = User.find_users('vendor allocator').pluck(:email)
+    mail(to: email,cc: DEFAULT_EMAILS, subject: 'Vendor Assignment Reminder')
   end
+
+  def vendorVerify(request)
+    @request = request
+    email = Role.findRRMEmail(request)
+    mail(to: email,cc: DEFAULT_EMAILS, subject: 'Vendor Assignment Verify')
+    #rrm vendor akash
+  end
+
+  def vendorAllocatorAssignment(request_id,user_id)
+    @request = Request.find(request_id)
+    @user = User.find(user_id)
+    emailCC = Role.findRRMEmail(@request)
+    email = @user.email
+    mail(to: email,cc: DEFAULT_EMAILS+[emailCC], subject: 'Vendor Assignment')
+  end
+
+  def vendorReplace(request)
+    @request = request
+    email = request.request_assignment.user.email
+    emailCC = Role.findRRMEmail(request)
+    mail(to: DEFAULT_EMAILS,cc: [emailCC]+DEFAULT_EMAILS, subject: 'Vendor Reassignment')
+    #newVendor RRM akash
+  end
+
+  def vendorResponse(request,status)
+    @request = request
+    @status = status
+    emailRRM = Role.findRRMEmail(request)
+    emailVA  = User.find_users('vendor allocator').pluck(:email)
+    mail(to: [emailRRM]+emailVA,cc: DEFAULT_EMAILS, subject: 'Vendor Action')
+    #RRM vendorAllocator akash
+  end
+
+  def vendorDocumentsUpload(request)
+    @request = request
+    @status = status
+    emailRRM = Role.findRRMEmail(request)
+    emailVA  = User.find_users('vendor allocator').pluck(:email)
+    mail(to: [emailRRM]+emailVA,cc: DEFAULT_EMAILS, subject: 'Upload Documents by Vendor')
+    #RRM vendorAllocator akash
+  end
+
+  def vendorAssignmentResponse
+    #if responseByCMO then RRM vendorAllocator akash
+    #if responseByRRM then CMO vendorAllocator akash
+  end
+
 
 end

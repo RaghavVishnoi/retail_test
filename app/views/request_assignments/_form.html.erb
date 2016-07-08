@@ -57,8 +57,10 @@
             <th><span>Request Type</span></th>
              <th><span>RT Code</span></th>
             <th><span>Retailer Name</span></th>
-            <th><span>Priority</span></th>
-            <th><span>Vendor</span></th>
+            <%if params[:is_rrm] != 'false'%>
+              <th><span>Priority</span></th>
+              <th><span>Vendor</span></th>
+            <%end%>
             <th><span>RRM<span></th>
              <th><span>Created On</span></th>
              <%if params[:is_rrm] != 'false'%>
@@ -94,12 +96,14 @@
             <td>
               <%=Retailer.retailer_data(request.retailer_code,"name")%>  
             </td>
+            <%if params[:is_rrm] != 'false'%>
             <td>
                <%=request.request_assignment.priority%>  
             </td>
             <td>
                <%=request.request_assignment.user.name%> 
             </td>
+            <%end%>
             <td>
              Akath
             </td>
@@ -117,15 +121,7 @@
                     <li class="blue ch_bttn add"><input type='checkbox' name='thing' value='<%=request.id%>' id="add<%=request.id%>" class="chbx"/><label for="add<%=request.id%>">Add</label> </li>
                   </ul>
                  <%else%>
-                   <ul class="list-inline list-unstyled">
-                    <a href="/request_assignments/<%=request.request_assignment.id%>/edit">  
-                      <li class="fa-stack" title="Edit">
-                        <i class="fa fa-square fa-stack-2x site-color"></i>
-                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                      </li>
-                    </a>
-
-                   
+                   <ul class="list-inline list-unstyled">                  
 
                    <a href="/request_assignments/<%=request.request_assignment.id%>/approve">  
                      <li class="fa-stack" title="Approve">

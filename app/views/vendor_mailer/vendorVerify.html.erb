@@ -1,0 +1,13 @@
+<html>
+	<body>
+		<table>
+			<thead>Successfully Verified by Vendor Allocator</thead>
+		</table>
+		<table width="500px">
+			<tr><td><b>Request Id:</b></td><%=@request.id%><td></td></tr>
+			<tr><td><b>Request Type:</b></td><%=@request.request_type%><td></td></tr>
+			<tr><td><b>RRM:</b></td><td><%=Role.findRRMName(@request)%></td></tr>
+			<tr><td><b>Vendor</b></td><td><%=@request.request_assignment.user.name%></td></tr>
+		</table>
+	</body>
+</html>

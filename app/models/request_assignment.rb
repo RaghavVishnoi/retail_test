@@ -183,6 +183,13 @@ class RequestAssignment < ActiveRecord::Base
 		self.where(id: requestAssignmentId).update_all(status: 'declined',current_stage: 'declined')
 	end
 
+	def self.sendNotification(params)
+		ids = params[:request_id]
+		ids.each do |id|
+			VendorMailer.delay.vendorAllocatorAssignment(id,params[:user_id])
+		end
+	end
+
 	private
 		def add_request_assignment_activity
 			user = User.find(self.assigned_by)

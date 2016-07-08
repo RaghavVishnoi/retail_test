@@ -31,7 +31,7 @@ class Request < ActiveRecord::Base
        transition :pending => :declined
     end
   after_transition any => [:approved, :declined], :do => :notify_cmo
-    
+  after_transition any => [:approved], :do => :notify_for_vendor  
   end
 
   validate :appprover_approve_date,:cmo_approve_date, :if => [:sis?,:in_shop?,:gsb?,:maintenance?]
@@ -123,6 +123,10 @@ end
 
  def notify_cmo
     #RequestMailer.delay.status_mail(id)
+ end
+
+ def notify_for_vendor
+    VendorMailer.delay.requestApproved(self)
  end
 
 

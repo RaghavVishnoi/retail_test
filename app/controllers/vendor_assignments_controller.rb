@@ -31,6 +31,7 @@ class VendorAssignmentsController < ApplicationController
       if INITIAL_STATUS.include?(params[:status])
         result = VendorAssignment.updateStatus(params)
         if result == 3
+          VendorAssignment.notifyUsers(params)
           redirect_to session[:prev_url],notice: "Successfully accepted!"
         else
           redirect_to session[:prev_url],notice: DATE_ERRORS[result]
@@ -38,6 +39,7 @@ class VendorAssignmentsController < ApplicationController
       else
         result = VendorAssignment.isValidDate?(params)
         if result == 3
+          VendorAssignment.notifyUsers(params)
           render :json => {result: true,message: 'Status successfully updated!'}
         else
           render :json => {result: false,message: DATE_ERRORS[result]}
