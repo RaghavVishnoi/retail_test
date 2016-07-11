@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, :only => [:edit, :update, :destroy,:show]
   skip_before_action :authenticate_user, :only => [:create, :new]
   authorize_resource
+  
   PER_PAGE = 20
 
   def index
