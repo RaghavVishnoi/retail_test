@@ -315,8 +315,8 @@
                       <th>Average</th>
                   </tr>
                
-              <%@sales_order.bizs.each_with_index do |biz,index| %>
-                      
+              <%@sales_order.bizs.reverse.each_with_index do |biz,index| %>
+                      <%puts "ssssss#{@sales_order.bizs.to_json}"%>
                       <% if index == 2 %>
                      
                       <tr class="Auto_Calculated">
