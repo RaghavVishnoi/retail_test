@@ -788,7 +788,7 @@ class SalesOrder < ActiveRecord::Base
     total_overhead = []
     new_revenueData = []
     
-    bizData.each_with_index do |biz,index|
+    bizData.reverse.each_with_index do |biz,index|
        
       if index == 0  
         revenueData.push(biz.attributes.values[2..13])
@@ -954,7 +954,7 @@ class SalesOrder < ActiveRecord::Base
     total_overhead = []
     new_revenueData = []
     
-    bizData.each_with_index do |biz,index|
+    bizData.reverse.each_with_index do |biz,index|
        
       if index == 0  
         revenueData.push(biz.attributes.values[2..13])
