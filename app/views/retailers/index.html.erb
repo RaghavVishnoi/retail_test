@@ -1,0 +1,123 @@
+<script>
+	function state(){
+		state = $('#state_shops option:selected').text();
+		location.href = "?state="+state
+	}
+	function city(){
+		city = $('#city_shops option:selected').text();
+		location.href = "?state=<%=params[:state]%>&city="+city 
+	}
+	function shop(){
+		shop = $('#shop option:selected').val();
+		location.href = "?state=<%=params[:state]%>&city=<%=params[:city]%>&shop="+shop 
+	}
+
+
+</script>
+	<div id="nav-col-submenu"></div>
+	</div>
+
+<div id="content-wrapper">
+<!-- <div class="row">
+<div class="col-lg-12">
+	<div class="add_new_notfcn">
+		<h4><i class="fa fa-plus-square fa-lg"></i><span> <%= link_to "New Retailer", new_retailer_path %></span></h4>
+	</div>
+</div>
+</div> -->
+
+<div class="row">
+	<div class="col-lg-12">
+	<div class="main-box clearfix">
+	<div class="clearfix">
+		<div class="common_page notification_page">
+		<div class="hdr">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="txt">Retailer</div>
+			</div>
+			<div class="col-md-9">
+				<div class="col-md-3">
+					<%= select_tag :state_shops, options_for_select(['All']+State.state_with_name(current_user),params[:state]),:class => 'form-control custm_select',:required => "required",:onchange => "state() " %>
+					 
+				</div>
+				<div class="col-md-2">
+					<%= select_tag :city_shops, options_for_select(['All']+Retailer.where(state: params[:state]).pluck(:city).uniq,params[:city]),:class => 'form-control custm_select',:required => "required",:onchange => "city() " %>
+					 
+				</div>
+				<div class="col-md-2">
+					<%= select_tag :shop, options_for_select(['All']+Retailer.city_retailer(params[:city]),params[:shop]),:class => 'form-control custm_select',:required => "required",:onchange => "shop()" %>
+					 
+				</div>
+				<div class="col-md-5">
+					<%=form_tag '/retailers' ,:method => 'get' do |f| %>  
+                    <div id="user-search-div" class="form-field">
+                       <div class="user-search-field">
+                         <%= text_field_tag :retailer_code, params[:retailer_code], :id => "retailer-search",:required => "required",:placeholder => "Enter retailer code",:class => 'search_email' %>
+                      </div>
+                      <div>
+                        <% if params[:retailer_code] == nil %>
+                           <%= button_tag(type: 'submit',value: 'search',:class=>"hide-button") do %>
+                             <i class="fa fa-search search-icon"></i> 
+                           <% end %>
+
+                        <% else %>
+                            
+                             <a href="/retailers" class="clear-button"><i class="fa fa-times-circle-o"></i></a> 
+                           
+                        <% end %>
+                        <%end%>
+				</div>
+			</div>
+		</div>
+
+				 
+
+
+		</div>
+		</div>
+		</div>
+
+	<% @retailer.each do |retailer| %>
+		<div class="ntifctn_blk">
+			<div class="row">
+				<div class="col-md-10">
+					<p><%=retailer.retailer_code%> <span class="blue">  <%=retailer.retailer_name%> </span></p>
+					<p>  <%=retailer.state%>,<%=retailer.city%></p>
+				</div>
+
+				<div class="col-md-2">
+					<ul class="list-inline list-unstyled edt_del">
+						 
+						 <li class="blue">
+                                  <i class="fa fa-hand-o-right"></i>
+                                  <span>
+                                  <%= link_to "Show", [retailer] %>
+
+                                  </span>
+                                </li>
+
+						 
+					</ul>
+				</div>
+			</div>
+		</div>
+ 	<%end%>
+		<%if @retailer.length > 1%>
+      <%=will_paginate @retailer%>
+  <%end%>
+
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+  $('#retailer').attr("class",'active') 
+</script>
+
+
+			
+		
+
+	

@@ -1,0 +1,19 @@
+<%= render :partial => 'data_files/absolute_path' %>
+
+<%= form_for @data_file, :html => { :class => 'user-form' } do |f| %>
+
+  <%= f.hidden_field :parent_id %>
+
+  <h4 id="form-title"><%= form_title %></h4>
+
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @data_file.errors } %>
+
+  <div class="form-field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <%= render :partial => 'data_files/access_fields', :locals => { :f => f } %>
+
+  <%= f.submit %>
+<% end %>

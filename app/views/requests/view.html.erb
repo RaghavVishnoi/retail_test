@@ -1,0 +1,24 @@
+<%= render :partial => "shared/error_messages", :locals => { :errors => @request.errors } %>
+<div class="request_wrap clearfix">
+ 
+  <div><%= request_type_name(@request) %> approve</div>
+  <div class="apprvr_wrap">
+
+    <%= render 'requests/details/requestor_details' %>
+
+    <%= render 'requests/details/shop_details' %>
+
+    <%= render 'requests/details/competition_details' %>
+
+    <% if @request.pending? %>
+      <%= form_for @request do %>
+        <div class="btn_blc clearfix">
+          <br>
+         <%= text_area_tag('comment',nil, class: 'comment-field',:required => "true",:placeholder => "Enter your comment here") %>
+        <%= submit_tag "Approve", :class => "apprv_btn"%>
+        <%= submit_tag "Decline", :class => "decline_btn"%>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

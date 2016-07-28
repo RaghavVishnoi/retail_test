@@ -1,0 +1,26 @@
+   
+<%= form_tag users_sign_in_path, {:class=> 'login_forms'}  do %>
+
+  <div class="login_wrapper" id="toggle">
+         <% if alert %>
+      <p class="alert cumtm_alert"><%= alert %></p>
+    <% end %>
+    <div class="logobox">
+      <%= image_tag 'logo_orange.png' %>
+    </div>
+
+    <div class="login_form">
+      <%= text_field_tag :email, nil, :placeholder => "Email ID", :id => "email" %>
+      <%= password_field_tag :password, nil, :placeholder => "Password", :id => "password" %>
+    </div>
+    <div class="button_box">
+      <div class="log_in">
+        <%= submit_tag "Continue >>" %>
+      </div>
+      
+        <a href="/brandStore/new" class="brand_store_proposal">Brand Store </a>
+            
+      <div class="clear"></div>
+    </div>
+  </div>
+<% end %>

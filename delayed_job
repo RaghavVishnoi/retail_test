@@ -1,0 +1,110 @@
+Script started on Friday 21 August 2015 09:57:38 AM IST
+]0;linchpin@linchpin-Satellite-L740-X4010: ~/Desktop/workspace/gionee_belinchpin@linchpin-Satellite-L740-X4010:~/Desktop/workspace/gionee_be$ sudo -irails servercd /home/linchpin/Desktop/workspace/gionee_berake jobs:work[Kdb:migrate[1Pjobs:work
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Starting job worker
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job VendorMailer.vendor_assignment (id=21424) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job VendorMailer.vendor_assignment (id=21424) FAILED (11 prior attempts) with ArgumentError: wrong number of arguments (1 for 2)
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job VendorMailer.vendor_assignment (id=21425) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job VendorMailer.vendor_assignment (id=21425) FAILED (11 prior attempts) with ArgumentError: wrong number of arguments (1 for 2)
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=20986) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=20986) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=19
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=20987) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=20987) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=18
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=20998) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=20998) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=24
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21068) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21068) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=34
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21078) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21078) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=37
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21082) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21082) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=17
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21116) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21116) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=48
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21117) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21117) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=38
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21118) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21118) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=48
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21121) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21121) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=49
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21164) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21164) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=63
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21165) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21165) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=43
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21166) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21166) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=35
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21170) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21170) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=64
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21180) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21180) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=67
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21193) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21193) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=73
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21197) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21197) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=76
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21198) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21198) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=77
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21207) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21207) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=79
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21231) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21231) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=139
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21257) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21257) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=1
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21258) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21258) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=1
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21259) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21259) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=1
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21289) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21289) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=166
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21294) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21294) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=168
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21297) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21297) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=169
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21298) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21298) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=1
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21308) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21308) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21309) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21309) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21318) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21318) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=176
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21319) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21319) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=176
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21320) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21320) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=176
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21323) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21323) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21324) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21324) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21325) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21325) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21326) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21326) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21331) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21331) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21332) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.status_mail (id=21332) FAILED (13 prior attempts) with ActiveRecord::RecordNotFound: Couldn't find Request with 'id'=176
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21339) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21339) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21364) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21364) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21365) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21365) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21366) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21366) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21367) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21367) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21368) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21368) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21369) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21369) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21370) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21370) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21371) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21371) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21372) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21372) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21373) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21373) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21378) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21378) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21383) RUNNING
+[Worker(host:linchpin-Satellite-L740-X4010 pid:4411)] Job RequestMailer.vendor_status_mail (id=21383) FAILED (13 prior attempts) with NameError: uninitialized constant RequestMailer::VendorTaks
+[Wo

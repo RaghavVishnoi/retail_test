@@ -1,0 +1,182 @@
+
+<section class="comments_sectn">
+	<div class="row">	
+		<div class="col-lg-12">
+			<div class="main-box clearfix">
+				<div class="clearfix">
+					<div class="common_page gsb_page">
+						<h2>Audit Details</h2>
+						<div class="comments_blk">
+							<div class="row">
+								<div class="col-md-5">
+									RSP Present
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										<%if(@request.is_rsp == true)%>
+									         Yes
+									        <%else%>
+									         No
+									        <%end%>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									Store Selling Gionee?
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										<%=@request.store_selling_gionee %>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									Rsp Name
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										<%= @request.rsp_name %>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									RSP Mobile Number
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										<%= @request.rsp_mobile_number %>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									RSP sales tag app user ID
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										<%= @request.rsp_app_user_id %>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									Clipon Present?
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										 <%=@request.is_clipon_present %>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									GSB Present?
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										 <%if(@request.is_gionee_gsb_present == true)%>
+								        Yes
+								       <%else%>
+								        No
+								       <%end%>
+									</div>
+								</div>
+							</div>
+
+								<div class="row">
+								<div class="col-md-5">
+									SIS Present?
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										 <%if(@request.is_sis_installed == true)%>
+									      Yes
+									      <%else%>
+									      No
+									      <%end%>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									No of pieces in stock
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										<%=@request.no_of_peace_in_stock %>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									Standee Present?
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										<%=@request.is_standee_present %>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									Countertop Present?
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										<%=@request.is_countertop_present %>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									Danglers in shop
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										<%=@request.is_dangler_in_shop %>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									Wall Posters in shop
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										<%=@request.is_wall_poster_in_shop %>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									Leaflets / Brochures available
+								</div>
+								<div class="col-md-4">
+									<div class="blue">
+										<%=@request.is_leaflets_available %>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>	

@@ -1,0 +1,631 @@
+
+<style>
+      
+      #map {
+ 
+        width:1050px;
+ 
+        height:600px;
+ 
+      }
+    </style>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="/assets/maplace.min.js"></script>
+
+<script>
+
+$(document).ready(function(){
+ 
+  map_data(0,0,'All State',[0,1,2,3,4],['all'])
+    
+  $('#ajaxButton').click(function(){
+    var request_type = []
+    var status = []
+    request_type.push('all');
+    status.push('all')
+ 
+    var state = []; 
+
+    $('#state option:selected').each(function(i, selected){ 
+      if($(selected).val() == 'All State')
+      {
+        state[i] = $(selected).val();
+      }else{
+      state[i] = parseInt($(selected).val()); 
+      }
+    });
+
+    var from_date = $('#map-date-from').val();
+    var till_date = $('#map-date-to').val();
+
+        if(from_date == '' || till_date == '' || state == ''){
+          alert("Please fill all required fields");
+          
+      }
+      else{
+        
+      map_data(from_date,till_date,state,[0,1,2,3,4],status)
+      $(".click-hide").css('display','block');
+
+    }//end of else block
+    
+    
+
+  $('#all_id').on('click',function(){
+      if($('#all_id').is(':checked') == true){
+          
+          request_type.push('all')
+          map_data(from_date,till_date,state,[0,1,2,3,4],status)
+      }
+      if($('#all_id').is(':checked') == false)  {
+         request_type.splice(request_type.indexOf('all'),1);
+            
+      }
+        request_type = []
+        request_type.push('all');
+
+        $('#gsb_id').attr('checked', false);
+        $('#sis_id').attr('checked', false);
+        $('#inshop_id').attr('checked', false);
+        $('#maintenance_id').attr('checked', false);
+        $('#audit_id').attr('checked', false);
+       
+      });
+
+        $("#gsb_id").click(function(){
+          //if(request_type.includes('all'))
+          if($.inArray('all', request_type) > -1)
+            {
+              request_type.splice(request_type.indexOf('all'),1);
+              $('#all_id').attr('checked', false);
+            }
+          if($('#gsb_id').is(':checked') == false){
+             request_type.splice(request_type.indexOf(0),1);
+          }
+          if($('#gsb_id').is(':checked') == true){
+            request_type.push(0)
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+             
+        $("#sis_id").click(function(){
+         // if(request_type.includes('all'))
+           if($.inArray('all', request_type) > -1)
+            {
+              request_type.splice(request_type.indexOf('all'),1);
+              $('#all_id').attr('checked', false);
+            }
+          if($('#sis_id').is(':checked') == false){
+             request_type.splice(request_type.indexOf(1),1);
+          }
+          if($('#sis_id').is(':checked') == true){
+            request_type.push(1)
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      }); 
+        $("#inshop_id").click(function(){
+         // if(request_type.includes('all'))
+           if($.inArray('all', request_type) > -1)
+            {
+              request_type.splice(request_type.indexOf('all'),1);
+              $('#all_id').attr('checked', false);
+            }
+          if($('#inshop_id').is(':checked') == false){
+             request_type.splice(request_type.indexOf(2),1);
+          }
+          if($('#inshop_id').is(':checked') == true){
+            request_type.push(2)
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+        $("#maintenance_id").click(function(){
+          //if(request_type.includes('all'))
+          if($.inArray('all', request_type) > -1)
+            {
+              request_type.splice(request_type.indexOf('all'),1);
+              $('#all_id').attr('checked', false);
+            }
+          if($('#maintenance_id').is(':checked') == false){
+             request_type.splice(request_type.indexOf(3),1);
+          }
+          if($('#maintenance_id').is(':checked') == true){
+            request_type.push(3)
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      }); 
+       $("#audit_id").click(function(){
+          //if(request_type.includes('all'))
+          if($.inArray('all', request_type) > -1)
+            {
+              request_type.splice(request_type.indexOf('all'),1);
+              $('#all_id').attr('checked', false);
+            }
+          if($('#audit_id').is(':checked') == false){
+             request_type.splice(request_type.indexOf(4),1);
+          }
+          if($('#audit_id').is(':checked') == true){
+            request_type.push(4)
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      }); 
+
+
+      
+
+  $('#status_all_id').on('click',function(){
+      if($('#status_all_id').is(':checked') == true){
+          status = []
+         status.push('all');
+          map_data(from_date,till_date,state,request_type,status)
+      }
+      if($('#status_all_id').is(':checked') == false)  {
+          
+          status.splice(status.indexOf('all'),1);
+            
+      }
+       
+
+
+        $('#cmopending_id').attr('checked', false);
+        $('#cmodeclined_id').attr('checked', false);
+        $('#pending_id').attr('checked', false);
+        $('#approved_id').attr('checked', false);
+        $('#declined_id').attr('checked', false);
+       
+      });
+
+        $("#cmopending_id").click(function(){
+          if($.inArray('all', status) > -1)
+            {
+              status.splice(status.indexOf('all'),1);
+              $('#status_all_id').attr('checked', false);
+            }
+          if($('#cmopending_id').is(':checked') == false){
+             status.splice(status.indexOf('cmo_pending'),1);
+          }
+          if($('#cmopending_id').is(':checked') == true){
+            status.push('cmo_pending')
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+
+         $("#cmodeclined_id").click(function(){
+          //if(status.includes('all'))
+           if($.inArray('all', status) > -1)
+            {
+              status.splice(status.indexOf('all'),1);
+              $('#status_all_id').attr('checked', false);
+            }
+          if($('#cmodeclined_id').is(':checked') == false){
+             status.splice(status.indexOf('cmo_declined'),1);
+          }
+          if($('#cmodeclined_id').is(':checked') == true){
+            status.push('cmo_declined')
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+
+      $("#pending_id").click(function(){
+        // if(status.includes('all'))
+          if($.inArray('all', status) > -1)
+            {
+              status.splice(status.indexOf('all'),1);
+              $('#status_all_id').attr('checked', false);
+            }
+          if($('#pending_id').is(':checked') == false){
+             status.splice(status.indexOf('pending'),1);
+          }
+          if($('#pending_id').is(':checked') == true){
+            status.push('pending')
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+
+      $("#approved_id").click(function(){
+          //if(status.includes('all'))
+            if($.inArray('all', status) > -1)
+            {
+              status.splice(status.indexOf('all'),1);
+              $('#status_all_id').attr('checked', false);
+            }
+          if($('#approved_id').is(':checked') == false){
+             status.splice(status.indexOf('approved'),1);
+          }
+          if($('#approved_id').is(':checked') == true){
+            status.push('approved')
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+
+      $("#declined_id").click(function(){
+          //if(status.includes('all'))
+            if($.inArray('all', status) > -1)
+            {
+              status.splice(status.indexOf('all'),1);
+              $('#status_all_id').attr('checked', false);
+            }
+          if($('#declined_id').is(':checked') == false){
+             status.splice(status.indexOf('declined'),1);
+          }
+          if($('#declined_id').is(':checked') == true){
+            status.push('declined')
+          }
+          
+          map_data(from_date,till_date,state,request_type,status)
+            
+      });
+
+        
+    
+
+
+  });
+
+  
+  function map_data(
+    from_date,till_date,state,request_type,status_type){
+    $('.loader').attr("style","display:block");
+     $.ajax({
+                 url: "/maps/map_data",   
+                 type: "POST",
+                 data: {  from_date : from_date,
+                         till_date : till_date,
+                         state : state,
+                         request_type : request_type,
+                         status_type: status_type
+
+                }, 
+                dataType: "text",
+                 
+                complete: function() {
+                  $('.loader').attr("style","display:none");
+                },
+
+            success: function(data) {     
+              var lln = []    
+              
+              var response = JSON.parse(data);
+                console.log(response);
+
+ 
+                for(i=0;i<response.length;i++){
+                 
+              //if(response[i]['lat'] != 0.0 && response[i]['lat'] != 'undefined' && response[i]['long'] != 0.0 && response[i]['long'] != 'undefined'){
+                if(response[i][3] != 0.0 && response[i][3] != 'undefined' && response[i][4] != 0.0 && response[i][4] != 'undefined'){
+
+                    //if(response[i]['status']=="approved"){
+                      if(response[i][1]=="approved"){
+                      var icon = "";
+                       //switch (parseInt(response[i]['request_type'])) {
+                        switch (parseInt(response[i][0])) {
+                              case 0:
+                                 icon= '/assets/a_gsb.png'
+
+                              break;
+                              case 1:
+                                 icon= '/assets/a_sis.png'
+                              break;
+                              case 2:
+                                 icon= '/assets/a_inshop.png'
+                              break;
+                              case 3:
+                                   icon= '/assets/a_maintenance.png'
+                              break;
+                              case 4:
+                                 icon= '/assets/a_visit.png'
+                              break;
+                      }
+                    
+
+                       
+                        //lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 4,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']})
+                        lln.push({lat: response[i][3],lon: response[i][4],zoom: 4,icon: icon,reqId: response[i][5],reqType: response[i][0]})
+                    }
+
+                  //else if(response[i]['status']=="declined"){
+                    else if(response[i][1]=="declined"){
+                        var icon = "";
+                      //switch ( parseInt(response[i]['request_type']) ) {
+                        switch ( parseInt(response[i][0]) ) {
+                              case 0:
+                                 icon= '/assets/d_gsb.png'
+                              break;
+                              case 1:
+                                icon= '/assets/d_sis.png'
+                              break;
+                              case 2:
+                                   icon= '/assets/d_inshop.png'
+                              break;
+                              case 3:
+                                   icon= '/assets/d_maintenance.png'
+                              break;
+                              case 4:
+                                  icon= '/assets/d_visit.png'
+                              break;
+                      }
+                      
+                      //lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']});
+                      lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]});
+                  }
+                  
+               // else if(response[i]['status']=="cmo_pending"){
+                else if(response[i][1]=="cmo_pending"){
+                  var icon = "";
+                      //switch ( parseInt(response[i]['request_type'])) {
+                        switch ( parseInt(response[i][0])) {
+                              case 0:
+                                  icon= '/assets/cp_gsb.png'
+                              break;
+                              case 1:
+                                 icon= '/assets/cp_sis.png'
+                              break;
+                              case 2:
+                                  icon= '/assets/cp_inshop.png'
+                              break;
+                              case 3:
+                                  icon= '/assets/cp_maintenance.png'
+                              break;
+                              case 4:
+                                 icon= '/assets/cp_visit.png'
+                              break;
+                        }
+                     
+                    //lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']});
+                    lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]});
+                  }
+
+                //else if(response[i]['status']=="cmo_declined"){
+                  else if(response[i][1]=="cmo_declined"){
+                    var icon = "";
+                      //switch ( parseInt(response[i]['request_type'])) {
+                        switch ( parseInt(response[i][0])) {
+                              case 0:
+                                  icon= '/assets/cd_gsb.png'
+                              break;
+                              case 1:
+                                 icon= '/assets/cd_sis.png'
+                              break;
+                              case 2:
+                                  icon= '/assets/cd_inshop.png'
+                              break;
+                              case 3:
+                                   icon= '/assets/cd_maintenance.png'
+                              break;
+                              case 4:
+                                  icon= '/assets/cd_visit.png'
+                              break;
+                        }
+
+
+                    //lln.push({lat: response[i]['lat'],lon: response[i]['long' ],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']});
+                    lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]});
+                  }
+                   //else if(response[i]['status']=='pending'){
+                    else if(response[i][1]=='pending'){
+                      var icon = "";
+                        //switch ( parseInt(response[i]['request_type']) ) {
+                          switch ( parseInt(response[i][0]) ) {
+                              case 0:
+                                  icon= '/assets/p_gsb.png'
+                              break;
+                              case 1:
+                               icon= '/assets/p_sis.png'
+                              break;
+                              case 2:
+                                   icon= '/assets/p_inshop.png'
+                              break;
+                              case 3:
+                                  icon= '/assets/p_maintenance.png'
+                              break;
+                              case 4:
+                                 icon= '/assets/p_visit.png'
+                              break;
+                        }
+
+                      //lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']})
+                      lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]})
+                  }
+                  
+                     
+                  }//end of main if
+                        
+              }//end of for loop
+ 
+                    initMap(lln);
+ 
+                   
+                
+
+            },//end of success function
+                error: function() {
+                         alert("Ajax error!")
+                }
+        });
+  }
+});
+ 
+
+</script>
+
+
+<div id="nav-col-submenu"></div>
+  </div>
+ 
+<div id="content-wrapper">
+  
+                
+  <div class="row">
+
+     <div class="col-lg-12" style="padding-left:0;">
+
+<div id="cover"></div>
+<nav id="main-nav">
+  
+  <div id="nav-button" class="cus-pad"><span class="fa fa-navicon"></span></div>
+
+  <div id="nav-list" class="custom-hide">
+<%=form_for maps_path  do %>
+<div class="cus-pad">
+  <h4>Choose State</h4>
+    <%=select_tag 'state',options_for_select(['All State'] + State.permit_state(current_user)),:multiple=>true %>
+
+
+<br>
+<h4>From</h4>
+    <%=date_field_tag 'from',nil,:id => "map-date-from",:value => @from%>
+    <h4>To</h4>
+    <%=date_field_tag 'to',nil,:id => "map-date-to",:value => @to%>
+
+<div class="" style="text-align:right;">
+
+<button type="button" class="btn btn-labeled btn-info"  id="ajaxButton" name="commit"> <span class="btn-label"> </span>  button</button>
+</div>
+
+</div>
+<div class="click-hide">
+
+
+      <div class="cus-pad">
+        <h4>Choose Request Type</h4>
+    <ul class="check-block" style="padding:0">
+
+       
+<li><%=image_tag "all_request.png",:class=>"map_icon"%><label> All </label><%= check_box_tag :all_id,'all',checked = true,:class=>'checkb' %> </li>
+
+<li><%=image_tag "gsb.png",:class=>"map_icon"%><label> GSB</label><%= check_box_tag :gsb_id,'gsb',checked = false,:class=>'checkb' %></li>
+
+<li><%=image_tag "inshop.png",:class=>"map_icon"%><label> In-shop </label><%= check_box_tag :inshop_id,'inshop',checked = false,:class=>'checkb' %> </li>
+
+<li><%=image_tag "sisp.png",:class=>"map_icon"%><label> SIS </label><%= check_box_tag :sis_id,'sis',checked = false,:class=>'checkb' %> </li>
+
+<li><%=image_tag "maintenance.png",:class=>"map_icon"%><label> Maintenance </label><%= check_box_tag :maintenance_id,'maintenance',checked = false,:class=>'checkb' %> </li>
+
+<li><%=image_tag "audit.png",:class=>"map_icon"%><label> Audit </label><%= check_box_tag :audit_id,'audit',checked = false,:class=>'checkb' %> </li>
+
+
+    </ul>
+<h4>Choose Status</h4>
+    <ul class="check-block" style="padding:0">
+        <li><%=image_tag "all_type.png",:class=>"map_icon"%><label> All </label><%= check_box_tag :status_all_id,'all',checked= true,:class=>'checkb' %> </li>
+
+          <li><%=image_tag "cpending.png",:class=>"map_icon"%><label>CMO Pending </label><%= check_box_tag :cmopending_id,'cmo_pending',checked= false,:class=>'checkb' %> </li>
+
+          <li> <%=image_tag "cdeclined.png",:class=>"map_icon"%><label> CMO Declined </label><%= check_box_tag :cmodeclined_id,'cmo_declined',checked= false,:class=>'checkb' %></li>
+
+          <li><%=image_tag "pending.png",:class=>"map_icon"%><label> Pending </label><%= check_box_tag :pending_id,'pending',checked= false,:class=>'checkb' %> </li>
+
+          <li><%=image_tag "approved.png",:class=>"map_icon"%><label> Approved </label><%= check_box_tag :approved_id,'approved',checked= false,:class=>'checkb' %> </li>
+
+          <li><%=image_tag "declined.png",:class=>"map_icon"%><label> Declined </label><%= check_box_tag :declined_id,'declined',checked= false,:class=>'checkb' %> </li>
+    </ul>
+  <br>
+
+ 
+
+      </div>
+</div>
+
+<div class="select_hide">
+<div class="cus-pad">
+    
+    <h4>Store Size</h4>
+    <%=select_tag 'store_size',options_for_select(['All Size'] + Map::AVG_STORE_MONTHLY_SALES,:selected => @store_size)%>
+<br>
+    <h4>RSP Present</h4>
+
+     <%=select_tag 'rsp_present',options_for_select(['All'] + BOOLEAN_VALUES,:selected => @rsp_present,:selected => @rsp_present)%>
+<br>
+     <h4>Gionee Sales</h4>
+
+     <%=select_tag 'gionee_sales',options_for_select(['Whole Sale'] + Map::AVG_GIONEE_MONTHLY_SALES,:selected => @gionee_sales)%>
+
+    
+
+</div>
+
+</div>
+  </div>
+
+  <% end %>
+</nav>
+
+
+<div class="loader"><img src='/assets/gionee-loader.gif' style="width:100px;height:100px;margin-left:30%;margin-top:10%;"/></div>
+    <div id="map"></div>
+ 
+    <script>
+    function initMap(lln){
+            
+           var myLatLng = {lat: -25.363, lng: 131.044};
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 5,
+            center: {lat: 20.5937, lng: 78.9629}
+          });
+ 
+
+        for(i=0 ;i<lln.length;i++) {
+          var position = new google.maps.LatLng(lln[i]['lat'], lln[i]['lon']);
+
+          var marker = new google.maps.Marker({
+            position: position,
+            icon: lln[i]['icon'],
+            map: map,
+            title: 'Hello World!',
+            url: '/requests/'+lln[i]['reqId']+'/edit?q[request_type]='+lln[i]['reqType']
+
+          });
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+               window.location.href = this.url;
+            }
+        })(marker, i));
+        }
+}
+    </script>
+ 
+     </div>
+ </div>
+</div> 
+ 
+ 
+ <script>
+
+
+$('#nav-button').click( function(){
+    $(this).toggleClass('width');
+    $(this).parent().toggleClass('show');
+    $(this).children().toggleClass( 'fa-navicon').toggleClass( 'fa-times-circle-o');
+    $('#nav-list').toggleClass('nav-show'); $('#cover').toggleClass('display'); 
+ 
+});
+</script>
+
+
+ 
+     
+         
+   
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4jlTEhC8Yx1Z0fIGZgPe0KD0b9_CjbMM">
+    </script>
+   
+ 

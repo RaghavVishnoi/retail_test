@@ -1,0 +1,95 @@
+<div id="nav-col-submenu"></div>
+</div>
+<div id="content-wrapper">
+<div class="row">
+<div class="col-lg-12">
+<div class="main-box clearfix">
+<div class="clearfix">
+	<div class="common_page gsb1">
+		<div class="hdr">
+	   		<div class="row">
+	    		<div class="col-md-2">
+					<div class="txt">Vendor Tasks
+					</div>
+				</div>
+				<div class="col-md-3">
+					<%= select_tag :state_request, options_for_select(['All']+State.permit_state(current_user)),:class => 'form-control custm_select',:required => "required",:onchange => "state_request()" %>
+					
+				</div>
+				<div class="col-md-5 col-md-offset-1">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+							<label class="col-md-3">From</label>
+							<div class="col-md-8">
+								<%= date_field_tag("date_from","",:class => "form-control") %> 		
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+							<label class="col-md-2">To</label>
+							<div class="col-md-9">
+								<%= date_field_tag("date_to","",:class => "form-control") %> 		
+							</div>
+						</div>
+					</div>
+				</div>
+
+				</div>
+				 
+			</div>	
+			 
+	</div>
+
+
+<div id='content' class="tab-content">
+	
+<%@assignments.each do |assignment|%>
+
+	<div class="tab-pane active" id="all">
+		<%= link_to "/requests/#{request.id}/edit?q[request_type]=4" do %>
+		<div class="row bdr_bttm">
+			 
+			<div class="col-md-8">
+				<div class="txt_area">
+					<ul class="list-inline list-unstyled">
+						<li>supervisor</li>
+						 
+					</ul>
+					<ul class="list-inline list-unstyled">
+						<li>
+							 retailer name
+						</li>
+					</ul>
+					<ul class="list-inline list-unstyled">
+						<li>
+						 address
+					 	</li> 
+					</ul> 
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="date_cmopendng">
+					<h5><b>Audit Date -</b>  </h5>
+					<h5><b>Audit by -</b>  </h5>
+				</div>
+			</div>
+		</div>
+	<%end%>	
+	</div>
+	<%end%>
+</div>
+							
+<div class="response-pagination clearfix">
+      <%= will_paginate @assignments %>
+</div>
+								
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<%=render partial: 'page_js/request_index'%>
+<%=render partial: 'page_js/menubar'%>

@@ -1,0 +1,12 @@
+<%= link_to "New Branch Office", new_address_path, :id => 'new-button' %>
+<table class="ui table">
+  <tbody>
+    <% @addresses.each do |address| %>
+      <tr>
+        <td><%= address.text %></td>
+        <td><%= link_to "Edit", [:edit, address] %></td>
+        <td><%= link_to "Delete", [address], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,24 @@
+<%= render 'contacts' %>
+
+<h5>Allocated To Users</h5>
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers_users.each do |customer_user| %>
+      <tr>
+        <td><%= customer_user.user.name %></td>
+        <td>
+          <% if can? :destroy, customer_user %>
+            <%= link_to "Delete", customers_user_path(customer_user.id), :method => :delete, :confirm => "Are you sure you want to delete it?" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

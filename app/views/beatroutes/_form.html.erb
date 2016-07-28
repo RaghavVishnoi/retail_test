@@ -1,0 +1,365 @@
+<div id="nav-col-submenu"></div>
+
+</div>
+
+
+<div id="content-wrapper">
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @beatroute.errors } %>
+
+  <div class="row">
+    <div class="col-lg-12">
+    <div class="main-box clearfix">
+    <div class="clearfix">
+      <div class="user_page">
+      <h2>Add New</h2>
+
+      <%= form_for @beatroute, :html => { :class => 'user-form' } do |f| %>
+
+
+        <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Distributor Name</label>
+                <div class="col-md-9">
+                <%= f.text_field :distributor_name,:required => "required",class: "form-control",placeholder: "Distributor Name" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">TSM Name</label>
+                <div class="col-md-9">
+                <%= f.text_field :tsm_name,:required => "required",class: "form-control",placeholder: "tsm_name"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">RSP Name</label>
+                <div class="col-md-9">
+                <%= f.text_field :rsp_name,:required => "required",class: "form-control",placeholder: "rsp_name" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">RSP Id</label>
+                <div class="col-md-9">
+                <%= f.phone_field :rsp_id,:required => "required",class: "form-control",placeholder: "rsp_id"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Employee Code</label>
+                <div class="col-md-9">
+                <%=f.text_field :employee_code,:required => "required",class: "form-control",placeholder: "employee_code" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Shop Code</label>
+                <div class="col-md-9">
+                <%= f.text_field :shop_code,:required => "required",class: "form-control",placeholder: "shop_code"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Retailer Code</label>
+                <div class="col-md-9">
+                <%=f.text_field :retailer_code,:required => "required",class: "form-control",placeholder: "retailer_code" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Retailer Name</label>
+                <div class="col-md-9">
+                <%=f.text_field :retailer_name,:required => "required",class: "form-control",placeholder: "retailer_name"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">City</label>
+                <div class="col-md-9">
+                <%=f.text_field :city,:required => "required",class: "form-control",placeholder: "city" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-6">Last month avg sales volume</label>
+                <div class="col-md-9">
+                <%=f.text_field :last_month_avg_sales_volume,:required => "required",class: "form-control",placeholder: "last_month_avg_sales_volume"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-6">Last month avg sales value</label>
+                <div class="col-md-9">
+                <%=f.text_field :last_month_avg_sales_value,:required => "required",class: "form-control",placeholder: "last_month_avg_sales_value" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-6">MTD avg sales volume</label>
+                <div class="col-md-9">
+                <%=f.text_field :mtd_avg_sales_volume,:required => "required",class: "form-control",placeholder: "last_month_avg_sales_volume"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+           <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-6">MTD avg sales value</label>
+                <div class="col-md-9">
+                <%=f.text_field :mtd_avg_sales_value,:required => "required",class: "form-control",placeholder: "mtd_avg_sales_value" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-6">Avg last month attendance</label>
+                <div class="col-md-9">
+                <%=f.text_field :avg_last_month_attendance,:required => "required",class: "form-control",placeholder: "avg_last_month_attendance"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+           <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-6">Last reported stock-number</label>
+                <div class="col-md-9">
+                <%=f.text_field :last_reported_stock,:required => "required",class: "form-control",placeholder: "last_reported_stock" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Models in stock</label>
+                <div class="col-md-9">
+                <%=f.text_field :models_in_stock,:required => "required",class: "form-control",placeholder: "models_in_stock"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-8">Distance between beatroute and app locations</label>
+                <div class="col-md-9">
+                <%=f.text_field :distance_btwn_beatroute_and_app_location,:required => "required",class: "form-control",placeholder: "distance_btwn_beatroute_and_app_location" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">SIS type</label>
+                <div class="col-md-9">
+                <%=f.text_field :sis_type,:required => "required",class: "form-control",placeholder: "sis_type"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+           <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">SIS installed on</label>
+                <div class="col-md-9">
+                <%=f.text_field :sis_installed_on,:required => "required",class: "form-control",placeholder: "sis_installed_on" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">GSB type</label>
+                <div class="col-md-9">
+                <%=f.text_field :gsb_type,:required => "required",class: "form-control",placeholder: "gsb_type"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+           <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3"> GSB installed on</label>
+                <div class="col-md-9">
+                <%=f.text_field :gsb_installed_on,:required => "required",class: "form-control",placeholder: "gsb_installed_on" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Clipon</label>
+                <div class="col-md-9">
+                <%=f.text_field :clipon,:required => "required",class: "form-control",placeholder: "clipon"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Countertop</label>
+                <div class="col-md-9">
+                <%=f.text_field :countertop,:required => "required",class: "form-control",placeholder: "countertop" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Flange</label>
+                <div class="col-md-9">
+                <%=f.text_field :flange ,:required => "required",class: "form-control",placeholder: "flange"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Standee</label>
+                <div class="col-md-9">
+                <%= f.text_field :standee ,:required => "required",class: "form-control",placeholder: "standee" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Inshop branding</label>
+                <div class="col-md-9">
+                <%=f.text_field :inshop_branding ,:required => "required",class: "form-control",placeholder: "inshop_branding"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+           <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">SIS</label>
+                <div class="col-md-9">
+                <%= f.text_field :sis ,:required => "required",class: "form-control",placeholder: "sis" %>
+                  
+                </div>
+              </div>
+            </div>
+             <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">GSB</label>
+                <div class="col-md-9">
+                <%=f.text_field :gsb ,:required => "required",class: "form-control",placeholder: "gsb"  %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-12">
+               <%= f.submit "Submit",:class => "btn btn-success rrm_frm_btn" %>
+              
+            </div>
+          </div>
+        <% end %>
+     
+
+        </div>
+         <hr style="border-bottom: 2px solid #1CDCD3;">
+
+         <%= form_for @beatroute,:url => { :action => "file_upload" }, :html => { :class => 'user-form',:id => 'uploadForm' } do |f| %>
+ 
+           <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Upload CSV</label>
+                <div class="col-md-9">
+                <%= f.file_field :file,:required => true %>
+                  
+                </div>
+              </div>
+            </div>
+             
+          </div>
+
+            <div class="beatroute_upload_button">
+    <%=f.button :value => "Upload Record",:class => "btn btn-success rrm_frm_btn"%>
+          <%=link_to "Get Format",'/uploads/beatroute/format/format.csv'%>
+         </div>
+       
+  
+        <%end%>
+
+
+      </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+      

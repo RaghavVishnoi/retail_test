@@ -1,0 +1,74 @@
+<div id="nav-col-submenu"></div>
+</div>
+<div id="content-wrapper">
+
+<% if User.user_roles(current_user.id).include? 'cmo'%>
+	<%=render 'dashboard/cmo'%>
+<%elsif User.user_roles(current_user.id).include? 'vendor'%>	
+	<%=render 'dashboard/vendor'%>
+<%elsif User.user_roles(current_user.id).include? 'vmqa'%>	
+	<%=render 'dashboard/vmqa'%>
+<%elsif User.user_roles(current_user.id).include? 'supervisor'%>	
+	<%=render 'dashboard/supervisor'%>	
+<%elsif User.user_roles(current_user.id).include? 'downloader'%>	
+	
+	 <script>location.href = '/downloads'</script>
+
+	 
+<%else%>
+	<%if User.user_roles(current_user.id).include? 'approver'%>
+	<div class="div-left">
+		<div class="btn-group" data-toggle="buttons">
+			<label class="btn btn-primary <%='active' if params[:v] == 'rrm'%>" id="rrm">
+				<input type="radio" name="view"> RRM 
+			</label>
+			<label class="btn btn-primary <%='active' if params[:v] == 'state' || params[:v] == nil%>" id="state">
+				<input type="radio" name="view"> State
+			</label>
+		</div>
+	</div>
+	<%end%>
+	
+	<%if params[:v] == 'rrm'%>
+		<%=render 'dashboard/admin_rrm'%>
+	<%else%>
+		<%=render 'dashboard/admin_state'%>
+	<%end%>	
+<%end%>
+
+</div>
+<script type="text/javascript">
+ 
+	$("#rrm").click(function(){
+		if(location.href.indexOf('?') === -1){
+			location.href = '/dashboard?v=rrm'
+		}else{
+			params = location.href.split('?')[1]			 
+			if(params != 'undefined' && params.length!=0){
+				if(location.href.indexOf('v=') === -1){
+  					location.href = '/dashboard?v=rrm&'+params
+				}else{
+					old_params = params.split('v=')[1]
+					if(location.href.indexOf('rrm') === -1){
+						old_params = old_params.replace("state","rrm")
+						location.href = '/dashboard?v='+old_params
+					}else{
+						location.href = '/dashboard?v='+old_params
+					}
+ 					
+				}
+				
+			}else{
+				location.href = '/dashboard?v=rrm'
+			}
+		}		
+ 	});
+ 	
+ 	$("#state").click(function(){
+		location.href = '/dashboard?v=state'
+ 	})
+
+
+	$('#dashboard').attr("class",'active')
+	
+</script>	

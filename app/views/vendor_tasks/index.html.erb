@@ -1,0 +1,182 @@
+        
+<div class="request_wrap clearfix"  >
+
+<div>Vendor Records
+<%= render :partial => 'search' %>
+</div>
+  
+  
+ <div class="req_cont clearfix">
+
+    <div class="links_blc">
+      <% if can? :cmo , VendorTask %>
+      
+          <div class="<%= request_status_class('cmo_pending') %>">
+            <%= link_to "CMO Pending", vendor_tasks_path(:q => { :status => 'cmo_pending' }) %>
+          </div>
+
+          <div class="<%= request_status_class('cmo_declined') %>">
+            <%= link_to "CMO Declined", vendor_tasks_path(:q => { :status => 'cmo_declined' }) %>
+          </div>
+
+          <div class="<%= request_status_class(['pending','declined','approved']) %>">
+            <%= link_to "CMO Approved", vendor_tasks_path(:q => { :status => ['pending','declined','approved']}) %>
+          </div>
+       <%end%>
+          
+           <% if can? :approve , VendorTask %>
+           
+           <div class="<%= request_status_class('pending') %>">
+             <%= link_to "Pending", vendor_tasks_path(:q => { :status => 'pending'}) %>
+           </div>
+
+           <div class="<%= request_status_class('declined') %>">
+            <%= link_to "Declined", vendor_tasks_path(:q => { :status => 'declined' }) %>
+           </div>
+
+           <div class="<%= request_status_class('approved') %>">
+            <%= link_to "Approved", vendor_tasks_path(:q => { :status => 'approved'}) %>
+           </div>
+        <%end%> 
+        <% if @role.name != 'superadmin' %>
+        <% if can? :get , VendorTask %>
+        
+      <div class="<%= request_status_class('pending') %>">
+        
+        <%= link_to "Pending", vendor_tasks_path(:q => { :status => 'pending'}) %>
+      </div>
+
+      <div class="<%= request_status_class('declined') %>">
+        <%= link_to "Declined", vendor_tasks_path(:q => { :status => 'declined' }) %>
+      </div>
+
+      <div class="<%= request_status_class('approved') %>">
+        <%= link_to "Approved", vendor_tasks_path(:q => { :status => 'approved' }) %>
+      </div>
+
+         
+       <%end%> 
+     <%end%>
+      </div>
+     	<% 
+      id = session[:user_id]
+      @user = User.find_by(:id => id)
+      @associated_roles = AssociatedRole.find_by(:object_id => id)
+      @role = @associated_roles.role 
+      
+      if @role.name == 'cmo'%>
+       <%@vendor_task.each do |vendor_task| %>
+       <% if vendor_task.status == 'cmo_pending'
+                    @cmo_approve_date = ''
+                    @heading = ''
+                    @status = 'Pending for CMO'
+                    @date = ''
+                  elsif vendor_task.status == 'cmo_declined'
+                    @status = 'Declined by CMO'
+                    @date = vendor_task.cmo_approve_date
+                  elsif vendor_task.status == 'pending'
+                    @status = 'Approved by CMO'
+                    @date = vendor_task.cmo_approve_date
+                  elsif vendor_task.status == 'declined'
+                    @status = 'Declined by Approver'
+                    @date = vendor_task.approver_approve_date
+                    @heading = 'CMO approved date'
+                    @cmo_approve_date = vendor_task.cmo_approve_date
+                  elsif vendor_task.status == 'approved'
+                    @status = 'Approved by Approver'
+                    @date = vendor_task.approver_approve_date
+                    @heading = 'CMO approved date'
+                    @cmo_approve_date = vendor_task.cmo_approve_date
+                    %>
+                  <%end%> 
+       <%@requests.each do |request|%>
+         <%if request.id.to_s == vendor_task.request_id%>
+          <%= link_to [:edit, vendor_task] do %>
+            <div class="request_contain clearfix">
+         	   <div class="req_info">
+              <% 
+                 if vendor_task.vendor_id != 0 
+                  @vendorlist = Vendorlist.find_by(:id => vendor_task.vendor_id) %>
+                  <div><%= @vendorlist.vendor_name %>-<%=@vendorlist.region+"   "+@vendorlist.state %></div>
+                  <div>Request Id - <%= vendor_task.request_id %></div>
+                 <%else%>
+                  <div><%= vendor_task.other_identity %></div>
+                  <div><%= vendor_task.request_id %></div>
+                <%end%>
+            </div>
+            <div class="req_desc">
+                   <div><%= @status %></div>
+                   <div><%= @date %></div>
+            </div>
+            <div class="req_desc">
+                  <div>Created on - <%=vendor_task.created_at.strftime("%b %d, %Y")%></div>
+                  <div><%= vendor_task.installation_of %></div>
+                  <div><%= vendor_task.retailer_code %></div>
+            </div>
+              <% vendor_task.images.first(3).each do |image| %>
+                  <div class="image-container">
+                      <%= image_tag image.image_url %>
+                  </div>
+              <% end %>
+          </div>  
+       <%end%>
+      <%end%> 
+     <%end%> 
+    <%end%>
+    <%else%>
+     <%@vendor_task.each do |vendor_task| %>
+     <% if vendor_task.status == 'pending'
+                    @status = 'Approved by CMO'
+                    @date = vendor_task.cmo_approve_date
+                  elsif vendor_task.status == 'declined'
+                    @status = 'Declined by Approver'
+                    @date = vendor_task.approver_approve_date
+                    @heading = 'CMO approved date'
+                    @cmo_approve_date = vendor_task.cmo_approve_date
+                  elsif vendor_task.status == 'approved'
+                    @status = 'Approved by Approver'
+                    @date = vendor_task.approver_approve_date
+                    @heading = 'CMO approved date'
+                    @cmo_approve_date = vendor_task.cmo_approve_date
+                    %>
+                  <%end%> 
+
+       <%= link_to [:edit, vendor_task] do %>
+        <div class="request_contain clearfix">
+         <div class="req_info">
+          <% 
+            if vendor_task.vendor_id != 0
+              @vendorlist = Vendorlist.find_by(:id => vendor_task.vendor_id) %>
+              <div><%= @vendorlist.vendor_name %>-<%=@vendorlist.region+"   "+@vendorlist.state %></div>
+              <div>Request Id - <%= vendor_task.request_id %></div>
+             <%else%>
+              <div><%= vendor_task.other_identity %></div>
+              <div><%= vendor_task.request_id %></div>
+            <%end%>
+        </div>
+        <div class="req_desc">
+              <div><%= @status %></div>
+              <div><%= @date %></div>
+        </div>
+        <div class="req_desc">
+              <div>Created on - <%=vendor_task.created_at.strftime("%b %d, %Y")%></div>
+              <div><%= vendor_task.installation_of %></div>
+              <div><%= vendor_task.retailer_code %></div>
+        </div>
+          <% vendor_task.images.first(3).each do |image| %>
+              <div class="image-container">
+                  <%= image_tag image.image_url %>
+              </div>
+          <% end %>
+       </div>  
+    <%end%>
+  <%end%>
+ <%end%>
+</div> 
+
+      <div class="response-pagination clearfix">
+       <%= will_paginate @vendor_task %>
+      </div>
+</div> 
+</div>
+

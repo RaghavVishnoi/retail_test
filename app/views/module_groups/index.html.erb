@@ -1,0 +1,10 @@
+<table class="ui table">
+  <tbody>
+    <% @module_groups.each do |group| %>
+      <tr>
+        <td><%= group.name %></td>
+        <td><%= link_to "activate", [:edit, group] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

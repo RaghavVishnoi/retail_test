@@ -1,0 +1,104 @@
+ 
+ 
+<!-- <div id ="date_field">
+<label><b>From</b></label> 
+<%= date_field_tag("date_from", "") %>
+<label><b>To</b></label>
+<%= date_field_tag("date_to", "") %>
+<%= button_tag class: 'search_button' do %>
+<i class="fa fa-search search-icon"></i>
+<% end %>
+</div> -->
+<div class="row">
+<div class="col-lg-12">
+<div class="row">
+<div class="col-md-12 col-sm-6">
+<div class="main-box clearfix">
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" style="color: #fff;">
+     	 Vendor Assignments 
+        </a>
+      </h4>
+    </div>
+    
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel_body">
+
+       	<h4><%=current_user.name%></h4>
+       	<div class="table-responsive">
+			<table class="table table-border">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Pending</th>
+						<th>In Process</th>
+						<th>Fixed</th>
+						<th>Declined</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+					<tr>
+						<td class="blue">
+							<a href="/vendor_assignments?q[status]=[0,1,2,3]">
+							GSB
+							</a>
+						</td>
+						<td><%=VendorRequest.request_count_by_type(current_user.id,0,params[:form],params[:to],0)%> </td>
+						<td> <%=VendorRequest.request_count_by_type(current_user.id,0,params[:form],params[:to],1)%></td>
+						<td> <%=VendorRequest.request_count_by_type(current_user.id,0,params[:form],params[:to],2)%></td>
+						<td><%=VendorRequest.request_count_by_type(current_user.id,0,params[:form],params[:to],3)%></td>
+					</tr>
+					<tr>
+						<td class="blue">
+							<a href=" ">
+								SIS
+							</a>
+						</td>		 
+						<td><%=VendorRequest.request_count_by_type(current_user.id,1,params[:form],params[:to],0)%> </td>
+						<td><%=VendorRequest.request_count_by_type(current_user.id,1,params[:form],params[:to],1)%> </td>
+						<td><%=VendorRequest.request_count_by_type(current_user.id,1,params[:form],params[:to],2)%> </td>
+						<td><%=VendorRequest.request_count_by_type(current_user.id,1,params[:form],params[:to],3)%></td>
+					</tr>
+					<tr>
+						<td class="blue">
+							<a href=" ">
+							In Shop
+							</a>	
+						</td>	
+						<td><%=VendorRequest.request_count_by_type(current_user.id,2,params[:form],params[:to],0)%> </td>
+						<td><%=VendorRequest.request_count_by_type(current_user.id,2,params[:form],params[:to],1)%> </td>
+						<td> <%=VendorRequest.request_count_by_type(current_user.id,2,params[:form],params[:to],2)%></td>
+						<td><%=VendorRequest.request_count_by_type(current_user.id,2,params[:form],params[:to],3)%></td>
+					</tr>
+					<tr>
+						<td class="blue">
+							<a href="">
+							Maintenance
+						</a>
+						</td><td><%=VendorRequest.request_count_by_type(current_user.id,3,params[:form],params[:to],0)%> </td>
+						<td> <%=VendorRequest.request_count_by_type(current_user.id,3,params[:form],params[:to],1)%></td>
+						<td><%=VendorRequest.request_count_by_type(current_user.id,3,params[:form],params[:to],2)%> </td>
+						<td><%=VendorRequest.request_count_by_type(current_user.id,3,params[:form],params[:to],3)%></td>
+					</tr>						
+				</tbody>
+			</table>
+		</div>
+    </div>
+    
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>		
+</div>
+<script type="text/javascript">
+$('#dashboard').attr("class",'active')
+</script>		
+

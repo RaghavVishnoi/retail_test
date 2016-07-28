@@ -1,0 +1,23 @@
+<%= form_for @holiday, :html => { :class => 'user-form' } do |f| %>
+
+  <h4 id="form-title"><%= form_title %></h4>
+  
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @holiday.errors} %>
+
+  <div class="form-field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  
+  <div class="form-field">
+    <%= f.label :date %>
+    <%= f.date_field :date %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :timezone %>
+    <%= f.time_zone_select :timezone, nil, :prompt => "Select TimeZone" %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

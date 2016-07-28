@@ -1,0 +1,10 @@
+ 
+<% if params[:user] == 'auditor' || @user.roles.pluck(:name).include?('auditor')%>
+	<%= render :partial => 'cmo', :locals => { :type => "Edit Auditor",action: 'edit'} %>
+<% else %>
+	<%= render :partial => 'form', :locals =>{:type => "edit",action: 'edit'} %>
+<% end %>
+<script type="text/javascript">
+  $('#user').attr("class",'active')
+</script>   
+

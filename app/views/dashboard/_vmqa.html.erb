@@ -1,0 +1,139 @@
+
+
+
+<div id ="date_field">
+<label><b>From</b></label> 
+<%= date_field_tag("date_from", "") %>
+<label><b>To</b></label>
+<%= date_field_tag("date_to", "") %>
+<%= button_tag class: 'search_button' do %>
+<i class="fa fa-search search-icon"></i>
+<% end %>
+</div>
+<div class="row">
+	
+	
+	
+<%@response.each_slice(2) do |response|
+div1 = response[0]
+div2 = response[1]
+%>
+<div class="col-lg-12">
+<div class="row"> 
+<div class="col-md-6 col-sm-6">
+<div class="main-box clearfix">
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<%=div1[:supervisor].id%>" style="color: #fff;">
+
+	
+		<%=div1[:supervisor].name%>
+</a>
+</h4>
+</div>
+<div id="<%=div1[:supervisor].id%>" class="panel-collapse collapse in">
+
+<div class="panel_body">
+	 
+	<div class="table-responsive">
+	<table class="table table-border">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Total</th>
+				<th>Pending</th>
+				<th>Audited</th>
+ 			</tr>
+		</thead>
+		<tbody>
+			<%div1[:auditor].each do |auditor|%>
+			<tr>
+				
+					<td class="blue">
+						<a href="/user_audits/<%=auditor.id%>?from=<%=params[:from]%>&to=<%=params[:to]%>">
+						<%=auditor.name%>
+						</a>
+					</td>
+					
+					<td><%=ShopAssignment.assignment_count(params[:from],params[:to],auditor.id,['pending','audited'])%></td>
+					<td><%=ShopAssignment.assignment_count(params[:from],params[:to],auditor.id,'pending')%></td>
+					<td><%=ShopAssignment.assignment_count(params[:from],params[:to],auditor.id,'audited')%></td>
+ 					
+			</tr>
+			<%end%> 
+			 
+			 
+			 	
+		</tbody>
+	</table>
+</div>
+ 
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<%if div2 != nil %>
+<div class="col-md-6 col-sm-6">
+<div class="main-box clearfix">							
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+		<a class="accordion-toggle" data-toggle="collapse" href="#<%=div2[:supervisor].id%>" style="color: #fff;">
+	 			<%=div2[:supervisor].name%>
+		</a>
+		</h4>
+    </div>
+<div id="<%=div2[:supervisor].id%>" class="panel-collapse collapse in">
+		<div class="panel_body">
+			 
+			<div class="table-responsive">
+			<table class="table table-border">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Total</th>
+						<th>Pending</th>
+						<th>Audited</th>
+ 					</tr>
+				</thead>
+				<tbody>
+					<%div2[:auditor].each do |auditor|%>
+					<tr>
+					<td class="blue">
+						<a href="/user_audits/<%=auditor.id%>?from=<%=params[:from]%>&to=<%=params[:to]%>">
+						<%=auditor.name%>
+					</a>
+					</td>
+					<td><%=ShopAssignment.assignment_count(params[:from],params[:to],auditor.id,['pending','audited'])%></td>
+					<td><%=ShopAssignment.assignment_count(params[:from],params[:to],auditor.id,'pending')%></td>
+					<td><%=ShopAssignment.assignment_count(params[:from],params[:to],auditor.id,'audited')%></td>
+ 				</tr>
+				<%end%> 
+				 
+				 						
+				</tbody>
+			</table>
+		</div>
+	 
+    </div>
+
+</div>
+</div>
+</div>							
+</div>
+<%end%>	
+</div>
+</div>
+</div>
+<%end%>
+</div>
+
+	
+

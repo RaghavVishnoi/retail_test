@@ -1,0 +1,43 @@
+
+
+<script>	
+	var myDropDown=$("#request");
+	var length = $('#request> option').length;
+ 	myDropDown.attr('size',length);
+ 	$("#state_request").val("<%=if params[:state] == 'All' then 'All' else State.find_by(name: params[:state].split(',')).id end%>");
+ 	 $("#state_retailer").val("<%=params[:retailer]%>")
+
+ 	 function state_request() {
+ 		state = $('#state_request option:selected').text();
+ 		url = window.location.href.split('state')[0];
+    current_state = window.location.href.split('state=')[1];
+    url1 = url.split('q[uid]')[0]; 
+ 		url2 = window.location.href.split('state')[1].split('&')[1];
+	    rparam = url1.split('&')[0];
+ 	    url1 = url1.replace("&"+rparam,"");
+	    url3 = url1.split('&page')[0];
+	    url4 = url1.split('&page')[1];	
+
+  	    state = encodeURIComponent(state);
+  	    if(url2 == 'undefined' || url4 == 'undefined' || url == null || url4 == null){
+   	    	location.href=url3+'state='+state;
+  	    }else{
+  	    	location.href=url3+'&'+url2+'&'+url4+'state='+state;
+  	    }
+	   	 
+ 	}
+  function state_retailer(){
+    var retailer = $("#state_retailer").val();
+    url1 = window.location.href.split('&page')[0];
+    url2 = window.location.href.split('&page')[1];
+    url3 = url1.split('&retailer=')[0]
+    if(url2 != 'undefined' && url2 != null){
+       location.href=url3+'&'+url2+'&retailer='+retailer
+    }else{
+      location.href=url3+'&retailer='+retailer
+    }
+
+    
+    
+  }
+</script>

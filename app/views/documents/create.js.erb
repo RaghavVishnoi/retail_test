@@ -1,0 +1,5 @@
+<% if @data_file.errors.present? %>
+  alert("<%= j(@data_file.errors.full_messages.to_sentence.html_safe) %>")
+<% else %>
+  $('.files-container').append('<%= j(render :partial => "data_files/file", :locals => { :file => @data_file }) %>') 
+<% end %>

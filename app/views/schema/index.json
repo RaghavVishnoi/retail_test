@@ -1,0 +1,107 @@
+{
+  "items": [
+    {
+      "table_name": "items",
+      "columns": [
+        { "name": "id", "type": "INTEGER PRIMARY KEY  NOT NULL" },
+        { "name": "jsondump", "type": "text" } 
+      ],
+      "url": "/api/v1/items",
+      "pagination": true,
+      "login_required": true
+    }
+  ],
+
+  "default": [
+    {
+      "table_name": "screens",
+      "columns": [
+        { "name": "id", "type": "INTEGER PRIMARY KEY  NOT NULL" },
+        { "name": "jsondump", "type": "text"}
+        
+
+      ],
+      "url": "/api/v1/screens",
+      "pagination": true,
+      "login_required": false
+    },
+
+    {
+      "table_name": "dropdown_values",
+      "columns": [
+        { "name": "jsondump", "type": "text" }
+      ],
+      "url": "/api/v1/dropdown_values",
+      "pagination": false,
+      "login_required": false,
+      "single_record": true
+    } 
+  ],
+
+  "crm": [
+    {
+      "table_name": "customers",
+      "columns": [
+        { "name": "id", "type": "INTEGER PRIMARY KEY NOT NULL" },
+        { "name": "name", "type": "text" },
+        { "name": "jsondump", "type": "text" }
+      ],
+      "url": "/api/v1/customers",
+      "pagination": true,
+      "login_required": true
+    }
+  ],
+
+  "survey": [
+    {
+      "table_name": "surveys",
+      "columns": [
+        { "name": "id", "type": "INTEGER PRIMARY KEY NOT NULL" },
+        { "name": "jsondump", "type": "text" }
+      ],
+      "url": "/api/v1/surveys",
+      "pagination": true,
+      "login_required": true
+    }
+  ],
+
+  "requester": [
+    {
+      "table_name": "requests",
+      "columns": [
+        { "name": "jsondump", "type": "text" }
+      ],
+      "url": "/api/v1/requests/new",
+      "pagination": false,
+      "login_required": false,
+      "single_record": true
+    }
+
+  ] ,
+
+  "vendor": [
+    {
+      "table_name": "vendor_tasks",
+      "columns": [
+        { "name": "jsondump", "type": "text" }
+      ],
+      "url": "/api/v1/vendor_tasks/new",
+      "pagination": false,
+      "login_required": false,
+      "single_record": true
+    },
+    {
+      "table_name": "dropdown_values",
+      "columns": [
+        { "name": "jsondump", "type": "text" }
+      ],
+      "url": "/api/v1/dropdown_values",
+      "pagination": false,
+      "login_required": false,
+      "single_record": true
+    } 
+  ] 
+
+
+
+}

@@ -1,0 +1,54 @@
+<div class="ui-element container <%= container_class %>" data-name="[[key][ui_element]]">
+
+  <h5>UI Element</h5>
+
+  <p>Id: <span class="element-id"><%= ui_element.id %></span></p>
+
+  <%= link_to "Remove", "javascript:void(0);", :class => 'remove-field' %>
+
+  <%= form.fields_for data_name, ui_element do |f| %>
+    <%= f.text_field :post_url, :placeholder => "Post Url", :data => { :name => "[post_url]" } %>
+
+    <%= f.text_field :style, :placeholder => "Style", :data => { :name => "[style]" } %>
+    
+    <%= f.text_field :width, :placeholder => "Width", :data => { :name => "[width]" } %>
+
+    <%= f.text_field :height, :placeholder => "Height", :data => { :name => "[height]" } %>
+
+    <%= f.hidden_field :id, :placeholder => "Id", :data => { :name => "[id]" }, :class => 'element-id-field' %>
+
+    <%= f.text_field :type, :placeholder => "Type", :data => { :name => "[type]" } %>
+
+    <%= f.text_field :name, :placeholder => "Name", :data => { :name => "[name]" } %>
+
+    <%= f.text_field :weight, :placeholder => "Weight", :data => { :name => "[weight]" } %>
+
+    <%= f.text_field :behaviour, :placeholder => "Behaviour", :data => { :name => "[behaviour]" } %>
+
+    <%= f.text_field :display_value, :placeholder => "Display Value", :data => { :name => "[display_value]" } %>
+
+    <%= f.text_field :url, :placeholder => "Service Url", :data => { :name => "[url]" } %>
+
+    <%= f.text_field :array_name, :placeholder => "Array Name", :data => { :name => "[array_name]" } %>
+
+    <%= f.text_field :parameters, :placeholder => "Parameters", :data => { :name => "[parameters]" } %>
+
+    <%= f.text_field :depedency_id, :placeholder => "Dependency Id", :data => { :name => "[dependency_id]" } %>
+
+    <%= f.text_field :is_comming_from_webservice, :placeholder => "Parent Webservice", :data => { :name => "[is_comming_from_webservice]" } %>
+
+    <%= f.text_field :token1, :placeholder => "token1", :data => { :name => "[token1]"} %>
+
+    <%= f.text_field :token2, :placeholder => "token2", :data => { :name => "[token2]"} %>
+
+    <%= f.text_field :token3, :placeholder => "token3", :data => { :name => "[token3]"} %>
+
+    <%= f.text_field :token4, :placeholder => "token4", :data => { :name => "[token4]"} %>
+
+    <%= f.text_field :token5, :placeholder => "token5", :data => { :name => "[token5]"} %>
+   
+    <% if @screen.is_menu? %>
+        <%= f.select :module_group, ModuleGroup.all.map { |g| [g.name, g.id] }, { :prompt => "Select Module" }, { :data => { :name => "[module_group]" } } %>
+    <% end %>
+  <% end %>
+</div> 

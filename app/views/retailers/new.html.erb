@@ -1,0 +1,256 @@
+ 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script>
+$(document).ready(function() {
+
+var bar = $('.bar');
+var percent = $('.percent');
+var status = $('#status');
+
+$('#file-submit').click(function(){
+
+
+ 
+$('#uploadForm').ajaxForm({
+    beforeSend: function() {
+   
+        $('#loader_img').show();
+         
+    },
+    complete: function(xhr,data) {
+        $('#loader_img').hide();
+        
+        
+        
+        var obj = jQuery.parseJSON(xhr.responseText);
+        var arr  = obj.retailers;
+        console.log(arr);
+        if(arr != 'false'){
+        $('#confirmation-popup').show(); 
+         var new_array = [] 
+         var update_array = []
+         var tbody = [$('#confirmation tbody'),$('#confirmation-status tbody')];
+         var arr1 = []
+         var arr2 = [] 
+         for(var i=0;i<tbody.length;i++){
+          
+            if (i == '0'){
+              arr1 = arr[0]
+               
+              for(var j=0;j<arr1.length;j++){
+                var tr = $('<tr>');
+                new_array.push(arr1[j][1])
+               $('<td style="padding-left:9%">').html(arr1[j][1]).appendTo(tr); 
+               $('<td style="padding-left:24%">').html(arr1[j][0]).appendTo(tr); 
+              tbody[i].append(tr);
+            }
+            
+          }
+            else{
+               
+               arr2 = arr[1]
+               arr3 = arr[2] 
+               
+               for(var v=0;v<arr2.length;v++){
+                 
+                var tr = $('<tr>');
+               update_array.push(arr2[v]);
+               $('<td style="padding-left:13%">').html(arr2[v]).appendTo(tr); 
+               $('<td style="padding-left:18%">').html(arr3[v]).appendTo(tr); 
+            tbody[i].append(tr);
+            }
+           }
+  
+       }
+       console.log(new_array)
+       $("#new_array").val(new_array);
+       $("#update_array").val(update_array); 
+      }
+      else{
+        $('#error-popup').show(); 
+      }
+     },
+    
+    
+       
+    
+    }); 
+
+  });
+  $('.confirm').click(function(){
+      $('#confirmation-popup').close();
+  });
+
+}); 
+
+</script>
+ <%= render 'retailers/confirmation_message' %>
+ <%= render 'retailers/error_message' %>
+
+  
+
+   <div id="nav-col-submenu"></div>
+
+</div>
+<div id="content-wrapper">
+  
+  <div class="row">
+    <%= render :partial => "shared/error_messages", :locals => { :errors => @retailer.errors } %>
+
+    <div class="col-lg-12">
+    <div class="main-box clearfix">
+    <div class="clearfix">
+      <div class="user_page">
+      <h2>Add New Retailer</h2>
+      
+        <%= form_for @retailer do |f| %>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Shop Name</label>
+                <div class="col-md-9">
+                  <%= f.text_field :retailer_name,:required => "required",class: "form-control",placeholder: "shop name"  %>
+         
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-md-3">Contact Number</label>
+                <div class="col-md-9">
+                <%= f.text_field :mobile_number,:required => "required",class: "form-control",placeholder: "contact number"  %>
+                  
+                </div>
+              </div>
+            </div>
+            <!-- left part of form end --> 
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Shop Code</label>
+                <div class="col-md-9">
+                 <%= f.text_field :retailer_code,class: "form-control",placeholder: "shop code" %>
+                  
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-md-3"> Tin Number</label>
+                <div class="col-md-9">
+                     <%= f.text_field :tin_number,class: "form-control",placeholder: "tin number" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Contact Person</label>
+                <div class="col-md-9">
+                  <%= f.text_field :contact_person,:required => "required",class: "form-control",placeholder: "contact person" %>
+                 
+                  
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-md-3">State</label>
+                <div class="col-md-9">
+  
+
+                   <%= f.select :state, State.all.pluck(:name),{:prompt => "Select state"},:class => 'retailer_select',:required => "required" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Sales Channel</label>
+                <div class="col-md-9">
+               <%= f.text_field :sales_channel,class: "form-control",placeholder: "sales channel" %>
+                  
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-md-4">City</label>
+                <div class="col-md-9">
+                   
+                  <%= f.text_field :city,class: "form-control",placeholder: "city" %>
+                </div>
+              </div>
+            </div>
+            <div>
+                <div class="col-md-6">
+                   <div class="form-group clearfix">
+                      <label class="col-md-3">Address</label>
+                      <div class="col-md-9">
+                     <%= f.text_area :address,class: "form-control",placeholder: "address" %>
+                        
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                <label class="col-md-4">Status</label>
+                <div class="col-md-9">
+                  <%= f.select :status, RETAILER_STATUS,{:prompt => "Select retailer status"},:class => 'retailer_select',:required => "required" %>
+                  
+                </div>
+              </div>
+              </div>
+                
+               
+            </div>
+            
+             <div>
+                <div class="col-md-6">
+                   <div class="form-group clearfix">
+                      <label class="col-md-3">Pincode</label>
+                      <div class="col-md-9">
+                     <%= f.text_field :pincode,class: "form-control",placeholder: "pincode" %>
+                        
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-6">
+                   <div class="form-group clearfix">
+                      <label class="col-md-3">Is RSP on counter</label>
+                      <div class="col-md-9">
+                     <%= f.text_field :is_isp_on_counter,class: "form-control",placeholder: "ps RSP on counter?" %>
+                        
+                      </div>
+                    </div>
+              </div>
+            </div>
+            <div>
+               <div class="col-md-6">
+                    
+              </div>
+                <div class="col-md-6">
+                   <div class="form-group clearfix">
+                      <label class="col-md-3">Counter Size</label>
+                      <div class="col-md-9">
+                     <%= f.text_field :counter_size,class: "form-control",placeholder: "counter Size" %>
+                        
+                      </div>
+                    </div>
+              </div>
+               
+            </div>
+
+            
+           
+
+            
+            <div class="col-md-12">
+               <%= f.submit "Submit",:class => "btn btn-success " %>
+              
+            </div>
+          </div>
+        <% end %>
+      
+
+        </div>
+      </div>
+      </div>
+    </div>
+  
+</div>
+<script type="text/javascript">
+  $('#retailer').attr("class",'active') 
+</script>
+      
+  

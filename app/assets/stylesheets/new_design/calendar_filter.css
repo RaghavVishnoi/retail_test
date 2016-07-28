@@ -1,0 +1,19 @@
+#date_field{
+	margin-left: 45%;
+	margin-bottom: 2%;
+}
+#date_from,#date_to{
+	height: 30px;
+	margin-top: 0px;
+    margin-right: 2%;
+}
+
+.search_button{
+	background: transparent;
+    border: none;
+}
+
+.request_search_button{
+	background: transparent;
+    border: none;
+}

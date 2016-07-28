@@ -1,0 +1,30 @@
+<%= form_for [@item, @inventory], :html => { :class => 'user-form' } do |f| %>
+
+  <h4 id="form-title"><%= form_title %></h4>
+  <h5><%= @item.name %></h5>
+
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @inventory.errors } %>
+
+  <div class="form-field">
+    <%= f.label :quantity %>
+    <%= f.text_field :quantity %>
+  </div>
+  
+  <div class="form-field">
+    <%= f.label :warehouse_id, "Warehouse" %>
+    <%= f.select :warehouse_id, Warehouse.pluck(:name, :id), :include_blank => true %>
+    <%= link_to "Add Warehouse", new_warehouse_path, :remote => true %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :low_stock_trigger_quantity %>
+    <%= f.text_field :low_stock_trigger_quantity %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :restock_time %>
+    <%= f.text_field :restock_time %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

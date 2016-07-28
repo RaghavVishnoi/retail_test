@@ -1,0 +1,230 @@
+
+
+
+<div id ="date_field">
+<label><b>From</b></label> 
+<%= date_field_tag("date_from", "") %>
+<label><b>To</b></label>
+<%= date_field_tag("date_to", "") %>
+<%= button_tag class: 'search_button' do %>
+<i class="fa fa-search search-icon"></i>
+<% end %>
+</div>
+<div class="row">
+<%@response.each_slice(2) do |response|
+div1 = response[0]
+div2 = response[1]
+%>
+<div class="col-lg-12">
+<div class="row"> 
+<div class="col-md-6 col-sm-6">
+<div class="main-box clearfix">
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<%=div1[:name].split.join%>" style="color: #fff;">
+
+	<%=div1[:name]%>
+		 
+</a>
+</h4>
+</div>
+<div id="<%=div1[:name].split.join%>" class="panel-collapse collapse in">
+<%div1[:states].each do |state|%> 
+<div class="panel_body">
+	<h4>State -  <%=state.name%></h4>
+	<div class="table-responsive">
+	<table class="table table-border">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Pending</th>
+				<th>Approved</th>
+				<th>Declined</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				
+					<td class="blue">
+						<a href="/requests?q[request_type]=0&q[status]=approved,declined,pending&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>">
+						GSB
+						</a>
+					</td>
+					
+					<td> <%=Request.request_count_by_state(state.name,'pending',0,params[:from],params[:to])%></td>
+					<td><%=RequestActivity.request_count_by_user(div1[:user_id],'approved','RRM',0,params,state.name)%></td>
+					<td><%=RequestActivity.request_count_by_user(div1[:user_id],'declined','RRM',0,params,state.name)%></td>
+					
+			</tr>
+			<tr>
+				<td class="blue">
+					<a href="/requests?q[request_type]=1&q[status]=approved,declined,pending&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>">
+					SIS
+				</a>
+				</td>								
+				<td><%=Request.request_count_by_state(state.name,'pending',1,params[:from],params[:to])%> </td>
+				<td><%=RequestActivity.request_count_by_user(div1[:user_id],'approved','RRM',1,params,state.name)%></td>
+				<td><%=RequestActivity.request_count_by_user(div1[:user_id],'declined','RRM',1,params,state.name)%></td>
+			</tr>
+			<tr>
+				<td class="blue">
+					<a href="/requests?q[request_type]=2&q[status]=approved,declined,pending&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>">
+						In Shop
+					</a>
+				</td>							
+				<td><%=Request.request_count_by_state(state.name,'pending',2,params[:from],params[:to])%> </td>
+				<td><%=RequestActivity.request_count_by_user(div1[:user_id],'approved','RRM',2,params,state.name)%></td>
+				<td><%=RequestActivity.request_count_by_user(div1[:user_id],'declined','RRM',2,params,state.name)%></td>
+			</tr>	
+			<tr>
+				<td class="blue">
+					<a href="/requests?q[request_type]=3&q[status]=approved,declined,pending&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>">
+						Maintenance
+					</a>
+				</td>							
+				<td><%=Request.request_count_by_state(state.name,'pending',3,params[:from],params[:to])%> </td>
+				<td><%=RequestActivity.request_count_by_user(div1[:user_id],'approved','RRM',3,params,state.name)%></td>
+				<td><%=RequestActivity.request_count_by_user(div1[:user_id],'declined','RRM',3,params,state.name)%></td>
+			</tr>	
+						
+		</tbody>
+	</table>
+</div>
+<div class="table-responsive">
+	<table class="table table-border">
+		 
+		<tbody>
+			<tr>
+				<td colspan="2"></td>
+				<td><b><center>Completed</center></b></td>
+				<td><b><center>Interrupted</center></b></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<a href="/requests?q[request_type]=4&q[status]=approved&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>">
+					Audit
+				</a>
+				</td>
+ 				<td><center><a href="/requests?q[request_type]=4&q[status]=approved&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>&audit=1"><%=Request.audit_count_by_state(state.name,1,params[:from],params[:to])%></a></center></td>
+				<td><center><a href="/requests?q[request_type]=4&q[status]=approved&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>&audit=0"><%=Request.audit_count_by_state(state.name,0,params[:from],params[:to])%></a></center></td>		
+			</tr>
+		</tbody>
+	</table> 
+</div>
+</div>
+<%end%>
+ 
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<%if div2 != nil %> 
+<div class="col-md-6 col-sm-6">
+<div class="main-box clearfix">							
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+		<a class="accordion-toggle" data-toggle="collapse" href="#<%=div2[:name].split.join%>" style="color: #fff;">
+	 			 <%=div2[:name]%>
+		</a>
+		</h4>
+    </div>
+<div id="<%=div2[:name].split.join%>" class="panel-collapse collapse in">
+ <%div2[:states].each do |state|%> 
+		<div class="panel_body">
+			<h4>State - <%=state.name%></h4>
+			<div class="table-responsive">
+			<table class="table table-border">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Pending</th>
+						<th>Approved</th>
+						<th>Declined</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					<td class="blue">
+						<a href="/requests?q[request_type]=0&q[status]=approved,declined,pending&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>">
+						GSB
+					</a>
+					</td>
+					<td><a href="/requests?q[request_type]=0&q[status]=pending&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>"><%=Request.request_count_by_state(state.name,'pending',0,params[:from],params[:to])%></a></td>
+					<td><a href="/requests?q[request_type]=0&q[status]=approved&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>"><%=RequestActivity.request_count_by_user(div2[:user_id],'approved','RRM',0,params,state.name)%></a></td>
+					<td><a href="/requests?q[request_type]=0&q[status]=declined&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>"><%=RequestActivity.request_count_by_user(div2[:user_id],'declined','RRM',0,params,state.name)%></a></td>
+				</tr>
+				<tr>
+					<td class="blue">
+						<a href="/requests?q[request_type]=1&q[status]=approved,declined,pending&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>">
+						SIS
+						</a>
+					</td>								
+					<td><a href="/requests?q[request_type]=1&q[status]=pending&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>"><%=Request.request_count_by_state(state.name,'pending',1,params[:from],params[:to])%></a></td>
+					<td><a href="/requests?q[request_type]=1&q[status]=approved&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>"><%=RequestActivity.request_count_by_user(div2[:user_id],'approved','RRM',1,params,state.name)%></a></td>
+					<td><a href="/requests?q[request_type]=1&q[status]=declined&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>"><%=RequestActivity.request_count_by_user(div2[:user_id],'declined','RRM',1,params,state.name)%></a></td>
+				</tr>
+				<tr>
+					<td class="blue">
+						<a href="/requests?q[request_type]=2&q[status]=approved,declined,pending&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>">
+						In Shop
+						</a>	
+					</td>							
+					<td><a href="/requests?q[request_type]=2&q[status]=pending&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>"><%=Request.request_count_by_state(state.name,'pending',2,params[:from],params[:to])%></a></td>
+					<td><a href="/requests?q[request_type]=2&q[status]=approved&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>"><%=RequestActivity.request_count_by_user(div2[:user_id],'approved','RRM',2,params,state.name)%></a></td>
+					<td><a href="/requests?q[request_type]=2&q[status]=declined&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>"><%=RequestActivity.request_count_by_user(div2[:user_id],'declined','RRM',2,params,state.name)%></a></td>
+				</tr>
+				<tr>
+					<td class="blue">
+						<a href="/requests?q[request_type]=3&q[status]=approved,declined,pending&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>">
+							Maintenance
+						</a>
+					</td>							
+					<td><a href="/requests?q[request_type]=3&q[status]=pending&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>"><%=Request.request_count_by_state(state.name,'pending',3,params[:from],params[:to])%></a></td>
+					<td><a href="/requests?q[request_type]=3&q[status]=approved&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>"><%=RequestActivity.request_count_by_user(div2[:user_id],'approved','RRM',3,params,state.name)%></a></td>
+					<td><a href="/requests?q[request_type]=3&q[status]=declined&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>"><%=RequestActivity.request_count_by_user(div2[:user_id],'declined','RRM',3,params,state.name)%></a></td>
+			</tr>								
+				</tbody>
+			</table>
+		</div>
+		<div class="table-responsive">
+	<table class="table table-border">
+		 
+		<tbody>
+			<tr>
+				<td colspan="2"></td>
+				<td><b><center>Completed</center></b></td>
+				<td><b><center>Interrupted</center></b></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<a href="/requests?q[request_type]=4&q[status]=approved&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>">
+					Audit
+				</a>
+				</td>
+ 				<td><center><a href="/requests?q[request_type]=4&q[status]=approved&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>&audit=1"><%=Request.audit_count_by_state(state.name,1,params[:from],params[:to])%></a></center></td>
+				<td><center><a href="/requests?q[request_type]=4&q[status]=approved&from=<%=params[:from]%>&to=<%=params[:to]%>&state=<%=state.name%>&audit=0"><%=Request.audit_count_by_state(state.name,0,params[:from],params[:to])%></a></center></td>		
+			</tr>
+		</tbody>
+	</table> 
+</div>
+</div>
+<%end%> 
+</div>
+</div>
+</div>							
+</div>
+ 
+</div>
+<%end%>
+</div>
+</div>
+  <%end%>
+</div>
+	
+

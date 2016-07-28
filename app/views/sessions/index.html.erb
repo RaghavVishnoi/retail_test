@@ -1,0 +1,1648 @@
+<script>  var arr={
+  business :0,
+  biz:0,
+  industry:0,
+  comp:0
+   }
+   var business ,biz,industry,comp;
+   </script>
+
+<div id="nav-col-submenu"></div>
+
+</div>
+
+<center><h1 style="margin-bottom: 0px;">Brand Store</h1></center>
+  <a href="/users/sign_in">
+<img src="/assets/back.png" alt="Smiley face" width="42" height="42" style="margin-left: 39px;">
+</a>
+<div id="content-wrapper" style="margin-left:0px;">
+ 
+<div class="row" style="opacity: 1;">
+<div class="col-lg-12">
+
+<div class="row">
+<div class="col-lg-12">
+  <div class="main-box clearfix" style="min-height: 520px;"> <br>
+    <div class="main-box-body clearfix">
+      <div id="myWizard" class="wizard">
+        <div class="wizard-inner">
+          <ul class="steps" style="margin-left: 0">
+            <li data-target="#step1" class="active"><span class="badge badge-primary">1</span>Project Analysis<span class="chevron"></span></li>
+            <li data-target="#step2" class=""><span class="badge">2</span>Biz Analysis<span class="chevron"></span></li>
+            <li data-target="#step3"><span class="badge">3</span>Pics<span class="chevron"></span></li>
+          </ul>
+          <div class="actions">
+            <button type="button" class="btn btn-default btn-mini btn-prev" disabled="disabled"> <i class="icon-arrow-left"></i>Prev</button>
+            <button type="button" class="btn btn-success btn-mini btn-next" data-last="Finish">Next<i class="icon-arrow-right"></i></button>
+          </div>
+        </div>
+        <div class="step-content">
+          <div class="step-pane active" id="step1"> <br>
+            <div class="project-analysis-div">
+              <div class="panel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2>Profile</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Name</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="name" required type="text" placeholder="Enter your Name" >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Email</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="email" required type="email"  placeholder="Enter your Email"  >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Mobile</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="mobile" required type="text" placeholder="Enter your mobile number" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"  >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                              <label>State</label>
+                            </div>
+                            <div class="col-md-8">
+                               
+
+                             <%=select_tag :state,options_for_select(State.all.pluck(:name,:id)),:prompt => '-----select any state----',class: 'form-control'%>
+                            </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="panel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2>Shop Dimensions</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="sub-heading"> Min SBA of 600 Sq Ft
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Super Built Up Area</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="super_build_up_area" required type="text" placeholder="Enter Super Built Up Area">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Built up Area</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="built_up_area" required type="text" placeholder="Enter Built up Area">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Carpet Area</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="carpet_area" required type="text" placeholder="Enter Carpet Area">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Clear Height</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="clear_height" required type="text" placeholder="Enter Clear Height">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label> No Seepage</label>
+                    </div>
+                    <div class="col-md-8">
+                     
+                        <select class="form-control" id="no_seepage">
+                        <option value>Enter No Seepage</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>No Mezzanine floor</label>
+                    </div>
+                    <div class="col-md-8">
+                      <select class="form-control" id="no_mezzanine_floor">
+                        <option value>Enter No Mezzanine floor </option>
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Please confirm no hindrance</label>
+                    </div>
+                    <div class="col-md-8">
+                      <select class="form-control" id="hindrance">
+                        <option value>Enter Please confirm no hindrance</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Power Back Up & Load</label>
+                    </div>
+                    <div class="col-md-8">
+                      <select class="form-control" id="power_back_up">
+                        <option value>Enter Power Back Up & Load</option>
+                       <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Current Flooring</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="current_flooring" required type="text" placeholder="Enter Current Flooring">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Current Ceiling</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="current_ceiling" required type="text" placeholder="Enter Current Ceiling">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Current Walls Status</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="current_walls_status" required type="text" placeholder="Enter Current Walls Status">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Fire safety</label>
+                    </div>
+                    <div class="col-md-8">
+                      <select class="form-control" id="fire_safety">
+                        <option value>Enter Fire safety</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>GSB Opportunity</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="gsb_opportunity" required type="text" placeholder="Enter GSB Opportunity">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>ISB/OSB/Special visibility Opportunity</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="visiblity_opprtunity" required type="text" placeholder="Enter ISB/OSB/Special visibility Opportunity">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Any other Hygeine/Safety/Branding issue</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control has-error" id="branding_issue" required type="text" placeholder="Enter Any other Hygeine/Safety/Branding issue">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="panel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2>Catchment Analsysis</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Remark</label>
+                    </div>
+                    <div class="col-md-8">
+                      <textarea class="form-control" id="introduction" Placeholder="Enter Your Remark"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Catchment Population(5 Kms Radius)</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control" type="text" id="population" placeholder="Enter Catchment Population 5 Kms Radius">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Colonies covered within</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control" type="text" id="colonies_covered" placeholder="Enter Colonies covered within">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="panel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2>Business</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="sub-heading"> Name  & Business of 10 Shops
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label><strong>Left Side</strong></label>
+                </div>
+                <div class="col-md-4">
+                  <label><strong>Right Side</strong></label>
+                </div>
+                <div class="col-md-4">
+                  <label><strong>Opposite Side</strong></label>
+                </div>
+              </div>
+            <div id="content">
+              
+                <div class="project-analysis-div">
+                    <div class="row">
+                        <div class="col-md-4" >
+                          <input type="text" class="form-control" id="business10" name="myInputs[]" placeholder="Enter Your Left Side">
+                        </div>
+                        <div class="col-md-4" >
+                          <input type="text"  class="form-control" id="business20" name="myInputs[]" placeholder="Enter Your Right Side">
+                        </div>
+                        <div class="col-md-4" >
+                          <input type="text"  class="form-control" id="business30" name="myInputs[]" placeholder="Enter Your Opposite Side">
+                        </div>
+                    </div>
+                  </div>                                
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <button type="button" class="btn btn-primary"  onClick="addElement()"> Add <i class="fa fa-plus"></i> </button>
+                  <button type="button" class="btn btn-primary" onClick="removeElement()"> Delete <i class="fa fa-minus"></i> </button>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <label>Mobile Brand stores near our proposed store</label>
+                    </div>
+                    <div class="col-md-7">
+                      <input class="form-control" type="text" id="Mobile_Brand_stores" placeholder="Enter Mobile Brand stores near our proposed store">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <label>Consumer Durable / Electronics Stores near our proposed store</label>
+                    </div>
+                    <div class="col-md-7">
+                      <input class="form-control" type="text" id="consumer_electronics_Store" placeholder="Enter Consumer Durable / Electronics Stores near our proposed store">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <label>No of RSP counters In 5 KMS Radius</label>
+                    </div>
+                    <div class="col-md-7">
+                      <input class="form-control" type="text" id="no_of_rsp" placeholder="Enter No of RSP counters In 5 KMS Radius">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <label>No of SIS counters In 5 KMS Radius</label>
+                    </div>
+                    <div class="col-md-7">
+                      <input class="form-control" type="text" id="no_of_sis" placeholder="Enter No of SIS counters In 5 KMS Radius">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="panel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2>Shop Ownership</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Type</label>
+                    </div>
+                    <div class="col-md-8">
+                      <select class="form-control" id="ownership_type">
+                        <option value>Select Type</option>
+                        <option>Owned</option>
+                        <option>Rented</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Title of ownership</label>
+                    </div>
+                    <div class="col-md-8">
+                      <select class="form-control" id="title_of_ownership">
+                        <option value>Select Your Title of ownership</option>
+                        
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Duration</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control" type="text" id="duration" placeholder="Enter Duration">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Parking Available</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control" type="text" id="parking_available" placeholder="Enter Parking Available">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>No Hindrance to entrance </label>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control" type="text" id="no_hindrance" placeholder="Enter No Hindrance to entrance">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+
+                      <div class="panel">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <h2>Partener Analysis</h2>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="contentBiz">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="sub-heading"> BIZ 1
+                            <hr>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label>Name of business entity</label>
+                            </div>
+                            <div class="col-md-7">
+                              <input class="form-control" type="text" placeholder="Enter name of business entity" id="biz10">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label>Structure of business entity</label>
+                            </div>
+                            <div class="col-md-7">
+                              <input class="form-control" id="biz20" type="text" placeholder="Enter structure of business entity">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                       <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label>Ownership</label>
+                            </div>
+                            <div class="col-md-7">
+                              <input class="form-control" id="biz30" type="text" placeholder="Enter ownership">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label>Turnover</label>
+                            </div>
+                            <div class="col-md-7">
+                              <input class="form-control" id="biz40" type="text" placeholder="Enter turnover">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <label>Manpower</label>
+                            </div>
+                            <div class="col-md-7">
+                              <input class="form-control" id="biz50" type="text" placeholder="Enter manpower">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                      
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label>Give a brief about business & its areas of operation</label>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <textarea class="form-control" id="biz60"></textarea>
+                        </div>
+                      </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-1">
+                          <button type="button" class="btn btn-primary" onclick="addElementBiz()"> Add <i class="fa fa-plus"></i> </button>
+                        </div>
+                        <div class="col-md-1">
+                          <button type="button" class="btn btn-primary" onclick="removeElementBiz()" > Delete <i class="fa fa-minus"></i> </button>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                         
+                      </div>
+                    </div>
+                  </div>
+
+
+          <div class="step-pane" id="step2"> <br>
+            <div class="project-analysis-div">
+              <div class="panel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2>EBITDA Projection for next 1 year of Operation</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+
+                  <div class="responsiveTable">
+              <table class="table table-bordered">
+                <tr>
+                      <th>&nbsp;</th>
+                      <th>Month 1</th>
+                      <th>Month 2</th>
+                      <th>Month 3</th>
+                      <th>Month 4</th>
+                      <th>Month 5</th>
+                      <th>Month 6</th>
+                      <th>Month 7</th>
+                      <th>Month 8</th>
+                      <th>Month 9</th>
+                      <th>Month 10</th>
+                      <th>Month 11</th>
+                      <th>Month 12</th>
+                  </tr>   
+             
+                  <tr>
+                      <td>Revenue( In lakhs) - Sales projection</td>
+                      <td><input class="form-control" placeholder="Enter Revenue( In lakhs) - Sales projection" id="rev_month1" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"  ></td>
+                      <td><input class="form-control" id="rev_month2"placeholder="Enter Revenue( In lakhs) - Sales projection" id="rev_month2" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" placeholder="Enter Revenue( In lakhs) - Sales projection" id="rev_month3" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" placeholder="Enter Revenue( In lakhs) - Sales projection" id="rev_month4" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" placeholder="Enter Revenue( In lakhs) - Sales projection" id="rev_month5" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" placeholder="Enter Revenue( In lakhs) - Sales projection" id="rev_month6" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" placeholder="Enter Revenue( In lakhs) - Sales projection" id="rev_month7" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" placeholder="Enter Revenue( In lakhs) - Sales projection" id="rev_month8" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" placeholder="Enter Revenue( In lakhs) - Sales projection" id="rev_month9" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" placeholder="Enter Revenue( In lakhs) - Sales projection" id="rev_month10" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" placeholder="Enter Revenue( In lakhs) - Sales projection" id="rev_month11" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" placeholder="Enter Revenue( In lakhs) - Sales projection" id="rev_month12" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>
+                  <tr>
+                      <td>Margin Percentage</td>
+                      <td> <input class="form-control" id="margin1" placeholder="Enter Margin Percentage" id="margin_month1" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control"  id="margin2" placeholder="Enter Margin Percentage" id="margin_month2" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control"  id="margin3" placeholder="Enter Margin Percentage" id="margin_month3" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control"  id="margin4" placeholder="Enter Margin Percentage" id="margin_month4" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control"  id="margin5"  placeholder="Enter Margin Percentage" id="margin_month5" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control"  id="margin6" placeholder="Enter Margin Percentage" id="margin_month6" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control"  id="margin7" placeholder="Enter Margin Percentage" id="margin_month7" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control"  id="margin8" placeholder="Enter Margin Percentage" id="margin_month8" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control"  id="margin9" placeholder="Enter Margin Percentage" id="margin_month9" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control"  id="margin10" placeholder="Enter Margin Percentage" id="margin_month10" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control"  id="margin11" placeholder="Enter Margin Percentage" id="margin_month11" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control"  id="margin12" placeholder="Enter Margin Percentage" id="margin_month12" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>
+           
+                  <tr>
+                      <td>Manpower Cost Total(1 Store manager, 2 sales man) (In Lakhs)</td>
+                      <td><input class="form-control" id="manpower1" placeholder="Enter Manpower Cost Total" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="manpower2" placeholder="Enter  Manpower Cost Total" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="manpower3" placeholder="Enter Manpower Cost Total" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="manpower4" placeholder="Enter Manpower Cost Total" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="manpower5" placeholder="Enter Manpower Cost Total" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="manpower6" placeholder="Enter Manpower Cost Total" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="manpower7" placeholder="Enter Manpower Cost Total" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="manpower8" placeholder="Enter Manpower Cost Total" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="manpower9" placeholder="Enter Manpower Cost Total" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="manpower10" placeholder="Enter Manpower Cost Total" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="manpower11" placeholder="Enter Manpower Cost Total" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="manpower12" placeholder="Enter Manpower Cost Total" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>
+                   
+                     <tr>
+                      <td>Electricity Cost (In Lakhs)</td>
+                      <td><input class="form-control" id="Electricity1" placeholder="Enter Electricity Cost" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="Electricity2" placeholder="Enter Electricity Cost" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="Electricity3" placeholder="Enter Electricity Cost " onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="Electricity4"placeholder="Enter Electricity Cost" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="Electricity5" placeholder="Enter Electricity Cost" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="Electricity6" placeholder="Enter Electricity Cost" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="Electricity7" placeholder="Enter Electricity Cost" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="Electricity8" placeholder="Enter Electricity Cost" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="Electricity9" placeholder="Enter Electricity Cost" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="Electricity10" placeholder="Enter Electricity Cost" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="Electricity11" placeholder="Enter Electricity Cost" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="Electricity12" placeholder="Enter Electricity Cost" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>
+                   
+                     <tr>
+                      <td>Rental Cost/Actual or notional (In Lakhs)</td>
+                      <td><input class="form-control" id="rental_cost1" placeholder="Enter Rental Cost/Actual or notional" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="rental_cost2" placeholder="Enter Rental Cost/Actual or notional" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="rental_cost3" placeholder="Enter Rental Cost/Actual or notional" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="rental_cost4" placeholder="Enter Rental Cost/Actual or notional" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="rental_cost5" placeholder="Enter Rental Cost/Actual or notional" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="rental_cost6" placeholder="Enter Rental Cost/Actual or notional" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="rental_cost7" placeholder="Enter Rental Cost/Actual or notional" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="rental_cost8" placeholder="Enter Rental Cost/Actual or notional" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="rental_cost9" placeholder="Enter Rental Cost/Actual or notional" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="rental_cost10" placeholder="Enter Rental Cost/Actual or notional" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="rental_cost11" placeholder="Enter Rental Cost/Actual or notional" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="rental_cost12"  placeholder="Enter Rental Cost/Actual or notional" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>
+                   
+                     <tr>
+                      <td>House Keeping (In Lakhs)</td>
+                      <td><input class="form-control" id="house1" placeholder="Enter House Keeping" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="house2" placeholder="Enter House Keeping" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="house3" placeholder="Enter House Keeping" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="house4" placeholder="Enter House Keeping" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="house5" placeholder="Enter House Keeping" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="house6" placeholder="Enter House Keeping" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="house7" placeholder="Enter House Keeping" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="house8" placeholder="Enter House Keeping" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="house9" placeholder="Enter House Keeping" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="house10" placeholder="Enter House Keeping" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="house11" placeholder="Enter House Keeping" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="house12" placeholder="Enter House Keeping" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>
+                   
+                     <tr>
+                      <td>Internet & Communicaiton (In Lakhs)</td>
+                      <td><input class="form-control" id="internet1" placeholder="Enter Internet & Communicaiton" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="internet2" placeholder="Enter Internet & Communicaiton" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="internet3" placeholder="Enter Internet & Communicaiton" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="internet4" placeholder="Enter Internet & Communicaiton" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="internet5" placeholder="Enter Internet & Communicaiton" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="internet6" placeholder="Enter Internet & Communicaiton" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="internet7" placeholder="Enter Internet & Communicaiton" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="internet8" placeholder="Enter Internet & Communicaiton" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="internet9" placeholder="Enter Internet & Communicaiton" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="internet10" placeholder="Enter Internet & Communicaiton" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="internet11" placeholder="Enter Internet & Communicaiton" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="internet12" placeholder="Enter Internet & Communicaiton" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>
+                   
+                     <tr>
+                      <td>Hardware Deprecitaion (In Lakhs)</td>
+                      <td><input class="form-control" id="hardware1" placeholder="Enter Hardware Deprecitaion" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="hardware2" placeholder="Enter Hardware Deprecitaion" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="hardware3" placeholder="Enter Hardware Deprecitaion" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="hardware4" placeholder="Enter Hardware Deprecitaion" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="hardware5" placeholder="Enter Hardware Deprecitaion" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="hardware6" placeholder="Enter Hardware Deprecitaion" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="hardware7" placeholder="Enter Hardware Deprecitaion" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="hardware8" placeholder="Enter Hardware Deprecitaion" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="hardware9" placeholder="Enter Hardware Deprecitaion" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="hardware10" placeholder="Enter Hardware Deprecitaion" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="hardware11" placeholder="Enter Hardware Deprecitaion" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="hardware12" placeholder="Enter Hardware Deprecitaion" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>
+                   
+                     <tr>
+                      <td>Stationery (In Lakhs)</td>
+                      <td><input class="form-control" id="stationery1" placeholder="Enter Stationery" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="stationery2" placeholder="Enter Stationery" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="stationery3" placeholder="Enter Stationery" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="stationery4" placeholder="Enter Stationery" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="stationery5" placeholder="Enter Stationery" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="stationery6" placeholder="Enter Stationery" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="stationery7" placeholder="Enter Stationery" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="stationery8" placeholder="Enter Stationery" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="stationery9" placeholder="Enter Stationery" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="stationery10" placeholder="Enter Stationery" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="stationery11" placeholder="Enter Stationery" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="stationery12" placeholder="Enter Stationery" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>
+                   
+                     <tr>
+                      <td>Other Overheads (In Lakhs)</td>
+                      <td><input class="form-control" id="overhead1" placeholder="Enter Other Overheads" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="overhead2" placeholder="Enter Other Overheads" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="overhead3" placeholder="Enter Other Overheads" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="overhead4" placeholder="Enter Other Overheads" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="overhead5" placeholder="Enter Other Overheads" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="overhead6" placeholder="Enter Other Overheads" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="overhead7" placeholder="Enter Other Overheads" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="overhead8" placeholder="Enter Other Overheads" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="overhead9" placeholder="Enter Other Overheads" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="overhead10" placeholder="Enter Other Overheads" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="overhead11" placeholder="Enter Other Overheads" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="overhead12" placeholder="Enter Other Overheads" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>
+                   
+          </table>
+                </div>
+                </div>
+              </div>
+              
+              <hr>
+              <div class="panel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2>Stock Investment Plan</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                   
+                  <div class="responsiveTable">
+              <table class="table table-bordered">
+                <tr>
+                      <th>&nbsp;</th>
+                      <th>Month 1</th>
+                      <th>Month 2</th>
+                      <th>Month 3</th>
+                      <th>Month 4</th>
+                      <th>Month 5</th>
+                      <th>Month 6</th>
+                      <th>Month 7</th>
+                      <th>Month 8</th>
+                      <th>Month 9</th>
+                      <th>Month 10</th>
+                      <th>Month 11</th>
+                      <th>Month 12</th>
+                  </tr>   
+             
+                  <tr>
+                      <td>No of SKUs (In Lakhs)</td>
+                      <td><input class="form-control" id="sku1" placeholder="Enter No of SKUs" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="sku2" placeholder="Enter No of SKUs" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="sku3" placeholder="Enter No of SKUs" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="sku4" placeholder="Enter No of SKUs" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="sku5" placeholder="Enter No of SKUs" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="sku6" placeholder="Enter No of SKUs" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="sku7" placeholder="Enter No of SKUs" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="sku8" placeholder="Enter No of SKUs" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="sku9" placeholder="Enter No of SKUs" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="sku10" placeholder="Enter No of SKUs" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="sku11" placeholder="Enter No of SKUs" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="sku12" placeholder="Enter No of SKUs" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>
+
+                   <tr>
+                      <td>Volume (In Lakhs)</td>
+                      <td><input class="form-control" id="volumne1" placeholder="Enter Volume" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="volumne2"  placeholder="Enter Volume" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="volumne3" placeholder="Enter Volume" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="volumne4" placeholder="Enter Volume" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="volumne5" placeholder="Enter Volume" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="volumne6" placeholder="Enter Volume" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="volumne7" placeholder="Enter Volume" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="volumne8" placeholder="Enter Volume" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="volumne9" placeholder="Enter Volume" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="volumne10" placeholder="Enter Volume" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="volumne11" placeholder="Enter Volume" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="volumne12" placeholder="Enter Volume" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>
+
+                   <tr>
+                      <td>Value (In Lakhs)</td>
+                      <td><input class="form-control" id="value1" placeholder="Enter Value" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="value2" placeholder="Enter Value" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="value3" placeholder="Enter Value" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="value4" placeholder="Enter Value" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="value5" placeholder="Enter Value" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="value6" placeholder="Enter Value" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="value7" placeholder="Enter Value" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="value8" placeholder="Enter Value" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="value9" placeholder="Enter Value" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="value10" placeholder="Enter Value" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="value11" placeholder="Enter Value" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                      <td><input class="form-control" id="value12" placeholder="Enter Value" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" ></td>
+                  </tr>  
+          </table>
+                </div>
+                </div>
+              </div>
+
+              <hr>
+              <div class="panel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2>Industry Analysis</h2>
+                  </div>
+                </div>
+              </div>
+              
+               
+               
+               
+             
+<div id="contentIndustry" class="project-analysis-div">
+  <div class="row">
+    <div class="col-md-12">
+    <div class="sub-heading">Comp 1 Value
+      <hr>
+    </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-4">
+      <label>City Mobile Biz</label>
+      </div>
+      <div class="col-md-4">
+      <input class="form-control" placeholder="Enter City Mobile Biz" id="industry10">
+      </div>
+      <div class="col-md-4">
+      <input class="form-control" placeholder="Enter City Mobile Biz" id="industry20">
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-4">
+      <label>Area Mobile Biz</label>
+      </div>
+      <div class="col-md-4">
+      <input class="form-control" id="industry30" placeholder="Enter Area Mobile Biz">
+      </div>
+      <div class="col-md-4">
+      <input class="form-control" id="industry40" placeholder="Enter Area Mobile Biz">
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-4">
+      <label>Gionee</label>
+      </div>
+      <div class="col-md-4">
+      <input class="form-control" id="industry50" placeholder="Enter Gionee">
+      </div>
+      <div class="col-md-4">
+      <input class="form-control" id="industry60" placeholder="Enter Gionee">
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-4">
+      <label>ASP</label>
+      </div>
+      <div class="col-md-4">
+      <input class="form-control" id="industry70" placeholder="Enter ASP">
+      </div>
+      <div class="col-md-4">
+      <input class="form-control" id="industry80" placeholder="Enter ASP">
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+              <hr>
+              <div class="row">
+  <div class="col-md-1">
+  
+    <button type="button" class="btn btn-primary" onClick="addElementIndustry()"> Add <i class="fa fa-plus"></i> </button>
+  </div>
+  <div class="col-md-1">
+    <button type="button" class="btn btn-primary" onClick="removeElementIndustry()"> Delete <i class="fa fa-minus"></i> </button>
+  </div>
+              </div>
+              <hr>
+              <div class="panel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2>Competition Analysis</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="sub-heading">Comp 1
+                    <hr>
+                  </div>
+                </div>
+              </div>
+<div id="contentComp">
+              <div class="row">
+                <div class="col-md-3">
+                  <label>Name of Entity</label>
+                  <input class="form-control" placeholder="Enter Name of Entity" id="comp10">
+                </div>
+                <div class="col-md-3">
+                  <label>Sales Average Value</label>
+                  <input class="form-control" placeholder="Enter Sales Average Value" id="comp20">
+                </div>
+                <div class="col-md-3">
+                  <label>Sales Avergae Volume</label>
+                  <input class="form-control" placeholder="Enter Sales Avergae Volume" id="comp30">
+                </div>
+                <div class="col-md-3">
+                  <label>ASP</label>
+                  <input class="form-control" placeholder="Enter ASP" id="comp40">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <label>Price Band wise sales Value</label>
+                  <select class="form-control" id="comp50">
+                    <option> > 30k</option>
+                    <option> 20 to 30k</option>
+                    <option> 10 to 20K</option>
+                    <option> 5 to 10 K</option>
+                    <option> < 5K</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label>Store Size SBA</label>
+                  <input class="form-control" placeholder="Enter Store Size SBA" id="comp60">
+                </div>
+                <div class="col-md-3">
+                  <label>Store Frontage</label>
+                  <input class="form-control" placeholder="Enter Store Frontage" id="comp70">
+                </div>
+                <div class="col-md-3">
+                  <label>Store Strength(Example)</label>
+                  <input class="form-control" placeholder="Enter Store Strength(Example)" id="comp80">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <label> Any highlight for competition</label>
+                  <input class="form-control" placeholder="Enter Any highlight for competition" id="comp90">
+                </div>
+              </div>
+</div>
+              <hr>
+              <div class="row">
+                <div class="col-md-1">
+                  <button type="button" class="btn btn-primary" onClick="addElementComp();"> Add <i class="fa fa-plus"></i> </button>
+  </div>
+   <div class="col-md-1">
+                  <button type="button" class="btn btn-primary" onClick="removeElementComp();"> Delete <i class="fa fa-minus"></i> </button>
+                </div>
+              </div>
+              <hr>
+              <br>
+              
+            </div>
+          </div>
+          <div class="step-pane" id="step3"><br>
+            <div class="project-analysis-div">
+              <div class="panel">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2>Please paste pic in 4*5 dimension & give a heading to each pic in this sheet</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="sub-heading">Please send pictures -
+                    <hr>
+                  </div>
+                </div>
+              </div>
+             
+              <div class="row">
+                <div class="col-md-3">
+
+                  <label>Shop Front view</label>
+                  <input class="form-control" type="file" id="shop_front_view">
+                </div>
+                <div class="col-md-3">
+                  <label>Left wall view</label>
+                  <input class="form-control" type="file" id="left_wall_view">
+                </div>
+                <div class="col-md-3">
+                  <label>right wall view</label>
+                  <input class="form-control" type="file" id="right_wall_view">
+                </div>
+                <div class="col-md-3">
+                  <label>ceiling</label>
+                  <input class="form-control" type="file" id="ceiling">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <label>flooring</label>
+                  <input class="form-control" type="file" id="flooring">
+                </div>
+                <div class="col-md-3">
+                  <label>Inside out view</label>
+                  <input class="form-control" type="file" id="inside_out_view">
+                </div>
+                <div class="col-md-3">
+                  <label>outside in view</label>
+                  <input class="form-control" type="file" id="outside_in_view">
+                </div>
+                <div class="col-md-3">
+                  <label>Complete shop building view</label>
+                  <input class="form-control" type="file" id="complete_shop_building_view">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <label>left 10 shops</label>
+                  <input class="form-control" type="file" id="left_shops">
+                </div>
+                <div class="col-md-3">
+                  <label>right shops</label>
+                  <input class="form-control" type="file" id="right_shop">
+                </div>
+                <div class="col-md-3">
+                  <label>opposite foot shops view</label>
+                  <input class="form-control" type="file" id="opposite_foot_shop">
+                </div>
+                <div class="col-md-3">
+                  <label>catchment pictures</label>
+                  <input class="form-control" type="file" id="catchment_picture">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <label>pics of prominent mobile & electronics players</label>
+                  <input class="form-control" type="file" id="prominent_mobile">
+                </div>
+                <div class="col-md-3">
+                  <label>experience shops</label>
+                  <input class="form-control" type="file" id="experience_shop">
+                </div>
+              </div>
+            
+              <br>
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <button class="btn btn-primary"  onclick="user_reporting()">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<script src="/assets/new_design/jquery.js"></script>
+<script src="/assets/new_design/bootstrap.js"></script>
+
+
+
+<script src="/assets/wizard.js"></script>
+
+<script>
+
+var intTextBox = 0;
+
+function addElement() {
+intTextBox++;
+
+var objNewDiv = document.createElement('div');
+objNewDiv.setAttribute('id', 'div_' + intTextBox);
+objNewDiv.innerHTML = '<div  class="project-analysis-div"><div class="row"><div class="col-md-4"> <input type="text"   id="business1' + intTextBox + '" class="form-control" placeholder="Enter Your Left Side" /></div><div class="col-md-4"> <input type="text" id="business2' + intTextBox + '" class="form-control" placeholder="Enter Your Right Side"/></div><div class="col-md-4"> <input type="text" id="business3' + intTextBox + '" class="form-control"  placeholder="Enter Your Opposite Side"/></div></div></div>';
+document.getElementById('content').appendChild(objNewDiv);
+arr.business=intTextBox;
+}
+
+function removeElement() {
+if(0 < intTextBox) {
+document.getElementById('content').removeChild(document.getElementById('div_' + intTextBox));
+intTextBox--;
+} else {
+alert("No textbox to remove");
+}
+  arr.business=intTextBox;
+}
+</script>
+<script>
+
+var intTextBoxBiz = 0;
+
+function addElementBiz() {
+intTextBoxBiz++;
+var objNewDiv = document.createElement('div');
+objNewDiv.setAttribute('id', 'divv_' + intTextBoxBiz);
+objNewDiv.innerHTML = '<div  class="project-analysis-div"><hr> <div class="row"> <div class="col-md-12"><div class="sub-heading"> BIZ '+(intTextBoxBiz + 1)  +'    <hr> </div> </div> </div><div class="row"> <div class="col-md-12"><div class="row"> <div class="col-md-5">  <label>Name of business entity</label>   </div>  <div class="col-md-7">   <input class="form-control" id="biz1' + intTextBoxBiz + '" type="text" placeholder="Enter name of business entity">  </div>  </div> </div>  </div>      <div class="row"> <div class="col-md-12"><div class="row"> <div class="col-md-5">  <label>Structure of business entity</label>   </div>  <div class="col-md-7">   <input class="form-control" id="biz2' + intTextBoxBiz + '" type="text" placeholder="Enter structure of business entity">  </div>  </div> </div>  </div><div class="row"> <div class="col-md-12"><div class="row"> <div class="col-md-5">  <label>Ownership</label>   </div>  <div class="col-md-7">   <input class="form-control"  id="biz3' + intTextBoxBiz + '" type="text" placeholder="Enter ownership">  </div>  </div> </div>  </div><div class="row"> <div class="col-md-12"><div class="row"> <div class="col-md-5">  <label>Turnover</label>   </div>  <div class="col-md-7">   <input class="form-control" id="biz4' + intTextBoxBiz + '" type="text" placeholder="Enter turnover">  </div>  </div> </div>  </div><div class="row"> <div class="col-md-12"><div class="row"> <div class="col-md-5">  <label>Manpower</label>   </div>  <div class="col-md-7">   <input class="form-control" id="biz5' + intTextBoxBiz + '" type="text" placeholder="Enter manpower">  </div>  </div> </div>  </div><div class="row"> <div class="col-md-12"><label>Give a brief about business & its areas of operation</label> </div> </div><textarea  id="biz6' + intTextBoxBiz + '" class="form-control"></textarea></div>';
+document.getElementById('contentBiz').appendChild(objNewDiv);
+  arr.biz = intTextBoxBiz;
+}
+
+function removeElementBiz() {
+if(0 < intTextBoxBiz) {
+document.getElementById('contentBiz').removeChild(document.getElementById('divv_' + intTextBoxBiz));
+intTextBoxBiz--;
+} else {
+alert("Cant delete");
+}
+arr.biz = intTextBoxBiz;
+}
+</script>
+<script>
+
+var intTextBoxComp = 0;
+
+function addElementComp() {
+intTextBoxComp++;
+var objNewDiv = document.createElement('div');
+objNewDiv.setAttribute('id', 'divC_' + intTextBoxComp);
+objNewDiv.innerHTML = '<div  class="project-analysis-div"> <hr><div class="row"> <div class="col-md-12"><div class="sub-heading">Comp '+(intTextBoxComp + 1)  +'    </div> </div> </div><div class="row"><div class="col-md-12"><div class="sub-heading"> <hr></div></div> </div><div class="row"><div class="col-md-3"> <label>Name of Entity</label><input type="text"  id="comp1' + intTextBoxComp + '" class="form-control" placeholder="Enter Name of Entity" /></div><div class="col-md-3"> <label>Sales Average Value</label><input type="text" class="form-control"  id="comp2' + intTextBoxComp + '"  placeholder="Enter Sales Average Value" /></div><div class="col-md-3"><label>Sales Avergae Volume</label> <input type="text"  id="comp3' + intTextBoxComp + '"  class="form-control"  placeholder="Enter Sales Avergae Volume" /></div><div class="col-md-3"> <label>ASP</label><input type="text"  id="comp4' + intTextBoxComp + '"  class="form-control" placeholder="Enter ASP" /></div></div><div class="row"><div class="col-md-3"><label>Price Band wise sales Value</label><select  id="comp5' + intTextBoxComp + '"  class="form-control"><option> &gt; 30k</option> <option> 20 to 30k</option> <option> 10 to 20K</option> <option> 5 to 10 K</option> <option> &lt; 5K</option></select></div><div class="col-md-3"> <label>Store Size SBA</label><input type="text"  id="comp6' + intTextBoxComp + '" class="form-control" placeholder="Enter Store Size SBA" /></div><div class="col-md-3"> <label>Store Frontage</label><input type="text"  id="comp7' + intTextBoxComp + '"  class="form-control"  placeholder="Enter Store Frontage"/></div><div class="col-md-3"><label>Store Strength(Example)</label> <input type="text"  id="comp8' + intTextBoxComp + '"   class="form-control" placeholder="Enter Store Strength(Example)"/></div></div><div class="row"><div class="col-md-3"><label>Any highlight for competition</label><input type="text"  id="comp9' + intTextBoxComp + '"  class="form-control" placeholder="Enter Any highlight for competition" /></div></div></div>';
+document.getElementById('contentComp').appendChild(objNewDiv);
+  arr.comp = intTextBoxComp;
+}
+
+function removeElementComp() {
+if(0 < intTextBoxComp) {
+document.getElementById('contentComp').removeChild(document.getElementById('divC_' + intTextBoxComp));
+intTextBoxComp--;
+} else {
+alert("Cant delete");
+}
+arr.comp = intTextBoxComp;
+}
+</script>
+<script>
+
+var intTextBoxIndustry = 0;
+
+function addElementIndustry() {
+intTextBoxIndustry++;
+//alert(intTextBoxIndustry);  
+var objNewDiv = document.createElement('div');
+objNewDiv.setAttribute('id', 'divI_' + intTextBoxIndustry);
+objNewDiv.innerHTML = '<div  class="project-analysis-div"><hr><div class="row">  <div class="col-md-12"><div class="sub-heading">Comp '+(intTextBoxIndustry + 1)  +' Value  <hr>  </div>  </div></div><div class="row"> <div class="col-md-6"><div class="row"> <div class="col-md-4"><label>City Mobile Biz</label></div><div class="col-md-4"> <input type="text"  id="industry1' + intTextBoxIndustry + '"   class="form-control" placeholder="Enter City Mobile Biz"/></div><div class="col-md-4"> <input type="text" id="industry2' + intTextBoxIndustry + '" class="form-control" placeholder="Enter City Mobile Biz" /></div></div></div></div><div class="row"> <div class="col-md-6"><div class="row"> <div class="col-md-4"><label>Area Mobile Biz</label></div><div class="col-md-4"> <input type="text" id="industry3' + intTextBoxIndustry + '" class="form-control" placeholder="Enter Area Mobile Biz" /></div><div class="col-md-4"> <input type="text" class="form-control" id="industry4' + intTextBoxIndustry + '" placeholder="Enter Area Mobile Biz"/></div></div></div></div><div class="row"> <div class="col-md-6"><div class="row"> <div class="col-md-4"><label>Gionee</label></div><div class="col-md-4"> <input type="text"  id="industry5' + intTextBoxIndustry + '" class="form-control" placeholder="Enter Gionee"/></div><div class="col-md-4"> <input type="text" id="industry6' + intTextBoxIndustry + '" class="form-control" placeholder="Enter Gionee" /></div></div></div></div><div class="row"> <div class="col-md-6"><div class="row"> <div class="col-md-4"><label>ASP</label></div><div class="col-md-4"> <input type="text"  id="industry7' + intTextBoxIndustry + '" class="form-control" placeholder="Enter ASP" /></div><div class="col-md-4"> <input type="text" id="industry8' + intTextBoxIndustry + '" class="form-control" placeholder="Enter ASP"  /></div></div></div></div></div>';
+document.getElementById('contentIndustry').appendChild(objNewDiv);
+arr.industry = intTextBoxIndustry;
+}
+
+function removeElementIndustry() {
+if(0 < intTextBoxIndustry) {
+document.getElementById('contentIndustry').removeChild(document.getElementById('divI_' + intTextBoxIndustry));
+intTextBoxIndustry--;
+} else {
+alert("Cant delete");
+}
+  arr.industry = intTextBoxIndustry;
+
+}
+</script>
+
+
+<script>
+function user_reporting(){
+      var business,biz,comp,industry,k;
+      
+      business = arr.business;
+      biz = arr.biz;
+      comp = arr.comp;
+      industry = arr.industry;
+      
+      name = $('#name').val();
+      email = $('#email').val();
+      mobile = $('#mobile').val();
+      state = $('#state option:selected').val()
+      
+      
+      var shop_dimensions_attributes = {};
+      var catchments_attributes = {};
+      var new_array=[];
+      var shop_ownerships_attributes = {};
+      var industry_array = [];
+      
+      var margin_months_attributes = {};
+       
+      shop_dimensions_attributes['super_build_up_area'] = $('#super_build_up_area ').val();
+      shop_dimensions_attributes['built_up_area'] = $('#built_up_area').val();
+      shop_dimensions_attributes['carpet_area'] = $('#carpet_area').val();
+      shop_dimensions_attributes['clear_height'] = $('#clear_height').val();
+      shop_dimensions_attributes['no_seepage'] = $('#no_seepage option:selected').val();
+      shop_dimensions_attributes['no_mezzanine_floor'] = $('#no_mezzanine_floor option:selected').val();
+      shop_dimensions_attributes['hindrance'] =$('#hindrance option:selected').val();
+      shop_dimensions_attributes['power_back_up'] = $('#power_back_up option:selected').val();
+      shop_dimensions_attributes['current_flooring'] = $('#current_flooring').val();
+      shop_dimensions_attributes['current_ceiling'] = $('#current_ceiling').val();
+      shop_dimensions_attributes['current_walls_status'] = $('#current_walls_status').val();
+      shop_dimensions_attributes['fire_safety'] = $('#fire_safety option:selected').val();
+      shop_dimensions_attributes['gsb_opportunity'] = $('#gsb_opportunity').val();
+      shop_dimensions_attributes['visiblity_opprtunity'] = $('#visiblity_opprtunity').val();
+      shop_dimensions_attributes['branding_issue'] =$('#branding_issue').val();
+
+      catchments_attributes['introduction'] = $('#introduction').val();
+      catchments_attributes['population'] = $('#population').val();
+      catchments_attributes['colonies_covered'] = $('#colonies_covered').val();
+      catchments_attributes['Mobile_Brand_stores'] =$('#Mobile_Brand_stores').val();
+      catchments_attributes['consumer_electronics_Store'] = $('#consumer_electronics_Store').val();
+      catchments_attributes['no_of_rsp'] = $('#no_of_rsp').val();
+      catchments_attributes['no_of_sis'] = $('#no_of_sis').val();
+
+      for(var i=0;i<=business;i++){
+       k=1;
+       catchment_business_shops_attributes ={};
+       catchment_business_shops_attributes['left'] = $('#business'+k.toString()+i.toString()).val();
+       k++;
+       catchment_business_shops_attributes['right'] = $('#business'+k.toString()+i.toString()).val();
+       k++;
+       catchment_business_shops_attributes['opposite'] = $('#business'+k.toString()+i.toString()).val();
+       new_array.push(catchment_business_shops_attributes);
+      }//end of loop
+      
+       
+      shop_ownerships_attributes["ownership_type"] = $('#ownership_type option:selected').val();
+
+      shop_ownerships_attributes["title_of_ownership"] = $('#title_of_ownership option:selected').val();
+      shop_ownerships_attributes["duration"] = $('#duration').val();
+      shop_ownerships_attributes["parking_available"] = $('#parking_available').val();
+      shop_ownerships_attributes["no_hindrance"] = $('#no_hindrance').val();
+
+       parteners_attributes_array =[]
+      for(var i=0;i<=biz;i++){
+       k=1;
+       parteners_attributes ={};
+       parteners_attributes['structure'] = $('#biz'+k.toString()+i.toString()).val();
+       k++;
+       parteners_attributes['ownership'] = $('#biz'+k.toString()+i.toString()).val();
+       k++;
+       parteners_attributes['nature'] = $('#biz'+k.toString()+i.toString()).val();
+       parteners_attributes['turnover'] = $('#biz'+k.toString()+i.toString()).val();
+       parteners_attributes['man_power'] = $('#biz'+k.toString()+i.toString()).val();
+       parteners_attributes['partener_name'] = $('#biz'+k.toString()+i.toString()).val();
+       parteners_attributes['breif_intro'] = $('#biz'+k.toString()+i.toString()).val();
+       parteners_attributes_array.push(parteners_attributes);
+      }//end of loop
+      
+      
+     
+        rev_months = [];
+        for(var i=1;i<=12;i++){
+          rev_months.push($('#rev_month'+ i.toString()).val());
+        }
+       
+
+        margin_months = [];
+         for(var i=1;i<=12;i++){
+          margin_months.push($('#margin'+ i.toString()).val());
+
+        }
+        
+        manpower = [];
+        for(var i=1;i<=12;i++){
+          manpower.push($('#manpower'+ i.toString()).val());
+
+        }
+
+        Electricity =[];
+          for(var i=1;i<=12;i++){
+          Electricity.push($('#Electricity'+ i.toString()).val());
+
+        }
+        rental_cost = [];
+         for(var i=1;i<=12;i++){
+          rental_cost.push($('#rental_cost'+ i.toString()).val());
+
+        }
+        house = [];
+        for(var i=1;i<=12;i++){
+          house.push($('#house'+ i.toString()).val());
+
+        }
+        internet = [];
+         for(var i=1;i<=12;i++){
+          internet.push($('#internet'+ i.toString()).val());
+
+        }
+        hardware = [];
+         for(var i=1;i<=12;i++){
+          hardware.push($('#hardware'+ i.toString()).val());
+
+        }
+        stationery = [];
+        for(var i=1;i<=12;i++){
+          stationery.push($('#stationery'+ i.toString()).val());
+
+        }
+        overhead = [];
+        for(var i=1;i<=12;i++){
+          overhead.push($('#overhead'+ i.toString()).val());
+        }
+        sku = [];
+        for(var i=1;i<=12;i++){
+          sku.push($('#sku'+ i.toString()).val());
+
+        }
+        volumne= [];
+        for(var i=1;i<=12;i++){
+          volumne.push($('#volumne'+ i.toString()).val());
+        }
+        value = [];
+         for(var i=1;i<=12;i++){
+          value.push($('#value'+ i.toString()).val());
+        }
+
+      var  rev_months_attributes = {
+        "revenue": rev_months,
+        "margin": margin_months,
+        "manpower": manpower,
+        "Electricity": Electricity,
+        "rental_cost": rental_cost,
+        "house": house,
+        "internet": internet,
+        "hardware": hardware,
+        "stationery": stationery,
+        "overhead": overhead,
+        "sku": sku,
+        "volumne": volumne,
+        "value": value
+       }; 
+
+       industry_attributes = {};
+
+       for(var i=0;i<=industry;i++){
+          k=1;
+          //industry_attributes['comp'+k.toString()]=
+          compKeyName = {}
+          compValue = {}
+
+          compValue['value'] = $('#industry'+k.toString()+i.toString()).val()
+          compValue['volume'] = $('#industry'+(k+1).toString()+i.toString()).val()
+          compKeyName['city_mobile_biz'] = compValue
+
+          
+
+
+          compValue = {}
+          compValue['value'] = $('#industry'+(k+2).toString()+i.toString()).val()
+          compValue['volume'] = $('#industry'+(k+3).toString()+i.toString()).val()
+          compKeyName['area_mobile_biz'] = compValue
+          
+           compValue = {}
+           compValue['value'] = $('#industry'+(k+4).toString()+i.toString()).val()
+          compValue['volume'] = $('#industry'+(k+5).toString()+i.toString()).val()
+          compKeyName['gionee'] = compValue
+          
+
+          compValue = {}
+          compValue['value'] = $('#industry'+(k+6).toString()+i.toString()).val()
+          compValue['volume'] = $('#industry'+(k+7).toString()+i.toString()).val()
+          compKeyName['asp'] = compValue
+
+
+          industry_attributes['comp'+(i+1).toString()] = compKeyName
+        } //end of loop
+ 
+
+        competition_analysis_attributes = {}
+       for(var i=0;i<=comp;i++){
+        k=1;
+        compValue = {}
+
+        id = '#comp'+k.toString()+i.toString()
+        val = $(id).val();
+        text = "Name of Entity";
+        compValue[text] = val
+
+        id = '#comp'+(k+1).toString()+i.toString()
+        val = $(id).val();
+        text = "Sales Average Value"
+        compValue[text] = val
+
+        id = '#comp'+(k+2).toString()+i.toString()
+        val = $(id).val();
+        text = "Sales Avergae Volume"
+        compValue[text] = val
+
+        id = '#comp'+(k+3).toString()+i.toString()
+        val = $(id).val();
+        text = "ASP"
+        compValue[text] = val
+
+        id = '#comp'+(k+4).toString()+i.toString()
+        val = $(id).val();
+        text = "Price Band wise sales Value"
+        compValue[text] = val
+
+        id = '#comp'+(k+5).toString()+i.toString()
+        val = $(id).val();
+        text = "Store Size SBA"
+        compValue[text] = val
+
+        id = '#comp'+(k+6).toString()+i.toString()
+        val = $(id).val();
+        text = "Store Frontage"
+        compValue[text] = val
+
+        id = '#comp'+(k+7).toString()+i.toString()
+        val = $(id).val();
+        text = "Store Strength(Example)"
+        compValue[text] = val
+
+        id = '#comp'+(k+8).toString()+i.toString()
+        val = $(id).val();
+        text = "Any highlight for competition"
+        compValue[text] = val
+
+        competition_analysis_attributes['comp'+(i+1).toString()] = compValue
+       }
+
+    var left_wall_view = document.getElementById('left_wall_view');
+    var file = left_wall_view.files[0];
+    
+    var shop_front_view = document.getElementById('shop_front_view');
+    var file1 = shop_front_view.files[0];
+
+    var right_wall_view = document.getElementById('right_wall_view');
+    var file2 = right_wall_view.files[0];
+
+    var ceiling = document.getElementById('ceiling');
+    var file3 = ceiling.files[0];
+
+    var flooring = document.getElementById('flooring');
+    var file4 = flooring.files[0];
+
+    var inside_out_view =  document.getElementById('inside_out_view');
+    var file5 = inside_out_view.files[0];
+
+    var outside_in_view = document.getElementById('outside_in_view');
+    var file6 = outside_in_view.files[0];
+
+    var complete_shop_building_view = document.getElementById('complete_shop_building_view');
+    var file7 = complete_shop_building_view.files[0]; 
+
+    var left_shops = document.getElementById('left_shops');
+    var file8 = left_shops.files[0];
+
+    var right_shop = document.getElementById('right_shop');
+    var file9 = right_shop.files[0];
+
+    var opposite_foot_shop = document.getElementById('opposite_foot_shop');
+    var file10 = opposite_foot_shop.files[0];
+
+    var catchment_picture =  document.getElementById('catchment_picture');
+    var file11 = catchment_picture.files[0];
+
+    var prominent_mobile = document.getElementById('prominent_mobile');
+    var file12 = prominent_mobile.files[0];
+
+    var experience_shop = document.getElementById('experience_shop');
+    var file13 = experience_shop.files[0];
+
+    var formData = new FormData();
+    formData.append('left_wall_view', file);
+    formData.append('shop_front_view',file1);
+    formData.append('right_wall_view',file2);
+    formData.append('ceiling',file3);
+    formData.append('flooring',file4);
+    formData.append('inside_out_view',file5);
+    formData.append('outside_in_view',file6);
+    formData.append('complete_shop_building_view',file7);
+    formData.append('left_shops',file8);
+    formData.append('right_shop',file9);
+    formData.append('opposite_foot_shop',file10);
+    formData.append('catchment_picture',file11);
+    formData.append('prominent_mobile',file12);
+    formData.append('experience_shop',file13);
+
+
+    formData.append('name',name);
+    formData.append('email',email);
+    formData.append('mobile',mobile);
+    formData.append('state',state);
+    formData.append('shop_dimensions_attributes',JSON.stringify(shop_dimensions_attributes));
+    formData.append('catchments_attributes',JSON.stringify(catchments_attributes));
+    formData.append('catchment_business_shops_attributes',JSON.stringify(new_array));
+    formData.append('shop_ownerships_attributes',JSON.stringify(shop_ownerships_attributes));
+    formData.append('parteners_attributes',JSON.stringify(parteners_attributes_array));
+    formData.append('rev_months_attributes',JSON.stringify(rev_months_attributes));
+    formData.append('industry_attributes',JSON.stringify(industry_attributes));
+    formData.append('competitions_attributes',JSON.stringify(competition_analysis_attributes)); 
+
+      if(name == '' ){
+          alert("Please fill name");    
+      }
+      else if(email == ''){
+         alert("Please fill email");  
+      }
+      else if(mobile == '' ){
+          alert("Please fill mobile");    
+      }
+      else if(state == ''){
+         alert("please select state")
+      }
+      else{
+          $.ajax({
+          url: "/sales_orders/user_data",
+          type: "POST",
+          data: formData,
+            
+          cache: false,
+          contentType: false,
+          processData: false,
+                 
+          dataType: "text",
+
+          complete: function(){
+          },
+          success: function(data,xhr){
+          var response = JSON.parse(data);
+          alert('data successfully entered!')
+          location.href='/'
+          },
+          error: function(){
+
+          } 
+          })
+
+      }
+
+}//end of function    
+</script>
+
+
+
+

@@ -1,0 +1,16 @@
+*~
+.\#*
+.*.swp
+TAGS
+tmtags
+tmp
+*.patch
+*.diff
+*.xmlx
+notes.txt
+*.\#*
+*.rbc
+pkg
+.DS_Store
+Gemfile.lock
+*.gem

@@ -1,0 +1,12 @@
+<%= link_to "New Business Unit", new_business_unit_path, :id => 'new-button' %>
+<table class="ui table">
+  <tbody>
+    <% @business_units.each do |business_unit| %>
+      <tr>
+        <td><%= business_unit.name %></td>
+        <td><%= link_to "Edit", [:edit, business_unit] %></td>
+        <td><%= link_to "Delete", [business_unit], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

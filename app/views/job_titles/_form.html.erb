@@ -1,0 +1,9 @@
+<%= form_for @job_title, :html => { :class => 'user-form' } do |f| %>
+  <h4 id="form-title"><%= form_title %></h4>
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @job_title.errors } %>
+  <div class="form-field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <%= f.submit %>
+<% end %>

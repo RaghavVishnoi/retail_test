@@ -1,0 +1,22 @@
+== README
+
+== Setup
+
+bundle exec rake db:create
+bundle exec rake db:migrate
+bundle exec rake db:seed
+
+
+== Deploy
+
+bundle exec cap staging deploy
+
+== Restart
+bundle exec cap staging deploy:restart
+
+
+== Server Login
+ssh fosem@180.179.208.178
+
+== default emails
+constant_values

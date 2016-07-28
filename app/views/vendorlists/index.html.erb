@@ -1,0 +1,122 @@
+
+  <div id="nav-col-submenu"></div>
+  </div>
+
+<div id="content-wrapper">
+<div class="row">
+<div class="col-lg-12">
+  <div class="add_new_notfcn">
+    <h4><i class="fa fa-plus-square fa-lg"></i><span> <%= link_to "New Vendor", new_vendorlist_path %></span></h4>
+  </div>
+</div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+  <div class="main-box clearfix">
+  <div class="clearfix">
+    <div class="common_page notification_page">
+    <div class="hdr">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="txt">Vendorlist</div>
+      </div>
+        
+      <div class="col-md-4">
+        
+          
+          <%=form_tag Vendorlist.new ,:method => 'get' do |f| %>          
+                    <div id="vendorlist-search-div" class="form-field">
+                       <div class="user-search-field">
+                         <%= text_field_tag :param, @search, :id => "retailer-search",:required => "required",:placeholder => "Enter Vendor name/state" %>
+                      </div>
+                      <div>
+                        <% if params[:param] == nil %>
+                           <%= button_tag(type: 'submit',value: 'search',:class=>"hide-button") do %>
+                             <i class="fa fa-search search-icon"></i> 
+                           <% end %>
+
+                        <% else %>
+
+                            <%= button_tag(type: 'submit',value: 'search',:class=>"clear-button") do %>
+                             <a href="/vendorlists"><i class="fa fa-times-circle-o"></i></a> 
+                            <% end %>
+                        <% end %>
+                      </div> 
+                    <div class="error" id="message"></div>
+               
+                  </div>
+          <% end %>  
+      </div>
+
+
+    </div>
+    </div>
+
+ <% @vendor.each do |vendor| %>
+    <div class="ntifctn_blk">
+      <div class="row">
+        <div class="col-md-9">
+          <p><%=vendor.vendor_name%> ,  <%=vendor.contact_person%> </p>
+          <p> <span class="blue">  <%=vendor.state%> </span></p>
+        </div>
+
+        <div class="col-md-3">
+                              <ul class="list-inline list-unstyled">
+                               
+                                <li class="blue">
+                                  <i class="fa fa-pencil"></i>
+                                  
+                                  <% if can? :manage, Vendor %>
+                                  <span>
+                                    <%= link_to "Edit", [:edit, vendor] %>
+                                  </span>
+                                  <%end%>
+
+                                </li>
+                              
+
+                                  <li class="blue">
+                                  <i class="fa fa-hand-o-right"></i>
+
+                                  <span>
+                                  <%= link_to "Show",vendorlist_path(vendor.id) %>
+
+                                  </span>
+                                </li>
+                                <p>
+                                  <li class="blue">
+                                  <span id="user_status">
+                                    <label class=' <%=vendor.status == 'Active' ? "user-of-status" : "user-of-status1" %>'>
+                                      <%= vendor.status %>
+                                     
+                                      </label>
+                                  </span>
+                                </li>
+                              </p>
+                             
+
+                              </ul>
+                          </div>
+      </div>
+    </div>
+  <%end%>
+    <%if @vendor.length > 1%>
+      <%=will_paginate @vendor%>
+  <%end%>
+
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$('#vendor').attr("class",'active') 
+  $('#list').attr("class",'active') 
+</script>
+
+
+      
+    
+
+  

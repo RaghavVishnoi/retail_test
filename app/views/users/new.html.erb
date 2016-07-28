@@ -1,0 +1,14 @@
+<% if ['cmo','vmqa','supervisor','auditor'].include? params[:user]%>
+	<%= render :partial => 'cmo', :locals =>{:type => "new",action: 'new'} %>
+<% elsif params[:user] == 'rrm'%>
+	<%= render :partial => 'rrm', :locals =>{:type => "new",action: 'new'} %>
+<% elsif params[:user] == 'auditor'%>
+	<%= render :partial => 'auditor', :locals =>{:type => "new",action: 'new'} %>
+<% elsif params[:user] == 'requester'%>
+	<%= render :partial => 'requester', :locals =>{:type => "new",action: 'new'} %>
+<% else %>
+	<%= render :partial => 'form', :locals =>{:type => "new",action: 'new'} %>
+<% end %>
+<script type="text/javascript">
+  $('#user').attr("class",'active')
+</script>   

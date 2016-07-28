@@ -1,0 +1,131 @@
+
+<div id="nav-col-submenu"></div>
+</div>
+				
+	<div id="content-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="common_page gsb_page">
+					<div class="clearfix"></div>
+						<div class="row">
+										<div class="col-md-6">
+					<div class="gsb_blk">
+						<h2>
+							 <%=Vendorlist.find(@vendor_request.vendor_id).vendor_name%>
+						</h2>
+						<div class="row">
+							<div class="col-md-4">
+							 Request Id
+							</div>
+							<div class="col-md-4">
+								 
+								
+							</div>	
+							<div class="col-md-4">
+								<div class="blue">
+								   <a href="/requests/<%=@vendor_request.request_id%>/edit?q[request_type]=<%=Request.find(@vendor_request.request_id).request_type%>"  class="blue"><%=@vendor_request.request_id%>
+                            			</a>
+								</div>
+							</div>
+							
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+							   Request Type
+							</div>
+							<div class="col-md-4">
+								 
+								
+							</div>	
+							<div class="col-md-4">
+								<div>
+									 <%=Request.find(@vendor_request.request_id).request_type.upcase%>
+								</div>
+							</div>
+						</div>
+						<div class="row mr_btm" >
+							<div class="col-md-4">
+							   Status
+							</div>
+							<div class="col-md-4">
+								 
+								
+							</div>	
+							<div class="col-md-4">
+								<div class="<%=if @vendor_request.status == 'accepted' then "green" else "red" end%>">
+									 <%=@vendor_request.status.upcase%>
+								</div>
+							</div>
+						</div>
+						 
+
+						<div class="row">
+							<div class="col-md-4">
+								Contact Person
+							</div>
+							<div class="col-md-4">
+								 
+								
+							</div>	
+							<div class="col-md-4">
+								 
+								 <%=Vendorlist.find(@vendor_request.vendor_id).contact_person%>								 
+							</div>
+						</div> 
+						<div class="row">
+							<div class="col-md-4">
+								Assigned On
+							</div>
+							<div class="col-md-4">
+								 
+								
+							</div>	
+							<div class="col-md-4">
+								 
+								 <%=@vendor_request.assigned_date.strftime("%d %b,%Y")%>								 
+							</div>
+						</div>
+
+						 
+
+						 
+
+						 
+					</div>
+				</div>	
+				        <div class="col-md-6">
+          <div class="shop_detals">
+            <h2>Action Details</h2>
+
+            <%if @vendor_request.vendor_stages.size != 0
+	            @vendor_request.vendor_stages.each do |stage|%> 
+	              <div class="row">
+	                <div class="col-md-5">
+	                   <%=stage.stage_name.camelize%> On
+	                </div>
+	                <div class="col-md-7">
+	                  <div class="green">
+	                  	<%=stage.update_date.strftime("%d %b,%Y")%>
+	                  </div>
+	                </div>
+	            </div>
+	            <%end%>
+            <%else%>
+            	<div class="row">
+	                <div class="col-md-5">
+	                   Waiting for response ...
+	                </div>
+            	</div>
+            <%end%>               
+        </div>
+    </div>									 	
+</div>
+</div>
+</div>
+</div>
+
+
+<script type="text/javascript">
+  $('#vendor').attr("class",'active')
+</script>   

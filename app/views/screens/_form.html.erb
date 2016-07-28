@@ -1,0 +1,32 @@
+<%= form_for @screen, :html => { :id => 'screen-form' } do |screen_form| %>
+  
+  <div class="form-field">
+    <%= screen_form.label :is_start_screen %>
+    <%= screen_form.check_box :is_start_screen %>
+  </div>
+
+  <div class="form-field">
+    <%= screen_form.label :module_group_id %>
+    <%= screen_form.select :module_group_id, ModuleGroup.all.map { |g| [g.name, g.id] } %>
+  </div>
+
+  <%= screen_form.fields_for :layout, OpenStruct.new(screen_form.object.layout || {}) do |f| %>
+    <div class="screen-name">
+      <%= f.text_field :screen_name, :placeholder => "Screen Name" %>
+      <%= f.text_field :screen_heading, :placeholder => "Screen Heading" %>
+      <%= f.text_field :has_menu, :placeholder => "Has Menu" %>
+      <%= f.text_field :has_action_bar, :placeholder => "Has Action Bar" %>
+    </div>
+
+    <%= render :partial => 'layout_element', :locals => { :form => f, :layout_element => OpenStruct.new({}), :container_class => 'hidden layout-element-template template', :data_name => "key", :key => 'key' } %>
+
+    <%= render :partial => 'ui_element', :locals => { :form => f, :ui_element => OpenStruct.new({}), :container_class => "hidden ui-element-template template", :data_name => "key" } %>
+
+    <div class="container" data-name="screen[layout]">
+      <%= render :partial => 'layout_elements', :locals => { :form => f, :layout_elements => (f.object.layout_elements || {}), :data_name => "", :container_class => "" } %>
+    </div>
+
+  <% end %>
+
+  <%= screen_form.submit %>
+<% end %>

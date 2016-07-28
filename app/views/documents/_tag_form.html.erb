@@ -1,0 +1,21 @@
+ 
+
+<div id="tag-popup">
+	 
+		 <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+		            <tr>
+		                <td class="tag-popup_title">Create new tag</td>
+		                <td class="tag-popup_title" align="right">
+		                    <label class="close-tag">Close</label>
+		                </td>
+
+		            </tr> 
+		            <tr><td colspan="2" class="tag_message">
+		            	
+		            		<%=text_field_tag 'tag_name','' ,:id => 'tag-text',:placeholder => "Enter ",:required => 'required'%>
+		            	
+		            </td></tr>
+		            <tr><td colsan="2" align="center"><%=submit_tag "Create", :id => "tag-button"%></td></tr>
+		 </table>
+   
+ </div>               

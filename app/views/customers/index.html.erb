@@ -1,0 +1,23 @@
+<%= will_paginate @customers %>
+
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @customers.each do |customer| %>
+        <tr>
+          <td><%= link_to customer.name, [customer] %></td>
+          <td><%= link_to "Edit", [:edit, customer] %></td>
+          <td><%= link_to "Allocate", new_customers_user_path(:customer_id => customer.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<%= will_paginate @customers %>

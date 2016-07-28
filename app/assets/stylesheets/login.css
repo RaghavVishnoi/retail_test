@@ -1,0 +1,42 @@
+#sign_in_form {
+  border: 1px solid #282831; 
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 90px;
+  padding: 10px;
+}
+
+#sign_in_form .form-field input {
+  width: 290px ;
+}
+#sign_in_form .form-field {
+  margin-bottom: 5px;
+}
+
+#sign_in_form input[type="submit"] {
+  float: right;
+  margin-right: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+  background-color: #167588;
+  border: none;
+  border-radius: 2px;
+  font-size: 15px;
+  color: white;
+}
+
+.alert {
+  color: #876a38;
+  margin: 0px 0px 5px 0px;
+  text-align: center;
+}
+.cumtm_alert{
+    position: absolute;
+    top: -9px;
+    left: 0;
+    right: 0;
+  } 
+ .login_forms{position: relative;}  
+.clear {
+  clear: both;
+}

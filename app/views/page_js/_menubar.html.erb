@@ -1,0 +1,19 @@
+<script type="text/javascript">
+	if(<%=params[:q][:request_type]%> == 4){
+		$('#audit').attr("class","active");	
+	}else{
+		$('#request').attr("class",'active')
+		if(<%=params[:q][:request_type]%> == 0){
+			$('#gsb a').attr("style","color:#f37022 !important;");	
+		}else if(<%=params[:q][:request_type]%> == 1){
+			$('#sis a').attr("style","color:#f37022 !important;");	
+		}else if(<%=params[:q][:request_type]%> == 2){
+			$('#inshop a').attr("style","color:#f37022 !important;");	
+		}else if(<%=params[:q][:request_type]%> == 3 || <%=params[:q][:request_type]%> == 'maintenance'){
+			$('#maintenance a').attr("style","color:#f37022 !important;");	
+		}else{
+			$('#all-request a').attr("style","color:#f37022 !important;");	
+		}
+	}
+
+</script>

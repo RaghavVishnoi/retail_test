@@ -1,0 +1,2284 @@
+Staging Url: http://43.252.88.222
+=====================================================================================
+* Signin
+
+POST /api/v1/users/sign_in
+
+Params:
+-- email
+-- password
+
+Success Response:
+{
+  "result": true,
+  "auth_token": '681e7e29b921628926d243097728727f',
+  "roles": [ "admin", "user"], // superadmin, admin, manager, user
+  "email": 'mail@example.com',
+  "quotation": "Illo architecto necessitatibus sint tempore et sit est voluptatum.",
+  "personalized_message": "Hi {username}"
+}
+
+Error Response:
+{
+  result: false,
+  errors: {
+    messages: ["Invalid Password"]
+  }
+}
+
+=================================================================================
+* Signout
+
+DELETE /api/v1/users/sign_out
+
+Params:
+-- auth_token
+
+Success Response:
+{
+  result: true
+}
+
+Error Response:
+{
+  result: false,
+  errors: {
+    messages: ["User not found"]
+  }
+}
+
+
+=================================================================================
+* Customers Index
+
+GET /api/v1/customers
+
+Params:
+-- auth_token
+-- page
+
+Success Response:
+{
+    "result": true,
+    "per_page": 20,
+    "length": 1,
+    "current_page": 1,
+    "total_pages": 1,
+    "customers": [
+        {
+            "id": 1,
+            "name": "customer_name1",
+            "address": "lajdfl",
+            "state": "aldljsdkf",
+            "phone_number": "1234567890",
+            "store_manager": "manager name",
+            "avatar_url": "/uploads/customer/avatar/1/9TH_ENVIRON_2098382f.jpg"
+        }
+    ]
+}
+================================================================================
+* Create Customer
+
+POST /api/v1/customers
+
+Params:
+-- auth_token
+-- customer[name]
+-- customer[address]
+-- customer[state]
+-- customer[phone_number]
+-- customer[store_manager]
+-- customer[avatar]
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+  "result": false,
+  "errors": {
+    "messages": ["State is not included in the list"]
+  }
+}
+
+================================================================================
+* Customer
+
+GET /api/v1/customers/id
+
+Params:
+-- auth_token
+
+Success Response:
+{   
+    "result": true,
+    "customer": {
+      "id": 1,
+      "name": "customer_name1",
+      "address": "lajdfl",
+      "state": "aldljsdkf",
+      "phone_number": "1234567890",
+      "store_manager": "manager name",
+      "avatar_url": "/uploads/customer/avatar/1/9TH_ENVIRON_2098382f.jpg"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Customer not found"
+        ]
+    }
+}
+
+
+===============================================================================
+* Update Customer
+
+PUT /api/v1/customers/id
+
+Params:
+-- auth_token
+-- customer[name]
+-- customer[address]
+-- customer[state]
+-- customer[phone_number]
+-- customer[store_manager]
+-- customer[avatar]
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+  "result": false,
+  "errors": {
+    "messages": ["State is not included in the list"]
+  }
+}
+
+
+============================================================================
+* Delete Customer
+
+DELETE /api/v1/customers/id
+
+Params:
+-- auth_token
+
+Success Response:
+{
+  "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Customer not found"
+        ]
+    }
+}
+
+===========================================================================
+* New Customer
+
+GET /api/v1/customers/new
+
+Params:
+-- auth_token
+-- latitude
+-- longitude
+
+Success Response:
+{   
+    "result": true,
+    "customer": {
+      "id": null,
+      "name": null,
+      "address": null,
+      "state": null,
+      "phone_number": null,
+      "store_manager": null,
+      "avatar_url": null
+    },
+    "states": ["Haryana", "Chandigarh", ...],
+    "default_state": "Haryana"
+}
+
+==========================================================================
+* Edit Customer
+
+GET /api/v1/customers/id/edit
+
+Params:
+-- auth_token
+
+Success Response:
+{
+  "result": true,
+  "customer": {
+    "id": 1,
+    "name": "customer_name1",
+    "address": "lajdfl",
+    "state": "aldljsdkf",
+    "phone_number": "1234567890",
+    "store_manager": "manager name",
+    "avatar_url": "/uploads/customer/avatar/1/9TH_ENVIRON_2098382f.jpg"
+  },
+  "states": ["Haryana", "Chandigarh", ...]
+}
+
+
+========================================================================
+* Items Index
+GET /api/v1/items
+
+Params:
+-- auth_token
+-- page
+
+Response:
+{
+    "result": true,
+    "per_page": 20,
+    "length": 5,
+    "current_page": 1,
+    "total_pages": 1,
+    "items": [
+                {
+                    "id": 4,
+                    "name": "item1",
+                    "city_id": 1,
+                    "item_region_id": 1,
+                    "category_id": 1,
+                    "subcategory_id": 2,
+                    "short_description": "description",
+                    "details": [
+                        {
+                            "name": "detail1",
+                            "value": "detail1 value"
+                        },
+                        {
+                            "name": "detail2",
+                            "value": "detail2 value"
+                        }
+                    ],
+                    "collection_id": 2,
+                    "size_id": 4,
+                    "alcohol_percent_id": 6,
+                    "prices": [
+                        {
+                            "name": "price1",
+                            "value": "100"
+                        },
+                        {
+                            "name": "price2",
+                            "value": "150"
+                        },
+                        {
+                            "name": "price3",
+                            "value": "200"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "id": 1,
+                            "image_url": "image_url"
+                        }
+                    ],
+                    "quantity": 10,
+                    "unit_of_measurement": "pack",
+                    "properties": [
+                        {
+                            "field": {
+                                "id": 1,
+                                "display_name": "Field1",
+                                "field_type": "dropdown",
+                                "value_type": "decimal",
+                                "configuration": {
+                                    "values": [
+                                        "10",
+                                        "20"
+                                    ]
+                                }
+                            },
+                            "value": "20"
+                        }
+                    ]
+              }
+    ]
+}
+
+=========================================================================
+* Create Items
+POST /api/v1/items
+
+Params:
+-- auth_token
+-- item[name]
+-- item[city_id]
+-- item[item_region_id]
+-- item[category_id]
+-- item[subcategory_id]
+-- item[short_description]
+-- item[details][][name]
+-- item[details][][value]
+-- item[details][][name]
+-- item[details][][value]
+-- item[collection_id]
+-- item[size_id]
+-- item[alcohol_percent_id]
+-- item[prices][][name]
+-- item[prices][][value]
+-- item[prices][][name]
+-- item[prices][][value]
+-- item[quantity]
+-- item[unit_of_measurement]
+-- item[image_ids][]
+-- item[properties][0][field_id]
+-- item[properties][0][value]
+
+
+Success Response:
+{
+    "result": true,
+    "item": {
+        "id": 4,
+        "name": "item1",
+        "city_id": 1,
+        "item_region_id": 1,
+        "category_id": 1,
+        "subcategory_id": 2,
+        "short_description": "description",
+        "details": [
+            {
+                "name": "detail1",
+                "value": "detail1 value"
+            },
+            {
+                "name": "detail2",
+                "value": "detail2 value"
+            }
+        ],
+        "collection_id": 2,
+        "size_id": 4,
+        "alcohol_percent_id": 6,
+        "prices": [
+            {
+                "name": "price1",
+                "value": "100"
+            },
+            {
+                "name": "price2",
+                "value": "150"
+            },
+            {
+                "name": "price3",
+                "value": "200"
+            }
+        ],
+        "images": [
+            {
+                "id": 1,
+                "image_url": "image_url"
+            }
+        ],
+        "quantity": 10,
+        "unit_of_measurement": "pack"
+  }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+
+========================================================================
+* New Item
+GET /api/v1/items/new
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "item": {
+        "id": null,
+        "name": null,
+        "city_id": null,
+        "item_region_id": null,
+        "category_id": null,
+        "subcategory_id": null,
+        "short_description": null,
+        "details": [],
+        "collection_id": null,
+        "size_id": null,
+        "alcohol_percent_id": null,
+        "prices": [],
+        "created_at": null,
+        "updated_at": null,
+        "quantity": null,
+        "unit_of_measurement": null
+    }
+}
+
+
+====================================================================
+* Edit Item
+GET /api/v1/items/{id}/edit
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "item": {
+        "id": 4,
+        "name": "item1",
+        "city_id": 1,
+        "item_region_id": 1,
+        "category_id": 1,
+        "subcategory_id": 2,
+        "short_description": "description",
+        "details": [
+            {
+                "name": "detail1",
+                "value": "detail1 value"
+            },
+            {
+                "name": "detail2",
+                "value": "detail2 value"
+            }
+        ],
+        "collection_id": 2,
+        "size_id": 4,
+        "alcohol_percent_id": 6,
+        "prices": [
+            {
+                "name": "price1",
+                "value": "100"
+            },
+            {
+                "name": "price2",
+                "value": "150"
+            },
+            {
+                "name": "price3",
+                "value": "200"
+            }
+        ],
+        "images": [
+            {
+                "id": 1,
+                "image_url": "image_url"
+            }
+        ],
+        "quantity": 10,
+        "unit_of_measurement": "pack"
+  }
+}
+
+==================================================================
+* Update Item
+PUT /api/v1/items/{id}
+
+Params:
+-- auth_token
+-- item[name]
+-- item[city_id]
+-- item[item_region_id]
+-- item[category_id]
+-- item[subcategory_id]
+-- item[short_description]
+-- item[details][][name]
+-- item[details][][value]
+-- item[details][][name]
+-- item[details][][value]
+-- item[collection_id]
+-- item[size_id]
+-- item[alcohol_percent_id]
+-- item[prices][][name]
+-- item[prices][][value]
+-- item[prices][][name]
+-- item[prices][][value]
+-- item[quantity]
+-- item[unit_of_measurement]
+-- item[image_ids][]
+
+Success Response:
+{
+    "result": true,
+    "item": {
+        "id": 4,
+        "name": "item1",
+        "city_id": 1,
+        "item_region_id": 1,
+        "category_id": 1,
+        "subcategory_id": 2,
+        "short_description": "description",
+        "details": [
+            {
+                "name": "detail1",
+                "value": "detail1 value"
+            },
+            {
+                "name": "detail2",
+                "value": "detail2 value"
+            }
+        ],
+        "collection_id": 2,
+        "size_id": 4,
+        "alcohol_percent_id": 6,
+        "prices": [
+            {
+                "name": "price1",
+                "value": "100"
+            },
+            {
+                "name": "price2",
+                "value": "150"
+            },
+            {
+                "name": "price3",
+                "value": "200"
+            }
+        ],
+        "images": [
+            {
+                "id": 1,
+                "image_url": "image_url"
+            }
+        ],
+        "quantity": 10,
+        "unit_of_measurement": "pack"
+  }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+
+=================================================================
+* Delete item
+DELETE /api/v1/items/{id}
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true
+}
+
+================================================================
+* Item Regions Index
+GET /api/v1/item_regions
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "per_page": 20,
+    "length": 9,
+    "current_page": 1,
+    "total_pages": 1,
+    "item_regions": [
+        {
+            "id": 1,
+            "name": "region1",
+            "created_at": "2015-01-22T09:05:08.000Z",
+            "updated_at": "2015-01-22T09:05:08.000Z"
+        }
+    ]
+
+
+=================================================================
+* Create Item Regions
+POST /api/v1/item_regions
+
+Params:
+-- auth_token
+-- item_region[name]
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+================================================================
+* Edit Item Region
+GET /api/v1/item_regions/{id}/edit
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "item_region": {
+        "id": 1,
+        "name": "region1",
+        "created_at": "2015-01-22T09:05:08.000Z",
+        "updated_at": "2015-01-22T09:05:08.000Z"
+    }
+}
+
+=============================================================
+* New Item Region
+GET /api/v1/item_regions/new
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "item_region": {
+        "id": null,
+        "name": null,
+        "created_at": null,
+        "updated_at": null
+    }
+}
+
+===========================================================
+* Update Item Region
+PUT /api/v1/item_regions/{id}
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name has already been taken"
+        ]
+    }
+}
+
+=========================================================
+* DELETE Item Region
+DELETE /api/v1/item_regions/{id}
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Cannot delete record because dependent items exist"
+        ]
+    }
+}
+
+========================================================
+* Cities Index
+GET /api/v1/cities
+
+Params:
+-- auth_token
+-- page
+
+Success Response:
+{
+    "result": true,
+    "per_page": 20,
+    "length": 11,
+    "current_page": 1,
+    "total_pages": 1,
+    "cities": [
+        {
+            "id": 1,
+            "name": "city1",
+            "created_at": "2015-01-22T09:04:37.000Z",
+            "updated_at": "2015-01-22T09:04:37.000Z"
+        }
+    ]
+}
+
+========================================================
+* New City
+GET /api/v1/cities/new
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "city": {
+        "id": null,
+        "name": null,
+        "created_at": null,
+        "updated_at": null
+    }
+}
+
+=======================================================
+* Edit City
+GET /api/v1/cities/{id}/edit
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "city": {
+        "id": 1,
+        "name": "city1",
+        "created_at": "2015-01-22T09:04:37.000Z",
+        "updated_at": "2015-01-22T09:04:37.000Z"
+    }
+}
+
+====================================================
+* Create City
+POST /api/v1/cities
+
+Params:
+-- auth_token
+-- city[name]
+
+Success Response:
+{
+    "result": true,
+    "city": {
+        "id": 1,
+        "name": "city1",
+        "created_at": "2015-01-27T08:50:13.616Z",
+        "updated_at": "2015-01-27T08:50:13.616Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name has already been taken"
+        ]
+    }
+}
+
+=====================================================
+* Update City
+PUT /api/v1/cities/{id}
+
+Params:
+-- auth_token
+-- city[name]
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+
+=======================================================
+* Delete City
+DELETE /api/v1/cities/{id}
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Cannot delete record because dependent items exist"
+        ]
+    }
+}
+
+
+==================================================================
+* Inventories Index
+GET /api/v1/items/{item_id}/inventories
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "inventories": [
+        {
+            "id": 1,
+            "item_id": 1,
+            "quantity": 1,
+            "warehouse_id": 1,
+            "low_stock_trigger_quantity": 1,
+            "restock_time": "2015-12-23T15:55:34.000Z",
+            "created_at": "2015-01-23T10:04:39.000Z",
+            "updated_at": "2015-01-23T10:25:45.000Z"
+        }
+    ]
+}
+
+================================================================
+* New Inventory
+GET /api/v1/items/{item_id}/inventories/new
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "inventory": {
+        "id": null,
+        "item_id": 1,
+        "quantity": null,
+        "warehouse_id": null,
+        "low_stock_trigger_quantity": null,
+        "restock_time": null,
+        "created_at": null,
+        "updated_at": null
+    }
+}
+
+==============================================================
+* Edit Inventory
+GET /api/v1/items/{item_id}/inventories/{id}/edit
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "inventory": {
+        "id": 1,
+        "item_id": 1,
+        "quantity": 1,
+        "warehouse_id": 1,
+        "low_stock_trigger_quantity": 1,
+        "restock_time": "2015-12-23T15:55:34.000Z",
+        "created_at": "2015-01-23T10:04:39.000Z",
+        "updated_at": "2015-01-23T10:25:45.000Z"
+    }
+}
+
+============================================================
+* Create Inventory
+POST /api/v1/items/{item_id}/inventories
+
+Params:
+-- auth_token
+-- inventory[quantity]
+-- inventory[warehouse_id]
+-- inventory[low_stock_trigger_quantity]
+-- inventory[restock_time]
+
+Success Response:
+{
+    "result": true,
+    "inventory": {
+        "id": 1,
+        "item_id": 1,
+        "quantity": 1,
+        "warehouse_id": 1,
+        "low_stock_trigger_quantity": 1,
+        "restock_time": "2015-12-23T15:55:34.000Z",
+        "created_at": "2015-01-23T10:04:39.000Z",
+        "updated_at": "2015-01-23T10:25:45.000Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Quantity can't be blank"
+        ]
+    }
+}
+
+=================================================================
+* Update Inventory
+PUT /api/v1/items/{item_id}/inventories/{id}
+
+Params:
+-- auth_token
+-- inventory[quantity]
+-- inventory[warehouse_id]
+-- inventory[low_stock_trigger_quantity]
+-- inventory[restock_time]
+
+Success Response:
+{
+    "result": true,
+    "inventory": {
+        "id": 1,
+        "item_id": 1,
+        "quantity": 1,
+        "warehouse_id": 1,
+        "low_stock_trigger_quantity": 1,
+        "restock_time": "2015-12-23T15:55:34.000Z",
+        "created_at": "2015-01-23T10:04:39.000Z",
+        "updated_at": "2015-01-23T10:25:45.000Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Quantity can't be blank"
+        ]
+    }
+}
+
+========================================================================
+* Delete Inventory
+DELETE /api/v1/items/{item_id}/inventories/{id}
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true
+}
+
+======================================================================
+* Categories Index
+GET /api/v1/categories
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "categories": [
+        {
+            "id": 1,
+            "name": "category1",
+            "created_at": "2015-01-22T09:05:33.000Z",
+            "updated_at": "2015-01-27T10:31:30.000Z"
+        }
+    ]
+}
+
+=====================================================================
+* New Category
+GET /api/v1/categories/new
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "category": {
+        "id": null,
+        "name": null,
+        "created_at": null,
+        "updated_at": null
+    }
+}
+
+===================================================================
+* Edit Category
+GET /api/v1/categories/{id}/edit
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "category": {
+        "id": 1,
+        "name": "category1",
+        "created_at": "2015-01-22T09:05:33.000Z",
+        "updated_at": "2015-01-27T10:31:30.000Z"
+    }
+}
+
+=================================================================
+* Create Category
+POST /api/v1/categories
+
+Params:
+-- auth_token
+-- category[name]
+
+Success Response:
+{
+    "result": true,
+    "category": {
+        "id": 1,
+        "name": "category1",
+        "created_at": "2015-01-22T09:05:33.000Z",
+        "updated_at": "2015-01-27T10:31:30.000Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+==============================================================
+* Update Category
+PUT /api/v1/categories/{id}
+
+Params:
+-- auth_token
+-- category[name]
+
+Success Response:
+{
+    "result": true,
+    "category": {
+        "id": 1,
+        "name": "category1",
+        "created_at": "2015-01-22T09:05:33.000Z",
+        "updated_at": "2015-01-27T10:31:30.000Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+============================================================
+* Delete Category
+DELETE /api/v1/categories/{id}
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Cannot delete record because dependent items exist"
+        ]
+    }
+}
+
+============================================================
+* Collections Index
+GET /api/v1/collections
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "collections": [
+        {
+            "id": 1,
+            "name": "collection1",
+            "created_at": "2015-01-22T09:05:55.000Z",
+            "updated_at": "2015-01-22T09:05:55.000Z"
+        }
+    ]
+}
+
+===========================================================
+* New Collection
+GET /api/v1/collections/new
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "collection": {
+        "id": null,
+        "name": null,
+        "created_at": null,
+        "updated_at": null
+    }
+}
+
+========================================================
+* Edit Collection
+GET /api/v1/collections/{id}/edit
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "collection": {
+        "id": 1,
+        "name": "collection1",
+        "created_at": "2015-01-22T09:05:55.000Z",
+        "updated_at": "2015-01-22T09:05:55.000Z"
+    }
+}
+
+==========================================================
+* Create Collection
+POST /api/v1/collections
+
+Params:
+-- auth_token
+-- collection[name]
+
+Success Response:
+{
+    "result": true,
+    "collection": {
+        "id": 1,
+        "name": "collection1",
+        "created_at": "2015-01-27T11:17:11.125Z",
+        "updated_at": "2015-01-27T11:17:11.125Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+===========================================================
+* Update Collection
+PUT /api/v1/collections/{id}
+
+Params:
+-- auth_token
+-- collection[name]
+
+Success Response:
+{
+    "result": true,
+    "collection": {
+        "id": 1,
+        "name": "collection1",
+        "created_at": "2015-01-27T11:17:11.125Z",
+        "updated_at": "2015-01-27T11:17:11.125Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+========================================================
+* Destroy Collection
+DELETE /api/v1/collections/{id}
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Cannot delete record because dependent items exist"
+        ]
+    }
+}
+
+
+=======================================================
+* Sizes Index
+GET /api/v1/sizes
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "sizes": [
+        {
+            "id": 1,
+            "name": "size1",
+            "created_at": "2015-01-22T09:06:20.000Z",
+            "updated_at": "2015-01-22T09:06:20.000Z"
+        }
+    ]
+}
+
+=======================================================
+* New Size
+GET /api/v1/sizes/new
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "size": {
+        "id": null,
+        "name": null,
+        "created_at": null,
+        "updated_at": null
+    }
+}
+
+======================================================
+* Edit Size
+GET /api/v1/sizes/{id}/edit
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "size": {
+        "id": 1,
+        "name": "size1",
+        "created_at": "2015-01-22T09:06:20.000Z",
+        "updated_at": "2015-01-22T09:06:20.000Z"
+    }
+}
+
+======================================================
+* Create Size
+POST /api/v1/sizes
+
+Params:
+-- auth_token
+-- size[name]
+
+Success Response:
+{
+    "result": true,
+    "size": {
+        "id": 1,
+        "name": "size1",
+        "created_at": "2015-01-27T11:50:17.531Z",
+        "updated_at": "2015-01-27T11:50:17.531Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+====================================================
+* Update Size
+PUT /api/v1/sizes/{id}
+
+Params:
+-- auth_token
+-- size[name]
+
+Success Response:
+{
+    "result": true,
+    "size": {
+        "id": 1,
+        "name": "size1",
+        "created_at": "2015-01-22T09:06:20.000Z",
+        "updated_at": "2015-01-22T09:06:20.000Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+===================================================
+* Delete Size
+DELETE /api/v1/sizes/{id}
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Cannot delete record because dependent items exist"
+        ]
+    }
+}
+
+======================================================
+* Alcohol Percents Index
+GET /api/v1/alcohol_percents
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "alcohol_percents": [
+        {
+            "id": 1,
+            "value": "1",
+            "created_at": "2015-01-22T09:07:02.000Z",
+            "updated_at": "2015-01-22T09:07:02.000Z"
+        }
+    ]
+}
+
+======================================================
+* New Alcohol Percent
+GET /api/v1/alcohol_percents/new
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "alcohol_percent": {
+        "id": null,
+        "value": null,
+        "created_at": null,
+        "updated_at": null
+    }
+}
+
+=====================================================
+* Edit Alcohol Percent
+GET /api/v1/alcohol_percents/{id}/edit
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "alcohol_percent": {
+        "id": 1,
+        "value": "1",
+        "created_at": "2015-01-22T09:07:02.000Z",
+        "updated_at": "2015-01-22T09:07:02.000Z"
+    }
+}
+
+=====================================================
+* Create Alcohol Percent
+POST /api/v1/alcohol_percents
+
+Params:
+-- auth_token
+-- alcohol_percent[value]
+
+Success Response:
+{
+    "result": true,
+    "alcohol_percent": {
+        "id": 1,
+        "value": "1",
+        "created_at": "2015-01-27T12:20:44.071Z",
+        "updated_at": "2015-01-27T12:20:44.071Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Value can't be blank"
+        ]
+    }
+}
+
+
+=====================================================
+* Update Alcohol Percent
+PUT /api/v1/alcohol_percents/{id}
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true,
+    "alcohol_percent": {
+        "id": 1,
+        "value": "1",
+        "created_at": "2015-01-22T09:07:02.000Z",
+        "updated_at": "2015-01-27T12:23:33.438Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Value can't be blank"
+        ]
+    }
+}
+
+========================================================
+* Delete Alcohol Percent
+DELETE /api/v1/alcohol_percents/{id}
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Cannot delete record because dependent items exist"
+        ]
+    }
+}
+
+=========================================================
+* Warehouses Index
+GET /api/v1/warehouses
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "warehouses": [
+        {
+            "id": 1,
+            "name": "warehouse1",
+            "created_at": "2015-01-23T09:53:59.000Z",
+            "updated_at": "2015-01-23T09:53:59.000Z"
+        }
+    ]
+}
+
+========================================================
+* New Warehouse
+GET /api/v1/warehouses/new
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "warehouse": {
+        "id": null,
+        "name": null,
+        "created_at": null,
+        "updated_at": null
+    }
+}
+
+======================================================
+* Edit Warehouse
+GET /api/v1/warehouses/{id}/edit
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "warehouse": {
+        "id": 1,
+        "name": "warehouse1",
+        "created_at": "2015-01-27T13:04:04.000Z",
+        "updated_at": "2015-01-27T13:04:04.000Z"
+    }
+}
+
+=====================================================
+* Create Warehouse
+POST /api/v1/warehouses
+
+Params:
+-- auth_token
+-- warehouse[name]
+
+Success Response:
+{
+    "result": true,
+    "warehouse": {
+        "id": 1,
+        "name": "warehouse1",
+        "created_at": "2015-01-27T12:55:22.408Z",
+        "updated_at": "2015-01-27T12:55:22.408Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+=====================================================
+* Update Warehouse
+PUT /api/v1/warehouses/{id}
+
+Params:
+-- auth_token
+-- warehouse[name]
+
+Success Response:
+{
+    "result": true,
+    "warehouse": {
+        "id": 1,
+        "name": "warehouse1",
+        "created_at": "2015-01-27T12:55:22.000Z",
+        "updated_at": "2015-01-27T12:56:57.305Z"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+=====================================================
+* Delete Warehouse
+DELETE /api/v1/warehouses/{id}
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Cannot delete record because dependent inventories exist"
+        ]
+    }
+}
+
+======================================================
+* Create Image
+POST /api/v1/images
+
+Params:
+-- auth_token
+-- image[image]
+
+Success Response:
+{
+    "result": true,
+    "image": {
+        "id": 1,
+        "image_url": "image url"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Image can't be blank"
+        ]
+    }
+}
+
+
+===================================================
+* Screens Index
+GET /api/v1/screens
+
+Response:
+{
+    "result": true,
+    "screens": [
+        {
+            "id": 1,
+            "layout": {
+
+            }
+        }
+    ]
+}
+
+
+==================================================
+* Screen
+GET /api/v1/screens/{id}
+
+Response:
+{
+    "result": true,
+    "screen": {
+    
+    }
+}
+
+
+========================================================
+* Files Index
+
+GET /api/v1/data_files
+
+Params:
+-- auth_token
+-- parent_id // optional
+
+Response:
+{
+    "result": true,
+    "data_files": [
+        {
+            "id": 1,
+            "name": "filename1",
+            "description": "description",
+            "type": "Folder",
+            "data_file_url": null
+        },
+        {
+            "id": 2,
+            "name": "filename2",
+            "description": "description",
+            "type": "Document",
+            "data_file_url": "file_url"
+        }
+    ]
+}
+
+==================================================================
+* New Document
+
+GET /api/v1/documents/new
+
+Params:
+-- auth_token
+-- parent_id // optional
+
+Response:
+{
+    "result": true,
+    "data_file": {
+        "id": null,
+        "name": null,
+        "description": null,
+        "type": "Document",
+        "data_file_url": null
+    }
+}
+
+===================================================================
+* New Folder
+
+GET /api/v1/folders/new
+
+Params:
+-- auth_token
+-- parent_id // optional
+
+Response:
+{
+    "result": true,
+    "data_file": {
+        "id": null,
+        "name": null,
+        "description": null,
+        "type": "Folder",
+        "data_file_url": null
+    }
+}
+
+===============================================================
+* Create Document
+
+POST /api/v1/documents
+
+Params:
+-- auth_token
+-- document[parent_id] // optional
+-- document[item_id] // optional
+-- document[name]
+-- document[description]
+-- document[data_file]
+-- document[sharable] // true or false
+-- document[user_ids][]
+-- document[roles][] // superadmin, admin, manager, user
+-- document[region_ids][]
+
+Success Response:
+{
+    "result": true,
+    "data_file": {
+        "id": 1,
+        "name": "filename",
+        "description": "description",
+        "type": "Document",
+        "data_file_url": "file_url"
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+=================================================================
+* Create Folder
+
+POST /api/v1/folders
+
+Params:
+-- auth_token
+-- folder[parent_id]
+-- folder[name]  // optional
+-- folder[user_ids][]
+-- folder[roles][]  // superadmin, admin, manager, user
+-- folder[region_ids][]
+
+Success Response:
+{
+    "result": true,
+    "data_file": {
+        "id": 1,
+        "name": "filename",
+        "description": null,
+        "type": "Folder",
+        "data_file_url": null
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+=====================================================================
+* Edit Document
+
+GET /api/v1/documents/{id}/edit
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true,
+    "data_file": {
+        "id": 1,
+        "name": "filename",
+        "description": "description",
+        "type": "Document",
+        "data_file_url": "file_url",
+        "user_ids": [1, 2],
+        "region_ids": [1, 2],
+        "roles": ["admin","user"],
+        "sharable": true
+    }
+}
+
+==================================================================
+* Edit Folder
+
+GET /api/v1/folders/{id}/edit
+
+Params:
+-- auth_token
+
+Success Response:
+{
+    "result": true,
+    "data_file": {
+        "id": 1,
+        "name": "filename",
+        "description": null,
+        "type": "Folder",
+        "data_file_url": null,
+        "user_ids": [1, 2],
+        "region_ids": [],
+        "roles": ["admin"],
+        "sharable": null
+    }
+}
+
+===============================================================
+* Update Folder
+
+PUT /api/v1/folders/{id}
+
+Params:
+-- auth_token
+-- folder[parent_id]
+-- folder[name]  // optional
+-- folder[user_ids][]
+-- folder[roles][]  // superadmin, admin, manager, user
+-- folder[region_ids][]
+
+Success Response:
+{
+    "result": true,
+    "data_file": {
+        "id": 1,
+        "name": "filename",
+        "description": "description",
+        "type": "Document",
+        "data_file_url": "file_url",
+        "user_ids": [1, 2],
+        "region_ids": [1, 2],
+        "roles": ["admin","user"],
+        "sharable": true
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+==============================================================
+* Update Document
+
+PUT /api/v1/documents/{id}
+
+Params:
+-- auth_token
+-- document[parent_id] // optional
+-- document[item_id] // optional
+-- document[name]
+-- document[description]
+-- document[data_file]
+-- document[sharable] // true or false
+-- document[user_ids][]
+-- document[roles][] // superadmin, admin, manager, user
+-- document[region_ids][]
+
+Success Response:
+{
+    "result": true,
+    "data_file": {
+        "id": 1,
+        "name": "filename",
+        "description": "description",
+        "type": "Document",
+        "data_file_url": "file_url",
+        "user_ids": [1, 2],
+        "region_ids": [1, 2],
+        "roles": ["admin","user"],
+        "sharable": true
+    }
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Name can't be blank"
+        ]
+    }
+}
+
+===========================================================
+* Destroy Document
+
+DELETE /api/v1/documents/{id}
+
+Response:
+{
+    "result": true
+}
+
+
+=========================================================
+* Destroy Folder
+
+DELETE /api/v1/folders/{id}
+
+Response:
+{
+    "result": true
+}
+
+======================================================
+* Share Document
+
+PUT /api/v1/documents/{id}/share
+
+Params:
+-- auth_token
+-- email    
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "This file is not sharable"
+        ]
+    }
+}
+
+========================================================
+* Forgot Password
+
+POST /api/v1/passwords
+
+Params:
+-- email
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Email can't be blank"
+        ]
+    }
+}
+
+======================================================
+* Reset Password
+
+PUT /api/v1/passwords
+
+Params:
+-- token
+-- password
+-- password_confirmation
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Password token is invalid"
+        ]
+    }
+}
+
+
+===============================================
+* Create Attendance
+
+POST /api/v1/attendances
+
+Params:
+-- auth_token
+-- punch_in // true or false
+-- attendance[punch_in_image]
+-- attendance[punch_in_lat]
+-- attendance[punch_in_long]
+-- attendance[punch_out_image]
+-- attendance[punch_out_lat]
+-- attendance[punch_out_long]
+
+Success Response:
+{
+    "result": true    
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": [
+            "Punch in image can't be blank"
+        ]
+    }
+}
+
+==================================================
+* Home Screen
+
+GET /api/v1/home
+
+Params:
+-- auth_token
+
+Response:
+{
+    "result": true,
+    "email": "",
+    "personalized_message": "",
+    "attendance_status": "Present"  // "Present" or "Absent"
+}
+
+=================================================
+* Surveys
+
+GET /api/v1/surveys
+
+Params:
+-- auth_token
+-- page
+
+Response:
+{
+    "result": true,
+    "per_page": 20,
+    "length": 0,
+    "current_page": 1,
+    "total_pages": 1,
+    "updated_at": "2015-03-23T10:13:00.191Z",
+    "surveys": [
+        {
+            "id": 4,
+            "heading": "survey1",
+            "updated_at": "2015-03-23T09:52:21.000Z",
+            "created_at": "2015-03-23T09:52:21.000Z",
+            "questions": [
+                {
+                    "id": 17,
+                    "content": "question1",
+                    "question_type": "text",
+                    "question_options": []
+                },
+                {
+                    "id": 18,
+                    "content": "question2",
+                    "question_type": "single_select",
+                    "question_options": [
+                        {
+                            "id": 20,
+                            "content": "option1"
+                        },
+                        {
+                            "id": 21,
+                            "content": "option2"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
+=========================================================
+* Answers
+
+POST /api/v1/answers
+
+Params:
+-- auth_token
+-- answer[question_id]
+-- answer[content]
+-- answer[question_option_ids][]
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": []
+    }
+}
+
+
+=======================================================
+* Requests
+
+POST /api/v1/requests
+
+Params:
+-- request[retailer_code]
+-- request[rsp_name]
+-- request[rsp_mobile_number]
+-- request[rsp_app_user_id]
+-- request[state]
+-- request[city]
+-- request[shop_name]
+-- request[shop_address]
+-- request[shop_owner_name]
+-- request[shop_owner_phone]
+-- request[is_main_signage]  // true or false
+-- request[is_sis_installed] // true or false
+-- request[avg_store_monthly_sales]
+-- request[avg_gionee_monthly_sales]
+-- request[cmo_name]
+-- request[request_type]
+-- request[remarks]
+-- request[is_rsp]
+-- request[rsp_not_present_reason]
+-- request[space_available]
+-- request[type_of_sis_required]
+-- request[type_of_gsb_requested]
+-- request[is_gsb_installed_outside]
+
+Success Response:
+{
+    "result": true
+}
+
+Error Response:
+{
+    "result": false,
+    "errors": {
+        "messages": []
+    }
+}

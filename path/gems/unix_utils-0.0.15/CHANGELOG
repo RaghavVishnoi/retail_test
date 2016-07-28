@@ -1,0 +1,106 @@
+0.0.15 / 2012-11-09
+
+* Enhancements
+
+  * Back to stdlib open3 because C extension support is not enabled by default in JRuby 1.7+
+
+* Known issues
+
+  * stderr is not captured in JRuby 1.7.0 because of https://jira.codehaus.org/browse/JRUBY-6986
+
+0.0.14 / 2012-07-06
+
+* Breaking changes
+
+  * UnixUtils.du_sk -> UnixUtils.du (but it's still `du -sk`)
+  * Heuristic for detecting attempts to curl a local file changed - now it looks for absence of '://'
+
+0.0.13 / 2012-05-16
+
+* Bug fixes
+
+  * `which -s` didn't work on all platforms
+
+0.0.12 / 2012-05-09
+
+* Bug fixes
+
+  * Unreleased code (dos2unix and unix2dos) appeared in gem release - got rid of that.
+
+0.0.11 / 2012-05-07
+
+* Bug fixes
+
+  * Fix handling of local files by UnixUtils.curl
+
+0.0.10 / 2012-04-23
+
+* Breaking changes
+
+  * Added UnixUtils.du_sk, which always returns bytes; removed UnixUtils.du, which returned block counts, which I doubt you wanted.
+
+* Enhancements
+
+  * If you call a method with _s at the end, you get a string back. For example: UnixUtils.head_s
+  * UnixUtils.tmp_path no longer junks up tmp paths with lots of "unix_utils_RANDOMSTRING"
+
+0.0.9 / 2012-04-12
+
+* Bug fixes
+
+  * Correct implementation of :read_from
+
+0.0.8 / 2012-04-12
+
+* Bug fixes
+
+  * Let perl handle its own input files (ARGF)... my implementation using IO.select was not working.
+
+0.0.7 / 2012-04-11
+
+* Bug fixes
+
+  * Make sure UnixUtils.tmp_path doesn't create too-long filenames
+
+0.0.6 / 2012-04-11
+
+* Enhancements
+
+  * iconv command silently discards invalid characters
+
+0.0.5 / 2012-03-21
+
+* Enhancements
+
+  * Change pipe buffer size to 64kb (it was 4mb before), which seems to make everything run faster
+
+* Bug fixes
+
+  * Thanks to @leomao10, make sed work more reliably on large files by using its input-file argument rather than piping in data
+
+0.0.4 / 2012-03-19
+
+* Bug fixes
+
+  * NoMethodError when trying to print $stderr - thanks @leomao10 !
+
+0.0.3 / 2012-03-19
+
+* Enhancements
+
+  * Uses https://github.com/rtomayko/posix-spawn to make things faster - suggested by @jjb in https://github.com/seamusabshere/unix_utils/issues/1
+  * Depends less on chdir to work properly - expands file paths immediately
+
+* Bug fixes
+
+  * Correctly use pipes (I hope) - imitate POSIX::Spawn::Child's use of IO.select
+
+0.0.2 / 2012-02-16
+
+* Bug fixes
+
+  * Fix use of splat internally so that it actually runs in MRI 1.8.7 and JRuby
+
+0.0.1 / 2012-02-16 (yanked!)
+
+* Birthday!

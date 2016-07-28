@@ -1,0 +1,26 @@
+<% if can? :edit, Request%>
+<%= form_for :Request, url: {action: "view"} do |f| %>  
+<div>
+   <div id="search-div" class="form-field">
+     <div class="search-field">
+       <%=select_tag 'type',options_for_select(["Request Id","RetailerCode","State"], params[:type]),:multiple => false,:style => "position:absolute;margin-left:-13%;width:10%;font-size:73%;"%>
+       <%if params[:type] == 'RetailerCode'
+            @value = params[:retailer_code]
+         else
+            @value = params[:state]
+         end%>
+       <%= text_field_tag "id",'', :id => "search",:required => "required",:placeholder => "Enter request id/retailer code/state",:value => @value%>
+
+       <%=hidden_field_tag "q",params[:q]%>
+    </div>
+   <div>
+       <%= button_tag(type: 'submit',value: '',:class=>"hide-button") do %>
+         <i ><%= image_tag 'search.png' ,:class => "button_with_image_save"%></i> 
+       <% end %>
+   </div>
+   <div class="error" id="message"></div>
+         
+  </div>
+</div>
+ <%end%>
+<%end%>

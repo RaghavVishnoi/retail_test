@@ -1,0 +1,127 @@
+all:
+  group_name: All
+  permissions:
+    "manage, all": "manage all"
+
+Customer:
+  group_name: Customers
+  permissions:
+    "read, Customer": "View Customers"
+
+Attendance:
+  group_name: Attendances
+  permissions:
+    "read, Attendance": "View Attendances"
+
+UsersReporting:
+  group_name: "Users"
+  permissions:
+    "read, UsersReporting": "View Assigned Users"
+
+User:
+  group_name: "Users"
+  permissions:
+    "manage, User": "Create Users"
+    "approver, User": "Create Approver Users"
+    "vmqa, User": "VMQA Users"
+
+Request:
+  group_name: "Requests"
+  permissions:
+    "manage, Request": "Manage Request"
+    "approve, Request": "Approver Request"
+    "get, Request": "Reader Request"
+    "edit, Request": "Edit Request"
+    "read, Request": "Read Request"
+    "update, Request": "Update Request"
+    "view, Request": "View Request"
+    "cmo, Request": "CMO Request"
+    "supercmo, Request": "Super CMO Request"
+    "rrm, Request": "Super RRM Request"
+
+
+
+VendorTask:
+  group_name: "VendorTasks"
+  permissions:
+    "manage, VendorTask": "Manage Request"
+    "read, VendorTask": "Read Request"
+    "edit, VendorTask": "Edit Request"
+    "update, VendorTask": "Update Request"
+    "cmo, VendorTask": "CMO Request"
+    "approve, VendorTask": "Approver Request"
+    "get, VendorTask": "Reader Request"
+    "view, VendorTask": "View Request"
+
+Retailer:
+  group_name: "Retailer"
+  permissions:
+    "manage, Retailer": "Manage Retailer"
+    "get, Retailer" : "Reader Action"
+    "read, Retailer" : "Get Retailers"
+Vendor:
+  group_name: "Vendorlist"
+  permissions:
+    "manage, Vendorlist": "Manage Vendorlist"
+    "update_status, VendorRequest": "Update Vendor Request"
+
+CMO:
+  group_name: "CMO"
+  permissions:
+    "manage, CMO": "Manage CMO"
+    "get, CMO" : "Reader Action"
+MAP:
+  group_name: "MAP"
+  permissions:
+    "manage, Map": "Manage Map"
+
+VendorRequest:
+  group_name: "VendorRequest"
+  permissions:
+    "manage, VendorRequest": "Manage Vendor Requests"
+
+VendorAssignment:
+  group_name: "VendorAssignment"
+  permissions:
+    "manage, VendorAssignment": "Manage Vendor Assignments"
+
+Downloads:
+  group_name: "Downloads"
+  permissions:
+    "manage, Download": "Download Records"
+ 
+BeatRoute:
+  group_name: "Beatroutes"
+  permissions:
+    "manage, Beatroute": "Beatroute Records"
+
+Document:
+  group_name: "Document"
+  permissions:
+    "manage, Document": "Document Records"
+
+Notification:
+  group_name: "Notification"
+  permissions:
+    "manage, Notification": "Notification"
+
+RRM:
+  group_name: "RRM"
+  permissions:
+    "manage, RRM": "RRM"
+
+ShopAssignment:
+  group_name: "ShopAssignment"
+  permissions:
+    "manage, ShopAssignment": "ShopAssignment"
+
+UserAudit:
+  group_name: "UserAudit"
+  permissions:
+    "manage, UserAudit": "UserAudit"
+
+SalesOrder:
+  group_name: "SalesOrder"
+  permissions:
+    "manage, SalesOrder": "SalesOrder"
+

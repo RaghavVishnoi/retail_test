@@ -1,0 +1,30 @@
+<div class="clearfix requestor_details_page page hidden" >
+
+<script>
+  $(document).ready(function(){
+    $('#loader').hide();
+  });
+</script>
+
+   <%= f.select :cmo_id, CMO.display_names, { :prompt => "CMO Name" } , :class => "pd-detail required"%>
+ 
+   <%= f.select :retailer_code, Retailer.order(:state).all.map {|a| a.state}.uniq, { :prompt => "Select State" } , :class => "pd-detail required",:id => "get"%>
+
+   <%= f.select :retailer_code, '', { :prompt => "Select City" } , :class => "pd-detail required", :id => "city"%>
+ 
+   <%= f.select :retailer_code, '', { :prompt => "Select Retailer" } , :class => "pd-detail required",:id => "retailer"%>
+   
+   <div id="loader" class="loader"><%= image_tag 'loader.gif' %></div>
+
+   <%= f.text_field :rsp_name, :placeholder => "RSP Name", :class => "input_tx required"%>
+
+
+   <%= f.phone_field :rsp_mobile_number, :placeholder => "RSP Mobile Number", :class => "pd-detail required", :validation => "validate_mobile_number" %>
+
+
+
+   <%= f.text_field :rsp_app_user_id, :placeholder => "RSP sales tag app user ID", :class => "input_txt"%>
+
+  
+
+</div>

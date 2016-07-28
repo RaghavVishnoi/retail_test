@@ -1,0 +1,17 @@
+<h2 id="welcome-msg">Welcome <%= @user.name %></h2>
+<%= render :partial => "shared/error_messages", :locals => { :errors => @user.errors } if @user %>
+<%= form_tag passwords_path, method: :put, :class => 'user-form password-form' do %>
+  <h4 id="form-title">Update Password</h4>
+
+  <%= hidden_field_tag :token, params[:token] %>
+
+  <div class="form-field">
+    <%= password_field_tag :password, nil, placeholder: 'Password'  %>
+  </div>
+
+  <div class="form-field">
+    <%= password_field_tag :password_confirmation, nil, placeholder: 'Password Confirmation' %>
+  </div>
+
+  <%= submit_tag "Update" %>
+<% end %>

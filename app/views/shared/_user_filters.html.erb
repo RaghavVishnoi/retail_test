@@ -1,0 +1,12 @@
+
+    <%= collection_check_boxes( 'search', '',User.permit_role(User.user_role(current_user.id)),:to_s,:to_s,{checked: @search},:class=> 'search')%>
+    <%= link_to 'Get Users','',:class => "user-button",:id => "approver_user_submit"%>
+    <%if request.params.include? 'search' %>
+	    <%= link_to  users_path  do %>
+	    	<%= image_tag "back-button.png" ,:class => 'back-button' %>
+	    <% end %>
+	<% end %>	    
+
+    
+
+

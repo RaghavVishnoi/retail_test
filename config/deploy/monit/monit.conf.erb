@@ -1,0 +1,26 @@
+set daemon 60
+ 
+set logfile /var/log/monit.log
+ 
+set idfile /var/lib/monit/id
+ 
+set statefile /var/lib/monit/state
+ 
+set eventqueue
+      basedir /var/lib/monit/events # set the base directory where events will be stored
+      slots 100                     # optionally limit the queue size
+ 
+check process nginx with pidfile /run/nginx.pid
+  group nginx-staging
+  start program = "/bin/bash -l -c 'sudo /etc/init.d/nginx start'"
+  stop program = "/bin/bash -l -c 'sudo /etc/init.d/nginx stop'"
+
+check process delayed_job
+  with pidfile <%= current_path %>/tmp/pids/delayed_job.pid
+  start program = "/bin/bash -l -c 'cd <%= current_path %> && RAILS_ENV=staging bundle exec bin/delayed_job start'"
+  stop program = "/bin/bash -l -c 'cd <%= current_path %> && RAILS_ENV=staging bundle exec bin/delayed_job stop'"
+
+check process passenger MATCHING "Passenger.*"
+  start program = "/bin/bash -l -c 'sudo /etc/init.d/nginx restart'"
+  stop program = "/bin/bash -l -c 'sudo /etc/init.d/nginx stop'" 
+

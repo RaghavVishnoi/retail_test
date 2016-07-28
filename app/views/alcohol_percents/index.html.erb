@@ -1,0 +1,13 @@
+<%= link_to "New Alcohol Percent", new_alcohol_percent_path, :id => 'new-button' %>
+
+<table class="ui table">
+  <tbody>
+    <% @alcohol_percents.each do |alcohol_percent| %>
+      <tr>
+        <td><%= alcohol_percent.value %></td>
+        <td><%= link_to "Edit", [:edit, alcohol_percent] %></td>
+        <td><%= link_to "Delete", [alcohol_percent], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

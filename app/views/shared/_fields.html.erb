@@ -1,0 +1,3 @@
+<% resource.properties.each do |property| %>
+  <%= render :partial => 'shared/field', :locals => { :form => form, :property => property } %>
+<% end %>

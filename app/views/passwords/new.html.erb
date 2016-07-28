@@ -1,0 +1,10 @@
+<%= form_tag passwords_path, :class => 'user-form password-form' do %>
+
+  <h4 id="form-title">Forgot Password</h4>
+
+  <div class="form-field">
+    <%= text_field_tag :email, params[:email], :placeholder => "Email" %>
+  </div>
+
+  <%= submit_tag "Submit" %>
+<% end %>

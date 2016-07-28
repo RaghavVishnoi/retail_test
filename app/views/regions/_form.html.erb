@@ -1,0 +1,15 @@
+<%= form_for @region, :html => { :class => 'user-form' } do |f| %>
+
+  <h4 id="form-title"><%= form_title %></h4>
+
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @region.errors } %>
+
+  <div class="form-field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <%= render :partial => "shared/fields", :locals => { :form => f, :resource => @region } %>
+
+  <%= f.submit %>
+<% end %>

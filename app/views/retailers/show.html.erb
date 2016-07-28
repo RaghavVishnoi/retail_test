@@ -1,0 +1,123 @@
+<div id="nav-col-submenu"></div>
+</div>
+
+<div id="content-wrapper">
+<a href="<%=session[:prev_url]%>" id="back-button">  <i class="fa fa-arrow-circle-left back-icon" aria-hidden="true" ></i></a>
+<div class="row">
+<div class="col-lg-12">
+<div class="main-box clearfix">
+<div class="clearfix">
+	<div class="common_page ">
+		<h2><%= @retailer.retailer_code %></h2>
+		<div class="main-box-body clearfix">
+			<div class="tochimobie_blk">
+				<div class="row">
+					<div class="col-md-6 result">
+					<div class="cmmn_blk">
+						<div class="row">
+							<div class="col-md-3">
+								<label>Retailer Name</label>
+							</div>
+							<div class="col-md-9"><div class="blue"><%= @retailer.retailer_name%></div></div>	
+						</div>
+						</div>
+						<div class="cmmn_blk">
+						<div class="row">
+							<div class="col-md-3">
+								<label>Mobile Number</label>
+							</div>
+							<div class="col-md-9"><%=@retailer.mobile_number.to_i%></div>	
+						</div>
+						</div>
+						<div class="cmmn_blk">
+						<div class="row">
+							<div class="col-md-3">
+								<label>State</label>
+							</div>
+							<div class="col-md-9"><%= @retailer.state %></div>	
+						</div>
+						</div>
+						<div class="cmmn_blk">
+						<div class="row">
+							<div class="col-md-3">
+								<label>Address</label>
+							</div>
+							<div class="col-md-9"><%= @retailer.address %></div>	
+						</div>
+						</div>
+						<div class="cmmn_blk">
+						<div class="row">
+							<div class="col-md-3">
+								<label>Pin code</label>
+							</div>
+							<div class="col-md-9">  <%=@retailer.pincode%></div>	
+						</div>
+						</div>
+						<div class="cmmn_blk">
+						<div class="row">
+							<div class="col-md-3">
+								<label>RSP on counter</label>
+							</div>
+							<div class="col-md-9"><%= @retailer.is_isp_on_counter %></div>	
+						</div>
+						</div>
+					</div>
+
+						<div class="col-md-6 result">
+						<div class="cmmn_blk">
+						<div class="row">
+							<div class="col-md-3">
+								<label>Sales Channel</label>
+							</div>
+							<div class="col-md-9"><%= @retailer.sales_channel %></div>	
+						</div>
+						</div>
+						<div class="cmmn_blk">
+						<div class="row">
+							<div class="col-md-3">
+								<label>Tin Number</label>
+							</div>
+							<div class="col-md-9"><%= @retailer.tin_number %></div>	
+						</div>
+						</div>
+						<div class="cmmn_blk">
+						<div class="row">
+							<div class="col-md-3">
+								<label>City</label>
+							</div>
+							<div class="col-md-9"><%=@retailer.city%></div>	
+						</div>
+						</div>
+						<div class="cmmn_blk">
+						<div class="row">
+							<div class="col-md-3">
+								<label>Status</label>
+							</div>
+							<div class="col-md-9"><%= @retailer.status %></div>	
+						</div>
+						</div>
+						<div class="cmmn_blk">
+						<div class="row">
+							<div class="col-md-3">
+								<label>Counter Size</label>
+							</div>
+							<div class="col-md-9"><%= @retailer.counter_size %></div>	
+						</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+					
+		
+
+	

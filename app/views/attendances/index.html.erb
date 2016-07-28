@@ -1,0 +1,38 @@
+<%= form_tag attendances_path, :method => :get do %>
+  <%= text_field_tag 'user_id', nil, :id => 'user-select', 'data-ajax-url' => "/users/autocomplete", :placeholder => "Select User", 'data-multiple' => false, 'data-initvalue' => (@user ? { text: @user.name, id: params[:user_id] } : []).to_json %>
+
+  <%= date_field_tag 'start_time', params[:start_time] || Time.current.to_date %>
+  
+  <%= date_field_tag 'end_time', params[:end_time] || Time.current.to_date %>
+  
+  <%= submit_tag 'Search' %>
+<% end %>
+
+<%= will_paginate @attendances %>
+
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Punch In Image</th>
+      <th>Time In</th>
+      <th>Time out</th>
+      <th>Punch Out Image</th>
+      <th>Work Duration</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @attendances.each do |attendance| %>
+      <tr>
+        <td><%= attendance.user.name %></td>
+        <td class="image-container"><%= image_tag attendance.punch_in_image_url if attendance.punch_in_image? %></td>
+        <td><%= attendance.punch_in_time %></td>
+        <td><%= attendance.punch_out_time %></td>
+        <td class="image-container"><%= image_tag attendance.punch_out_image_url if attendance.punch_out_image? %></td>
+        <td><%= distance_of_time_in_words(attendance.punch_in_time, attendance.punch_out_time) if attendance.punch_in_time? && attendance.punch_out_time? %></td>
+        <td><%= attendance.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

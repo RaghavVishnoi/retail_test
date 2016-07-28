@@ -1,0 +1,14 @@
+<%= link_to "New Field", new_field_path(:entity => params[:entity]), :id => 'new-button' %>
+
+<table class="ui table">
+  <tbody>
+    <% @fields.each do |field| %>
+      <tr>
+        <td><%= field.entity %></td>
+        <td><%= field.display_name %></td>
+        <td><%= link_to "Edit", [:edit, field] %></td>
+        <td><%= link_to "Delete", [field], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

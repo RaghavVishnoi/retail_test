@@ -1,0 +1,66 @@
+
+{
+  "avg_gionee_monthly_sales": <%= AVG_GIONEE_MONTHLY_SALES.to_json.html_safe %>,
+
+  "avg_store_monthly_sales": <%= AVG_STORE_MONTHLY_SALES.to_json.html_safe %>,
+
+  "cmo_name": <%= CMO.display_names.compact.to_json.html_safe %>,
+
+  "is_main_signage": <%= BOOLEAN_VALUES.to_json.html_safe %>,
+
+  "is_sis_installed": <%= BOOLEAN_VALUES.to_json.html_safe %>,
+
+  "is_gionee_gsb_present": <%= BOOLEAN_VALUES.to_json.html_safe %>,
+
+  "is_rsp":<%= BOOLEAN_VALUES.to_json.html_safe %>,
+
+  "state":  <%= STATES.to_json.html_safe %>,
+
+  "sis_types": <%= SIS_TYPES.to_json.html_safe %>,
+
+  "space_available": <%= SPACE_AVAILABLE.to_json.html_safe %>,
+
+  "gsb_types": <%= GSB_TYPES.to_json.html_safe %>,
+
+  "requirement_for_this_shop": <%= REQUIREMENT_FOR_THIS_SHOP.to_json.html_safe %>,
+
+  "rsp_not_present_reason": <%= RSP_NOT_PRESENT_REASON.to_json.html_safe %>,
+
+  "is_gsb_installed_outside": <%= BOOLEAN_VALUES.to_json.html_safe %>,
+
+  "retailer_state": <%= Retailer.order(:state).all.map {|a| [a.state]}.uniq.to_json.html_safe %>,
+
+  "type_of_issue": <%= [['SIS'],['GSB'],['Clipon'],['Countertop'],['Standee'],['Other']].to_json.html_safe %>,
+
+  "type_of_problem": <%= [['Damage to material'],['Electrical – lights etc not working'],['Security System related'],['Wrong Placement – Need to shift location'],['Wrong Shop – Need to remove from shop'],['Quality / finish issue'],['Visual / artwork to be changed'],['other']].to_json.html_safe %>,
+
+  "visitor_boolean_values":<%= VISITOR_BOOLEAN_VALUES.to_json.html_safe %>,
+
+  "no_of_peices_in_stock":<%= No_OF_PIECES_IN_STOCK.to_json.html_safe %>,
+
+  "gsb_type_installed":<%= GSB_TYPE_INSTALLED.to_json.html_safe %>,
+
+  "location_of_gsb":<%= LOCATION_OF_GSB.to_json.html_safe %>,
+
+  "gsb_cleanliness":<%= GSB_CLEANLINESS.to_json.html_safe %>,
+
+  "installation_quality":<%= INSTALLATION_QUALITY.to_json.html_safe %>,
+
+  "security_alarm_working":<%= SECURITY_ALARM_WORKING.to_json.html_safe %>,
+
+  "demo_phones_installed":<%= DEMO_PHONES_INSTALLED.to_json.html_safe %>,
+
+  "selling_skills":<%= SELLING_SKILLS.to_json.html_safe %>,
+
+  "vendor_verify":<%= VENDOR_VERIFY.to_json.html_safe %>,
+
+
+  "vendor_list":<%= Vendorlist.display_names.compact.to_json.html_safe %>,
+
+  "installation_of":<%= INSTALLATION_OF.to_json.html_safe %>,
+
+  "installation_report":<%= INSTALLATION_REPORT.to_json.html_safe %>,
+
+  "overall_rating":<%= OVERALL_RATING.to_json.html_safe %>
+
+}

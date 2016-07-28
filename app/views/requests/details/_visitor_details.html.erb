@@ -1,0 +1,57 @@
+ <script>
+  $(document).ready(function(){
+      $('#form').hide();
+      $('#click').click(function(){
+          $('#form').show();
+          $('#click').hide();
+
+      });
+  });
+</script>
+
+<div class="approv_cont clearfix">
+  <div class="appr_info">
+    <div>Request Type</div>
+    <div>Visitor</div>
+  </div>
+
+  <div class="appr_retail">
+    <div><%=@heading%></div>
+    <div><%=@cmo_approve_date%></div>
+  </div>
+
+  <div class="appr_desc">
+    <div><%=@status%></div>
+    <div><%=@date%></div>
+  </div>
+</div>
+
+<div class="approv_cont clearfix">
+     
+  <div class="appr_info">
+    <div>Shop Visit Date</div>
+    <div><%=@request.shop_visit_date%></div>
+  </div>
+
+  <div class="appr_retail">
+    <div>Shop Visit Done By</div>
+    <div><%= @request.shop_visit_done_by %></div>
+  </div>
+
+  <div class="appr_desc">
+    <div>Visitor Mobile Number</div>
+    <div><%= @request.visitor_contact_number%></div>
+  </div>
+
+</div>
+
+
+
+ 
+
+  <div class="appr_desc">
+    <div></div>
+    <div></div>
+  </div>
+
+ 

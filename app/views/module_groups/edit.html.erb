@@ -1,0 +1,12 @@
+<%= form_for @module_group, :html => { :class => 'user-form' } do |f| %>
+  <h4 id="form-title">Activate <%= @module_group.name %> Module</h4>
+
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @module_group.errors } %>
+
+  <div class="form-field">
+    <%= f.label :app_ids %>
+    <%= f.select :app_ids, App.pluck(:name, :id), {}, { :multiple => true } %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

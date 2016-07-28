@@ -1,0 +1,7 @@
+<div class="hidden details">
+  <h5><%= file.name %></h5>
+  <p> Created by: <%= file.owner.name %></p>
+  <p> Roles: <%= file.roles.pluck(:name).join(',') %></p>
+  <p> Users: <%= file.users.map(&:name).join(',') %></p>
+  <p> Regions: <%= file.regions.map(&:name).join(',') %></p>
+</div>

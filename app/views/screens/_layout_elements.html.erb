@@ -1,0 +1,13 @@
+<div class="layout-elements-container container <%= container_class %>" data-name="[layout_elements]">
+  <h5>Layout Elements</h5>
+
+  <% layout_elements.each_pair do |key, object| %>
+
+    <% layout_element = OpenStruct.new(object[:layout_element] || {}) %>
+
+    <%= render :partial => 'layout_element', :locals => { :form => form, :layout_element => layout_element, :container_class => "", :key => key, :data_name => "#{data_name}[layout_elements[#{key}][layout_element]]" } %>
+
+  <% end %>
+
+  <%= link_to "Add Layout Element", "javascript:void(0);", :class => "add-field", :data => { :template_class => 'layout-element-template'} %>
+</div>

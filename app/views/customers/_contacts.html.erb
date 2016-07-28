@@ -1,0 +1,27 @@
+<h5>Contacts</h5>
+<%= link_to "New Contact", new_customer_contact_path(@customer), :id => 'new-button' %>
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Designation</th>
+      <th>Phone</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customer.contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.first_name %></td>
+        <td><%= contact.last_name %></td>
+        <td><%= contact.designation %></td>
+        <td><%= contact.phone %></td>
+        <td><%= link_to "Edit", [:edit, @customer, contact] %></td>
+        <td><%= link_to "Delete", [@customer, contact], :method => :delete, :confirm => "Are you sure you want to delete it?" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

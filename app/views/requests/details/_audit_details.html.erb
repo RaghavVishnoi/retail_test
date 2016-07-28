@@ -1,0 +1,53 @@
+			<div class="col-md-6">
+					<div class="gsb_blk">
+						<h2>
+							Audit
+						</h2>
+						<div class="row">
+							<div class="col-md-4">
+							<b>Audit Date</b>
+							</div>
+							<div class="col-md-4">
+								
+							</div>
+							<div class="col-md-4">
+								<div class="green"%>
+									<%= @request.shop_visit_date%>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+							<b>Audit Done By</b>
+							</div>
+							<div class="col-md-4">
+								
+							</div>	
+							<div class="col-md-4">
+								<div class="green"%>
+
+								<%= @request.shop_visit_done_by%>
+								</div>
+							</div>
+						</div>
+						<div class="row mr_btm" >
+							<div class="col-md-5">
+							<b>Auditor Mobile Number</b>
+							</div>
+							<div class="col-md-3">
+								 
+								
+							</div>	
+							<div class="col-md-4">
+								<div class="<%=if @request.status == 'declined' || @request.status == 'cmo_decliend' then "red" else "green" end%>">
+								<%=@request.visitor_contact_number%>	
+								</div>
+							</div>
+						</div>
+						
+
+						
+					</div>
+				</div>	
+</div>

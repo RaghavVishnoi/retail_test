@@ -1,0 +1,24 @@
+<%= link_to "New Screen", new_screen_path, :id => 'new-button' %>
+
+<%= will_paginate @screens %>
+
+<table class="ui table">
+  <thead>
+    <tr>
+      <td>Screen Name</td>
+      <td>Module</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @screens.each do |screen| %>
+      <tr>
+        <td><%= screen.layout[:screen_name] %></td>
+        <td><%= screen.module_group.try(:name) %></td>
+        <td><%= link_to "Edit", [:edit, screen] %></td>
+        <td><%= link_to "Delete", [screen], method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

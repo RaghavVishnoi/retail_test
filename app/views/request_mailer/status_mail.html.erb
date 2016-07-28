@@ -1,0 +1,35 @@
+<p>Request Id: <%= @request.id %></p>
+<p>Request Type: <%= request_type_name(@request) %></p>
+<p>RSP Present in Shop?: <%= @request.is_rsp %></p>
+<p>Reason: <%= @request.rsp_not_present_reason %></p>
+<p>CMO Name: <%= @request.cmo.try(:display_name) %></p>
+<p>Retailer Code: <%= @request.retailer_code %></p>
+<p>RSP Name: <%= @request.rsp_name %></p>
+<p>RSP Mobile number: <%= @request.rsp_mobile_number %></p>
+<p>RSP sales tag app user ID: <%= @request.rsp_app_user_id %></p>
+<p>City: <%= @request.city %></p>
+<p>state: <%= @request.state %></p>
+<p>Shop Name: <%= @request.shop_name %></p>
+<p>Shop Address: <%= @request.shop_address %></p>
+<p>Shop Owner Name: <%= @request.shop_owner_name %></p>
+<p>Shop Owner Phone: <%= @request.shop_owner_phone %></p>
+<p>Avg. Store Monthly Sales: <%= monthly_sales_str(@request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES) %></p>
+<p>Avg. Gionee Monthly Sales: <%= monthly_sales_str(@request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES) %></p>
+<p>Space Available in Store: <%= @request.space_available %></p>
+<p>Gionee GSB Present?: <%= @request.is_gionee_gsb_present %></p>
+<p>Type of SIS required?: <%= @request.type_of_sis_required %></p>
+<p>Is Gionee SIS installed in shop?: <%= @request.is_sis_installed %></p>
+<p>Is it main signage?: <%= @request.is_main_signage %></p>
+<p>GSB installed outside?: <%= @request.is_gsb_installed_outside %></p>
+<p>Width: <%= @request.width %></p>
+<p>Height: <%= @request.height %></p>
+<p>Type of GSB Requested?: <%= @request.type_of_gsb_requested %></p>
+<p>Shop Requirements: <%= field_values_str(@request.shop_requirements) %></p>
+
+<% @request.branding_details.each do |branding_details| %>
+  <p><%= field_display_name(branding_details) %>: <%= field_values_str(branding_details) %></p>
+
+<% end %>
+
+<p>Remarks: <%= @request.remarks %></p>
+<p>Approver Comment: <%= @request.comment_by_approver %></p>

@@ -1,0 +1,107 @@
+
+<div id="nav-col-submenu"></div>
+
+</div>
+<div id="content-wrapper">
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @document.errors } %>
+<%=render 'tag_form.html.erb' %>
+  <div class="row">
+    <div class="col-lg-12">
+    <div class="main-box clearfix">
+    <div class="clearfix">
+      <div class="user_page">
+      <h2><%=form_title%></h2>
+ 
+<%= form_for @document, :html => { :class => 'user-form',:multipart=>true } do |f| %>
+	
+	<div class="row">
+        <div class="col-md-6">
+            <div class="form-group clearfix">
+                <label class="col-md-3">Title</label>
+                <div class="col-md-9">
+                	<%= f.text_field :document_title,:required => "required",class: "form-control",placeholder: "name" %>
+                  
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group clearfix">
+                <label class="col-md-3">Add Level</label>
+                <div class="col-md-9">
+                <%= f.select :level, Level.all.pluck(:level_name),{:prompt => "Select level"},:class => 'retailer_select',:required => "required" %>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group clearfix">
+                <label class="col-md-5">Add Tag<span class="tag-link">create tag</span></label>
+                <div class="col-md-9">
+                	<%= f.select :tag, Tag.all.pluck(:tag_name),{},:class => 'tag-select',:required => "required",:multiple => true %>
+                  
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group clearfix">
+                <label class="col-md-3">Attach Document</label>
+                <div class="col-md-9">
+                <%= f.file_field :file,:required => "required" %>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+               <%= f.submit "Submit",:class => "btn btn-success rrm_frm_btn" %>
+              
+            </div>
+<%end%>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+  $('#repository').attr("class",'active') 
+     $('.tag-link').click(function(){
+       $('#tag-popup').show();
+    });
+   $('.close-tag').click(function(){
+      $('#tag-popup').hide();
+    });
+    $('#tag-button').click(function(){
+        var tag_value = $('#tag-text').val()
+        if(tag_value == ""){
+            alert("Please insert tag name");
+        }else{
+        var tag = {'tag_name':$('#tag-text').val()}
+        $.ajax({
+            url: '/tags/create',
+            type: 'GET',
+            data: {'tag':tag},
+            dataType: 'text',
+
+            complete: function(data){
+
+            },
+            success: function(data,status,xhr){
+                var response = JSON.parse(data);
+                console.log('result'+response.tag);
+                var select = document.getElementsByClassName("tag-select");
+                 var tag = response.tag;
+                var tag_name = tag.tag_name;
+                
+                if(response.result == 'success'){
+                    $("#document_tag").append("<option value="+tag_name+">"+tag_name+"</option>");
+                    
+                    $('#tag-popup').hide();
+                }
+
+            }
+
+        });
+    }
+    });
+ </script>

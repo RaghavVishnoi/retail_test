@@ -1,0 +1,17 @@
+<div class="shop_details_page page hidden">
+ 
+
+<%= f.text_field :maintenance_requestor, :placeholder => "Maintenance Requested By", :class => "input_tx required"%>
+
+
+<%= f.phone_field :maintenance_requestor_mobile_number, :placeholder => "Mobile Number", :class => "input_tx required", :validation => "validate_mobile_number" %>
+
+<%= f.collection_select(:type_of_issue, Request::TYPE_OF_ISSUE, :to_s, :to_s,{:prompt => 'Select Type of Issue'},{ :class => 'pd-detail required', :selected => 1})
+  %>
+
+  <%= f.collection_select(:type_of_problem, Request::TYPE_OF_PROBLEM, :to_s, :to_s,{:prompt => 'Select Type of Problem'},{ :class => 'pd-detail required', :selected => 1})
+  %>
+
+  
+     
+</div>

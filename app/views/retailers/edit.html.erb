@@ -1,0 +1,163 @@
+
+ <div id="nav-col-submenu"></div>
+
+</div>
+<div id="content-wrapper">
+  <%= render :partial => "shared/error_messages", :locals => { :errors => @retailer.errors } %>
+
+  <div class="row">
+    <div class="col-lg-12">
+    <div class="main-box clearfix">
+    <div class="clearfix">
+      <div class="user_page">
+      <h2>Edit</h2>
+      
+        <%= form_for @retailer do |f| %>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Shop Name</label>
+                <div class="col-md-9">
+                  <%= f.text_field :retailer_name,:required => "required",class: "form-control",placeholder: "shop name"  %>
+         
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-md-3">Contact Number</label>
+                <div class="col-md-9">
+                <%= f.text_field :mobile_number,:required => "required",class: "form-control",placeholder: "contact number"  %>
+                  
+                </div>
+              </div>
+            </div>
+            <!-- left part of form end --> 
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Shop Code</label>
+                <div class="col-md-9">
+                 <%= f.text_field :retailer_code,class: "form-control",placeholder: "shop code" %>
+                  
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-md-3"> Tin Number</label>
+                <div class="col-md-9">
+                     <%= f.text_field :tin_number,class: "form-control",placeholder: "tin number" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Contact Person</label>
+                <div class="col-md-9">
+                  <%= f.text_field :contact_person,:required => "required",class: "form-control",placeholder: "contact person" %>
+                 
+                  
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-md-3">State</label>
+                <div class="col-md-9">
+  
+
+                   <%= f.select :state, State.all.pluck(:name),{:prompt => "Select state"},:class => 'retailer_select',:required => "required" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group clearfix">
+                <label class="col-md-3">Sales Channel</label>
+                <div class="col-md-9">
+               <%= f.text_field :sales_channel,class: "form-control",placeholder: "sales channel" %>
+                  
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-md-4">City</label>
+                <div class="col-md-9">
+                   
+                  <%= f.text_field :city,class: "form-control",placeholder: "city" %>
+                </div>
+              </div>
+            </div>
+            <div>
+                <div class="col-md-6">
+                   <div class="form-group clearfix">
+                      <label class="col-md-3">Address</label>
+                      <div class="col-md-9">
+                     <%= f.text_area :address,class: "form-control",placeholder: "address" %>
+                        
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                <label class="col-md-4">Status</label>
+                <div class="col-md-9">
+                  <%= f.select :status, RETAILER_STATUS,{:prompt => "Select retailer status"},:class => 'retailer_select',:required => "required" %>
+                  
+                </div>
+              </div>
+              </div>
+                
+               
+            </div>
+            
+             <div>
+                <div class="col-md-6">
+                   <div class="form-group clearfix">
+                      <label class="col-md-3">Pincode</label>
+                      <div class="col-md-9">
+                     <%= f.text_field :pincode,class: "form-control",placeholder: "pincode" %>
+                        
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-6">
+                   <div class="form-group clearfix">
+                      <label class="col-md-3">Is RSP on counter</label>
+                      <div class="col-md-9">
+                     <%= f.text_field :is_isp_on_counter,class: "form-control",placeholder: "ps RSP on counter?" %>
+                        
+                      </div>
+                    </div>
+              </div>
+            </div>
+            <div>
+               <div class="col-md-6">
+                    
+              </div>
+                <div class="col-md-6">
+                   <div class="form-group clearfix">
+                      <label class="col-md-3">Counter Size</label>
+                      <div class="col-md-9">
+                     <%= f.text_field :counter_size,class: "form-control",placeholder: "counter Size" %>
+                        
+                      </div>
+                    </div>
+              </div>
+               
+            </div>
+
+            
+           
+
+            
+            <div class="col-md-12">
+               <%= f.submit "Submit",:class => "btn btn-success " %>
+              
+            </div>
+          </div>
+        <% end %>
+      
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script type="text/javascript">
+  $('#retailer').attr("class",'active') 
+</script>  

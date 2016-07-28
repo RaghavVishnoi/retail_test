@@ -1,0 +1,10 @@
+<%= form_tag update_all_user_shifts_path, :method => :put, :id => 'update-all-shift-time' do %>
+  <%= text_field_tag :shift_start_time, params[:shift_start_time], :placeholder => 'Start Time(e.g. 10:00)' %>
+  <%= text_field_tag :shift_end_time, params[:shift_end_time], :placeholder => 'End Time(e.g. 17:30)' %>
+  <%= select_tag :timezone, time_zone_options_for_select(params[:timezone]), :prompt => "Select TimeZone"  %>
+  <%= submit_tag 'Update' %>
+<% end %>
+
+<% @users.each do |user| %>
+  <%= render :partial => 'shift_time', :locals => { :user => user } %>
+<% end %>

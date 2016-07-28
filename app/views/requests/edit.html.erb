@@ -1,0 +1,126 @@
+
+<%if params[:alert] == 'true'%>
+  <div id="popup-request">
+    <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
+      <tr>
+        <td class="popup_title">Confirmation message</td>
+        <td class="popup_title align_right">
+            <a href="javascript:void(0);" id="request-popup-close">Close</a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" id="popup-assign-message">Assign request to vendor</td>
+      </tr>   
+    </table>
+    <%= button_tag "Yes",:value => "Yes", :class => "popup_button", :id => 'popup-button'%> 
+
+    <%= button_tag "No",:value => "No", :class => "popup_button", :id => 'request-close'%>
+  </div> 
+<%end%>
+<div id="popup-request-assignment">
+ <%= form_for VendorRequest.new do |f|%>
+     <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0" >
+            <tr>
+                <td class="popup_title">Assign Request</td>
+                <td class="popup_title align_right">
+                    <a href="javascript:void(0);" id="btnClose-assignment">Close</a>
+                </td>
+                
+              </tr> 
+            
+             <tr>
+                  <td colspan="2"><%=f.select :vendor_id,  Vendorlist.display_names,:prompt => "Choose Vendor",:id => "popup-select",:required => "required"%></td>
+                </tr> 
+           </table>
+           <%time = Time.new%>
+    <%= f.hidden_field :request_id,:value => @request.id %>
+    <%= f.hidden_field :vendor_response,:value => "Waiting" %>
+    <%= f.hidden_field :vendor_response_date,:value => "0000-00-00" %>
+    <%= f.hidden_field :assigned_date,:value => "#{time.year}-#{time.month}-#{time.day}" %>
+    <%= f.hidden_field :status,:value => "Waiting" %>
+    <%= submit_tag "Assign", :class => "popup_button_assignment"%>
+    
+
+ <%end%>
+ </div> 
+
+<div id="nav-col-submenu"></div>
+</div>
+				
+	<div id="content-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="common_page gsb_page">
+					<div class="clearfix"></div>
+        <a href="<%=session[:prev_url]%>" id="back-button">  
+          <i class="fa fa-arrow-circle-left back-icon" aria-hidden="true" ></i></a>
+						<div class="row">
+									
+						<% if params[:q][:request_type] == '4'  %>
+									<%= render 'requests/details/audit_details' %>
+                    <%=render 'requests/details/shop_details'%>
+                     
+                    <%if @request.is_audit_done == true%>
+                         <%=render 'requests/details/photo'%>
+                         <%=render 'requests/details/sales'%>
+                         <%=render 'requests/details/branding_detail'%>
+
+                          <%= render 'requests/details/audit_overview'%>
+          
+                          <%= render 'requests/details/rsp_audit'%>
+                        
+                          <%= render 'requests/details/gsb_audit'%>
+
+                          <%= render 'requests/details/sis_visit_details' %>
+
+                          <%= render 'requests/details/clipon_details' %>
+                    <%else%>
+                        <%=render 'requests/details/audit_not_done_reasons' %>
+                    <%end%>
+									<% else %>
+									<%=render 'requests/details/request_details'%>
+									<%=render 'requests/details/action'%> 
+                  <%=render 'requests/details/shop_details'%><%=render 'requests/details/rsp_details'%> 
+                  <%=render 'requests/details/sales'%>  
+                  <%=render 'requests/details/branding_detail'%>
+                  <%=render 'requests/details/photo'%>
+
+                  <%=render 'requests/details/action_details' if @request.status != 'cmo_pending'%>   
+						<% end %>
+												
+						</div>
+					</div>
+				</div>
+		 
+			
+          
+
+			   
+    		
+    		 
+
+    		
+    		
+         
+        
+       
+</div>
+    		
+
+			
+<%=render partial: 'page_js/menubar'%>
+<script>
+ 	$("#request-close").click(function(){
+    url = $("#back-button").attr("href");
+		location.href = url;
+	});
+	$("#request-popup-close").click(function(){
+ 		url = $("#back-button").attr("href");
+		location.href = url;
+	});
+	$("#popup-button").click(function(){
+ 		$(this).attr("style","display:none");
+ 		$('#popup-request-assignment').attr("style","display:block");
+	});
+ 	
+</script>

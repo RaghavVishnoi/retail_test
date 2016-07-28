@@ -1,0 +1,40 @@
+<div class="visitor_overall_performance_page page hidden" >
+
+ 
+<table width="100%" class = "visiter_table_top"><thead>
+      <th>Over All Performance</th>
+    </thead>
+    <tbody> 
+      <tr><td><%=f.text_field :overall_rating, :placeholder => "Overall rating of retail visibility where 10 is maximum.." ,:class => "input_tx required" %></td></tr>
+
+      <tr><td><%=f.text_area :overall_comments, :placeholder => "Overall comments ..",:class => "visitor_text_area" %></td></tr>
+      <tr><td>
+      <span>Attach Shop Visiting Card and Shop visit photo with RSP/Retailer/GSB</span>
+         <%= field_set_tag "Images" do %>
+
+          <%= link_to "Shop Visiting Card", new_image_path(:imageable_type => "request"), :remote => true,:id => 'visiting_card' %>
+          <br>
+
+          <div class="images">
+            <% @request.images.each do |image| %>
+
+              <%= render :partial => 'images/image', :locals => { :image => image } %>
+            <% end %>
+          </div>
+          <%= link_to "Shop Visit Photo with RSP", new_image_path(:imageable_type => "request",:id => 'visit_photo'), :remote => true %>
+        <% end %>
+      </td></tr>
+       
+    </tbody>
+   </table>
+   <input type="submit" value="Back" id="back-v" class="decline_btn hidden">
+
+  <%= f.submit :class => "submitt_btn" %>
+   </div> 
+
+    
+
+ 
+  
+
+</div>

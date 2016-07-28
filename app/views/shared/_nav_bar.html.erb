@@ -1,0 +1,14 @@
+<div class="header clearfix">
+  <div class="menu"></div>
+
+  <%= link_to dashboard_path do %>
+    <h1 class="gione_logo"></h1>
+  <% end %>
+
+  <div class="filter"></div>
+  <div class="sort"></div>
+  <%= link_to requests_csv_new_path, :remote => true do %>
+    <div class="request_dashboard"></div>
+  <% end %>
+  <div class="clear"></div>
+</div>

@@ -1,0 +1,62 @@
+<% if can?(:approve , Request) || can?(:cmo , Request)%>
+<%= form_for @request do %>
+<% if @request.cmo_pending? %>
+<div class="col-md-6">
+					<div class="gsb_blk">
+					<h2>CMO Action</h2>
+						<div class="comments_blk">
+							<div class="row ">
+								<div class="col-md-12">
+									<%= hidden_field_tag "status","cmo_pending" %>
+									<%= text_area_tag('comment',nil, class: 'form-control',:placeholder => "Enter your comment here",:rows => "5") %> 
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<%= submit_tag "Approve", :class => "btn btn-success pull-left button-pair"%>
+
+									<%= submit_tag "Decline", :class => "btn btn-success pull-left", style: "margin-top: 20px;background-color:red"%>
+								</div>
+								 
+
+								</div>								 
+					    </div>
+					</div>
+				</div>
+ 
+<% end %>
+<%end%>
+<%end%>
+
+
+<% if can?(:approve, Request) || can?(:rrm, Request)%>
+<%= form_for @request do %>
+<% if @request.pending? %>
+				<div class="col-md-6">
+					<div class="gsb_blk">
+					<h2>RRM Action</h2>
+						<div class="comments_blk">
+							<div class="row">
+								<div class="col-md-12">
+									<%= hidden_field_tag "status","pending" %>
+									<%= text_area_tag('comment',nil, class: 'form-control',:placeholder => "Enter your comment here") %> 
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<%= submit_tag "Approve", :class => "btn btn-success pull-right", style: "margin-top: 20px;background-color:green"%>
+								</div>
+								<div class="col-md-6">
+									<%= submit_tag "Decline", :class => "btn btn-success pull-left", style: "margin-top: 20px;background-color:red"%>
+								</div>
+
+								</div>								 
+					    </div>
+					</div>
+				</div>
+			
+</section>
+<% end %>
+<%end%>
+<% end %>
+</div>	

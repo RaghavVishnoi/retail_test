@@ -1,0 +1,7 @@
+<%= form_tag weekly_offs_path, :class => 'user-form' do %>
+  <h4 id="form-title">Weekly Offs</h4>
+  <div class="form-field">
+    <%= select_tag 'days', options_from_collection_for_select(WeeklyOff.days, :last, :first, WeeklyOff.pluck(:day)), { :include_blank => true, :multiple => true, :class => 'weekly-off-field' } %>
+  </div>
+  <%= submit_tag "Save" %>
+<% end %>

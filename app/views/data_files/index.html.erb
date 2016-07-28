@@ -1,0 +1,21 @@
+<%= render :partial => 'data_files/absolute_path' %>
+
+<%= link_to "New Document", new_document_path(:parent_id => params[:parent_id]), :id => 'new-button' %>
+
+<%= link_to "New Folder", new_folder_path(:parent_id => params[:parent_id]), :id => 'new-button' %>
+
+<table class="ui table">
+  <tbody class="files-container">
+    <% @data_files.each do |file| %>
+      <%= render :partial => 'file', :locals => { :file => file } %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_for Document.new do |f| %>
+  <%= hidden_field_tag 'document[parent_id]', params[:parent_id] %>
+  <%= f.file_field :data_file, :id => 'dropfile', :class => 'hidden' %>
+  <div id="dropzone">
+    <h5>Drop Files Here</h5>
+  </div>
+<% end %>

@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="col-md-5">
+		Is gionee gsb present?
+	</div>
+	<div class="col-md-4">
+		<div class="blue"><%=if @request.is_gionee_gsb_present == true then 'Yes' else 'No' end%></div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-5">
+		Gionee gsb installed outside?
+	</div>
+	<div class="col-md-4">
+		<div class="blue"><%=if @request.is_gsb_installed_outside == true then 'Yes' else 'No' end%></div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-5">
+		Is gionee sis installed in shop?
+	</div>
+	<div class="col-md-4">
+		<div class="blue"><%=if @request.is_sis_installed == true then 'Yes' else 'No' end%></div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-5">
+		Your requirement for this shop
+	</div>
+	<div class="col-md-4">
+		<div class="blue">
+			<%= field_values_str(@request.shop_requirements) %>
+		</div>
+	</div>
+</div>

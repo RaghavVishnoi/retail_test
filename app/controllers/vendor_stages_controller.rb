@@ -1,0 +1,2 @@
+class VendorStagesController < ApplicationController
+end

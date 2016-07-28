@@ -1,0 +1,21 @@
+<div class="elements-container container" data-name="[elements]">
+  <h5>Elements</h5>
+
+  <%= link_to "Add Layout Element", "javascript:void(0);", :class => "add-field", :data => { :template_class => 'layout-element-template' } %>
+
+  <%= link_to "Add UI Element", "javascript:void(0);", :class => "add-field", :data => { :template_class => 'ui-element-template' } %>
+
+  <% (form.object.elements || {}).each_pair do |key, object| %>
+    <% data_name = "[elements[#{key}]]" %>
+    
+    <% if object[:layout_element].present? %>
+      <%= render :partial => 'layout_element', :locals => { :layout_element => OpenStruct.new(object[:layout_element]), :key => key, :form => form, :data_name => "#{data_name}[layout_element]", :container_class => "" } %>
+      
+    <% elsif object[:ui_element].present? %>
+        
+      <%= render :partial => "ui_element", :locals => { :form => form, :ui_element => OpenStruct.new(object[:ui_element]), :container_class => "", :data_name => "#{data_name}[ui_element]" } %>
+
+    <% end %>
+
+  <% end %>
+</div>

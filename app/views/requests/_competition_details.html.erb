@@ -1,0 +1,20 @@
+<div class="competition_details_page page hidden">
+  <% @request.branding_details.each do |property| %>
+    <%= render :partial => "shared/field", :locals => { :form => f, :property => property } %>
+  <% end %>
+
+  <div class="request-field">
+    <%= f.text_area :remarks, :placeholder => "Remarks" %>
+  </div>
+
+  <%= field_set_tag "Images" do %>
+    <%= link_to "Add Image", new_image_path(:imageable_type => "request"), :remote => true %>
+    <div class="images">
+      <% @request.images.each do |image| %>
+        <%= render :partial => 'images/image', :locals => { :image => image } %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= f.submit :class => "submitt_btn" %>
+</div>

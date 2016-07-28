@@ -1,0 +1,119 @@
+<script>
+    $('#myTab li').click(function (e) {
+    $(this).find('a').tab('show');
+     $(this).closest('ul').find('input[type="checkbox"]').prop('checked','');
+     $(this).closest('li').find('input[type="checkbox"]').prop('checked','checked');
+   
+  });
+
+  var search = []
+    if($('#search__cmo').is(":checked")){
+            search.push('cmo');
+    }
+    if($('#search__rrm').is(":checked")){
+            search.push('rrm');
+    }
+    if($('#search__vendor').is(":checked")){
+            search.push('vendor');
+    }
+    if($('#search__requester').is(":checked")){
+            search.push('requester');
+    }
+    if($('#search__supervisor').is(":checked")){
+            search.push('supervisor');
+    }
+    if($('#search__auditor').is(":checked")){
+            search.push('auditor');
+    }
+    $('#search__cmo').change(function() {
+        if($(this).is(":checked")){
+            search.push('cmo');
+           location.href = '/users?search='+search 
+        }
+        if(!$(this).is(":checked")){
+            search.splice(search.indexOf('cmo'),1);
+            if(search.length != 0){
+              location.href = '/users?search='+search 
+            }else{
+              location.href = '/users'
+            }
+        }          
+    });
+            
+    $('#search__rrm').change(function() {
+        if($(this).is(":checked")) {
+            search.push('rrm');
+             location.href = '/users?search='+search 
+
+        }
+        if(!$(this).is(":checked")) {
+           search.splice(search.indexOf('rrm'),1);
+           if(search.length != 0){
+              location.href = '/users?search='+search 
+           }else{
+              location.href = '/users'
+           }
+        }
+          
+    });
+    $('#search__vendor').change(function() {
+        if($(this).is(":checked")) {
+            search.push('vendor');
+            location.href = '/users?search='+search 
+        }
+        if(!$(this).is(":checked")) {
+            search.splice(search.indexOf('vendor'),1);
+            if(search.length != 0){
+              location.href = '/users?search='+search 
+            }else{
+              location.href = '/users'
+            }
+        }
+          
+    });
+    $('#search__requester').change(function() {
+        if($(this).is(":checked")) {
+            search.push('requester');
+            location.href = '/users?search='+search 
+        }
+        if(!$(this).is(":checked")) {
+           search.splice(search.indexOf('requester'),1);
+            if(search.length != 0){
+              location.href = '/users?search='+search 
+            }else{
+              location.href = '/users'
+            }
+        }     
+    });
+    $('#search__supervisor').change(function() {
+        if($(this).is(":checked")) {
+            search.push('supervisor');
+            location.href = '/users?search='+search 
+        }
+        if(!$(this).is(":checked")) {
+           search.splice(search.indexOf('supervisor'),1);
+            if(search.length != 0){
+              location.href = '/users?search='+search 
+            }else{
+              location.href = '/users'
+            }
+        }     
+    });
+    $('#search__auditor').change(function() {
+        if($(this).is(":checked")) {
+            search.push('auditor');
+            location.href = '/users?search='+search 
+        }
+        if(!$(this).is(":checked")) {
+           search.splice(search.indexOf('auditor'),1);
+            if(search.length != 0){
+              location.href = '/users?search='+search 
+            }else{
+              location.href = '/users'
+            }
+        }     
+    });
+
+    
+
+</script>

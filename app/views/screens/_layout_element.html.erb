@@ -1,0 +1,43 @@
+<div class="layout-element-container container <%= container_class %>" data-name="[[<%= key %>][layout_element]]">
+
+  <h5>Layout Element</h5>
+
+  <p>Id: <span class="element-id"><%= layout_element.id %></span></p>
+
+  <%= link_to "Remove", "javascript:void(0);", :class => 'remove-field' %>
+
+  <%= form.fields_for data_name, layout_element do |f| %>
+
+    <%= f.text_field :title_1, :placeholder => "Title 1", :data => { :name => "[title_1]" } %>
+
+    <%= f.text_field :title_2, :placeholder => "Title 2", :data => { :name => "[title_2]" } %>
+
+    <%= f.text_field :view_count, :placeholder => "View Count", :data => { :name => "[view_count]" } %>
+    
+    <%= f.text_field :get_url, :placeholder => "Get Url", :data => { :name => "[get_url]" } %>
+
+    <%= f.text_field :table_name, :placeholder => "Table Name", :data => { :name => "[table_name]" } %>
+
+    <%= f.hidden_field :id, :placeholder => "Id", :data => { :name => "[id]" }, :class => 'element-id-field' %>
+
+    <%= f.text_field :type, :placeholder => "Type", :data => { :name => "[type]"} %>
+
+    <%= f.text_field :style, :placeholder => "Style", :data => { :name => "[style]" } %>
+
+    <%= f.text_field :width, :placeholder => "Width", :data => { :name => "[width]" } %>
+
+    <%= f.text_field :height, :placeholder => "Height", :data => { :name => "[height]" } %>
+
+    <%= f.text_field :weight, :placeholder => "Weight", :data => { :name => "[weight]" } %>
+
+    <%= f.text_field :weight_sum, :placeholder => "Weight Sum", :data => { :name => "[weight_sum]" } %>
+
+    <%= f.text_field :orientation, :placeholder => "Orientation", :data => { :name => "[orientation]" } %>
+
+    <%= f.text_field :allow_reflow, :placeholder => "Allow Reflow", :data => { :name => "[allow_reflow]" } %>
+
+     <%= f.text_field :token1, :placeholder => "token1", :data => { :name => "[token1]" } %>
+
+    <%= render :partial => "elements", :locals => { :form => f } %>
+  <% end %>
+</div>
