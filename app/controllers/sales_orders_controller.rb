@@ -73,7 +73,13 @@ class SalesOrdersController < ApplicationController
 
   def download_report
      SalesOrder.download(params[:id].to_i)
-     render :json => {result: true}
+     @sales =  SalesOrder.find(params[:id].to_i)
+     
+     path = "/brand_store/brandstoreproposal_"+@sales.id.to_s+".xls"
+    
+     #puts "dddddd#{path.split('public')[1]}"
+
+     render :json => path
   end
 
   def change_status
