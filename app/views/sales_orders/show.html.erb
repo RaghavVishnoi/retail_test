@@ -290,10 +290,10 @@
             </table>
             <% @value =  SalesOrder.autoCalculateValues(@sales_order.bizs)%>
             
-
+            <% puts "ssssssss#{@value.to_json}" %>
 
             <% @total = SalesOrder.total_value(@sales_order.bizs) %>
-            
+               <% puts "ssssssss#{@total.to_json}" %>
 
             <div class="responsiveTable">
               <table class="table table-bordered">
@@ -314,7 +314,7 @@
                       <th>Total</th>
                       <th>Average</th>
                   </tr>
-               <%puts "ssssss#{@sales_order.bizs.to_json}"%>
+              
               <%@sales_order.bizs.reverse.each_with_index do |biz,index| %>
                       
                       <% if index == 2 %>
