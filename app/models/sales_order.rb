@@ -437,7 +437,7 @@ class SalesOrder < ActiveRecord::Base
       sheet2.row(1).concat %w{name month1 month2 month3 month4 month5 month6 month7 month8 month9 month10
         month11 month12 Total Average}
 
-      data.reverse.each do |o|
+      data.each do |o|
          o = o.to_a.flatten
          sheet2.insert_row(2, o)
       end
