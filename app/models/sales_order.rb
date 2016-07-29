@@ -342,7 +342,7 @@ class SalesOrder < ActiveRecord::Base
       
       sheet2.row(0).concat %w{EBITDAProjectionfornext1yearofOperation}
       
-      biz = @sales.bizs.map{|v| v.attributes.select{|k| k if(k != "id")}.select{|j| j if(j != "created_at")}.select{|j| j if(j != "updated_at")}.select{|j| j if(j != "sales_order_id")} }
+      biz = @sales.bizs.reverse.map{|v| v.attributes.select{|k| k if(k != "id")}.select{|j| j if(j != "created_at")}.select{|j| j if(j != "updated_at")}.select{|j| j if(j != "sales_order_id")} }
         
       values = SalesOrder.rest_Values(@sales.bizs)
       total_Avg = SalesOrder.total_value_for_model(@sales.bizs)
@@ -437,7 +437,7 @@ class SalesOrder < ActiveRecord::Base
       sheet2.row(1).concat %w{name month1 month2 month3 month4 month5 month6 month7 month8 month9 month10
         month11 month12 Total Average}
 
-      data.each do |o|
+      data.reverse.each do |o|
          o = o.to_a.flatten
          sheet2.insert_row(2, o)
       end
@@ -449,7 +449,7 @@ class SalesOrder < ActiveRecord::Base
       
       sheet2.row(19).concat %w{IndustryAnalysis}
       
-      industry = @sales.industries.map{|v| v.attributes.select{|k| k if(k != "id")}.select{|j| j if(j != "sales_order_id")}.select{|j| j if(j != "comp_name")}.select{|j| j if(j != "comp_value")} }
+      industry = @sales.industries.reverse.map{|v| v.attributes.select{|k| k if(k != "id")}.select{|j| j if(j != "sales_order_id")}.select{|j| j if(j != "comp_name")}.select{|j| j if(j != "comp_value")} }
         
       count = 0
       industry_array = []
@@ -470,7 +470,7 @@ class SalesOrder < ActiveRecord::Base
       sheet2.row(19+count).concat %w{CompetitionAnalysis}
       
 
-       competition = @sales.competitions.map{|v| v.attributes.select{|k| k if(k != "id")}.select{|j| j if(j != "sales_order_id")} } 
+       competition = @sales.competitions.reverse.map{|v| v.attributes.select{|k| k if(k != "id")}.select{|j| j if(j != "sales_order_id")} } 
 
        competition_array = []
       competition.each do |o|
