@@ -163,7 +163,7 @@
 .project-analysis-div > .row{margin:0px 0px 10px 0px;}
 .project-analysis-div label{line-height:normal;}
 .project-analysis-div h2{margin:0px 10px;}
-.project-analysis-div .panel{border-radius:0px; margin-bottom:10px; color:#fff; background:#F37022 !important; box-shadow:none;}
+.project-analysis-div .panel{border-radius:0px; margin-bottom:10px; color:#fff; background:#F37022 ; box-shadow:none;}
 .sub-heading{margin:0px; padding:0px;}
 .sub-heading hr{margin:5px 0px;}
 .close-div{position:relative; margin:0px auto; padding:10px 0px 0px 0px; right:0;}
