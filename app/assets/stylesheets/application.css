@@ -17,14 +17,3 @@
  *= require jquery-ui/dialog
  *= require colorbox-rails
  */
-.project-analysis-div{margin:0px; padding:0px; position:relative;}
-.project-analysis-div > .row{margin:0px 0px 10px 0px;}
-.project-analysis-div label{line-height:normal;}
-.project-analysis-div h2{margin:0px 10px;}
-.project-analysis-div .panel{border-radius:0px; margin-bottom:10px; color:#fff; background:#F37022 !important; box-shadow:none;}
-.sub-heading{margin:0px; padding:0px;}
-.sub-heading hr{margin:5px 0px;}
-.close-div{position:relative; margin:0px auto; padding:10px 0px 0px 0px; right:0;}
-.close-div a i{position:absolute; right:0; z-index:100; top:0; font-size:15px;}
-.project-analysis-div .btn-primary{background:#F37022; border-color:#F37022;}
-.table-panel .table tbody > tr > td > img{max-width:50%;}
