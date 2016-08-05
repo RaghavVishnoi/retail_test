@@ -38,7 +38,7 @@ gem 'capistrano-rails', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-#gem 'mysql2'
+gem 'mysql2'
 gem 'pry', :group => :development
 gem 'will_paginate'
 gem 'geocoder'
@@ -49,7 +49,7 @@ gem 'capistrano'
 gem 'rvm1-capistrano3', require: false
 gem 'capistrano-bundler'
 gem 'fog'
-gem 'pg'
+#gem 'pg'
 gem 'aws-sdk'
 gem 'delayed_job_active_record'
 # gem 'activerecord4-redshift-adapter', github: 'aamine/activerecord4-redshift-adapter'

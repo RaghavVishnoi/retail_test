@@ -24,7 +24,7 @@
 #   <<: *default
 #   database: db/production.sqlite3
 default: &default
-  adapter: postgresql
+  adapter: mysql2
   pool: 5
   timeout: 5000
   username: root
@@ -34,7 +34,7 @@ default: &default
 
 development:
   <<: *default
-  database: staging_fosem
+  database: development_fosem1
 
 staging:
   <<: *default
