@@ -201,7 +201,7 @@
 						</a>
 					</li>
 				<%end%>
-				<%if ['approver','rrm','superadmin','ShopBrandingAdmin','vmqa'].include?(User.user_role(current_user.id).name) %>  
+ 				<%if ['approver','rrm','superadmin','ShopBrandingAdmin','vmqa'].include?(User.user_role(current_user.id).name) %>  
 					<li id="sales_order">
 						<a href="" class="dropdown-toggle" >
 							<i class="fa fa-camera-retro" aria-hidden="true"></i>
@@ -281,7 +281,8 @@
 	$('#vmqa').click(function(){
  		location.href = '/user_audits'
 	});
-	$('#sales_order').click(function(){
+ 	$('#sales_order').click(function(){
  		location.href = '/BrandStore'
 	});
+ 
  </script>

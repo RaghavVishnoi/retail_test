@@ -157,7 +157,7 @@
 .rtl .wizard .wizard-inner ul li.complete .chevron:before {
   border-right: 14px solid #f3f4f5;
 }
-
+ 
 
 .project-analysis-div{margin:0px; padding:0px; position:relative;}
 .project-analysis-div > .row{margin:0px 0px 10px 0px;}
@@ -170,3 +170,4 @@
 .close-div a i{position:absolute; right:0; z-index:100; top:0; font-size:15px;}
 .project-analysis-div .btn-primary{background:#F37022; border-color:#F37022;}
 .table-panel .table tbody > tr > td > img{max-width:50%;}
+ 

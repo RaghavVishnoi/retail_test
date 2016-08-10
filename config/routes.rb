@@ -325,6 +325,7 @@ Rails.application.routes.draw do
    post '/shop_assignments/search'
 
 
+<<<<<<< HEAD
    post '/sales_orders/change_status'
    resources :sales_orders 
  
@@ -337,4 +338,6 @@ Rails.application.routes.draw do
   #get '/sales_orders/:id/download', to: 'sales_orders#download'
 
 
+=======
+>>>>>>> 185d82af2c8ac7765e149d87ceda5133bfe4246e
 end

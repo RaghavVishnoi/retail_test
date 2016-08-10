@@ -119,9 +119,10 @@ UserAudit:
   group_name: "UserAudit"
   permissions:
     "manage, UserAudit": "UserAudit"
-
+ 
 SalesOrder:
   group_name: "SalesOrder"
   permissions:
     "manage, SalesOrder": "SalesOrder"
 
+ 
