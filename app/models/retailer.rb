@@ -1,5 +1,6 @@
 class Retailer < ActiveRecord::Base
-	 
+	 require 'rubygems'
+    require 'geokit'
 	 
 
 	validates :retailer_code, :presence => true, :uniqueness => {:message => "Retailer code can't be duplicate"}
@@ -153,5 +154,17 @@ def self.permit_retailers(current_user)
 	   Retailer.where(state: current_user.states.pluck(:name))	 
     end
 end
+
+	def self.retailer_list
+		@retailers = self.all
+		
+		@retailers.each do |retailer|
+			lat_long=Geokit::Geocoders::GoogleGeocoder.geocode retailer.address
+			lat = lat_long.ll.split(',')[0]
+            long = lat_long.ll.split(',')[1]
+            retailer.update(:latitude=> lat,:longitude=>long)  
+		end
+		
+	end
 
 end

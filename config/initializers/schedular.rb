@@ -8,7 +8,7 @@ scheduler = Rufus::Scheduler.singleton
 # 	Rpush.push
 # end
  
-scheduler.cron '05 01 * * *' do
+scheduler.in '2s' do
 	end_time = Time.now
 	begin_time = end_time.yesterday.strftime("%Y-%m-%d")
 	end_time = end_time.strftime("%Y-%m-%d")

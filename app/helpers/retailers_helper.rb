@@ -1,5 +1,8 @@
 module RetailersHelper
 	require 'httparty'
+	require 'rubygems'
+    require 'geokit'
+	
 	def zedsales_upload(begin_time,end_time)
 		param1 = ZED_SALES_PARAMS[0]
 		param2 = ZED_SALES_PARAMS[1]
@@ -26,7 +29,14 @@ module RetailersHelper
 			@status =  "Inactive"
 		end
 		retailer = Retailer.find_by(:retailer_code => data['RetailerCode'])
-		retailer.update(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'],:location_code => data['MUMCode'],:salesman_id => data['SalesmanID'])
+		 
+		#if retailer.latitude == 0.0 || retailer.longitude == 0.0		  
+			lat_long=Geokit::Geocoders::GoogleGeocoder.geocode retailer.address
+			lat = lat_long.ll.split(',')[0]
+        	long = lat_long.ll.split(',')[1]  
+    	#end
+		
+		retailer.update(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'],:location_code => data['MUMCode'],:salesman_id => data['SalesmanID'] )
 	end
 
 	def create_retailer(data)
@@ -35,6 +45,10 @@ module RetailersHelper
 		else
 			@status =  "Inactive"
 		end
-		Retailer.create(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'],:location_code => data['MUMCode'],:salesman_id => data['SalesmanID'])
+		lat_long=Geokit::Geocoders::GoogleGeocoder.geocode data['RetailerAddress']
+		lat = lat_long.ll.split(',')[0]
+        long = lat_long.ll.split(',')[1]  
+
+		Retailer.create(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'],:location_code => data['MUMCode'],:salesman_id => data['SalesmanID'],:latitude=> lat,:longitude=>long)
 	end
 end

@@ -62,6 +62,8 @@ gem 'less-rails'
 gem 'semantic-ui-rails'
 gem 'select2-rails'
 gem 'spreadsheet', '~> 1.1', '>= 1.1.2'
+gem 'geokit', '~> 1.10'
+
  
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

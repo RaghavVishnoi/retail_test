@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516050528) do
+ActiveRecord::Schema.define(version: 20160812103114) do
 
   create_table "GioneeRetailer", id: false, force: true do |t|
     t.text "Code",     null: false
@@ -128,6 +128,27 @@ ActiveRecord::Schema.define(version: 20160516050528) do
     t.datetime "updated_at",                               default: '2015-09-30 12:46:37'
   end
 
+  create_table "bizs", force: true do |t|
+    t.string   "title"
+    t.string   "month1"
+    t.string   "month2"
+    t.string   "month3"
+    t.string   "month4"
+    t.string   "month5"
+    t.string   "month6"
+    t.string   "month7"
+    t.string   "month8"
+    t.string   "month9"
+    t.string   "month10"
+    t.string   "month11"
+    t.string   "month12"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "sales_order_id"
+  end
+
+  add_index "bizs", ["sales_order_id"], name: "index_bizs_on_sales_order_id", using: :btree
+
   create_table "business_units", force: true do |t|
     t.string "name"
   end
@@ -136,6 +157,28 @@ ActiveRecord::Schema.define(version: 20160516050528) do
     t.integer "business_unit_id"
     t.integer "user_id"
   end
+
+  create_table "catchment_business_shops", force: true do |t|
+    t.string  "left"
+    t.string  "right"
+    t.string  "opposite"
+    t.integer "catchment_id"
+  end
+
+  add_index "catchment_business_shops", ["catchment_id"], name: "index_catchment_business_shops_on_catchment_id", using: :btree
+
+  create_table "catchments", force: true do |t|
+    t.text    "introduction"
+    t.integer "population"
+    t.text    "colonies"
+    t.text    "brand_stores"
+    t.text    "consumer_stores"
+    t.integer "rsp_counters"
+    t.integer "sis_counters"
+    t.integer "sales_order_id"
+  end
+
+  add_index "catchments", ["sales_order_id"], name: "index_catchments_on_sales_order_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -165,6 +208,15 @@ ActiveRecord::Schema.define(version: 20160516050528) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "competitions", force: true do |t|
+    t.string  "name"
+    t.string  "comp_name"
+    t.string  "comp_value"
+    t.integer "sales_order_id"
+  end
+
+  add_index "competitions", ["sales_order_id"], name: "index_competitions_on_sales_order_id", using: :btree
 
   create_table "contacts", force: true do |t|
     t.integer  "customer_id"
@@ -329,6 +381,17 @@ ActiveRecord::Schema.define(version: 20160516050528) do
 
   add_index "images", ["imageable_id", "imageable_type"], name: "index_images_on_imageable_id_and_imageable_type", using: :btree
 
+  create_table "industries", force: true do |t|
+    t.string  "name"
+    t.string  "value"
+    t.string  "volume"
+    t.string  "comp_name"
+    t.string  "comp_value"
+    t.integer "sales_order_id"
+  end
+
+  add_index "industries", ["sales_order_id"], name: "index_industries_on_sales_order_id", using: :btree
+
   create_table "inventories", force: true do |t|
     t.integer  "item_id"
     t.integer  "quantity"
@@ -417,6 +480,19 @@ ActiveRecord::Schema.define(version: 20160516050528) do
     t.datetime "updated_at"
   end
 
+  create_table "parteners", force: true do |t|
+    t.string  "structure"
+    t.string  "ownership"
+    t.string  "nature"
+    t.string  "turnover"
+    t.string  "man_power"
+    t.string  "partener_name"
+    t.text    "breif_intro"
+    t.integer "sales_order_id"
+  end
+
+  add_index "parteners", ["sales_order_id"], name: "index_parteners_on_sales_order_id", using: :btree
+
   create_table "permissions", force: true do |t|
     t.integer  "role_id"
     t.string   "action"
@@ -426,6 +502,18 @@ ActiveRecord::Schema.define(version: 20160516050528) do
   end
 
   add_index "permissions", ["role_id"], name: "index_permissions_on_role_id", using: :btree
+
+  create_table "pictures", force: true do |t|
+    t.integer  "object_id"
+    t.string   "object_type"
+    t.string   "picture"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "sales_order_id"
+  end
+
+  add_index "pictures", ["object_id", "object_type"], name: "index_pictures_on_object_id_and_object_type", using: :btree
+  add_index "pictures", ["sales_order_id"], name: "index_pictures_on_sales_order_id", using: :btree
 
   create_table "question_options", force: true do |t|
     t.integer  "question_id"
@@ -482,6 +570,43 @@ ActiveRecord::Schema.define(version: 20160516050528) do
 
   add_index "request_activities", ["request_id"], name: "index_request_activities_on_request_id", using: :btree
   add_index "request_activities", ["user_id"], name: "index_request_activities_on_user_id", using: :btree
+
+  create_table "request_assignment_activities", force: true do |t|
+    t.string   "user_type"
+    t.string   "status"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "request_assignment_id"
+    t.integer  "user_id"
+  end
+
+  add_index "request_assignment_activities", ["request_assignment_id"], name: "index_request_assignment_activities_on_request_assignment_id", using: :btree
+  add_index "request_assignment_activities", ["user_id"], name: "index_request_assignment_activities_on_user_id", using: :btree
+
+  create_table "request_assignments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "request_id"
+    t.datetime "assign_date"
+    t.string   "current_stage"
+    t.string   "status"
+    t.string   "user_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "upload_bill",   default: 0
+    t.string   "po_number"
+    t.boolean  "is_rrm",        default: false
+    t.boolean  "is_valc",       default: false
+    t.string   "priority",      default: "normal"
+  end
+
+  create_table "request_documents", force: true do |t|
+    t.string   "request_document"
+    t.integer  "request_document_id"
+    t.string   "request_document_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "requests", force: true do |t|
     t.string   "retailer_code"
@@ -586,6 +711,7 @@ ActiveRecord::Schema.define(version: 20160516050528) do
     t.string   "store_shifted"
     t.string   "not_allowed_in_store"
     t.integer  "state_id"
+    t.integer  "is_fixed",                                                     default: 0
   end
 
   add_index "requests", ["cmo_id"], name: "index_requests_on_cmo_id", using: :btree
@@ -613,6 +739,11 @@ ActiveRecord::Schema.define(version: 20160516050528) do
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "location_code"
+    t.string   "salesman_id"
+    t.integer  "priority",                         default: 0
+    t.float    "latitude",             limit: 24
+    t.float    "longitude",            limit: 24
   end
 
   add_index "retailers", ["retailer_code"], name: "index2", using: :btree
@@ -701,6 +832,19 @@ ActiveRecord::Schema.define(version: 20160516050528) do
   add_index "rpush_notifications", ["app_id", "delivered", "failed", "deliver_after"], name: "index_rapns_notifications_multi", using: :btree
   add_index "rpush_notifications", ["delivered", "failed"], name: "index_rpush_notifications_multi", using: :btree
 
+  create_table "sales_orders", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.text     "comment"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "state_id"
+    t.string   "status",     default: "pending"
+  end
+
+  add_index "sales_orders", ["state_id"], name: "index_sales_orders_on_state_id", using: :btree
+
   create_table "screens", force: true do |t|
     t.text     "layout"
     t.integer  "module_group_id"
@@ -724,6 +868,106 @@ ActiveRecord::Schema.define(version: 20160516050528) do
   add_index "shop_assignments", ["request_id"], name: "index_shop_assignments_on_request_id", using: :btree
   add_index "shop_assignments", ["retailer_id"], name: "index_shop_assignments_on_retailers_id", using: :btree
   add_index "shop_assignments", ["user_id"], name: "index_shop_assignments_on_users_id", using: :btree
+
+  create_table "shop_audits", force: true do |t|
+    t.boolean "is_store_visited"
+    t.boolean "is_store_closed"
+    t.boolean "is_permission_issue"
+    t.boolean "is_store_selling_gionee"
+    t.boolean "is_rsp_assigned"
+    t.boolean "is_rsp_present"
+    t.boolean "is_gsb_present"
+    t.string  "type_of_gsb"
+    t.boolean "is_gsb_on_good_location"
+    t.boolean "is_gsb_cleanliness"
+    t.boolean "is_gsb_working"
+    t.boolean "is_flange_available"
+    t.boolean "is_gsb_placed_properly"
+    t.string  "logo_type"
+    t.boolean "is_gsb_working_properly"
+    t.boolean "is_sis_present"
+    t.string  "type_of_sis"
+    t.boolean "is_sis_on_good_location"
+    t.boolean "is_sis_cleanliness"
+    t.boolean "is_sis_working"
+    t.boolean "is_latest_sis_clipon_creative"
+    t.boolean "is_securty_system_installed"
+    t.boolean "is_security_system_working"
+    t.boolean "is_demo_phone_installed"
+    t.boolean "is_lit_present"
+    t.boolean "is_lit_on_good_location"
+    t.boolean "is_lit_cleanliness"
+    t.boolean "is_lit_working"
+    t.boolean "is_latest_lit_clipon_creative"
+    t.boolean "is_poster_available"
+    t.boolean "is_updated_creative"
+    t.boolean "is_poster_placed_properly"
+    t.boolean "is_dangler_available"
+    t.boolean "is_bunting_available"
+    t.boolean "is_leaflets_available"
+    t.boolean "is_models_in_leaflets"
+    t.boolean "is_countertop_available"
+    t.string  "type_of_countertop"
+    t.boolean "is_countertop_placed_properly"
+    t.boolean "is_countertop_working"
+    t.boolean "is_dummies_present"
+    t.text    "dummy_models"
+    t.boolean "is_dummies_placed_properly"
+    t.boolean "is_deployment_done"
+    t.boolean "is_updated_posters"
+    t.boolean "is_updated_danglers"
+    t.boolean "is_updated_buntings"
+    t.boolean "is_updated_leaflets"
+    t.boolean "is_updated_dummies"
+    t.text    "deployment_remarks"
+    t.text    "maintenance_observations"
+    t.integer "audit_type"
+    t.integer "request_id"
+    t.string  "rsp_not_present_reason"
+    t.string  "rsp_not_in_uniform_reason"
+    t.boolean "is_flange_working"
+    t.string  "type_of_flange"
+    t.text    "other_rectification"
+    t.text    "rectification_remarks"
+    t.boolean "is_logo_working_properly"
+    t.boolean "is_flange_placed_properly"
+    t.string  "rsp_not_assigned_reason"
+    t.boolean "is_rsp_in_uniform"
+    t.text    "models_in_leaflets"
+    t.text    "other_observation"
+  end
+
+  create_table "shop_dimensions", force: true do |t|
+    t.string  "built_up_area"
+    t.string  "carpet_area"
+    t.string  "clear_height"
+    t.string  "seepage"
+    t.string  "mezzanine_floor"
+    t.string  "hindrance"
+    t.string  "power_backup"
+    t.string  "current_flooring"
+    t.string  "current_ceilling"
+    t.string  "current_wall_status"
+    t.string  "fire_safety"
+    t.string  "gsb_opportunity"
+    t.string  "special_visible_opportunity"
+    t.string  "other_issue"
+    t.integer "sales_order_id"
+    t.string  "super_build_up_area"
+  end
+
+  add_index "shop_dimensions", ["sales_order_id"], name: "index_shop_dimensions_on_sales_order_id", using: :btree
+
+  create_table "shop_ownerships", force: true do |t|
+    t.string  "shop_type"
+    t.string  "title"
+    t.string  "clear_title_duration"
+    t.string  "parking_available"
+    t.string  "hindrance_entrance"
+    t.integer "sales_order_id"
+  end
+
+  add_index "shop_ownerships", ["sales_order_id"], name: "index_shop_ownerships_on_sales_order_id", using: :btree
 
   create_table "sizes", force: true do |t|
     t.string   "name"
@@ -749,6 +993,13 @@ ActiveRecord::Schema.define(version: 20160516050528) do
     t.datetime "updated_at"
   end
 
+  create_table "tat_groups", force: true do |t|
+    t.string   "name"
+    t.integer  "duration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "upload_files", force: true do |t|
     t.string   "file_name"
     t.datetime "uploaded_on"
@@ -769,6 +1020,7 @@ ActiveRecord::Schema.define(version: 20160516050528) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "grade",       limit: 1
   end
 
   add_index "user_data", ["user_id"], name: "index_user_data_on_user_id", using: :btree
@@ -830,24 +1082,26 @@ ActiveRecord::Schema.define(version: 20160516050528) do
   end
 
   create_table "vendor_requests", force: true do |t|
-    t.integer "vendor_id",            null: false
-    t.integer "request_id",           null: false
-    t.date    "assigned_date"
-    t.string  "vendor_response"
-    t.date    "vendor_response_date"
-    t.string  "status"
-    t.string  "description"
+    t.string   "installation_of"
+    t.string   "installation_report"
+    t.datetime "installed_on"
+    t.string   "status"
+    t.text     "cmo_comment"
+    t.datetime "cmo_response_date"
+    t.text     "rrm_comment"
+    t.datetime "rrm_response_date"
+    t.integer  "request_assignment_id"
   end
+
+  add_index "vendor_requests", ["request_assignment_id"], name: "index_vendor_requests_on_request_assignment_id", using: :btree
 
   create_table "vendor_stages", force: true do |t|
     t.string   "stage_name"
-    t.date     "update_date"
+    t.datetime "update_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "vendor_request_id"
+    t.integer  "request_assignment_id"
   end
-
-  add_index "vendor_stages", ["vendor_request_id"], name: "index_vendor_stages_on_vendor_request_id", using: :btree
 
   create_table "vendor_tasks", force: true do |t|
     t.string   "retailer_code"
