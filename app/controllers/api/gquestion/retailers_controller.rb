@@ -8,6 +8,12 @@ module Api
 				render :json => {result: true,count: @result.length,object: @result}
 			end
 
+			def update_retailer
+	          Retailer.retailer_list	
+	          render :json => {result: true}
+
+        	end
+
 		end
 	end
 end

@@ -13,3 +13,4 @@ scheduler.in '30m' do
 	end_time = end_time.strftime("%Y-%m-%d")
  	zedsales_upload(begin_time,end_time)
 end
+ 

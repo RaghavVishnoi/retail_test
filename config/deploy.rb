@@ -1,10 +1,11 @@
 
 # config valid only for current version of Capistrano
-lock '3.5.0'
+ 
+lock '3.6.0'
 
 set :application, 'fosem-staging'
 set :repo_url, 'ssh://xp-dev.com/LPTPL_GIONEE_REQUESTER_WEB'
-
+set :branch, :phase_6
 set :tmp_dir, "/home/fosem/tmp"
 
 # Default branch is :master

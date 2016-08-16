@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160708084539) do
+ActiveRecord::Schema.define(version: 20160810081723) do
 
   create_table "GioneeRetailer", id: false, force: true do |t|
     t.text "Code",     null: false
@@ -128,6 +128,27 @@ ActiveRecord::Schema.define(version: 20160708084539) do
     t.datetime "updated_at",                               default: '2015-09-30 12:46:37'
   end
 
+  create_table "bizs", force: true do |t|
+    t.string   "title"
+    t.string   "month1"
+    t.string   "month2"
+    t.string   "month3"
+    t.string   "month4"
+    t.string   "month5"
+    t.string   "month6"
+    t.string   "month7"
+    t.string   "month8"
+    t.string   "month9"
+    t.string   "month10"
+    t.string   "month11"
+    t.string   "month12"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "sales_order_id"
+  end
+
+  add_index "bizs", ["sales_order_id"], name: "index_bizs_on_sales_order_id", using: :btree
+
   create_table "business_units", force: true do |t|
     t.string "name"
   end
@@ -136,6 +157,28 @@ ActiveRecord::Schema.define(version: 20160708084539) do
     t.integer "business_unit_id"
     t.integer "user_id"
   end
+
+  create_table "catchment_business_shops", force: true do |t|
+    t.string  "left"
+    t.string  "right"
+    t.string  "opposite"
+    t.integer "catchment_id"
+  end
+
+  add_index "catchment_business_shops", ["catchment_id"], name: "index_catchment_business_shops_on_catchment_id", using: :btree
+
+  create_table "catchments", force: true do |t|
+    t.text    "introduction"
+    t.integer "population"
+    t.text    "colonies"
+    t.text    "brand_stores"
+    t.text    "consumer_stores"
+    t.integer "rsp_counters"
+    t.integer "sis_counters"
+    t.integer "sales_order_id"
+  end
+
+  add_index "catchments", ["sales_order_id"], name: "index_catchments_on_sales_order_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -165,6 +208,15 @@ ActiveRecord::Schema.define(version: 20160708084539) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "competitions", force: true do |t|
+    t.string  "name"
+    t.string  "comp_name"
+    t.string  "comp_value"
+    t.integer "sales_order_id"
+  end
+
+  add_index "competitions", ["sales_order_id"], name: "index_competitions_on_sales_order_id", using: :btree
 
   create_table "contacts", force: true do |t|
     t.integer  "customer_id"
@@ -329,6 +381,17 @@ ActiveRecord::Schema.define(version: 20160708084539) do
 
   add_index "images", ["imageable_id", "imageable_type"], name: "index_images_on_imageable_id_and_imageable_type", using: :btree
 
+  create_table "industries", force: true do |t|
+    t.string  "name"
+    t.string  "value"
+    t.string  "volume"
+    t.string  "comp_name"
+    t.string  "comp_value"
+    t.integer "sales_order_id"
+  end
+
+  add_index "industries", ["sales_order_id"], name: "index_industries_on_sales_order_id", using: :btree
+
   create_table "inventories", force: true do |t|
     t.integer  "item_id"
     t.integer  "quantity"
@@ -417,6 +480,19 @@ ActiveRecord::Schema.define(version: 20160708084539) do
     t.datetime "updated_at"
   end
 
+  create_table "parteners", force: true do |t|
+    t.string  "structure"
+    t.string  "ownership"
+    t.string  "nature"
+    t.string  "turnover"
+    t.string  "man_power"
+    t.string  "partener_name"
+    t.text    "breif_intro"
+    t.integer "sales_order_id"
+  end
+
+  add_index "parteners", ["sales_order_id"], name: "index_parteners_on_sales_order_id", using: :btree
+
   create_table "permissions", force: true do |t|
     t.integer  "role_id"
     t.string   "action"
@@ -426,6 +502,18 @@ ActiveRecord::Schema.define(version: 20160708084539) do
   end
 
   add_index "permissions", ["role_id"], name: "index_permissions_on_role_id", using: :btree
+
+  create_table "pictures", force: true do |t|
+    t.integer  "object_id"
+    t.string   "object_type"
+    t.string   "picture"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "sales_order_id"
+  end
+
+  add_index "pictures", ["object_id", "object_type"], name: "index_pictures_on_object_id_and_object_type", using: :btree
+  add_index "pictures", ["sales_order_id"], name: "index_pictures_on_sales_order_id", using: :btree
 
   create_table "question_options", force: true do |t|
     t.integer  "question_id"
@@ -653,6 +741,8 @@ ActiveRecord::Schema.define(version: 20160708084539) do
     t.datetime "updated_at"
     t.string   "location_code"
     t.string   "salesman_id"
+    t.string   "latitude"
+    t.string   "longitude"
   end
 
   add_index "retailers", ["retailer_code"], name: "index2", using: :btree
@@ -741,6 +831,19 @@ ActiveRecord::Schema.define(version: 20160708084539) do
   add_index "rpush_notifications", ["app_id", "delivered", "failed", "deliver_after"], name: "index_rapns_notifications_multi", using: :btree
   add_index "rpush_notifications", ["delivered", "failed"], name: "index_rpush_notifications_multi", using: :btree
 
+  create_table "sales_orders", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.text     "comment"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "state_id"
+    t.string   "status",     default: "pending"
+  end
+
+  add_index "sales_orders", ["state_id"], name: "index_sales_orders_on_state_id", using: :btree
+
   create_table "screens", force: true do |t|
     t.text     "layout"
     t.integer  "module_group_id"
@@ -762,8 +865,40 @@ ActiveRecord::Schema.define(version: 20160708084539) do
   end
 
   add_index "shop_assignments", ["request_id"], name: "index_shop_assignments_on_request_id", using: :btree
-  add_index "shop_assignments", ["retailer_id"], name: "index_shop_assignments_on_retailers_id", using: :btree
-  add_index "shop_assignments", ["user_id"], name: "index_shop_assignments_on_users_id", using: :btree
+  add_index "shop_assignments", ["retailer_id"], name: "index_shop_assignments_on_retailer_id", using: :btree
+  add_index "shop_assignments", ["user_id"], name: "index_shop_assignments_on_user_id", using: :btree
+
+  create_table "shop_dimensions", force: true do |t|
+    t.string  "built_up_area"
+    t.string  "carpet_area"
+    t.string  "clear_height"
+    t.string  "seepage"
+    t.string  "mezzanine_floor"
+    t.string  "hindrance"
+    t.string  "power_backup"
+    t.string  "current_flooring"
+    t.string  "current_ceilling"
+    t.string  "current_wall_status"
+    t.string  "fire_safety"
+    t.string  "gsb_opportunity"
+    t.string  "special_visible_opportunity"
+    t.string  "other_issue"
+    t.integer "sales_order_id"
+    t.string  "super_build_up_area"
+  end
+
+  add_index "shop_dimensions", ["sales_order_id"], name: "index_shop_dimensions_on_sales_order_id", using: :btree
+
+  create_table "shop_ownerships", force: true do |t|
+    t.string  "shop_type"
+    t.string  "title"
+    t.string  "clear_title_duration"
+    t.string  "parking_available"
+    t.string  "hindrance_entrance"
+    t.integer "sales_order_id"
+  end
+
+  add_index "shop_ownerships", ["sales_order_id"], name: "index_shop_ownerships_on_sales_order_id", using: :btree
 
   create_table "sizes", force: true do |t|
     t.string   "name"
@@ -816,7 +951,7 @@ ActiveRecord::Schema.define(version: 20160708084539) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "grade",       limit: 1
+    t.string   "grade"
   end
 
   add_index "user_data", ["user_id"], name: "index_user_data_on_user_id", using: :btree
@@ -827,7 +962,6 @@ ActiveRecord::Schema.define(version: 20160708084539) do
     t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "users_id"
   end
 
   add_index "user_parents", ["user_id"], name: "index_user_parents_on_user_id", using: :btree

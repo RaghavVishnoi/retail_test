@@ -382,7 +382,8 @@ h2.asgnd_shop_blk {padding-bottom: 1.5% !important;}
     width: 35%;
  }
  .common_page.gsb1 input.form-control{padding: 7px 2px;}
- .help-icon{width:50%;}
+ 
+  .help-icon{width:50%;}
 
 
  #popup-request {
@@ -469,7 +470,7 @@ h2.asgnd_shop_blk {padding-bottom: 1.5% !important;}
   color: #EC6707;
 }
 #popup-select{
-  width:75%;
+  width:85%;
   margin:auto;
 }
 .vlabel{
@@ -590,3 +591,32 @@ select.multi-select option.selected{background:red;}
   }
 
  .tatBG{background-color: red;} 
+ .help-icon{width:50%;}
+
+ .brand_store_proposal{  
+  margin-top: 5%;
+  display: block;
+  font-size: 15px;
+  max-width: 100%;
+  text-align: right;
+  color: #AEAEAB;
+}
+.brand_store_proposal:hover{
+  background: none;
+  color: #AEAEAB;
+  text-decoration: none;
+}
+
+.responsiveTable{ width: 100%; overflow: auto}
+.responsiveTable table th, .responsiveTable table td{ min-width:150px !important;}
+
+.responsiveData{width:100%; overflow:auto; padding-bottom: 20px;}
+.responsiveData .row{ width: 200%;}
+
+.Auto_Calculated{
+  background-color: #F37022;
+  color: #FFFFFF   ;
+}
+
+.loader{width:50px;height:50px;position:absolute;z-index: 10;margin-left:35%;margin-top: 20%;}
+ 

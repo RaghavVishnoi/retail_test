@@ -260,6 +260,12 @@ Rails.application.routes.draw do
   namespace :api,:defaults => {format: :json},constraints: {format: :json} do
     namespace :gquestion do
       resources :retailers , only: [:index]
+
+        resources :retailers do
+            collection do
+              post  '/update_retailer' , to: 'retailers#update_retailer'
+            end
+        end
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
@@ -342,4 +348,16 @@ Rails.application.routes.draw do
    
    #get 'request_assignments/statusCount' => 'request_assignments#counts'
 
+   post '/sales_orders/change_status'
+   resources :sales_orders 
+ 
+  get '/brandStore/new', to: 'sessions#index'
+  get '/brandStore/:id', to: 'sales_orders#show'
+  get '/BrandStore', to: 'sales_orders#index'
+  post '/sales_orders/user_data'
+
+  post 'sales_orders/download_report'
+  #get '/sales_orders/:id/download', to: 'sales_orders#download'
+
+ 
 end

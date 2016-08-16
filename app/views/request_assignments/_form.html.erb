@@ -148,13 +148,12 @@
 
 </div>
      <%if params[:is_rrm] == 'false'%>
-        <table class="mr_btm1">
+        <table class="mr_btm1" style="width:35%;">
           <tr><td>
-            <%=select_tag :vendor_id,options_for_select(User.users_data('vendor')),:prompt => 'Select Vendor-----  ',:class => "vendor-assignment form-control custm_select",:required => "required",:id => "popup-select"%>
+            <%=select_tag :vendor_id,options_for_select(User.users_data('vendor')),:prompt => '-----Select Vendor-----  ',:class => "vendor-assignment form-control custm_select",:required => "required",:id => "popup-select"%>
           </td>
-          <td></td>
-          <td>
-            <%=select_tag :priority,options_for_select(PRIORITY),:prompt => 'Select Priority',:required => "required",:class => 'priority form-control custm_select'%>
+           <td style="width:45%">
+            <%=select_tag :priority,options_for_select(PRIORITY),:prompt => '-----Select Priority-----',:required => "required",:class => 'priority form-control custm_select'%>
           </td>
 
           <%=hidden_field_tag :assigned_by,current_user.id%>

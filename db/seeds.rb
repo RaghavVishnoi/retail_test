@@ -98,12 +98,12 @@
 # 	{role_id: '9',action: 'manage', subject_class: 'VendorRequest'},
 # 	{role_id: '9',action: 'edit', subject_class: 'Map'}
 # ])
-Level.create!([
-	{level_name: 'Requester and above'},
-	{level_name: 'CMO and above'},
-	{level_name: 'Approver and above'},
-	{level_name: 'RRM and above'}
-])
-Permission.create!([
-	{role_id: '1',action: 'manage', subject_class: 'all'}
-])
+# Level.create!([
+# 	{level_name: 'Requester and above'},
+# 	{level_name: 'CMO and above'},
+# 	{level_name: 'Approver and above'},
+# 	{level_name: 'RRM and above'}
+# ])
+# Permission.create!([
+# 	{role_id: '1',action: 'manage', subject_class: 'all'}
+# ])

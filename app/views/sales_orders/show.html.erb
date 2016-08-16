@@ -1,0 +1,804 @@
+<div id="nav-col-submenu"></div>
+</div>
+<div id="content-wrapper">
+<div class="row" style="opacity: 1;">
+<div class="col-lg-12">
+<div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12">
+<div class="form-detail-div">
+<div class="main-box clearfix">
+  <div class="tabs-wrapper profile-tabs">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#tab-newsfeed" data-toggle="tab">Project Analysis</a></li>
+      <li class=""><a href="#tab-activity" data-toggle="tab">Biz Analysis</a></li>
+      <li class=""><a href="#tab-friends" data-toggle="tab">Pics</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade active in" id="tab-newsfeed">
+        <div id="newsfeed">
+          <div class="table-panel">
+            <div class="main-box-body clearfix">
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                <thead>
+                  <tr class="panel-org">
+                  <td colspan="4"><h5><strong>User</strong></h5></td>
+                    </tr>
+                </thead>
+                  <thead>
+                    <tr>
+                      <th><span>Name</span></th>
+                      <th><span>Email</span></th>
+                      <th><span>Mobile</span></th>
+                      <th><span>State</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%=@sales_order.name%></td>
+                      <td><%=@sales_order.email%></td>
+                      <td><%=@sales_order.phone%></td>
+                      <td><%=State.find_by(id: @sales_order.state_id).name%></td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+                
+                <table class="table table-bordered">
+                <thead>
+                  <tr class="panel-org">
+                  <td colspan="7"><h5><strong>Shop Dimensions</strong></h5></td>
+                    </tr>
+                </thead>
+                  <thead>
+                    <tr>
+                      <th><span>Super Built Up Area</span></th>
+                      <th><span>Built up Area</span></th>
+                      <th><span>Carpet Area</span></th>
+                      <th><span>Clear Height</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%=@sales_order.shop_dimension.super_build_up_area%></td>
+                      <td><%=@sales_order.shop_dimension.built_up_area%></td>
+                      <td><%=@sales_order.shop_dimension.carpet_area%></td>
+                      <td><%=@sales_order.shop_dimension.clear_height%></td>
+                    </tr>                                    
+                  </tbody>
+                  
+                  <thead>
+                    <tr>
+                      <th><span>No Seepage</span></th>
+                      <th><span>No Mezzanine floor</span></th>
+                      <th><span>hindrance to entr</span></th>
+                      <th><span>Power Back Up & Load</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%=@sales_order.shop_dimension.seepage%></td>
+                      <td><%=@sales_order.shop_dimension.mezzanine_floor%></td>
+                      <td><%=@sales_order.shop_dimension.hindrance%></td>
+                      <td><%=@sales_order.shop_dimension.power_backup%></td>
+                    </tr>                                    
+                  </tbody>
+                  <thead>
+                    <tr>
+                      <th><span>Current Flooring</span></th>
+                      <th><span>Current Ceiling</span></th>
+                      <th><span>Current Walls Status</span></th>
+                      <th><span>Fire safety</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%=@sales_order.shop_dimension.current_flooring%></td>
+                      <td><%=@sales_order.shop_dimension.current_ceilling%></td>
+                      <td><%=@sales_order.shop_dimension.current_wall_status%></td>
+                      <td><%=@sales_order.shop_dimension.fire_safety%></td>
+                    </tr>                                    
+                  </tbody>
+                                                    
+                  <thead>
+                    <tr>
+                      <th><span>GSB Opportunity</span></th>
+                      <th><span>ISB/OSB/Special visibility Opportunity </span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%=@sales_order.shop_dimension.gsb_opportunity%></td>
+                      <td><%=@sales_order.shop_dimension.special_visible_opportunity%></td>
+                      
+                    </tr>                                    
+                  </tbody> 
+                                                   
+                </table>
+                
+                <table class="table table-bordered">
+                <thead>
+                  <tr class="panel-org">
+                  <td colspan="4"><h5><strong>Catchment Analsysis</strong></h5></td>
+                    </tr>
+                </thead>
+                  <thead>
+                    <tr>
+                      <th><span>CONSUMER DURABLE / ELECTRONICS STORES</span></th>
+                      <th><span>NO OF RSP COUNTERS</span></th>
+                      <th><span>NO OF SIS COUNTERS</span></th>
+                       <th><span>MOBILE BRAND</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%=@sales_order.catchment.consumer_stores%></td>
+                      <td><%=@sales_order.catchment.rsp_counters%></td>
+                      <td><%=@sales_order.catchment.sis_counters%></td>
+                      <td><%=@sales_order.catchment.brand_stores%></td>
+                    </tr>
+                    
+                  </tbody>
+
+                   <thead>
+                    <tr>
+                      <th><span>Remark</span></th>
+                      <th><span>Catchment Population</span></th>
+                      <th><span>Colonies covered within 5kms</span></th>
+                     
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%=@sales_order.catchment.introduction%></td>
+                      <td><%=@sales_order.catchment.population%></td>
+                      <td><%=@sales_order.catchment.colonies%></td>
+                    </tr>
+                    
+                  </tbody>
+
+                </table>
+                
+                <table class="table table-bordered">
+                <thead>
+                  <tr class="panel-org">
+                  <td colspan="3"><h5><strong>Name and business of 10 shops</strong></h5></td>
+                    </tr>
+                </thead>
+                  <thead>
+                    <tr>
+                       
+                      <th><span>Left Side</span></th>
+                      <th><span>Right Side</span></th>
+                      <th><span>Opposite Side</span></th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <%@sales_order.catchment.catchment_business_shops.each do |business|%>
+                    <tr>
+                      <td><%=business.left%></td>
+                      <td><%=business.right%></td>
+                      <td><%=business.opposite%></td>
+                     
+                    </tr>  
+                    <%end%>  
+                  </tbody>
+                  
+                  
+                  
+                  
+                  
+                </table>
+                
+                <table class="table table-bordered">
+                <thead>
+                  <tr class="panel-org">
+                  <td colspan="4"><h5><strong>Shop Ownership</strong></h5></td>
+                    </tr>
+                </thead>
+                  <thead>
+                    <tr>
+                      <th><span>Type</span></th>
+                      <th><span> Title of ownership</span></th>
+                      <th><span>Duration</span></th>
+                      <th><span>Parking Available </span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr>
+                      <td><%=@sales_order.shop_ownership.shop_type%></td>
+                      <td><%=@sales_order.shop_ownership.title%></td>
+                      <td><%=@sales_order.shop_ownership.clear_title_duration%></td>
+                       <td><%=@sales_order.shop_ownership.parking_available%></td>
+                    </tr>
+                     <thead>
+                    <tr>
+                      <th colspan="4"><span>No hindrance</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="4"><%=@sales_order.shop_ownership.hindrance_entrance%></td>
+                    </tr>                                    
+                  </tbody>                                   
+                  </tbody>
+                </table>
+                
+                <table class="table table-bordered">
+                <thead>
+                  <tr class="panel-org">
+                  <td colspan="5"><h5><strong>Partner Analysis</strong></h5></td>
+                    </tr>
+                </thead>
+                  <thead>
+                    <tr>
+                      <th><span>Name of Business Entity</span></th>
+                      <th><span>Structure of business entity</span></th>
+                      <th colspan="4"><span>Ownership</span></th>                                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%@sales_order.parteners.each do |partener|%> 
+                    <tr>
+                      <td><%=partener.partener_name%></td>
+                      <td><%=partener.structure%></td>
+                      <td colspan="4"><%=partener.ownership%></td>
+                    </tr>
+                     
+                    <% end %>     
+                  </tbody>
+
+                  <thead>
+                    <tr>
+                      <th><span>turnover</span></th>
+                      <th><span>man_power</span></th>
+                      <th colspan="4"><span>breif_intro</span></th>                         
+                    </tr>
+                  </thead>
+
+                   <tbody>
+                    <%@sales_order.parteners.each do |partener|%> 
+                    <tr>
+                      <td><%=partener.turnover%></td>
+                      <td><%=partener.man_power%></td>
+                      <td colspan="4"><%=partener.breif_intro%></td>
+                    </tr>
+                     <% end %>
+                         
+                  </tbody>
+                </table>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tab-pane fade" id="tab-activity">
+        <div class="table-panel">
+          <div class="main-box-body clearfix">
+            <div class="">
+              <table class="table table-bordered">
+                
+                <thead>
+                  <tr class="panel-org Auto_Calculated">
+                  <td colspan="4"><h5><strong>EBITDA Projection for next 1 year of Operation</strong></h5></td>
+                    </tr>
+                </thead>
+            </table>
+            <% @value =  SalesOrder.autoCalculateValues(@sales_order.bizs)%>
+            
+            
+
+            <% @total = SalesOrder.total_value(@sales_order.bizs) %>
+               
+
+            <div class="responsiveTable">
+              <table class="table table-bordered">
+                <tr>
+                      <th>&nbsp;</th>
+                      <th>Month 1</th>
+                      <th>Month 2</th>
+                      <th>Month 3</th>
+                      <th>Month 4</th>
+                      <th>Month 5</th>
+                      <th>Month 6</th>
+                      <th>Month 7</th>
+                      <th>Month 8</th>
+                      <th>Month 9</th>
+                      <th>Month 10</th>
+                      <th>Month 11</th>
+                      <th>Month 12</th>
+                      <th>Total</th>
+                      <th>Average</th>
+                  </tr>
+              
+              <%@sales_order.bizs.each_with_index do |biz,index| %>
+                      
+                      <% if index == 2 %>
+                     
+                      <tr class="Auto_Calculated">
+                      <td >Gross Profit</td>
+                      <td><%=@value[:gross][0]%></td>
+                      <td><%=@value[:gross][1]%> </td>
+                      <td><%=@value[:gross][2]%></td>
+                      <td><%=@value[:gross][3]%></td>
+                      <td><%=@value[:gross][4]%></td>
+                      <td><%=@value[:gross][5]%></td>
+                      <td><%=@value[:gross][6]%></td>
+                      <td><%=@value[:gross][7]%></td>
+                      <td><%=@value[:gross][8]%></td>
+                      <td><%=@value[:gross][9]%></td>
+                      <td><%=@value[:gross][10]%></td>
+                      <td><%=@value[:gross][11]%></td>
+                      <td><%=@total[:other_value][0] %> </td>
+                      <td><%=@total[:other_avg][0] %> </td>
+                      </tr>
+                      <tr>
+                        <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      </tr>
+
+                      <tr>
+                        <td><%=biz.title.camelize %>(In Lakhs)</td>
+                      <td><%=biz.month1 %></td>
+                      <td><%=biz.month2 %></td>
+                      <td><%=biz.month3 %></td>
+                      <td><%=biz.month4 %></td>
+                      <td><%=biz.month5 %></td>
+                      <td><%=biz.month6 %></td>
+                      <td><%=biz.month7 %></td>
+                      <td><%=biz.month8 %></td>
+                      <td><%=biz.month9 %></td>
+                      <td><%=biz.month10 %></td>
+                      <td><%=biz.month11 %></td>
+                      <td><%=biz.month12 %></td>
+                      <td><%=@total[:other_value][1] %> </td>
+                      <td><%=@total[:other_avg][1] %> </td>
+                      </tr>
+
+                      <%elsif index == 10 %>
+                   
+                       
+                       
+                        <tr class="Auto_Calculated"> 
+                      <td>Total OverHead</td>
+                      <td><%=@value[:total_overhead][0]%></td>
+                      <td><%=@value[:total_overhead][1]%> </td>
+                      <td><%=@value[:total_overhead][2]%></td>
+                      <td><%=@value[:total_overhead][3]%></td>
+                      <td><%=@value[:total_overhead][4]%></td>
+                      <td><%=@value[:total_overhead][5]%></td>
+                      <td><%=@value[:total_overhead][6]%></td>
+                      <td><%=@value[:total_overhead][7]%></td>
+                      <td><%=@value[:total_overhead][8]%></td>
+                      <td><%=@value[:total_overhead][9]%></td>
+                      <td><%=@value[:total_overhead][10]%></td>
+                      <td><%=@value[:total_overhead][11]%></td>
+                       <td><%=@total[:other_value][2] %> </td>
+                        <td><%=@total[:other_avg][2] %> </td>
+                      </tr>
+                      <tr class="Auto_Calculated">
+
+                        <td>EBITDA Profit</td>
+                        <% sum1 =  @value[:gross][0] - @value[:total_overhead][0] %>
+                      <td><%= sum1 %></td>
+                         <% sum2 =  @value[:gross][1] - @value[:total_overhead][1] %>
+                      <td><%=sum2 %> </td>
+                      <% sum3 =  @value[:gross][2] - @value[:total_overhead][2] %>
+                      <td><%= sum3 %></td>
+                      <% sum4 =  @value[:gross][3] - @value[:total_overhead][3] %>
+                      <td><%= sum4 %></td>
+                      <% sum5 =  @value[:gross][4] - @value[:total_overhead][4] %>
+                      <td><%= sum5 %></td>
+                      <% sum6 =  @value[:gross][5] - @value[:total_overhead][5] %>
+                      <td><%= sum6 %></td>
+                      <% sum7 =  @value[:gross][6] - @value[:total_overhead][6] %>
+
+                      <td><%= sum7 %></td>
+                      <% sum8 =  @value[:gross][7] - @value[:total_overhead][7] %>
+
+                      <td><%= sum8 %></td>
+                      <% sum9 =  @value[:gross][8] - @value[:total_overhead][8] %>
+
+                      <td><%= sum9%></td>
+                      <% sum10 =  @value[:gross][9] - @value[:total_overhead][9] %>
+                      <td><%= sum10%></td>
+                      <% sum11 =  @value[:gross][10] - @value[:total_overhead][10] %>
+                      <td><%= sum11%></td>
+                      <% sum12 =  @value[:gross][11] - @value[:total_overhead][11] %>
+                      <td><%= sum12%></td>
+                       <td><%=@total[:other_value][3] %> </td>
+                        <td><%=@total[:other_avg][3] %> </td>
+                      </tr>
+
+                      <tr class="Auto_Calculated">
+                       
+
+                      <th>EBITDA Margin %</th>
+                      <th><%= sum_total0 = ( @value[:new_revenueData][0] != 0) ?   sum1 / @value[:new_revenueData][0] : 0%></th>
+                      <th><%= sum_total1 = ( @value[:new_revenueData][1] != 0) ? sum2 / @value[:new_revenueData][1] : 0   %></th>
+
+                       <th><%= sum_total2 = ( @value[:new_revenueData][2] != 0) ? sum3 / @value[:new_revenueData][2] : 0   %></th>
+                      <th><%= sum_total3 = (  @value[:new_revenueData][3] != 0 ) ?   sum4 / @value[:new_revenueData][3] : 0%></th>
+
+                      <th><%= sum_total4 = (  @value[:new_revenueData][4] != 0 ) ?   sum5 / @value[:new_revenueData][4] : 0%></th>
+
+                      <th><%= sum_total5 = (  @value[:new_revenueData][5] != 0 ) ?   sum6 / @value[:new_revenueData][5] : 0%></th>
+
+                      <th><%= sum_total6 = (  @value[:new_revenueData][6] != 0 ) ?   sum7 / @value[:new_revenueData][6] : 0%></th>
+                      
+                      <th><%= sum_total7 = (  @value[:new_revenueData][7] != 0 ) ?   sum8 / @value[:new_revenueData][7] : 0%></th>
+
+                      <th><%= sum_total8 = (  @value[:new_revenueData][8] != 0 ) ?   sum9 / @value[:new_revenueData][8] : 0%></th>
+
+                      <th><%= sum_total9 = (  @value[:new_revenueData][9] != 0 ) ?   sum10 / @value[:new_revenueData][9] : 0%></th>
+
+                      <th><%= sum_total10 = (  @value[:new_revenueData][10] != 0 ) ?   sum11 / @value[:new_revenueData][10] : 0%></th>
+
+                      <th><%= sum_total11 = (  @value[:new_revenueData][11] != 0 ) ?   sum12 / @value[:new_revenueData][11] : 0%></th>
+
+                     
+                    
+      <th><%= avg = (sum_total0 + sum_total1 + sum_total2 + sum_total3 + sum_total4 + sum_total5 + sum_total6 + sum_total7 + sum_total8 + sum_total9 + sum_total10 + sum_total11)  %></th>
+      <th> <%= avg/12%></th>
+                      
+
+                     </tr>
+
+
+                       
+
+                      <tr>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      </tr>
+
+                        <td><%=biz.title.camelize%>(In Lakhs)</td>
+                      <td><%=biz.month1 %></td>
+                      <td><%=biz.month2 %></td>
+                      <td><%=biz.month3 %></td>
+                      <td><%=biz.month4 %></td>
+                      <td><%=biz.month5 %></td>
+                      <td><%=biz.month6 %></td>
+                      <td><%=biz.month7 %></td>
+                      <td><%=biz.month8 %></td>
+                      <td><%=biz.month9 %></td>
+                      <td><%=biz.month10 %></td>
+                      <td><%=biz.month11 %></td>
+                      <td><%=biz.month12 %></td>
+                       <td><%=@total[:other_value][4] %> </td>
+                        <td><%=@total[:other_value][4] %> </td>
+                      </tr>
+
+      <%else%>
+                     
+                    
+                      <tr>
+                        <% if index != 1 %>
+                        <td><%=biz.title.camelize%> (In Lakhs)</td>
+                        <% else %>
+                         <td><%=biz.title.camelize%> (%)</td>
+                        <% end %>
+                      <td><%=biz.month1 %></td>
+                      <td><%=biz.month2 %></td>
+                      <td><%=biz.month3 %></td>
+                      <td><%=biz.month4 %></td>
+                      <td><%=biz.month5 %></td>
+                      <td><%=biz.month6 %></td>
+                      <td><%=biz.month7 %></td>
+                      <td><%=biz.month8 %></td>
+                      <td><%=biz.month9 %></td>
+                      <td><%=biz.month10 %></td>
+                      <td><%=biz.month11 %></td>
+                      <td><%=biz.month12 %></td>
+
+                      <td>
+                         <% if index == 0 || index == 1%>
+                        <%= @total[:result][index] %>
+                        <% elsif index == 3 || index ==4 || index ==5 || index == 6 || index == 7 || index ==8 || index == 9 %>
+                             <%= @total[:result][index-1] %>
+                        <% elsif index == 11 || index == 12 %>
+                          <%= @total[:result][index-2] %>
+                          
+                        <% end %>
+                      </td>
+                      <td>
+                      
+                     <% if index == 0 || index == 1%>
+                        <%= @total[:avg][index] %>
+                        <% elsif index == 3 || index ==4 || index ==5 || index == 6 || index == 7 || index ==8 || index == 9 %>
+                             <%= @total[:avg][index-1] %>
+                        <% elsif index == 11 || index == 12 %>
+                          <%= @total[:avg][index-2] %>
+                          
+                        <% end %>
+
+                      </td>
+                      
+                      </tr>
+                      <% end %>
+                       
+              <% end%>
+          </table>
+        
+              
+                
+                </div><br>
+                <table class="table table-bordered">
+                                <thead>
+                                  <tr class="panel-org">
+                                  <td colspan="4"><h5><strong>Industry Analysis</strong></h5></td>
+                                    </tr>
+                                </thead>
+                                 <%@sales_order.industries.each_slice(4) do |industry|%>         
+                                  <thead>
+                                  <tr>
+                                    <td colspan="4"> <%=industry[0][:comp_name]%></td>
+                                  </tr>
+                                    <tr>
+                                      <th><span><%=industry[0][:name]%></span></th>
+                                      <th><span><%=industry[1][:name]%></span></th>
+                                      <th><span><%=industry[2][:name]%></span></th>
+                                      <th><span><%=industry[3][:name]%></span></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td><%=industry[0][:value]%></td>
+                                      <td><%=industry[1][:value]%></td>
+                                      <td><%=industry[2][:value]%></td>
+                                      <td><%=industry[3][:value]%></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><%=industry[0][:volume]%></td>
+                                      <td><%=industry[1][:volume]%></td>
+                                      <td><%=industry[2][:volume]%></td>
+                                      <td><%=industry[3][:volume]%></td>
+                                    </tr>                
+                                  </tbody>
+                              <%end%>                                                                                         
+                                </table>
+                              
+                                
+                              <table class="table table-bordered">
+                                <thead>
+                                  <tr class="panel-org">
+                                  <td colspan="4"><h5><strong>Competition Analysis</strong></h5></td>
+                                    </tr>
+
+                                </thead>
+                                 <%@sales_order.competitions.each_slice(9) do |competition|%> 
+                                  <tr>
+                                    <td colspan="4"><%=competition[0][:comp_name]%></td>
+                                  </tr>
+                                  <thead>
+                                    <tr>
+                                      <th><span><%=competition[0][:name]%></span></th>
+                                      <th><span><%=competition[1][:name]%></span></th>
+                                      <th><span><%=competition[2][:name]%></span></th>
+                                      <th><span><%=competition[3][:name]%></span></th>
+                                    </tr>
+                                  </thead>
+                                  
+                                  <tbody>
+                                    <tr>
+                                      <td><%=competition[0][:comp_value]%></td>
+                                      <td><%=competition[1][:comp_value]%></td>
+                                      <td><%=competition[2][:comp_value]%></td>
+                                      <td><%=competition[3][:comp_value]%></td>
+                                    </tr>                                    
+                                  </tbody>
+                                  <thead>                                  
+                                    <tr>
+                                      <th><span><%=competition[4][:name]%></span></th>
+                                      <th><span><%=competition[5][:name]%></span></th>
+                                      <th><span><%=competition[6][:name]%></span></th>
+                                      <th><span><%=competition[7][:name]%></span></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td><%=competition[4][:comp_value]%></td>
+                                      <td><%=competition[5][:comp_value]%></td>
+                                      <td><%=competition[6][:comp_value]%></td>
+                                      <td><%=competition[7][:comp_value]%></td>
+                                    </tr>                             
+                                  </tbody>
+
+                                   <thead>
+                                    <tr>
+                                      <th><span><%=competition[8][:name]%></span></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td><%=competition[8][:comp_value]%></td>
+                                       </tr>           </tbody>
+                             <%end%>
+                                                                                                                                   
+                                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane clearfix fade" id="tab-friends">
+        <div class="table-panel">
+          <div class="main-box-body clearfix">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                                <thead>
+                                  <tr class="panel-org">
+                                  <td colspan="4"><h5><strong>Please paste pic in 4*5 dimension & give a heading to each pic in this sheet</strong></h5></td>
+                                    </tr>
+                                </thead>
+                                 
+                                  <thead>
+                                    <tr>
+                                      <th><span>Shop Front view</span></th>
+                                      <th><span>Left wall view</span></th>
+                                      <th><span>right wall view</span></th>
+                                      <th><span>ceiling</span></th>
+                                    </tr>
+                                  </thead>
+                                  
+                                  <tbody>
+                                    <tr>
+                                      <td width="25%"><img src="<%=@sales_order.pictures[1].picture_url%>"></td>
+                                      <td width="25%"><img src="<%=@sales_order.pictures[0].picture_url%>"></td>
+                                      <td width="25%"><img src="<%=@sales_order.pictures[2].picture_url%>"></td>
+                                      <td width="25%"><img src="<%=@sales_order.pictures[3].picture_url%>"></td>
+                                    </tr>                                    
+                                  </tbody>
+                                  <thead>                                  
+                                    <tr>
+                                      <th><span>flooring</span></th>
+                                      <th><span>Inside out view</span></th>
+                                      <th><span>outside in view</span></th>
+                                      <th><span>Complete shop building view</span></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td width="25%" ><img src="<%=@sales_order.pictures[4].picture_url%>"></td>
+                                      <td width="25%"><img src="<%=@sales_order.pictures[5].picture_url%>"></td>
+                                      <td width="25%"><img src="<%=@sales_order.pictures[6].picture_url%>"></td>
+                                      <td width="25%"><img src="<%=@sales_order.pictures[7].picture_url%>"></td>
+                                    </tr>                           
+                                  </tbody>
+                                  
+                                  <thead>                                  
+                                    <tr>
+                                      <th><span>left 10 shops</span></th>
+                                      <th><span>right shops</span></th>
+                                      <th><span>oppsosite foot shops view</span></th>
+                                      <th><span>catchment pictures</span></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td width="25%"><img src="<%=@sales_order.pictures[8].picture_url%>"></td>
+                                      <td width="25%"><img src="<%=@sales_order.pictures[9].picture_url%>"></td>
+                                      <td width="25%"><img src="<%=@sales_order.pictures[10].picture_url%>"></td>
+                                      <td width="25%"><img src="<%=@sales_order.pictures[11].picture_url%>"></td>
+                                    </tr>                           
+                                  </tbody>
+                                  
+                                  <thead>                                  
+                                    <tr>
+                                      <th colspan="2"><span>pics of prominent mobile & electronics players</span></th>
+                                      <th colspan="2"><span>experience shops</span></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td colspan="2" width="25%" ><img src="<%=@sales_order.pictures[12].picture_url%>"   ></td>
+                                      <td colspan="2" width="25%"><img src="<%=@sales_order.pictures[13].picture_url%>"></td>
+                                    </tr>                           
+                                  </tbody>
+                                                                                                                                   
+                                </table>
+                        
+                      <% salesorder = SalesOrder.find(params[:id].to_i) %>
+                       
+                      <% if salesorder.status == 'pending' %>
+                          
+                          <div class="col-md-6">
+                            <textarea class="form-control" id="comment" name="comment" placeholder="Enter your comment here" rows="5"></textarea>
+                          </div>
+                            
+                       
+                       
+                          <div class="col-md-6" >
+
+                            <input class="btn btn-success pull-left button-pair" name="commit" type="submit"  id="approve"  value="Approve" onclick='status_change("<%=params[:id] %>","accept");'>
+
+                            <input class="btn btn-success pull-left" name="commit"style="margin-top: 20px;background-color:red" type="submit"  id="decline"  value="Decline" onclick='status_change("<%=params[:id] %>","decline");'>
+
+                          </div>
+
+                      <% end %>
+                        
+ 
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div> 
+</div>
+</div>
+
+<script >
+function status_change(id,status){
+  
+     comment = $('#comment').val();
+
+    if(confirm("Are you sure you want to "+status+'?')){
+          $.ajax({
+            url: "/sales_orders/change_status",
+            type: "POST",
+            data: {status: status,
+                  id: id,
+                  comment: comment},
+            dataType: "text",
+
+          complete: function(){
+          },
+          success: function(data,xhr){
+            //location.href = "/models"
+          },
+          error: function(){
+
+          } 
+          })
+      }
+      else{
+          return false;
+      }
+  
+}
+ </script>
+
+ <script >
+  $("#approve").click(function(){
+         $("#comment").hide();
+         $("#approve").hide();
+         $("#decline").hide();
+  });
+ 
+ 
+ </script>
+
