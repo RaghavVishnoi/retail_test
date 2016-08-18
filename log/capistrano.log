@@ -10473,3 +10473,1733 @@ Warning: PATH set to RVM ruby but GEM_HOME and/or GEM_PATH not set, see:
          it might also help to re-add RVM to your dotfiles: 'rvm get stable --auto-dotfiles',
          to fix temporarily in this shell session run: 'rvm use ruby-2.1.2'.
  DEBUG [332bb035] 	[31mbundler: not executable: script/delayed_job[0m
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-08-16 21:32:02 +0530 cap staging deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [ab96b4ae] Running /usr/bin/env mkdir -p /var/www/fosem-staging/rvm1scripts/ as root@43.252.88.222
+ DEBUG [ab96b4ae] Command: /usr/bin/env mkdir -p /var/www/fosem-staging/rvm1scripts/
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-08-16 21:32:08 +0530 cap staging deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [1ba33eb6] Running /usr/bin/env mkdir -p /var/www/fosem-staging/rvm1scripts/ as root@43.252.88.222
+ DEBUG [1ba33eb6] Command: /usr/bin/env mkdir -p /var/www/fosem-staging/rvm1scripts/
+  INFO [1ba33eb6] Finished in 5.615 seconds with exit status 0 (successful).
+ DEBUG Uploading /usr/local/rvm/gems/ruby-2.1.2/gems/rvm1-capistrano3-1.4.0/script/rvm-auto.sh 0.0%
+  INFO Uploading /usr/local/rvm/gems/ruby-2.1.2/gems/rvm1-capistrano3-1.4.0/script/rvm-auto.sh 100.0%
+  INFO [c01150e7] Running /usr/bin/env chmod +x /var/www/fosem-staging/rvm1scripts/rvm-auto.sh as root@43.252.88.222
+ DEBUG [c01150e7] Command: /usr/bin/env chmod +x /var/www/fosem-staging/rvm1scripts/rvm-auto.sh
+  INFO [c01150e7] Finished in 0.110 seconds with exit status 0 (successful).
+  INFO [7f2165f8] Running /usr/bin/env mkdir -p /home/fosem/tmp as root@43.252.88.222
+ DEBUG [7f2165f8] Command: /usr/bin/env mkdir -p /home/fosem/tmp
+  INFO [7f2165f8] Finished in 0.113 seconds with exit status 0 (successful).
+ DEBUG Uploading /home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh 0.0%
+  INFO Uploading /home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh 100.0%
+  INFO [90e03ceb] Running /usr/bin/env chmod 700 /home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh as root@43.252.88.222
+ DEBUG [90e03ceb] Command: /usr/bin/env chmod 700 /home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh
+  INFO [90e03ceb] Finished in 0.118 seconds with exit status 0 (successful).
+  INFO [7658b3f3] Running /usr/bin/env git ls-remote --heads ssh://xp-dev.com/LPTPL_GIONEE_REQUESTER_WEB as root@43.252.88.222
+ DEBUG [7658b3f3] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh" ; /usr/bin/env git ls-remote --heads ssh://xp-dev.com/LPTPL_GIONEE_REQUESTER_WEB )
+ DEBUG [7658b3f3] 	aecc34d01c8c846314b2c08e47d23f6070cafc8d	refs/heads/audit_form
+9cf09fdb1f6b427748a97a2e6dc427c3ed64c809	refs/heads/brand_store
+185d82af2c8ac7765e149d87ceda5133bfe4246e	refs/heads/master
+c32e11aafc3b2c760c8aaec0459724495945ecbd	refs/heads/staging
+681492ed9baa533fd9aa6c269f103455199f61a5	refs/heads/vendor
+52d0a1c5c1c2b67206bedcef5b5f1bfb85ee16ed	refs/heads/vendor_flow
+8c4794e5bd2424905432d0676745425de735e889	refs/heads/vendor_workflow
+5844995005e8cc2a0cd68fa0bbabd49719965463	refs/heads/vmqa
+  INFO [7658b3f3] Finished in 3.164 seconds with exit status 0 (successful).
+  INFO [ced73810] Running /usr/bin/env mkdir -p /var/www/fosem-staging/shared /var/www/fosem-staging/releases as root@43.252.88.222
+ DEBUG [ced73810] Command: /usr/bin/env mkdir -p /var/www/fosem-staging/shared /var/www/fosem-staging/releases
+  INFO [ced73810] Finished in 0.119 seconds with exit status 0 (successful).
+  INFO [88a20f8d] Running /usr/bin/env mkdir -p /var/www/fosem-staging/shared/bin /var/www/fosem-staging/shared/log /var/www/fosem-staging/shared/tmp/pids /var/www/fosem-staging/shared/tmp/cache /var/www/fosem-staging/shared/tmp/sockets /var/www/fosem-staging/shared/vendor/bundle /var/www/fosem-staging/shared/public/system /var/www/fosem-staging/shared/public/uploads /var/www/fosem-staging/shared/analytics /var/www/fosem-staging/shared/requests_csv /var/www/fosem-staging/shared/public/assets as root@43.252.88.222
+ DEBUG [88a20f8d] Command: /usr/bin/env mkdir -p /var/www/fosem-staging/shared/bin /var/www/fosem-staging/shared/log /var/www/fosem-staging/shared/tmp/pids /var/www/fosem-staging/shared/tmp/cache /var/www/fosem-staging/shared/tmp/sockets /var/www/fosem-staging/shared/vendor/bundle /var/www/fosem-staging/shared/public/system /var/www/fosem-staging/shared/public/uploads /var/www/fosem-staging/shared/analytics /var/www/fosem-staging/shared/requests_csv /var/www/fosem-staging/shared/public/assets
+  INFO [88a20f8d] Finished in 0.111 seconds with exit status 0 (successful).
+ DEBUG [6df77caa] Running [ -f /var/www/fosem-staging/current/REVISION ] as root@43.252.88.222
+ DEBUG [6df77caa] Command: [ -f /var/www/fosem-staging/current/REVISION ]
+ DEBUG [6df77caa] Finished in 0.113 seconds with exit status 0 (successful).
+ DEBUG [88cbe7c1] Running /usr/bin/env cat /var/www/fosem-staging/current/REVISION 2>/dev/null as root@43.252.88.222
+ DEBUG [88cbe7c1] Command: /usr/bin/env cat /var/www/fosem-staging/current/REVISION 2>/dev/null
+ DEBUG [88cbe7c1] 	4b3b8291c2ee0d907b035d0578ed87108f1d6ad6
+ DEBUG [88cbe7c1] Finished in 0.119 seconds with exit status 0 (successful).
+ DEBUG [1b2552b5] Running [ -f /var/www/fosem-staging/repo/HEAD ] as root@43.252.88.222
+ DEBUG [1b2552b5] Command: [ -f /var/www/fosem-staging/repo/HEAD ]
+ DEBUG [1b2552b5] Finished in 0.113 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/fosem-staging/repo
+ DEBUG [eb52679b] Running if test ! -d /var/www/fosem-staging/repo; then echo "Directory does not exist '/var/www/fosem-staging/repo'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [eb52679b] Command: if test ! -d /var/www/fosem-staging/repo; then echo "Directory does not exist '/var/www/fosem-staging/repo'" 1>&2; false; fi
+ DEBUG [eb52679b] Finished in 0.111 seconds with exit status 0 (successful).
+  INFO [1f888864] Running /usr/bin/env git remote update --prune as root@43.252.88.222
+ DEBUG [1f888864] Command: cd /var/www/fosem-staging/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [1f888864] 	Fetching origin
+ DEBUG [1f888864] 	remote: Counting objects: 13, done.[K
+remote: Compressing objects:  16% (1/6)   [Kremote: Compressing objects:  33% (2/6)   [Kremote: Compressing objects:  50% (3/6)   [Kremote: Compressing objects:  66% (4/6)   [Kremote: Compressing objects:  83% (5/6)   [K
+ DEBUG [1f888864] 	remote: Compressing objects: 100% (6/6)   [Kremote: Compressing objects: 100% (6/6), done.[K
+ DEBUG [1f888864] 	Unpacking objects:  14% (1/7)   
+ DEBUG [1f888864] 	Unpacking objects:  28% (2/7)   Unpacking objects:  42% (3/7)   
+ DEBUG [1f888864] 	Unpacking objects:  57% (4/7)   
+ DEBUG [1f888864] 	Unpacking objects:  71% (5/7)   
+ DEBUG [1f888864] 	remote: Total 7 (delta 4), reused 1 (delta 0)[K
+ DEBUG [1f888864] 	Unpacking objects:  85% (6/7)   Unpacking objects: 100% (7/7)   Unpacking objects: 100% (7/7), done.
+From ssh://xp-dev.com/LPTPL_GIONEE_REQUESTER_WEB
+   4b3b829..8c4794e  vendor_workflow -> vendor_workflow
+  INFO [1f888864] Finished in 4.776 seconds with exit status 0 (successful).
+ DEBUG [9f1dba4b] Running if test ! -d /var/www/fosem-staging/repo; then echo "Directory does not exist '/var/www/fosem-staging/repo'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [9f1dba4b] Command: if test ! -d /var/www/fosem-staging/repo; then echo "Directory does not exist '/var/www/fosem-staging/repo'" 1>&2; false; fi
+ DEBUG [9f1dba4b] Finished in 0.120 seconds with exit status 0 (successful).
+  INFO [ba1297e5] Running /usr/bin/env mkdir -p /var/www/fosem-staging/releases/20160816160219 as root@43.252.88.222
+ DEBUG [ba1297e5] Command: cd /var/www/fosem-staging/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh" ; /usr/bin/env mkdir -p /var/www/fosem-staging/releases/20160816160219 )
+  INFO [ba1297e5] Finished in 0.140 seconds with exit status 0 (successful).
+  INFO [67aacfd2] Running /usr/bin/env git archive vendor_workflow | tar -x -f - -C /var/www/fosem-staging/releases/20160816160219 as root@43.252.88.222
+ DEBUG [67aacfd2] Command: cd /var/www/fosem-staging/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh" ; /usr/bin/env git archive vendor_workflow | tar -x -f - -C /var/www/fosem-staging/releases/20160816160219 )
+ DEBUG [67aacfd2] 	tar: .byebug_history: time stamp 2016-08-16 12:01:18 is 326.616304696 s in the future
+tar: .capistrano/metrics: time stamp 2016-08-16 12:01:18 is 326.616113012 s in the future
+tar: .capistrano: time stamp 2016-08-16 12:01:18 is 326.616092923 s in the future
+tar: .rspec: time stamp 2016-08-16 12:01:18 is 326.616061424 s in the future
+tar: .ruby-gemset: time stamp 2016-08-16 12:01:18 is 326.61603398 s in the future
+tar: .ruby-version: time stamp 2016-08-16 12:01:18 is 326.61600727 s in the future
+tar: Capfile: time stamp 2016-08-16 12:01:18 is 326.615962107 s in the future
+tar: Gemfile: time stamp 2016-08-16 12:01:18 is 326.615929482 s in the future
+tar: Gemfile.lock: time stamp 2016-08-16 12:01:18 is 326.61589321 s in the future
+tar: README.rdoc: time stamp 2016-08-16 12:01:18 is 326.615865751 s in the future
+tar: Rakefile: time stamp 2016-08-16 12:01:18 is 326.615839698 s in the future
+tar: api_doc.txt: time stamp 2016-08-16 12:01:18 is 326.615130986 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/FontAwesome.otf: time stamp 2016-08-16 12:01:18 is 326.614532571 s in the future
+tar: app/assets/fonts/WeatherIcons-Regular.otf: time stamp 2016-08-16 12:01:18 is 326.614460306 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/fontawesome-webfont.eot: time stamp 2016-08-16 12:01:18 is 326.613179747 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/fontawesome-webfont.svg: time stamp 2016-08-16 12:01:18 is 326.611886195 s in the future
+tar: app/assets/fonts/fontawesome-webfont.ttf: time stamp 2016-08-16 12:01:18 is 326.611552553 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/fontawesome-webfont.woff: time stamp 2016-08-16 12:01:18 is 326.611112738 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/footable.eot: time stamp 2016-08-16 12:01:18 is 326.611068253 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/footable.svg: time stamp 2016-08-16 12:01:18 is 326.611026582 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/footable.ttf: time stamp 2016-08-16 12:01:18 is 326.610689658 s in the future
+tar: app/assets/fonts/footable.woff: time stamp 2016-08-16 12:01:18 is 326.610653253 s in the future
+tar: app/assets/fonts/glyphicons-halflings-regular.eot: time stamp 2016-08-16 12:01:18 is 326.610606609 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/glyphicons-halflings-regular.svg: time stamp 2016-08-16 12:01:18 is 326.610117251 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/glyphicons-halflings-regular.ttf: time stamp 2016-08-16 12:01:18 is 326.610040986 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/glyphicons-halflings-regular.woff: time stamp 2016-08-16 12:01:18 is 326.609231557 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/weathericons-regular-webfont.eot: time stamp 2016-08-16 12:01:18 is 326.609131314 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/weathericons-regular-webfont.svg: time stamp 2016-08-16 12:01:18 is 326.608499404 s in the future
+tar: app/assets/fonts/weathericons-regular-webfont.ttf: time stamp 2016-08-16 12:01:18 is 326.608366157 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/fonts/weathericons-regular-webfont.woff: time stamp 2016-08-16 12:01:18 is 326.608056322 s in the future
+tar: app/assets/fonts: time stamp 2016-08-16 12:01:18 is 326.607808851 s in the future
+tar: app/assets/images/.keep: time stamp 2016-08-16 12:01:18 is 326.607754926 s in the future
+tar: app/assets/images/678111-map-marker-128.png: time stamp 2016-08-16 12:01:18 is 326.607720588 s in the future
+tar: app/assets/images/Preloader_8.gif: time stamp 2016-08-16 12:01:18 is 326.607547897 s in the future
+tar: app/assets/images/a_gsb.png: time stamp 2016-08-16 12:01:18 is 326.607514622 s in the future
+tar: app/assets/images/a_inshop.png: time stamp 2016-08-16 12:01:18 is 326.607486379 s in the future
+tar: app/assets/images/a_maintenance.png: time stamp 2016-08-16 12:01:18 is 326.607456968 s in the future
+tar: app/assets/images/a_sis.png: time stamp 2016-08-16 12:01:18 is 326.607327279 s in the future
+tar: app/assets/images/a_visit.png: time stamp 2016-08-16 12:01:18 is 326.607293794 s in the future
+tar: app/assets/images/accept.png: time stamp 2016-08-16 12:01:18 is 326.60726477 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/accept_all.png: time stamp 2016-08-16 12:01:18 is 326.607100592 s in the future
+tar: app/assets/images/add_approver_icon.png: time stamp 2016-08-16 12:01:18 is 326.607063896 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/all_request.png: time stamp 2016-08-16 12:01:18 is 326.607030592 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/all_type.png: time stamp 2016-08-16 12:01:18 is 326.606864819 s in the future
+tar: app/assets/images/approved.png: time stamp 2016-08-16 12:01:18 is 326.606755665 s in the future
+tar: app/assets/images/arrow_1.png: time stamp 2016-08-16 12:01:18 is 326.606721523 s in the future
+tar: app/assets/images/arrow_2.png: time stamp 2016-08-16 12:01:18 is 326.606693046 s in the future
+tar: app/assets/images/attendance.png: time stamp 2016-08-16 12:01:18 is 326.606606117 s in the future
+tar: app/assets/images/audit.png: time stamp 2016-08-16 12:01:18 is 326.606569454 s in the future
+tar: app/assets/images/back-button.png: time stamp 2016-08-16 12:01:18 is 326.606466149 s in the future
+tar: app/assets/images/back.jpg: time stamp 2016-08-16 12:01:18 is 326.606348504 s in the future
+tar: app/assets/images/back.png: time stamp 2016-08-16 12:01:18 is 326.606201742 s in the future
+tar: app/assets/images/back1.png: time stamp 2016-08-16 12:01:18 is 326.60613991 s in the future
+tar: app/assets/images/burger_btn.png: time stamp 2016-08-16 12:01:18 is 326.606106453 s in the future
+tar: app/assets/images/c: time stamp 2016-08-16 12:01:18 is 326.606077132 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/cancel.png: time stamp 2016-08-16 12:01:18 is 326.605953982 s in the future
+tar: app/assets/images/cd_gsb.png: time stamp 2016-08-16 12:01:18 is 326.60591836 s in the future
+tar: app/assets/images/cd_inshop.png: time stamp 2016-08-16 12:01:18 is 326.605890008 s in the future
+tar: app/assets/images/cd_maintenance.png: time stamp 2016-08-16 12:01:18 is 326.605860177 s in the future
+tar: app/assets/images/cd_sis.png: time stamp 2016-08-16 12:01:18 is 326.605737822 s in the future
+tar: app/assets/images/cd_visit.png: time stamp 2016-08-16 12:01:18 is 326.605705301 s in the future
+tar: app/assets/images/cdeclined.png: time stamp 2016-08-16 12:01:18 is 326.605677327 s in the future
+tar: app/assets/images/cp_gsb.png: time stamp 2016-08-16 12:01:18 is 326.605559015 s in the future
+tar: app/assets/images/cp_inshop.png: time stamp 2016-08-16 12:01:18 is 326.605528237 s in the future
+tar: app/assets/images/cp_maintenance.png: time stamp 2016-08-16 12:01:18 is 326.60549863 s in the future
+tar: app/assets/images/cp_sis.png: time stamp 2016-08-16 12:01:18 is 326.605469672 s in the future
+tar: app/assets/images/cp_visit.png: time stamp 2016-08-16 12:01:18 is 326.605334831 s in the future
+tar: app/assets/images/cpending.png: time stamp 2016-08-16 12:01:18 is 326.605303851 s in the future
+tar: app/assets/images/customer-icon.png: time stamp 2016-08-16 12:01:18 is 326.60513578 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/d_gsb.png: time stamp 2016-08-16 12:01:18 is 326.605100432 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/d_inshop.png: time stamp 2016-08-16 12:01:18 is 326.605041536 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/d_maintenance.png: time stamp 2016-08-16 12:01:18 is 326.605007605 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/d_sis.png: time stamp 2016-08-16 12:01:18 is 326.604888662 s in the future
+tar: app/assets/images/d_visit.png: time stamp 2016-08-16 12:01:18 is 326.604851574 s in the future
+tar: app/assets/images/declined.png: time stamp 2016-08-16 12:01:18 is 326.604818546 s in the future
+tar: app/assets/images/doc.png: time stamp 2016-08-16 12:01:18 is 326.604790787 s in the future
+tar: app/assets/images/down-arrow.png: time stamp 2016-08-16 12:01:18 is 326.604526628 s in the future
+tar: app/assets/images/drop_down_arrow.png: time stamp 2016-08-16 12:01:18 is 326.604491174 s in the future
+tar: app/assets/images/export.png: time stamp 2016-08-16 12:01:18 is 326.604462092 s in the future
+tar: app/assets/images/fevicon.jpg: time stamp 2016-08-16 12:01:18 is 326.604331245 s in the future
+tar: app/assets/images/file-icon.png: time stamp 2016-08-16 12:01:18 is 326.604296703 s in the future
+tar: app/assets/images/filter_btn.png: time stamp 2016-08-16 12:01:18 is 326.604267873 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/gbs.png: time stamp 2016-08-16 12:01:18 is 326.603804147 s in the future
+tar: app/assets/images/generate_report_icon.png: time stamp 2016-08-16 12:01:18 is 326.603769283 s in the future
+tar: app/assets/images/gionee-loader.gif: time stamp 2016-08-16 12:01:18 is 326.60359566 s in the future
+tar: app/assets/images/gionee_logo (1).png: time stamp 2016-08-16 12:01:18 is 326.603516516 s in the future
+tar: app/assets/images/gionee_logo.png: time stamp 2016-08-16 12:01:18 is 326.60339263 s in the future
+tar: app/assets/images/gionee_logo1-(1).png: time stamp 2016-08-16 12:01:18 is 326.603349738 s in the future
+tar: app/assets/images/gionee_logo1.png: time stamp 2016-08-16 12:01:18 is 326.60325688 s in the future
+tar: app/assets/images/gsb.png: time stamp 2016-08-16 12:01:18 is 326.603210205 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/help_icon.png: time stamp 2016-08-16 12:01:18 is 326.603046634 s in the future
+tar: app/assets/images/in_shop.png: time stamp 2016-08-16 12:01:18 is 326.603009312 s in the future
+tar: app/assets/images/inshop.png: time stamp 2016-08-16 12:01:18 is 326.602872338 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/loader.gif: time stamp 2016-08-16 12:01:18 is 326.601394534 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/loader1.gif: time stamp 2016-08-16 12:01:18 is 326.600771413 s in the future
+tar: app/assets/images/loader2.gif: time stamp 2016-08-16 12:01:18 is 326.600420202 s in the future
+tar: app/assets/images/loader_new.gif: time stamp 2016-08-16 12:01:18 is 326.600229537 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/logo.png: time stamp 2016-08-16 12:01:18 is 326.599942146 s in the future
+tar: app/assets/images/logo_gionee.png: time stamp 2016-08-16 12:01:18 is 326.599807569 s in the future
+tar: app/assets/images/logo_orange.png: time stamp 2016-08-16 12:01:18 is 326.599690842 s in the future
+tar: app/assets/images/logout.png: time stamp 2016-08-16 12:01:18 is 326.599614636 s in the future
+tar: app/assets/images/logout1.jpg: time stamp 2016-08-16 12:01:18 is 326.599579187 s in the future
+tar: app/assets/images/logout1.png: time stamp 2016-08-16 12:01:18 is 326.599487672 s in the future
+tar: app/assets/images/logout_icon.png: time stamp 2016-08-16 12:01:18 is 326.599453771 s in the future
+tar: app/assets/images/maintenance.png: time stamp 2016-08-16 12:01:18 is 326.599345739 s in the future
+tar: app/assets/images/manintenance.png: time stamp 2016-08-16 12:01:18 is 326.599309914 s in the future
+tar: app/assets/images/maximize.png: time stamp 2016-08-16 12:01:18 is 326.59914662 s in the future
+tar: app/assets/images/minimize.png: time stamp 2016-08-16 12:01:18 is 326.599110959 s in the future
+tar: app/assets/images/new_design/clear.png: time stamp 2016-08-16 12:01:18 is 326.599049562 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/new_design/error-404-v2.png: time stamp 2016-08-16 12:01:18 is 326.598913012 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/new_design/error-404-v3.png: time stamp 2016-08-16 12:01:18 is 326.598819951 s in the future
+tar: app/assets/images/new_design/error-404.png: time stamp 2016-08-16 12:01:18 is 326.598678545 s in the future
+tar: app/assets/images/new_design/error-500-v1.png: time stamp 2016-08-16 12:01:18 is 326.59857065 s in the future
+tar: app/assets/images/new_design/error-500-v2.png: time stamp 2016-08-16 12:01:18 is 326.598398445 s in the future
+tar: app/assets/images/new_design/headline-bg.jpg: time stamp 2016-08-16 12:01:18 is 326.598358055 s in the future
+tar: app/assets/images/new_design/images.jpg: time stamp 2016-08-16 12:01:18 is 326.598324438 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/new_design/loading.gif: time stamp 2016-08-16 12:01:18 is 326.596398546 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/new_design/login-img.jpg: time stamp 2016-08-16 12:01:18 is 326.595352431 s in the future
+tar: app/assets/images/new_design/logo-black.png: time stamp 2016-08-16 12:01:18 is 326.595313314 s in the future
+tar: app/assets/images/new_design/logo-small-black.png: time stamp 2016-08-16 12:01:18 is 326.595279816 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/new_design/logo-small.png: time stamp 2016-08-16 12:01:18 is 326.59498551 s in the future
+tar: app/assets/images/new_design/logo.png: time stamp 2016-08-16 12:01:18 is 326.594938515 s in the future
+tar: app/assets/images/new_design/pricing-star.png: time stamp 2016-08-16 12:01:18 is 326.594907577 s in the future
+tar: app/assets/images/new_design/samples/admin-devices.png: time stamp 2016-08-16 12:01:18 is 326.594677904 s in the future
+tar: app/assets/images/new_design/samples/angelina-300.jpg: time stamp 2016-08-16 12:01:18 is 326.594557927 s in the future
+tar: app/assets/images/new_design/samples/email-sample-img-2.png: time stamp 2016-08-16 12:01:18 is 326.59444169 s in the future
+tar: app/assets/images/new_design/samples/email-sample-img.png: time stamp 2016-08-16 12:01:18 is 326.59440471 s in the future
+tar: app/assets/images/new_design/samples/email-sample-small-1.png: time stamp 2016-08-16 12:01:18 is 326.594278872 s in the future
+tar: app/assets/images/new_design/samples/email-sample-small-180-1.png: time stamp 2016-08-16 12:01:18 is 326.59423016 s in the future
+tar: app/assets/images/new_design/samples/email-sample-small-180-2.png: time stamp 2016-08-16 12:01:18 is 326.594197177 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/new_design/samples/email-sample-small-180-3.png: time stamp 2016-08-16 12:01:18 is 326.59405017 s in the future
+tar: app/assets/images/new_design/samples/email-sample-small-2.png: time stamp 2016-08-16 12:01:18 is 326.594014943 s in the future
+tar: app/assets/images/new_design/samples/email-sample-small-260-1.png: time stamp 2016-08-16 12:01:18 is 326.593974886 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/new_design/samples/email-sample-small-260-2.png: time stamp 2016-08-16 12:01:18 is 326.591826783 s in the future
+tar: app/assets/images/new_design/samples/email-sample-small-3.png: time stamp 2016-08-16 12:01:18 is 326.591781055 s in the future
+tar: app/assets/images/new_design/samples/images.jpg: time stamp 2016-08-16 12:01:18 is 326.591177876 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/new_design/samples/profile-photo.png: time stamp 2016-08-16 12:01:18 is 326.590985866 s in the future
+tar: app/assets/images/new_design/samples/ryan-300.jpg: time stamp 2016-08-16 12:01:18 is 326.590642403 s in the future
+tar: app/assets/images/new_design/samples/scarlet-159.png: time stamp 2016-08-16 12:01:18 is 326.590476688 s in the future
+tar: app/assets/images/new_design/samples/scarlet.png: time stamp 2016-08-16 12:01:18 is 326.590320214 s in the future
+tar: app/assets/images/new_design/samples/scarlett-300.jpg: time stamp 2016-08-16 12:01:18 is 326.590221687 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/new_design/samples/user-profile-1.png: time stamp 2016-08-16 12:01:18 is 326.590071808 s in the future
+tar: app/assets/images/new_design/samples: time stamp 2016-08-16 12:01:18 is 326.59005159 s in the future
+tar: app/assets/images/new_design/select2-spinner.gif: time stamp 2016-08-16 12:01:18 is 326.590022129 s in the future
+tar: app/assets/images/new_design/select2.png: time stamp 2016-08-16 12:01:18 is 326.589897941 s in the future
+tar: app/assets/images/new_design/select2x2.png: time stamp 2016-08-16 12:01:18 is 326.589866278 s in the future
+tar: app/assets/images/new_design/sprite-green.png: time stamp 2016-08-16 12:01:18 is 326.589745392 s in the future
+tar: app/assets/images/new_design/spritemap.png: time stamp 2016-08-16 12:01:18 is 326.589557155 s in the future
+tar: app/assets/images/new_design/spritemap@2x.png: time stamp 2016-08-16 12:01:18 is 326.589484273 s in the future
+tar: app/assets/images/new_design/whitey.jpg: time stamp 2016-08-16 12:01:18 is 326.589277676 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/new_design/whitey_@2X.jpg: time stamp 2016-08-16 12:01:18 is 326.58912254 s in the future
+tar: app/assets/images/new_design: time stamp 2016-08-16 12:01:18 is 326.589101596 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/our-team.png: time stamp 2016-08-16 12:01:18 is 326.58894047 s in the future
+tar: app/assets/images/p_gsb.png: time stamp 2016-08-16 12:01:18 is 326.588904438 s in the future
+tar: app/assets/images/p_inshop.png: time stamp 2016-08-16 12:01:18 is 326.58887301 s in the future
+tar: app/assets/images/p_maintenance.png: time stamp 2016-08-16 12:01:18 is 326.588751384 s in the future
+tar: app/assets/images/p_sis.png: time stamp 2016-08-16 12:01:18 is 326.588715388 s in the future
+tar: app/assets/images/p_visit.png: time stamp 2016-08-16 12:01:18 is 326.588683668 s in the future
+tar: app/assets/images/pending.png: time stamp 2016-08-16 12:01:18 is 326.58858694 s in the future
+tar: app/assets/images/profile-icon.png: time stamp 2016-08-16 12:01:18 is 326.588550309 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/reject.png: time stamp 2016-08-16 12:01:18 is 326.586602447 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/request-icon.png: time stamp 2016-08-16 12:01:18 is 326.585490455 s in the future
+tar: app/assets/images/request_dashboard_icon.png: time stamp 2016-08-16 12:01:18 is 326.585451888 s in the future
+tar: app/assets/images/retailer_record.png: time stamp 2016-08-16 12:01:18 is 326.58531231 s in the future
+tar: app/assets/images/search.png: time stamp 2016-08-16 12:01:18 is 326.585233811 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/settings_icon.png: time stamp 2016-08-16 12:01:18 is 326.585039107 s in the future
+tar: app/assets/images/sis.png: time stamp 2016-08-16 12:01:18 is 326.585000427 s in the future
+tar: app/assets/images/sisp.png: time stamp 2016-08-16 12:01:18 is 326.584842721 s in the future
+tar: app/assets/images/sort_icon.png: time stamp 2016-08-16 12:01:18 is 326.584806835 s in the future
+tar: app/assets/images/turn-off1.png: time stamp 2016-08-16 12:01:18 is 326.584637355 s in the future
+tar: app/assets/images/up-arrow.png: time stamp 2016-08-16 12:01:18 is 326.584574123 s in the future
+tar: app/assets/images/update.png: time stamp 2016-08-16 12:01:18 is 326.584457506 s in the future
+tar: app/assets/images/update_inactive.png: time stamp 2016-08-16 12:01:18 is 326.584328098 s in the future
+tar: app/assets/images/update_status.png: time stamp 2016-08-16 12:01:18 is 326.584290013 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images/updated.png: time stamp 2016-08-16 12:01:18 is 326.584105024 s in the future
+tar: app/assets/images/visitor.png: time stamp 2016-08-16 12:01:18 is 326.58406635 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/images: time stamp 2016-08-16 12:01:18 is 326.584049479 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/javascripts/application.js: time stamp 2016-08-16 12:01:18 is 326.583989235 s in the future
+tar: app/assets/javascripts/beatroute.js.coffee: time stamp 2016-08-16 12:01:18 is 326.583695986 s in the future
+tar: app/assets/javascripts/cmos.js.coffee: time stamp 2016-08-16 12:01:18 is 326.583647709 s in the future
+tar: app/assets/javascripts/device_registration.js.coffee: time stamp 2016-08-16 12:01:18 is 326.583615207 s in the future
+tar: app/assets/javascripts/devices.js.coffee: time stamp 2016-08-16 12:01:18 is 326.583586233 s in the future
+tar: app/assets/javascripts/downloads.js.coffee: time stamp 2016-08-16 12:01:18 is 326.583558298 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/javascripts/file-progress.js: time stamp 2016-08-16 12:01:18 is 326.582225217 s in the future
+tar: app/assets/javascripts/gmails.js.coffee: time stamp 2016-08-16 12:01:18 is 326.582180507 s in the future
+tar: app/assets/javascripts/helps.js.coffee: time stamp 2016-08-16 12:01:18 is 326.582120229 s in the future
+tar: app/assets/javascripts/image_upload.js: time stamp 2016-08-16 12:01:18 is 326.582074382 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/javascripts/jquery-1.10.2.js: time stamp 2016-08-16 12:01:18 is 326.579789214 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/javascripts/jquery-ui.js: time stamp 2016-08-16 12:01:18 is 326.578686501 s in the future
+tar: app/assets/javascripts/levels.js.coffee: time stamp 2016-08-16 12:01:18 is 326.57864472 s in the future
+tar: app/assets/javascripts/maintenance_dropdown.js: time stamp 2016-08-16 12:01:18 is 326.578598398 s in the future
+tar: app/assets/javascripts/new_design/assignment.js: time stamp 2016-08-16 12:01:18 is 326.578512759 s in the future
+tar: app/assets/javascripts/new_design/bootstrap.js: time stamp 2016-08-16 12:01:18 is 326.578271811 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/javascripts/new_design/datefield.js: time stamp 2016-08-16 12:01:18 is 326.57766243 s in the future
+tar: app/assets/javascripts/new_design/demo-skin-changer.js: time stamp 2016-08-16 12:01:18 is 326.577624509 s in the future
+tar: app/assets/javascripts/new_design/error_messages.js: time stamp 2016-08-16 12:01:18 is 326.57759122 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/javascripts/new_design/jquery.js: time stamp 2016-08-16 12:01:18 is 326.5768722 s in the future
+tar: app/assets/javascripts/new_design/moment.js: time stamp 2016-08-16 12:01:18 is 326.576544301 s in the future
+tar: app/assets/javascripts/new_design/pace.min.js: time stamp 2016-08-16 12:01:18 is 326.576440905 s in the future
+tar: app/assets/javascripts/new_design/scripts.js: time stamp 2016-08-16 12:01:18 is 326.576300156 s in the future
+tar: app/assets/javascripts/new_design: time stamp 2016-08-16 12:01:18 is 326.576278913 s in the future
+tar: app/assets/javascripts/notifications.js.coffee: time stamp 2016-08-16 12:01:18 is 326.576249445 s in the future
+tar: app/assets/javascripts/popup.js: time stamp 2016-08-16 12:01:18 is 326.57621431 s in the future
+tar: app/assets/javascripts/repositories.js.coffee: time stamp 2016-08-16 12:01:18 is 326.576172266 s in the future
+tar: app/assets/javascripts/request_assignments.js.coffee: time stamp 2016-08-16 12:01:18 is 326.576114667 s in the future
+tar: app/assets/javascripts/request_documents.js.coffee: time stamp 2016-08-16 12:01:18 is 326.57607622 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/javascripts/request_dropdown.js: time stamp 2016-08-16 12:01:18 is 326.575926574 s in the future
+tar: app/assets/javascripts/request_form.js: time stamp 2016-08-16 12:01:18 is 326.575794937 s in the future
+tar: app/assets/javascripts/retailers.js.coffee: time stamp 2016-08-16 12:01:18 is 326.575759394 s in the future
+tar: app/assets/javascripts/rrms.js.coffee: time stamp 2016-08-16 12:01:18 is 326.575731126 s in the future
+tar: app/assets/javascripts/select.js: time stamp 2016-08-16 12:01:18 is 326.57570243 s in the future
+tar: app/assets/javascripts/semantic-ui.js: time stamp 2016-08-16 12:01:18 is 326.575586432 s in the future
+tar: app/assets/javascripts/shift_time_update.js: time stamp 2016-08-16 12:01:18 is 326.575552332 s in the future
+tar: app/assets/javascripts/tags.js.coffee: time stamp 2016-08-16 12:01:18 is 326.575523315 s in the future
+tar: app/assets/javascripts/tat_groups.js.coffee: time stamp 2016-08-16 12:01:18 is 326.575495895 s in the future
+tar: app/assets/javascripts/user_audits.js.coffee: time stamp 2016-08-16 12:01:18 is 326.57545252 s in the future
+tar: app/assets/javascripts/user_data.js.coffee: time stamp 2016-08-16 12:01:18 is 326.575419493 s in the future
+tar: app/assets/javascripts/users.js: time stamp 2016-08-16 12:01:18 is 326.575391024 s in the future
+tar: app/assets/javascripts/vendor_assignments.js.coffee: time stamp 2016-08-16 12:01:18 is 326.57535277 s in the future
+tar: app/assets/javascripts/vendor_form.js: time stamp 2016-08-16 12:01:18 is 326.575323188 s in the future
+tar: app/assets/javascripts/vendor_requests.js.coffee: time stamp 2016-08-16 12:01:18 is 326.57521992 s in the future
+tar: app/assets/javascripts/vendor_stages.js.coffee: time stamp 2016-08-16 12:01:18 is 326.575152678 s in the future
+tar: app/assets/javascripts/vendors.js.coffee: time stamp 2016-08-16 12:01:18 is 326.575108725 s in the future
+tar: app/assets/javascripts/visitor_dropdown.js: time stamp 2016-08-16 12:01:18 is 326.57506985 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/javascripts/wizard.js: time stamp 2016-08-16 12:01:18 is 326.574822903 s in the future
+tar: app/assets/javascripts: time stamp 2016-08-16 12:01:18 is 326.574792683 s in the future
+tar: app/assets/stylesheets/application.css: time stamp 2016-08-16 12:01:18 is 326.574739644 s in the future
+tar: app/assets/stylesheets/beatroute.css.scss: time stamp 2016-08-16 12:01:18 is 326.574710621 s in the future
+tar: app/assets/stylesheets/cmos.css.scss: time stamp 2016-08-16 12:01:18 is 326.574681059 s in the future
+tar: app/assets/stylesheets/device_registration.css.scss: time stamp 2016-08-16 12:01:18 is 326.574653468 s in the future
+tar: app/assets/stylesheets/devices.css.scss: time stamp 2016-08-16 12:01:18 is 326.574625782 s in the future
+tar: app/assets/stylesheets/downloads.css.scss: time stamp 2016-08-16 12:01:18 is 326.574415837 s in the future
+tar: app/assets/stylesheets/gmails.css.scss: time stamp 2016-08-16 12:01:18 is 326.574382611 s in the future
+tar: app/assets/stylesheets/helps.css.scss: time stamp 2016-08-16 12:01:18 is 326.574340605 s in the future
+tar: app/assets/stylesheets/jquery-ui.css: time stamp 2016-08-16 12:01:18 is 326.574227268 s in the future
+tar: app/assets/stylesheets/levels.css.scss: time stamp 2016-08-16 12:01:18 is 326.574175202 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/stylesheets/login.css: time stamp 2016-08-16 12:01:18 is 326.573875612 s in the future
+tar: app/assets/stylesheets/main.css.erb: time stamp 2016-08-16 12:01:18 is 326.573324696 s in the future
+tar: app/assets/stylesheets/maps.css.scss: time stamp 2016-08-16 12:01:18 is 326.573288605 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/stylesheets/new_design/bootstrap/bootstrap.css: time stamp 2016-08-16 12:01:18 is 326.572505819 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/stylesheets/new_design/bootstrap/bootstrap.min.css: time stamp 2016-08-16 12:01:18 is 326.572047987 s in the future
+tar: app/assets/stylesheets/new_design/bootstrap: time stamp 2016-08-16 12:01:18 is 326.572011062 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/stylesheets/new_design/calendar_filter.css: time stamp 2016-08-16 12:01:18 is 326.571963389 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/stylesheets/new_design/compiled/calendar.css: time stamp 2016-08-16 12:01:18 is 326.571878706 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/stylesheets/new_design/compiled/custom.css: time stamp 2016-08-16 12:01:18 is 326.571004808 s in the future
+tar: app/assets/stylesheets/new_design/compiled/theme_styles.css: time stamp 2016-08-16 12:01:18 is 326.570547635 s in the future
+tar: app/assets/stylesheets/new_design/compiled/wizard.css: time stamp 2016-08-16 12:01:18 is 326.570506031 s in the future
+tar: app/assets/stylesheets/new_design/compiled: time stamp 2016-08-16 12:01:18 is 326.570487524 s in the future
+tar: app/assets/stylesheets/new_design/left_menu.css: time stamp 2016-08-16 12:01:18 is 326.570384745 s in the future
+tar: app/assets/stylesheets/new_design/libs/daterangepicker.css: time stamp 2016-08-16 12:01:18 is 326.570211432 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/stylesheets/new_design/libs/font-awesome.css: time stamp 2016-08-16 12:01:18 is 326.570009059 s in the future
+tar: app/assets/stylesheets/new_design/libs/jquery-jvectormap-1.2.2.css: time stamp 2016-08-16 12:01:18 is 326.569958073 s in the future
+tar: app/assets/stylesheets/new_design/libs/nanoscroller.css: time stamp 2016-08-16 12:01:18 is 326.569873079 s in the future
+tar: app/assets/stylesheets/new_design/libs/weather-icons.css: time stamp 2016-08-16 12:01:18 is 326.56973945 s in the future
+tar: app/assets/stylesheets/new_design/libs: time stamp 2016-08-16 12:01:18 is 326.569718205 s in the future
+tar: app/assets/stylesheets/new_design: time stamp 2016-08-16 12:01:18 is 326.569704844 s in the future
+tar: app/assets/stylesheets/notifications.css.scss: time stamp 2016-08-16 12:01:18 is 326.569675372 s in the future
+tar: app/assets/stylesheets/repositories.css.scss: time stamp 2016-08-16 12:01:18 is 326.569647045 s in the future
+tar: app/assets/stylesheets/request_assignments.css.scss: time stamp 2016-08-16 12:01:18 is 326.569618755 s in the future
+tar: app/assets/stylesheets/request_documents.css.scss: time stamp 2016-08-16 12:01:18 is 326.569591204 s in the future
+tar: app/assets/stylesheets/retailers.css.scss: time stamp 2016-08-16 12:01:18 is 326.569562403 s in the future
+tar: app/assets/stylesheets/rrms.css.scss: time stamp 2016-08-16 12:01:18 is 326.569533761 s in the future
+tar: app/assets/stylesheets/scaffolds.css.scss: time stamp 2016-08-16 12:01:18 is 326.569404127 s in the future
+tar: app/assets/stylesheets/semantic-ui.css.less: time stamp 2016-08-16 12:01:18 is 326.569362859 s in the future
+tar: app/assets/stylesheets/style.css: time stamp 2016-08-16 12:01:18 is 326.569331162 s in the future
+tar: app/assets/stylesheets/tags.css.scss: time stamp 2016-08-16 12:01:18 is 326.569302152 s in the future
+tar: app/assets/stylesheets/tat_groups.css.scss: time stamp 2016-08-16 12:01:18 is 326.569272092 s in the future
+tar: app/assets/stylesheets/user_audits.css.scss: time stamp 2016-08-16 12:01:18 is 326.569241304 s in the future
+tar: app/assets/stylesheets/user_data.css.scss: time stamp 2016-08-16 12:01:18 is 326.569201485 s in the future
+tar: app/assets/stylesheets/vendor_assignments.css.scss: time stamp 2016-08-16 12:01:18 is 326.569150724 s in the future
+ DEBUG [67aacfd2] 	tar: app/assets/stylesheets/vendor_requests.css.scss: time stamp 2016-08-16 12:01:18 is 326.568824049 s in the future
+tar: app/assets/stylesheets/vendor_stages.css.scss: time stamp 2016-08-16 12:01:18 is 326.568788023 s in the future
+tar: app/assets/stylesheets/vendors.css.scss: time stamp 2016-08-16 12:01:18 is 326.56875789 s in the future
+tar: app/assets/stylesheets: time stamp 2016-08-16 12:01:18 is 326.568741253 s in the future
+tar: app/assets: time stamp 2016-08-16 12:01:18 is 326.568727868 s in the future
+tar: app/controllers/addresses_controller.rb: time stamp 2016-08-16 12:01:18 is 326.568682151 s in the future
+tar: app/controllers/alcohol_percents_controller.rb: time stamp 2016-08-16 12:01:18 is 326.568653828 s in the future
+tar: app/controllers/answers_controller.rb: time stamp 2016-08-16 12:01:18 is 326.568617827 s in the future
+tar: app/controllers/api/gpulse/base_controller.rb: time stamp 2016-08-16 12:01:18 is 326.568412622 s in the future
+tar: app/controllers/api/gpulse/cmos_controller.rb: time stamp 2016-08-16 12:01:18 is 326.568366103 s in the future
+tar: app/controllers/api/gpulse/maps_controller.rb: time stamp 2016-08-16 12:01:18 is 326.568335044 s in the future
+tar: app/controllers/api/gpulse/requests_controller.rb: time stamp 2016-08-16 12:01:18 is 326.568305189 s in the future
+tar: app/controllers/api/gpulse/statelists_controller.rb: time stamp 2016-08-16 12:01:18 is 326.568275613 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/api/gpulse: time stamp 2016-08-16 12:01:18 is 326.568017961 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/api/gquestion/retailers_controller.rb: time stamp 2016-08-16 12:01:18 is 326.567933955 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/api/gquestion: time stamp 2016-08-16 12:01:18 is 326.567901099 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/api/gstar/shops_controller.rb: time stamp 2016-08-16 12:01:18 is 326.567779985 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/api/gstar: time stamp 2016-08-16 12:01:18 is 326.567747809 s in the future
+tar: app/controllers/api/v1/attendances_controller.rb: time stamp 2016-08-16 12:01:18 is 326.567675249 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/api/v1/base_controller.rb: time stamp 2016-08-16 12:01:18 is 326.56762203 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/api/v1/citylists_controller.rb: time stamp 2016-08-16 12:01:18 is 326.567570041 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/api/v1/customers_controller.rb: time stamp 2016-08-16 12:01:18 is 326.567353102 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/api/v1/devices_controller.rb: time stamp 2016-08-16 12:01:18 is 326.567313089 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/api/v1/documents_controller.rb: time stamp 2016-08-16 12:01:18 is 326.567274473 s in the future
+tar: app/controllers/api/v1/home_controller.rb: time stamp 2016-08-16 12:01:18 is 326.567231177 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/api/v1/radiofields_controller.rb: time stamp 2016-08-16 12:01:18 is 326.567150731 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/api/v1/repository_controller.rb: time stamp 2016-08-16 12:01:18 is 326.567100787 s in the future
+tar: app/controllers/api/v1/response_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566926315 s in the future
+tar: app/controllers/api/v1/retailerlists_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566886832 s in the future
+tar: app/controllers/api/v1/screens_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566845285 s in the future
+tar: app/controllers/api/v1/sessions_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566719417 s in the future
+tar: app/controllers/api/v1/shop_assignments_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566683314 s in the future
+tar: app/controllers/api/v1/statelists_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566654724 s in the future
+tar: app/controllers/api/v1/test_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566625508 s in the future
+tar: app/controllers/api/v1/vendors_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566476409 s in the future
+tar: app/controllers/api/v1/version_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566432667 s in the future
+tar: app/controllers/api/v1/visitors_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566403189 s in the future
+tar: app/controllers/api/v1: time stamp 2016-08-16 12:01:18 is 326.566386999 s in the future
+tar: app/controllers/api: time stamp 2016-08-16 12:01:18 is 326.566367056 s in the future
+tar: app/controllers/application_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566339257 s in the future
+tar: app/controllers/apps_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566311501 s in the future
+tar: app/controllers/attendances_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566284772 s in the future
+tar: app/controllers/beatroutes_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566177763 s in the future
+tar: app/controllers/biz.rb: time stamp 2016-08-16 12:01:18 is 326.566115172 s in the future
+tar: app/controllers/business_units_controller.rb: time stamp 2016-08-16 12:01:18 is 326.566077527 s in the future
+tar: app/controllers/catchment.rb: time stamp 2016-08-16 12:01:18 is 326.566047413 s in the future
+tar: app/controllers/catchment_business_shop.rb: time stamp 2016-08-16 12:01:18 is 326.566020157 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/categories_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565924339 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/cities_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565844773 s in the future
+tar: app/controllers/cmos_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565806731 s in the future
+tar: app/controllers/collections_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565778808 s in the future
+tar: app/controllers/competition.rb: time stamp 2016-08-16 12:01:18 is 326.565657495 s in the future
+tar: app/controllers/concerns/.keep: time stamp 2016-08-16 12:01:18 is 326.565612095 s in the future
+tar: app/controllers/concerns: time stamp 2016-08-16 12:01:18 is 326.565595867 s in the future
+tar: app/controllers/contacts_controller.rb: time stamp 2016-08-16 12:01:18 is 326.56556985 s in the future
+tar: app/controllers/customers_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565541499 s in the future
+tar: app/controllers/customers_users_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565514089 s in the future
+tar: app/controllers/dashboard_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565370817 s in the future
+tar: app/controllers/data_files_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565336201 s in the future
+tar: app/controllers/departments_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565305531 s in the future
+tar: app/controllers/devices_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565277785 s in the future
+tar: app/controllers/documents_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565248633 s in the future
+tar: app/controllers/downloads_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565219733 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/dropdown_values_controller.rb: time stamp 2016-08-16 12:01:18 is 326.565034289 s in the future
+tar: app/controllers/fields_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564998483 s in the future
+tar: app/controllers/folders_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564967325 s in the future
+tar: app/controllers/helps_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564939508 s in the future
+tar: app/controllers/holidays_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564910567 s in the future
+tar: app/controllers/images_controller.rb: time stamp 2016-08-16 12:01:18 is 326.56488321 s in the future
+tar: app/controllers/industry.rb: time stamp 2016-08-16 12:01:18 is 326.564854934 s in the future
+tar: app/controllers/inventories_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564738399 s in the future
+tar: app/controllers/item_regions_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564702853 s in the future
+tar: app/controllers/items_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564674703 s in the future
+tar: app/controllers/job_titles_controller.rb: time stamp 2016-08-16 12:01:18 is 326.56454082 s in the future
+tar: app/controllers/levels_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564507841 s in the future
+tar: app/controllers/maps_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564471855 s in the future
+tar: app/controllers/module_groups_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564432149 s in the future
+tar: app/controllers/notifications_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564401535 s in the future
+tar: app/controllers/organizations_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564366552 s in the future
+tar: app/controllers/partener.rb: time stamp 2016-08-16 12:01:18 is 326.564335872 s in the future
+tar: app/controllers/passwords_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564206167 s in the future
+tar: app/controllers/permissions_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564149207 s in the future
+tar: app/controllers/picture.rb: time stamp 2016-08-16 12:01:18 is 326.564105686 s in the future
+tar: app/controllers/regions_controller.rb: time stamp 2016-08-16 12:01:18 is 326.56407066 s in the future
+tar: app/controllers/request_assignments_controller.rb: time stamp 2016-08-16 12:01:18 is 326.564041405 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/request_documents_controller.rb: time stamp 2016-08-16 12:01:18 is 326.563928048 s in the future
+tar: app/controllers/requests_controller.rb: time stamp 2016-08-16 12:01:18 is 326.563763348 s in the future
+tar: app/controllers/requests_csv_controller.rb: time stamp 2016-08-16 12:01:18 is 326.563727601 s in the future
+tar: app/controllers/retailers_controller.rb: time stamp 2016-08-16 12:01:18 is 326.563692979 s in the future
+tar: app/controllers/roles_controller.rb: time stamp 2016-08-16 12:01:18 is 326.563657061 s in the future
+tar: app/controllers/rrms_controller.rb: time stamp 2016-08-16 12:01:18 is 326.563513364 s in the future
+tar: app/controllers/sales_orders_controller.rb: time stamp 2016-08-16 12:01:18 is 326.563473366 s in the future
+tar: app/controllers/schema_controller.rb: time stamp 2016-08-16 12:01:18 is 326.563432676 s in the future
+tar: app/controllers/screens_controller.rb: time stamp 2016-08-16 12:01:18 is 326.5634014 s in the future
+tar: app/controllers/sessions_controller.rb: time stamp 2016-08-16 12:01:18 is 326.563363581 s in the future
+tar: app/controllers/shop_assignments_controller.rb: time stamp 2016-08-16 12:01:18 is 326.563241433 s in the future
+tar: app/controllers/shop_dimension.rb: time stamp 2016-08-16 12:01:18 is 326.563201006 s in the future
+tar: app/controllers/shop_ownership.rb: time stamp 2016-08-16 12:01:18 is 326.563144991 s in the future
+tar: app/controllers/sizes_controller.rb: time stamp 2016-08-16 12:01:18 is 326.563099683 s in the future
+tar: app/controllers/surveys_controller.rb: time stamp 2016-08-16 12:01:18 is 326.56306691 s in the future
+tar: app/controllers/tags_controller.rb: time stamp 2016-08-16 12:01:18 is 326.563039054 s in the future
+ DEBUG [67aacfd2] 	tar: app/controllers/tat_groups_controller.rb: time stamp 2016-08-16 12:01:18 is 326.562892706 s in the future
+tar: app/controllers/user_audits_controller.rb: time stamp 2016-08-16 12:01:18 is 326.562851395 s in the future
+tar: app/controllers/user_data_controller.rb: time stamp 2016-08-16 12:01:18 is 326.562812439 s in the future
+tar: app/controllers/user_shifts_controller.rb: time stamp 2016-08-16 12:01:18 is 326.562782589 s in the future
+tar: app/controllers/users_controller.rb: time stamp 2016-08-16 12:01:18 is 326.56275473 s in the future
+tar: app/controllers/users_reportings_controller.rb: time stamp 2016-08-16 12:01:18 is 326.562727118 s in the future
+tar: app/controllers/vendor_assignments_controller.rb: time stamp 2016-08-16 12:01:18 is 326.562606034 s in the future
+tar: app/controllers/vendor_requests_controller.rb: time stamp 2016-08-16 12:01:18 is 326.562574421 s in the future
+tar: app/controllers/vendor_stages_controller.rb: time stamp 2016-08-16 12:01:18 is 326.562544226 s in the future
+tar: app/controllers/vendor_tasks_controller.rb: time stamp 2016-08-16 12:01:18 is 326.562449202 s in the future
+tar: app/controllers/vendorlists_controller.rb: time stamp 2016-08-16 12:01:18 is 326.562413361 s in the future
+tar: app/controllers/warehouses_controller.rb: time stamp 2016-08-16 12:01:18 is 326.562385099 s in the future
+tar: app/controllers/weekly_offs_controller.rb: time stamp 2016-08-16 12:01:18 is 326.562347309 s in the future
+tar: app/controllers: time stamp 2016-08-16 12:01:18 is 326.562331029 s in the future
+tar: app/helpers/api/v1/citylists_helper.rb: time stamp 2016-08-16 12:01:18 is 326.5620826 s in the future
+tar: app/helpers/api/v1: time stamp 2016-08-16 12:01:18 is 326.562062678 s in the future
+tar: app/helpers/api: time stamp 2016-08-16 12:01:18 is 326.562050103 s in the future
+tar: app/helpers/api_helper.rb: time stamp 2016-08-16 12:01:18 is 326.562026493 s in the future
+tar: app/helpers/application_helper.rb: time stamp 2016-08-16 12:01:18 is 326.5619987 s in the future
+tar: app/helpers/beatroute_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561971988 s in the future
+tar: app/helpers/cmos_helper.rb: time stamp 2016-08-16 12:01:18 is 326.56194589 s in the future
+tar: app/helpers/date_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561919722 s in the future
+ DEBUG [67aacfd2] 	tar: app/helpers/device_registration_helper.rb: time stamp 2016-08-16 12:01:18 is 326.56177108 s in the future
+tar: app/helpers/devices_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561736705 s in the future
+tar: app/helpers/downloads_helper.rb: time stamp 2016-08-16 12:01:18 is 326.56170685 s in the future
+tar: app/helpers/gmails_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561679216 s in the future
+tar: app/helpers/helps_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561648276 s in the future
+tar: app/helpers/levels_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561620015 s in the future
+tar: app/helpers/maps_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561593204 s in the future
+tar: app/helpers/notifications_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561566025 s in the future
+tar: app/helpers/repositories_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561444987 s in the future
+tar: app/helpers/request_assignments_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561410763 s in the future
+tar: app/helpers/request_documents_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561383117 s in the future
+tar: app/helpers/requests_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561285645 s in the future
+tar: app/helpers/retailers_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561188431 s in the future
+ DEBUG [67aacfd2] 	tar: app/helpers/rrms_helper.rb: time stamp 2016-08-16 12:01:18 is 326.561032346 s in the future
+tar: app/helpers/tags_helper.rb: time stamp 2016-08-16 12:01:18 is 326.560998162 s in the future
+tar: app/helpers/tat_groups_helper.rb: time stamp 2016-08-16 12:01:18 is 326.560970513 s in the future
+tar: app/helpers/user_audits_helper.rb: time stamp 2016-08-16 12:01:18 is 326.560942209 s in the future
+tar: app/helpers/user_data_helper.rb: time stamp 2016-08-16 12:01:18 is 326.560914901 s in the future
+tar: app/helpers/vendor_assignments_helper.rb: time stamp 2016-08-16 12:01:18 is 326.560885807 s in the future
+tar: app/helpers/vendor_requests_helper.rb: time stamp 2016-08-16 12:01:18 is 326.560849416 s in the future
+tar: app/helpers/vendor_stages_helper.rb: time stamp 2016-08-16 12:01:18 is 326.560812109 s in the future
+tar: app/helpers/vendors_helper.rb: time stamp 2016-08-16 12:01:18 is 326.560783296 s in the future
+tar: app/helpers: time stamp 2016-08-16 12:01:18 is 326.560767777 s in the future
+tar: app/mailers/.keep: time stamp 2016-08-16 12:01:18 is 326.56072906 s in the future
+tar: app/mailers/file_mailer.rb: time stamp 2016-08-16 12:01:18 is 326.560484547 s in the future
+tar: app/mailers/password_mailer.rb: time stamp 2016-08-16 12:01:18 is 326.56043745 s in the future
+tar: app/mailers/request_mailer.rb: time stamp 2016-08-16 12:01:18 is 326.560407858 s in the future
+tar: app/mailers/upload_file_mailer.rb: time stamp 2016-08-16 12:01:18 is 326.560372548 s in the future
+tar: app/mailers/user_mailer.rb: time stamp 2016-08-16 12:01:18 is 326.560322488 s in the future
+tar: app/mailers/vendor_mailer.rb: time stamp 2016-08-16 12:01:18 is 326.560291307 s in the future
+tar: app/mailers: time stamp 2016-08-16 12:01:18 is 326.560275648 s in the future
+tar: app/models/.keep: time stamp 2016-08-16 12:01:18 is 326.560233348 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/ability.rb: time stamp 2016-08-16 12:01:18 is 326.559946507 s in the future
+tar: app/models/address.rb: time stamp 2016-08-16 12:01:18 is 326.559910459 s in the future
+tar: app/models/alcohol_percent.rb: time stamp 2016-08-16 12:01:18 is 326.55988093 s in the future
+tar: app/models/analytics.rb: time stamp 2016-08-16 12:01:18 is 326.559842196 s in the future
+tar: app/models/answer.rb: time stamp 2016-08-16 12:01:18 is 326.559806322 s in the future
+tar: app/models/answer_option.rb: time stamp 2016-08-16 12:01:18 is 326.559776378 s in the future
+tar: app/models/app.rb: time stamp 2016-08-16 12:01:18 is 326.559749581 s in the future
+tar: app/models/apps_module_group.rb: time stamp 2016-08-16 12:01:18 is 326.559722136 s in the future
+tar: app/models/associated_role.rb: time stamp 2016-08-16 12:01:18 is 326.559688342 s in the future
+tar: app/models/associated_state.rb: time stamp 2016-08-16 12:01:18 is 326.559550432 s in the future
+tar: app/models/attendance.rb: time stamp 2016-08-16 12:01:18 is 326.559518157 s in the future
+tar: app/models/beatroute.rb: time stamp 2016-08-16 12:01:18 is 326.559486978 s in the future
+tar: app/models/business_unit.rb: time stamp 2016-08-16 12:01:18 is 326.559440404 s in the future
+tar: app/models/category.rb: time stamp 2016-08-16 12:01:18 is 326.559411174 s in the future
+tar: app/models/city.rb: time stamp 2016-08-16 12:01:18 is 326.559384383 s in the future
+tar: app/models/cmo.rb: time stamp 2016-08-16 12:01:18 is 326.559220973 s in the future
+tar: app/models/collection.rb: time stamp 2016-08-16 12:01:18 is 326.559171938 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/concerns/.keep: time stamp 2016-08-16 12:01:18 is 326.559067703 s in the future
+tar: app/models/concerns/fields.rb: time stamp 2016-08-16 12:01:18 is 326.559028237 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/concerns: time stamp 2016-08-16 12:01:18 is 326.558999113 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/contact.rb: time stamp 2016-08-16 12:01:18 is 326.558965472 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/customer.rb: time stamp 2016-08-16 12:01:18 is 326.558937623 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/customers_user.rb: time stamp 2016-08-16 12:01:18 is 326.558880917 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/data_file.rb: time stamp 2016-08-16 12:01:18 is 326.558834662 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/data_files_region.rb: time stamp 2016-08-16 12:01:18 is 326.558636206 s in the future
+tar: app/models/data_files_user.rb: time stamp 2016-08-16 12:01:18 is 326.558604607 s in the future
+tar: app/models/department.rb: time stamp 2016-08-16 12:01:18 is 326.558577158 s in the future
+tar: app/models/device.rb: time stamp 2016-08-16 12:01:18 is 326.558550577 s in the future
+tar: app/models/document.rb: time stamp 2016-08-16 12:01:18 is 326.558519346 s in the future
+tar: app/models/field.rb: time stamp 2016-08-16 12:01:18 is 326.558485747 s in the future
+tar: app/models/field_value.rb: time stamp 2016-08-16 12:01:18 is 326.558438333 s in the future
+tar: app/models/folder.rb: time stamp 2016-08-16 12:01:18 is 326.558394509 s in the future
+tar: app/models/holiday.rb: time stamp 2016-08-16 12:01:18 is 326.558221975 s in the future
+tar: app/models/image.rb: time stamp 2016-08-16 12:01:18 is 326.558190649 s in the future
+tar: app/models/inventory.rb: time stamp 2016-08-16 12:01:18 is 326.558125846 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/item.rb: time stamp 2016-08-16 12:01:18 is 326.55807608 s in the future
+tar: app/models/item_region.rb: time stamp 2016-08-16 12:01:18 is 326.558043772 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/job_title.rb: time stamp 2016-08-16 12:01:18 is 326.558012503 s in the future
+tar: app/models/level.rb: time stamp 2016-08-16 12:01:18 is 326.557984572 s in the future
+tar: app/models/line_item.rb: time stamp 2016-08-16 12:01:18 is 326.557957807 s in the future
+tar: app/models/map.rb: time stamp 2016-08-16 12:01:18 is 326.557416022 s in the future
+tar: app/models/module_group.rb: time stamp 2016-08-16 12:01:18 is 326.557381577 s in the future
+tar: app/models/notification.rb: time stamp 2016-08-16 12:01:18 is 326.557335588 s in the future
+tar: app/models/order.rb: time stamp 2016-08-16 12:01:18 is 326.557296374 s in the future
+tar: app/models/organization.rb: time stamp 2016-08-16 12:01:18 is 326.557266575 s in the future
+tar: app/models/permission.rb: time stamp 2016-08-16 12:01:18 is 326.557239411 s in the future
+tar: app/models/question.rb: time stamp 2016-08-16 12:01:18 is 326.557204476 s in the future
+tar: app/models/question_option.rb: time stamp 2016-08-16 12:01:18 is 326.557139089 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/read_file.rb: time stamp 2016-08-16 12:01:18 is 326.55708699 s in the future
+tar: app/models/region.rb: time stamp 2016-08-16 12:01:18 is 326.557054549 s in the future
+tar: app/models/repository.rb: time stamp 2016-08-16 12:01:18 is 326.557023832 s in the future
+tar: app/models/request.rb: time stamp 2016-08-16 12:01:18 is 326.556987355 s in the future
+tar: app/models/request_activity.rb: time stamp 2016-08-16 12:01:18 is 326.556957077 s in the future
+tar: app/models/request_assignment.rb: time stamp 2016-08-16 12:01:18 is 326.556920299 s in the future
+tar: app/models/request_assignment_activity.rb: time stamp 2016-08-16 12:01:18 is 326.556889394 s in the future
+tar: app/models/request_document.rb: time stamp 2016-08-16 12:01:18 is 326.556854577 s in the future
+tar: app/models/retailer.rb: time stamp 2016-08-16 12:01:18 is 326.556812601 s in the future
+tar: app/models/role.rb: time stamp 2016-08-16 12:01:18 is 326.556784453 s in the future
+tar: app/models/rrm.rb: time stamp 2016-08-16 12:01:18 is 326.556754896 s in the future
+tar: app/models/sales_order.rb: time stamp 2016-08-16 12:01:18 is 326.556300325 s in the future
+tar: app/models/screen.rb: time stamp 2016-08-16 12:01:18 is 326.55626358 s in the future
+tar: app/models/shop_assignment.rb: time stamp 2016-08-16 12:01:18 is 326.556235084 s in the future
+tar: app/models/size.rb: time stamp 2016-08-16 12:01:18 is 326.556071094 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/state.rb: time stamp 2016-08-16 12:01:18 is 326.556032244 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/survey.rb: time stamp 2016-08-16 12:01:18 is 326.556001506 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/tag.rb: time stamp 2016-08-16 12:01:18 is 326.555942383 s in the future
+tar: app/models/tat_group.rb: time stamp 2016-08-16 12:01:18 is 326.555906817 s in the future
+tar: app/models/upload_file.rb: time stamp 2016-08-16 12:01:18 is 326.555878329 s in the future
+tar: app/models/user.rb: time stamp 2016-08-16 12:01:18 is 326.555831765 s in the future
+tar: app/models/user_audit.rb: time stamp 2016-08-16 12:01:18 is 326.555793856 s in the future
+tar: app/models/user_data.rb: time stamp 2016-08-16 12:01:18 is 326.555765595 s in the future
+tar: app/models/user_parent.rb: time stamp 2016-08-16 12:01:18 is 326.55573824 s in the future
+tar: app/models/user_state.rb: time stamp 2016-08-16 12:01:18 is 326.555709643 s in the future
+tar: app/models/users_reporting.rb: time stamp 2016-08-16 12:01:18 is 326.555677569 s in the future
+tar: app/models/vendor.rb: time stamp 2016-08-16 12:01:18 is 326.555649721 s in the future
+tar: app/models/vendor_assignment.rb: time stamp 2016-08-16 12:01:18 is 326.555619794 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/vendor_request.rb: time stamp 2016-08-16 12:01:18 is 326.555119058 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/vendor_stage.rb: time stamp 2016-08-16 12:01:18 is 326.555075089 s in the future
+ DEBUG [67aacfd2] 	tar: app/models/vendor_task.rb: time stamp 2016-08-16 12:01:18 is 326.555044548 s in the future
+tar: app/models/vendorlist.rb: time stamp 2016-08-16 12:01:18 is 326.555016556 s in the future
+tar: app/models/warehouse.rb: time stamp 2016-08-16 12:01:18 is 326.554987104 s in the future
+tar: app/models/weekly_off.rb: time stamp 2016-08-16 12:01:18 is 326.554956998 s in the future
+tar: app/models: time stamp 2016-08-16 12:01:18 is 326.554941587 s in the future
+tar: app/serializers/contact_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554888456 s in the future
+tar: app/serializers/customer_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554851394 s in the future
+tar: app/serializers/data_file_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554814987 s in the future
+tar: app/serializers/image_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554787235 s in the future
+tar: app/serializers/item_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554760188 s in the future
+tar: app/serializers/order_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554732235 s in the future
+tar: app/serializers/question_option_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554704533 s in the future
+tar: app/serializers/question_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554677369 s in the future
+tar: app/serializers/request_assignment_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554648543 s in the future
+tar: app/serializers/request_document_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554620125 s in the future
+tar: app/serializers/screen_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554589655 s in the future
+tar: app/serializers/survey_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554562055 s in the future
+tar: app/serializers/tat_group_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.554533056 s in the future
+tar: app/serializers: time stamp 2016-08-16 12:01:18 is 326.554517509 s in the future
+tar: app/services/dashboard.rb: time stamp 2016-08-16 12:01:18 is 326.554464909 s in the future
+tar: app/services/download.rb: time stamp 2016-08-16 12:01:18 is 326.554429103 s in the future
+tar: app/services/log_handler.rb: time stamp 2016-08-16 12:01:18 is 326.554397452 s in the future
+tar: app/services/quotation.rb: time stamp 2016-08-16 12:01:18 is 326.55436079 s in the future
+tar: app/services/requests_csv.rb: time stamp 2016-08-16 12:01:18 is 326.554319487 s in the future
+tar: app/services/time_handler.rb: time stamp 2016-08-16 12:01:18 is 326.554287146 s in the future
+tar: app/services: time stamp 2016-08-16 12:01:18 is 326.554271303 s in the future
+tar: app/uploaders/avatar_uploader.rb: time stamp 2016-08-16 12:01:18 is 326.554223394 s in the future
+tar: app/uploaders/data_file_uploader.rb: time stamp 2016-08-16 12:01:18 is 326.554179129 s in the future
+ DEBUG [67aacfd2] 	tar: app/uploaders/image_uploader.rb: time stamp 2016-08-16 12:01:18 is 326.554101424 s in the future
+tar: app/uploaders/logo_uploader.rb: time stamp 2016-08-16 12:01:18 is 326.554070172 s in the future
+ DEBUG [67aacfd2] 	tar: app/uploaders/picture_uploader.rb: time stamp 2016-08-16 12:01:18 is 326.553407351 s in the future
+tar: app/uploaders/request_document_uploader.rb: time stamp 2016-08-16 12:01:18 is 326.55336246 s in the future
+tar: app/uploaders: time stamp 2016-08-16 12:01:18 is 326.553345358 s in the future
+tar: app/views/addresses/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.553283072 s in the future
+tar: app/views/addresses/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.553252693 s in the future
+tar: app/views/addresses/edit_hq.html.erb: time stamp 2016-08-16 12:01:18 is 326.55322535 s in the future
+tar: app/views/addresses/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.553182323 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/addresses/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.553108109 s in the future
+tar: app/views/addresses: time stamp 2016-08-16 12:01:18 is 326.553082952 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/alcohol_percents/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.553038887 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/alcohol_percents/create.js.erb: time stamp 2016-08-16 12:01:18 is 326.553009842 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/alcohol_percents/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.552948804 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/alcohol_percents/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.552919715 s in the future
+tar: app/views/alcohol_percents/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.552892283 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/alcohol_percents/new.js.erb: time stamp 2016-08-16 12:01:18 is 326.552859751 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/alcohol_percents: time stamp 2016-08-16 12:01:18 is 326.552832354 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/api/v1/shop_assignments/_shop.json.jbuilder: time stamp 2016-08-16 12:01:18 is 326.552687349 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/api/v1/shop_assignments/index.json.jbuilder: time stamp 2016-08-16 12:01:18 is 326.552643502 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/api/v1/shop_assignments: time stamp 2016-08-16 12:01:18 is 326.55262546 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/api/v1/vendors/shop_info.json.jbuilder: time stamp 2016-08-16 12:01:18 is 326.552580237 s in the future
+tar: app/views/api/v1/vendors: time stamp 2016-08-16 12:01:18 is 326.552562363 s in the future
+tar: app/views/api/v1: time stamp 2016-08-16 12:01:18 is 326.552549592 s in the future
+tar: app/views/api: time stamp 2016-08-16 12:01:18 is 326.552537594 s in the future
+tar: app/views/apps/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.552489786 s in the future
+tar: app/views/apps/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.552443956 s in the future
+tar: app/views/apps/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.552413979 s in the future
+tar: app/views/apps/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.552386888 s in the future
+tar: app/views/apps: time stamp 2016-08-16 12:01:18 is 326.552363456 s in the future
+tar: app/views/attendances/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.552314419 s in the future
+tar: app/views/attendances: time stamp 2016-08-16 12:01:18 is 326.552297762 s in the future
+tar: app/views/beatroutes/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.552243887 s in the future
+tar: app/views/beatroutes/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.552200555 s in the future
+tar: app/views/beatroutes/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.552133501 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/beatroutes/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.552088006 s in the future
+tar: app/views/beatroutes/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.552051182 s in the future
+tar: app/views/beatroutes: time stamp 2016-08-16 12:01:18 is 326.552034809 s in the future
+tar: app/views/business_units/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.55198663 s in the future
+tar: app/views/business_units/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.551955668 s in the future
+tar: app/views/business_units/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.551928267 s in the future
+tar: app/views/business_units/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.551895787 s in the future
+tar: app/views/business_units: time stamp 2016-08-16 12:01:18 is 326.551876767 s in the future
+tar: app/views/categories/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.551816115 s in the future
+tar: app/views/categories/create.js.erb: time stamp 2016-08-16 12:01:18 is 326.551781215 s in the future
+tar: app/views/categories/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.551751173 s in the future
+tar: app/views/categories/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.551723723 s in the future
+tar: app/views/categories/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.551696812 s in the future
+tar: app/views/categories/new.js.erb: time stamp 2016-08-16 12:01:18 is 326.551668843 s in the future
+tar: app/views/categories: time stamp 2016-08-16 12:01:18 is 326.551653217 s in the future
+tar: app/views/cities/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.551594216 s in the future
+tar: app/views/cities/create.js.erb: time stamp 2016-08-16 12:01:18 is 326.551565883 s in the future
+tar: app/views/cities/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.551538976 s in the future
+tar: app/views/cities/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.551505759 s in the future
+tar: app/views/cities/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.551468976 s in the future
+tar: app/views/cities/new.js.erb: time stamp 2016-08-16 12:01:18 is 326.55143137 s in the future
+tar: app/views/cities: time stamp 2016-08-16 12:01:18 is 326.551414693 s in the future
+tar: app/views/cmos/_cmo_form.erb: time stamp 2016-08-16 12:01:18 is 326.55136646 s in the future
+tar: app/views/cmos/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.551335267 s in the future
+tar: app/views/cmos/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.551307955 s in the future
+tar: app/views/cmos/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.551243027 s in the future
+tar: app/views/cmos/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.551202992 s in the future
+tar: app/views/cmos: time stamp 2016-08-16 12:01:18 is 326.551178351 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/collections/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.551002508 s in the future
+tar: app/views/collections/create.js.erb: time stamp 2016-08-16 12:01:18 is 326.550970485 s in the future
+tar: app/views/collections/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.55094129 s in the future
+tar: app/views/collections/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.550914051 s in the future
+tar: app/views/collections/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.550887014 s in the future
+tar: app/views/collections/new.js.erb: time stamp 2016-08-16 12:01:18 is 326.550849478 s in the future
+tar: app/views/collections: time stamp 2016-08-16 12:01:18 is 326.550827185 s in the future
+tar: app/views/common/_footer.html.erb: time stamp 2016-08-16 12:01:18 is 326.550782812 s in the future
+tar: app/views/common/_header.html.erb: time stamp 2016-08-16 12:01:18 is 326.550750415 s in the future
+tar: app/views/common/_menubar.html.erb: time stamp 2016-08-16 12:01:18 is 326.550711751 s in the future
+tar: app/views/common: time stamp 2016-08-16 12:01:18 is 326.550695513 s in the future
+tar: app/views/contacts/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.550647943 s in the future
+tar: app/views/contacts/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.550619701 s in the future
+tar: app/views/contacts/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.550591909 s in the future
+tar: app/views/contacts: time stamp 2016-08-16 12:01:18 is 326.550576338 s in the future
+tar: app/views/customers/_contacts.html.erb: time stamp 2016-08-16 12:01:18 is 326.550534668 s in the future
+tar: app/views/customers/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.550506718 s in the future
+tar: app/views/customers/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.550469159 s in the future
+tar: app/views/customers/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.550429028 s in the future
+tar: app/views/customers/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.550400548 s in the future
+tar: app/views/customers: time stamp 2016-08-16 12:01:18 is 326.550384792 s in the future
+tar: app/views/customers_users/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.550332955 s in the future
+tar: app/views/customers_users/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.550303005 s in the future
+tar: app/views/customers_users: time stamp 2016-08-16 12:01:18 is 326.550287241 s in the future
+tar: app/views/dashboard/_admin_rrm.html.erb: time stamp 2016-08-16 12:01:18 is 326.55023913 s in the future
+tar: app/views/dashboard/_admin_state.html.erb: time stamp 2016-08-16 12:01:18 is 326.550186837 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/dashboard/_cmo.html.erb: time stamp 2016-08-16 12:01:18 is 326.549711044 s in the future
+tar: app/views/dashboard/_supervisor.html.erb: time stamp 2016-08-16 12:01:18 is 326.549674907 s in the future
+tar: app/views/dashboard/_vendor.html.erb: time stamp 2016-08-16 12:01:18 is 326.549634899 s in the future
+tar: app/views/dashboard/_vendor_allocator.html.erb: time stamp 2016-08-16 12:01:18 is 326.549597779 s in the future
+tar: app/views/dashboard/_vmqa.html.erb: time stamp 2016-08-16 12:01:18 is 326.549567771 s in the future
+tar: app/views/dashboard/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.549540504 s in the future
+tar: app/views/dashboard: time stamp 2016-08-16 12:01:18 is 326.549524923 s in the future
+tar: app/views/data_files/_absolute_path.html.erb: time stamp 2016-08-16 12:01:18 is 326.549475995 s in the future
+tar: app/views/data_files/_access_fields.html.erb: time stamp 2016-08-16 12:01:18 is 326.54943038 s in the future
+tar: app/views/data_files/_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.549399546 s in the future
+tar: app/views/data_files/_file.html.erb: time stamp 2016-08-16 12:01:18 is 326.549364428 s in the future
+tar: app/views/data_files/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.549334111 s in the future
+tar: app/views/data_files: time stamp 2016-08-16 12:01:18 is 326.549318224 s in the future
+tar: app/views/departments/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.54926814 s in the future
+tar: app/views/departments/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.549240386 s in the future
+tar: app/views/departments/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.549208856 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/departments/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.548783619 s in the future
+tar: app/views/departments: time stamp 2016-08-16 12:01:18 is 326.548761958 s in the future
+tar: app/views/devices/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.548711577 s in the future
+tar: app/views/devices: time stamp 2016-08-16 12:01:18 is 326.548694799 s in the future
+tar: app/views/documents/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.548650598 s in the future
+tar: app/views/documents/_tag_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.548622341 s in the future
+tar: app/views/documents/create.js.erb: time stamp 2016-08-16 12:01:18 is 326.548595286 s in the future
+tar: app/views/documents/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.548568642 s in the future
+tar: app/views/documents/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.548537949 s in the future
+tar: app/views/documents/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.548464429 s in the future
+tar: app/views/documents/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.548427643 s in the future
+tar: app/views/documents: time stamp 2016-08-16 12:01:18 is 326.548411078 s in the future
+tar: app/views/downloads/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.548353597 s in the future
+tar: app/views/downloads: time stamp 2016-08-16 12:01:18 is 326.548335947 s in the future
+tar: app/views/dropdown_values/index.json.erb: time stamp 2016-08-16 12:01:18 is 326.548290957 s in the future
+tar: app/views/dropdown_values: time stamp 2016-08-16 12:01:18 is 326.548274189 s in the future
+tar: app/views/fields/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.548228044 s in the future
+tar: app/views/fields/_values.html.erb: time stamp 2016-08-16 12:01:18 is 326.548179351 s in the future
+ DEBUG [67aacfd2] 	
+tar: app/views/fields/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.547984141 s in the future
+tar: app/views/fields/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.547953692 s in the future
+tar: app/views/fields/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.547916286 s in the future
+tar: app/views/fields: time stamp 2016-08-16 12:01:18 is 326.547899405 s in the future
+tar: app/views/file_mailer/share_file_url.html.erb: time stamp 2016-08-16 12:01:18 is 326.547848752 s in the future
+tar: app/views/file_mailer: time stamp 2016-08-16 12:01:18 is 326.547821188 s in the future
+tar: app/views/folders/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.547772093 s in the future
+tar: app/views/folders/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.547743183 s in the future
+tar: app/views/folders/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.547716117 s in the future
+tar: app/views/folders: time stamp 2016-08-16 12:01:18 is 326.547700723 s in the future
+tar: app/views/helps/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.547656438 s in the future
+tar: app/views/helps: time stamp 2016-08-16 12:01:18 is 326.54763963 s in the future
+tar: app/views/holidays/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.547596495 s in the future
+tar: app/views/holidays/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.547568748 s in the future
+tar: app/views/holidays/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.547536369 s in the future
+tar: app/views/holidays/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.547507921 s in the future
+tar: app/views/holidays: time stamp 2016-08-16 12:01:18 is 326.547489271 s in the future
+tar: app/views/images/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.547430576 s in the future
+tar: app/views/images/_image.html.erb: time stamp 2016-08-16 12:01:18 is 326.547391098 s in the future
+tar: app/views/images/create.js.erb: time stamp 2016-08-16 12:01:18 is 326.54735069 s in the future
+tar: app/views/images/new.js.erb: time stamp 2016-08-16 12:01:18 is 326.547321715 s in the future
+tar: app/views/images: time stamp 2016-08-16 12:01:18 is 326.547306138 s in the future
+tar: app/views/inventories/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.547259852 s in the future
+tar: app/views/inventories/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.547230677 s in the future
+tar: app/views/inventories/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.547190967 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/inventories/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.546959099 s in the future
+tar: app/views/inventories: time stamp 2016-08-16 12:01:18 is 326.546932536 s in the future
+tar: app/views/item_regions/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.546876143 s in the future
+tar: app/views/item_regions/create.js.erb: time stamp 2016-08-16 12:01:18 is 326.546845302 s in the future
+tar: app/views/item_regions/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.546815195 s in the future
+tar: app/views/item_regions/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.54678748 s in the future
+tar: app/views/item_regions/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.546748819 s in the future
+tar: app/views/item_regions/new.js.erb: time stamp 2016-08-16 12:01:18 is 326.546707939 s in the future
+tar: app/views/item_regions: time stamp 2016-08-16 12:01:18 is 326.546690545 s in the future
+tar: app/views/items/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.546632699 s in the future
+tar: app/views/items/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.546601886 s in the future
+tar: app/views/items/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.546573634 s in the future
+tar: app/views/items/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.546544645 s in the future
+tar: app/views/items: time stamp 2016-08-16 12:01:18 is 326.546528757 s in the future
+tar: app/views/job_titles/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.546479682 s in the future
+tar: app/views/job_titles/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.546440858 s in the future
+tar: app/views/job_titles/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.546411028 s in the future
+tar: app/views/job_titles/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.546375983 s in the future
+tar: app/views/job_titles: time stamp 2016-08-16 12:01:18 is 326.546358765 s in the future
+tar: app/views/layouts/application.html.erb: time stamp 2016-08-16 12:01:18 is 326.546306227 s in the future
+tar: app/views/layouts/signin.html.erb: time stamp 2016-08-16 12:01:18 is 326.546271721 s in the future
+tar: app/views/layouts: time stamp 2016-08-16 12:01:18 is 326.546255373 s in the future
+tar: app/views/maps/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.546192962 s in the future
+tar: app/views/maps: time stamp 2016-08-16 12:01:18 is 326.546175739 s in the future
+tar: app/views/module_groups/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.546132181 s in the future
+tar: app/views/module_groups/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.546100238 s in the future
+tar: app/views/module_groups: time stamp 2016-08-16 12:01:18 is 326.546084374 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/notifications/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.545337669 s in the future
+tar: app/views/notifications/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.545266489 s in the future
+tar: app/views/notifications/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.54523493 s in the future
+tar: app/views/notifications: time stamp 2016-08-16 12:01:18 is 326.545218651 s in the future
+tar: app/views/organizations/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.545166667 s in the future
+tar: app/views/organizations: time stamp 2016-08-16 12:01:18 is 326.545150288 s in the future
+tar: app/views/page_js/_menubar.html.erb: time stamp 2016-08-16 12:01:18 is 326.545090218 s in the future
+tar: app/views/page_js/_request_index.html.erb: time stamp 2016-08-16 12:01:18 is 326.545020869 s in the future
+tar: app/views/page_js/_user_search.html.erb: time stamp 2016-08-16 12:01:18 is 326.544975051 s in the future
+tar: app/views/page_js: time stamp 2016-08-16 12:01:18 is 326.544957436 s in the future
+tar: app/views/password_mailer/forgot_password_mail.html.erb: time stamp 2016-08-16 12:01:18 is 326.544913328 s in the future
+tar: app/views/password_mailer: time stamp 2016-08-16 12:01:18 is 326.544896515 s in the future
+tar: app/views/passwords/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.544857019 s in the future
+tar: app/views/passwords/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.544827466 s in the future
+tar: app/views/passwords: time stamp 2016-08-16 12:01:18 is 326.544811553 s in the future
+tar: app/views/permissions/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.544766256 s in the future
+tar: app/views/permissions/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.544717364 s in the future
+tar: app/views/permissions/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.544684688 s in the future
+tar: app/views/permissions/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.544655763 s in the future
+tar: app/views/permissions: time stamp 2016-08-16 12:01:18 is 326.544639928 s in the future
+tar: app/views/regions/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.544600717 s in the future
+tar: app/views/regions/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.544571445 s in the future
+tar: app/views/regions/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.5445427 s in the future
+tar: app/views/regions/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.54451567 s in the future
+tar: app/views/regions: time stamp 2016-08-16 12:01:18 is 326.544497242 s in the future
+tar: app/views/request_assignments/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.544426307 s in the future
+tar: app/views/request_assignments/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.54438943 s in the future
+tar: app/views/request_assignments/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.544349737 s in the future
+tar: app/views/request_assignments/index.json.jbuilder: time stamp 2016-08-16 12:01:18 is 326.544321048 s in the future
+tar: app/views/request_assignments/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.544290198 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/request_assignments/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.543457437 s in the future
+tar: app/views/request_assignments/show.json.jbuilder: time stamp 2016-08-16 12:01:18 is 326.543421786 s in the future
+tar: app/views/request_assignments: time stamp 2016-08-16 12:01:18 is 326.543405097 s in the future
+tar: app/views/request_documents/_document.html.erb: time stamp 2016-08-16 12:01:18 is 326.543352152 s in the future
+tar: app/views/request_documents/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.543322404 s in the future
+tar: app/views/request_documents: time stamp 2016-08-16 12:01:18 is 326.543306384 s in the future
+tar: app/views/request_mailer/csv_mail.html.erb: time stamp 2016-08-16 12:01:18 is 326.543265513 s in the future
+tar: app/views/request_mailer/status_mail.html.erb: time stamp 2016-08-16 12:01:18 is 326.543140358 s in the future
+tar: app/views/request_mailer: time stamp 2016-08-16 12:01:18 is 326.543121022 s in the future
+tar: app/views/requests/_audit_list.html.erb: time stamp 2016-08-16 12:01:18 is 326.543078433 s in the future
+tar: 
+ DEBUG [67aacfd2] 	app/views/requests/_clipon_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.543050257 s in the future
+tar: app/views/requests/_competition_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.542918753 s in the future
+tar: app/views/requests/_gsb_visit_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.542791797 s in the future
+tar: app/views/requests/_maintenance_details_I.html.erb: time stamp 2016-08-16 12:01:18 is 326.542755171 s in the future
+tar: app/views/requests/_maintenance_details_II.html.erb: time stamp 2016-08-16 12:01:18 is 326.54271124 s in the future
+tar: app/views/requests/_maintenance_details_III.html.erb: time stamp 2016-08-16 12:01:18 is 326.542679843 s in the future
+tar: app/views/requests/_request_list.html.erb: time stamp 2016-08-16 12:01:18 is 326.542564425 s in the future
+tar: app/views/requests/_requestor_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.542531522 s in the future
+tar: app/views/requests/_retailer_requests.html.erb: time stamp 2016-08-16 12:01:18 is 326.542441033 s in the future
+tar: app/views/requests/_rsp_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.542406778 s in the future
+tar: app/views/requests/_sales.html.erb: time stamp 2016-08-16 12:01:18 is 326.542370868 s in the future
+tar: app/views/requests/_search.html.erb: time stamp 2016-08-16 12:01:18 is 326.542341496 s in the future
+tar: app/views/requests/_shop_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.542242371 s in the future
+tar: app/views/requests/_sis_visit_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.542207936 s in the future
+tar: app/views/requests/_visitor_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.542178279 s in the future
+tar: app/views/requests/_visitor_overall_performance.html.erb: time stamp 2016-08-16 12:01:18 is 326.542149313 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/requests/_visitor_shop_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.541915954 s in the future
+tar: app/views/requests/details/_action.html.erb: time stamp 2016-08-16 12:01:18 is 326.541860664 s in the future
+tar: app/views/requests/details/_action_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.541831087 s in the future
+tar: app/views/requests/details/_audit_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.541802814 s in the future
+tar: app/views/requests/details/_audit_not_done_reasons.html.erb: time stamp 2016-08-16 12:01:18 is 326.541672002 s in the future
+tar: app/views/requests/details/_audit_overview.html.erb: time stamp 2016-08-16 12:01:18 is 326.541633641 s in the future
+tar: app/views/requests/details/_branding_detail.html.erb: time stamp 2016-08-16 12:01:18 is 326.541604519 s in the future
+tar: app/views/requests/details/_clipon_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.541576168 s in the future
+tar: app/views/requests/details/_comment.html.erb: time stamp 2016-08-16 12:01:18 is 326.541418961 s in the future
+tar: app/views/requests/details/_gsb_audit.html.erb: time stamp 2016-08-16 12:01:18 is 326.541386884 s in the future
+tar: app/views/requests/details/_gsb_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.541350005 s in the future
+tar: app/views/requests/details/_gsb_visit_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.541321291 s in the future
+tar: app/views/requests/details/_inshop_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.54129168 s in the future
+tar: app/views/requests/details/_maintenance_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.54120966 s in the future
+tar: app/views/requests/details/_photo.html.erb: time stamp 2016-08-16 12:01:18 is 326.541178233 s in the future
+tar: app/views/requests/details/_request_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.541149524 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/requests/details/_requestor_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.540898008 s in the future
+tar: app/views/requests/details/_rsp_audit.html.erb: time stamp 2016-08-16 12:01:18 is 326.540861918 s in the future
+tar: app/views/requests/details/_rsp_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.540766614 s in the future
+tar: app/views/requests/details/_sales.html.erb: time stamp 2016-08-16 12:01:18 is 326.540717243 s in the future
+tar: app/views/requests/details/_shop_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.540590256 s in the future
+tar: app/views/requests/details/_sis_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.540553609 s in the future
+tar: app/views/requests/details/_sis_visit_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.540522131 s in the future
+tar: app/views/requests/details/_vendor_assign.html.erb: time stamp 2016-08-16 12:01:18 is 326.540328905 s in the future
+tar: app/views/requests/details/_vendor_progress.html.erb: time stamp 2016-08-16 12:01:18 is 326.540292489 s in the future
+tar: app/views/requests/details/_visitor_competition_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.540263211 s in the future
+tar: app/views/requests/details/_visitor_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.540234762 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/requests/details/_visitor_shop_details.html.erb: time stamp 2016-08-16 12:01:18 is 326.539994747 s in the future
+tar: app/views/requests/details: time stamp 2016-08-16 12:01:18 is 326.539972387 s in the future
+tar: app/views/requests/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.539942651 s in the future
+tar: app/views/requests/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.539913288 s in the future
+tar: app/views/requests/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.539868181 s in the future
+tar: app/views/requests/view.html.erb: time stamp 2016-08-16 12:01:18 is 326.539836384 s in the future
+tar: app/views/requests: time stamp 2016-08-16 12:01:18 is 326.53982019 s in the future
+tar: app/views/requests_csv/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.539774426 s in the future
+tar: app/views/requests_csv/create.js.erb: time stamp 2016-08-16 12:01:18 is 326.539733523 s in the future
+tar: app/views/requests_csv/new.js.erb: time stamp 2016-08-16 12:01:18 is 326.539698382 s in the future
+tar: app/views/requests_csv: time stamp 2016-08-16 12:01:18 is 326.539681856 s in the future
+tar: app/views/retailers/_confirmation_message.html.erb: time stamp 2016-08-16 12:01:18 is 326.539624239 s in the future
+tar: app/views/retailers/_error_message.html.erb: time stamp 2016-08-16 12:01:18 is 326.539592099 s in the future
+tar: app/views/retailers/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.539561223 s in the future
+tar: app/views/retailers/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.53950482 s in the future
+tar: app/views/retailers/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.539352834 s in the future
+tar: app/views/retailers/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.539318498 s in the future
+tar: app/views/retailers: time stamp 2016-08-16 12:01:18 is 326.539302311 s in the future
+tar: app/views/roles/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.539257895 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/roles/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.538849857 s in the future
+tar: app/views/roles/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.538814507 s in the future
+tar: app/views/roles/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.538786658 s in the future
+tar: app/views/roles: time stamp 2016-08-16 12:01:18 is 326.538770939 s in the future
+tar: app/views/rrms/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.538708613 s in the future
+tar: app/views/rrms/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.538675602 s in the future
+tar: app/views/rrms/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.538636457 s in the future
+tar: app/views/rrms/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.538603888 s in the future
+tar: app/views/rrms/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.53857297 s in the future
+tar: app/views/rrms: time stamp 2016-08-16 12:01:18 is 326.538557091 s in the future
+tar: app/views/sales_orders/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.538515466 s in the future
+tar: app/views/sales_orders/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.53848122 s in the future
+tar: app/views/sales_orders/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.538428911 s in the future
+tar: app/views/sales_orders/index.json.jbuilder: time stamp 2016-08-16 12:01:18 is 326.53839735 s in the future
+tar: app/views/sales_orders/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.538361134 s in the future
+tar: app/views/sales_orders/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.538278106 s in the future
+tar: app/views/sales_orders/show.json.jbuilder: time stamp 2016-08-16 12:01:18 is 326.538237709 s in the future
+tar: app/views/sales_orders: time stamp 2016-08-16 12:01:18 is 326.538210218 s in the future
+tar: app/views/schema/index.json: time stamp 2016-08-16 12:01:18 is 326.538163336 s in the future
+tar: app/views/schema: time stamp 2016-08-16 12:01:18 is 326.538146816 s in the future
+tar: app/views/screens/_elements.html.erb: time stamp 2016-08-16 12:01:18 is 326.538105295 s in the future
+tar: app/views/screens/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.538077697 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/screens/_layout_element.html.erb: time stamp 2016-08-16 12:01:18 is 326.537984039 s in the future
+tar: app/views/screens/_layout_elements.html.erb: time stamp 2016-08-16 12:01:18 is 326.537948895 s in the future
+tar: app/views/screens/_ui_element.html.erb: time stamp 2016-08-16 12:01:18 is 326.537917565 s in the future
+tar: app/views/screens/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.537889447 s in the future
+tar: app/views/screens/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.537859468 s in the future
+tar: app/views/screens/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.537831149 s in the future
+tar: app/views/screens: time stamp 2016-08-16 12:01:18 is 326.537815431 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/sessions/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.536940684 s in the future
+tar: app/views/sessions/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.536902668 s in the future
+tar: app/views/sessions: time stamp 2016-08-16 12:01:18 is 326.536885874 s in the future
+tar: app/views/shared/_dynamic_field.html.erb: time stamp 2016-08-16 12:01:18 is 326.536840446 s in the future
+tar: app/views/shared/_error_messages.html.erb: time stamp 2016-08-16 12:01:18 is 326.536811837 s in the future
+tar: app/views/shared/_field.html.erb: time stamp 2016-08-16 12:01:18 is 326.536694855 s in the future
+tar: app/views/shared/_fields.html.erb: time stamp 2016-08-16 12:01:18 is 326.536660269 s in the future
+tar: app/views/shared/_flash_messages.html.erb: time stamp 2016-08-16 12:01:18 is 326.536632201 s in the future
+tar: app/views/shared/_nav_bar.html.erb: time stamp 2016-08-16 12:01:18 is 326.536605247 s in the future
+tar: app/views/shared/_notice_messages.html.erb: time stamp 2016-08-16 12:01:18 is 326.536578002 s in the future
+tar: app/views/shared/_user_filters.html.erb: time stamp 2016-08-16 12:01:18 is 326.536549798 s in the future
+tar: app/views/shared/field_types/_checkbox.html.erb: time stamp 2016-08-16 12:01:18 is 326.536499499 s in the future
+tar: app/views/shared/field_types/_common_notice_messages.html.erb: time stamp 2016-08-16 12:01:18 is 326.536453401 s in the future
+tar: app/views/shared/field_types/_dropdown.html.erb: time stamp 2016-08-16 12:01:18 is 326.536421211 s in the future
+tar: app/views/shared/field_types/_radio.html.erb: time stamp 2016-08-16 12:01:18 is 326.536393047 s in the future
+tar: app/views/shared/field_types/_text.html.erb: time stamp 2016-08-16 12:01:18 is 326.536233296 s in the future
+tar: app/views/shared/field_types: time stamp 2016-08-16 12:01:18 is 326.536213718 s in the future
+tar: app/views/shared: time stamp 2016-08-16 12:01:18 is 326.536200948 s in the future
+tar: app/views/shop_assignments/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.536154301 s in the future
+tar: app/views/shop_assignments/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.536074253 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/shop_assignments/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.535979427 s in the future
+tar: app/views/shop_assignments/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.535881021 s in the future
+tar: app/views/shop_assignments/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.535847185 s in the future
+tar: app/views/shop_assignments: time stamp 2016-08-16 12:01:18 is 326.53583092 s in the future
+tar: app/views/sizes/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.535785876 s in the future
+tar: app/views/sizes/create.js.erb: time stamp 2016-08-16 12:01:18 is 326.535750752 s in the future
+tar: app/views/sizes/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.535708322 s in the future
+tar: app/views/sizes/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.535676577 s in the future
+tar: app/views/sizes/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.535648752 s in the future
+tar: app/views/sizes/new.js.erb: time stamp 2016-08-16 12:01:18 is 326.535621959 s in the future
+tar: app/views/sizes: time stamp 2016-08-16 12:01:18 is 326.53560632 s in the future
+tar: app/views/surveys/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.535492739 s in the future
+tar: app/views/surveys/_question.html.erb: time stamp 2016-08-16 12:01:18 is 326.535443511 s in the future
+tar: app/views/surveys/_question_option.html.erb: time stamp 2016-08-16 12:01:18 is 326.535413874 s in the future
+tar: app/views/surveys/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.535385383 s in the future
+tar: app/views/surveys/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.535348813 s in the future
+tar: app/views/surveys/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.535321553 s in the future
+tar: app/views/surveys: time stamp 2016-08-16 12:01:18 is 326.535305734 s in the future
+tar: app/views/tat_groups/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.535196193 s in the future
+tar: app/views/tat_groups/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.535163251 s in the future
+tar: app/views/tat_groups/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.535135644 s in the future
+tar: app/views/tat_groups/index.json.jbuilder: time stamp 2016-08-16 12:01:18 is 326.535107661 s in the future
+tar: app/views/tat_groups/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.53507913 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/tat_groups/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.535048541 s in the future
+tar: app/views/tat_groups/show.json.jbuilder: time stamp 2016-08-16 12:01:18 is 326.534945597 s in the future
+tar: app/views/tat_groups: time stamp 2016-08-16 12:01:18 is 326.534785055 s in the future
+tar: app/views/upload_file_mailer/upload_confirmation.html.erb: time stamp 2016-08-16 12:01:18 is 326.534720674 s in the future
+tar: app/views/upload_file_mailer/upload_retailer_confirmation.html.erb: time stamp 2016-08-16 12:01:18 is 326.534689164 s in the future
+tar: app/views/upload_file_mailer: time stamp 2016-08-16 12:01:18 is 326.534672913 s in the future
+tar: app/views/user_audits/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.534630657 s in the future
+tar: app/views/user_audits/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.534530216 s in the future
+tar: app/views/user_audits: time stamp 2016-08-16 12:01:18 is 326.534510876 s in the future
+tar: app/views/user_mailer/invite_mail.html.erb: time stamp 2016-08-16 12:01:18 is 326.534451822 s in the future
+tar: app/views/user_mailer/reset_password_token.html.erb: time stamp 2016-08-16 12:01:18 is 326.534421428 s in the future
+tar: app/views/user_mailer: time stamp 2016-08-16 12:01:18 is 326.534405287 s in the future
+tar: app/views/user_shifts/_shift_time.html.erb: time stamp 2016-08-16 12:01:18 is 326.53435366 s in the future
+tar: app/views/user_shifts/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.534324809 s in the future
+tar: app/views/user_shifts/update.js.erb: time stamp 2016-08-16 12:01:18 is 326.534244536 s in the future
+tar: app/views/user_shifts: time stamp 2016-08-16 12:01:18 is 326.534224635 s in the future
+tar: app/views/users/_auditor.html.erb: time stamp 2016-08-16 12:01:18 is 326.534170671 s in the future
+tar: app/views/users/_cmo.html.erb: time stamp 2016-08-16 12:01:18 is 326.534069789 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/users/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.533972758 s in the future
+tar: app/views/users/_requester.html.erb: time stamp 2016-08-16 12:01:18 is 326.533857158 s in the future
+tar: app/views/users/_rrm.html.erb: time stamp 2016-08-16 12:01:18 is 326.533801796 s in the future
+tar: app/views/users/_vendor.html.erb: time stamp 2016-08-16 12:01:18 is 326.533615325 s in the future
+tar: app/views/users/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.533580713 s in the future
+tar: app/views/users/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.533526098 s in the future
+tar: app/views/users/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.533494505 s in the future
+tar: app/views/users/reset_password.html.erb: time stamp 2016-08-16 12:01:18 is 326.533465818 s in the future
+tar: app/views/users/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.533338264 s in the future
+tar: app/views/users: time stamp 2016-08-16 12:01:18 is 326.53331885 s in the future
+tar: app/views/users_reportings/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.533257422 s in the future
+tar: app/views/users_reportings: time stamp 2016-08-16 12:01:18 is 326.533230069 s in the future
+tar: app/views/vendor_assignments/_bill_received.html.erb: time stamp 2016-08-16 12:01:18 is 326.533184715 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/vendor_assignments/_date_update.html.erb: time stamp 2016-08-16 12:01:18 is 326.533050329 s in the future
+tar: app/views/vendor_assignments/_po_update.html.erb: time stamp 2016-08-16 12:01:18 is 326.532963251 s in the future
+tar: app/views/vendor_assignments/_poreceive.html.erb: time stamp 2016-08-16 12:01:18 is 326.532933704 s in the future
+tar: app/views/vendor_assignments/_terminate.html.erb: time stamp 2016-08-16 12:01:18 is 326.532843421 s in the future
+tar: app/views/vendor_assignments/_upload_bill.html.erb: time stamp 2016-08-16 12:01:18 is 326.532809661 s in the future
+tar: app/views/vendor_assignments/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.532660311 s in the future
+tar: app/views/vendor_assignments/index.xls.erb: time stamp 2016-08-16 12:01:18 is 326.532626584 s in the future
+tar: app/views/vendor_assignments/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.532506885 s in the future
+tar: app/views/vendor_assignments/status.html.erb: time stamp 2016-08-16 12:01:18 is 326.532459851 s in the future
+tar: app/views/vendor_assignments: time stamp 2016-08-16 12:01:18 is 326.532441562 s in the future
+tar: app/views/vendor_mailer/requestApproved.html.erb: time stamp 2016-08-16 12:01:18 is 326.532395659 s in the future
+tar: app/views/vendor_mailer/vendorAllocatorAssignment.html.erb: time stamp 2016-08-16 12:01:18 is 326.532195485 s in the future
+tar: app/views/vendor_mailer/vendorDocumentsUpload.html.erb: time stamp 2016-08-16 12:01:18 is 326.532164111 s in the future
+tar: app/views/vendor_mailer/vendorReplace.html.erb: time stamp 2016-08-16 12:01:18 is 326.532135746 s in the future
+tar: app/views/vendor_mailer/vendorResponse.html.erb: time stamp 2016-08-16 12:01:18 is 326.532108191 s in the future
+tar: app/views/vendor_mailer/vendorVerify.html.erb: time stamp 2016-08-16 12:01:18 is 326.53208083 s in the future
+tar: 
+ DEBUG [67aacfd2] 	app/views/vendor_mailer/vendor_assignment.html.erb: time stamp 2016-08-16 12:01:18 is 326.532051949 s in the future
+tar: app/views/vendor_mailer: time stamp 2016-08-16 12:01:18 is 326.531982364 s in the future
+tar: app/views/vendor_requests/_action.html.erb: time stamp 2016-08-16 12:01:18 is 326.531932975 s in the future
+tar: app/views/vendor_requests/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.531797057 s in the future
+tar: app/views/vendor_requests/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.531638142 s in the future
+tar: app/views/vendor_requests/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.531604444 s in the future
+tar: app/views/vendor_requests: time stamp 2016-08-16 12:01:18 is 326.531587997 s in the future
+tar: app/views/vendor_tasks/_search.html.erb: time stamp 2016-08-16 12:01:18 is 326.53154452 s in the future
+tar: app/views/vendor_tasks/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.53134537 s in the future
+tar: app/views/vendor_tasks/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.531181745 s in the future
+tar: app/views/vendor_tasks/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.531147882 s in the future
+tar: app/views/vendor_tasks: time stamp 2016-08-16 12:01:18 is 326.531131625 s in the future
+tar: app/views/vendorlists/_vendor_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.531086978 s in the future
+ DEBUG [67aacfd2] 	tar: app/views/vendorlists/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.53089107 s in the future
+tar: app/views/vendorlists/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.53085643 s in the future
+tar: app/views/vendorlists/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.530828596 s in the future
+tar: app/views/vendorlists/show.html.erb: time stamp 2016-08-16 12:01:18 is 326.530800202 s in the future
+tar: app/views/vendorlists: time stamp 2016-08-16 12:01:18 is 326.530784192 s in the future
+tar: app/views/warehouses/_form.html.erb: time stamp 2016-08-16 12:01:18 is 326.530625945 s in the future
+tar: app/views/warehouses/create.js.erb: time stamp 2016-08-16 12:01:18 is 326.530595037 s in the future
+tar: app/views/warehouses/edit.html.erb: time stamp 2016-08-16 12:01:18 is 326.530566716 s in the future
+tar: app/views/warehouses/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.53053984 s in the future
+tar: app/views/warehouses/new.html.erb: time stamp 2016-08-16 12:01:18 is 326.530511274 s in the future
+tar: app/views/warehouses/new.js.erb: time stamp 2016-08-16 12:01:18 is 326.530475711 s in the future
+tar: app/views/warehouses: time stamp 2016-08-16 12:01:18 is 326.530451807 s in the future
+tar: app/views/weekly_offs/index.html.erb: time stamp 2016-08-16 12:01:18 is 326.53040284 s in the future
+tar: app/views/weekly_offs: time stamp 2016-08-16 12:01:18 is 326.530386164 s in the future
+tar: app/views: time stamp 2016-08-16 12:01:18 is 326.530366213 s in the future
+tar: app: time stamp 2016-08-16 12:01:18 is 326.530353267 s in the future
+tar: bin/bundle: time stamp 2016-08-16 12:01:18 is 326.530307182 s in the future
+tar: bin/delayed_job: time stamp 2016-08-16 12:01:18 is 326.530268831 s in the future
+tar: bin/rails: time stamp 2016-08-16 12:01:18 is 326.530086019 s in the future
+tar: bin/rake: time stamp 2016-08-16 12:01:18 is 326.530055511 s in the future
+ DEBUG [67aacfd2] 	tar: bin/spring: time stamp 2016-08-16 12:01:18 is 326.52997614 s in the future
+tar: bin: time stamp 2016-08-16 12:01:18 is 326.529958321 s in the future
+tar: config.ru: time stamp 2016-08-16 12:01:18 is 326.529933382 s in the future
+tar: config/application.rb: time stamp 2016-08-16 12:01:18 is 326.529889754 s in the future
+tar: config/boot.rb: time stamp 2016-08-16 12:01:18 is 326.529862573 s in the future
+tar: config/database.yml: time stamp 2016-08-16 12:01:18 is 326.529834351 s in the future
+tar: config/deploy.rb: time stamp 2016-08-16 12:01:18 is 326.529699682 s in the future
+tar: config/deploy/logrotate/log.conf: time stamp 2016-08-16 12:01:18 is 326.529629993 s in the future
+tar: config/deploy/logrotate: time stamp 2016-08-16 12:01:18 is 326.529613201 s in the future
+tar: config/deploy/monit/monit.conf.erb: time stamp 2016-08-16 12:01:18 is 326.529568786 s in the future
+tar: config/deploy/monit: time stamp 2016-08-16 12:01:18 is 326.529358366 s in the future
+tar: config/deploy/nginx/nginx.conf.erb: time stamp 2016-08-16 12:01:18 is 326.52930608 s in the future
+tar: config/deploy/nginx: time stamp 2016-08-16 12:01:18 is 326.529288985 s in the future
+tar: config/deploy/production.rb: time stamp 2016-08-16 12:01:18 is 326.529258746 s in the future
+tar: config/deploy/staging.rb: time stamp 2016-08-16 12:01:18 is 326.529216583 s in the future
+tar: config/deploy: time stamp 2016-08-16 12:01:18 is 326.529101906 s in the future
+tar: config/environment.rb: time stamp 2016-08-16 12:01:18 is 326.529072609 s in the future
+ DEBUG [67aacfd2] 	tar: config/environments/development.rb: time stamp 2016-08-16 12:01:18 is 326.528975634 s in the future
+tar: config/environments/production.rb: time stamp 2016-08-16 12:01:18 is 326.52894501 s in the future
+tar: config/environments/staging.rb: time stamp 2016-08-16 12:01:18 is 326.528818689 s in the future
+tar: config/environments/test.rb: time stamp 2016-08-16 12:01:18 is 326.528785954 s in the future
+tar: config/environments: time stamp 2016-08-16 12:01:18 is 326.528770269 s in the future
+tar: config/initializers/address_states.rb: time stamp 2016-08-16 12:01:18 is 326.528710649 s in the future
+tar: config/initializers/assets.rb: time stamp 2016-08-16 12:01:18 is 326.528680954 s in the future
+tar: config/initializers/aws_carrierwave.rb: time stamp 2016-08-16 12:01:18 is 326.528653057 s in the future
+tar: config/initializers/backtrace_silencers.rb: time stamp 2016-08-16 12:01:18 is 326.528626473 s in the future
+tar: config/initializers/constant_values.rb: time stamp 2016-08-16 12:01:18 is 326.528498837 s in the future
+tar: config/initializers/cookies_serializer.rb: time stamp 2016-08-16 12:01:18 is 326.528451249 s in the future
+tar: config/initializers/filter_parameter_logging.rb: time stamp 2016-08-16 12:01:18 is 326.528313503 s in the future
+tar: config/initializers/geocoder.rb: time stamp 2016-08-16 12:01:18 is 326.528281226 s in the future
+tar: config/initializers/inflections.rb: time stamp 2016-08-16 12:01:18 is 326.528254227 s in the future
+tar: config/initializers/mime_types.rb: time stamp 2016-08-16 12:01:18 is 326.528227344 s in the future
+tar: config/initializers/module_permissions.rb: time stamp 2016-08-16 12:01:18 is 326.528198904 s in the future
+tar: config/initializers/rpush.rb: time stamp 2016-08-16 12:01:18 is 326.528078099 s in the future
+ DEBUG [67aacfd2] 	tar: config/initializers/schedular.rb: time stamp 2016-08-16 12:01:18 is 326.52799817 s in the future
+tar: config/initializers/session_store.rb: time stamp 2016-08-16 12:01:18 is 326.527957187 s in the future
+tar: config/initializers/state_machine.rb: time stamp 2016-08-16 12:01:18 is 326.527927994 s in the future
+tar: config/initializers/tat_modules.rb: time stamp 2016-08-16 12:01:18 is 326.527901089 s in the future
+tar: config/initializers/will_paginate_array.rb: time stamp 2016-08-16 12:01:18 is 326.527874088 s in the future
+tar: config/initializers/wrap_parameters.rb: time stamp 2016-08-16 12:01:18 is 326.527846586 s in the future
+tar: config/initializers: time stamp 2016-08-16 12:01:18 is 326.527831121 s in the future
+tar: config/locales/en.yml: time stamp 2016-08-16 12:01:18 is 326.527788514 s in the future
+tar: config/locales: time stamp 2016-08-16 12:01:18 is 326.527772388 s in the future
+tar: config/module_group_permissions.yml: time stamp 2016-08-16 12:01:18 is 326.527642893 s in the future
+tar: config/routes.rb: time stamp 2016-08-16 12:01:18 is 326.527508196 s in the future
+tar: config/secrets.yml: time stamp 2016-08-16 12:01:18 is 326.527463482 s in the future
+tar: config: time stamp 2016-08-16 12:01:18 is 326.527444838 s in the future
+tar: db/migrate/20141126105614_create_user.rb: time stamp 2016-08-16 12:01:18 is 326.527385991 s in the future
+tar: db/migrate/20141126111822_add_role_to_user.rb: time stamp 2016-08-16 12:01:18 is 326.527321638 s in the future
+tar: db/migrate/20141126115432_create_customer.rb: time stamp 2016-08-16 12:01:18 is 326.527197087 s in the future
+tar: db/migrate/20141210125506_create_delayed_jobs.rb: time stamp 2016-08-16 12:01:18 is 326.527166705 s in the future
+tar: db/migrate/20141211074251_add_col_name_to_user.rb: time stamp 2016-08-16 12:01:18 is 326.527139258 s in the future
+tar: db/migrate/20141216102051_remove_password_from_users.rb: time stamp 2016-08-16 12:01:18 is 326.527110533 s in the future
+tar: db/migrate/20141216102830_add_password_digest_to_users.rb: time stamp 2016-08-16 12:01:18 is 326.527082701 s in the future
+tar: db/migrate/20141216105049_remove_col_role_to_user.rb: time stamp 2016-08-16 12:01:18 is 326.527052441 s in the future
+ DEBUG [67aacfd2] 	
+tar: db/migrate/20141216105315_add_roles_mask_to_user.rb: time stamp 2016-08-16 12:01:18 is 326.526958924 s in the future
+tar: db/migrate/20141216120353_add_reset_password_token_to_users.rb: time stamp 2016-08-16 12:01:18 is 326.526927325 s in the future
+tar: db/migrate/20141219090647_create_organization.rb: time stamp 2016-08-16 12:01:18 is 326.526899224 s in the future
+tar: db/migrate/20141219100036_create_address.rb: time stamp 2016-08-16 12:01:18 is 326.526776249 s in the future
+tar: db/migrate/20141219100854_create_job_title.rb: time stamp 2016-08-16 12:01:18 is 326.526728296 s in the future
+tar: db/migrate/20141219111538_add_columns_to_address.rb: time stamp 2016-08-16 12:01:18 is 326.526695052 s in the future
+tar: db/migrate/20141222074429_create_department.rb: time stamp 2016-08-16 12:01:18 is 326.526666656 s in the future
+tar: db/migrate/20141222082218_create_region.rb: time stamp 2016-08-16 12:01:18 is 326.526636429 s in the future
+tar: db/migrate/20141222083541_create_business_unit.rb: time stamp 2016-08-16 12:01:18 is 326.526608789 s in the future
+tar: db/migrate/20141222085018_create_user_department.rb: time stamp 2016-08-16 12:01:18 is 326.52658055 s in the future
+tar: db/migrate/20141222092122_create_regions_users.rb: time stamp 2016-08-16 12:01:18 is 326.526553082 s in the future
+tar: db/migrate/20141222092948_create_business_units_users.rb: time stamp 2016-08-16 12:01:18 is 326.526525743 s in the future
+tar: db/migrate/20141222100258_create_job_titles_users.rb: time stamp 2016-08-16 12:01:18 is 326.52649827 s in the future
+tar: db/migrate/20141222112435_create_weekly_offs.rb: time stamp 2016-08-16 12:01:18 is 326.526367204 s in the future
+tar: db/migrate/20141222122738_create_users_weekly_offs.rb: time stamp 2016-08-16 12:01:18 is 326.526335829 s in the future
+tar: db/migrate/20150122073358_create_item.rb: time stamp 2016-08-16 12:01:18 is 326.526304995 s in the future
+tar: db/migrate/20150122074131_create_city.rb: time stamp 2016-08-16 12:01:18 is 326.526276012 s in the future
+tar: db/migrate/20150122074256_create_item_region.rb: time stamp 2016-08-16 12:01:18 is 326.526246931 s in the future
+tar: db/migrate/20150122074411_create_category.rb: time stamp 2016-08-16 12:01:18 is 326.52621914 s in the future
+tar: db/migrate/20150122074501_create_collection.rb: time stamp 2016-08-16 12:01:18 is 326.526191347 s in the future
+tar: db/migrate/20150122074617_create_size.rb: time stamp 2016-08-16 12:01:18 is 326.526164258 s in the future
+tar: db/migrate/20150122080337_create_image.rb: time stamp 2016-08-16 12:01:18 is 326.526136005 s in the future
+tar: db/migrate/20150122082357_create_alcohol_percent.rb: time stamp 2016-08-16 12:01:18 is 326.526108124 s in the future
+ DEBUG [67aacfd2] 	tar: db/migrate/20150123080549_add_qty_and_unit_of_measurement_to_item.rb: time stamp 2016-08-16 12:01:18 is 326.525890833 s in the future
+tar: db/migrate/20150123082150_create_inventory.rb: time stamp 2016-08-16 12:01:18 is 326.525856821 s in the future
+tar: db/migrate/20150123083427_add_index_on_images_and_inventories.rb: time stamp 2016-08-16 12:01:18 is 326.525826937 s in the future
+tar: db/migrate/20150123084512_create_warehouse.rb: time stamp 2016-08-16 12:01:18 is 326.525798844 s in the future
+tar: db/migrate/20150204082939_create_screen.rb: time stamp 2016-08-16 12:01:18 is 326.525771494 s in the future
+tar: db/migrate/20150217053839_create_field.rb: time stamp 2016-08-16 12:01:18 is 326.525728739 s in the future
+tar: db/migrate/20150217055609_create_field_value.rb: time stamp 2016-08-16 12:01:18 is 326.52569275 s in the future
+tar: db/migrate/20150218101620_create_data_file.rb: time stamp 2016-08-16 12:01:18 is 326.525664279 s in the future
+tar: db/migrate/20150218105228_create_data_files_users.rb: time stamp 2016-08-16 12:01:18 is 326.525633488 s in the future
+tar: db/migrate/20150219061037_add_item_id_to_data_files.rb: time stamp 2016-08-16 12:01:18 is 326.525605201 s in the future
+tar: db/migrate/20150219085446_create_data_files_regions.rb: time stamp 2016-08-16 12:01:18 is 326.525441685 s in the future
+tar: db/migrate/20150220055159_add_user_id_to_data_file.rb: time stamp 2016-08-16 12:01:18 is 326.525410205 s in the future
+tar: db/migrate/20150220061439_add_index_to_data_files_users.rb: time stamp 2016-08-16 12:01:18 is 326.52537501 s in the future
+tar: db/migrate/20150226100124_add_columns_to_fields.rb: time stamp 2016-08-16 12:01:18 is 326.52534295 s in the future
+tar: db/migrate/20150227121143_add_columns_to_screens.rb: time stamp 2016-08-16 12:01:18 is 326.525312533 s in the future
+tar: db/migrate/20150227132454_create_module_group.rb: time stamp 2016-08-16 12:01:18 is 326.52528454 s in the future
+tar: db/migrate/20150302111527_add_col_to_screen.rb: time stamp 2016-08-16 12:01:18 is 326.525255363 s in the future
+tar: db/migrate/20150309123120_add_updated_at_to_screen.rb: time stamp 2016-08-16 12:01:18 is 326.52522769 s in the future
+tar: db/migrate/20150312063120_create_attendance.rb: time stamp 2016-08-16 12:01:18 is 326.525198451 s in the future
+tar: db/migrate/20150312092640_add_index_on_attendance.rb: time stamp 2016-08-16 12:01:18 is 326.525104756 s in the future
+tar: db/migrate/20150313070734_add_updated_at_to_customers.rb: time stamp 2016-08-16 12:01:18 is 326.525071759 s in the future
+ DEBUG [67aacfd2] 	tar: db/migrate/20150317102705_create_users_reporting.rb: time stamp 2016-08-16 12:01:18 is 326.524983863 s in the future
+tar: db/migrate/20150318053043_modify_customers.rb: time stamp 2016-08-16 12:01:18 is 326.524948079 s in the future
+tar: db/migrate/20150318053443_create_customers_users.rb: time stamp 2016-08-16 12:01:18 is 326.524917938 s in the future
+tar: db/migrate/20150318091725_create_contact.rb: time stamp 2016-08-16 12:01:18 is 326.524886097 s in the future
+tar: db/migrate/20150318111212_create_orders.rb: time stamp 2016-08-16 12:01:18 is 326.524857788 s in the future
+tar: db/migrate/20150318111440_create_line_item.rb: time stamp 2016-08-16 12:01:18 is 326.524828545 s in the future
+tar: db/migrate/20150320085425_create_survey.rb: time stamp 2016-08-16 12:01:18 is 326.524800522 s in the future
+tar: db/migrate/20150320085611_create_question.rb: time stamp 2016-08-16 12:01:18 is 326.524772621 s in the future
+tar: db/migrate/20150320090210_create_question_options.rb: time stamp 2016-08-16 12:01:18 is 326.52465899 s in the future
+tar: db/migrate/20150323130124_create_answer.rb: time stamp 2016-08-16 12:01:18 is 326.524626066 s in the future
+tar: db/migrate/20150323130510_create_answer_option.rb: time stamp 2016-08-16 12:01:18 is 326.524595077 s in the future
+tar: db/migrate/20150327080512_add_shift_start_time_and_shift_end_time_to_users.rb: time stamp 2016-08-16 12:01:18 is 326.524565989 s in the future
+tar: db/migrate/20150327100023_add_time_zone_to_users.rb: time stamp 2016-08-16 12:01:18 is 326.524537118 s in the future
+tar: db/migrate/20150327124707_create_holiday.rb: time stamp 2016-08-16 12:01:18 is 326.524507748 s in the future
+tar: db/migrate/20150330065517_create_roles.rb: time stamp 2016-08-16 12:01:18 is 326.524467528 s in the future
+tar: db/migrate/20150330070033_remove_roles_from_user.rb: time stamp 2016-08-16 12:01:18 is 326.524432214 s in the future
+tar: db/migrate/20150330070937_create_roles_association.rb: time stamp 2016-08-16 12:01:18 is 326.524403136 s in the future
+tar: db/migrate/20150330073833_create_permission.rb: time stamp 2016-08-16 12:01:18 is 326.524365685 s in the future
+tar: db/migrate/20150330074608_remove_roles_from_data_files.rb: time stamp 2016-08-16 12:01:18 is 326.524205254 s in the future
+tar: db/migrate/20150331094710_create_request.rb: time stamp 2016-08-16 12:01:18 is 326.524170244 s in the future
+tar: db/migrate/20150331111344_create_app.rb: time stamp 2016-08-16 12:01:18 is 326.524138313 s in the future
+tar: db/migrate/20150331120247_create_apps_module_groups.rb: time stamp 2016-08-16 12:01:18 is 326.524108295 s in the future
+tar: db/migrate/20150331120907_remove_active_from_module_group.rb: time stamp 2016-08-16 12:01:18 is 326.524079896 s in the future
+tar: 
+ DEBUG [67aacfd2] 	db/migrate/20150401120037_add_imageable_column_to_images.rb: time stamp 2016-08-16 12:01:18 is 326.524051374 s in the future
+tar: db/migrate/20150402060300_add_status_to_request.rb: time stamp 2016-08-16 12:01:18 is 326.523960083 s in the future
+tar: db/migrate/20150402072110_add_columns_to_request.rb: time stamp 2016-08-16 12:01:18 is 326.523927294 s in the future
+tar: db/migrate/20150406063647_add_columns_to_requests.rb: time stamp 2016-08-16 12:01:18 is 326.52389848 s in the future
+tar: db/migrate/20150406072751_change_request_type_to_integer.rb: time stamp 2016-08-16 12:01:18 is 326.523774509 s in the future
+tar: db/migrate/20150406084918_change_avg_monthly_sales.rb: time stamp 2016-08-16 12:01:18 is 326.52372603 s in the future
+tar: db/migrate/20150409072653_add_mandatory_to_field.rb: time stamp 2016-08-16 12:01:18 is 326.523692281 s in the future
+tar: db/migrate/20150416094409_change_columns_requests.rb: time stamp 2016-08-16 12:01:18 is 326.523660089 s in the future
+tar: db/migrate/20150416104703_add_column_to_request.rb: time stamp 2016-08-16 12:01:18 is 326.523631288 s in the future
+tar: db/migrate/20150417072037_add_col_to_request.rb: time stamp 2016-08-16 12:01:18 is 326.523603205 s in the future
+tar: db/migrate/20150421095453_add_col_to_requests.rb: time stamp 2016-08-16 12:01:18 is 326.523534349 s in the future
+tar: db/migrate/20150501131318_add_col_to_image.rb: time stamp 2016-08-16 12:01:18 is 326.523502858 s in the future
+tar: db/migrate/20150504064323_add_cols_to_images.rb: time stamp 2016-08-16 12:01:18 is 326.523454548 s in the future
+tar: db/migrate/20150505120413_create_cmo.rb: time stamp 2016-08-16 12:01:18 is 326.523422832 s in the future
+tar: db/migrate/20150505122959_change_request_column.rb: time stamp 2016-08-16 12:01:18 is 326.523285713 s in the future
+tar: db/migrate/20150626052702_create_vendor_tasks.rb: time stamp 2016-08-16 12:01:18 is 326.523251508 s in the future
+tar: db/migrate/20150628080250_add_colm_to_requests.rb: time stamp 2016-08-16 12:01:18 is 326.523222293 s in the future
+tar: db/migrate/20150629064714_add_col_for_maintenance_in.rb: time stamp 2016-08-16 12:01:18 is 326.523191912 s in the future
+tar: db/migrate/20150701043135_add_visitor_to_request.rb: time stamp 2016-08-16 12:01:18 is 326.523160814 s in the future
+tar: db/migrate/20150707054818_add_columns_to_vendor_tasks.rb: time stamp 2016-08-16 12:01:18 is 326.523130892 s in the future
+tar: db/migrate/20150709060534_add_colmn_to_requests.rb: time stamp 2016-08-16 12:01:18 is 326.523101573 s in the future
+tar: db/migrate/20150710104556_add_col_to_vendor_task.rb: time stamp 2016-08-16 12:01:18 is 326.523072278 s in the future
+tar: db/migrate/20150728045330_add_status_to_cmos.rb: time stamp 2016-08-16 12:01:18 is 326.522964555 s in the future
+tar: db/migrate/20150728122323_create_vendor_request.rb: time stamp 2016-08-16 12:01:18 is 326.522915128 s in the future
+ DEBUG [67aacfd2] 	tar: db/migrate/20150803051101_change_column_status_to_retailer.rb: time stamp 2016-08-16 12:01:18 is 326.522865445 s in the future
+ DEBUG [67aacfd2] 	tar: db/migrate/20150804100922_add_column_phone_to_cmo.rb: time stamp 2016-08-16 12:01:18 is 326.522812075 s in the future
+ DEBUG [67aacfd2] 	tar: db/migrate/20150813044917_add_status_in_user.rb: time stamp 2016-08-16 12:01:18 is 326.522752095 s in the future
+tar: db/migrate/20150814051839_add_user_as_fk_in_request.rb: time stamp 2016-08-16 12:01:18 is 326.522707699 s in the future
+tar: db/migrate/20150819102237_change_request_id_in_vendor_requests.rb: time stamp 2016-08-16 12:01:18 is 326.522673074 s in the future
+tar: db/migrate/20150825123751_create_stages_for_vendor.rb: time stamp 2016-08-16 12:01:18 is 326.522641593 s in the future
+tar: db/migrate/20150825124212_add_vendor_request_fk_in_vendor_stages.rb: time stamp 2016-08-16 12:01:18 is 326.522611712 s in the future
+tar: db/migrate/20150916094307_create_beatroute.rb: time stamp 2016-08-16 12:01:18 is 326.522461224 s in the future
+tar: db/migrate/20150929064442_set_current_time_stamp_in_beatroute.rb: time stamp 2016-08-16 12:01:18 is 326.522425926 s in the future
+tar: db/migrate/20150929082407_create_upload_files.rb: time stamp 2016-08-16 12:01:18 is 326.522394825 s in the future
+tar: db/migrate/20151001045717_create_documents.rb: time stamp 2016-08-16 12:01:18 is 326.522353883 s in the future
+tar: db/migrate/20151001051051_create_repositories.rb: time stamp 2016-08-16 12:01:18 is 326.522322051 s in the future
+tar: db/migrate/20151001052027_add_foreign_keys_to_repositories.rb: time stamp 2016-08-16 12:01:18 is 326.522278108 s in the future
+tar: db/migrate/20151001061343_make_documents_id_to_unique.rb: time stamp 2016-08-16 12:01:18 is 326.522244087 s in the future
+tar: db/migrate/20151001062332_create_tags.rb: time stamp 2016-08-16 12:01:18 is 326.522214847 s in the future
+tar: db/migrate/20151001062945_create_levels.rb: time stamp 2016-08-16 12:01:18 is 326.52218617 s in the future
+tar: db/migrate/20151102073203_create_notifications.rb: time stamp 2016-08-16 12:01:18 is 326.522156859 s in the future
+tar: db/migrate/20151102083900_create_devices.rb: time stamp 2016-08-16 12:01:18 is 326.521934277 s in the future
+tar: db/migrate/20151103101951_add_rpush.rb: time stamp 2016-08-16 12:01:18 is 326.521879457 s in the future
+tar: db/migrate/20151103101952_rpush_2_0_0_updates.rb: time stamp 2016-08-16 12:01:18 is 326.521846169 s in the future
+tar: db/migrate/20151103101953_rpush_2_1_0_updates.rb: time stamp 2016-08-16 12:01:18 is 326.521803322 s in the future
+tar: db/migrate/20151103121535_add_registration_date_to_devices.rb: time stamp 2016-08-16 12:01:18 is 326.521767375 s in the future
+tar: db/migrate/20151104043101_add_status_in_devices.rb: time stamp 2016-08-16 12:01:18 is 326.52170933 s in the future
+tar: db/migrate/20151104084345_add_state_to_users.rb: time stamp 2016-08-16 12:01:18 is 326.521675106 s in the future
+tar: db/migrate/20151218064500_add_timestamps_into_users.rb: time stamp 2016-08-16 12:01:18 is 326.521645672 s in the future
+tar: db/migrate/20151218070444_add_new_columns_to_requests.rb: time stamp 2016-08-16 12:01:18 is 326.521609878 s in the future
+tar: db/migrate/20151218070933_add_some_columns_to_requests.rb: time stamp 2016-08-16 12:01:18 is 326.521578037 s in the future
+tar: db/migrate/20151224044025_add_column_size_into_documents.rb: time stamp 2016-08-16 12:01:18 is 326.521548439 s in the future
+tar: db/migrate/20160209043833_add_columns_into_audit.rb: time stamp 2016-08-16 12:01:18 is 326.521518534 s in the future
+tar: db/migrate/20160209045411_rename_columns_into_audit.rb: time stamp 2016-08-16 12:01:18 is 326.521474373 s in the future
+tar: db/migrate/20160209104516_change_column_is_audit_done.rb: time stamp 2016-08-16 12:01:18 is 326.521436844 s in the future
+tar: db/migrate/20160316051132_create_states.rb: time stamp 2016-08-16 12:01:18 is 326.521407131 s in the future
+tar: db/migrate/20160316053264_create_associated_states.rb: time stamp 2016-08-16 12:01:18 is 326.521310516 s in the future
+ DEBUG [67aacfd2] 	tar: db/migrate/20160316054252_create_user_data.rb: time stamp 2016-08-16 12:01:18 is 326.521229193 s in the future
+ DEBUG [67aacfd2] 	tar: db/migrate/20160317052945_rename_associated_state.rb: time stamp 2016-08-16 12:01:18 is 326.52117982 s in the future
+ DEBUG [67aacfd2] 	tar: db/migrate/20160318055035_add_state_id_to_requests.rb: time stamp 2016-08-16 12:01:18 is 326.521128789 s in the future
+tar: db/migrate/20160318063852_create_request_activities.rb: time stamp 2016-08-16 12:01:18 is 326.521092469 s in the future
+tar: db/migrate/20160321122346_add_user_type_to_user_states.rb: time stamp 2016-08-16 12:01:18 is 326.521061214 s in the future
+tar: db/migrate/20160322071164_rename_request_states_in_request_activities.rb: time stamp 2016-08-16 12:01:18 is 326.521018855 s in the future
+tar: db/migrate/20160419110100_add_phone_to_users.rb: time stamp 2016-08-16 12:01:18 is 326.520984327 s in the future
+tar: db/migrate/20160419111747_change_datatype_of_phone.rb: time stamp 2016-08-16 12:01:18 is 326.520955125 s in the future
+tar: db/migrate/20160419113043_change_datatypee_of_phone.rb: time stamp 2016-08-16 12:01:18 is 326.520924714 s in the future
+tar: db/migrate/20160526093527_create_request_assignments.rb: time stamp 2016-08-16 12:01:18 is 326.52081433 s in the future
+tar: db/migrate/20160527092245_create_request_assignment_activities.rb: time stamp 2016-08-16 12:01:18 is 326.520780334 s in the future
+tar: db/migrate/20160527102350_add_column_grade_into_user_data.rb: time stamp 2016-08-16 12:01:18 is 326.520737537 s in the future
+tar: db/migrate/20160531064710_update_foreign_key_into_vendor_stages.rb: time stamp 2016-08-16 12:01:18 is 326.52069825 s in the future
+tar: db/migrate/20160601055544_add_column_into_request_assignments.rb: time stamp 2016-08-16 12:01:18 is 326.520667677 s in the future
+tar: db/migrate/20160601072906_create_request_documents.rb: time stamp 2016-08-16 12:01:18 is 326.520638276 s in the future
+tar: db/migrate/20160601092804_drop_table_vendor_requests.rb: time stamp 2016-08-16 12:01:18 is 326.520609065 s in the future
+tar: db/migrate/20160601092843_create_vendor_requests.rb: time stamp 2016-08-16 12:01:18 is 326.520578344 s in the future
+tar: db/migrate/20160601115210_update_assign_date_type_into_vendor_stages.rb: time stamp 2016-08-16 12:01:18 is 326.520548932 s in the future
+tar: db/migrate/20160602134946_add_column_is_fixed_into_requests.rb: time stamp 2016-08-16 12:01:18 is 326.520519377 s in the future
+tar: db/migrate/20160603051332_add_po_number_into_request_assignments.rb: time stamp 2016-08-16 12:01:18 is 326.520408037 s in the future
+tar: db/migrate/20160608113553_add_columns_to_request_assignment.rb: time stamp 2016-08-16 12:01:18 is 326.520371651 s in the future
+tar: db/migrate/20160608113702_add_default_to_request_assignments.rb: time stamp 2016-08-16 12:01:18 is 326.520330814 s in the future
+ DEBUG [67aacfd2] 	tar: db/migrate/20160608120550_add_column_to_request_assignment.rb: time stamp 2016-08-16 12:01:18 is 326.52030037 s in the future
+ DEBUG [67aacfd2] 	tar: db/migrate/20160608120700_change_column_to_request_assignment.rb: time stamp 2016-08-16 12:01:18 is 326.520175201 s in the future
+tar: db/migrate/20160611180648_create_sales_orders.rb: time stamp 2016-08-16 12:01:18 is 326.520136348 s in the future
+tar: db/migrate/20160611180848_create_shop_dimensions.rb: time stamp 2016-08-16 12:01:18 is 326.520073442 s in the future
+tar: db/migrate/20160611181548_create_catchments.rb: time stamp 2016-08-16 12:01:18 is 326.520041463 s in the future
+tar: db/migrate/20160611181908_create_catchment_business_shops.rb: time stamp 2016-08-16 12:01:18 is 326.52001114 s in the future
+tar: db/migrate/20160611182029_create_shop_ownerships.rb: time stamp 2016-08-16 12:01:18 is 326.519968578 s in the future
+tar: db/migrate/20160611182209_create_parteners.rb: time stamp 2016-08-16 12:01:18 is 326.51991682 s in the future
+tar: db/migrate/20160611182519_create_industries.rb: time stamp 2016-08-16 12:01:18 is 326.519884531 s in the future
+tar: db/migrate/20160611182709_create_competitions.rb: time stamp 2016-08-16 12:01:18 is 326.519854638 s in the future
+tar: db/migrate/20160615142339_create_bizs.rb: time stamp 2016-08-16 12:01:18 is 326.519825482 s in the future
+tar: db/migrate/20160616044824_add_super_build_up_area_to_shop_dimensions.rb: time stamp 2016-08-16 12:01:18 is 326.519795617 s in the future
+tar: db/migrate/20160616060850_rename_type_in_shop_ownership.rb: time stamp 2016-08-16 12:01:18 is 326.519765422 s in the future
+tar: db/migrate/20160617145935_pictures.rb: time stamp 2016-08-16 12:01:18 is 326.519731694 s in the future
+tar: db/migrate/20160708084539_create_tat_groups.rb: time stamp 2016-08-16 12:01:18 is 326.519701812 s in the future
+tar: db/migrate/20160726105356_remove_status_from_sales_order.rb: time stamp 2016-08-16 12:01:18 is 326.519671855 s in the future
+tar: db/migrate/20160726105515_add_status_from_sales_order.rb: time stamp 2016-08-16 12:01:18 is 326.519642525 s in the future
+tar: db/migrate: time stamp 2016-08-16 12:01:18 is 326.519615793 s in the future
+tar: db/schema.rb: time stamp 2016-08-16 12:01:18 is 326.519437913 s in the future
+tar: db/seeds.rb: time stamp 2016-08-16 12:01:18 is 326.519080498 s in the future
+tar: db: time stamp 2016-08-16 12:01:18 is 326.519060745 s in the future
+tar: db_analytics/migrate/20141215092035_create_analytics.rb: time stamp 2016-08-16 12:01:18 is 326.51899127 s in the future
+tar: db_analytics/migrate: time stamp 2016-08-16 12:01:18 is 326.518962828 s in the future
+tar: db_analytics: time stamp 2016-08-16 12:01:18 is 326.518948494 s in the future
+tar: delayed: time stamp 2016-08-16 12:01:18 is 326.518924387 s in the future
+tar: delayed_job: time stamp 2016-08-16 12:01:18 is 326.518877012 s in the future
+tar: delayed_jobs: time stamp 2016-08-16 12:01:18 is 326.518805829 s in the future
+ DEBUG [67aacfd2] 	tar: deploy.o: time stamp 2016-08-16 12:01:18 is 326.515694276 s in the future
+ DEBUG [67aacfd2] 	tar: erd.pdf: time stamp 2016-08-16 12:01:18 is 326.515565703 s in the future
+tar: jobs: time stamp 2016-08-16 12:01:18 is 326.515537534 s in the future
+tar: lib/assets/.keep: time stamp 2016-08-16 12:01:18 is 326.515461825 s in the future
+tar: lib/assets: time stamp 2016-08-16 12:01:18 is 326.515443588 s in the future
+tar: lib/capistrano/tasks/delayed_job.rake: time stamp 2016-08-16 12:01:18 is 326.515366955 s in the future
+tar: lib/capistrano/tasks: time stamp 2016-08-16 12:01:18 is 326.515348769 s in the future
+tar: lib/capistrano: time stamp 2016-08-16 12:01:18 is 326.5153365 s in the future
+tar: lib/tasks/.keep: time stamp 2016-08-16 12:01:18 is 326.515295086 s in the future
+tar: lib/tasks/databases.rake: time stamp 2016-08-16 12:01:18 is 326.515265724 s in the future
+tar: lib/tasks: time stamp 2016-08-16 12:01:18 is 326.515237895 s in the future
+tar: lib: time stamp 2016-08-16 12:01:18 is 326.515221327 s in the future
+tar: log/.keep: time stamp 2016-08-16 12:01:18 is 326.51518091 s in the future
+ DEBUG [67aacfd2] 	tar: log/capistrano.log: time stamp 2016-08-16 12:01:18 is 326.512953965 s in the future
+tar: log: time stamp 2016-08-16 12:01:18 is 326.512922669 s in the future
+tar: public/404.html: time stamp 2016-08-16 12:01:18 is 326.512847968 s in the future
+tar: public/422.html: time stamp 2016-08-16 12:01:18 is 326.512811238 s in the future
+tar: public/500.html: time stamp 2016-08-16 12:01:18 is 326.512782855 s in the future
+ DEBUG [67aacfd2] 	tar: public/beatroute.csv: time stamp 2016-08-16 12:01:18 is 326.511955319 s in the future
+tar: public/favicon.ico: time stamp 2016-08-16 12:01:18 is 326.511919331 s in the future
+tar: public/robots.txt: time stamp 2016-08-16 12:01:18 is 326.511889444 s in the future
+tar: public: time stamp 2016-08-16 12:01:18 is 326.511873367 s in the future
+ DEBUG [67aacfd2] 	tar: requests_csv/2016-04-01_2016-04-01_all_.csv: time stamp 2016-08-16 12:01:18 is 326.510798175 s in the future
+tar: requests_csv/2016-04-01_2016-04-02_all_.csv: time stamp 2016-08-16 12:01:18 is 326.510701478 s in the future
+tar: requests_csv/2016-05-01_2016-05-01_all_.csv: time stamp 2016-08-16 12:01:18 is 326.510667021 s in the future
+tar: requests_csv/2016-05-01_2016-05-04_all_.csv: time stamp 2016-08-16 12:01:18 is 326.
+ DEBUG [67aacfd2] 	510633317 s in the future
+tar: requests_csv/2016-05-01_2016-05-05_audit_.csv: time stamp 2016-08-16 12:01:18 is 326.510603683 s in the future
+tar: requests_csv/2016-05-16_2016-05-16_all_.csv: time stamp 2016-08-16 12:01:18 is 326.510505975 s in the future
+tar: requests_csv/2016-05-17_2016-05-17_all_.csv: time stamp 2016-08-16 12:01:18 is 326.510472055 s in the future
+ DEBUG [67aacfd2] 	tar: requests_csv: time stamp 2016-08-16 12:01:18 is 326.51034333 s in the future
+tar: script/delayed_job: time stamp 2016-08-16 12:01:18 is 326.510272285 s in the future
+tar: script: time stamp 2016-08-16 12:01:18 is 326.510254847 s in the future
+tar: spec/controllers/addresses_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.510194791 s in the future
+tar: spec/controllers/api/v1/citylists_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.510134722 s in the future
+tar: spec/controllers/api/v1: time stamp 2016-08-16 12:01:18 is 326.50998278 s in the future
+tar: spec/controllers/api: time stamp 2016-08-16 12:01:18 is 326.509965977 s in the future
+tar: spec/controllers/api_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509937594 s in the future
+tar: spec/controllers/beatroute_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509907226 s in the future
+tar: spec/controllers/business_units_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509876077 s in the future
+tar: spec/controllers/categories_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509780328 s in the future
+tar: spec/controllers/cities_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509728199 s in the future
+tar: spec/controllers/cmos_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509691963 s in the future
+tar: spec/controllers/departments_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509591084 s in the future
+tar: spec/controllers/device_registration_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509558007 s in the future
+tar: spec/controllers/devices_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509529059 s in the future
+tar: spec/controllers/downloads_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509502038 s in the future
+tar: spec/controllers/gmails_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509459643 s in the future
+tar: spec/controllers/helps_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509425908 s in the future
+tar: spec/controllers/inventories_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509281621 s in the future
+tar: spec/controllers/item_regions_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509167913 s in the future
+tar: spec/controllers/items_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.509130119 s in the future
+tar: spec/controllers/job_titles_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508996635 s in the future
+tar: spec/controllers/levels_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508961288 s in the future
+tar: spec/controllers/maps_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508933308 s in the future
+tar: spec/controllers/notifications_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508905513 s in the future
+tar: spec/controllers/organizations_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508877868 s in the future
+tar: spec/controllers/regions_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508703628 s in the future
+tar: spec/controllers/repositories_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.50866972 s in the future
+tar: spec/controllers/request_assignments_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508561829 s in the future
+tar: spec/controllers/request_documents_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508527771 s in the future
+tar: spec/controllers/retailers_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508498242 s in the future
+tar: spec/controllers/rrms_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508452384 s in the future
+tar: spec/controllers/sessions_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508420894 s in the future
+tar: spec/controllers/tags_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508369964 s in the future
+tar: spec/controllers/tat_groups_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508213421 s in the future
+tar: spec/controlle
+ DEBUG [67aacfd2] 	rs/user_audits_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508179077 s in the future
+tar: spec/controllers/user_data_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508149758 s in the future
+tar: spec/controllers/users_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.508056493 s in the future
+tar: spec/controllers/vendor_assignments_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507985873 s in the future
+tar: spec/controllers/vendor_requests_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507954164 s in the future
+tar: spec/controllers/vendor_stages_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507925919 s in the future
+tar: spec/controllers/vendors_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507898903 s in the future
+tar: spec/controllers/weekly_offs_controller_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507867458 s in the future
+tar: spec/controllers: time stamp 2016-08-16 12:01:18 is 326.507851076 s in the future
+tar: spec/factories.rb: time stamp 2016-08-16 12:01:18 is 326.507703017 s in the future
+tar: spec/helpers/api/v1/citylists_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507620684 s in the future
+tar: spec/helpers/api/v1: time stamp 2016-08-16 12:01:18 is 326.507603064 s in the future
+tar: spec/helpers/api: time stamp 2016-08-16 12:01:18 is 326.507590452 s in the future
+tar: spec/helpers/api_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507565263 s in the future
+tar: spec/helpers/beatroute_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.50753741 s in the future
+tar: spec/helpers/cmos_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507509489 s in the future
+tar: spec/helpers/device_registration_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507472229 s in the future
+tar: spec/helpers/devices_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507435722 s in the future
+tar: spec/helpers/downloads_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507407635 s in the future
+tar: spec/helpers/gmails_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507371205 s in the future
+tar: spec/helpers/helps_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507231055 s in the future
+tar: spec/helpers/levels_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507183625 s in the future
+tar: spec/helpers/maps_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507144475 s in the future
+tar: spec/helpers/notification_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.50707051 s in the future
+tar: spec/helpers/notifications_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.507011284 s in the future
+tar: spec/helpers/repositories_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.506980739 s in the future
+tar: spec/helpers/request_assignments_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.506951863 s in the future
+tar: spec/helpers/request_documents_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.506923266 s in the future
+tar: spec/helpers/retailers_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.506896006 s in the future
+tar: spec/helpers/rrms_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.506868957 s in the future
+tar: spec/helpers/tags_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.506706408 s in the future
+tar: spec/helpers/tat_groups_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.506674231 s in the future
+tar: spec/helpers/user_audits_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.50664667 s in the future
+tar: spec/helpers/user_data_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.506619978 s in the future
+tar: spec/helpers/vendor_assignments_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.506592739 s in the future
+tar: spec/helpers/vendor_requests_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.506564276 s in the future
+tar: spec/helpers/vendor_stages_helper_spec.rb: time stamp 2016-08-16 12:01:18 is 326.506537036 s in the future
+tar: spec/helpers/vendors_helper_spec.rb: time stamp 2
+ DEBUG [67aacfd2] 	016-08-16 12:01:18 is 326.506507487 s in the future
+tar: spec/helpers: time stamp 2016-08-16 12:01:18 is 326.506487351 s in the future
+tar: spec/mailers/password_mailer_spec.rb: time stamp 2016-08-16 12:01:18 is 326.506422796 s in the future
+tar: spec/mailers/upload_file_mailer_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505904781 s in the future
+tar: spec/mailers/vendor_mails_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505852951 s in the future
+tar: spec/mailers: time stamp 2016-08-16 12:01:18 is 326.505834248 s in the future
+tar: spec/models/address_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505785109 s in the future
+tar: spec/models/associated_state_spec.rb: time stamp 2016-08-16 12:01:18 is 326.50574371 s in the future
+tar: spec/models/beatroute_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505705415 s in the future
+tar: spec/models/business_unit_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505675838 s in the future
+tar: spec/models/category_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505648929 s in the future
+tar: spec/models/city_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505622324 s in the future
+tar: spec/models/department_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505596164 s in the future
+tar: spec/models/device_registration_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505500361 s in the future
+tar: spec/models/download_spec.rb: time stamp 2016-08-16 12:01:18 is 326.50545391 s in the future
+tar: spec/models/item_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505424081 s in the future
+tar: spec/models/job_title_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505397373 s in the future
+tar: spec/models/level_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505362616 s in the future
+tar: spec/models/map_spec.rb: time stamp 2016-08-16 12:01:18 is 326.50532775 s in the future
+tar: spec/models/notification_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505299999 s in the future
+tar: spec/models/organization_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505257999 s in the future
+tar: spec/models/read_file_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505228815 s in the future
+tar: spec/models/region_spec.rb: time stamp 2016-08-16 12:01:18 is 326.505201916 s in the future
+tar: spec/models/repository_spec.rb: time stamp 2016-08-16 12:01:18 is 326.504710958 s in the future
+tar: spec/models/request_activity_spec.rb: time stamp 2016-08-16 12:01:18 is 326.504677039 s in the future
+ DEBUG [67aacfd2] 	tar: spec/models/request_assignment_spec.rb: time stamp 2016-08-16 12:01:18 is 326.2413192 s in the future
+tar: spec/models/rrm_spec.rb: time stamp 2016-08-16 12:01:18 is 326.241223479 s in the future
+ DEBUG [67aacfd2] 	tar: spec/models/shop_assignments_spec.rb: time stamp 2016-08-16 12:01:18 is 326.241166154 s in the future
+ DEBUG [67aacfd2] 	tar: spec/models/state_spec.rb: time stamp 2016-08-16 12:01:18 is 326.241111166 s in the future
+ DEBUG [67aacfd2] 	tar: spec/models/tag_spec.rb: time stamp 2016-08-16 12:01:18 is 326.241065476 s in the future
+ DEBUG [67aacfd2] 	tar: spec/models/tat_group_spec.rb: time stamp 2016-08-16 12:01:18 is 326.241034728 s in the future
+tar: spec/models/upload_file_spec.rb: time stamp 2016-08-16 12:01:18 is 326.241006017 s in the future
+tar: spec/models/user_audits_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240977844 s in the future
+tar: spec/models/user_data_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240941568 s in the future
+tar: spec/models/user_parent_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240906051 s in the future
+tar: spec/models/user_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240877816 s in the future
+tar: spec/models/user_state_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240834635 s in the future
+tar: spec/models/vendor_assignment_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240799715 s in the future
+tar: spec/models/vendor_request_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240771507 s in the future
+tar: spec/models/vendor_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240744343 s in the future
+tar: spec/models/vendor_stage_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240712921 s in the future
+tar: spec/models/vendorlist_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240683633 s in the future
+tar: spec/models/weekly_off_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240656986 s in the future
+tar: spec/models: time stamp 2016-08-16 12:01:18 is 326.240641862 s in the future
+tar: spec/rails_helper.rb: time stamp 2016-08-16 12:01:18 is 326.240617121 s in the future
+tar: spec/requests/request_assignments_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240559713 s in the future
+tar: spec/requests/tat_groups_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240531587 s in the future
+tar: spec/requests: time stamp 2016-08-16 12:01:18 is 326.240516334 s in the future
+tar: spec/routing/request_assignments_routing_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240458369 s in the future
+tar: spec/routing/tat_groups_routing_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240422737 s in the future
+tar: spec/routing: time stamp 2016-08-16 12:01:18 is 326.240406981 s in the future
+tar: spec/spec_helper.rb: time stamp 2016-08-16 12:01:18 is 326.240370328 s in the future
+tar: spec/support/user_helper.rb: time stamp 2016-08-16 12:01:18 is 326.240323622 s in the future
+tar: spec/support: time stamp 2016-08-16 12:01:18 is 326.240307389 s in the future
+ DEBUG [67aacfd2] 	tar: spec/views/request_assignments/edit.html.erb_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240205758 s in the future
+ DEBUG [67aacfd2] 	tar: spec/views/request_assignments/index.html.erb_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240164742 s in the future
+ DEBUG [67aacfd2] 	tar: spec/views/request_assignments/new.html.erb_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240118041 s in the future
+tar: spec/views/request_assignments/show.html.erb_spec.rb: time stamp 2016-08-16 12:01:18 is 326.2400787 s in the future
+tar: spec/views/request_assignments: time stamp 2016-08-16 12:01:18 is 326.24006215 s in the future
+tar: spec/views/tat_groups/edit.html.erb_spec.rb: time stamp 2016-08-16 12:01:18 is 326.240020522 s in the future
+tar: spec/views/tat_groups/index.html.erb_spec.rb: time stamp 2016-08-16 12:01:18 is 326.239991624 s in the future
+tar: spec/views/tat_groups/new.html.erb_spec.rb: time stamp 2016-08-16 12:01:18 is 326.239964392 s in the future
+tar: spec/views/tat_groups/show.html.erb_spec.rb: time stamp 2016-08-16 12:01:18 is 326.239937613 s in the future
+tar: spec/views/tat_groups: time stamp 2016-08-16 12:01:18 is 326.23992229 s in the future
+tar: spec/views: time stamp 2016-08-16 12:01:18 is 326.239910582 s in the future
+tar: spec: time stamp 2016-08-16 12:01:18 is 326.239899292 s in the future
+tar: test.csv: time stamp 2016-08-16 12:01:18 is 326.239859932 s in the future
+tar: test.xls: time stamp 2016-08-16 12:01:18 is 326.239820062 s in the future
+tar: test/controllers/.keep: time stamp 2016-08-16 12:01:18 is 326.239759051 s in the future
+tar: test/controllers: time stamp 2016-08-16 12:01:18 is 326.239743411 s in the future
+tar: test/fixtures/.keep: time stamp 2016-08-16 12:01:18 is 326.239703138 s in the future
+tar: test/fixtures: time stamp 2016-08-16 12:01:18 is 326.239687846 s in the future
+tar: test/helpers/.keep: time stamp 2016-08-16 12:01:18 is 326.239650946 s in the future
+tar: test/helpers: time stamp 2016-08-16 12:01:18 is 326.23963189 s in the future
+tar: test/integration/.keep: time stamp 2016-08-16 12:01:18 is 326.2395923 s in the future
+tar: test/integration: time stamp 2016-08-16 12:01:18 is 326.239576969 s in the future
+tar: test/mailers/.keep: time stamp 2016-08-16 12:01:18 is 326.239542859 s in the future
+tar: test/mailers: time stamp 2016-08-16 12:01:18 is 326.239527696 s in the future
+tar: test/models/.keep: time stamp 2016-08-16 12:01:18 is 326.23948165 s in the future
+tar: test/models: time stamp 2016-08-16 12:01:18 is 326.239453883 s in the future
+tar: test/test_helper.rb: time stamp 2016-08-16 12:01:18 is 326.239425905 s in the future
+tar: test: time stamp 2016-08-16 12:01:18 is 326.239411011 s in the future
+tar: typescript: time stamp 2016-08-16 12:01:18 is 326.239390511 s in the future
+tar: vendor/assets/javascripts/.keep: time stamp 2016-08-16 12:01:18 is 326.239297883 s in the future
+tar: vendor/assets/javascripts: time stamp 2016-08-16 12:01:18 is 326.239250667 s in the future
+ DEBUG [67aacfd2] 	tar: vendor/assets/stylesheets/.keep: time stamp 2016-08-16 12:01:18 is 326.239198115 s in the future
+ DEBUG [67aacfd2] 	tar: vendor/assets/stylesheets: time stamp 2016-08-16 12:01:18 is 326.239171706 s in the future
+tar: vendor/assets: time stamp 2016-08-16 12:01:18 is 326.239158671 s in the future
+ DEBUG [67aacfd2] 	tar: vendor: time stamp 2016-08-16 12:01:18 is 326.239147716 s in the future
+  INFO [67aacfd2] Finished in 0.563 seconds with exit status 0 (successful).
+ DEBUG [193fb366] Running if test ! -d /var/www/fosem-staging/repo; then echo "Directory does not exist '/var/www/fosem-staging/repo'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [193fb366] Command: if test ! -d /var/www/fosem-staging/repo; then echo "Directory does not exist '/var/www/fosem-staging/repo'" 1>&2; false; fi
+ DEBUG [193fb366] Finished in 0.115 seconds with exit status 0 (successful).
+ DEBUG [2134b368] Running /usr/bin/env git rev-list --max-count=1 vendor_workflow as root@43.252.88.222
+ DEBUG [2134b368] Command: cd /var/www/fosem-staging/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh" ; /usr/bin/env git rev-list --max-count=1 vendor_workflow )
+ DEBUG [2134b368] 	8c4794e5bd2424905432d0676745425de735e889
+ DEBUG [2134b368] Finished in 0.133 seconds with exit status 0 (successful).
+ DEBUG [d6fbe495] Running if test ! -d /var/www/fosem-staging/releases/20160816160219; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160816160219'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [d6fbe495] Command: if test ! -d /var/www/fosem-staging/releases/20160816160219; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160816160219'" 1>&2; false; fi
+ DEBUG [d6fbe495] Finished in 0.122 seconds with exit status 0 (successful).
+  INFO [4f782893] Running /usr/bin/env echo "8c4794e5bd2424905432d0676745425de735e889" >> REVISION as root@43.252.88.222
+ DEBUG [4f782893] Command: cd /var/www/fosem-staging/releases/20160816160219 && /usr/bin/env echo "8c4794e5bd2424905432d0676745425de735e889" >> REVISION
+  INFO [4f782893] Finished in 0.171 seconds with exit status 0 (successful).
+  INFO [3da777de] Running /usr/bin/env mkdir -p /var/www/fosem-staging/releases/20160816160219 /var/www/fosem-staging/releases/20160816160219/tmp /var/www/fosem-staging/releases/20160816160219/vendor /var/www/fosem-staging/releases/20160816160219/public as root@43.252.88.222
+ DEBUG [3da777de] Command: /usr/bin/env mkdir -p /var/www/fosem-staging/releases/20160816160219 /var/www/fosem-staging/releases/20160816160219/tmp /var/www/fosem-staging/releases/20160816160219/vendor /var/www/fosem-staging/releases/20160816160219/public
+  INFO [3da777de] Finished in 0.128 seconds with exit status 0 (successful).
+ DEBUG [49961008] Running [ -L /var/www/fosem-staging/releases/20160816160219/bin ] as root@43.252.88.222
+ DEBUG [49961008] Command: [ -L /var/www/fosem-staging/releases/20160816160219/bin ]
+ DEBUG [49961008] Finished in 0.128 seconds with exit status 1 (failed).
+ DEBUG [fd8f4c07] Running [ -d /var/www/fosem-staging/releases/20160816160219/bin ] as root@43.252.88.222
+ DEBUG [fd8f4c07] Command: [ -d /var/www/fosem-staging/releases/20160816160219/bin ]
+ DEBUG [fd8f4c07] Finished in 0.118 seconds with exit status 0 (successful).
+  INFO [57f4b9a5] Running /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160816160219/bin as root@43.252.88.222
+ DEBUG [57f4b9a5] Command: /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160816160219/bin
+  INFO [57f4b9a5] Finished in 0.116 seconds with exit status 0 (successful).
+  INFO [3cc4b040] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/bin /var/www/fosem-staging/releases/20160816160219/bin as root@43.252.88.222
+ DEBUG [3cc4b040] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/bin /var/www/fosem-staging/releases/20160816160219/bin
+  INFO [3cc4b040] Finished in 0.487 seconds with exit status 0 (successful).
+ DEBUG [419c59cb] Running [ -L /var/www/fosem-staging/releases/20160816160219/log ] as root@43.252.88.222
+ DEBUG [419c59cb] Command: [ -L /var/www/fosem-staging/releases/20160816160219/log ]
+ DEBUG [419c59cb] Finished in 0.134 seconds with exit status 1 (failed).
+ DEBUG [ebcb054c] Running [ -d /var/www/fosem-staging/releases/20160816160219/log ] as root@43.252.88.222
+ DEBUG [ebcb054c] Command: [ -d /var/www/fosem-staging/releases/20160816160219/log ]
+ DEBUG [ebcb054c] Finished in 0.123 seconds with exit status 0 (successful).
+  INFO [8f61c582] Running /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160816160219/log as root@43.252.88.222
+ DEBUG [8f61c582] Command: /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160816160219/log
+  INFO [8f61c582] Finished in 0.152 seconds with exit status 0 (successful).
+  INFO [fc603bf8] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/log /var/www/fosem-staging/releases/20160816160219/log as root@43.252.88.222
+ DEBUG [fc603bf8] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/log /var/www/fosem-staging/releases/20160816160219/log
+  INFO [fc603bf8] Finished in 0.130 seconds with exit status 0 (successful).
+ DEBUG [90ca9e44] Running [ -L /var/www/fosem-staging/releases/20160816160219/tmp/pids ] as root@43.252.88.222
+ DEBUG [90ca9e44] Command: [ -L /var/www/fosem-staging/releases/20160816160219/tmp/pids ]
+ DEBUG [90ca9e44] Finished in 0.140 seconds with exit status 1 (failed).
+ DEBUG [ab619015] Running [ -d /var/www/fosem-staging/releases/20160816160219/tmp/pids ] as root@43.252.88.222
+ DEBUG [ab619015] Command: [ -d /var/www/fosem-staging/releases/20160816160219/tmp/pids ]
+ DEBUG [ab619015] Finished in 0.172 seconds with exit status 1 (failed).
+  INFO [af517433] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/tmp/pids /var/www/fosem-staging/releases/20160816160219/tmp/pids as root@43.252.88.222
+ DEBUG [af517433] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/tmp/pids /var/www/fosem-staging/releases/20160816160219/tmp/pids
+  INFO [af517433] Finished in 0.125 seconds with exit status 0 (successful).
+ DEBUG [3bef5ddd] Running [ -L /var/www/fosem-staging/releases/20160816160219/tmp/cache ] as root@43.252.88.222
+ DEBUG [3bef5ddd] Command: [ -L /var/www/fosem-staging/releases/20160816160219/tmp/cache ]
+ DEBUG [3bef5ddd] Finished in 0.120 seconds with exit status 1 (failed).
+ DEBUG [5500fc39] Running [ -d /var/www/fosem-staging/releases/20160816160219/tmp/cache ] as root@43.252.88.222
+ DEBUG [5500fc39] Command: [ -d /var/www/fosem-staging/releases/20160816160219/tmp/cache ]
+ DEBUG [5500fc39] Finished in 0.154 seconds with exit status 1 (failed).
+  INFO [f9e3feba] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/tmp/cache /var/www/fosem-staging/releases/20160816160219/tmp/cache as root@43.252.88.222
+ DEBUG [f9e3feba] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/tmp/cache /var/www/fosem-staging/releases/20160816160219/tmp/cache
+  INFO [f9e3feba] Finished in 0.126 seconds with exit status 0 (successful).
+ DEBUG [4bb784c3] Running [ -L /var/www/fosem-staging/releases/20160816160219/tmp/sockets ] as root@43.252.88.222
+ DEBUG [4bb784c3] Command: [ -L /var/www/fosem-staging/releases/20160816160219/tmp/sockets ]
+ DEBUG [4bb784c3] Finished in 0.109 seconds with exit status 1 (failed).
+ DEBUG [3a844f52] Running [ -d /var/www/fosem-staging/releases/20160816160219/tmp/sockets ] as root@43.252.88.222
+ DEBUG [3a844f52] Command: [ -d /var/www/fosem-staging/releases/20160816160219/tmp/sockets ]
+ DEBUG [3a844f52] Finished in 0.109 seconds with exit status 1 (failed).
+  INFO [5f3c3bbd] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/tmp/sockets /var/www/fosem-staging/releases/20160816160219/tmp/sockets as root@43.252.88.222
+ DEBUG [5f3c3bbd] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/tmp/sockets /var/www/fosem-staging/releases/20160816160219/tmp/sockets
+  INFO [5f3c3bbd] Finished in 0.112 seconds with exit status 0 (successful).
+ DEBUG [2c5edb5f] Running [ -L /var/www/fosem-staging/releases/20160816160219/vendor/bundle ] as root@43.252.88.222
+ DEBUG [2c5edb5f] Command: [ -L /var/www/fosem-staging/releases/20160816160219/vendor/bundle ]
+ DEBUG [2c5edb5f] Finished in 0.118 seconds with exit status 1 (failed).
+ DEBUG [e414e655] Running [ -d /var/www/fosem-staging/releases/20160816160219/vendor/bundle ] as root@43.252.88.222
+ DEBUG [e414e655] Command: [ -d /var/www/fosem-staging/releases/20160816160219/vendor/bundle ]
+ DEBUG [e414e655] Finished in 0.110 seconds with exit status 1 (failed).
+  INFO [3888f306] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/vendor/bundle /var/www/fosem-staging/releases/20160816160219/vendor/bundle as root@43.252.88.222
+ DEBUG [3888f306] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/vendor/bundle /var/www/fosem-staging/releases/20160816160219/vendor/bundle
+  INFO [3888f306] Finished in 0.120 seconds with exit status 0 (successful).
+ DEBUG [f02c4df7] Running [ -L /var/www/fosem-staging/releases/20160816160219/public/system ] as root@43.252.88.222
+ DEBUG [f02c4df7] Command: [ -L /var/www/fosem-staging/releases/20160816160219/public/system ]
+ DEBUG [f02c4df7] Finished in 0.127 seconds with exit status 1 (failed).
+ DEBUG [22fb2d4b] Running [ -d /var/www/fosem-staging/releases/20160816160219/public/system ] as root@43.252.88.222
+ DEBUG [22fb2d4b] Command: [ -d /var/www/fosem-staging/releases/20160816160219/public/system ]
+ DEBUG [22fb2d4b] Finished in 0.115 seconds with exit status 1 (failed).
+  INFO [6b1c39a5] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/public/system /var/www/fosem-staging/releases/20160816160219/public/system as root@43.252.88.222
+ DEBUG [6b1c39a5] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/public/system /var/www/fosem-staging/releases/20160816160219/public/system
+  INFO [6b1c39a5] Finished in 0.110 seconds with exit status 0 (successful).
+ DEBUG [0d1838a9] Running [ -L /var/www/fosem-staging/releases/20160816160219/public/uploads ] as root@43.252.88.222
+ DEBUG [0d1838a9] Command: [ -L /var/www/fosem-staging/releases/20160816160219/public/uploads ]
+ DEBUG [0d1838a9] Finished in 0.112 seconds with exit status 1 (failed).
+ DEBUG [4a63972d] Running [ -d /var/www/fosem-staging/releases/20160816160219/public/uploads ] as root@43.252.88.222
+ DEBUG [4a63972d] Command: [ -d /var/www/fosem-staging/releases/20160816160219/public/uploads ]
+ DEBUG [4a63972d] Finished in 0.110 seconds with exit status 1 (failed).
+  INFO [a236092a] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/public/uploads /var/www/fosem-staging/releases/20160816160219/public/uploads as root@43.252.88.222
+ DEBUG [a236092a] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/public/uploads /var/www/fosem-staging/releases/20160816160219/public/uploads
+  INFO [a236092a] Finished in 0.109 seconds with exit status 0 (successful).
+ DEBUG [9ba8f62c] Running [ -L /var/www/fosem-staging/releases/20160816160219/analytics ] as root@43.252.88.222
+ DEBUG [9ba8f62c] Command: [ -L /var/www/fosem-staging/releases/20160816160219/analytics ]
+ DEBUG [9ba8f62c] Finished in 0.135 seconds with exit status 1 (failed).
+ DEBUG [e4907f08] Running [ -d /var/www/fosem-staging/releases/20160816160219/analytics ] as root@43.252.88.222
+ DEBUG [e4907f08] Command: [ -d /var/www/fosem-staging/releases/20160816160219/analytics ]
+ DEBUG [e4907f08] Finished in 0.113 seconds with exit status 1 (failed).
+  INFO [e1b86ffe] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/analytics /var/www/fosem-staging/releases/20160816160219/analytics as root@43.252.88.222
+ DEBUG [e1b86ffe] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/analytics /var/www/fosem-staging/releases/20160816160219/analytics
+  INFO [e1b86ffe] Finished in 0.115 seconds with exit status 0 (successful).
+ DEBUG [93ed4b92] Running [ -L /var/www/fosem-staging/releases/20160816160219/requests_csv ] as root@43.252.88.222
+ DEBUG [93ed4b92] Command: [ -L /var/www/fosem-staging/releases/20160816160219/requests_csv ]
+ DEBUG [93ed4b92] Finished in 0.110 seconds with exit status 1 (failed).
+ DEBUG [09074dfb] Running [ -d /var/www/fosem-staging/releases/20160816160219/requests_csv ] as root@43.252.88.222
+ DEBUG [09074dfb] Command: [ -d /var/www/fosem-staging/releases/20160816160219/requests_csv ]
+ DEBUG [09074dfb] Finished in 0.112 seconds with exit status 0 (successful).
+  INFO [25937c7a] Running /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160816160219/requests_csv as root@43.252.88.222
+ DEBUG [25937c7a] Command: /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160816160219/requests_csv
+  INFO [25937c7a] Finished in 0.110 seconds with exit status 0 (successful).
+  INFO [70b3d675] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/requests_csv /var/www/fosem-staging/releases/20160816160219/requests_csv as root@43.252.88.222
+ DEBUG [70b3d675] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/requests_csv /var/www/fosem-staging/releases/20160816160219/requests_csv
+  INFO [70b3d675] Finished in 0.114 seconds with exit status 0 (successful).
+ DEBUG [8bc23e88] Running [ -L /var/www/fosem-staging/releases/20160816160219/public/assets ] as root@43.252.88.222
+ DEBUG [8bc23e88] Command: [ -L /var/www/fosem-staging/releases/20160816160219/public/assets ]
+ DEBUG [8bc23e88] Finished in 0.122 seconds with exit status 1 (failed).
+ DEBUG [458a27a3] Running [ -d /var/www/fosem-staging/releases/20160816160219/public/assets ] as root@43.252.88.222
+ DEBUG [458a27a3] Command: [ -d /var/www/fosem-staging/releases/20160816160219/public/assets ]
+ DEBUG [458a27a3] Finished in 0.111 seconds with exit status 1 (failed).
+  INFO [7fa7a885] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/public/assets /var/www/fosem-staging/releases/20160816160219/public/assets as root@43.252.88.222
+ DEBUG [7fa7a885] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/public/assets /var/www/fosem-staging/releases/20160816160219/public/assets
+  INFO [7fa7a885] Finished in 0.112 seconds with exit status 0 (successful).
+ DEBUG [182dd3a4] Running if test ! -d /var/www/fosem-staging/releases/20160816160219; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160816160219'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [182dd3a4] Command: if test ! -d /var/www/fosem-staging/releases/20160816160219; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160816160219'" 1>&2; false; fi
+ DEBUG [182dd3a4] Finished in 0.109 seconds with exit status 0 (successful).
+  INFO [cc05d829] Running /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle install --path /var/www/fosem-staging/shared/bundle --without development test --deployment --quiet as root@43.252.88.222
+ DEBUG [cc05d829] Command: cd /var/www/fosem-staging/releases/20160816160219 && /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle install --path /var/www/fosem-staging/shared/bundle --without development test --deployment --quiet
+ DEBUG [cc05d829] 	
+Warning: PATH set to RVM ruby but GEM_HOME and/or GEM_PATH not set, see:
+    https://github.com/rvm/rvm/issues/3212
+
+ DEBUG [cc05d829] 	Warning! PATH is not properly set up, $GEM_HOME is not set,
+         usually this is caused by shell initialization files - check them for 'PATH=...' entries,
+         it might also help to re-add RVM to your dotfiles: 'rvm get stable --auto-dotfiles',
+         to fix temporarily in this shell session run: 'rvm use ruby-2.1.2'.
+  INFO [cc05d829] Finished in 1.219 seconds with exit status 0 (successful).
+ DEBUG [0d5bad3d] Running if test ! -d /var/www/fosem-staging/releases/20160816160219; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160816160219'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [0d5bad3d] Command: if test ! -d /var/www/fosem-staging/releases/20160816160219; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160816160219'" 1>&2; false; fi
+ DEBUG [0d5bad3d] Finished in 0.110 seconds with exit status 0 (successful).
+  INFO [652fc541] Running /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle exec rake assets:precompile as root@43.252.88.222
+ DEBUG [652fc541] Command: cd /var/www/fosem-staging/releases/20160816160219 && ( export RAILS_ENV="staging" ; /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle exec rake assets:precompile )
+ DEBUG [652fc541] 	
+Warning: PATH set to RVM ruby but GEM_HOME and/or GEM_PATH not set, see:
+    https://github.com/rvm/rvm/issues/3212
+
+ DEBUG [652fc541] 	Warning! PATH is not properly set up, $GEM_HOME is not set,
+         usually this is caused by shell initialization files - check them for 'PATH=...' entries,
+         it might also help to re-add RVM to your dotfiles: 'rvm get stable --auto-dotfiles',
+         to fix temporarily in this shell session run: 'rvm use ruby-2.1.2'.
+ DEBUG [652fc541] 	/usr/local/rvm/gems/ruby-2.1.2@FOSEM/gems/bundler-1.10.6/lib/bundler/shared_helpers.rb:78: warning: Insecure world writable dir /var/www/fosem-staging/shared/bundle/ruby/2.1.0/bin in PATH, mode 040777
+  INFO [652fc541] Finished in 4.697 seconds with exit status 0 (successful).
+ DEBUG [40518308] Running if test ! -d /var/www/fosem-staging/releases/20160816160219; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160816160219'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [40518308] Command: if test ! -d /var/www/fosem-staging/releases/20160816160219; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160816160219'" 1>&2; false; fi
+ DEBUG [40518308] Finished in 0.115 seconds with exit status 0 (successful).
+  INFO [74b3aec0] Running /usr/bin/env mkdir -p /var/www/fosem-staging/releases/20160816160219/assets_manifest_backup as root@43.252.88.222
+ DEBUG [74b3aec0] Command: cd /var/www/fosem-staging/releases/20160816160219 && /usr/bin/env mkdir -p /var/www/fosem-staging/releases/20160816160219/assets_manifest_backup
+  INFO [74b3aec0] Finished in 0.182 seconds with exit status 0 (successful).
+ DEBUG [29a90c5a] Running /usr/bin/env ls /var/www/fosem-staging/releases/20160816160219/public/assets/.sprockets-manifest* as root@43.252.88.222
+ DEBUG [29a90c5a] Command: cd /var/www/fosem-staging/releases/20160816160219 && /usr/bin/env ls /var/www/fosem-staging/releases/20160816160219/public/assets/.sprockets-manifest*
+ DEBUG [29a90c5a] 	ls: cannot access /var/www/fosem-staging/releases/20160816160219/public/assets/.sprockets-manifest*: No such file or directory
+ DEBUG [29a90c5a] Finished in 0.156 seconds with exit status 2 (failed).
+ DEBUG [805f0733] Running /usr/bin/env ls /var/www/fosem-staging/releases/20160816160219/public/assets/manifest*.* as root@43.252.88.222
+ DEBUG [805f0733] Command: cd /var/www/fosem-staging/releases/20160816160219 && /usr/bin/env ls /var/www/fosem-staging/releases/20160816160219/public/assets/manifest*.*
+ DEBUG [805f0733] 	/var/www/fosem-staging/releases/20160816160219/public/assets/manifest-6804d49924aa66ebe1a9d59566ac3de6.json
+ DEBUG [805f0733] Finished in 0.165 seconds with exit status 0 (successful).
+ DEBUG [f73abc82] Running /usr/bin/env ls /var/www/fosem-staging/releases/20160816160219/public/assets/manifest*.* as root@43.252.88.222
+ DEBUG [f73abc82] Command: cd /var/www/fosem-staging/releases/20160816160219 && /usr/bin/env ls /var/www/fosem-staging/releases/20160816160219/public/assets/manifest*.*
+ DEBUG [f73abc82] 	/var/www/fosem-staging/releases/20160816160219/public/assets/manifest-6804d49924aa66ebe1a9d59566ac3de6.json
+ DEBUG [f73abc82] Finished in 0.152 seconds with exit status 0 (successful).
+  INFO [a769642a] Running /usr/bin/env cp /var/www/fosem-staging/releases/20160816160219/public/assets/manifest-6804d49924aa66ebe1a9d59566ac3de6.json /var/www/fosem-staging/releases/20160816160219/assets_manifest_backup as root@43.252.88.222
+ DEBUG [a769642a] Command: cd /var/www/fosem-staging/releases/20160816160219 && /usr/bin/env cp /var/www/fosem-staging/releases/20160816160219/public/assets/manifest-6804d49924aa66ebe1a9d59566ac3de6.json /var/www/fosem-staging/releases/20160816160219/assets_manifest_backup
+  INFO [a769642a] Finished in 0.152 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+ DEBUG [48d44326] Running if test ! -d /var/www/fosem-staging/releases/20160816160219; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160816160219'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [48d44326] Command: if test ! -d /var/www/fosem-staging/releases/20160816160219; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160816160219'" 1>&2; false; fi
+ DEBUG [48d44326] Finished in 0.113 seconds with exit status 0 (successful).
+  INFO [cc912546] Running /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle exec rake db:migrate as root@43.252.88.222
+ DEBUG [cc912546] Command: cd /var/www/fosem-staging/releases/20160816160219 && ( export RAILS_ENV="staging" ; /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle exec rake db:migrate )
+ DEBUG [cc912546] 	
+Warning: PATH set to RVM ruby but GEM_HOME and/or GEM_PATH not set, see:
+    https://github.com/rvm/rvm/issues/3212
+
+ DEBUG [cc912546] 	Warning! PATH is not properly set up, $GEM_HOME is not set,
+         usually this is caused by shell initialization files - check them for 'PATH=...' entries,
+         it might also help to re-add RVM to your dotfiles: 'rvm get stable --auto-dotfiles',
+         to fix temporarily in this shell session run: 'rvm use ruby-2.1.2'.
+ DEBUG [cc912546] 	/usr/local/rvm/gems/ruby-2.1.2@FOSEM/gems/bundler-1.10.6/lib/bundler/shared_helpers.rb:78: warning: Insecure world writable dir /var/www/fosem-staging/shared/bundle/ruby/2.1.0/bin in PATH, mode 040777
+  INFO [cc912546] Finished in 4.275 seconds with exit status 0 (successful).
+  INFO [ba9990eb] Running /usr/bin/env ln -s /var/www/fosem-staging/releases/20160816160219 /var/www/fosem-staging/releases/current as root@43.252.88.222
+ DEBUG [ba9990eb] Command: /usr/bin/env ln -s /var/www/fosem-staging/releases/20160816160219 /var/www/fosem-staging/releases/current
+  INFO [ba9990eb] Finished in 0.189 seconds with exit status 0 (successful).
+  INFO [835996ee] Running /usr/bin/env mv /var/www/fosem-staging/releases/current /var/www/fosem-staging as root@43.252.88.222
+ DEBUG [835996ee] Command: /usr/bin/env mv /var/www/fosem-staging/releases/current /var/www/fosem-staging
+  INFO [835996ee] Finished in 0.140 seconds with exit status 0 (successful).
+  INFO [7389068b] Running sudo service monit stop as root@43.252.88.222
+ DEBUG [7389068b] Command: sudo service monit stop
+ DEBUG [7389068b] 	Shutting down monit: 
+ DEBUG [7389068b] 	[60G[[0;32m  OK  [0;39m]
+ DEBUG [7389068b] 	
+  INFO [7389068b] Finished in 0.262 seconds with exit status 0 (successful).
+ DEBUG Uploading /etc/nginx.conf 0.0%
+  INFO Uploading /etc/nginx.conf 100.0%
+  INFO [e74a5b37] Running sudo mv /etc/nginx.conf /etc/nginx/nginx.conf as root@43.252.88.222
+ DEBUG [e74a5b37] Command: sudo mv /etc/nginx.conf /etc/nginx/nginx.conf
+  INFO [e74a5b37] Finished in 0.124 seconds with exit status 0 (successful).
+  INFO [ec5394a1] Running sudo /etc/init.d/nginx restart as root@43.252.88.222
+ DEBUG [ec5394a1] Command: sudo /etc/init.d/nginx restart
+ DEBUG [ec5394a1] 	Stopping nginx: 
+ DEBUG [ec5394a1] 	[60G[[0;32m  OK  [0;39m]
+ DEBUG [ec5394a1] 	
+ DEBUG [ec5394a1] 	Starting nginx: 
+ DEBUG [ec5394a1] 	[60G[[0;32m  OK  [0;39m]
+  INFO [ec5394a1] Finished in 0.481 seconds with exit status 0 (successful).
+  INFO [f4826385] Running sudo service monit restart as root@43.252.88.222
+ DEBUG [f4826385] Command: sudo service monit restart
+ DEBUG [f4826385] 	Shutting down monit: [60G[[0;31mFAILED[0;39m]
+ DEBUG [f4826385] 	
+ DEBUG [f4826385] 	Starting monit: 
+ DEBUG [f4826385] 	[60G[[0;32m  OK  [0;39m]
+  INFO [f4826385] Finished in 0.164 seconds with exit status 0 (successful).
+ DEBUG [d542609b] Running if test ! -d /var/www/fosem-staging/releases/20160816160219; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160816160219'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [d542609b] Command: if test ! -d /var/www/fosem-staging/releases/20160816160219; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160816160219'" 1>&2; false; fi
+ DEBUG [d542609b] Finished in 0.152 seconds with exit status 0 (successful).
+  INFO [2048edf5] Running /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle exec script/delayed_job  restart as root@43.252.88.222
+ DEBUG [2048edf5] Command: cd /var/www/fosem-staging/releases/20160816160219 && ( export RAILS_ENV="staging" ; /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle exec script/delayed_job  restart )
+ DEBUG [2048edf5] 	
+Warning: PATH set to RVM ruby but GEM_HOME and/or GEM_PATH not set, see:
+    https://github.com/rvm/rvm/issues/3212
+
+ DEBUG [2048edf5] 	Warning! PATH is not properly set up, $GEM_HOME is not set,
+         usually this is caused by shell initialization files - check them for 'PATH=...' entries,
+         it might also help to re-add RVM to your dotfiles: 'rvm get stable --auto-dotfiles',
+         to fix temporarily in this shell session run: 'rvm use ruby-2.1.2'.
+ DEBUG [2048edf5] 	/usr/local/rvm/gems/ruby-2.1.2@FOSEM/gems/bundler-1.10.6/lib/bundler/shared_helpers.rb:78: warning: Insecure world writable dir /var/www/fosem-staging/shared/bundle/ruby/2.1.0/bin in PATH, mode 040777
+ DEBUG [2048edf5] 	[DEPRECATED] By requiring 'spreadsheet/excel' you are loading a Compatibility
+             layer which provides a drop-in replacement for Spreadsheet::Excel
+             versions <= 0.3.5.1. This code will be removed in Spreadsheet
+             version 1.0.0
+ DEBUG [2048edf5] 	delayed_job: trying to stop process with pid 5321...
+ DEBUG [2048edf5] 	delayed_job: process with pid 5321 successfully stopped.
+ DEBUG [2048edf5] 	delayed_job: process with pid 27968 started.
+  INFO [2048edf5] Finished in 7.603 seconds with exit status 0 (successful).
+ DEBUG Uploading /etc/logrotate 0.0%
+  INFO Uploading /etc/logrotate 100.0%
+  INFO [6cb1efda] Running sudo mv /etc/logrotate /etc/logrotate.d/nginx as root@43.252.88.222
+ DEBUG [6cb1efda] Command: sudo mv /etc/logrotate /etc/logrotate.d/nginx
+  INFO [6cb1efda] Finished in 0.128 seconds with exit status 0 (successful).
+ DEBUG [1d3b8b53] Running /usr/bin/env ls -xtr /var/www/fosem-staging/releases as root@43.252.88.222
+ DEBUG [1d3b8b53] Command: /usr/bin/env ls -xtr /var/www/fosem-staging/releases
+ DEBUG [1d3b8b53] 	20160816153631	20160816153845	20160816154949	20160816155126	20160816155540
+20160816155900	20160816160219
+ DEBUG [1d3b8b53] Finished in 0.129 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 7 deployed releases on 43.252.88.222
+  INFO [97f58dbb] Running /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160816153631 /var/www/fosem-staging/releases/20160816153845 as root@43.252.88.222
+ DEBUG [97f58dbb] Command: /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160816153631 /var/www/fosem-staging/releases/20160816153845
+  INFO [97f58dbb] Finished in 0.151 seconds with exit status 0 (successful).
+ DEBUG [5b52cab2] Running if test ! -d /var/www/fosem-staging/releases; then echo "Directory does not exist '/var/www/fosem-staging/releases'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [5b52cab2] Command: if test ! -d /var/www/fosem-staging/releases; then echo "Directory does not exist '/var/www/fosem-staging/releases'" 1>&2; false; fi
+ DEBUG [5b52cab2] Finished in 0.111 seconds with exit status 0 (successful).
+  INFO [4e305d63] Running /usr/bin/env echo "Branch vendor_workflow (at 8c4794e5bd2424905432d0676745425de735e889) deployed as release 20160816160219 by linchpin" >> /var/www/fosem-staging/revisions.log as root@43.252.88.222
+ DEBUG [4e305d63] Command: cd /var/www/fosem-staging/releases && /usr/bin/env echo "Branch vendor_workflow (at 8c4794e5bd2424905432d0676745425de735e889) deployed as release 20160816160219 by linchpin" >> /var/www/fosem-staging/revisions.log
+  INFO [4e305d63] Finished in 0.127 seconds with exit status 0 (successful).

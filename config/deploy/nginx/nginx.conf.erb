@@ -130,7 +130,7 @@ http {
     passenger_enabled on;
     #passenger_set_cgi_param HTTP_X_QUEUE_START "t=${msec}000";
 
-    root /var/www/gquestions/current/public;
+    root /var/www/staging/mum/current/public;
     server_name gioneebeat.gionee.co.in;
     # this rewrites all the requests to the maintenance.html
     # page if it exists in the doc root. This is for capistrano's
@@ -143,12 +143,53 @@ http {
     error_page   500 502 503 504  /500.html;
     location = /500.html
     {
-      root /var/www/fosem-staging/current/public;
+      root /var/www/staging/mum/current/public;
     }
     error_page 404  /404.html;
     location = /404.html
     {
-      root /var/www/fosem-staging/current/public;
+      root /var/www/staging/mum/current/public;
+    }
+
+
+    # Give static assets a far-future header and serve the pre-compressed version of the asset
+    # instead of compressing on the fly.
+    location ~ ^/(assets)/ {
+      gzip_static on;
+      expires     max;
+      add_header  Cache-Control public;
+      add_header  Last-Modified "";
+      add_header  ETag "";
+      break;
+    }
+
+    client_max_body_size 5M;
+  }
+
+  server {
+    listen 80;
+    passenger_enabled on;
+    #passenger_set_cgi_param HTTP_X_QUEUE_START "t=${msec}000";
+
+    root /var/www/staging/fos/current/public;
+    server_name gioneebeat.gionee.co.in;
+    # this rewrites all the requests to the maintenance.html
+    # page if it exists in the doc root. This is for capistrano's
+    # disable web task
+    if (-f $document_root/system/maintenance.html)
+    {
+      rewrite  ^(.*)$  /system/maintenance.html last;
+      break;
+    }
+    error_page   500 502 503 504  /500.html;
+    location = /500.html
+    {
+      root /var/www/staging/fos/current/public;
+    }
+    error_page 404  /404.html;
+    location = /404.html
+    {
+      root /var/www/staging/fos/current/public;
     }
 
 
