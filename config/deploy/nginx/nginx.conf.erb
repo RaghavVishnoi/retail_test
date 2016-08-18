@@ -131,7 +131,7 @@ http {
     #passenger_set_cgi_param HTTP_X_QUEUE_START "t=${msec}000";
 
     root /var/www/staging/mum/current/public;
-    server_name gioneebeat.gionee.co.in;
+    server_name stagemum.gionee.co.in;
     # this rewrites all the requests to the maintenance.html
     # page if it exists in the doc root. This is for capistrano's
     # disable web task
@@ -172,7 +172,7 @@ http {
     #passenger_set_cgi_param HTTP_X_QUEUE_START "t=${msec}000";
 
     root /var/www/staging/fos/current/public;
-    server_name gioneebeat.gionee.co.in;
+    server_name stagefos.gionee.co.in;
     # this rewrites all the requests to the maintenance.html
     # page if it exists in the doc root. This is for capistrano's
     # disable web task
