@@ -13937,3 +13937,299 @@ Warning: PATH set to RVM ruby but GEM_HOME and/or GEM_PATH not set, see:
   INFO [c18445cc] Running /usr/bin/env echo "Branch vendor_workflow (at 71719ce3ccf3b6c61b81ad7f35bca7737c4f6a49) deployed as release 20160818003611 by linchpin" >> /var/www/fosem-staging/revisions.log as root@43.252.88.222
  DEBUG [c18445cc] Command: cd /var/www/fosem-staging/releases && /usr/bin/env echo "Branch vendor_workflow (at 71719ce3ccf3b6c61b81ad7f35bca7737c4f6a49) deployed as release 20160818003611 by linchpin" >> /var/www/fosem-staging/revisions.log
   INFO [c18445cc] Finished in 0.199 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-08-22 07:44:29 +0530 cap staging deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [2f9a1aae] Running /usr/bin/env mkdir -p /var/www/fosem-staging/rvm1scripts/ as root@43.252.88.222
+ DEBUG [2f9a1aae] Command: /usr/bin/env mkdir -p /var/www/fosem-staging/rvm1scripts/
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-08-22 07:47:22 +0530 cap staging deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [48524e34] Running /usr/bin/env mkdir -p /var/www/fosem-staging/rvm1scripts/ as root@43.252.88.222
+ DEBUG [48524e34] Command: /usr/bin/env mkdir -p /var/www/fosem-staging/rvm1scripts/
+  INFO [48524e34] Finished in 3.442 seconds with exit status 0 (successful).
+ DEBUG Uploading /usr/local/rvm/gems/ruby-2.1.2@FOSEM/gems/rvm1-capistrano3-1.4.0/script/rvm-auto.sh 0.0%
+  INFO Uploading /usr/local/rvm/gems/ruby-2.1.2@FOSEM/gems/rvm1-capistrano3-1.4.0/script/rvm-auto.sh 100.0%
+  INFO [3cdfaa5a] Running /usr/bin/env chmod +x /var/www/fosem-staging/rvm1scripts/rvm-auto.sh as root@43.252.88.222
+ DEBUG [3cdfaa5a] Command: /usr/bin/env chmod +x /var/www/fosem-staging/rvm1scripts/rvm-auto.sh
+  INFO [3cdfaa5a] Finished in 0.264 seconds with exit status 0 (successful).
+  INFO [ef98dabc] Running /usr/bin/env mkdir -p /home/fosem/tmp as root@43.252.88.222
+ DEBUG [ef98dabc] Command: /usr/bin/env mkdir -p /home/fosem/tmp
+  INFO [ef98dabc] Finished in 0.269 seconds with exit status 0 (successful).
+ DEBUG Uploading /home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh 0.0%
+  INFO Uploading /home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh 100.0%
+  INFO [61c60915] Running /usr/bin/env chmod 700 /home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh as root@43.252.88.222
+ DEBUG [61c60915] Command: /usr/bin/env chmod 700 /home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh
+  INFO [61c60915] Finished in 0.323 seconds with exit status 0 (successful).
+  INFO [abc1417d] Running /usr/bin/env git ls-remote --heads ssh://xp-dev.com/LPTPL_GIONEE_REQUESTER_WEB as root@43.252.88.222
+ DEBUG [abc1417d] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh" ; /usr/bin/env git ls-remote --heads ssh://xp-dev.com/LPTPL_GIONEE_REQUESTER_WEB )
+ DEBUG [abc1417d] 	aecc34d01c8c846314b2c08e47d23f6070cafc8d	refs/heads/audit_form
+9cf09fdb1f6b427748a97a2e6dc427c3ed64c809	refs/heads/brand_store
+185d82af2c8ac7765e149d87ceda5133bfe4246e	refs/heads/master
+c32e11aafc3b2c760c8aaec0459724495945ecbd	refs/heads/staging
+681492ed9baa533fd9aa6c269f103455199f61a5	refs/heads/vendor
+52d0a1c5c1c2b67206bedcef5b5f1bfb85ee16ed	refs/heads/vendor_flow
+f922e3b91d851c939883d22923de67cc08b4f562	refs/heads/vendor_workflow
+5844995005e8cc2a0cd68fa0bbabd49719965463	refs/heads/vmqa
+  INFO [abc1417d] Finished in 4.258 seconds with exit status 0 (successful).
+  INFO [f2f6374e] Running /usr/bin/env mkdir -p /var/www/fosem-staging/shared /var/www/fosem-staging/releases as root@43.252.88.222
+ DEBUG [f2f6374e] Command: /usr/bin/env mkdir -p /var/www/fosem-staging/shared /var/www/fosem-staging/releases
+  INFO [f2f6374e] Finished in 0.302 seconds with exit status 0 (successful).
+  INFO [dc8e389a] Running /usr/bin/env mkdir -p /var/www/fosem-staging/shared/bin /var/www/fosem-staging/shared/log /var/www/fosem-staging/shared/tmp/pids /var/www/fosem-staging/shared/tmp/cache /var/www/fosem-staging/shared/tmp/sockets /var/www/fosem-staging/shared/vendor/bundle /var/www/fosem-staging/shared/public/system /var/www/fosem-staging/shared/public/uploads /var/www/fosem-staging/shared/analytics /var/www/fosem-staging/shared/requests_csv /var/www/fosem-staging/shared/public/assets as root@43.252.88.222
+ DEBUG [dc8e389a] Command: /usr/bin/env mkdir -p /var/www/fosem-staging/shared/bin /var/www/fosem-staging/shared/log /var/www/fosem-staging/shared/tmp/pids /var/www/fosem-staging/shared/tmp/cache /var/www/fosem-staging/shared/tmp/sockets /var/www/fosem-staging/shared/vendor/bundle /var/www/fosem-staging/shared/public/system /var/www/fosem-staging/shared/public/uploads /var/www/fosem-staging/shared/analytics /var/www/fosem-staging/shared/requests_csv /var/www/fosem-staging/shared/public/assets
+  INFO [dc8e389a] Finished in 0.287 seconds with exit status 0 (successful).
+ DEBUG [4eb0008d] Running [ -f /var/www/fosem-staging/current/REVISION ] as root@43.252.88.222
+ DEBUG [4eb0008d] Command: [ -f /var/www/fosem-staging/current/REVISION ]
+ DEBUG [4eb0008d] Finished in 0.276 seconds with exit status 0 (successful).
+ DEBUG [bcb59466] Running /usr/bin/env cat /var/www/fosem-staging/current/REVISION 2>/dev/null as root@43.252.88.222
+ DEBUG [bcb59466] Command: /usr/bin/env cat /var/www/fosem-staging/current/REVISION 2>/dev/null
+ DEBUG [bcb59466] 	7736df81f1ed506299b2a5020e4114a600d8fae7
+ DEBUG [bcb59466] Finished in 0.267 seconds with exit status 0 (successful).
+ DEBUG [4808caab] Running [ -f /var/www/fosem-staging/repo/HEAD ] as root@43.252.88.222
+ DEBUG [4808caab] Command: [ -f /var/www/fosem-staging/repo/HEAD ]
+ DEBUG [4808caab] Finished in 0.278 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/fosem-staging/repo
+ DEBUG [7467ceab] Running if test ! -d /var/www/fosem-staging/repo; then echo "Directory does not exist '/var/www/fosem-staging/repo'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [7467ceab] Command: if test ! -d /var/www/fosem-staging/repo; then echo "Directory does not exist '/var/www/fosem-staging/repo'" 1>&2; false; fi
+ DEBUG [7467ceab] Finished in 0.282 seconds with exit status 0 (successful).
+  INFO [c3ebfce3] Running /usr/bin/env git remote update --prune as root@43.252.88.222
+ DEBUG [c3ebfce3] Command: cd /var/www/fosem-staging/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [c3ebfce3] 	Fetching origin
+ DEBUG [c3ebfce3] 	remote: Counting objects: 17, done.[K
+remote: Compressing objects:  11% (1/9)   [Kremote: Compressing objects:  22% (2/9)   [Kremote: Compressing objects:  33% (3/9)   [Kremote: Compressing objects:  44% (4/9)   [Kremote: Compressing objects:  55% (5/9)   [Kremote: Compressing objects:  66% (6/9)   [K
+ DEBUG [c3ebfce3] 	remote: Compressing objects:  77% (7/9)   [Kremote: Compressing objects:  88% (8/9)   [Kremote: Compressing objects: 100% (9/9)   [Kremote: Compressing objects: 100% (9/9), done.[K
+remote: Total 9 (delta 8), reused 0 (delta 0)[K
+ DEBUG [c3ebfce3] 	Unpacking objects:  11% (1/9)   
+ DEBUG [c3ebfce3] 	Unpacking objects:  22% (2/9)   
+ DEBUG [c3ebfce3] 	Unpacking objects:  33% (3/9)   
+ DEBUG [c3ebfce3] 	Unpacking objects:  44% (4/9)   
+ DEBUG [c3ebfce3] 	Unpacking objects:  55% (5/9)   
+ DEBUG [c3ebfce3] 	Unpacking objects:  66% (6/9)   
+ DEBUG [c3ebfce3] 	Unpacking objects:  77% (7/9)   
+ DEBUG [c3ebfce3] 	Unpacking objects:  88% (8/9)   
+ DEBUG [c3ebfce3] 	Unpacking objects: 100% (9/9)   Unpacking objects: 100% (9/9), done.
+From ssh://xp-dev.com/LPTPL_GIONEE_REQUESTER_WEB
+   7736df8..f922e3b  vendor_workflow -> vendor_workflow
+  INFO [c3ebfce3] Finished in 4.856 seconds with exit status 0 (successful).
+ DEBUG [c3f72d83] Running if test ! -d /var/www/fosem-staging/repo; then echo "Directory does not exist '/var/www/fosem-staging/repo'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [c3f72d83] Command: if test ! -d /var/www/fosem-staging/repo; then echo "Directory does not exist '/var/www/fosem-staging/repo'" 1>&2; false; fi
+ DEBUG [c3f72d83] Finished in 0.282 seconds with exit status 0 (successful).
+  INFO [6e300f74] Running /usr/bin/env mkdir -p /var/www/fosem-staging/releases/20160822021735 as root@43.252.88.222
+ DEBUG [6e300f74] Command: cd /var/www/fosem-staging/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh" ; /usr/bin/env mkdir -p /var/www/fosem-staging/releases/20160822021735 )
+  INFO [6e300f74] Finished in 0.318 seconds with exit status 0 (successful).
+  INFO [b7e026e3] Running /usr/bin/env git archive vendor_workflow | tar -x -f - -C /var/www/fosem-staging/releases/20160822021735 as root@43.252.88.222
+ DEBUG [b7e026e3] Command: cd /var/www/fosem-staging/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh" ; /usr/bin/env git archive vendor_workflow | tar -x -f - -C /var/www/fosem-staging/releases/20160822021735 )
+  INFO [b7e026e3] Finished in 3.992 seconds with exit status 0 (successful).
+ DEBUG [3c419156] Running if test ! -d /var/www/fosem-staging/repo; then echo "Directory does not exist '/var/www/fosem-staging/repo'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [3c419156] Command: if test ! -d /var/www/fosem-staging/repo; then echo "Directory does not exist '/var/www/fosem-staging/repo'" 1>&2; false; fi
+ DEBUG [3c419156] Finished in 0.282 seconds with exit status 0 (successful).
+ DEBUG [ccc4c907] Running /usr/bin/env git rev-list --max-count=1 vendor_workflow as root@43.252.88.222
+ DEBUG [ccc4c907] Command: cd /var/www/fosem-staging/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/home/fosem/tmp/git-ssh-fosem-staging-staging-linchpin.sh" ; /usr/bin/env git rev-list --max-count=1 vendor_workflow )
+ DEBUG [ccc4c907] 	f922e3b91d851c939883d22923de67cc08b4f562
+ DEBUG [ccc4c907] Finished in 0.308 seconds with exit status 0 (successful).
+ DEBUG [1fda1f5e] Running if test ! -d /var/www/fosem-staging/releases/20160822021735; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160822021735'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [1fda1f5e] Command: if test ! -d /var/www/fosem-staging/releases/20160822021735; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160822021735'" 1>&2; false; fi
+ DEBUG [1fda1f5e] Finished in 0.287 seconds with exit status 0 (successful).
+  INFO [ecb77282] Running /usr/bin/env echo "f922e3b91d851c939883d22923de67cc08b4f562" >> REVISION as root@43.252.88.222
+ DEBUG [ecb77282] Command: cd /var/www/fosem-staging/releases/20160822021735 && /usr/bin/env echo "f922e3b91d851c939883d22923de67cc08b4f562" >> REVISION
+  INFO [ecb77282] Finished in 0.427 seconds with exit status 0 (successful).
+  INFO [7c05e255] Running /usr/bin/env mkdir -p /var/www/fosem-staging/releases/20160822021735 /var/www/fosem-staging/releases/20160822021735/tmp /var/www/fosem-staging/releases/20160822021735/vendor /var/www/fosem-staging/releases/20160822021735/public as root@43.252.88.222
+ DEBUG [7c05e255] Command: /usr/bin/env mkdir -p /var/www/fosem-staging/releases/20160822021735 /var/www/fosem-staging/releases/20160822021735/tmp /var/www/fosem-staging/releases/20160822021735/vendor /var/www/fosem-staging/releases/20160822021735/public
+  INFO [7c05e255] Finished in 0.290 seconds with exit status 0 (successful).
+ DEBUG [837f039a] Running [ -L /var/www/fosem-staging/releases/20160822021735/bin ] as root@43.252.88.222
+ DEBUG [837f039a] Command: [ -L /var/www/fosem-staging/releases/20160822021735/bin ]
+ DEBUG [837f039a] Finished in 0.273 seconds with exit status 1 (failed).
+ DEBUG [0285ff00] Running [ -d /var/www/fosem-staging/releases/20160822021735/bin ] as root@43.252.88.222
+ DEBUG [0285ff00] Command: [ -d /var/www/fosem-staging/releases/20160822021735/bin ]
+ DEBUG [0285ff00] Finished in 0.295 seconds with exit status 0 (successful).
+  INFO [c8251bbb] Running /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160822021735/bin as root@43.252.88.222
+ DEBUG [c8251bbb] Command: /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160822021735/bin
+  INFO [c8251bbb] Finished in 0.285 seconds with exit status 0 (successful).
+  INFO [bb3b7683] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/bin /var/www/fosem-staging/releases/20160822021735/bin as root@43.252.88.222
+ DEBUG [bb3b7683] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/bin /var/www/fosem-staging/releases/20160822021735/bin
+  INFO [bb3b7683] Finished in 0.283 seconds with exit status 0 (successful).
+ DEBUG [8e0dbc27] Running [ -L /var/www/fosem-staging/releases/20160822021735/log ] as root@43.252.88.222
+ DEBUG [8e0dbc27] Command: [ -L /var/www/fosem-staging/releases/20160822021735/log ]
+ DEBUG [8e0dbc27] Finished in 0.299 seconds with exit status 1 (failed).
+ DEBUG [f6bf2903] Running [ -d /var/www/fosem-staging/releases/20160822021735/log ] as root@43.252.88.222
+ DEBUG [f6bf2903] Command: [ -d /var/www/fosem-staging/releases/20160822021735/log ]
+ DEBUG [f6bf2903] Finished in 0.284 seconds with exit status 0 (successful).
+  INFO [a92a3e7c] Running /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160822021735/log as root@43.252.88.222
+ DEBUG [a92a3e7c] Command: /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160822021735/log
+  INFO [a92a3e7c] Finished in 0.308 seconds with exit status 0 (successful).
+  INFO [b390463c] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/log /var/www/fosem-staging/releases/20160822021735/log as root@43.252.88.222
+ DEBUG [b390463c] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/log /var/www/fosem-staging/releases/20160822021735/log
+  INFO [b390463c] Finished in 0.302 seconds with exit status 0 (successful).
+ DEBUG [ccf7cc36] Running [ -L /var/www/fosem-staging/releases/20160822021735/tmp/pids ] as root@43.252.88.222
+ DEBUG [ccf7cc36] Command: [ -L /var/www/fosem-staging/releases/20160822021735/tmp/pids ]
+ DEBUG [ccf7cc36] Finished in 0.320 seconds with exit status 1 (failed).
+ DEBUG [71eee1a5] Running [ -d /var/www/fosem-staging/releases/20160822021735/tmp/pids ] as root@43.252.88.222
+ DEBUG [71eee1a5] Command: [ -d /var/www/fosem-staging/releases/20160822021735/tmp/pids ]
+ DEBUG [71eee1a5] Finished in 0.280 seconds with exit status 1 (failed).
+  INFO [431476fd] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/tmp/pids /var/www/fosem-staging/releases/20160822021735/tmp/pids as root@43.252.88.222
+ DEBUG [431476fd] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/tmp/pids /var/www/fosem-staging/releases/20160822021735/tmp/pids
+  INFO [431476fd] Finished in 1.051 seconds with exit status 0 (successful).
+ DEBUG [9acee9aa] Running [ -L /var/www/fosem-staging/releases/20160822021735/tmp/cache ] as root@43.252.88.222
+ DEBUG [9acee9aa] Command: [ -L /var/www/fosem-staging/releases/20160822021735/tmp/cache ]
+ DEBUG [9acee9aa] Finished in 0.273 seconds with exit status 1 (failed).
+ DEBUG [afb9f873] Running [ -d /var/www/fosem-staging/releases/20160822021735/tmp/cache ] as root@43.252.88.222
+ DEBUG [afb9f873] Command: [ -d /var/www/fosem-staging/releases/20160822021735/tmp/cache ]
+ DEBUG [afb9f873] Finished in 0.273 seconds with exit status 1 (failed).
+  INFO [71653867] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/tmp/cache /var/www/fosem-staging/releases/20160822021735/tmp/cache as root@43.252.88.222
+ DEBUG [71653867] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/tmp/cache /var/www/fosem-staging/releases/20160822021735/tmp/cache
+  INFO [71653867] Finished in 0.267 seconds with exit status 0 (successful).
+ DEBUG [7ae01ccd] Running [ -L /var/www/fosem-staging/releases/20160822021735/tmp/sockets ] as root@43.252.88.222
+ DEBUG [7ae01ccd] Command: [ -L /var/www/fosem-staging/releases/20160822021735/tmp/sockets ]
+ DEBUG [7ae01ccd] Finished in 0.272 seconds with exit status 1 (failed).
+ DEBUG [27f2d209] Running [ -d /var/www/fosem-staging/releases/20160822021735/tmp/sockets ] as root@43.252.88.222
+ DEBUG [27f2d209] Command: [ -d /var/www/fosem-staging/releases/20160822021735/tmp/sockets ]
+ DEBUG [27f2d209] Finished in 0.264 seconds with exit status 1 (failed).
+  INFO [f948612c] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/tmp/sockets /var/www/fosem-staging/releases/20160822021735/tmp/sockets as root@43.252.88.222
+ DEBUG [f948612c] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/tmp/sockets /var/www/fosem-staging/releases/20160822021735/tmp/sockets
+  INFO [f948612c] Finished in 0.263 seconds with exit status 0 (successful).
+ DEBUG [6fcd3772] Running [ -L /var/www/fosem-staging/releases/20160822021735/vendor/bundle ] as root@43.252.88.222
+ DEBUG [6fcd3772] Command: [ -L /var/www/fosem-staging/releases/20160822021735/vendor/bundle ]
+ DEBUG [6fcd3772] Finished in 0.272 seconds with exit status 1 (failed).
+ DEBUG [1c2e2aab] Running [ -d /var/www/fosem-staging/releases/20160822021735/vendor/bundle ] as root@43.252.88.222
+ DEBUG [1c2e2aab] Command: [ -d /var/www/fosem-staging/releases/20160822021735/vendor/bundle ]
+ DEBUG [1c2e2aab] Finished in 0.277 seconds with exit status 1 (failed).
+  INFO [795c5fca] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/vendor/bundle /var/www/fosem-staging/releases/20160822021735/vendor/bundle as root@43.252.88.222
+ DEBUG [795c5fca] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/vendor/bundle /var/www/fosem-staging/releases/20160822021735/vendor/bundle
+  INFO [795c5fca] Finished in 0.272 seconds with exit status 0 (successful).
+ DEBUG [ff7b5e25] Running [ -L /var/www/fosem-staging/releases/20160822021735/public/system ] as root@43.252.88.222
+ DEBUG [ff7b5e25] Command: [ -L /var/www/fosem-staging/releases/20160822021735/public/system ]
+ DEBUG [ff7b5e25] Finished in 0.280 seconds with exit status 1 (failed).
+ DEBUG [bb9939e3] Running [ -d /var/www/fosem-staging/releases/20160822021735/public/system ] as root@43.252.88.222
+ DEBUG [bb9939e3] Command: [ -d /var/www/fosem-staging/releases/20160822021735/public/system ]
+ DEBUG [bb9939e3] Finished in 0.266 seconds with exit status 1 (failed).
+  INFO [2c0a6e31] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/public/system /var/www/fosem-staging/releases/20160822021735/public/system as root@43.252.88.222
+ DEBUG [2c0a6e31] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/public/system /var/www/fosem-staging/releases/20160822021735/public/system
+  INFO [2c0a6e31] Finished in 0.271 seconds with exit status 0 (successful).
+ DEBUG [48fa138c] Running [ -L /var/www/fosem-staging/releases/20160822021735/public/uploads ] as root@43.252.88.222
+ DEBUG [48fa138c] Command: [ -L /var/www/fosem-staging/releases/20160822021735/public/uploads ]
+ DEBUG [48fa138c] Finished in 0.282 seconds with exit status 1 (failed).
+ DEBUG [8187114f] Running [ -d /var/www/fosem-staging/releases/20160822021735/public/uploads ] as root@43.252.88.222
+ DEBUG [8187114f] Command: [ -d /var/www/fosem-staging/releases/20160822021735/public/uploads ]
+ DEBUG [8187114f] Finished in 0.284 seconds with exit status 1 (failed).
+  INFO [25a75296] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/public/uploads /var/www/fosem-staging/releases/20160822021735/public/uploads as root@43.252.88.222
+ DEBUG [25a75296] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/public/uploads /var/www/fosem-staging/releases/20160822021735/public/uploads
+  INFO [25a75296] Finished in 0.304 seconds with exit status 0 (successful).
+ DEBUG [49cfd294] Running [ -L /var/www/fosem-staging/releases/20160822021735/analytics ] as root@43.252.88.222
+ DEBUG [49cfd294] Command: [ -L /var/www/fosem-staging/releases/20160822021735/analytics ]
+ DEBUG [49cfd294] Finished in 0.285 seconds with exit status 1 (failed).
+ DEBUG [70b01342] Running [ -d /var/www/fosem-staging/releases/20160822021735/analytics ] as root@43.252.88.222
+ DEBUG [70b01342] Command: [ -d /var/www/fosem-staging/releases/20160822021735/analytics ]
+ DEBUG [70b01342] Finished in 0.273 seconds with exit status 1 (failed).
+  INFO [ce5d560b] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/analytics /var/www/fosem-staging/releases/20160822021735/analytics as root@43.252.88.222
+ DEBUG [ce5d560b] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/analytics /var/www/fosem-staging/releases/20160822021735/analytics
+  INFO [ce5d560b] Finished in 0.266 seconds with exit status 0 (successful).
+ DEBUG [8eee5597] Running [ -L /var/www/fosem-staging/releases/20160822021735/requests_csv ] as root@43.252.88.222
+ DEBUG [8eee5597] Command: [ -L /var/www/fosem-staging/releases/20160822021735/requests_csv ]
+ DEBUG [8eee5597] Finished in 0.291 seconds with exit status 1 (failed).
+ DEBUG [ccd01257] Running [ -d /var/www/fosem-staging/releases/20160822021735/requests_csv ] as root@43.252.88.222
+ DEBUG [ccd01257] Command: [ -d /var/www/fosem-staging/releases/20160822021735/requests_csv ]
+ DEBUG [ccd01257] Finished in 0.298 seconds with exit status 0 (successful).
+  INFO [4fbdca41] Running /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160822021735/requests_csv as root@43.252.88.222
+ DEBUG [4fbdca41] Command: /usr/bin/env rm -rf /var/www/fosem-staging/releases/20160822021735/requests_csv
+  INFO [4fbdca41] Finished in 0.283 seconds with exit status 0 (successful).
+  INFO [259f35f1] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/requests_csv /var/www/fosem-staging/releases/20160822021735/requests_csv as root@43.252.88.222
+ DEBUG [259f35f1] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/requests_csv /var/www/fosem-staging/releases/20160822021735/requests_csv
+  INFO [259f35f1] Finished in 0.284 seconds with exit status 0 (successful).
+ DEBUG [86abf3bb] Running [ -L /var/www/fosem-staging/releases/20160822021735/public/assets ] as root@43.252.88.222
+ DEBUG [86abf3bb] Command: [ -L /var/www/fosem-staging/releases/20160822021735/public/assets ]
+ DEBUG [86abf3bb] Finished in 0.277 seconds with exit status 1 (failed).
+ DEBUG [cf28f605] Running [ -d /var/www/fosem-staging/releases/20160822021735/public/assets ] as root@43.252.88.222
+ DEBUG [cf28f605] Command: [ -d /var/www/fosem-staging/releases/20160822021735/public/assets ]
+ DEBUG [cf28f605] Finished in 0.264 seconds with exit status 1 (failed).
+  INFO [65ebc34b] Running /usr/bin/env ln -s /var/www/fosem-staging/shared/public/assets /var/www/fosem-staging/releases/20160822021735/public/assets as root@43.252.88.222
+ DEBUG [65ebc34b] Command: /usr/bin/env ln -s /var/www/fosem-staging/shared/public/assets /var/www/fosem-staging/releases/20160822021735/public/assets
+  INFO [65ebc34b] Finished in 0.282 seconds with exit status 0 (successful).
+ DEBUG [3fd6c0f7] Running if test ! -d /var/www/fosem-staging/releases/20160822021735; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160822021735'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [3fd6c0f7] Command: if test ! -d /var/www/fosem-staging/releases/20160822021735; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160822021735'" 1>&2; false; fi
+ DEBUG [3fd6c0f7] Finished in 0.281 seconds with exit status 0 (successful).
+  INFO [ed0eeaa5] Running /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle install --path /var/www/fosem-staging/shared/bundle --without development test --deployment --quiet as root@43.252.88.222
+ DEBUG [ed0eeaa5] Command: cd /var/www/fosem-staging/releases/20160822021735 && /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle install --path /var/www/fosem-staging/shared/bundle --without development test --deployment --quiet
+ DEBUG [ed0eeaa5] 	
+Warning: PATH set to RVM ruby but GEM_HOME and/or GEM_PATH not set, see:
+    https://github.com/rvm/rvm/issues/3212
+
+ DEBUG [ed0eeaa5] 	Warning! PATH is not properly set up, $GEM_HOME is not set,
+         usually this is caused by shell initialization files - check them for 'PATH=...' entries,
+         it might also help to re-add RVM to your dotfiles: 'rvm get stable --auto-dotfiles',
+         to fix temporarily in this shell session run: 'rvm use ruby-2.1.2'.
+  INFO [ed0eeaa5] Finished in 2.617 seconds with exit status 0 (successful).
+ DEBUG [a132c609] Running if test ! -d /var/www/fosem-staging/releases/20160822021735; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160822021735'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [a132c609] Command: if test ! -d /var/www/fosem-staging/releases/20160822021735; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160822021735'" 1>&2; false; fi
+ DEBUG [a132c609] Finished in 0.311 seconds with exit status 0 (successful).
+  INFO [92dfb542] Running /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle exec rake assets:precompile as root@43.252.88.222
+ DEBUG [92dfb542] Command: cd /var/www/fosem-staging/releases/20160822021735 && ( export RAILS_ENV="staging" ; /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle exec rake assets:precompile )
+ DEBUG [92dfb542] 	
+Warning: PATH set to RVM ruby but GEM_HOME and/or GEM_PATH not set, see:
+    https://github.com/rvm/rvm/issues/3212
+
+ DEBUG [92dfb542] 	Warning! PATH is not properly set up, $GEM_HOME is not set,
+         usually this is caused by shell initialization files - check them for 'PATH=...' entries,
+         it might also help to re-add RVM to your dotfiles: 'rvm get stable --auto-dotfiles',
+         to fix temporarily in this shell session run: 'rvm use ruby-2.1.2'.
+ DEBUG [92dfb542] 	/usr/local/rvm/gems/ruby-2.1.2@FOSEM/gems/bundler-1.10.6/lib/bundler/shared_helpers.rb:78: warning: Insecure world writable dir /var/www/fosem-staging/shared/bundle/ruby/2.1.0/bin in PATH, mode 040777
+  INFO [92dfb542] Finished in 8.138 seconds with exit status 0 (successful).
+ DEBUG [95607889] Running if test ! -d /var/www/fosem-staging/releases/20160822021735; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160822021735'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [95607889] Command: if test ! -d /var/www/fosem-staging/releases/20160822021735; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160822021735'" 1>&2; false; fi
+ DEBUG [95607889] Finished in 0.303 seconds with exit status 0 (successful).
+  INFO [c768e629] Running /usr/bin/env mkdir -p /var/www/fosem-staging/releases/20160822021735/assets_manifest_backup as root@43.252.88.222
+ DEBUG [c768e629] Command: cd /var/www/fosem-staging/releases/20160822021735 && /usr/bin/env mkdir -p /var/www/fosem-staging/releases/20160822021735/assets_manifest_backup
+  INFO [c768e629] Finished in 0.379 seconds with exit status 0 (successful).
+ DEBUG [9cc5a41f] Running /usr/bin/env ls /var/www/fosem-staging/releases/20160822021735/public/assets/.sprockets-manifest* as root@43.252.88.222
+ DEBUG [9cc5a41f] Command: cd /var/www/fosem-staging/releases/20160822021735 && /usr/bin/env ls /var/www/fosem-staging/releases/20160822021735/public/assets/.sprockets-manifest*
+ DEBUG [9cc5a41f] 	ls: cannot access /var/www/fosem-staging/releases/20160822021735/public/assets/.sprockets-manifest*: No such file or directory
+ DEBUG [9cc5a41f] Finished in 0.321 seconds with exit status 2 (failed).
+ DEBUG [dd1641bf] Running /usr/bin/env ls /var/www/fosem-staging/releases/20160822021735/public/assets/manifest*.* as root@43.252.88.222
+ DEBUG [dd1641bf] Command: cd /var/www/fosem-staging/releases/20160822021735 && /usr/bin/env ls /var/www/fosem-staging/releases/20160822021735/public/assets/manifest*.*
+ DEBUG [dd1641bf] 	/var/www/fosem-staging/releases/20160822021735/public/assets/manifest-6804d49924aa66ebe1a9d59566ac3de6.json
+ DEBUG [dd1641bf] Finished in 0.320 seconds with exit status 0 (successful).
+ DEBUG [b1129f8b] Running /usr/bin/env ls /var/www/fosem-staging/releases/20160822021735/public/assets/manifest*.* as root@43.252.88.222
+ DEBUG [b1129f8b] Command: cd /var/www/fosem-staging/releases/20160822021735 && /usr/bin/env ls /var/www/fosem-staging/releases/20160822021735/public/assets/manifest*.*
+ DEBUG [b1129f8b] 	/var/www/fosem-staging/releases/20160822021735/public/assets/manifest-6804d49924aa66ebe1a9d59566ac3de6.json
+ DEBUG [b1129f8b] Finished in 0.338 seconds with exit status 0 (successful).
+  INFO [405cd9d5] Running /usr/bin/env cp /var/www/fosem-staging/releases/20160822021735/public/assets/manifest-6804d49924aa66ebe1a9d59566ac3de6.json /var/www/fosem-staging/releases/20160822021735/assets_manifest_backup as root@43.252.88.222
+ DEBUG [405cd9d5] Command: cd /var/www/fosem-staging/releases/20160822021735 && /usr/bin/env cp /var/www/fosem-staging/releases/20160822021735/public/assets/manifest-6804d49924aa66ebe1a9d59566ac3de6.json /var/www/fosem-staging/releases/20160822021735/assets_manifest_backup
+  INFO [405cd9d5] Finished in 0.519 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+ DEBUG [0384313c] Running if test ! -d /var/www/fosem-staging/releases/20160822021735; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160822021735'" 1>&2; false; fi as root@43.252.88.222
+ DEBUG [0384313c] Command: if test ! -d /var/www/fosem-staging/releases/20160822021735; then echo "Directory does not exist '/var/www/fosem-staging/releases/20160822021735'" 1>&2; false; fi
+ DEBUG [0384313c] Finished in 0.282 seconds with exit status 0 (successful).
+  INFO [7179eac0] Running /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle exec rake db:migrate as root@43.252.88.222
+ DEBUG [7179eac0] Command: cd /var/www/fosem-staging/releases/20160822021735 && ( export RAILS_ENV="staging" ; /var/www/fosem-staging/rvm1scripts/rvm-auto.sh . bundle exec rake db:migrate )
+ DEBUG [7179eac0] 	
+Warning: PATH set to RVM ruby but GEM_HOME and/or GEM_PATH not set, see:
+    https://github.com/rvm/rvm/issues/3212
+
+ DEBUG [7179eac0] 	Warning! PATH is not properly set up, $GEM_HOME is not set,
+         usually this is caused by shell initialization files - check them for 'PATH=...' entries,
+         it might also help to re-add RVM to your dotfiles: 'rvm get stable --auto-dotfiles',
+         to fix temporarily in this shell session run: 'rvm use ruby-2.1.2'.
+ DEBUG [7179eac0] 	/usr/local/rvm/gems/ruby-2.1.2@FOSEM/gems/bundler-1.10.6/lib/bundler/shared_helpers.rb:78: warning: Insecure world writable dir /var/www/fosem-staging/shared/bundle/ruby/2.1.0/bin in PATH, mode 040777
+ DEBUG [7179eac0] 	rake aborted!
+Mysql2::Error: Access denied for user 'root'@'localhost' (using password: NO)
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/mysql2-0.3.21/lib/mysql2/client.rb:70:in `connect'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/mysql2-0.3.21/lib/mysql2/client.rb:70:in `initialize'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `new'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `mysql2_connection'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:435:in `new_connection'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:445:in `checkout_new_connection'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:416:in `acquire_connection'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:351:in `block in checkout'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:350:in `checkout'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:265:in `block in connection'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:264:in `connection'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:541:in `retrieve_connection'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/connection_handling.rb:113:in `retrieve_connection'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/connection_handling.rb:87:in `connection'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/migration.rb:910:in `initialize'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/migration.rb:807:in `new'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/migration.rb:807:in `up'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/migration.rb:785:in `migrate'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/activerecord-4.1.4/lib/active_record/railties/databases.rake:34:in `block (2 levels) in <top (required)>'
+/var/www/fosem-staging/shared/bundle/ruby/2.1.0/gems/rake-11.2.2/exe/rake:27:in `<top (required)>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)
