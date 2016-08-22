@@ -32,6 +32,9 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+
+  
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   # config.action_mailer.default_url_options = { host: "http://requesterapp.gionee.co.in" }
@@ -44,5 +47,13 @@ Rails.application.configure do
   #   password:             'aaf66e26b083c566359ba00e6afd3cf886c3da38',
   #   authentication:       'plain',
   #   enable_starttls_auto: true  }
+
+  # Rails.application.config.middleware.use ExceptionNotification::Rack,
+  # :email => {
+  #   :deliver_with => :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
+  #   :email_prefix => "Exception",
+  #   :sender_address => %{"notifier" <notifier@gionee.co.in>},
+  #   :exception_recipients => %w{raghav.singh@lptpl.com}
+  # }  
 
 end

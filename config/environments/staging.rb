@@ -80,7 +80,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
- 
+  config.assets.raise_runtime_errors = true
+
   config.action_mailer.default_url_options = { host: "http://requesterapp.gionee.co.in" }
 
   config.action_mailer.delivery_method = :smtp
@@ -91,4 +92,14 @@ Rails.application.configure do
     password:             'aaf66e26b083c566359ba00e6afd3cf886c3da38',
     authentication:       'plain',
     enable_starttls_auto: true  }
+
+
+   Rails.application.config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :deliver_with => :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
+      :email_prefix => "Exception",
+      :sender_address => %{"Retail Notifier" <notifier@gionee.co.in>},
+      :exception_recipients => %w{raghav.singh@lptpl.com,vishal.singhani@techbirds.in}
+    }  
+   
 end

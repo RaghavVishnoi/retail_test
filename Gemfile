@@ -68,6 +68,8 @@ gem 'select2-rails'
 gem 'spreadsheet', '~> 1.1', '>= 1.1.2'
 gem 'geokit', '~> 1.10'
 
+gem 'exception_notification'
+
  
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
