@@ -30,13 +30,20 @@ module RetailersHelper
 		end
 		retailer = Retailer.find_by(:retailer_code => data['RetailerCode'])
 		 
-		#if retailer.latitude == 0.0 || retailer.longitude == 0.0		  
-			lat_long=Geokit::Geocoders::GoogleGeocoder.geocode retailer.address
-			lat = lat_long.ll.split(',')[0]
-        	long = lat_long.ll.split(',')[1]  
-    	#end
+		if retailer.latitude == 0.0 || retailer.longitude == 0.0 || retailer.latitude == nil || retailer.longitude == nil		  
+			lat = 0.0;long=0.0;
+			begin
+				lat_long=Geokit::Geocoders::GoogleGeocoder.geocode retailer.address
+				lat = lat_long.ll.split(',')[0]
+	        	long = lat_long.ll.split(',')[1]  
+        	rescue
+        	end
+        else
+        	lat = retailer.latitude
+        	long = retailer.longitude
+    	end
 		
-		retailer.update(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'],:location_code => data['MUMCode'],:salesman_id => data['SalesmanID'] )
+		retailer.update(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'],:location_code => data['MUMCode'],:salesman_id => data['SalesmanID'],:latitude=> lat,:longitude=>long )
 	end
 
 	def create_retailer(data)
@@ -45,9 +52,14 @@ module RetailersHelper
 		else
 			@status =  "Inactive"
 		end
-		lat_long=Geokit::Geocoders::GoogleGeocoder.geocode data['RetailerAddress']
-		lat = lat_long.ll.split(',')[0]
-        long = lat_long.ll.split(',')[1]  
+		lat = 0.0;long=0.0;
+		begin
+			lat_long=Geokit::Geocoders::GoogleGeocoder.geocode data['RetailerAddress']
+			lat = lat_long.ll.split(',')[0]
+	        long = lat_long.ll.split(',')[1] 
+        rescue
+
+        end 
 
 		Retailer.create(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'],:location_code => data['MUMCode'],:salesman_id => data['SalesmanID'],:latitude=> lat,:longitude=>long)
 	end
