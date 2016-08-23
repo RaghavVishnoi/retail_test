@@ -129,7 +129,6 @@ Rails.application.routes.draw do
       get '/statelists' => 'statelists#index'
       post 'retailerlists/search_retailer'
       get 'retailerlists/search_retailer'
-      get 'sessions/create'
       delete 'sessions/destroy'
       get '/home' => 'home#index'
       post 'sessions/forgot_password'

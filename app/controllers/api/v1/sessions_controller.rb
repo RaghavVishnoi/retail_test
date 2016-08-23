@@ -23,8 +23,8 @@
              else
               @roles = User.user_roles(@user.id)
               @role = User.user_role(@user.id)
-
-               if (REQUESTER_ROLES.any?{|role| @roles.include?(role)} && params[:request][:app_id] == '1' && @user.status == 'Active') || (@role.name == 'vendor' && params[:request][:app_id] == '2' && @user.status == 'Active')
+              
+               if (REQUESTER_ROLES.any?{|role| @user.roles.pluck(:name).include?(role)} && params[:request][:app_id] == '1' && @user.status == 'Active') || (@role.name == 'vendor' && params[:request][:app_id] == '2' && @user.status == 'Active')
                 
                  if @user && @user.authenticate(params[:session][:password])
                    sign_in @user
