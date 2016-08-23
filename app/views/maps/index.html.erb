@@ -308,14 +308,14 @@ $(document).ready(function(){
  
                 for(i=0;i<response.length;i++){
                  
-              if(response[i]['lat'] != 0.0 && response[i]['lat'] != 'undefined' && response[i]['long'] != 0.0 && response[i]['long'] != 'undefined'){
-                // if(response[i][3] != 0.0 && response[i][3] != 'undefined' && response[i][4] != 0.0 && response[i][4] != 'undefined'){
+              // if(response[i]['lat'] != 0.0 && response[i]['lat'] != 'undefined' && response[i]['long'] != 0.0 && response[i]['long'] != 'undefined'){
+                if(response[i][3] != 0.0 && response[i][3] != 'undefined' && response[i][4] != 0.0 && response[i][4] != 'undefined'){
 
-                    if(response[i]['status']=="approved"){
-                      // if(response[i][1]=="approved"){
+                    //if(response[i]['status']=="approved"){
+                     if(response[i][1]=="approved"){
                       var icon = "";
-                       //switch (parseInt(response[i]['request_type'])) {
-                        switch (parseInt(response[i][0])) {
+                       switch (parseInt(response[i]['request_type'])) {
+                        //switch (parseInt(response[i][0])) {
                               case 0:
                                  icon= '/assets/a_gsb.png'
 
@@ -336,15 +336,15 @@ $(document).ready(function(){
                     
 
                        
-                        lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 4,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']})
-                        // lln.push({lat: response[i][3],lon: response[i][4],zoom: 4,icon: icon,reqId: response[i][5],reqType: response[i][0]})
+                        // lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 4,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']})
+                        lln.push({lat: response[i][3],lon: response[i][4],zoom: 4,icon: icon,reqId: response[i][5],reqType: response[i][0]})
                     }
 
-                  else if(response[i]['status']=="declined"){
-                    // else if(response[i][1]=="declined"){
+                  // else if(response[i]['status']=="declined"){
+                    else if(response[i][1]=="declined"){
                          var icon = "";
-                      switch ( parseInt(response[i]['request_type']) ) {
-                        // switch ( parseInt(response[i][0]) ) {
+                      //switch ( parseInt(response[i]['request_type']) ) {
+                        switch ( parseInt(response[i][0]) ) {
                               case 0:
                                  icon= '/assets/d_gsb.png'
                               break;
@@ -362,15 +362,15 @@ $(document).ready(function(){
                               break;
                       }
                       
-                      lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']});
-                      // lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]});
+                      // lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']});
+                      lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]});
                   }
                   
-               else if(response[i]['status']=="cmo_pending"){
-                //else if(response[i][1]=="cmo_pending"){
+               // else if(response[i]['status']=="cmo_pending"){
+                else if(response[i][1]=="cmo_pending"){
                   var icon = "";
-                      switch ( parseInt(response[i]['request_type'])) {
-                        // switch ( parseInt(response[i][0])) {
+                      // switch ( parseInt(response[i]['request_type'])) {
+                        switch ( parseInt(response[i][0])) {
                               case 0:
                                   icon= '/assets/cp_gsb.png'
                               break;
@@ -388,15 +388,15 @@ $(document).ready(function(){
                               break;
                         }
                      
-                    lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']});
-                    // lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]});
+                    // lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']});
+                    lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]});
                   }
 
-                else if(response[i]['status']=="cmo_declined"){
-                  // else if(response[i][1]=="cmo_declined"){
+                // else if(response[i]['status']=="cmo_declined"){
+                 else if(response[i][1]=="cmo_declined"){
                     var icon = "";
-                      switch ( parseInt(response[i]['request_type'])) {
-                        // switch ( parseInt(response[i][0])) {
+                      // switch ( parseInt(response[i]['request_type'])) {
+                        switch ( parseInt(response[i][0])) {
                               case 0:
                                   icon= '/assets/cd_gsb.png'
                               break;
@@ -415,14 +415,14 @@ $(document).ready(function(){
                         }
 
 
-                    lln.push({lat: response[i]['lat'],lon: response[i]['long' ],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']});
-                    // lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]});
+                    // lln.push({lat: response[i]['lat'],lon: response[i]['long' ],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']});
+                    lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]});
                   }
-                   else if(response[i]['status']=='pending'){
-                    //else if(response[i][1]=='pending'){
+                   // else if(response[i]['status']=='pending'){
+                    else if(response[i][1]=='pending'){
                       var icon = "";
-                        switch ( parseInt(response[i]['request_type']) ) {
-                          //switch ( parseInt(response[i][0]) ) {
+                        // switch ( parseInt(response[i]['request_type']) ) {
+                          switch ( parseInt(response[i][0]) ) {
                               case 0:
                                   icon= '/assets/p_gsb.png'
                               break;
@@ -440,8 +440,8 @@ $(document).ready(function(){
                               break;
                         }
 
-                      lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']})
-                      // lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]})
+                      // lln.push({lat: response[i]['lat'],lon: response[i]['long'],zoom: 5,icon: icon,reqId: response[i]['id'],reqType: response[i]['request_type']})
+                      lln.push({lat: response[i][3],lon: response[i][4],zoom: 5,icon: icon,reqId: response[i][5],reqType: response[i][0]})
                   }
                   
                      
