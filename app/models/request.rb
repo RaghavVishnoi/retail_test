@@ -16,6 +16,9 @@ class Request < ActiveRecord::Base
   has_many :request_activities
   has_many :shop_assignments
   has_one :request_assignment
+
+  has_one :shop_audit,dependent: :destroy
+  accepts_nested_attributes_for :shop_audit, :allow_destroy => true, reject_if: :all_blank
    
   state_machine :status, :initial => :cmo_pending do
     event :cmo_approve do

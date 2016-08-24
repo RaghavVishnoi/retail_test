@@ -226,6 +226,15 @@ class User < ActiveRecord::Base
       role = Role.where(id: associated_roles).order('name desc').first
     end
 
+    def self.role_for_permit(current_user)
+      currentRoles = current_user.roles.pluck(:name)
+      sortedRoles = 
+      currentRoles.sort do |e1, e2|
+        ROLE_ORDER.index(e1) <=> ROLE_ORDER.index(e2)
+      end
+      Role.find_by(name: sortedRoles[0])
+    end
+
 
     def self.delete_at_multi(role,set)
       @role = role
@@ -237,22 +246,23 @@ class User < ActiveRecord::Base
     end
 
     def self.permit_role(role)
-      roles = Role.all.pluck(:name) 
+      roles = Role.all.pluck(:name)
+      puts "rrrr #{role.name}" 
       case role.name
       when 'superadmin'
         delete_at_multi(roles,[0,2,3,4])
       when 'approver'
         delete_at_multi(roles,[0,1,2,3,4,9,10,11])
       when 'rrm'
-        delete_at_multi(roles,[0,1,2,3,4,8,9,10,11,12,13])
+        delete_at_multi(roles,[0,1,2,3,4,8,9,10,11,12,13,14,15,16])
       when 'cmo'
-        delete_at_multi(roles,[0,1,2,3,4,5,8,9,10,11,12,13])
+        delete_at_multi(roles,[0,1,2,3,4,5,8,9,10,11,12,13,14,15,16])
       when 'vmqa'
-        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,12,13])
+        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,12,13,14,15,16])
       when 'supervisor'
-        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,12,13])
+        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16])
       when 'auditor'
-        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,11,13])
+        delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16])
       end             
     end
 

@@ -10,7 +10,7 @@
             <div class="row">
 
             
-            <%if User.permit_role(User.user_role(current_user.id)).include? 'rrm'%>     
+            <%if User.permit_role(User.role_for_permit(current_user)).include? 'rrm'%>     
               <div class="col-md-3">
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i><span>
@@ -20,7 +20,7 @@
               </div>
             <%end%>  
 
-            <%if User.permit_role(User.user_role(current_user.id)).include? 'cmo'%>  
+            <%if User.permit_role(User.role_for_permit(current_user)).include? 'cmo'%>  
               <div class="col-md-3">
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i>
@@ -32,7 +32,7 @@
               </div>
             <%end%>
 
-            <%if User.permit_role(User.user_role(current_user.id)).include? 'vmqa'%>  
+            <%if User.permit_role(User.role_for_permit(current_user)).include? 'vmqa'%>  
               <div class="col-md-3">
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i>
@@ -44,7 +44,7 @@
               </div>
             <%end%> 
 
-            <%if User.permit_role(User.user_role(current_user.id)).include? 'supervisor'%>  
+            <%if User.permit_role(User.role_for_permit(current_user)).include? 'supervisor'%>  
               <div class="col-md-3">
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i>
@@ -57,7 +57,7 @@
             <%end%>     
                
               
-            <%if User.permit_role(User.user_role(current_user.id)).include? 'auditor'%>
+            <%if User.permit_role(User.role_for_permit(current_user)).include? 'auditor'%>
               <div class="col-md-3">
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i><span>
@@ -67,7 +67,7 @@
               </div>
             <%end%>
               
-            <%if User.permit_role(User.user_role(current_user.id)).include? 'requester'%>
+            <%if User.permit_role(User.role_for_permit(current_user)).include? 'requester'%>
               <div class="col-md-3">
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i>
@@ -78,7 +78,7 @@
               </div>
             <%end%>
 
-            <%if User.permit_role(User.user_role(current_user.id)).include? 'vendor'%>
+            <%if User.permit_role(User.role_for_permit(current_user)).include? 'vendor'%>
               <div class="col-md-3">
                 <div class="add_new_notfcn">
                   <h4><i class="fa fa-plus-square fa-lg"></i>
@@ -109,7 +109,7 @@
                 <div class="col-md-7">
                 <ul class="list-inline list-unstyled" id="myTab">
 
-              <%= collection_check_boxes( 'search', '',User.permit_role(User.user_role(current_user.id)),:to_s,:to_s,{checked: @search},:class=> 'search') if User.user_role(current_user.id).name == 'approver' || 'superadmin' %> 
+              <%= collection_check_boxes( 'search', '',User.permit_role(User.role_for_permit(current_user)),:to_s,:to_s,{checked: @search},:class=> 'search') if User.role_for_permit(current_user).name == 'approver' || 'superadmin' %> 
                 </ul>
 
                 </div>

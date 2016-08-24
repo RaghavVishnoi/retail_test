@@ -16,6 +16,33 @@
                     <%=render 'requests/details/shop_details'%>
                      
                     <%if @request.is_audit_done == true%>
+                        <%if @request.shop_audit != nil%>
+                          <%=render 'requests/details/photo'%>
+                         <%=render 'requests/details/audit_form/sales_detail'%>
+                         <%=render 'requests/details/branding_detail'%>
+                         <%if @request.shop_audit.audit_type == 1%>
+                          <%=render 'requests/details/audit_form/audit/gsb_detail'%>
+
+                          <%=render 'requests/details/audit_form/audit/sis_detail'%>
+
+                          <%=render 'requests/details/audit_form/audit/hard_posm_detail'%>
+
+                          <%=render 'requests/details/audit_form/audit/soft_posm_detail'%>
+
+                         <%elsif @request.shop_audit.audit_type == 2
+                           %>
+
+                           <%=render 'requests/details/audit_form/deployment/deployment_required_detail'%>
+
+                           <%=render 'requests/details/audit_form/deployment/deployment_done_detail'%>
+
+                         <%elsif @request.shop_audit.audit_type == 3
+                           %>  
+
+                           <%=render 'requests/details/audit_form/maintenance/maintenance_detail'%>
+
+                         <%end%>  
+                        <%else%>
                          <%=render 'requests/details/photo'%>
                          <%=render 'requests/details/sales'%>
                          <%=render 'requests/details/branding_detail'%>
@@ -29,6 +56,7 @@
                           <%= render 'requests/details/sis_visit_details' %>
 
                           <%= render 'requests/details/clipon_details' %>
+                        <%end%>  
                     <%else%>
                         <%=render 'requests/details/audit_not_done_reasons' %>
                     <%end%>
