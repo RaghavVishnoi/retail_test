@@ -12,7 +12,7 @@ module Api
 	        value = json[key]
           my_logger ||= Logger.new("#{Rails.root}/log/user.log")
           my_logger.info "Accessed in new app"    
-          render :json => value
+          render :json => {response: value}
        end
 
     end
