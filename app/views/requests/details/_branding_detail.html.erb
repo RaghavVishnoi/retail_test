@@ -7,36 +7,34 @@
 				<div class="common_page gsb_page">
 					<h2>Competition Details</h2>
 					<div class="comments_blk ">
-					 
+					    <h4>Branding available for:</h4>
 						 <% @request.branding_details.each_slice(3) do |branding_details| %>
 							  <div class="row ">
 							  
 							    <div class="col-md-12 cmpltn_detls">
-							      <div class="col-md-6"><%= field_display_name(branding_details[0]) %></div>
-							      <div class="col-md-6">
+							      <div class="col-md-2"><%= field_display_name(branding_details[0]) %></div>
+							      <div class="col-md-2">
 							      	<div class="blue">
 							      		<%= field_values_str(branding_details[0]) %>
 							        </div>
 							      </div>
-							    </div>
-
-							    <div class="col-md-12 cmpltn_detls">
-							      <div class="col-md-6"><%= field_display_name(branding_details[1]) %></div>
-							      <div class="col-md-6">
+							      <div class="col-md-2"><%= field_display_name(branding_details[1]) %></div>
+							      <div class="col-md-2">
 							      	<div class="blue">
 							      		<%= field_values_str(branding_details[1]) %>
 							      	</div>	
 							      </div>
-							    </div>
-
-							    <div class="col-md-12 cmpltn_detls">
-							      <div class="col-md-6"><%= field_display_name(branding_details[2]) %></div>
-							      <div class="col-md-6">
+							      <div class="col-md-2"><%= field_display_name(branding_details[2]) %></div>
+							      <div class="col-md-2">
 							      	<div class="blue">
 							      		<%= field_values_str(branding_details[2]) %>
-							      	</div>
+							      	</div>	
 							      </div>
 							    </div>
+
+							    
+
+							   
 
 							 </div>
 						<% end %>

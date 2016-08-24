@@ -319,7 +319,31 @@ class RequestsController < ApplicationController
         :clipon_models,
         :lit_standee_models,
         :countertop_models,
-        :demo_models
+        :demo_models,
+        :range_brochure_avilable,
+       :leaflet_available,
+       :poster_available,
+       :wall_branding_available,
+       :one_way_vision_available,
+       :danglers_available,
+       :shelf_strips_available,
+       :roll_up_standee_available,
+       :no_of_range_brochure,
+       :range_brochure_type,
+       :leaflet_type,
+       :poster_type,
+       :no_of_wall_branding,
+       :wall_branding_type,
+       :no_of_one_way_vision,
+       :one_way_vision_type,
+       :no_of_danglers,
+       :danglers_type,
+       :no_of_shelf_strips,
+       :shelf_strips_type,
+       :no_of_roll_up_standee,
+       :roll_up_standee_type,
+       :escalate_to_tl,
+       :cleaned_and_checked_clipon
       ]
       )
   end

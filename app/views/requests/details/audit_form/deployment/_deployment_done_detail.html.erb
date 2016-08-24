@@ -12,7 +12,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.gsb_present%>
+									<%=to_bool(@request.shop_audit.gsb_present)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -20,7 +20,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.changed_visual_gsb%>
+									<%=to_bool(@request.shop_audit.changed_visual_gsb)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -28,7 +28,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.cleaned_and_checked_gsb%>
+									<%=to_bool(@request.shop_audit.cleaned_and_checked_gsb)%>
 									</div>
 								</div>
 							</div>
@@ -41,7 +41,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.sis_present%>
+									<%=to_bool(@request.shop_audit.sis_present)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -49,7 +49,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.changed_visual_sis%>
+									<%=to_bool(@request.shop_audit.changed_visual_sis)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -57,7 +57,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.cleaned_and_checked_sis%>
+									<%=to_bool(@request.shop_audit.cleaned_and_checked_sis)%>
 									</div>
 								</div>
 							</div>
@@ -68,7 +68,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.lit_standee_present%>
+									<%=to_bool(@request.shop_audit.lit_standee_present)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -76,7 +76,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.changed_visual_lit_standee%>
+									<%=to_bool(@request.shop_audit.changed_visual_lit_standee)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -84,7 +84,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.cleaned_and_checked_lit_standee%>
+									<%=to_bool(@request.shop_audit.cleaned_and_checked_lit_standee)%>
 									</div>
 								</div>
 							</div>
@@ -95,7 +95,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.flange_present%>
+									<%=to_bool(@request.shop_audit.flange_present)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -103,7 +103,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.changed_visual_flange%>
+									<%=to_bool(@request.shop_audit.changed_visual_flange)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -111,7 +111,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.cleaned_and_checked_flange%>
+									<%=to_bool(@request.shop_audit.cleaned_and_checked_flange)%>
 									</div>
 								</div>
 							</div>
@@ -122,7 +122,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.countertop_present%>
+									<%=to_bool(@request.shop_audit.countertop_present)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -130,7 +130,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.changed_visual_countertop%>
+									<%=to_bool(@request.shop_audit.changed_visual_countertop)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -138,7 +138,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.cleaned_and_checked_flange%>
+									<%=to_bool(@request.shop_audit.cleaned_and_checked_flange)%>
 									</div>
 								</div>
 							</div>
@@ -149,7 +149,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.clipon_present%>
+									<%=to_bool(@request.shop_audit.clipon_present)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -157,7 +157,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									<%=@request.shop_audit.changed_visual_clipon%>
+									<%=to_bool(@request.shop_audit.changed_visual_clipon)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -165,7 +165,7 @@
 								</div>
 								<div class="col-md-1">
 									<div class="blue">
-									@request.shop_audit.cleaned_and_checked_clipon
+									<%=to_bool(@request.shop_audit.cleaned_and_checked_clipon)%>
 									</div>
 								</div>
 							</div> 

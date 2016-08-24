@@ -12,7 +12,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									Yes
+									<%=to_bool(@request.shop_audit.range_brochure_avilable)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -20,7 +20,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-										1	
+										<%=@request.shop_audit.no_of_range_brochure%>	
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -28,44 +28,19 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									current
+									<%=@request.shop_audit.range_brochure_type%>
 									</div>
 								</div>
 							</div>
 							
-							<div class="row">
-								<div class="col-md-2">
-									Range Broucher Present?
-								</div>
-								<div class="col-md-2">
-									<div class="blue">
-									Yes
-									</div>
-								</div>
-								<div class="col-md-2">
-									Count
-								</div>
-								<div class="col-md-2">
-									<div class="blue">
-										1	
-									</div>
-								</div>
-								<div class="col-md-2">
-									Type
-								</div>
-								<div class="col-md-2">
-									<div class="blue">
-									current
-									</div>
-								</div>
-							</div>
+							 
 							<div class="row">
 								<div class="col-md-2">
 									Leaflets Present?
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									Yes
+									<%=to_bool(@request.shop_audit.leaflet_available)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -73,7 +48,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-										1	
+										<%=@request.shop_audit.no_of_leaflet%>	
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -81,7 +56,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									current
+									<%=@request.shop_audit.leaflet_type%>
 									</div>
 								</div>
 							</div>
@@ -91,7 +66,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									Yes
+									<%=to_bool(@request.shop_audit.poster_available)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -99,7 +74,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-										1	
+										<%=@request.shop_audit.no_of_poster%>	
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -107,7 +82,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									current
+									<%=@request.shop_audit.poster_type%>
 									</div>
 								</div>
 							</div>
@@ -117,7 +92,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									Yes
+									<%=to_bool(@request.shop_audit.wall_branding_available)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -125,7 +100,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-										1	
+										<%=@request.shop_audit.no_of_wall_branding%>	
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -133,7 +108,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									current
+									<%=@request.shop_audit.wall_branding_type%>
 									</div>
 								</div>
 							</div> 
@@ -144,7 +119,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									Yes
+									<%=to_bool(@request.shop_audit.one_way_vision_available)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -152,7 +127,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-										1	
+										<%=@request.shop_audit.no_of_one_way_vision%>	
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -160,7 +135,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									current
+									<%=@request.shop_audit.one_way_vision_type%>
 									</div>
 								</div>
 							</div>
@@ -170,7 +145,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									Yes
+									<%=to_bool(@request.shop_audit.danglers_available)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -178,7 +153,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-										1	
+										<%=@request.shop_audit.no_of_danglers%>	
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -186,7 +161,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									current
+									<%=@request.shop_audit.danglers_type%>
 									</div>
 								</div>
 							</div>
@@ -196,7 +171,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									Yes
+									<%=to_bool(@request.shop_audit.shelf_strips_available)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -204,7 +179,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-										1	
+										<%=@request.shop_audit.no_of_shelf_strips%>	
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -212,7 +187,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									current
+									<%=@request.shop_audit.shelf_strips_type%>
 									</div>
 								</div>
 							</div>
@@ -222,7 +197,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									Yes
+									<%=to_bool(@request.shop_audit.roll_up_standee_available)%>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -230,7 +205,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-										1	
+										<%=@request.shop_audit.no_of_roll_up_standee%>	
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -238,7 +213,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="blue">
-									current
+									<%=@request.shop_audit.roll_up_standee_type%>
 									</div>
 								</div>
 							</div> 
