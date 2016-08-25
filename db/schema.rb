@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824015714) do
+ActiveRecord::Schema.define(version: 20160825044538) do
 
   create_table "GioneeRetailer", id: false, force: true do |t|
     t.text "Code",     null: false
@@ -870,7 +870,7 @@ ActiveRecord::Schema.define(version: 20160824015714) do
 
   create_table "shop_audits", force: true do |t|
     t.integer "audit_type"
-    t.string  "avg_monthly_sale"
+    t.string  "average_monthly_sales"
     t.string  "most_selling_brand"
     t.string  "second_most_selling_brand"
     t.string  "third_most_selling_brand"
