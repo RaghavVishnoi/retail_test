@@ -43,7 +43,7 @@ module RetailersHelper
         	long = retailer.longitude
     	end
 		
-		retailer.update(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'],:location_code => data['MUMCode'],:salesman_id => data['SalesmanID'],:latitude=> lat,:longitude=>long )
+		retailer.update(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'],:location_code => data['MUMCode'],:salesman_id => data['SalesmanID'],:latitude=> lat,:longitude=>long,:sales_channel_code => data['SalesChannelCode'] )
 	end
 
 	def create_retailer(data)
@@ -61,6 +61,6 @@ module RetailersHelper
 
         end 
 
-		Retailer.create(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'],:location_code => data['MUMCode'],:salesman_id => data['SalesmanID'],:latitude=> lat,:longitude=>long)
+		Retailer.create(:retailer_name => data['RetailerName'],:retailer_code => data['RetailerCode'],:sales_channel => data['SalesChannelName'],:contact_person => data['ContactPerson'],:state => data['StateName'],:city => data['CityName'],:pincode => data['PinCode'],:tin_number => data['TinNumber'],:mobile_number => data['MobileNumber'],:status => @status,:is_isp_on_counter => '',:counter_size => data['CounterSize'],:nd => data['ND'],:address => data['RetailerAddress'],:location_code => data['MUMCode'],:salesman_id => data['SalesmanID'],:latitude=> lat,:longitude=>long,:sales_channel_code => data['SalesChannelCode'])
 	end
 end
