@@ -50,9 +50,9 @@ class RequestsCsv
       file.puts text
   end
 
-  def branding_details_header
-    Request.new.branding_details.map { |r| r[:field][:display_name] }
-  end
+  # def branding_details_header
+  #   Request.new.branding_details.map { |r| r[:field][:display_name] }
+  # end
 
   def branding_details_csv(request)
     request.branding_details.map { |details| field_values_str(details) }
@@ -92,7 +92,8 @@ class RequestsCsv
         'Is SIS present','Is SIS placed properly','Is SIS condition good','Is SIS cleaned daily','Is SIS damaged','SIS structured flaws','SIS security alarm working','SIS security device chargin',
         'SIS demo phone installed','Spec card demo phone match','Backwall light working properly','Is counter lights working','Is clipon on light','Dealer switch on SIS lights','Update Gionee creative','SIS any problem',
         'SIS retailer feedback','Is good visibility in store','Lit in store','Has a relevant visual','Overall rating','Is clipon not working properly','Shop Requirements', branding_details_header,'Overall comments'].flatten.join(',')
-      
+      elsif @request_type == 'vmqa'
+          vmqa_header
      end
         
          
@@ -100,13 +101,16 @@ class RequestsCsv
 
 
   def create_csv_file
+   write_file header
    if @request_type == 'All' || @request_type == 'all' || @request_type == '' || @request_type == nil
-       write_file header 
         Request.where(:created_at => from_date..till_date,state_id: @states).find_each(batch_size: 100) do |request|
             write_file to_csv(request)
-        end      
+        end  
+    elsif @request_type == 'vmqa'
+      Request.where(request_type: 4,:created_at => from_date..till_date,state_id: @states).joins(:shop_audit).find_each(batch_size: 100) do |request|
+            write_file to_csv(request)
+      end
    else
-      write_file header
       request_type = request_type_backend(@request_type)
       Request.where(:request_type => request_type,:created_at => from_date..till_date,state_id: @states).find_each(batch_size: 100) do |request|
         write_file to_csv(request)
@@ -206,7 +210,10 @@ class RequestsCsv
          request.is_counter_lights_working,request.is_clip_on_lights,request.dealer_switch_on_sis_lights,request.updated_gionee_creative,request.sis_any_problem,request.sis_retailer_feedback,request.is_good_visibility_in_store,request.lit_in_store,request.has_a_relevant_visual,
          request.overall_rating,request.is_clipon_not_working_properly,field_values_str(request.shop_requirements),branding_details_csv(request),request.overall_comments
         ].flatten.map {|v| "\"#{v.to_s.gsub('"', '""')}\"" }.join(',')
-        
+          
+       elsif @request_type == 'vmqa'
+        [vmqa_records(request)].flatten.map {|v| "\"#{v.to_s.gsub('"', '""')}\"" }.join(',')
+         
        end
       
     

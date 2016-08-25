@@ -23,6 +23,8 @@
 .download_blk .cmmn_btn_blk .cmmn_btn.btn_inshop{background: linear-gradient(#FD6270, #FD6288);}
 .download_blk .cmmn_btn_blk .cmmn_btn.btn_mentinace{background: linear-gradient(#3FD0CC, #3FD0B1);}
 .download_blk .cmmn_btn_blk .cmmn_btn.btn_audit{background: linear-gradient(#F8B74C, #EDA148);}
+.download_blk .cmmn_btn_blk .cmmn_btn.btn_vmqa{background: linear-gradient(#F8B74C, #F37022);}
+
 
 .tochimobie_blk{padding-top: 10px;}
 .tochimobie_blk .result{padding:0;border: 1px solid #ccc;}

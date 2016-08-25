@@ -8,7 +8,11 @@ module Api
          page = {}
          page[:page] = params[:page]
        	 @shop_assignments = assignments.paginate(page).per_page(10) 
-         render :index
+         if params[:status] == 'all'
+          render :assigned_shops
+         else
+          render :index
+         end
       end
 
       def audited
@@ -35,7 +39,11 @@ module Api
       end
 
       def assignments
+        if params[:status] == 'all'
+          ShopAssignment.where(user_id: User.find_by(auth_token: params[:auth_token]).id)
+        else
           ShopAssignment.where(user_id: User.find_by(auth_token: params[:auth_token]).id,status: params[:status])
+        end
       end
 
   	end
