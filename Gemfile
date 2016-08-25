@@ -55,7 +55,7 @@ gem 'capistrano-bundler'
 gem 'fog'
 gem 'pg'
  
-# 'mysql2', '~> 0.3.18'
+#gem 'mysql2', '~> 0.3.18'
 gem 'aws-sdk'
 gem 'delayed_job_active_record'
 # gem 'activerecord4-redshift-adapter', github: 'aamine/activerecord4-redshift-adapter'
