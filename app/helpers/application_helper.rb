@@ -442,6 +442,17 @@ module ApplicationHelper
     end
   end
 
+  def audit_request(type)
+    case type
+    when 1
+      "Audit Only"
+    when 3
+      "Maintenance"
+    when 2
+      "Deployment"
+    end
+  end
+
   
 
 end

@@ -9,7 +9,7 @@
 		<div class="hdr">
 	   		<div class="row">
 	    		<div class="col-md-2">
-					<div class="txt"><%=REQ_TYPE[params[:q][:request_type].to_i].upcase %>
+					<div class="txt"><%=REQ_TYPE[params[:q][:request_type].to_i].upcase %> 
 					</div>
 				</div>
 				<div class="col-md-3">
@@ -95,6 +95,10 @@
 			</div>
 			<div class="col-md-4">
 				<div class="date_cmopendng">
+				<%if request.shop_audit != nil%>
+					<h5><b>Type - </b><%=audit_request(request.shop_audit.audit_type)%></h5>
+				<%end%>
+				    
 					<h5><b>Audit Date -</b> <%=request.created_at.strftime("%b %d, %Y")%></h5>
 					<h5><b>Audit by -</b> <%=request.shop_visit_done_by%><%=%></h5>
 				</div>
