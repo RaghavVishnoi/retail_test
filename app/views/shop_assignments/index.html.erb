@@ -54,7 +54,7 @@
                          <%end%>
                         <p>Supervisor: <span class="blue"><%=UserParent.user_parent(assignment.user_id,'auditor').pluck(:name).join(',')%></span></p>
                         <p>Auditor: <span class="blue"><%=User.find(assignment.user_id).name%></span></p>
-                        <p>Type: <span class="blue"><%=audit_request(assignment.request.shop_audit.audit_type%></span></p>
+                        <p>Type: <span class="blue"><%=if assignment.request != nil &&  assignment.request.shop_audit != nil then audit_request(assignment.request.shop_audit.audit_type) else 'Audit' end%></span></p>
 
                       </div>
 
