@@ -9,7 +9,7 @@ scheduler = Rufus::Scheduler.singleton
 # end
 scheduler.cron '55 11 * * *' do
 	end_time = Time.now
-	begin_time = end_time.yesterday.strftime("%Y-%m-%d")
+	begin_time = (end_time - 3.days).yesterday.strftime("%Y-%m-%d")
 	end_time = end_time.strftime("%Y-%m-%d")
  	zedsales_upload(begin_time,end_time)
 end
