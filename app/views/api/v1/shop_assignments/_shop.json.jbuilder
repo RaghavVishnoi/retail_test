@@ -1,4 +1,8 @@
-retailer = Retailer.find(assignment.retailer_id)
+if assignment.retailer_id == -1
+	retailer = Retailer.find_by(retailer_code: 'RT00')
+else
+	retailer = Retailer.find(assignment.retailer_id)
+end
 json.assignment_id assignment.id
 json.retailer_code retailer.retailer_code
 json.shop_name retailer.retailer_name
