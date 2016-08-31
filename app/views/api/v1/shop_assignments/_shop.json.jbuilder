@@ -10,6 +10,6 @@ rescue
 	json.state 'undefined'
 end
 json.city retailer.city
-json.address retailer.address.tr("\n","")
+json.address retailer.address.tr("\n","") if retailer.address != nil
 json.supervisor_name  UserParent.user_parent(assignment.user_id,'auditor').pluck(:name).join(',')
 json.assign_date assignment.assign_date.strftime("%b %d,%Y") 
