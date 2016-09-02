@@ -268,6 +268,12 @@ Rails.application.routes.draw do
         end
     end
   end
+
+  namespace :api,:defaults => {format: :json},constraints:{format: :json} do
+    namespace :retailer do
+      get '/requests' => 'requests#index'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

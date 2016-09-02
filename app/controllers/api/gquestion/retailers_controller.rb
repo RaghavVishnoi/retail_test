@@ -11,7 +11,6 @@ module Api
 			def update_retailer
 	          Retailer.retailer_list	
 	          render :json => {result: true}
-
         	end
 
 		end
