@@ -270,7 +270,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api,:defaults => {format: :json},constraints:{format: :json} do
-    namespace :retailer do
+    namespace :retailer_api do
       get '/requests' => 'requests#index'
     end
   end

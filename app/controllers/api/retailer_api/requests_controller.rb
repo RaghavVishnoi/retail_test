@@ -1,5 +1,5 @@
 module Api
-	module Retailer
+	module RetailerApi
 		class RequestsController < ApplicationController
 
 			def index
