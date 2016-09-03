@@ -1,0 +1,12 @@
+json.requestId request.id
+json.request_type request.request_type
+json.status request.status
+json.vendor RequestData.vendor(request)
+json.generated_on request.created_at
+json.cmo RequestData.cmoName(request)
+json.rrm RequestData.rrmName(request)
+json.state request.state
+json.city request.city
+json.approved_by_cmo request.cmo_approve_date
+json.approved_by_rrm request.approver_approve_date
+json.priority RequestData.priority(request)

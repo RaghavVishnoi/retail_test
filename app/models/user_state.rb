@@ -15,7 +15,6 @@ class UserState < ActiveRecord::Base
 			end
 		end
  		rrm
-
 	end
 
 
