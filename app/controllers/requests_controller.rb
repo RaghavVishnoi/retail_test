@@ -342,8 +342,15 @@ class RequestsController < ApplicationController
        :shelf_strips_type,
        :no_of_roll_up_standee,
        :roll_up_standee_type,
-       :escalate_to_tl,
-       :cleaned_and_checked_clipon
+       :escalate,
+       :cleaned_and_checked_clipon,
+       :dummy_models,
+       :demo_models,
+       :posters_models,
+       :sticker_models,
+       :brochure_models,
+       :leaflet_models,
+       :lit_standee_models
       ]
       )
   end

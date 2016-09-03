@@ -128,7 +128,7 @@ module ApplicationHelper
          branding_details_header,
          "Overall comments",
           "audit_type",
-          "avg_monthly_sale",
+          "average_monthly_sales",
           "most_selling_brand",
           "second_most_selling_brand", 
           "third_most_selling_brand",
@@ -276,7 +276,15 @@ module ApplicationHelper
         "no_of_roll_up_standee",
         "roll_up_standee_type",
         "escalate_to_tl",
-        "cleaned_and_checked_clipon"
+        "cleaned_and_checked_clipon",
+        "sis_type_logo",
+        "dummy_models",
+        "demo_models",
+        "posters_models",
+        "sticker_models",
+        "brochure_models",
+        "leaflet_models",
+        "lit_standee_models"
         ].flatten.map{|head| head.camelize}.join(',')
   end
 
@@ -290,7 +298,7 @@ module ApplicationHelper
       [request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, if request.status != 'cmo_pending' then request_cmo(request.id) else State.find(request.state_id).name+"'s CMOs" end, request.retailer_code,@retailer_state,@retailer_city,@shop_address ,@lat,@long,request.remarks, request.comment_by_approver, request.comment_by_cmo, 
          request.created_at.strftime("%b %d, %Y"),request.shop_visit_date,request.shop_visit_done_by,request.visitor_contact_number,request.is_audit_done,request.store_open,request.store_renovation,request.store_shifted,request.not_allowed_in_store,field_values_str(request.shop_requirements),branding_details_csv(request),request.overall_comments,
          shop_audit.audit_type,
-          shop_audit.avg_monthly_sale,
+          shop_audit.average_monthly_sales,
           shop_audit.most_selling_brand,
           shop_audit.second_most_selling_brand, 
           shop_audit.third_most_selling_brand,
@@ -438,7 +446,15 @@ module ApplicationHelper
           shop_audit.no_of_roll_up_standee,
           shop_audit.roll_up_standee_type,
           shop_audit.escalate,
-          shop_audit.cleaned_and_checked_clipon].map{|data| data == true ? "Yes" : data == false ? "No" : data}
+          shop_audit.cleaned_and_checked_clipon,
+          shop_audit.sis_type_logo,
+          shop_audit.dummy_models,
+          shop_audit.demo_models,
+          shop_audit.posters_models,
+          shop_audit.sticker_models,
+          shop_audit.brochure_models,
+          shop_audit.leaflet_models,
+          shop_audit.lit_standee_models].map{|data| data == true ? "Yes" : data == false ? "No" : data}
     end
   end
 
