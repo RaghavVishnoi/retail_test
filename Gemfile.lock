@@ -298,7 +298,6 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.5.5)
     murmurhash3 (0.1.6)
-    mysql2 (0.3.21)
     net-http-persistent (2.9.4)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -307,6 +306,7 @@ GEM
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     orm_adapter (0.5.0)
+    pg (0.18.4)
     pkg-config (1.1.7)
     polyglot (0.3.5)
     pry (0.10.4)
@@ -491,7 +491,7 @@ DEPENDENCIES
   less-rails
   letter_opener
   mini_magick
-  mysql2 (~> 0.3.18)
+  pg
   pry
   rack
   rack-utf8_sanitizer

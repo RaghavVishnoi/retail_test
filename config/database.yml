@@ -24,8 +24,8 @@
 #   <<: *default
 #   database: db/production.sqlite3
 default: &default
-  #adapter: postgresql
-  adapter: mysql2
+  adapter: postgresql
+  #adapter: mysql2
   pool: 5
   timeout: 5000
   # username: requester_web
