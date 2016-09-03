@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160825044538) do
+ActiveRecord::Schema.define(version: 20160903103915) do
 
   create_table "GioneeRetailer", id: false, force: true do |t|
     t.text "Code",     null: false
@@ -712,6 +712,13 @@ ActiveRecord::Schema.define(version: 20160825044538) do
     t.string   "not_allowed_in_store"
     t.integer  "state_id"
     t.integer  "is_fixed",                                                     default: 0
+    t.string   "average_monthly_sales"
+    t.string   "most_selling_brand"
+    t.string   "second_most_selling_brand"
+    t.string   "third_most_selling_brand"
+    t.string   "gionee_sales"
+    t.string   "gionee_stock_quantity"
+    t.string   "models_available"
   end
 
   add_index "requests", ["cmo_id"], name: "index_requests_on_cmo_id", using: :btree
@@ -724,6 +731,7 @@ ActiveRecord::Schema.define(version: 20160825044538) do
     t.string   "retailer_name"
     t.string   "retailer_code"
     t.string   "sales_channel"
+    t.string   "sales_channel_code"
     t.string   "contact_person"
     t.string   "state"
     t.string   "city"
@@ -743,6 +751,7 @@ ActiveRecord::Schema.define(version: 20160825044538) do
     t.string   "salesman_id"
     t.string   "latitude"
     t.string   "longitude"
+    t.string   "email"
   end
 
   add_index "retailers", ["retailer_code"], name: "index2", using: :btree
@@ -1019,6 +1028,12 @@ ActiveRecord::Schema.define(version: 20160825044538) do
     t.string  "roll_up_standee_type"
     t.boolean "escalate"
     t.boolean "cleaned_and_checked_clipon"
+    t.string  "sis_type_logo",                   limit: 5
+    t.string  "posters_models",                  limit: 25
+    t.string  "sticker_models",                  limit: 25
+    t.string  "brochure_models",                 limit: 25
+    t.string  "leaflet_models",                  limit: 25
+    t.string  "back_wall_model",                 limit: 25
   end
 
   create_table "shop_dimensions", force: true do |t|
