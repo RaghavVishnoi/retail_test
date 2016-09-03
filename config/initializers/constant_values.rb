@@ -68,11 +68,10 @@ RSP_NOT_PRESENT_REASON = [
 ]
 
 SIS_TYPES = [
-  ["7’X4ft back wall with wooden top front counter", "7’X4ft back wall with wooden top front counter"],
-  ["7’X4ft back wall with glass top front counter", "7’X4ft back wall with glass top front counter"],
-  ["2’8X2’8 island unit", "2’8X2’8 island unit"],
-  ["Only 7’X4ft back wall with phone display", "Only 7’X4ft back wall with phone display"],
-  ["7’8’’X 8ft back wall with wooden top front counter", "7’8’’X 8ft back wall with wooden top front counter"]
+  ["Island Unit [Type C]", "Island Unit [Type C]"],
+  ["Backwall with phone display", "Backwall with phone display"],
+  [" Backwall with Glass Front Counter (Type B)", " Backwall with Glass Front Counter (Type B)"],
+  ["Backwall with Experience Counter (Type A)", "Backwall with Experience Counter (Type A)"] 
 ]
 
 SPACE_AVAILABLE = [
