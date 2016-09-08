@@ -4,6 +4,7 @@ module RetailersHelper
     require 'geokit'
 	
 	def zedsales_upload(begin_time,end_time)
+		puts "bbbbbbbb #{begin_time} eeeeeeee #{end_time}"
 		syncCount = 0
 		param1 = ZED_SALES_PARAMS[0]
 		param2 = ZED_SALES_PARAMS[1]
@@ -24,6 +25,7 @@ module RetailersHelper
 		    end
 		end 
 		SyncService.create!(name: 'Retailer',url: url,sync_time: Time.now,start_time: begin_time,end_time: end_time,sync_count: syncCount)    	   	
+		syncCount
 	end
 
 	def update_retailer(data)

@@ -20,22 +20,19 @@
 #   <<: *default
 #   database: db/test.sqlite3
 
-# production:
-#   <<: *default
-#   database: db/production.sqlite3
+
 default: &default
-  #adapter: postgresql
   adapter: mysql2
   pool: 5
   timeout: 5000
   username: requester_web
   password: requester@12345#
- 
+
 
 
 development:
   <<: *default
-  database: brand_store
+  database: staging_fosem
  
 staging:
   <<: *default

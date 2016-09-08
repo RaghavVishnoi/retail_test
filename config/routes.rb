@@ -260,11 +260,13 @@ Rails.application.routes.draw do
     namespace :gquestion do
       resources :retailers , only: [:index]
 
-        resources :retailers do
-            collection do
-              post  '/update_retailer' , to: 'retailers#update_retailer'
-            end
-        end
+      resources :retailers do
+          collection do
+            post  '/update_retailer' , to: 'retailers#update_retailer'
+          end
+      end
+
+      get '/syncRetailers' => 'sync#index'
     end
   end
 
@@ -273,6 +275,7 @@ Rails.application.routes.draw do
       get '/requests' => 'requests#index'
     end
   end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
