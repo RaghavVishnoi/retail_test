@@ -69,6 +69,7 @@ gem 'spreadsheet', '~> 1.1', '>= 1.1.2'
 gem 'geokit', '~> 1.10'
 
 gem 'exception_notification'
+gem 'rack-timeout', '~> 0.4.2' 
 
  
 group :development, :test do
