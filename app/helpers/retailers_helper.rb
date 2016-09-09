@@ -27,8 +27,6 @@ module RetailersHelper
 		end 
 		SyncService.create!(name: 'Retailer',url: url,sync_time: Time.now,start_time: begin_time,end_time: end_time,sync_count: syncCount)    	   	
 		syncCount
-
-		end
 	end
 
 	def update_retailer(data)
