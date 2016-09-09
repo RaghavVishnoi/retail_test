@@ -76,7 +76,7 @@
                         </ul>
                         <ul class="list-inline list-unstyled">
                          
-                          <li><span>Audited On: <span class="blue"><%=if assignment.status == 'pending' then "N/A" else assignment.request.created_at end%></span></li>
+                          <li><span>Audited On: <span class="blue"><%=ShopAssignment.audit_date(assignment)%></span></li>
                            
                         </ul>
                       </div>

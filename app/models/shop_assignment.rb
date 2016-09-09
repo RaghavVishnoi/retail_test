@@ -99,4 +99,16 @@ class ShopAssignment < ActiveRecord::Base
   		self.where(created_at: @from.beginning_of_day..@to.end_of_day,status: status,user_id: user_id).count
  	end
 
+ 	def self.audit_date(assignment)
+ 		if assignment.status == 'pending' 
+ 			 "N/A"
+ 		else 
+ 			if assignment.request != nil
+ 				assignment.request.created_at
+ 			else
+ 				nil
+ 			end
+ 		end
+ 	end
+
 end
