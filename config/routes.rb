@@ -266,6 +266,8 @@ Rails.application.routes.draw do
               post  '/update_retailer' , to: 'retailers#update_retailer'
             end
         end
+
+        get '/syncRetailers' => 'sync#index'
     end
   end
 

@@ -4,6 +4,7 @@ module RetailersHelper
     require 'geokit'
 	
 	def zedsales_upload(begin_time,end_time)
+		syncCount = 0
 		param1 = ZED_SALES_PARAMS[0]
 		param2 = ZED_SALES_PARAMS[1]
 		url = ZED_SALES_URL[0]+'&'+param1+'='+begin_time+'&'+param2+'='+end_time
@@ -15,11 +16,14 @@ module RetailersHelper
 		    	retailer_code = data['RetailerCode']
 		    	if Retailer.exists?(:retailer_code => retailer_code)
 		    		update_retailer(data)
+		    		syncCount = syncCount + 1
 		    	else
 		    		create_retailer(data)
+		    		syncCount = syncCount + 1
 		    	end
 		    end
-		end    	
+		end
+		syncCount    	
 	end
 
 	def update_retailer(data)
