@@ -17,14 +17,18 @@ module RetailersHelper
 		    	if Retailer.exists?(:retailer_code => retailer_code)
 		    		syncCount = syncCount + 1
 		    		update_retailer(data)
+		    		syncCount = syncCount + 1
 		    	else
 		    		syncCount = syncCount + 1
 		    		create_retailer(data)
+		    		syncCount = syncCount + 1
 		    	end
 		    end
 		end 
 		SyncService.create!(name: 'Retailer',url: url,sync_time: Time.now,start_time: begin_time,end_time: end_time,sync_count: syncCount)    	   	
 		syncCount
+
+		end
 	end
 
 	def update_retailer(data)
