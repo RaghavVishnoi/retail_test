@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903103915) do
+ActiveRecord::Schema.define(version: 20160913052527) do
 
   create_table "GioneeRetailer", id: false, force: true do |t|
     t.text "Code",     null: false
@@ -1028,12 +1028,12 @@ ActiveRecord::Schema.define(version: 20160903103915) do
     t.string  "roll_up_standee_type"
     t.boolean "escalate"
     t.boolean "cleaned_and_checked_clipon"
-    t.string  "sis_type_logo",                   limit: 5
-    t.string  "posters_models",                  limit: 25
-    t.string  "sticker_models",                  limit: 25
-    t.string  "brochure_models",                 limit: 25
-    t.string  "leaflet_models",                  limit: 25
-    t.string  "back_wall_model",                 limit: 25
+    t.text    "sis_type_logo"
+    t.text    "posters_models"
+    t.text    "sticker_models"
+    t.text    "brochure_models"
+    t.text    "leaflet_models"
+    t.text    "back_wall_model"
   end
 
   create_table "shop_dimensions", force: true do |t|
