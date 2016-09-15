@@ -9,9 +9,7 @@ module Api
 	        key = params[:key]
 	        response = HTTParty.get('http://requesterapp.gionee.co.in/api/v1/dropdown_values')
 	        json = JSON.parse(response.body)
-	        value = json[key]
-          my_logger ||= Logger.new("#{Rails.root}/log/user.log")
-          my_logger.info "Accessed in new app"    
+	        value = json[key]  
           render :json => {response: value}
        end
 
