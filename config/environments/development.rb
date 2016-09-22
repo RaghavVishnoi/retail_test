@@ -39,14 +39,14 @@ Rails.application.configure do
   #config.action_view.raise_on_missing_translations = true
   config.action_mailer.default_url_options = { host: "http://requesterapp.gionee.co.in" }
 
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   address:              'smtp.sparkpostmail.com',
-  #   port:                 587,
-  #   user_name:            'SMTP_Injection',
-  #   password:             'aaf66e26b083c566359ba00e6afd3cf886c3da38',
-  #   authentication:       'plain',
-  #   enable_starttls_auto: true  }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.sparkpostmail.com',
+    port:                 587,
+    user_name:            'SMTP_Injection',
+    password:             'aaf66e26b083c566359ba00e6afd3cf886c3da38',
+    authentication:       'plain',
+    enable_starttls_auto: true  }
 
   # Rails.application.config.middleware.use ExceptionNotification::Rack,
   # :email => {

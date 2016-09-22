@@ -13,7 +13,7 @@ module Api
 
         def retailers
           retailer_code = params[:retailer_code]
-          @retailers  = Retailer.find_by(:retailer_code => retailer_code,:status => 'Active')
+          @retailers  = Retailer.find_by(:retailer_code => retailer_code.upcase)
           if @retailers != nil && @retailers != '' 
              render :json => {:result => true, :retailers => @retailers}
           else
@@ -25,7 +25,7 @@ module Api
           retailer_code = params[:retailer_code]
           state = State.find(params[:state]).name
           retailer = Retailer.where("retailer_code LIKE ? AND state = ?","%#{retailer_code}%",state).order('SUBSTR(retailer_code FROM 1 FOR 2), CAST(SUBSTR(retailer_code FROM 3) AS UNSIGNED)')
-          retailer_list = retailer.where(:status => "Active").pluck(:retailer_code).first(100)
+          retailer_list = retailer.pluck(:retailer_code).first(100)
           if retailer_list.size != 0
             render :json => {:result => true, :retailer_list => retailer_list}
           else
