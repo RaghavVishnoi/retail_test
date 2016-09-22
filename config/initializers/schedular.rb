@@ -8,10 +8,11 @@ scheduler = Rufus::Scheduler.singleton
 # 	Rpush.push
 # end
 scheduler.cron '00 14 * * *' do
+#scheduler.in '2s' do
 	end_time = Time.now
 	begin_time = (end_time - 3.days).strftime("%Y-%m-%d")
 	end_time = (end_time + 1.day).strftime("%Y-%m-%d")
-	SchedularMailer.sync(SYNC_EMAIL,begin_time,end_time).deliver!
+	SchedularMailer.sync(SYNC_EMAIL,begin_time,end_time,1).deliver!
  	zedsales_upload(begin_time,end_time)
 end
 
@@ -19,6 +20,7 @@ scheduler.every '3h' do
 	end_time = Time.now
 	begin_time = (end_time - 1.days).strftime("%Y-%m-%d")
 	end_time = (end_time + 1.day).strftime("%Y-%m-%d")
+	SchedularMailer.sync(SYNC_EMAIL,begin_time,end_time,2).deliver!
  	zedsales_upload(begin_time,end_time)
 end
  

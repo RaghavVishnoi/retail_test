@@ -1,3 +1,10 @@
 <p>This is to update you for data sync in Gionee Retail</p>
 <p>Start Date: <%=@start_date%></p>
 <p>End Date: <%=@end_date%></p>
+<p>
+	<%if @type == 1 || @type == '1'%>
+		Type: Daily Sync
+	<%else%>
+		Type: Every 3 Hour
+	<%end%>
+</p>
