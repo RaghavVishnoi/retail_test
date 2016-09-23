@@ -7,7 +7,7 @@ scheduler = Rufus::Scheduler.singleton
 # scheduler.every '2s' do
 # 	Rpush.push
 # end
-scheduler.cron '00 14 * * *' do
+scheduler.cron '00 15 * * *' do
 #scheduler.in '2s' do
 	end_time = Time.now
 	begin_time = (end_time - 3.days).strftime("%Y-%m-%d")
