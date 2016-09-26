@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160913052528) do
+ActiveRecord::Schema.define(version: 20160913203507) do
 
   create_table "GioneeRetailer", id: false, force: true do |t|
     t.text "Code",     null: false
@@ -616,7 +616,7 @@ ActiveRecord::Schema.define(version: 20160913052528) do
     t.string   "state"
     t.string   "city"
     t.string   "shop_name"
-    t.string   "shop_address"
+    t.text     "shop_address"
     t.string   "shop_owner_name"
     t.string   "shop_owner_phone"
     t.boolean  "is_main_signage"

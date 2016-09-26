@@ -6,10 +6,9 @@ module Api
       require 'httparty'
 
        def parser
-	        key = params[:key]
-	        response = HTTParty.get('http://requesterapp.gionee.co.in/api/v1/dropdown_values')
-	        json = JSON.parse(response.body)
-	        value = json[key]  
+          key = params[:key]
+	        response = DropdownValue.data
+	        value = response[key]  
           render :json => {response: value}
        end
 
