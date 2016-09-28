@@ -6,7 +6,7 @@ module Api
 				begin
 					if params[:retailer_code] != nil
 						if Request.exists?(retailer_code: params[:retailer_code])
-							@requests = Request.where(retailer_code: params[:retailer_code]).order('created_at')
+							@requests = Request.where(retailer_code: params[:retailer_code]).order('created_at desc')
 						else
 							render :json => {result: false,status: 404,message: 'Record not found!'}
 						end
