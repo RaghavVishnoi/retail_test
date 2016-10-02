@@ -98,6 +98,17 @@ module ApplicationHelper
      time
   end
 
+  def audit_type(type)
+    case type
+    when 1,'1'
+      'Visibility Audit'
+    when 2,'2'
+      'Deployment'
+    when 3,'3'
+      'Maintenance'
+    end
+  end
+
   def vmqa_header
     [
         "id",
@@ -298,7 +309,7 @@ module ApplicationHelper
       shop_audit = request.shop_audit
       [request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, if request.status != 'cmo_pending' then request_cmo(request.id) else State.find(request.state_id).name+"'s CMOs" end, request.retailer_code,@retailer_state,@retailer_city,@shop_address ,@lat,@long,request.remarks, request.comment_by_approver, request.comment_by_cmo,request.overall_rating, 
          request.created_at.strftime("%b %d, %Y"),request.shop_visit_date,request.shop_visit_done_by,request.visitor_contact_number,request.is_audit_done,request.store_open,request.store_renovation,request.store_shifted,request.not_allowed_in_store,field_values_str(request.shop_requirements),branding_details_csv(request),request.overall_comments,
-         shop_audit.audit_type,
+          audit_type(shop_audit.audit_type),
           request.average_monthly_sales,
           request.most_selling_brand,
           request.second_most_selling_brand, 
