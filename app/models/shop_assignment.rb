@@ -12,16 +12,20 @@ class ShopAssignment < ActiveRecord::Base
 
 	def self.search(from,to,status,user_id)
 		assignments = []
-		self.where(created_at: from.to_date.beginning_of_day..to.to_date.end_of_day,status: status.split(','),user_id: user_id).each do |assignment|
-			shop_assignment = {}
-			shop_assignment[:shop] = assignment.retailer
-			shop_assignment[:created_at] = assignment.created_at.strftime("%d %b, %Y")
-			request = assignment.request if assignment.request_id != nil
-			shop_assignment[:audited_on] = if request != nil then request.created_at.strftime("%d %b,%Y") else "N/A" end
-			shop_assignment[:status] = assignment.status
-			assignments.push(shop_assignment)
-		end
-		assignments
+		begin
+			self.where(created_at: from.to_date.beginning_of_day..to.to_date.end_of_day,status: status.split(','),user_id: user_id).each do |assignment|
+				shop_assignment = {}
+				shop_assignment[:shop] = assignment.retailer
+				shop_assignment[:created_at] = assignment.created_at.strftime("%d %b, %Y")
+				request = assignment.request if assignment.request_id != nil
+				shop_assignment[:audited_on] = if request != nil then request.created_at.strftime("%d %b,%Y") else "N/A" end
+				shop_assignment[:status] = assignment.status
+				assignments.push(shop_assignment)
+			end
+			assignments
+		rescue
+			assignments
+		end	
 	end
 
 	def self.available_assignment(current_user,state,city)
