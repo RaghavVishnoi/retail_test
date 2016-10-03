@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.with_password.with_email(params[:email]).first if params[:email]
-    if @user && @user.authenticate(params[:password])
+    if @user && @user.authenticate(params[:password]) && !@user.roles.pluck(:name) == 'auditor'
       sign_in @user
       redirect_to dashboard_path
     else
