@@ -14,6 +14,7 @@ module RetailersHelper
 		    retailers_data = json[0].values[1]
 		    retailers_data.each do |data|
 		    	Retailer.transaction do
+		    		puts "dddddd #{data['RetailerCode']}"
 			    	retailer_code = data['RetailerCode']
 			    	if Retailer.exists?(:retailer_code => retailer_code)
 			    		syncCount = syncCount + 1
