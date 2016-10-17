@@ -13,16 +13,18 @@ module RetailersHelper
 		if json[0].values[0] != 0
 		    retailers_data = json[0].values[1]
 		    retailers_data.each do |data|
-		    	retailer_code = data['RetailerCode']
-		    	if Retailer.exists?(:retailer_code => retailer_code)
-		    		syncCount = syncCount + 1
-		    		update_retailer(data)
-		    		syncCount = syncCount + 1
-		    	else
-		    		syncCount = syncCount + 1
-		    		create_retailer(data)
-		    		syncCount = syncCount + 1
-		    	end
+		    	Retailer.transaction do
+			    	retailer_code = data['RetailerCode']
+			    	if Retailer.exists?(:retailer_code => retailer_code)
+			    		syncCount = syncCount + 1
+			    		update_retailer(data)
+			    		syncCount = syncCount + 1
+			    	else
+			    		syncCount = syncCount + 1
+			    		create_retailer(data)
+			    		syncCount = syncCount + 1
+			    	end
+			    end	
 		    end
 		end 
 		SyncService.create!(name: 'Retailer',url: url,sync_time: Time.now,start_time: begin_time,end_time: end_time,sync_count: syncCount)    	   	
