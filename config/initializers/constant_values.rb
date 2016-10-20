@@ -304,7 +304,7 @@ DATE_ERRORS = ['Wrong date format!','Added date is less than last updated date!'
 
 INITIAL_STATUS = ['accepted','declined']
 
-ROLE_ORDER = ['superadmin','approver','rrm','cmo','requester','vmqa','supervisor','auditor','vendor_allocator','vendor','downloader']
+ROLE_ORDER = ['superadmin','approver','rrm','cmo','requester','vmqa','supervisor','auditor','vendor_allocator','vendor','downloader','reader']
 SYNC_EMAIL = ['raghav.singh@lptpl.com','vishal.singhani@techbirds.in','saurabh.khurana@gionee.co.in']
 
   

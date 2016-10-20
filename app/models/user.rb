@@ -247,12 +247,11 @@ class User < ActiveRecord::Base
 
     def self.permit_role(role)
       roles = Role.all.pluck(:name)
-      puts "rrrr #{role.name}" 
       case role.name
       when 'superadmin'
-        delete_at_multi(roles,[0,2,3,4])
+        delete_at_multi(roles,[0,2,3])
       when 'approver'
-        delete_at_multi(roles,[0,1,2,3,4,9,10,11])
+        delete_at_multi(roles,[0,1,2,3,9,10,11])
       when 'rrm'
         delete_at_multi(roles,[0,1,2,3,4,8,9,10,11,12,13,14,15,16])
       when 'cmo'
