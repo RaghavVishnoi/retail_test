@@ -23,7 +23,7 @@
 				</a>
 			</li>
 
-			<% if can?(:cmo, Request) || can?(:rrm,Request) || can?(:manage, Request) || can?(:approve, Request)%>
+			<% if can?(:cmo, Request) || can?(:rrm,Request) || can?(:manage, Request) || can?(:approve, Request) || can?(:view, Request)%>
 			<li id="request">
 				<a class="dropdown-toggle">
 					<i class="fa fa-table"></i>
@@ -69,7 +69,7 @@
 			</li>
 			<%end%>
 
-			<% if can?(:cmo, Request) || can?(:rrm,Request) || can?(:manage, Request) || can?(:approve, Request)%>
+			<% if can?(:cmo, Request) || can?(:rrm,Request) || can?(:manage, Request) || can?(:approve, Request) || can?(:view, Request)%>
 			<li id="audit">
 				<a href="" class="dropdown-toggle" >
 

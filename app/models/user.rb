@@ -228,11 +228,11 @@ class User < ActiveRecord::Base
 
     def self.role_for_permit(current_user)
       currentRoles = current_user.roles.pluck(:name)
-      sortedRoles = 
+      #sortedRoles = 
       currentRoles.sort do |e1, e2|
         ROLE_ORDER.index(e1) <=> ROLE_ORDER.index(e2)
       end
-      Role.find_by(name: sortedRoles[0])
+      Role.find_by(name: currentRoles[0])
     end
 
 
@@ -262,6 +262,8 @@ class User < ActiveRecord::Base
         delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16])
       when 'auditor'
         delete_at_multi(roles,[0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16])
+      when 'reader'
+        delete_at_multi(roles,[0,1,2,3,9,10,11])
       end             
     end
 

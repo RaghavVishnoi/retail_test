@@ -9,7 +9,7 @@
         <div class="main-box-body clearfix">
             <div class="row">
 
-            
+          <%if !current_user.roles.pluck(:name).include?('reader')%>  
             <%if User.permit_role(User.role_for_permit(current_user)).include? 'rrm'%>     
               <div class="col-md-3">
                 <div class="add_new_notfcn">
@@ -88,7 +88,7 @@
                 </div>
               </div>
             <%end%>    
-
+          <%end%>  
 
 
             </div>
@@ -107,11 +107,12 @@
                   <h4>User</h4>
                 </div>
                 <div class="col-md-7">
+                <%if !current_user.roles.pluck(:name).include?('reader')%>
                 <ul class="list-inline list-unstyled" id="myTab">
 
               <%= collection_check_boxes( 'search', '',User.permit_role(User.role_for_permit(current_user)),:to_s,:to_s,{checked: @search},:class=> 'search') if User.role_for_permit(current_user).name == 'approver' || 'superadmin' %> 
                 </ul>
-
+                <%end%>
                 </div>
                 
                 <div class="col-md-4">
@@ -162,7 +163,7 @@
                             <%= user.phone 
                              %></p>
                           </div>
-
+                          <%if !current_user.roles.pluck(:name).include?('reader')%>
                           <div class="col-md-5">
                               <ul class="list-inline list-unstyled">
                               <li class="blue"><i class="fa fa-lock"></i><span>
@@ -228,6 +229,7 @@
 
                               </ul>
                           </div>
+                          <%end%>
                         </div>
                     </div>
 
