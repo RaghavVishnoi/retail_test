@@ -17,6 +17,8 @@ module RepositoriesHelper
 			['1','2','3','4','5']
 		elsif role.include?('approver')
 			['1','2','3','4']
+		elsif role.include?('reader')
+			['1','2','3','4']		
 		elsif role.include?('rrm')
 			['1','2','3']
 		elsif role.include?('cmo')
