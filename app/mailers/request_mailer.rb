@@ -32,7 +32,7 @@ class RequestMailer < ActionMailer::Base
     end
     emails = ['raghav.singh@lptpl.com']
     emails.push(email).flatten!
-    mail(to: 'raghav.singh@lptpl.com', subject: subject)
+    mail(to: emails, subject: subject)
   end
  
 end
