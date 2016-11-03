@@ -306,5 +306,5 @@ INITIAL_STATUS = ['accepted','declined']
 
 ROLE_ORDER = ['superadmin','approver','rrm','cmo','requester','vmqa','supervisor','auditor','vendor_allocator','vendor','downloader','reader']
 SYNC_EMAIL = ['raghav.singh@lptpl.com','vishal.singhani@techbirds.in','saurabh.khurana@gionee.co.in']
-
-  
+DOWNLOADER_EMAIL = 'jaipal.singh@gionee.co.in'  
+VMQA_ADMIN = 'ajit.jha@theradicles.com'

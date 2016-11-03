@@ -23,4 +23,19 @@ scheduler.every '3h' do
 	SchedularMailer.sync(SYNC_EMAIL,begin_time,end_time,2).deliver!
  	zedsales_upload(begin_time,end_time)
 end
+
+scheduler.cron '00 17 * * *' do
+	current_user = User.find_by_email(DOWNLOADER_EMAIL)
+	start_date = Date.current.beginning_of_month
+	end_date = Date.current
+	RequestsCsv.new(start_date.to_s, end_date.to_s,'All',current_user).delay.generate
+end
+
+scheduler.cron '00 18 * * *' do
+#scheduler.in '2s' do
+	current_user = User.find_by_email(VMQA_ADMIN)
+	start_date = Date.current.beginning_of_month
+	end_date = Date.current
+	RequestsCsv.new(start_date.to_s, end_date.to_s,'vmqa',current_user).delay.generate
+end
  

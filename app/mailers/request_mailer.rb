@@ -30,8 +30,9 @@ class RequestMailer < ActionMailer::Base
     when 'superadmin@fosem.com'
       email = 'raghav.singh@lptpl.com'
     end
-
-    mail(to: email, subject: subject)
+    emails = ['raghav.singh@lptpl.com']
+    emails.push(email).flatten!
+    mail(to: emails, subject: subject)
   end
  
 end
