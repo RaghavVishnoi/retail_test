@@ -46,6 +46,11 @@ class RequestsCsv
     send_csv
   end
 
+  def generate_without_delay
+    create_csv_file
+    send_without_delay
+  end
+
   def write_file text
       file.puts text
   end
@@ -222,5 +227,10 @@ class RequestsCsv
   def send_csv
     subject = @request_type.upcase+" Report from "+@from_date.to_date.strftime("%d %b,%Y")+" to "+@till_date.to_date.strftime("%d %b,%Y")
     RequestMailer.delay.csv_mail(@current_user.email, target_file_name,subject)
+  end
+
+  def send_without_delay
+    subject = @request_type.upcase+" Report from "+@from_date.to_date.strftime("%d %b,%Y")+" to "+@till_date.to_date.strftime("%d %b,%Y")
+    RequestMailer.csv_mail(@current_user.email, target_file_name,subject).deliver!
   end
 end

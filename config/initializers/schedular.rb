@@ -25,10 +25,11 @@ scheduler.every '3h' do
 end
 
 scheduler.cron '00 17 * * *' do
+#scheduler.in '2s' do
 	current_user = User.find_by_email(DOWNLOADER_EMAIL)
 	start_date = Date.current.beginning_of_month
 	end_date = Date.current
-	RequestsCsv.new(start_date.to_s, end_date.to_s,'All',current_user).delay.generate
+	RequestsCsv.new(start_date.to_s, end_date.to_s,'All',current_user).generate_without_delay
 end
 
 scheduler.cron '00 18 * * *' do
@@ -36,6 +37,6 @@ scheduler.cron '00 18 * * *' do
 	current_user = User.find_by_email(VMQA_ADMIN)
 	start_date = Date.current.beginning_of_month
 	end_date = Date.current
-	RequestsCsv.new(start_date.to_s, end_date.to_s,'vmqa',current_user).delay.generate
+	RequestsCsv.new(start_date.to_s, end_date.to_s,'vmqa',current_user).generate_without_delay
 end
  
