@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160913203507) do
+ActiveRecord::Schema.define(version: 20161103084617) do
 
   create_table "GioneeRetailer", id: false, force: true do |t|
     t.text "Code",     null: false
@@ -609,115 +609,115 @@ ActiveRecord::Schema.define(version: 20160913203507) do
   end
 
   create_table "requests", force: true do |t|
-    t.string   "retailer_code"
-    t.string   "rsp_name"
-    t.string   "rsp_mobile_number"
-    t.string   "rsp_app_user_id"
-    t.string   "state"
-    t.string   "city"
-    t.string   "shop_name"
+    t.string   "retailer_code",                       limit: 50
+    t.string   "rsp_name",                            limit: 100
+    t.string   "rsp_mobile_number",                   limit: 30
+    t.string   "rsp_app_user_id",                     limit: 100
+    t.string   "state",                               limit: 50
+    t.string   "city",                                limit: 50
+    t.string   "shop_name",                           limit: 100
     t.text     "shop_address"
-    t.string   "shop_owner_name"
-    t.string   "shop_owner_phone"
+    t.string   "shop_owner_name",                     limit: 100
+    t.string   "shop_owner_phone",                    limit: 30
     t.boolean  "is_main_signage"
     t.boolean  "is_sis_installed"
-    t.decimal  "avg_store_monthly_sales",             precision: 10, scale: 2
-    t.decimal  "avg_gionee_monthly_sales",            precision: 10, scale: 2
+    t.decimal  "avg_store_monthly_sales",                         precision: 10, scale: 2
+    t.decimal  "avg_gionee_monthly_sales",                        precision: 10, scale: 2
     t.integer  "request_type"
     t.text     "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
+    t.string   "status",                              limit: 20
     t.integer  "approved_by_user_id"
     t.integer  "declined_by_user_id"
     t.boolean  "is_gionee_gsb_present"
     t.boolean  "is_rsp"
     t.string   "rsp_not_present_reason"
-    t.string   "type_of_sis_required"
-    t.string   "space_available"
-    t.string   "type_of_gsb_requested"
-    t.decimal  "width",                               precision: 10, scale: 4
-    t.decimal  "height",                              precision: 10, scale: 4
+    t.string   "type_of_sis_required",                limit: 100
+    t.string   "space_available",                     limit: 100
+    t.string   "type_of_gsb_requested",               limit: 100
+    t.decimal  "width",                                           precision: 10, scale: 4
+    t.decimal  "height",                                          precision: 10, scale: 4
     t.boolean  "is_gsb_installed_outside"
     t.integer  "cmo_id"
     t.text     "comment_by_approver"
     t.text     "comment_by_cmo"
-    t.string   "maintenance_requestor"
-    t.string   "maintenance_requestor_mobile_number"
-    t.string   "type_of_issue"
-    t.string   "type_of_problem"
-    t.string   "shop_visit_date"
-    t.string   "shop_visit_done_by"
-    t.string   "visitor_contact_number"
-    t.string   "store_selling_gionee"
-    t.string   "is_clipon_present"
-    t.string   "is_countertop_present"
-    t.string   "is_standee_present"
-    t.string   "no_of_peace_in_stock"
-    t.string   "is_leaflets_available"
-    t.string   "is_wall_poster_in_shop"
-    t.string   "is_dangler_in_shop"
-    t.string   "rsp_assigned_in_store"
-    t.string   "rsp_present_in_shop"
-    t.string   "rsp_in_gionee_tshirt"
-    t.string   "rsp_well_groomed"
-    t.string   "rsp_selling_skills"
-    t.string   "gsb_type_installed"
-    t.string   "location_of_gsb"
-    t.string   "gsb_cleanliness"
-    t.string   "installation_quality"
-    t.string   "is_gsb_light_woring"
-    t.string   "is_gsb_light_throw_is_good"
-    t.text     "gsb_structured_damage"
+    t.string   "maintenance_requestor",               limit: 200
+    t.string   "maintenance_requestor_mobile_number", limit: 20
+    t.string   "type_of_issue",                       limit: 100
+    t.string   "type_of_problem",                     limit: 100
+    t.string   "shop_visit_date",                     limit: 20
+    t.string   "shop_visit_done_by",                  limit: 100
+    t.string   "visitor_contact_number",              limit: 20
+    t.string   "store_selling_gionee",                limit: 5
+    t.string   "is_clipon_present",                   limit: 5
+    t.string   "is_countertop_present",               limit: 5
+    t.string   "is_standee_present",                  limit: 5
+    t.string   "no_of_peace_in_stock",                limit: 5
+    t.string   "is_leaflets_available",               limit: 5
+    t.string   "is_wall_poster_in_shop",              limit: 5
+    t.string   "is_dangler_in_shop",                  limit: 5
+    t.string   "rsp_assigned_in_store",               limit: 5
+    t.string   "rsp_present_in_shop",                 limit: 100
+    t.string   "rsp_in_gionee_tshirt",                limit: 100
+    t.string   "rsp_well_groomed",                    limit: 50
+    t.string   "rsp_selling_skills",                  limit: 100
+    t.string   "gsb_type_installed",                  limit: 50
+    t.string   "location_of_gsb",                     limit: 50
+    t.string   "gsb_cleanliness",                     limit: 50
+    t.string   "installation_quality",                limit: 50
+    t.string   "is_gsb_light_woring",                 limit: 50
+    t.string   "is_gsb_light_throw_is_good",          limit: 5
+    t.string   "gsb_structured_damage",               limit: 100
     t.text     "gsb_other_problem"
     t.string   "gsb_retailer_feedback"
-    t.string   "is_sis_present"
-    t.string   "is_sis_placed_properly"
-    t.string   "is_sis_condition_good"
-    t.string   "is_sis_cleaned_daily"
-    t.string   "is_sis_damaged"
-    t.string   "sis_structured_flaws"
-    t.string   "sis_security_alarm_working"
-    t.string   "sis_security_device_charging"
-    t.string   "sis_demo_phones_installed"
-    t.string   "spec_card_demo_phone_match"
-    t.string   "backwall_light_working_properly"
-    t.string   "is_counter_lights_working"
-    t.string   "is_clip_on_lights"
-    t.string   "dealer_switch_on_sis_lights"
-    t.string   "updated_gionee_creative"
+    t.string   "is_sis_present",                      limit: 5
+    t.string   "is_sis_placed_properly",              limit: 5
+    t.string   "is_sis_condition_good",               limit: 5
+    t.string   "is_sis_cleaned_daily",                limit: 5
+    t.string   "is_sis_damaged",                      limit: 5
+    t.string   "sis_structured_flaws",                limit: 150
+    t.string   "sis_security_alarm_working",          limit: 50
+    t.string   "sis_security_device_charging",        limit: 50
+    t.string   "sis_demo_phones_installed",           limit: 50
+    t.string   "spec_card_demo_phone_match",          limit: 5
+    t.string   "backwall_light_working_properly",     limit: 5
+    t.string   "is_counter_lights_working",           limit: 5
+    t.string   "is_clip_on_lights",                   limit: 5
+    t.string   "dealer_switch_on_sis_lights",         limit: 5
+    t.string   "updated_gionee_creative",             limit: 5
     t.text     "sis_any_problem"
     t.text     "sis_retailer_feedback"
-    t.string   "is_good_visibility_in_store"
-    t.string   "lit_in_store"
-    t.string   "has_a_relevant_visual"
+    t.string   "is_good_visibility_in_store",         limit: 5
+    t.string   "lit_in_store",                        limit: 50
+    t.string   "has_a_relevant_visual",               limit: 50
     t.string   "overall_rating"
-    t.string   "is_clipon_not_working_properly"
+    t.string   "is_clipon_not_working_properly",      limit: 50
     t.text     "overall_comments"
     t.string   "approver_approve_date"
     t.string   "cmo_approve_date"
     t.integer  "user_id"
-    t.string   "other_name"
-    t.string   "other_phone"
+    t.string   "other_name",                          limit: 100
+    t.string   "other_phone",                         limit: 20
     t.string   "other_address"
-    t.string   "lfr_name"
-    t.string   "lfr_phone"
-    t.string   "lfr_app_user_id"
+    t.string   "lfr_name",                            limit: 100
+    t.string   "lfr_phone",                           limit: 20
+    t.string   "lfr_app_user_id",                     limit: 50
     t.integer  "is_other"
     t.integer  "is_lfr"
-    t.boolean  "is_audit_done",                                                default: true
-    t.string   "store_open"
-    t.string   "store_renovation"
-    t.string   "store_shifted"
-    t.string   "not_allowed_in_store"
+    t.boolean  "is_audit_done",                                                            default: true
+    t.string   "store_open",                          limit: 5
+    t.string   "store_renovation",                    limit: 5
+    t.string   "store_shifted",                       limit: 5
+    t.string   "not_allowed_in_store",                limit: 5
     t.integer  "state_id"
-    t.integer  "is_fixed",                                                     default: 0
-    t.string   "average_monthly_sales"
-    t.string   "most_selling_brand"
-    t.string   "second_most_selling_brand"
-    t.string   "third_most_selling_brand"
-    t.string   "gionee_sales"
-    t.string   "gionee_stock_quantity"
+    t.integer  "is_fixed",                                                                 default: 0
+    t.string   "average_monthly_sales",               limit: 100
+    t.string   "most_selling_brand",                  limit: 50
+    t.string   "second_most_selling_brand",           limit: 50
+    t.string   "third_most_selling_brand",            limit: 50
+    t.string   "gionee_sales",                        limit: 50
+    t.string   "gionee_stock_quantity",               limit: 100
     t.string   "models_available"
   end
 
@@ -878,23 +878,23 @@ ActiveRecord::Schema.define(version: 20160913203507) do
   add_index "shop_assignments", ["user_id"], name: "index_shop_assignments_on_user_id", using: :btree
 
   create_table "shop_audits", force: true do |t|
-    t.integer "audit_type"
-    t.string  "average_monthly_sales"
-    t.string  "most_selling_brand"
-    t.string  "second_most_selling_brand"
-    t.string  "third_most_selling_brand"
-    t.string  "gionee_sales"
-    t.string  "gionee_stock_quantity"
+    t.integer "audit_type",                      limit: 2
+    t.string  "average_monthly_sales",           limit: 15
+    t.string  "most_selling_brand",              limit: 50
+    t.string  "second_most_selling_brand",       limit: 50
+    t.string  "third_most_selling_brand",        limit: 50
+    t.string  "gionee_sales",                    limit: 50
+    t.string  "gionee_stock_quantity",           limit: 50
     t.text    "models_available"
     t.integer "no_of_flange"
     t.boolean "flange_delivered"
     t.boolean "flange_installation"
-    t.string  "flange_condition"
+    t.string  "flange_condition",                limit: 50
     t.boolean "flange_avilable"
     t.integer "no_of_lit_standee"
     t.boolean "lit_standee_delivered"
     t.boolean "lit_standee_installation"
-    t.string  "lit_standee_condition"
+    t.string  "lit_standee_condition",           limit: 50
     t.boolean "lit_standee_available"
     t.integer "no_of_leaflet"
     t.boolean "leaflet_delivered"
@@ -917,12 +917,12 @@ ActiveRecord::Schema.define(version: 20160913203507) do
     t.integer "no_of_demo"
     t.boolean "demo_delivered"
     t.boolean "demo_installation"
-    t.string  "demo_condition"
+    t.string  "demo_condition",                  limit: 50
     t.boolean "demo_available"
     t.integer "no_of_dummy"
     t.boolean "dummy_delivered"
     t.boolean "dummy_installation"
-    t.string  "dummy_condition"
+    t.string  "dummy_condition",                 limit: 50
     t.boolean "dummy_available"
     t.integer "no_of_spec_card"
     t.boolean "spec_card_delivered"
@@ -939,7 +939,7 @@ ActiveRecord::Schema.define(version: 20160913203507) do
     t.integer "no_of_countertop"
     t.boolean "countertop_delivered"
     t.boolean "countertop_installation"
-    t.string  "countertop_condition"
+    t.string  "countertop_condition",            limit: 50
     t.boolean "countertop_available"
     t.integer "no_of_gift_item"
     t.boolean "gift_item_delivered"
@@ -953,7 +953,7 @@ ActiveRecord::Schema.define(version: 20160913203507) do
     t.integer "no_of_clipon"
     t.boolean "clipon_delivered"
     t.boolean "clipon_installation"
-    t.string  "clipon_condition"
+    t.string  "clipon_condition",                limit: 50
     t.boolean "clipon_available"
     t.integer "no_of_cubes"
     t.boolean "cubes_delivered"
@@ -978,25 +978,25 @@ ActiveRecord::Schema.define(version: 20160913203507) do
     t.boolean "cleaned_and_checked_lit_standee"
     t.boolean "cleaned_and_checked_flange"
     t.boolean "cleaned_and_checked_countertop"
-    t.string  "maintenance_done_on"
+    t.string  "maintenance_done_on",             limit: 20
     t.text    "consumnables_used"
-    t.string  "type_of_issue"
+    t.string  "type_of_issue",                   limit: 100
     t.boolean "maintenance_done"
     t.boolean "problem_solved"
     t.boolean "checkbox_escalate"
     t.boolean "sis_present_in_store"
-    t.string  "sis_type"
+    t.string  "sis_type",                        limit: 100
     t.integer "back_wall_nos"
     t.integer "glass_counter_no"
     t.integer "experience_counter_no"
-    t.string  "sis_condition"
-    t.string  "sis_needs"
+    t.string  "sis_condition",                   limit: 100
+    t.string  "sis_needs",                       limit: 100
     t.integer "no_of_gsb"
-    t.string  "gsb_type_installed"
-    t.string  "gsb_type_logo"
-    t.string  "gsb_position"
-    t.string  "gsb_condition"
-    t.string  "gsb_size"
+    t.string  "gsb_type_installed",              limit: 50
+    t.string  "gsb_type_logo",                   limit: 100
+    t.string  "gsb_position",                    limit: 100
+    t.string  "gsb_condition",                   limit: 100
+    t.string  "gsb_size",                        limit: 100
     t.boolean "gsb_present_at_store"
     t.text    "dummy_models"
     t.text    "clipon_models"
@@ -1012,20 +1012,20 @@ ActiveRecord::Schema.define(version: 20160913203507) do
     t.boolean "danglers_available"
     t.boolean "shelf_strips_available"
     t.boolean "roll_up_standee_available"
-    t.string  "no_of_range_brochure"
-    t.string  "range_brochure_type"
-    t.string  "leaflet_type"
-    t.string  "poster_type"
-    t.string  "no_of_wall_branding"
-    t.string  "wall_branding_type"
-    t.string  "no_of_one_way_vision"
-    t.string  "one_way_vision_type"
-    t.string  "no_of_danglers"
-    t.string  "danglers_type"
-    t.string  "no_of_shelf_strips"
-    t.string  "shelf_strips_type"
-    t.string  "no_of_roll_up_standee"
-    t.string  "roll_up_standee_type"
+    t.string  "no_of_range_brochure",            limit: 20
+    t.string  "range_brochure_type",             limit: 50
+    t.string  "leaflet_type",                    limit: 50
+    t.string  "poster_type",                     limit: 50
+    t.string  "no_of_wall_branding",             limit: 20
+    t.string  "wall_branding_type",              limit: 50
+    t.string  "no_of_one_way_vision",            limit: 10
+    t.string  "one_way_vision_type",             limit: 50
+    t.string  "no_of_danglers",                  limit: 10
+    t.string  "danglers_type",                   limit: 50
+    t.string  "no_of_shelf_strips",              limit: 10
+    t.string  "shelf_strips_type",               limit: 50
+    t.string  "no_of_roll_up_standee",           limit: 10
+    t.string  "roll_up_standee_type",            limit: 50
     t.boolean "escalate"
     t.boolean "cleaned_and_checked_clipon"
     t.text    "sis_type_logo"

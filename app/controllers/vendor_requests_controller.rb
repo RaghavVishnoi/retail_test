@@ -3,7 +3,7 @@
 	before_action :set_user, :only => [:edit, :update, :destroy,:show]
   skip_before_action :authenticate_user, :only => [:create, :new]
   authorize_resource :except => [:create]
-  PER_PAGE = 50
+  PER_PAGE = 20
 
 
     def index

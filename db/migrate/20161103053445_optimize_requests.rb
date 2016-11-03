@@ -1,0 +1,78 @@
+class OptimizeRequests < ActiveRecord::Migration
+  def change
+  	change_column :requests,:retailer_code,:string,limit: 50,index: true
+  	change_column :requests,:rsp_name,:string,limit: 100
+  	change_column :requests,:rsp_mobile_number,:string,limit: 30
+  	change_column :requests,:rsp_app_user_id ,:string,limit: 100
+  	change_column :requests,:state ,:string,limit: 50
+  	change_column :requests,:city ,:string,limit: 50
+  	change_column :requests,:shop_name ,:string,limit: 100
+  	change_column :requests,:shop_owner_name ,:string,limit: 100
+  	change_column :requests,:shop_owner_phone ,:string,limit: 30
+  	change_column :requests,:status ,:string,limit: 20,index: true
+  	change_column :requests,:type_of_sis_required ,:string,limit: 100
+  	change_column :requests,:type_of_gsb_requested ,:string,limit: 100
+  	change_column :requests,:space_available ,:string,limit: 100
+  	change_column :requests,:maintenance_requestor ,:string,limit: 200
+  	change_column :requests,:maintenance_requestor_mobile_number ,:string,limit: 20
+  	change_column :requests,:type_of_issue ,:string,limit: 100
+  	change_column :requests,:type_of_problem ,:string,limit: 100
+  	change_column :requests,:shop_visit_date ,:string,limit: 20
+  	change_column :requests,:shop_visit_done_by ,:string,limit: 100
+  	change_column :requests,:visitor_contact_number ,:string,limit: 20
+  	change_column :requests,:store_selling_gionee ,:string,limit: 5
+  	change_column :requests,:is_clipon_present ,:string,limit: 5
+  	change_column :requests,:is_countertop_present ,:string,limit: 5
+  	change_column :requests,:is_standee_present ,:string,limit: 5
+  	change_column :requests,:no_of_peace_in_stock ,:string,limit: 5
+  	change_column :requests,:is_leaflets_available ,:string,limit: 5
+  	change_column :requests,:is_wall_poster_in_shop ,:string,limit: 5
+  	change_column :requests,:is_dangler_in_shop ,:string,limit: 5
+  	change_column :requests,:rsp_assigned_in_store ,:string,limit: 5
+  	change_column :requests,:rsp_present_in_shop ,:string,limit: 100
+  	change_column :requests,:rsp_in_gionee_tshirt ,:string,limit: 100
+  	change_column :requests,:rsp_well_groomed ,:string,limit: 50
+  	change_column :requests,:rsp_selling_skills ,:string,limit: 100
+  	change_column :requests,:gsb_type_installed ,:string,limit: 50
+  	change_column :requests,:location_of_gsb ,:string,limit: 50
+  	change_column :requests,:gsb_cleanliness ,:string,limit: 50
+  	change_column :requests,:installation_quality ,:string,limit: 50
+  	change_column :requests,:is_gsb_light_woring ,:string,limit: 50
+  	change_column :requests,:is_gsb_light_throw_is_good ,:string,limit: 5
+  	change_column :requests,:gsb_structured_damage ,:string,limit: 100
+  	change_column :requests,:is_sis_present ,:string,limit: 5
+  	change_column :requests,:is_sis_placed_properly ,:string,limit: 5
+  	change_column :requests,:is_sis_condition_good ,:string,limit: 5
+  	change_column :requests,:is_sis_cleaned_daily ,:string,limit: 5
+  	change_column :requests,:is_sis_damaged ,:string,limit: 5
+  	change_column :requests,:sis_structured_flaws ,:string,limit: 150
+  	change_column :requests,:sis_security_alarm_working ,:string,limit: 50
+  	change_column :requests,:sis_security_device_charging ,:string,limit: 50
+  	change_column :requests,:sis_demo_phones_installed ,:string,limit: 50
+  	change_column :requests,:spec_card_demo_phone_match ,:string,limit: 5
+  	change_column :requests,:backwall_light_working_properly ,:string,limit: 5
+  	change_column :requests,:is_counter_lights_working ,:string,limit: 5
+  	change_column :requests,:is_clip_on_lights ,:string,limit: 5
+  	change_column :requests,:dealer_switch_on_sis_lights ,:string,limit: 5
+  	change_column :requests,:updated_gionee_creative ,:string,limit: 5
+  	change_column :requests,:is_good_visibility_in_store ,:string,limit: 5
+  	change_column :requests,:lit_in_store ,:string,limit: 50
+  	change_column :requests,:has_a_relevant_visual ,:string,limit: 50
+  	change_column :requests,:is_clipon_not_working_properly ,:string,limit: 50
+  	change_column :requests,:other_name ,:string,limit: 100
+  	change_column :requests,:other_phone ,:string,limit: 20
+  	change_column :requests,:lfr_name ,:string,limit: 100
+  	change_column :requests,:lfr_phone ,:string,limit: 20
+  	change_column :requests,:lfr_app_user_id ,:string,limit: 50
+  	change_column :requests,:store_open ,:string,limit: 5
+  	change_column :requests,:store_renovation ,:string,limit: 5
+  	change_column :requests,:store_shifted ,:string,limit: 5
+  	change_column :requests,:not_allowed_in_store ,:string,limit: 5
+  	change_column :requests,:average_monthly_sales ,:string,limit: 100
+  	change_column :requests,:most_selling_brand ,:string,limit: 50
+  	change_column :requests,:second_most_selling_brand ,:string,limit: 50
+  	change_column :requests,:third_most_selling_brand ,:string,limit: 50
+  	change_column :requests,:gionee_sales ,:string,limit: 50
+  	change_column :requests,:gionee_stock_quantity ,:string,limit: 100
+  end
+end
