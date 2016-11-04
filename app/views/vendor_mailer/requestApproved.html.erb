@@ -7,7 +7,7 @@
 			<tr><td><b>Request Id:</b></td><%=@request.id%><td></td></tr>
 			<tr><td><b>Request Type:</b></td><%=@request.request_type%><td></td></tr>
 			<tr><td><b>RRM:</b></td><td><%=Role.findRRMName(@request)%></td></tr>
-			<tr><td><b>Approved Date:</b></td><td><%=@request.approver_approve_date.strftime("%d %b,%Y")%></td></tr>
+			<tr><td><b>Approved Date:</b></td><td><%=@request.approver_approve_date%></td></tr>
 		</table>
 	</body>
 </html>
