@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  require 'will_paginate/array'
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token, :if => "request.format.json?"
   after_filter :add_allow_credentials_headers

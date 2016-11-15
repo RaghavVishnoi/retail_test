@@ -30,17 +30,21 @@ class VendorRequest < ActiveRecord::Base
 	validate :rrm_comment
 	validate :rrm_response_date
 
-
-	def self.vendor_requests(current_user)
+	def self.permit_requests(current_user)
 		roles = current_user.roles.pluck(:name)
 		if roles.include?(Cmo)
 			request_ids = RequestActivity.where(user_type: 'CMO',user_id: current_user.id,request_status: CMO_APPROVED).pluck(:request_id)
 		elsif roles.include?(RRMS)
 			request_ids = RequestActivity.where(user_type: 'RRM',user_id: current_user.id,request_status: APPROVED).pluck(:request_id)
 		elsif roles.include?(APPROVER)
-			request_ids = RequestActivity.where('request_status IN (?)',[CMO_APPROVED,PENDING]).pluck(:request_id)	
+			request_ids = RequestActivity.where('request_status IN (?)',[CMO_APPROVED,APPROVED]).pluck(:request_id)	
 		end
-		all.joins(:request_assignment).where('request_id IN (?)',request_ids)
+	end
+
+	def self.vendor_requests(current_user)
+		request_ids = permit_requests(current_user)
+		request_assignments_ids = RequestAssignment.where(request_id: request_ids).pluck(:id)
+		all.where(request_assignment_id: request_assignments_ids)
 	end
 
 	def self.add_activity(params,current_user,vRequest)

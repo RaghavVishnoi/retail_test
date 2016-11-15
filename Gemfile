@@ -70,6 +70,7 @@ gem 'geokit', '~> 1.10'
 
 gem 'exception_notification'
 gem 'rack-timeout', '~> 0.4.2' 
+gem 'kaminari'
 
  
 group :development, :test do

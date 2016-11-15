@@ -1,3 +1,4 @@
+PER_PAGE_VENDOR = 50
 VERSION = 9
 AVG_GIONEE_MONTHLY_SALES = [
   ["0-50 Thousand", "0"], 
