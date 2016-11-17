@@ -167,10 +167,10 @@
 
 <div id='content' class="tab-content ">
 <%@requests.each do |request|%>
-<%if Role.isCMO?(current_user) && request.status == 'cmo_pending' && TatGroup.isTatLimit?('Request Generate-CMO Response',request.created_at)%>
+<%if (Role.isCMO?(current_user) || Role.isHO?(current_user)) && request.status == 'cmo_pending' && TatGroup.isTatLimit?('Request Generate-CMO Response',request.created_at)%>
 	<%@tatBGClass = 'bgColorPending'%>
-<%elsif Role.isRRM?(current_user) && request.status == 'pending' && TatGroup.isTatLimit?('CMO Response-RRM Response',request.cmo_approve_date)%>
-		<%@tatBGClass = ''%>
+<%elsif (Role.isRRM?(current_user) || Role.isHO?(current_user)) && request.status == 'pending' && TatGroup.isTatLimit?('CMO Response-RRM Response',request.cmo_approve_date)%>
+		<%@tatBGClass = 'bgColorPending'%>
 <%else%>
 		<%@tatBGClass = ''%>	
 <%end%>

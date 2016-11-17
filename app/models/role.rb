@@ -26,4 +26,8 @@ class Role < ActiveRecord::Base
     current_user.roles.pluck(:name).include?('cmo')
   end
 
+  def self.isHO?(current_user)
+    current_user.roles.pluck(:name).include?('approver')
+  end
+
 end
