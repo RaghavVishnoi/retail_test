@@ -61,8 +61,8 @@ Rails.application.routes.draw do
 
   resources :helps, :only => [:index]
 
-  resources :services, :only => [:index]
   get 'services/start'
+  get 'services/status'
 
   resources :read_files do
     collection { post :import }
