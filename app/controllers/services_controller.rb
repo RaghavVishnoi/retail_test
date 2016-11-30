@@ -1,8 +1,13 @@
 class ServicesController < ApplicationController
 
-	def index
-		stdout, stdeerr, status = Open3.capture3("RAILS_ENV=development ./script/delayed_job status")
-		render :json => {result: stdout}
+	def status
+		stdout, stdeerr, status = Open3.capture3("RAILS_ENV=statging ./script/delayed_job status")
+		render :json => {result: status}
+	end
+
+	def start
+		stdout, stdeerr, status = Open3.capture3("RAILS_ENV=statging ./script/delayed_job start")
+		render :json => {result: status}
 	end
 
 end
