@@ -118,6 +118,7 @@ module ApplicationHelper
         "reason", 
         "CMO_name",
         "retailer_code",
+        "retailer_name",
         "state",
         "city",
         "shop_address",
@@ -307,7 +308,7 @@ module ApplicationHelper
   def vmqa_records(request)
     if request.shop_audit != nil
       shop_audit = request.shop_audit
-      [request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, if request.status != 'cmo_pending' then request_cmo(request.id) else State.find(request.state_id).name+"'s CMOs" end, request.retailer_code,@retailer_state,@retailer_city,@shop_address ,@lat,@long,request.remarks, request.comment_by_approver, request.comment_by_cmo,request.overall_rating, 
+      [request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, if request.status != 'cmo_pending' then request_cmo(request.id) else State.find(request.state_id).name+"'s CMOs" end, request.retailer_code,request.shop_name,request.state,request.city,request.shop_address ,request.images.first.lat,request.images.first.long,request.remarks, request.comment_by_approver, request.comment_by_cmo,request.overall_rating, 
          request.created_at.strftime("%b %d, %Y"),request.shop_visit_date,request.shop_visit_done_by,request.visitor_contact_number,request.is_audit_done,request.store_open,request.store_renovation,request.store_shifted,request.not_allowed_in_store,field_values_str(request.shop_requirements),branding_details_csv(request),request.overall_comments,
           audit_type(shop_audit.audit_type),
           request.average_monthly_sales,
