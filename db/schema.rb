@@ -602,7 +602,7 @@ ActiveRecord::Schema.define(version: 20161103084617) do
 
   create_table "request_documents", force: true do |t|
     t.string   "request_document"
-    t.string   "request_document_id"
+    t.integer  "request_document_id"
     t.string   "request_document_type"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -749,8 +749,9 @@ ActiveRecord::Schema.define(version: 20161103084617) do
     t.datetime "updated_at"
     t.string   "location_code"
     t.string   "salesman_id"
-    t.string   "latitude"
-    t.string   "longitude"
+    t.integer  "priority",                         default: 0
+    t.float    "latitude",             limit: 24
+    t.float    "longitude",            limit: 24
     t.string   "email"
   end
 
@@ -874,136 +875,75 @@ ActiveRecord::Schema.define(version: 20161103084617) do
   end
 
   add_index "shop_assignments", ["request_id"], name: "index_shop_assignments_on_request_id", using: :btree
-  add_index "shop_assignments", ["retailer_id"], name: "index_shop_assignments_on_retailer_id", using: :btree
-  add_index "shop_assignments", ["user_id"], name: "index_shop_assignments_on_user_id", using: :btree
+  add_index "shop_assignments", ["retailer_id"], name: "index_shop_assignments_on_retailers_id", using: :btree
+  add_index "shop_assignments", ["user_id"], name: "index_shop_assignments_on_users_id", using: :btree
 
   create_table "shop_audits", force: true do |t|
-    t.integer "audit_type",                      limit: 2
-    t.string  "average_monthly_sales",           limit: 15
-    t.string  "most_selling_brand",              limit: 50
-    t.string  "second_most_selling_brand",       limit: 50
-    t.string  "third_most_selling_brand",        limit: 50
-    t.string  "gionee_sales",                    limit: 50
-    t.string  "gionee_stock_quantity",           limit: 50
-    t.text    "models_available"
-    t.integer "no_of_flange"
-    t.boolean "flange_delivered"
-    t.boolean "flange_installation"
-    t.string  "flange_condition",                limit: 50
-    t.boolean "flange_avilable"
-    t.integer "no_of_lit_standee"
-    t.boolean "lit_standee_delivered"
-    t.boolean "lit_standee_installation"
-    t.string  "lit_standee_condition",           limit: 50
-    t.boolean "lit_standee_available"
-    t.integer "no_of_leaflet"
-    t.boolean "leaflet_delivered"
-    t.boolean "leaflet_installation"
-    t.integer "no_of_brochure"
-    t.boolean "brochure_delivered"
-    t.boolean "brochure_installation"
-    t.integer "no_of_dangler"
-    t.boolean "dangler_delivered"
-    t.boolean "dangler_installation"
-    t.integer "no_of_shelf_strip"
-    t.boolean "shelf_strip_delivered"
-    t.boolean "shelf_strip_installation"
-    t.integer "no_of_sticker"
-    t.boolean "sticker_delivered"
-    t.boolean "sticker_installation"
-    t.integer "no_of_poster"
-    t.boolean "poster_delivered"
-    t.boolean "poster_installation"
-    t.integer "no_of_demo"
-    t.boolean "demo_delivered"
-    t.boolean "demo_installation"
-    t.string  "demo_condition",                  limit: 50
-    t.boolean "demo_available"
-    t.integer "no_of_dummy"
-    t.boolean "dummy_delivered"
-    t.boolean "dummy_installation"
-    t.string  "dummy_condition",                 limit: 50
-    t.boolean "dummy_available"
-    t.integer "no_of_spec_card"
-    t.boolean "spec_card_delivered"
-    t.boolean "spec_card_installation"
-    t.integer "no_of_cables"
-    t.boolean "cables_delivered"
-    t.boolean "cables_installation"
-    t.integer "no_of_pods"
-    t.boolean "pods_delivered"
-    t.boolean "pods_installation"
-    t.integer "no_of_security_system"
-    t.boolean "security_system_delivered"
-    t.boolean "security_system_installation"
-    t.integer "no_of_countertop"
-    t.boolean "countertop_delivered"
-    t.boolean "countertop_installation"
-    t.string  "countertop_condition",            limit: 50
-    t.boolean "countertop_available"
-    t.integer "no_of_gift_item"
-    t.boolean "gift_item_delivered"
-    t.boolean "gift_item_installation"
-    t.integer "no_of_tshirt"
-    t.boolean "tshirt_delivered"
-    t.boolean "tshirt_installation"
-    t.integer "no_of_rollupstandee"
-    t.boolean "rollupstandee_delivered"
-    t.boolean "rollupstandee_installation"
-    t.integer "no_of_clipon"
-    t.boolean "clipon_delivered"
-    t.boolean "clipon_installation"
-    t.string  "clipon_condition",                limit: 50
-    t.boolean "clipon_available"
-    t.integer "no_of_cubes"
-    t.boolean "cubes_delivered"
-    t.boolean "cubes_installation"
-    t.integer "no_of_balloons"
-    t.boolean "balloons_delivered"
-    t.boolean "balloons_installation"
-    t.boolean "gsb_present"
-    t.boolean "sis_present"
-    t.boolean "lit_standee_present"
-    t.boolean "flange_present"
-    t.boolean "countertop_present"
-    t.boolean "clipon_present"
-    t.boolean "changed_visual_gsb"
-    t.boolean "changed_visual_sis"
-    t.boolean "changed_visual_lit_standee"
-    t.boolean "changed_visual_flange"
-    t.boolean "changed_visual_countertop"
-    t.boolean "changed_visual_clipon"
-    t.boolean "cleaned_and_checked_gsb"
-    t.boolean "cleaned_and_checked_sis"
-    t.boolean "cleaned_and_checked_lit_standee"
-    t.boolean "cleaned_and_checked_flange"
-    t.boolean "cleaned_and_checked_countertop"
-    t.string  "maintenance_done_on",             limit: 20
-    t.text    "consumnables_used"
-    t.string  "type_of_issue",                   limit: 100
-    t.boolean "maintenance_done"
-    t.boolean "problem_solved"
-    t.boolean "checkbox_escalate"
-    t.boolean "sis_present_in_store"
-    t.string  "sis_type",                        limit: 100
-    t.integer "back_wall_nos"
-    t.integer "glass_counter_no"
-    t.integer "experience_counter_no"
-    t.string  "sis_condition",                   limit: 100
-    t.string  "sis_needs",                       limit: 100
-    t.integer "no_of_gsb"
-    t.string  "gsb_type_installed",              limit: 50
-    t.string  "gsb_type_logo",                   limit: 100
-    t.string  "gsb_position",                    limit: 100
-    t.string  "gsb_condition",                   limit: 100
-    t.string  "gsb_size",                        limit: 100
-    t.boolean "gsb_present_at_store"
+    t.boolean "is_store_visited"
+    t.boolean "is_store_closed"
+    t.boolean "is_permission_issue"
+    t.boolean "is_store_selling_gionee"
+    t.boolean "is_rsp_assigned"
+    t.boolean "is_rsp_present"
+    t.boolean "is_gsb_present"
+    t.string  "type_of_gsb"
+    t.boolean "is_gsb_on_good_location"
+    t.boolean "is_gsb_cleanliness"
+    t.boolean "is_gsb_working"
+    t.boolean "is_flange_available"
+    t.boolean "is_gsb_placed_properly"
+    t.string  "logo_type"
+    t.boolean "is_gsb_working_properly"
+    t.boolean "is_sis_present"
+    t.string  "type_of_sis"
+    t.boolean "is_sis_on_good_location"
+    t.boolean "is_sis_cleanliness"
+    t.boolean "is_sis_working"
+    t.boolean "is_latest_sis_clipon_creative"
+    t.boolean "is_securty_system_installed"
+    t.boolean "is_security_system_working"
+    t.boolean "is_demo_phone_installed"
+    t.boolean "is_lit_present"
+    t.boolean "is_lit_on_good_location"
+    t.boolean "is_lit_cleanliness"
+    t.boolean "is_lit_working"
+    t.boolean "is_latest_lit_clipon_creative"
+    t.boolean "is_poster_available"
+    t.boolean "is_updated_creative"
+    t.boolean "is_poster_placed_properly"
+    t.boolean "is_dangler_available"
+    t.boolean "is_bunting_available"
+    t.boolean "is_leaflets_available"
+    t.boolean "is_models_in_leaflets"
+    t.boolean "is_countertop_available"
+    t.string  "type_of_countertop"
+    t.boolean "is_countertop_placed_properly"
+    t.boolean "is_countertop_working"
+    t.boolean "is_dummies_present"
     t.text    "dummy_models"
-    t.text    "clipon_models"
-    t.text    "lit_standee_models"
-    t.text    "countertop_models"
-    t.text    "demo_models"
+    t.boolean "is_dummies_placed_properly"
+    t.boolean "is_deployment_done"
+    t.boolean "is_updated_posters"
+    t.boolean "is_updated_danglers"
+    t.boolean "is_updated_buntings"
+    t.boolean "is_updated_leaflets"
+    t.boolean "is_updated_dummies"
+    t.text    "deployment_remarks"
+    t.text    "maintenance_observations"
+    t.integer "audit_type",                    limit: 2
     t.integer "request_id"
+    t.string  "rsp_not_present_reason"
+    t.string  "rsp_not_in_uniform_reason"
+    t.boolean "is_flange_working"
+    t.string  "type_of_flange"
+    t.text    "other_rectification"
+    t.text    "rectification_remarks"
+    t.boolean "is_logo_working_properly"
+    t.boolean "is_flange_placed_properly"
+    t.string  "rsp_not_assigned_reason"
+    t.boolean "is_rsp_in_uniform"
+    t.text    "models_in_leaflets"
+    t.text    "other_observation"
     t.boolean "range_brochure_avilable"
     t.boolean "leaflet_available"
     t.boolean "poster_available"
@@ -1012,20 +952,20 @@ ActiveRecord::Schema.define(version: 20161103084617) do
     t.boolean "danglers_available"
     t.boolean "shelf_strips_available"
     t.boolean "roll_up_standee_available"
-    t.string  "no_of_range_brochure",            limit: 20
-    t.string  "range_brochure_type",             limit: 50
-    t.string  "leaflet_type",                    limit: 50
-    t.string  "poster_type",                     limit: 50
-    t.string  "no_of_wall_branding",             limit: 20
-    t.string  "wall_branding_type",              limit: 50
-    t.string  "no_of_one_way_vision",            limit: 10
-    t.string  "one_way_vision_type",             limit: 50
-    t.string  "no_of_danglers",                  limit: 10
-    t.string  "danglers_type",                   limit: 50
-    t.string  "no_of_shelf_strips",              limit: 10
-    t.string  "shelf_strips_type",               limit: 50
-    t.string  "no_of_roll_up_standee",           limit: 10
-    t.string  "roll_up_standee_type",            limit: 50
+    t.string  "no_of_range_brochure"
+    t.string  "range_brochure_type"
+    t.string  "leaflet_type"
+    t.string  "poster_type"
+    t.string  "no_of_wall_branding"
+    t.string  "wall_branding_type"
+    t.string  "no_of_one_way_vision"
+    t.string  "one_way_vision_type"
+    t.string  "no_of_danglers"
+    t.string  "danglers_type"
+    t.string  "no_of_shelf_strips"
+    t.string  "shelf_strips_type"
+    t.string  "no_of_roll_up_standee"
+    t.string  "roll_up_standee_type"
     t.boolean "escalate"
     t.boolean "cleaned_and_checked_clipon"
     t.text    "sis_type_logo"
@@ -1130,7 +1070,7 @@ ActiveRecord::Schema.define(version: 20161103084617) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "grade"
+    t.string   "grade",       limit: 1
   end
 
   add_index "user_data", ["user_id"], name: "index_user_data_on_user_id", using: :btree
@@ -1141,6 +1081,7 @@ ActiveRecord::Schema.define(version: 20161103084617) do
     t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "users_id"
   end
 
   add_index "user_parents", ["user_id"], name: "index_user_parents_on_user_id", using: :btree

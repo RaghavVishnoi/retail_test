@@ -33,7 +33,9 @@
 									<strong>Location </strong>
 								</div>
 								<div class="comments_img_blk">
+							  <% if @request.images.present? %>
 								<%=@request.images.first.lat%>,<%=@request.images.first.long%>
+								<% end %>
 								</div>	
 								
 						</div>
