@@ -108,8 +108,8 @@ class RequestsCsv
   def create_csv_file
    write_file header
    if @request_type == 'All' || @request_type == 'all' || @request_type == '' || @request_type == nil
-        Request.where(:created_at => from_date..till_date,state_id: @states).find_each(batch_size: 100) do |request|
-            write_file to_csv(request)
+        Request.where(:created_at => from_date..till_date,state_id: @states).find_each(batch_size: 1000) do |request|
+          write_file to_csv(request)
         end  
     elsif @request_type == 'vmqa'
       Request.where(request_type: 4,:created_at => from_date..till_date,state_id: @states).joins(:shop_audit).find_each(batch_size: 100) do |request|
@@ -117,7 +117,7 @@ class RequestsCsv
       end
    else
       request_type = request_type_backend(@request_type)
-      Request.where(:request_type => request_type,:created_at => from_date..till_date,state_id: @states).find_each(batch_size: 100) do |request|
+      Request.where(:request_type => request_type,:created_at => from_date..till_date,state_id: @states).find_each(batch_size: 1000) do |request|
         write_file to_csv(request)
       end
    end   
@@ -126,45 +126,6 @@ class RequestsCsv
   end
 
   def to_csv(request)
-      retailer_code = request.retailer_code
-      @retailer = Retailer.find_by(:retailer_code => retailer_code)
-
-      if request.city == '' && @retailer != nil || request.city == nil && @retailer != nil
-         @retailer_city = @retailer.city
-      else
-        @retailer_city = request.city
-      end
-
-      if request.state == '' && @retailer != nil || request.state == nil && @retailer != nil
-        @retailer_state = @retailer.state
-      else
-        @retailer_state = request.state
-      end
-
-      if request.shop_name == '' && @retailer != nil || request.shop_name == nil && @retailer != nil
-        @shop_name = @retailer.retailer_name
-      else
-        @shop_name = request.shop_name
-      end
-
-      if request.shop_owner_name == '' && @retailer != nil || request.shop_owner_name == nil && @retailer != nil 
-       @shop_owner_name = @retailer.contact_person
-      else
-       @shop_owner_name = request.shop_owner_name
-      end
-
-      if request.shop_owner_phone == '' && @retailer != nil || request.shop_owner_phone == nil && @retailer != nil
-       @shop_owner_phone = @retailer.mobile_number
-      else
-       @shop_owner_phone = request.shop_owner_phone  
-      end
-
-      if request.shop_address == '' && @retailer != nil || request.shop_address == nil && @retailer != nil
-       @shop_address = @retailer.address
-      else
-       @shop_address = request.shop_address
-      end
-
       image = request.images.first
       if image != nil
         @lat = image.lat
@@ -173,13 +134,11 @@ class RequestsCsv
         @lat = 0.0
         @long = 0.0
       end 
-
-
-      
+     
       if @request_type == 'All' || @request_type == 'all' || @request_type == '' || @request_type == nil
         [ request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, if request.status != 'cmo_pending' then request_cmo(request.id) else State.find(request.state_id).name+"'s CMOs" end, request.retailer_code, request.rsp_name,
-        request.rsp_mobile_number, request.rsp_app_user_id,@retailer_city, @retailer_state, @shop_name, @shop_address,@lat,@long,
-        @shop_owner_name, @shop_owner_phone, monthly_sales_str(request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES), monthly_sales_str(request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES),
+        request.rsp_mobile_number, request.rsp_app_user_id,request.city, request.state, request.shop_name, request.shop_address,@lat,@long,
+        request.shop_owner_name, request.shop_owner_phone, monthly_sales_str(request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES), monthly_sales_str(request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES),
         request.space_available, request.is_gionee_gsb_present, request.type_of_sis_required, request.is_sis_installed, request.is_main_signage,
         request.is_gsb_installed_outside, request.width, request.height, request.type_of_gsb_requested, field_values_str(request.shop_requirements),
         branding_details_csv(request), request.remarks, request.comment_by_approver,request.comment_by_cmo,  request.created_at.strftime("%b %d, %Y"),request.type_of_issue,request.type_of_problem,
@@ -193,21 +152,21 @@ class RequestsCsv
 
        elsif @request_type == 'gsb' || @request_type == 'sis' || @request_type == 'in_shop'
         [ request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason,  if request.status != 'cmo_pending' then request_cmo(request.id) else State.find(request.state_id).name+"'s CMOs" end, request.retailer_code, request.rsp_name,
-        request.rsp_mobile_number, request.rsp_app_user_id,@retailer_city, @retailer_state, @shop_name, @shop_address,@lat,@long,
-        @shop_owner_name, @shop_owner_phone, monthly_sales_str(request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES), monthly_sales_str(request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES),
+        request.rsp_mobile_number, request.rsp_app_user_id,request.city, request.state, request.shop_name, request.shop_address,@lat,@long,
+        request.shop_owner_name, request.shop_owner_phone, monthly_sales_str(request.avg_store_monthly_sales, AVG_STORE_MONTHLY_SALES), monthly_sales_str(request.avg_gionee_monthly_sales, AVG_GIONEE_MONTHLY_SALES),
         request.space_available, request.is_gionee_gsb_present, request.type_of_sis_required, request.is_sis_installed, request.is_main_signage,
         request.is_gsb_installed_outside, request.width, request.height, request.type_of_gsb_requested, field_values_str(request.shop_requirements),
         branding_details_csv(request), request.remarks, request.comment_by_approver, request.comment_by_cmo,  request.created_at.strftime("%b %d, %Y")
         ].flatten.map {|v| "\"#{v.to_s.gsub('"', '""')}\"" }.join(',')
 
        elsif @request_type == 'maintenance'
-        [ request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason,  if request.status != 'cmo_pending' then request_cmo(request.id) else State.find(request.state_id).name+"'s CMOs" end, request.retailer_code,@retailer_city, @retailer_state, @shop_name, @shop_address,@lat,@long,
-        @shop_owner_name, @shop_owner_phone, request.remarks, request.comment_by_approver, request.comment_by_cmo, 
+        [ request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason,  if request.status != 'cmo_pending' then request_cmo(request.id) else State.find(request.state_id).name+"'s CMOs" end, request.retailer_code,request.city, request.state, request.shop_name, request.shop_address,@lat,@long,
+        request.shop_owner_name, request.shop_owner_phone, request.remarks, request.comment_by_approver, request.comment_by_cmo, 
          request.created_at.strftime("%b %d, %Y"),request.type_of_issue,request.type_of_problem
         ].flatten.map {|v| "\"#{v.to_s.gsub('"', '""')}\"" }.join(',')
 
        elsif @request_type == 'audit'
-       [ request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, if request.status != 'cmo_pending' then request_cmo(request.id) else State.find(request.state_id).name+"'s CMOs" end, request.retailer_code,@retailer_state,@retailer_city,@shop_address ,@lat,@long,request.remarks, request.comment_by_approver, request.comment_by_cmo, 
+       [ request.id,request.status, request_type_name(request),request.is_rsp, request.rsp_not_present_reason, if request.status != 'cmo_pending' then request_cmo(request.id) else State.find(request.state_id).name+"'s CMOs" end, request.retailer_code,request.state,request.city,request.shop_address ,@lat,@long,request.remarks, request.comment_by_approver, request.comment_by_cmo, 
          request.created_at.strftime("%b %d, %Y"),request.shop_visit_date,request.shop_visit_done_by,request.is_standee_present,request.visitor_contact_number,request.is_audit_done,request.store_open,request.store_renovation,request.store_shifted,request.not_allowed_in_store,request.store_selling_gionee,request.is_clipon_present,request.is_countertop_present,request.is_leaflets_available,
          request.no_of_peace_in_stock,request.is_wall_poster_in_shop,request.is_dangler_in_shop,request.rsp_assigned_in_store,request.rsp_present_in_shop,request.rsp_in_gionee_tshirt,request.rsp_well_groomed,request.rsp_selling_skills,request.gsb_type_installed,request.location_of_gsb,
          request.gsb_cleanliness,request.installation_quality,request.is_gsb_light_woring,request.is_gsb_light_throw_is_good,request.gsb_structured_damage,request.gsb_other_problem,request.gsb_retailer_feedback,request.is_sis_present,request.is_sis_placed_properly,request.is_sis_condition_good,
