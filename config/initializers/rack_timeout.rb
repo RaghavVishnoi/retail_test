@@ -1,1 +1,1 @@
-Rack::Timeout.service_timeout = 60000000
+# Rack::Timeout.service_timeout = 60000000
