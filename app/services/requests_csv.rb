@@ -1,6 +1,7 @@
 class RequestsCsv
   attr_accessor :from_date, :till_date
   include ApplicationHelper
+   
 
 
   def initialize(from, till, request_type,current_user)

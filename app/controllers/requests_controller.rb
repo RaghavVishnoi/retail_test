@@ -199,6 +199,7 @@ class RequestsController < ApplicationController
         :most_selling_brand,
         :second_most_selling_brand, 
         :third_most_selling_brand,
+        :gionee_position,
         :gionee_sales,
         :gionee_stock_quantity,
         :models_available,  
@@ -294,7 +295,6 @@ class RequestsController < ApplicationController
         :cleaned_and_checked_lit_standee,
         :cleaned_and_checked_flange,
         :cleaned_and_checked_countertop,
-        :cleaned_and_checked_clipon,
         :maintenance_done_on,
         :consumnables_used,
         :type_of_issue,
@@ -350,7 +350,9 @@ class RequestsController < ApplicationController
        :sticker_models,
        :brochure_models,
        :leaflet_models,
-       :lit_standee_models
+       :lit_standee_models,
+       :sis_type_logo,
+       :back_wall_models,
       ]
       )
   end
