@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def permission_name(subject_class, action_permission) 
+  def permission_name(subject_class, action_permission)  
     Permission::Actions[subject_class][:permissions][action_permission]
   end
 
@@ -145,6 +145,7 @@ module ApplicationHelper
           "most_selling_brand",
           "second_most_selling_brand", 
           "third_most_selling_brand",
+          "gionee_position",
           "gionee_sales",
           "gionee_stock_quantity",
           "models_available", 
@@ -240,7 +241,6 @@ module ApplicationHelper
         "cleaned_and_checked_lit_standee",
         "cleaned_and_checked_flange",
         "cleaned_and_checked_countertop",
-        "cleaned_and_checked_clipon",
         "maintenance_done_on",
         "consumnables_used",
         "type_of_issue",
@@ -261,9 +261,7 @@ module ApplicationHelper
         "gsb_condition",
         "gsb_size",
         "gsb_present_at_store",
-        "dummy_models",
         "clipon_models",
-        "lit_standee_models",
         "countertop_models",
         "demo_models",
         "range_brochure_avilable",
@@ -292,11 +290,11 @@ module ApplicationHelper
         "cleaned_and_checked_clipon",
         "sis_type_logo",
         "dummy_models",
-        "demo_models",
         "posters_models",
         "sticker_models",
         "brochure_models",
         "leaflet_models",
+        "back_wall_models",
         "lit_standee_models"
         ].flatten.map{|head| head.camelize}.join(',')
   end
@@ -317,6 +315,7 @@ module ApplicationHelper
           request.most_selling_brand,
           request.second_most_selling_brand, 
           request.third_most_selling_brand,
+          shop_audit.gionee_position,
           request.gionee_sales,
           request.gionee_stock_quantity,
           request.models_available, 
@@ -412,7 +411,6 @@ module ApplicationHelper
           shop_audit.cleaned_and_checked_lit_standee,
           shop_audit.cleaned_and_checked_flange,
           shop_audit.cleaned_and_checked_countertop,
-          shop_audit.cleaned_and_checked_clipon,
           shop_audit.maintenance_done_on,
           shop_audit.consumnables_used,
           shop_audit.type_of_issue,
@@ -433,9 +431,7 @@ module ApplicationHelper
           shop_audit.gsb_condition,
           shop_audit.gsb_size,
           shop_audit.gsb_present_at_store,
-          shop_audit.dummy_models,
           shop_audit.clipon_models,
-          shop_audit.lit_standee_models,
           shop_audit.countertop_models,
           shop_audit.demo_models,
           shop_audit.range_brochure_avilable,
@@ -464,11 +460,11 @@ module ApplicationHelper
           shop_audit.cleaned_and_checked_clipon,
           shop_audit.sis_type_logo,
           shop_audit.dummy_models,
-          shop_audit.demo_models,
           shop_audit.posters_models,
           shop_audit.sticker_models,
           shop_audit.brochure_models,
           shop_audit.leaflet_models,
+          shop_audit.back_wall_models,
           shop_audit.lit_standee_models].map{|data| data == true ? "Yes" : data == false ? "No" : data}
     end
   end
