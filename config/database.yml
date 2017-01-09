@@ -22,11 +22,11 @@
 
 
 default: &default
-  adapter: mysql2
+  adapter: postgresql
   pool: 5
   timeout: 5000
-  username: requester_web
-  password: requester@12345#
+  username: pinch
+  password: 12345
 
 
 
